@@ -560,6 +560,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const waOrtu = document.getElementById('reg-wa-ortu').value;
             const waAnak = document.getElementById('reg-wa-anak').value || '-';
             
+            // Simple Validation
+            if (!/^[0-9\+\-\s]+$/.test(waOrtu)) {
+                alert("Mohon masukkan format Nomor WA Orang Tua yang valid (angka).");
+                document.getElementById('reg-wa-ortu').focus();
+                return;
+            }
+            if (waOrtu.length < 9) {
+                alert("Nomor WA terlalu pendek.");
+                document.getElementById('reg-wa-ortu').focus();
+                return;
+            }
+
             const message = `*Form Pendaftaran Bali Seeds Robotic & Coding*
             
 Nama Lengkap: ${nama}

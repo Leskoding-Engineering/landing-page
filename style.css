@@ -338,3 +338,22 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
     50% { top: 200%; }
     100% { top: 200%; }
 }
+
+/* Subtle Animated Roadmap Line */
+.roadmap-line {
+    background: repeating-linear-gradient(90deg, #14b8a6, #14b8a6 10px, transparent 10px, transparent 20px);
+    background-size: 40px 100%;
+    animation: moveLine 2s linear infinite;
+    opacity: 0.8;
+}
+.roadmap-line-purple {
+    background: repeating-linear-gradient(90deg, #a855f7, #a855f7 10px, transparent 10px, transparent 20px);
+}
+.roadmap-line-gold {
+    background: repeating-linear-gradient(90deg, #facc15, #facc15 10px, transparent 10px, transparent 20px);
+}
+
+@keyframes moveLine {
+    0% { background-position: 40px 0; }
+    100% { background-position: 0 0; }
+}
