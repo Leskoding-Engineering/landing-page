@@ -1,0 +1,340 @@
+/* Custom Interactive Animations & Polish */
+
+/* Typography */
+body { font-family: 'Plus Jakarta Sans', sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+
+/* Grid Pattern Background for that Tech feel */
+.bg-grid-pattern {
+    background-image: 
+        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center center;
+}
+
+/* Scroll Animations */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Magnetic Glow Tracker */
+.bento-card {
+    position: relative;
+    transform: translateZ(0); /* Force hardware acceleration */
+}
+.magnetic-glow {
+    position: absolute;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Game Container Glow Border */
+.glow-border {
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(20,184,166,0.5) 0%, transparent 50%);
+    z-index: 0;
+    border-radius: 24px;
+}
+
+/* Scanlines for Game Canvas */
+.scanlines {
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0.2)
+    );
+    background-size: 100% 4px;
+    mix-blend-mode: overlay;
+}
+
+/* Modal */
+#reward-modal.show {
+    display: flex;
+    opacity: 1;
+}
+#reward-modal.show #reward-content {
+    transform: scale(1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #020617; }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+/* Global Animated Background Effect */
+.global-bg-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-color: #020617; /* dark-950 */
+}
+
+/* Subtle Geometric Texture Overlay */
+.bg-texture-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Animated Orbs */
+.animated-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.6;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.orb-1 {
+    top: -10%; left: -10%;
+    width: 50vw; height: 50vw;
+    background-color: rgba(14, 165, 233, 0.15); /* Brand blue-ish */
+    animation-name: float-orb-1;
+    animation-duration: 22s;
+}
+.orb-2 {
+    bottom: -15%; right: -10%;
+    width: 60vw; height: 60vw;
+    background-color: rgba(168, 85, 247, 0.12); /* Purple */
+    animation-name: float-orb-2;
+    animation-duration: 28s;
+}
+.orb-3 {
+    top: 40%; left: 60%;
+    width: 40vw; height: 40vw;
+    background-color: rgba(250, 204, 21, 0.08); /* Gold */
+    animation-name: float-orb-3;
+    animation-duration: 18s;
+}
+
+@keyframes float-orb-1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(15%, 15%) scale(1.2); }
+}
+@keyframes float-orb-2 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-10%, -20%) scale(1.1); }
+}
+@keyframes float-orb-3 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-20%, 10%) scale(1.3); }
+}
+
+/* Floating SVG Elements in Background */
+.bg-svg-element {
+    position: absolute;
+    opacity: 0.15; /* Subtle */
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bg-svg-1 {
+    top: 20%; left: 15%;
+    width: 40px; height: 40px;
+    animation: float-rotate 15s linear infinite;
+    fill: #0ea5e9; /* Brand Blue */
+}
+
+.bg-svg-2 {
+    bottom: 30%; right: 10%;
+    width: 60px; height: 60px;
+    animation: float-rotate-reverse 20s linear infinite;
+    fill: #a855f7; /* Purple */
+}
+
+.bg-svg-3 {
+    top: 60%; left: 70%;
+    width: 30px; height: 30px;
+    animation: float-rotate 12s linear infinite;
+    fill: #eab308; /* Gold */
+}
+
+.bg-svg-4 {
+    top: 10%; right: 25%;
+    width: 50px; height: 50px;
+    animation: float-rotate-reverse 25s linear infinite;
+    fill: #ffffff; /* White */
+}
+
+@keyframes float-rotate {
+    0% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-30px) rotate(120deg); }
+    66% { transform: translateY(15px) rotate(240deg); }
+    100% { transform: translateY(0) rotate(360deg); }
+}
+
+@keyframes float-rotate-reverse {
+    0% { transform: translateY(0) rotate(360deg); }
+    33% { transform: translateY(40px) rotate(240deg); }
+    66% { transform: translateY(-20px) rotate(120deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* 3D Flip Card Utilities */
+
+
+
+
+/* Spotlight Effect on HOF Grid */
+.hof-grid:hover .hof-card:not(:hover) {
+    opacity: 0.35;
+    filter: blur(3px) grayscale(60%);
+    transform: scale(0.96);
+}
+.hof-card {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dynamic Badge Shine */
+.badge-shine {
+    position: relative;
+    overflow: hidden;
+}
+.badge-shine::after {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: rotate(30deg) translateX(-100%);
+    animation: shine 3s infinite;
+}
+@keyframes shine {
+    0% { transform: rotate(30deg) translateX(-100%); }
+    20%, 100% { transform: rotate(30deg) translateX(100%); }
+}
+
+/* Fix Flip Card Animation */
+.hof-card {
+    perspective: 1500px;
+}
+.flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+.hof-card:hover .flip-inner {
+    transform: rotateY(180deg) !important;
+}
+.backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+.rotate-y-180 {
+    transform: rotateY(180deg) !important;
+}
+
+/* Bulletproof 3D Flip */
+.hof-card {
+    perspective: 1500px;
+    -webkit-perspective: 1500px;
+    background-color: transparent;
+}
+.flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+.hof-card:hover .flip-inner {
+    transform: rotateY(180deg) !important;
+    -webkit-transform: rotateY(180deg) !important;
+}
+.backface-hidden {
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.rotate-y-180 {
+    transform: rotateY(180deg) !important;
+    -webkit-transform: rotateY(180deg) !important;
+}
+
+/* Masterpiece Eye-Catching Effects */
+.masterpiece-card {
+    position: relative;
+    border-radius: 1.5rem;
+    z-index: 1;
+}
+.masterpiece-card::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 1.7rem;
+    background: linear-gradient(90deg, #facc15, #a855f7, #0ea5e9, #facc15);
+    background-size: 300% 300%;
+    animation: animateBorder 4s linear infinite;
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.7;
+    transition: opacity 0.5s;
+}
+.masterpiece-card:hover::before {
+    opacity: 1;
+    filter: blur(15px);
+}
+.masterpiece-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    background: rgba(15, 23, 42, 0.95);
+    z-index: -1;
+}
+@keyframes animateBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.levitate {
+    animation: levitate 6s ease-in-out infinite;
+}
+@keyframes levitate {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.02); }
+}
+
+.hologram-scan {
+    position: relative;
+    overflow: hidden;
+}
+.hologram-scan::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    background: linear-gradient(to bottom, rgba(14,165,233,0), rgba(14,165,233,0.5), rgba(14,165,233,0));
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+    z-index: 30;
+}
+@keyframes scan {
+    0% { top: -100%; }
+    50% { top: 200%; }
+    100% { top: 200%; }
+}

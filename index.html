@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LesKodingSpace - Elite Gamified Academy</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    colors: {
+                        brand: { 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7' }, // Bright Blue
+                        gold: { 400: '#facc15', 500: '#eab308' }, // Yellow-Gold
+                        purpleBrand: { 500: '#a855f7', 600: '#9333ea', 700: '#7e22ce' }, // Purple
+                        redBrand: { 500: '#ef4444', 600: '#dc2626' }, // Red
+                        dark: { 900: '#050b14', 950: '#020617' }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Outfit:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-body  text-slate-300 antialiased overflow-x-hidden selection:bg-brand-500/30 selection:text-white bg-grid-pattern">
+    <!-- Global Animated Background -->
+    <div class="global-bg-wrapper overflow-hidden">
+        <div class="bg-texture-overlay"></div>
+        <div class="animated-orb orb-1"></div>
+        <div class="animated-orb orb-2"></div>
+        <div class="animated-orb orb-3"></div>
+        
+        <!-- Floating SVGs -->
+        <!-- Code Brackets -->
+        <svg class="bg-svg-element bg-svg-1" viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l4.2-4.2L7.6 6.4l-5.6 5.6 5.6 5.6zM15 16.2l4.2-4.2-4.2-4.2L16.4 6.4l5.6 5.6-5.6 5.6z"/></svg>
+        <!-- Sparkle/Star -->
+        <svg class="bg-svg-element bg-svg-2" viewBox="0 0 24 24"><path d="M12 2L15 9l7 3-7 3-3 7-3-7-7-3 7-3z"/></svg>
+        <!-- Robot/Gear abstract -->
+        <svg class="bg-svg-element bg-svg-3" viewBox="0 0 24 24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.73,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.49-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
+        <!-- Triangle / Game Play -->
+        <svg class="bg-svg-element bg-svg-4" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </div>
+
+    
+    <!-- Floating HUD (Hidden on mobile) -->
+    <div class="fixed top-6 left-6 z-[100] hidden md:flex flex-col gap-3 pointer-events-none" id="hud">
+        <div class="pointer-events-auto flex items-center gap-4 bg-dark-950/80 border border-white/10 backdrop-blur-xl px-5 py-2.5 rounded-full shadow-2xl transition-all hover:border-white/20">
+            <button id="toggle-sound" class="text-slate-400 hover:text-brand-400 transition-colors flex items-center justify-center rounded-full focus:outline-none">
+                <i class="fa-solid fa-volume-xmark text-sm" id="sound-icon"></i>
+            </button>
+            <div class="w-px h-4 bg-white/10"></div>
+            <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-terminal text-brand-400 text-[10px]"></i>
+                <span class="font-mono font-semibold text-white tracking-[0.15em] text-sm" id="hud-score">0000</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Sci-Fi Pill Navbar -->
+    <nav class="fixed top-4 md:top-8 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl transition-all duration-500 group" id="navbar">
+        <!-- Gradient Border Wrapper -->
+        <div class="rounded-full p-[1px] bg-gradient-to-r from-brand-500/20 via-purpleBrand-500/20 to-brand-500/20 shadow-[0_15px_40px_rgba(0,0,0,0.6)] group-hover:from-brand-500/40 group-hover:via-purpleBrand-500/40 group-hover:to-brand-500/40 transition-colors duration-500">
+            <!-- Inner Glass Container -->
+            <div id="nav-container" class="bg-dark-950/90 backdrop-blur-2xl rounded-full px-5 md:px-6 py-4 md:py-5 flex justify-between items-center w-full transition-all duration-500">
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img id="nav-logo" src="assets/logo/leskoding_community.png" alt="LesKodingSpace" class="h-8 md:h-10 w-auto object-contain hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-500">
+                </div>
+                
+                <!-- Center Links (Desktop - Terminal Style) -->
+                <div class="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
+                    <a href="#hall-of-fame" class="group/link text-slate-400 hover:text-gold-400 font-mono font-bold transition-colors text-[10px] uppercase tracking-[0.2em] flex items-center gap-2 drop-shadow-[0_0_5px_rgba(250,204,21,0.4)]">
+                        <i class="fa-solid fa-crown text-gold-400"></i> Hall of Fame
+                    </a>
+                    <a href="#course" class="group/link text-slate-400 hover:text-white font-mono font-medium transition-colors text-[10px] uppercase tracking-[0.2em] flex items-center gap-1">
+                        <span class="text-purpleBrand-400 opacity-0 group-hover/link:opacity-100 transition-opacity">&gt;</span> Course
+                    </a>
+                    <a href="#tutors" class="group/link text-slate-400 hover:text-white font-mono font-medium transition-colors text-[10px] uppercase tracking-[0.2em] flex items-center gap-1">
+                        <span class="text-brand-400 opacity-0 group-hover/link:opacity-100 transition-opacity">&gt;</span> Tutors
+                    </a>
+                    <a href="#location" class="group/link text-slate-400 hover:text-white font-mono font-medium transition-colors text-[10px] uppercase tracking-[0.2em] flex items-center gap-1">
+                        <span class="text-emerald-400 opacity-0 group-hover/link:opacity-100 transition-opacity">&gt;</span> Location
+                    </a>
+                </div>
+                
+                <!-- Right CTA (Desktop) -->
+                <div class="hidden md:block">
+                    <a href="#register" class="relative overflow-hidden inline-flex items-center justify-center bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold px-6 py-2 rounded-full text-[10px] uppercase tracking-[0.25em] transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.6)]">
+                        <span class="relative z-10 flex items-center gap-2"><i class="fa-solid fa-bolt text-dark-950"></i> Enroll</span>
+                        <div class="absolute inset-0 bg-white/20 translate-y-full hover:translate-y-0 transition-transform"></div>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-brand-400 hover:text-white focus:outline-none w-8 h-8 flex items-center justify-center rounded-full bg-brand-500/10 border border-brand-500/20 active:scale-95 transition-transform">
+                        <i class="fa-solid fa-bars-staggered text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Interactive Hero Section -->
+    <section id="home" class="relative min-h-[100vh] flex items-center justify-center pt-24 md:pt-32 pb-12 overflow-hidden border-b border-white/5">
+        <!-- Background & Overlays -->
+        <div class="absolute inset-0  z-0"></div>
+        <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity z-0" alt="Coding Background">
+        <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-dark-950 via-dark-950/60 to-transparent z-0 hidden lg:block"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Left: Text Content & CTAs -->
+                <div class="text-left fade-in-up pt-10">
+                    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-brand-500/30 bg-brand-500/10 text-brand-400 text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                        </span>
+                        #1 Akademi Pemrograman Bali
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-heading font-black text-white mb-6 leading-[1.15] tracking-tight">
+                        Rasakan Petualangan Coding yang <br class="hidden md:block">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-indigo-400 to-purpleBrand-500">Tak Terlupakan!</span>
+                    </h1>
+                    
+                    <p class="text-sm md:text-base text-slate-300 mb-4 max-w-xl font-normal leading-relaxed">
+                        Setiap petualangan dimulai dengan langkah pertama. Di <span class="text-white font-bold">LesKoding</span>, kami tidak hanya mengajarkan coding – kami membawa Anda dalam perjalanan yang menggugah semangat, di mana kreativitas dan teknologi bertemu.
+                    </p>
+                    <p class="text-sm md:text-base text-slate-300 mb-10 max-w-xl font-normal leading-relaxed hidden sm:block">
+                        Apakah Anda siap untuk menjelajahi dunia yang penuh dengan kemungkinan? Bersiaplah untuk mengasah keterampilan Anda, berkolaborasi dengan teman baru, dan menyaksikan ide-ide Anda hidup. Mulailah petualangan Anda hari ini!
+                    </p>
+                    
+                    <div class="flex flex-wrap items-center gap-4 mb-12">
+                        <a href="#register" class="w-full sm:w-auto relative group px-8 py-4 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(20,184,166,0.2)] hover:shadow-[0_0_40px_rgba(20,184,166,0.4)] transition-all duration-300 bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold text-xs uppercase tracking-[0.1em] text-center">
+                            <span class="relative z-10 flex items-center justify-center gap-2">
+                                Mulai Petualangan! <i class="fa-solid fa-rocket"></i>
+                            </span>
+                        </a>
+                        <a href="#course" class="w-full sm:w-auto relative group px-8 py-4 rounded-xl overflow-hidden transition-all duration-300 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-bold text-xs uppercase tracking-[0.1em] text-center">
+                            Pelajari Rute Kami <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div class="grid grid-cols-2 gap-8 pt-8 border-t border-white/10">
+                        <div>
+                            <div class="text-3xl md:text-4xl font-heading font-black text-white mb-1"><span class="counter" data-target="15000">0</span>+</div>
+                            <div class="text-[10px] md:text-xs uppercase tracking-wider text-slate-400 font-bold">Siswa Aktif</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl md:text-4xl font-heading font-black text-brand-400 mb-1"><span class="counter" data-target="20000">0</span>+</div>
+                            <div class="text-[10px] md:text-xs uppercase tracking-wider text-slate-400 font-bold">Proyek Selesai</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Floating Elements & Testimonials -->
+                <div class="relative hidden lg:block h-full min-h-[500px]">
+                    <!-- Testimonial Floating Card 1 -->
+                    <div class="absolute bottom-10 right-0 bg-dark-900/80 backdrop-blur-xl  border border-white/10 p-6 rounded-3xl shadow-2xl max-w-sm transform hover:-translate-y-2 transition-transform duration-500 z-30">
+                        <i class="fa-solid fa-quote-right text-3xl text-brand-500/20 absolute top-4 right-6"></i>
+                        <div class="flex items-center gap-4 mb-4">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex&backgroundColor=transparent" alt="Alex" class="w-12 h-12 rounded-full  border-2 border-brand-500/50">
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Alex Pratama</h4>
+                                <div class="flex text-gold-400 text-[10px]">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 text-sm italic font-medium leading-relaxed">"Saya merasa seperti seorang penjelajah saat belajar di LesKoding! Setiap proyek membawa tantangan baru dan pengalaman berharga."</p>
+                    </div>
+
+                    <!-- Floating Jargon / Slogan Card -->
+                    <div class="absolute top-20 left-0 bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-brand-500/30 p-6 rounded-3xl shadow-[0_0_40px_rgba(14,165,233,0.15)] max-w-[280px] transform hover:scale-105 transition-all duration-500 animate-[bounce_5s_infinite] z-20 group">
+                        <i class="fa-solid fa-rocket text-4xl text-brand-500/20 absolute -top-3 -left-3 group-hover:rotate-12 transition-transform"></i>
+                        <h4 class="font-heading font-black text-xl text-white tracking-wide mb-2 leading-tight">
+                            Dari <span class="text-redBrand-400 line-through decoration-2 decoration-redBrand-500/50">Nol</span><br>
+                            Menjadi <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purpleBrand-400">Kreator Teknologi!</span>
+                        </h4>
+                        <div class="w-12 h-1 bg-gradient-to-r from-brand-400 to-purpleBrand-400 rounded-full mb-3"></div>
+                        <p class="text-slate-300 text-xs font-medium leading-relaxed">
+                            Bukan sekadar belajar biasa. Kami sulap rasa penasaranmu menjadi karya digital nyata berstandar masa depan.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- HALL OF FAME: PREMIUM MUSEUM -->
+    <section id="hall-of-fame" class="pt-32 pb-20 md:pt-40 md:pb-28 relative z-10 border-b border-white/5 overflow-hidden bg-gradient-to-b from-transparent via-[#2e1065]/40 to-[#020617]">
+        <!-- Ambient lighting -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-gold-500/10 blur-[150px] pointer-events-none rounded-full"></div>
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purpleBrand-500/10 blur-[120px] pointer-events-none rounded-full"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Header -->
+            <div class="text-center mb-16 fade-in-up flex flex-col items-center">
+                <!-- SVG Trophy Icon -->
+                <div class="mb-6 w-24 h-24 bg-dark-900/80 backdrop-blur-xl backdrop-blur-xl rounded-full border border-gold-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(250,204,21,0.2)] group hover:shadow-[0_0_50px_rgba(250,204,21,0.4)] transition-all cursor-default">
+                    <svg class="w-12 h-12 transform group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                        <path d="M32 0C15.296 0 2 9.681 2 24c0 2.831 1.903 5.498 2 9.476C1.192 36.879 0 41.368 0 46.8v6.6C0 58.918 5.082 64 11.4 64h41.2c6.318 0 11.4-5.082 11.4-11.6V46.8c0-5.432-1.192-9.921-4-12.324 0-3.978 2-6.645 2-9.476 0-14.319-13.296-24-30-24z" fill="url(#goldGrad)"/>
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fef08a;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#eab308;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#a16207;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white mb-6 tracking-tight">Kisah Sukses dari<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-yellow-600">Penjelajah Kami!</span></h2>
+                <p class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Di sinilah karya luar biasa dari siswa kami ditampilkan! Setiap proyek adalah petualangan yang menceritakan perjalanan kreativitas dan dedikasi. Terinspirasi oleh pencapaian mereka? Bergabunglah dan biarkan petualangan Anda dimulai!</p>
+            </div>
+
+            <!-- Digital Trophy Wall (Masterpiece / Winner) -->
+            <div class="mb-24 fade-in-up">
+                <h3 class="text-lg font-heading font-bold text-white mb-8 border-b border-white/10 pb-4 inline-block pr-12"><i class="fa-solid fa-trophy text-gold-400 mr-3"></i> Pajangan Proyek Pilihan</h3>
+                
+                <div class="group masterpiece-card levitate flex flex-col lg:flex-row gap-8 items-center p-6 md:p-10 shadow-[0_0_80px_rgba(250,204,21,0.15)] transition-all duration-700">
+                    
+                    <!-- 3D Image Container -->
+                    <div class="w-full lg:w-1/2 relative rounded-2xl overflow-hidden shadow-2xl shrink-0 tilt-element hologram-scan border border-white/5" style="transform-style: preserve-3d;">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent z-10 pointer-events-none"></div>
+                        <!-- Badge -->
+                        <div class="absolute top-4 left-4 z-20 flex flex-col gap-2 transform translate-z-10 badge-shine">
+                            <span class="bg-gradient-to-r from-gold-400 to-yellow-600 text-dark-950 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-lg shadow-[0_0_20px_rgba(250,204,21,0.5)] border border-gold-300 flex items-center gap-2"><i class="fa-solid fa-crown text-sm"></i> Masterpiece Terbaik</span>
+                        </div>
+                        <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="w-full h-[300px] md:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105" alt="Masterpiece Project">
+                    </div>
+
+                    <!-- Content -->
+                    <div class="w-full lg:w-1/2 flex flex-col justify-center">
+                        <div class="inline-flex items-center gap-2 text-brand-400 font-mono text-[10px] uppercase tracking-widest mb-2"><i class="fa-solid fa-code"></i> Pilihan Kurator LesKoding</div>
+                        <h4 class="text-3xl md:text-5xl font-heading font-black text-white mb-4 leading-tight">Cyber City RP Game</h4>
+                        
+                        <!-- Floating Hologram Profile -->
+                        <div class="flex items-center gap-4 mb-6 bg-white/5 border border-white/10 rounded-2xl p-3 backdrop-blur-sm max-w-sm">
+                            <div class="relative shrink-0">
+                                <div class="absolute -inset-1 bg-gradient-to-r from-gold-500 to-purpleBrand-500 rounded-full animate-pulse blur-sm opacity-50"></div>
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" class="relative w-12 h-12 rounded-full border-2 border-dark-900 bg-dark-900" alt="Sarah">
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-white flex items-center gap-2">Sarah (12 Tahun) <i class="fa-solid fa-circle-check text-blue-400 text-xs" title="Verified Creator"></i></p>
+                                <p class="text-[10px] text-gold-400 font-mono uppercase tracking-widest">Lead Roblox Creator</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-6 border-l-2 border-brand-500/50 pl-4 italic">"Sebuah dunia Roleplay 3D masif yang dibangun dalam Roblox Studio. Menggabungkan arsitektur cyberpunk dengan sistem mata uang virtual dan NPC interaktif tingkat lanjut."</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="px-3 py-1 bg-brand-500/10 text-brand-300 border border-brand-500/30 rounded-full text-[10px] font-mono shadow-[0_0_10px_rgba(14,165,233,0.2)]">Roblox Studio</span>
+                            <span class="px-3 py-1 bg-purpleBrand-500/10 text-purpleBrand-300 border border-purpleBrand-500/30 rounded-full text-[10px] font-mono shadow-[0_0_10px_rgba(168,85,247,0.2)]">Lua Scripting</span>
+                            <span class="px-3 py-1 bg-gold-500/10 text-gold-300 border border-gold-500/30 rounded-full text-[10px] font-mono shadow-[0_0_10px_rgba(250,204,21,0.2)]">3D Modeling</span>
+                        </div>
+                        
+                        <div class="flex flex-wrap items-center gap-4">
+                            <button onclick="triggerConfetti()" class="inline-flex justify-center items-center gap-3 bg-gradient-to-r from-brand-500 to-purpleBrand-500 text-white font-black px-8 py-4 rounded-xl uppercase tracking-[0.1em] text-xs transition-all shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:shadow-[0_0_50px_rgba(168,85,247,0.8)] hover:-translate-y-1 hover:scale-105">
+                                <i class="fa-solid fa-rocket"></i> Eksplorasi Dunia
+                            </button>
+                            <button onclick="upvoteProject(this)" class="upvote-btn inline-flex justify-center items-center gap-2 border border-white/10 bg-dark-950/50 hover:bg-dark-900 hover:border-red-500/50 hover:text-red-400 text-slate-400 font-bold px-6 py-4 rounded-xl transition-all text-xs group/btn">
+                                <i class="fa-solid fa-heart group-hover/btn:scale-125 transition-transform text-red-500/80 group-hover/btn:text-red-500 group-hover/btn:animate-pulse"></i> <span class="vote-count text-white text-sm">1400</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Virtual Gallery Grid -->
+            <div class="fade-in-up">
+                <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-8">
+                    <h3 class="text-lg font-heading font-bold text-white"><i class="fa-solid fa-layer-group text-slate-400 mr-3"></i> Galeri Eksibisi</h3>
+                    <div class="text-xs text-slate-500 font-mono">Menampilkan: <span class="text-white">Karya Teratas</span></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hof-grid">
+                    <!-- Gallery Card 1 (3D Flip) -->
+                    <div class="hof-card group/flip w-full h-[450px] perspective-1000">
+                        <div class="flip-inner relative w-full h-full transition-transform duration-700 preserve-3d">
+                            <!-- Front Side -->
+                            <div class="absolute inset-0 backface-hidden bg-dark-900 border border-gold-500/30 rounded-3xl overflow-hidden flex flex-col shadow-lg">
+                                <div class="relative h-2/3 overflow-hidden">
+                                    <div class="absolute inset-0 bg-dark-950/20 z-10 transition-opacity group-hover/flip:opacity-0"></div>
+                                    <div class="absolute top-4 left-4 z-20 badge-shine">
+                                        <span class="bg-purpleBrand-500/90 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg border border-purpleBrand-300/50"><i class="fa-solid fa-fire mr-1"></i> Terfavorit</span>
+                                    </div>
+                                    <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" class="w-full h-full object-cover" alt="Project">
+                                </div>
+                                <div class="p-6 h-1/3 flex flex-col justify-center items-center text-center">
+                                    <h4 class="font-heading font-bold text-white text-xl">Sistem AI Kasir Pintar</h4>
+                                    <p class="text-[10px] text-brand-400 mt-2 font-mono uppercase tracking-widest"><i class="fa-solid fa-arrow-rotate-right mr-1"></i> Arahkan Kursor</p>
+                                </div>
+                            </div>
+                            <!-- Back Side -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-dark-900 via-dark-900/90 to-purpleBrand-950/40 border border-gold-400/50 rounded-3xl p-6 md:p-8 flex flex-col shadow-[0_0_40px_rgba(250,204,21,0.2)]">
+                                <div class="absolute -top-6 right-6 border-4 border-dark-900 rounded-full shadow-xl z-30">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Budi" class="w-12 h-12 rounded-full " alt="User">
+                                </div>
+                                <p class="text-[10px] font-bold text-gold-400 uppercase tracking-wider mb-4 mt-2 border-b border-white/10 pb-2">Budi (14 Tahun) <span class="text-slate-400 font-normal">· Web Dev</span></p>
+                                <p class="text-sm text-slate-300 mb-4 leading-relaxed flex-grow">Aplikasi kasir berbasis web menggunakan logika JavaScript kompleks untuk kalkulasi inventaris dan struk real-time.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">JS</span>
+                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">HTML/CSS</span>
+                                </div>
+                                <div class="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
+                                    <button onclick="triggerConfetti()" class="text-[10px] font-bold uppercase tracking-widest text-dark-950 bg-gold-400 hover:bg-gold-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
+                                        Lihat <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button onclick="upvoteProject(this)" class="upvote-btn text-slate-400 hover:text-red-500 transition-colors text-xs flex items-center gap-1.5 font-mono">
+                                        <i class="fa-solid fa-heart"></i> <span class="vote-count text-white font-bold">856</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Card 2 (3D Flip) -->
+                    <div class="hof-card group/flip w-full h-[450px] perspective-1000">
+                        <div class="flip-inner relative w-full h-full transition-transform duration-700 preserve-3d">
+                            <!-- Front Side -->
+                            <div class="absolute inset-0 backface-hidden bg-dark-900 border border-gold-500/30 rounded-3xl overflow-hidden flex flex-col shadow-lg">
+                                <div class="relative h-2/3 overflow-hidden">
+                                    <div class="absolute inset-0 bg-dark-950/20 z-10 transition-opacity group-hover/flip:opacity-0"></div>
+                                    <div class="absolute top-4 left-4 z-20 badge-shine">
+                                        <span class="bg-brand-500/90 text-dark-950 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg border border-brand-300/50"><i class="fa-solid fa-robot mr-1"></i> Future Tech</span>
+                                    </div>
+                                    <img src="assets/sessions/01M3JK50X16R206D3HK7Z9A9G0.jpeg" class="w-full h-full object-cover" alt="Project">
+                                </div>
+                                <div class="p-6 h-1/3 flex flex-col justify-center items-center text-center">
+                                    <h4 class="font-heading font-bold text-white text-xl">Robot Pemilah Sampah</h4>
+                                    <p class="text-[10px] text-brand-400 mt-2 font-mono uppercase tracking-widest"><i class="fa-solid fa-arrow-rotate-right mr-1"></i> Arahkan Kursor</p>
+                                </div>
+                            </div>
+                            <!-- Back Side -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-dark-900 via-dark-900/90 to-brand-950/40 border border-gold-400/50 rounded-3xl p-6 md:p-8 flex flex-col shadow-[0_0_40px_rgba(250,204,21,0.2)]">
+                                <div class="absolute -top-6 right-6 border-4 border-dark-900 rounded-full shadow-xl z-30">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kevin" class="w-12 h-12 rounded-full " alt="User">
+                                </div>
+                                <p class="text-[10px] font-bold text-gold-400 uppercase tracking-wider mb-4 mt-2 border-b border-white/10 pb-2">Kevin (10 Tahun) <span class="text-slate-400 font-normal">· Robotics</span></p>
+                                <p class="text-sm text-slate-300 mb-4 leading-relaxed flex-grow">Proyek Arduino dengan sensor ultrasonik dan motor servo yang secara otomatis membuka tutup tempat sampah.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">Arduino</span>
+                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">C++</span>
+                                </div>
+                                <div class="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
+                                    <button onclick="triggerConfetti()" class="text-[10px] font-bold uppercase tracking-widest text-dark-950 bg-gold-400 hover:bg-gold-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
+                                        Lihat <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button onclick="upvoteProject(this)" class="upvote-btn text-slate-400 hover:text-red-500 transition-colors text-xs flex items-center gap-1.5 font-mono">
+                                        <i class="fa-solid fa-heart"></i> <span class="vote-count text-white font-bold">642</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Card 3 (3D Flip) -->
+                    <div class="hof-card group/flip w-full h-[450px] perspective-1000">
+                        <div class="flip-inner relative w-full h-full transition-transform duration-700 preserve-3d">
+                            <!-- Front Side -->
+                            <div class="absolute inset-0 backface-hidden bg-dark-900 border border-gold-500/30 rounded-3xl overflow-hidden flex flex-col shadow-lg">
+                                <div class="relative h-2/3 overflow-hidden">
+                                    <div class="absolute inset-0 bg-dark-950/20 z-10 transition-opacity group-hover/flip:opacity-0"></div>
+                                    <div class="absolute top-4 left-4 z-20 badge-shine">
+                                        <span class="bg-gold-500/90 text-dark-950 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg border border-gold-300/50"><i class="fa-solid fa-gem mr-1"></i> Desain Terbaik</span>
+                                    </div>
+                                    <img src="assets/sessions/01M3JK1KMW3XQ7DFP5F7YZ8J0D.jpg" class="w-full h-full object-cover" alt="Project">
+                                </div>
+                                <div class="p-6 h-1/3 flex flex-col justify-center items-center text-center">
+                                    <h4 class="font-heading font-bold text-white text-xl">Portofolio Animasi Web</h4>
+                                    <p class="text-[10px] text-brand-400 mt-2 font-mono uppercase tracking-widest"><i class="fa-solid fa-arrow-rotate-right mr-1"></i> Arahkan Kursor</p>
+                                </div>
+                            </div>
+                            <!-- Back Side -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-dark-900 via-dark-900/90 to-gold-950/40 border border-gold-400/50 rounded-3xl p-6 md:p-8 flex flex-col shadow-[0_0_40px_rgba(250,204,21,0.2)]">
+                                <div class="absolute -top-6 right-6 border-4 border-dark-900 rounded-full shadow-xl z-30">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Nadia" class="w-12 h-12 rounded-full " alt="User">
+                                </div>
+                                <p class="text-[10px] font-bold text-gold-400 uppercase tracking-wider mb-4 mt-2 border-b border-white/10 pb-2">Nadia (15 Tahun) <span class="text-slate-400 font-normal">· Web Dev</span></p>
+                                <p class="text-sm text-slate-300 mb-4 leading-relaxed flex-grow">Website portofolio pribadi yang penuh dengan animasi CSS 3D dan transisi scroll mulus tanpa framework eksternal.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">TailwindCSS</span>
+                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">JavaScript</span>
+                                </div>
+                                <div class="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
+                                    <button onclick="triggerConfetti()" class="text-[10px] font-bold uppercase tracking-widest text-dark-950 bg-gold-400 hover:bg-gold-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
+                                        Lihat <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button onclick="upvoteProject(this)" class="upvote-btn text-slate-400 hover:text-red-500 transition-colors text-xs flex items-center gap-1.5 font-mono">
+                                        <i class="fa-solid fa-heart"></i> <span class="vote-count text-white font-bold">1100</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button class="px-8 py-3.5 bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/10 hover:border-gold-500/50 hover:bg-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-300 hover:text-gold-400 transition-all shadow-lg flex items-center gap-3 mx-auto group">
+                        Muat Lebih Banyak Karya <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Grid Features (Magnetic Hover) -->
+    <section id="features" class="py-20 md:py-28 relative z-10  border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-indigo-400 mb-2">Petualangan Belajar</h2>
+                <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Mengapa Petualangan Ini Sangat Berharga?</h3>
+                <p class="text-sm md:text-base text-slate-400 max-w-2xl mx-auto">Di LesKoding, setiap kelas adalah sebuah eksplorasi baru.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <!-- Item 1 (Wide) -->
+                <div class="bento-card md:col-span-2 rounded-[1.5rem] bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/5 p-6 md:p-8 relative overflow-hidden group fade-in-up min-h-[240px] flex flex-col justify-end">
+                    <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-500" alt="Session">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-brand-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                    
+                    <div class="relative z-10 w-full">
+                        <h4 class="text-xl font-heading font-bold text-white mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-map text-brand-400"></i> Kursus Interaktif
+                        </h4>
+                        <p class="text-slate-300 text-xs md:text-sm leading-relaxed">Ikuti peta belajar yang dinamis, di mana setiap sesi membawa Anda lebih dekat menuju tujuan besar Anda dalam petualangan coding.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 (Square) -->
+                <div class="bento-card rounded-[1.5rem] bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/5 p-6 md:p-8 relative overflow-hidden group fade-in-up min-h-[240px] flex flex-col justify-end" style="transition-delay: 100ms;">
+                    <img src="assets/sessions/01M3H323B1QJV4PH2CCWGH9AQ2.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500" alt="Session">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-purpleBrand-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                    
+                    <div class="relative z-10 w-full">
+                        <h4 class="text-lg font-heading font-bold text-white mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-user-astronaut text-purpleBrand-400"></i> Fasilitator Ahli
+                        </h4>
+                        <p class="text-slate-300 text-xs leading-relaxed">Pemandu Anda dalam petualangan ini adalah para ahli yang siap membagikan pengetahuan berharga.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 (Square) -->
+                <div class="bento-card rounded-[1.5rem] bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/5 p-6 md:p-8 relative overflow-hidden group fade-in-up min-h-[240px] flex flex-col justify-end" style="transition-delay: 200ms;">
+                    <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500" alt="Session">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-gold-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                    
+                    <div class="relative z-10 w-full">
+                        <h4 class="text-lg font-heading font-bold text-white mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-users text-gold-400"></i> Koneksi Komunitas
+                        </h4>
+                        <p class="text-slate-300 text-xs leading-relaxed">Bergabunglah dengan sesama petualang, berbagi pengalaman, dan saling membantu dalam belajar.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 (Wide) -->
+                <div class="bento-card md:col-span-2 rounded-[1.5rem] bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/5 p-6 md:p-8 relative overflow-hidden group fade-in-up min-h-[240px] flex flex-col justify-end" style="transition-delay: 300ms;">
+                    <img src="assets/sessions/01M3RVHT4R9SQ961Z3GTWJD72Y.jpg" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-500" alt="Session">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-redBrand-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                    
+                    <div class="relative z-10 w-full md:w-3/4">
+                        <h4 class="text-xl font-heading font-bold text-white mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-redBrand-400"></i> Micro-Learning RPG
+                        </h4>
+                        <p class="text-slate-300 text-xs md:text-sm leading-relaxed">Materi dipecah menjadi *quest*. Belajar koding semenarik menaikkan level karakter di game favorit Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Elite Mentors (Tutors) -->
+    <section id="tutors" class="py-20 md:py-28 relative z-10  border-b border-white/5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="fade-in-up">
+                <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-purpleBrand-400 mb-2">Instruktur Terverifikasi</h2>
+                <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-12">Belajar dari Para Ahli</h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <!-- Mentor 1 -->
+                    <div class="bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/5 rounded-3xl p-8 hover:bg-dark-800 transition-colors shadow-xl group">
+                        <div class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-br from-brand-400 to-indigo-600 mb-6 group-hover:scale-110 transition-transform duration-500">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=transparent" class="w-full h-full  rounded-full" alt="Mentor">
+                        </div>
+                        <h4 class="font-bold text-white text-xl mb-1">Felix R.</h4>
+                        <p class="text-[10px] text-brand-400 font-bold uppercase tracking-widest mb-4">Ex-Google Engineer</p>
+                        <p class="text-sm text-slate-400 leading-relaxed">Pakar arsitektur skala besar. Mengajar Web Dev tingkat mahir dan membimbing ratusan portofolio.</p>
+                    </div>
+                    <!-- Mentor 2 -->
+                    <div class="bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/5 rounded-3xl p-8 hover:bg-dark-800 transition-colors shadow-xl group">
+                        <div class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-br from-gold-400 to-redBrand-500 mb-6 group-hover:scale-110 transition-transform duration-500">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Anita&backgroundColor=transparent" class="w-full h-full  rounded-full" alt="Mentor">
+                        </div>
+                        <h4 class="font-bold text-white text-xl mb-1">Anita K.</h4>
+                        <p class="text-[10px] text-gold-400 font-bold uppercase tracking-widest mb-4">Top Roblox Creator</p>
+                        <p class="text-sm text-slate-400 leading-relaxed">Game developer sukses. Membantu 500+ anak membangun dan mempublikasikan game pertamanya.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 inline-flex items-center justify-center gap-4 text-xs text-slate-400 bg-white/5 border border-white/10 rounded-full px-6 py-3">
+                    <div class="flex -space-x-2">
+                        <img class="w-6 h-6 rounded-full border border-dark-950" src="https://api.dicebear.com/7.x/avataaars/svg?seed=User1" alt="">
+                        <img class="w-6 h-6 rounded-full border border-dark-950" src="https://api.dicebear.com/7.x/avataaars/svg?seed=User2" alt="">
+                        <img class="w-6 h-6 rounded-full border border-dark-950" src="https://api.dicebear.com/7.x/avataaars/svg?seed=User3" alt="">
+                    </div>
+                    <p>Dibimbing langsung oleh para pakar di industri.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COURSE ADVENTURE MAP -->
+    <section id="course" class="py-24 md:py-32 relative z-10  border-b border-white/5 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purpleBrand-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-[11px] font-bold tracking-[0.3em] uppercase text-brand-400 mb-3 drop-shadow-[0_0_10px_rgba(20,184,166,0.3)]">Petualangan Menanti</h2>
+                <h3 class="text-3xl md:text-5xl font-heading font-black text-white mb-6">Siapkan Diri Anda untuk Tantangan Seru!</h3>
+                <p class="text-slate-400/80 text-sm max-w-2xl mx-auto leading-relaxed">Temukan rute yang paling sesuai untuk Anda! Apakah Anda siap untuk menjelajahi dunia coding dengan cara yang menyenangkan?</p>
+            </div>
+
+            <!-- Course Tabs -->
+            <div class="flex flex-col md:flex-row justify-center gap-4 mb-16 fade-in-up">
+                <button onclick="switchCoursePath('game')" id="tab-game" class="course-tab-btn border-brand-500 bg-dark-900/60 backdrop-blur-xl  relative px-8 py-4 border rounded-2xl flex flex-col items-center gap-2 transition-all group overflow-hidden">
+                    <div class="absolute inset-0 bg-brand-500/10 opacity-100 tab-bg transition-opacity"></div>
+                    <i class="fa-solid fa-gamepad text-2xl text-brand-400 tab-icon mb-1 relative z-10 transition-colors"></i>
+                    <span class="font-heading font-bold text-white tab-title relative z-10 transition-colors">Game Programming</span>
+                    <span class="text-[9px] text-brand-200 tab-subtitle uppercase tracking-widest relative z-10 transition-colors">"Code Your Universe"</span>
+                </button>
+                <button onclick="switchCoursePath('web')" id="tab-web" class="course-tab-btn border-white/10 bg-dark-900/50 hover:border-purpleBrand-500/50 relative px-8 py-4 border rounded-2xl flex flex-col items-center gap-2 transition-all group overflow-hidden">
+                    <div class="absolute inset-0 bg-purpleBrand-500/10 opacity-0 group-hover:opacity-100 tab-bg transition-opacity"></div>
+                    <i class="fa-solid fa-code text-2xl text-slate-400 group-hover:text-purpleBrand-400 tab-icon mb-1 relative z-10 transition-colors"></i>
+                    <span class="font-heading font-bold text-slate-300 group-hover:text-white tab-title relative z-10 transition-colors">Web Programming</span>
+                    <span class="text-[9px] text-slate-500 group-hover:text-purpleBrand-200 tab-subtitle uppercase tracking-widest relative z-10 transition-colors">"Architect The Web"</span>
+                </button>
+                <button onclick="switchCoursePath('robotic')" id="tab-robotic" class="course-tab-btn border-white/10 bg-dark-900/50 hover:border-gold-500/50 relative px-8 py-4 border rounded-2xl flex flex-col items-center gap-2 transition-all group overflow-hidden">
+                    <div class="absolute inset-0 bg-gold-500/10 opacity-0 group-hover:opacity-100 tab-bg transition-opacity"></div>
+                    <i class="fa-solid fa-robot text-2xl text-slate-400 group-hover:text-gold-400 tab-icon mb-1 relative z-10 transition-colors"></i>
+                    <span class="font-heading font-bold text-slate-300 group-hover:text-white tab-title relative z-10 transition-colors">Robotic Engineering</span>
+                    <span class="text-[9px] text-slate-500 group-hover:text-gold-200 tab-subtitle uppercase tracking-widest relative z-10 transition-colors">"Bring Machines To Life"</span>
+                </button>
+            </div>
+
+            <!-- Course Paths Container -->
+            <div class="relative max-w-5xl mx-auto min-h-[300px] bg-dark-900/40 border border-white/5 rounded-3xl p-8 md:p-12 backdrop-blur-sm shadow-2xl">
+                
+                <!-- GAME PATH -->
+                <div id="path-game" class="course-path block transition-opacity duration-500">
+                    <div class="text-center mb-12">
+                        <h4 class="text-2xl md:text-3xl font-bold text-brand-400 mb-2">Jalur Game Developer</h4>
+                        <p class="text-slate-400 text-sm max-w-xl mx-auto">Dari logika dasar hingga membangun dunia 3D interaktif yang dimainkan ribuan orang di Roblox.</p>
+                    </div>
+                    
+                    <div class="relative">
+                        <!-- Connecting Line -->
+                        <div class="absolute top-1/2 left-0 w-full h-1 bg-dark-800 -translate-y-1/2 hidden md:block rounded-full">
+                            <div class="h-full bg-gradient-to-r from-brand-500/50 to-brand-300 w-full rounded-full shadow-[0_0_10px_rgba(20,184,166,0.5)]"></div>
+                        </div>
+
+                        <!-- Nodes -->
+                        <div class="flex flex-col md:flex-row justify-between relative z-10 gap-8 md:gap-0">
+                            <!-- Node 1 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 1: Dasar', 'Scratch 2D', 'fa-compass', 'emerald-500', 'Pelajari dasar-dasar logika pemrograman menggunakan platform visual block-coding Scratch. Sempurna untuk pemula yang ingin memahami algoritma secara interaktif.', '+500 XP', '4 Minggu', ['Pengenalan Koordinat X & Y', 'Logika Perulangan (Loops)', 'Kondisional (If-Else)', 'Membuat Mini Game Platformer'])">
+                                <div class="w-16 h-16 rounded-full  border-4 border-emerald-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(16,185,129,0.3)] mb-4 group-hover:scale-110 group-hover:bg-emerald-900 transition-all cursor-pointer">
+                                    <i class="fa-solid fa-compass text-emerald-500 group-hover:text-white transition-colors"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-white mb-1">Scratch 2D</h5>
+                                    <p class="text-[10px] text-slate-400">Logika Dasar</p>
+                                </div>
+                            </div>
+                            <!-- Node 2 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 2: Menengah', 'Roblox Studio', 'fa-cube', 'brand-500', 'Mulai membangun dunia 3D sendiri menggunakan Roblox Studio. Eksplorasi pembuatan terrain, model bangunan, dan sistem fisika dasar.', '+1000 XP', '6 Minggu', ['Navigasi Roblox Studio', '3D Modeling Dasar', 'Lighting & Environment', 'Obstacle Course (Obby)'])">
+                                <div class="w-16 h-16 rounded-full  border-4 border-brand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(20,184,166,0.3)] mb-4 group-hover:scale-110 group-hover:bg-brand-900 transition-all cursor-pointer">
+                                    <i class="fa-solid fa-cube text-brand-500 group-hover:text-white transition-colors"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-white mb-1">Roblox Studio</h5>
+                                    <p class="text-[10px] text-slate-400">Environment 3D</p>
+                                </div>
+                            </div>
+                            <!-- Node 3 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 3: Lanjutan', 'Lua Scripting', 'fa-wand-magic-sparkles', 'purpleBrand-500', 'Tambahkan nyawa ke dalam game! Belajar bahasa pemrograman Lua untuk mengontrol mekanika, AI sederhana, dan interaksi pemain.', '+1500 XP', '8 Minggu', ['Sintaks Dasar Lua', 'Variabel & Fungsi', 'GUI & HUD System', 'Sistem Poin & Leaderboard'])">
+                                <div class="w-16 h-16 rounded-full  border-4 border-purpleBrand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(147,51,234,0.3)] mb-4 group-hover:scale-110 group-hover:bg-purpleBrand-900 transition-all cursor-pointer">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-purpleBrand-500 group-hover:text-white transition-colors"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-white mb-1">Lua Scripting</h5>
+                                    <p class="text-[10px] text-slate-400">Kode & Mekanika</p>
+                                </div>
+                            </div>
+                            <!-- Node 4 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 4: Spesial', 'Game Release', 'fa-crown', 'gold-500', 'Tahap akhir perjalanan. Poles karya menjadi mahakarya, publikasikan ke jutaan pemain, dan pahami dasar monetisasi game.', '+3000 XP', '4 Minggu', ['Testing & Bug Fixing', 'Security & Anti-Exploit', 'Game Passes (Monetisasi)', 'Publishing ke Global Server'])">
+                                <div class="w-16 h-16 rounded-full bg-gold-500 border-4 border-gold-300 flex items-center justify-center text-xl text-dark-950 font-black shadow-[0_0_30px_rgba(250,204,21,0.6)] mb-4 group-hover:scale-110 transition-transform cursor-pointer">
+                                    <i class="fa-solid fa-crown text-dark-950"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-gold-400 mb-1">Game Release</h5>
+                                    <p class="text-[10px] text-slate-400">Masterpiece & Monetisasi</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WEB PATH -->
+                <div id="path-web" class="course-path hidden opacity-0 transition-opacity duration-500">
+                    <div class="text-center mb-12">
+                        <h4 class="text-2xl md:text-3xl font-bold text-purpleBrand-400 mb-2">Jalur Web Architect</h4>
+                        <p class="text-slate-400 text-sm max-w-xl mx-auto">Bangun struktur, desain antarmuka, hingga arsitektur aplikasi web modern yang dipakai di seluruh dunia.</p>
+                    </div>
+                    
+                    <div class="relative">
+                        <!-- Connecting Line -->
+                        <div class="absolute top-1/2 left-0 w-full h-1 bg-dark-800 -translate-y-1/2 hidden md:block rounded-full">
+                            <div class="h-full bg-gradient-to-r from-emerald-500/50 via-brand-500 to-gold-500/50 w-full rounded-full shadow-[0_0_10px_rgba(147,51,234,0.5)]"></div>
+                        </div>
+
+                        <!-- Nodes -->
+                        <div class="flex flex-col md:flex-row justify-between relative z-10 gap-8 md:gap-0">
+                            <!-- Node 1 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 1: Dasar', 'HTML & CSS', 'fa-layer-group', 'emerald-500', 'Mulai membangun struktur halaman web dan berikan gaya visual yang memukau. Belajar membuat desain yang responsif di segala perangkat.', '+500 XP', '4 Minggu', ['Tag HTML Fundamental', 'CSS Flexbox & Grid', 'Responsive Web Design', 'Hosting ke Netlify'])">
+                                <div class="w-16 h-16 rounded-full  border-4 border-emerald-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(16,185,129,0.3)] mb-4 group-hover:scale-110 group-hover:bg-emerald-900 transition-all cursor-pointer">
+                                    <i class="fa-solid fa-layer-group text-emerald-500 group-hover:text-white transition-colors"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-white mb-1">HTML & CSS</h5>
+                                    <p class="text-[10px] text-slate-400">Struktur & Gaya</p>
+                                </div>
+                            </div>
+                            <!-- Node 2 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 2: Menengah', 'JavaScript Magic', 'fa-bolt', 'brand-500', 'Buat halaman web menjadi hidup! Terapkan logika JavaScript untuk animasi, kalkulasi, dan manipulasi elemen web secara langsung.', '+1000 XP', '8 Minggu', ['Variabel, Array & Looping', 'DOM Manipulation', 'Event Listeners', 'Membuat Web Kalkulator'])">
+                                <div class="w-16 h-16 rounded-full  border-4 border-brand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(20,184,166,0.3)] mb-4 group-hover:scale-110 group-hover:bg-brand-900 transition-all cursor-pointer">
+                                    <i class="fa-solid fa-bolt text-brand-500 group-hover:text-white transition-colors"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-white mb-1">JavaScript</h5>
+                                    <p class="text-[10px] text-slate-400">Interaktivitas</p>
+                                </div>
+                            </div>
+                            <!-- Node 3 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 3: Lanjutan', 'Modern Frameworks', 'fa-cubes', 'purpleBrand-500', 'Masuki dunia arsitektur modern. Pelajari React/Vue untuk membangun aplikasi satu halaman (SPA) yang sangat cepat dan scalable.', '+1500 XP', '8 Minggu', ['Konsep Komponen', 'State & Props', 'Lifecycle', 'Integrasi API/Fetch'])">
+                                <div class="w-16 h-16 rounded-full  border-4 border-purpleBrand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(147,51,234,0.3)] mb-4 group-hover:scale-110 group-hover:bg-purpleBrand-900 transition-all cursor-pointer">
+                                    <i class="fa-solid fa-cubes text-purpleBrand-500 group-hover:text-white transition-colors"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-white mb-1">Frameworks</h5>
+                                    <p class="text-[10px] text-slate-400">Aplikasi SPA (React)</p>
+                                </div>
+                            </div>
+                            <!-- Node 4 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 4: Spesial', 'Full-Stack Mastery', 'fa-server', 'gold-500', 'Kuasai seluruh sistem. Hubungkan aplikasi web ke database, amankan data pengguna, dan luncurkan ke server cloud sesungguhnya.', '+3000 XP', '6 Minggu', ['Node.js & Backend Logic', 'Manajemen Database', 'Sistem Autentikasi', 'Cloud Deployment'])">
+                                <div class="w-16 h-16 rounded-full bg-gold-500 border-4 border-gold-300 flex items-center justify-center text-xl text-dark-950 font-black shadow-[0_0_30px_rgba(250,204,21,0.6)] mb-4 group-hover:scale-110 transition-transform cursor-pointer">
+                                    <i class="fa-solid fa-server text-dark-950"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-gold-400 mb-1">Full-Stack Deploy</h5>
+                                    <p class="text-[10px] text-slate-400">Arsitektur Utuh</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROBOTIC PATH -->
+                <div id="path-robotic" class="course-path hidden opacity-0 transition-opacity duration-500">
+                    <div class="text-center mb-12">
+                        <h4 class="text-2xl md:text-3xl font-bold text-gold-400 mb-2">Jalur Robotic Engineer</h4>
+                        <p class="text-slate-400 text-sm max-w-xl mx-auto">Rakit komponen elektronik, hubungkan sensor, dan berikan kecerdasan pada mesin di dunia nyata.</p>
+                    </div>
+                    
+                    <div class="relative">
+                        <!-- Connecting Line -->
+                        <div class="absolute top-1/2 left-0 w-full h-1 bg-dark-800 -translate-y-1/2 hidden md:block rounded-full">
+                            <div class="h-full bg-gradient-to-r from-emerald-500/50 via-brand-500 to-gold-500/50 w-full rounded-full shadow-[0_0_10px_rgba(250,204,21,0.5)]"></div>
+                        </div>
+
+                        <!-- Nodes -->
+                        <div class="flex flex-col md:flex-row justify-between relative z-10 gap-8 md:gap-0">
+                            <!-- Node 1 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 1: Dasar', 'Electronics 101', 'fa-microchip', 'emerald-500', 'Pahami dunia sirkuit dan tegangan listrik. Merakit komponen dasar elektronik dengan aman menggunakan breadboard.', '+500 XP', '4 Minggu', ['Hukum Ohm & Tegangan', 'Merakit Resistor & LED', 'Logika Saklar Dasar', 'Keamanan Elektronik'])">
+                                <div class="w-16 h-16 rounded-full  border-4 border-emerald-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(16,185,129,0.3)] mb-4 group-hover:scale-110 group-hover:bg-emerald-900 transition-all cursor-pointer">
+                                    <i class="fa-solid fa-microchip text-emerald-500 group-hover:text-white transition-colors"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-white mb-1">Electronics</h5>
+                                    <p class="text-[10px] text-slate-400">Komponen Dasar</p>
+                                </div>
+                            </div>
+                            <!-- Node 2 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 2: Menengah', 'Microcontroller', 'fa-code-merge', 'brand-500', 'Menjadi penghubung software dan hardware. Belajar memprogram otak dari robot (Arduino) menggunakan bahasa C++.', '+1000 XP', '6 Minggu', ['Setup IDE Arduino', 'Menulis Kode C++', 'Mengontrol Perangkat Output', 'Pemrograman Motor Servo'])">
+                                <div class="w-16 h-16 rounded-full  border-4 border-brand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(20,184,166,0.3)] mb-4 group-hover:scale-110 group-hover:bg-brand-900 transition-all cursor-pointer">
+                                    <i class="fa-solid fa-code-merge text-brand-500 group-hover:text-white transition-colors"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-white mb-1">Microcontroller</h5>
+                                    <p class="text-[10px] text-slate-400">Pemrograman Arduino</p>
+                                </div>
+                            </div>
+                            <!-- Node 3 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 3: Lanjutan', 'Sensors & IoT', 'fa-satellite-dish', 'purpleBrand-500', 'Ubah mesin biasa menjadi cerdas. Hubungkan robotmu dengan sensor lingkungan dan internet (IoT) agar dapat berkomunikasi jarak jauh.', '+1500 XP', '8 Minggu', ['Kalibrasi Sensor Suhu/Cahaya', 'Sistem Radar Ultrasonik', 'Koneksi WiFi ESP32', 'Mengirim Data ke Dashboard Web'])">
+                                <div class="w-16 h-16 rounded-full  border-4 border-purpleBrand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(147,51,234,0.3)] mb-4 group-hover:scale-110 group-hover:bg-purpleBrand-900 transition-all cursor-pointer">
+                                    <i class="fa-solid fa-satellite-dish text-purpleBrand-500 group-hover:text-white transition-colors"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-white mb-1">Sensors & IoT</h5>
+                                    <p class="text-[10px] text-slate-400">Konektivitas</p>
+                                </div>
+                            </div>
+                            <!-- Node 4 -->
+                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 4: Spesial', 'Autonomous Robot', 'fa-robot', 'gold-500', 'Proyek akhir! Bangun robot yang dapat membuat keputusan sendiri. Robot cerdas pencari jalan atau drone darat.', '+3000 XP', '6 Minggu', ['Logika Pemecahan Labirin', 'Integrasi Multi-Sensor', 'AI & Machine Learning Dasar', 'Kompetisi Robotika Internal'])">
+                                <div class="w-16 h-16 rounded-full bg-gold-500 border-4 border-gold-300 flex items-center justify-center text-xl text-dark-950 font-black shadow-[0_0_30px_rgba(250,204,21,0.6)] mb-4 group-hover:scale-110 transition-transform cursor-pointer">
+                                    <i class="fa-solid fa-robot text-dark-950"></i>
+                                </div>
+                                <div class="text-center group-hover:-translate-y-1 transition-transform">
+                                    <h5 class="font-bold text-gold-400 mb-1">Autonomous</h5>
+                                    <p class="text-[10px] text-slate-400">Robot Mandiri!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Access Section -->
+    <section id="location" class="py-20 md:py-28 relative z-10  border-y border-white/5 overflow-hidden text-slate-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Header Section -->
+            <div class="text-center mb-16 fade-in-up">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-500/30 bg-brand-500/10 mb-4">
+                    <i class="fa-solid fa-map-location-dot text-brand-400 text-xs"></i>
+                    <span class="text-[9px] font-bold tracking-[0.2em] uppercase text-brand-400">Kampus Tersedia</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-heading font-black text-white mb-4">Temukan Rute Menuju Petualangan Anda!</h2>
+                <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">Dari peta penduduk lokal hingga sistem transportasi, LesKoding terletak di tempat yang strategis untuk memudahkan Anda memulai perjalanan. Temukan lokasi kami dan manfaatkan kemudahan akses untuk memulai petualangan coding Anda!</p>
+            </div>
+
+            <!-- Locations Grid (3 Columns) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 fade-in-up">
+                
+                <!-- Cabang 1: Gianyar -->
+                <div class="bg-dark-900/50 backdrop-blur-sm rounded-3xl p-5 shadow-xl border border-white/10 hover:shadow-[0_0_20px_rgba(14,165,233,0.15)] hover:border-brand-500/50 transition-all group flex flex-col h-full">
+                    <h3 class="text-xl font-heading font-black text-white mb-3 group-hover:text-brand-400 transition-colors flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-building-flag"></i>
+                        </div>
+                        Gents Robotic
+                    </h3>
+                    
+                    <div class="w-full h-[180px] rounded-2xl overflow-hidden mb-4 border border-white/10 opacity-90 group-hover:opacity-100 transition-opacity">
+                        <iframe src="https://maps.google.com/maps?q=Jln%20Ksatrian%20No%208%20Lingkungan%20Candi%20Baru%20Gianyar&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-400 mb-2 flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-1 text-slate-500"></i>
+                            <span>Jln Ksatrian, No. 8, Lingkungan Candi Baru, Gianyar</span>
+                        </p>
+                    </div>
+                    <div class="mt-2 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <div class="flex items-center gap-2 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                            <span class="text-xs font-bold text-slate-300">0851-8306-798</span>
+                        </div>
+                        <a href="https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-brand-400 hover:text-brand-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">Rute <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Cabang 2: Peliatan -->
+                <div class="bg-dark-900/50 backdrop-blur-sm rounded-3xl p-5 shadow-xl border border-white/10 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] hover:border-purpleBrand-500/50 transition-all group flex flex-col h-full" style="transition-delay: 100ms;">
+                    <h3 class="text-xl font-heading font-black text-white mb-3 group-hover:text-purpleBrand-400 transition-colors flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-xl bg-purpleBrand-500/20 text-purpleBrand-400 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        Bali Seed Peliatan
+                    </h3>
+                    
+                    <div class="w-full h-[180px] rounded-2xl overflow-hidden mb-4 border border-white/10 opacity-90 group-hover:opacity-100 transition-opacity">
+                        <iframe src="https://maps.google.com/maps?q=Jalan%20Peliatan%20No%201%20Ubud&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-400 mb-2 flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-1 text-slate-500"></i>
+                            <span>Jalan Peliatan, No. 1, Ubud</span>
+                        </p>
+                    </div>
+                    <div class="mt-2 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <div class="flex items-center gap-2 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                            <span class="text-xs font-bold text-slate-300">0857-9273-6627</span>
+                        </div>
+                        <a href="https://maps.google.com/?q=Jalan+Peliatan+No+1+Ubud" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-purpleBrand-400 hover:text-purpleBrand-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">Rute <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Cabang 3: Bedulu -->
+                <div class="bg-dark-900/50 backdrop-blur-sm rounded-3xl p-5 shadow-xl border border-white/10 hover:shadow-[0_0_20px_rgba(250,204,21,0.15)] hover:border-gold-500/50 transition-all group flex flex-col h-full" style="transition-delay: 200ms;">
+                    <h3 class="text-xl font-heading font-black text-white mb-3 group-hover:text-gold-400 transition-colors flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        Bali Seed Bedulu
+                    </h3>
+                    
+                    <div class="w-full h-[180px] rounded-2xl overflow-hidden mb-4 border border-white/10 opacity-90 group-hover:opacity-100 transition-opacity">
+                        <iframe src="https://maps.google.com/maps?q=Jln%20Raya%20Semebaung%20Bedulu&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-400 mb-2 flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-1 text-slate-500"></i>
+                            <span>Jln Raya Semebaung Bedulu</span>
+                        </p>
+                    </div>
+                    <div class="mt-2 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <div class="flex items-center gap-2 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                            <span class="text-xs font-bold text-slate-300">0851-8306-798</span>
+                        </div>
+                        <a href="https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-gold-400 hover:text-gold-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">Rute <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distance Checker Bottom Row -->
+            <div class="max-w-2xl mx-auto fade-in-up" style="transition-delay: 300ms;">
+                
+                <!-- Distance Checker -->
+                <div class="bg-dark-900/50 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/10 text-center">
+                    <div class="w-12 h-12 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl mx-auto mb-4">
+                        <i class="fa-solid fa-route"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-black text-white mb-2">Cek Kampus Terdekat</h3>
+                    <p class="text-sm text-slate-400 mb-6">Masukkan area/kecamatan Anda untuk melihat cabang mana yang paling mudah diakses.</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-3 mb-2">
+                        <div class="relative flex-grow">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fa-solid fa-location-crosshairs text-slate-500"></i>
+                            </div>
+                            <input type="text" id="user-location" placeholder="Contoh: Denpasar Selatan" class="w-full pl-11 pr-4 py-3.5  border border-white/10 rounded-xl text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all font-medium text-white placeholder-slate-600">
+                        </div>
+                        
+                        <button id="check-distance-btn" onclick="calculateDistance()" class="sm:w-auto w-full bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold py-3.5 px-8 rounded-xl uppercase tracking-[0.15em] text-[10px] transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(56,189,248,0.3)]">
+                            <i class="fa-solid fa-magnifying-glass-location"></i> Cek Lokasi
+                        </button>
+                    </div>
+                    
+                    <!-- Result Box (Hidden default) -->
+                    <div id="distance-result-box" class="hidden  rounded-xl p-4 border border-white/10 transition-all mt-4 text-left">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-car-side"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Estimasi Tiba</p>
+                                <p id="distance-result-text" class="text-sm font-bold text-white">Hanya 15 Menit (5 km) dari lokasi Anda!</p>
+                                <p class="text-xs text-slate-400 mt-1"><i class="fa-solid fa-circle-info text-brand-400 mr-1"></i> Kampus terdekat: <strong class="text-brand-300">Bali Seed Peliatan</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section id="register" class="py-20 md:py-28 relative z-10 bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12 fade-in-up">
+                <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-brand-400 mb-2">Enrollment</h2>
+                <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Pendaftaran Bali Seeds</h3>
+                <p class="text-slate-400 text-sm max-w-xl mx-auto">Isi formulir di bawah ini untuk memulai perjalanan digital anak Anda. Konfirmasi pendaftaran akan diproses otomatis melalui WhatsApp.</p>
+            </div>
+            
+            <form id="registration-form" class=" border border-white/10 rounded-[2rem] p-6 md:p-10 shadow-2xl fade-in-up">
+                <h4 class="font-heading font-bold text-white text-lg mb-6 border-b border-white/10 pb-4">Form Pendaftaran Bali Seeds Robotic & Coding</h4>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Nama Lengkap</label>
+                        <input type="text" id="reg-nama" required class="w-full bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: Putu Johan Lasya Hara">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Panggilan</label>
+                        <input type="text" id="reg-panggilan" required class="w-full bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: Johan">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Usia</label>
+                        <input type="text" id="reg-usia" required class="w-full bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: 10y">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Asal Sekolah</label>
+                        <input type="text" id="reg-sekolah" required class="w-full bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: SD Sutha Dharma">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Nama Orang Tua</label>
+                        <input type="text" id="reg-ortu" required class="w-full bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: Arik Ayu Rastini">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Email</label>
+                        <input type="email" id="reg-email" required class="w-full bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: ayuarik071@gmail.com">
+                    </div>
+                    <div class="space-y-2 md:col-span-2">
+                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Alamat Lengkap</label>
+                        <textarea id="reg-alamat" required rows="3" class="w-full bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: Br Katiklantang Singakerta Ubud"></textarea>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400">WA Orang Tua</label>
+                        <input type="tel" id="reg-wa-ortu" required class="w-full bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: 081239197127">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400">WA Anak (Opsional)</label>
+                        <input type="tel" id="reg-wa-anak" class="w-full bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: +62 815-4753-3884">
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <button type="submit" class="w-full bg-[#25D366] hover:bg-[#1ebe5c] text-white font-bold py-4 rounded-xl uppercase tracking-[0.1em] text-sm transition-all shadow-[0_0_15px_rgba(37,211,102,0.3)] hover:shadow-[0_0_25px_rgba(37,211,102,0.5)] flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Kirim Pendaftaran via WhatsApp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- COURSE MODAL -->
+    <div id="course-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 pointer-events-none">
+        <div class="absolute inset-0 bg-dark-950/80 backdrop-blur-sm modal-overlay pointer-events-auto cursor-pointer" onclick="closeCourseModal()"></div>
+        <div class="bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-white/10 rounded-3xl w-full max-w-lg relative z-10 shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300 pointer-events-auto" id="course-modal-content">
+            <div class="absolute top-0 left-0 w-full h-1.5" id="modal-color-bar"></div>
+            <button onclick="closeCourseModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors focus:outline-none">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="p-8">
+                <div class="flex items-center gap-4 mb-5">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg border border-white/10" id="modal-icon-container">
+                        <i id="modal-icon" class="fa-solid fa-compass text-white"></i>
+                    </div>
+                    <div>
+                        <span class="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-1 block" id="modal-level">Tingkat 1: Dasar</span>
+                        <h3 class="text-2xl font-heading font-bold text-white" id="modal-title">Pengenalan Coding</h3>
+                    </div>
+                </div>
+                
+                <p class="text-slate-400 text-sm mb-6 leading-relaxed" id="modal-desc"></p>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class=" border border-white/5 rounded-xl p-3 flex flex-col justify-center">
+                        <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider block mb-1">Reward</span>
+                        <div class="flex items-center gap-2 text-gold-400 font-mono font-bold text-sm">
+                            <i class="fa-solid fa-star"></i> <span id="modal-xp">+500 XP</span>
+                        </div>
+                    </div>
+                    <div class=" border border-white/5 rounded-xl p-3 flex flex-col justify-center">
+                        <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider block mb-1">Durasi</span>
+                        <div class="flex items-center gap-2 text-brand-400 font-mono font-bold text-sm">
+                            <i class="fa-regular fa-clock"></i> <span id="modal-duration">4 Minggu</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-8 bg-dark-950/50 rounded-xl p-4 border border-white/5">
+                    <span class="text-[10px] text-slate-400 uppercase font-bold block mb-3 tracking-widest border-b border-white/5 pb-2">Topik Pembelajaran:</span>
+                    <ul class="text-sm text-slate-300 space-y-2.5" id="modal-topics">
+                        <!-- JS fills this -->
+                    </ul>
+                </div>
+                
+                <a href="#register" onclick="closeCourseModal()" id="modal-btn" class="w-full inline-flex justify-center items-center gap-2 bg-brand-500 hover:bg-brand-400 text-dark-950 font-bold py-3.5 rounded-xl uppercase tracking-[0.1em] text-xs transition-all shadow-[0_0_15px_rgba(20,184,166,0.3)] hover:shadow-[0_0_25px_rgba(20,184,166,0.5)]">
+                    Mulai Petualangan <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class=" border-t border-white/5 py-10 text-center z-10 relative">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+            <div class="flex items-center justify-center gap-2.5 mb-6 opacity-70 hover:opacity-100 transition-opacity cursor-pointer" onclick="window.scrollTo(0,0)">
+                <img src="assets/logo/leskoding_community.png" alt="LesKodingSpace" class="h-6 md:h-10 w-auto object-contain">
+            </div>
+            <p class="text-slate-500 text-[11px] mb-6 font-mono bg-dark-900/60 backdrop-blur-xl  px-4 py-2 rounded-lg border border-white/5">
+                <span class="text-brand-400">sys</span>.<span class="text-indigo-400">init</span>() => "Gamified Academy"
+            </p>
+            <div class="text-[9px] text-slate-600 font-bold uppercase tracking-[0.2em]">
+                &copy; 2026 Interactive Academy
+            </div>
+        </div>
+    </footer>
+
+    <!-- Reward Modal -->
+    <div id="reward-modal" class="fixed inset-0 bg-dark-950/90  z-[150] flex items-center justify-center hidden opacity-0 transition-opacity duration-500">
+        <div class="bg-dark-900/60 backdrop-blur-xl backdrop-blur-xl border border-brand-500/30 rounded-[2rem] w-full max-w-[400px] mx-4 p-8 text-center shadow-[0_0_60px_rgba(20,184,166,0.15)] transform scale-95 transition-all duration-500" id="reward-content">
+            <div class="w-16 h-16 mx-auto bg-gradient-to-br from-brand-400 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(20,184,166,0.3)] animate-bounce border border-white/10">
+                <i class="fa-solid fa-unlock-keyhole text-2xl text-white"></i>
+            </div>
+            <h3 class="font-heading font-bold text-2xl text-white mb-2 tracking-tight">SYSTEM UNLOCKED</h3>
+            <p class="text-slate-400 mb-6 font-mono text-[11px]">Target [1000 Pts] Achieved.</p>
+            
+            <div class=" border border-white/10 rounded-xl p-4 mb-6 relative overflow-hidden group cursor-pointer" onclick="navigator.clipboard.writeText('ELITE2026'); alert('Secret code copied to clipboard!');">
+                <div class="absolute inset-0 bg-brand-500/5 group-hover:bg-brand-500/10 transition-colors"></div>
+                <p class="text-[9px] text-slate-500 uppercase tracking-widest font-semibold mb-1">Secret Founder Code</p>
+                <div class="flex items-center justify-center gap-3">
+                    <p class="font-mono text-xl text-brand-400 font-semibold tracking-widest group-hover:text-white transition-colors">ELITE2026</p>
+                    <i class="fa-regular fa-copy text-slate-500 text-sm group-hover:text-brand-400 transition-colors"></i>
+                </div>
+            </div>
+            
+            <button id="claim-reward" class="w-full bg-white text-dark-950 font-bold py-3.5 rounded-full uppercase tracking-[0.15em] text-[10px] hover:bg-slate-200 transition-all shadow-md">
+                Redeem & Initialize
+            </button>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="app.js"></script>
+</body>
+</html>
