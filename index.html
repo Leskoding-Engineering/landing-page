@@ -116,9 +116,9 @@
     </nav>
 
     <!-- Interactive Hero Section -->
-    <section id="home" class="relative min-h-[100vh] flex items-center justify-center pt-24 md:pt-32 pb-12 overflow-hidden border-b border-white/5">
+    <section id="home" class="relative h-screen flex items-center justify-center pt-24 md:pt-32 pb-12 overflow-hidden border-b border-white/5">
         <!-- Background & Overlays -->
-        <div class="absolute inset-0z-0"></div>
+        <div class="absolute inset-0 z-0"></div>
         <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity z-0" alt="Coding Background">
         <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent z-0"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-dark-950 via-dark-950/60 to-transparent z-0 hidden lg:block"></div>
@@ -175,7 +175,7 @@
                 <!-- Right: Floating Elements & Testimonials -->
                 <div class="relative hidden lg:block h-full min-h-[500px]">
                     <!-- Testimonial Floating Card 1 -->
-                    <div class="absolute bottom-10 right-0 bg-dark-900/80 backdrop-blur-xlborder border-white/10 p-6 rounded-3xl shadow-2xl max-w-sm transform hover:-translate-y-2 transition-transform duration-500 z-30">
+                    <div class="absolute bottom-10 right-0 bg-dark-900/80 backdrop-blur-xl border border-white/10 p-6 rounded-3xl shadow-2xl max-w-sm transform hover:-translate-y-2 transition-transform duration-500 z-30">
                         <i class="fa-solid fa-quote-right text-3xl text-brand-500/20 absolute top-4 right-6"></i>
                         <div class="flex items-center gap-4 mb-4">
                             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex&backgroundColor=transparent" alt="Alex" class="w-12 h-12 rounded-fullborder-2 border-brand-500/50">
@@ -426,7 +426,7 @@
     </section>
 
     <!-- Bento Grid Features (Magnetic Hover) -->
-    <section id="features" class="py-20 md:py-28 relative z-10border-b border-white/5">
+    <section id="features" class="py-20 md:py-28 relative z-10 border-b border-white/5">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in-up">
                 <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-indigo-400 mb-2">Petualangan Belajar</h2>
@@ -495,7 +495,7 @@
     </section>
 
     <!-- Elite Mentors (Tutors) -->
-    <section id="tutors" class="py-20 md:py-28 relative z-10border-b border-white/5">
+    <section id="tutors" class="py-20 md:py-28 relative z-10 border-b border-white/5">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="fade-in-up">
                 <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-purpleBrand-400 mb-2">Instruktur Terverifikasi</h2>
@@ -535,7 +535,7 @@
     </section>
 
     <!-- COURSE ADVENTURE MAP -->
-    <section id="course" class="py-24 md:py-32 relative z-10border-b border-white/5 overflow-hidden">
+    <section id="course" class="py-24 md:py-32 relative z-10 border-b border-white/5 overflow-hidden">
         <!-- Background Elements -->
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-[120px] pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purpleBrand-500/10 rounded-full blur-[120px] pointer-events-none"></div>
@@ -549,8 +549,8 @@
 
             <!-- Course Tabs -->
             <div class="flex flex-col md:flex-row justify-center gap-4 mb-16 fade-in-up">
-                <button onclick="switchCoursePath('game')" id="tab-game" class="course-tab-btn border-brand-500 bg-dark-900/60 backdrop-blur-xlrelative px-8 py-4 border rounded-2xl flex flex-col items-center gap-2 transition-all group overflow-hidden">
-                    <div class="absolute inset-0 bg-brand-500/10 opacity-100 tab-bg transition-opacity"></div>
+                <button onclick="switchCoursePath('game')" id="tab-game" class="course-tab-btn border-brand-500 bg-dark-900/60 backdrop-blur-xl relative px-8 py-4 border rounded-2xl flex flex-col items-center gap-2 transition-all group overflow-hidden">
+                    <div class="absolute inset-0 bg-brand-500/5 opacity-100 tab-bg rounded-2xl transition-opacity"></div>
                     <i class="fa-solid fa-gamepad text-2xl text-brand-400 tab-icon mb-1 relative z-10 transition-colors"></i>
                     <span class="font-heading font-bold text-white tab-title relative z-10 transition-colors">Game Programming</span>
                     <span class="text-[9px] text-brand-200 tab-subtitle uppercase tracking-widest relative z-10 transition-colors">"Code Your Universe"</span>
@@ -862,7 +862,7 @@
     </section>
 
     <!-- Location & Access Section -->
-    <section id="location" class="py-20 md:py-28 relative z-10border-y border-white/5 overflow-hidden text-slate-300">
+    <section id="location" class="py-20 md:py-28 relative z-10 border-y border-white/5 overflow-hidden text-slate-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- Header Section -->
             <div class="text-center mb-16 fade-in-up">
@@ -978,7 +978,7 @@
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <i class="fa-solid fa-location-crosshairs text-slate-500"></i>
                             </div>
-                            <input type="text" id="user-location" placeholder="Contoh: Denpasar Selatan" class="w-full pl-11 pr-4 py-3.5border border-white/10 rounded-xl text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all font-medium text-white placeholder-slate-600">
+                            <input type="text" id="user-location" placeholder="Contoh: Denpasar Selatan" class="w-full pl-11 pr-4 py-3.5 bg-dark-950 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all font-medium text-white placeholder-slate-600">
                         </div>
                         
                         <button id="check-distance-btn" onclick="calculateDistance()" class="sm:w-auto w-full bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold py-3.5 px-8 rounded-xl uppercase tracking-[0.15em] text-[10px] transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(56,189,248,0.3)]">
@@ -987,14 +987,14 @@
                     </div>
                     
                     <!-- Result Box (Hidden default) -->
-                    <div id="distance-result-box" class="hiddenrounded-xl p-4 border border-white/10 transition-all mt-4 text-left">
+                    <div id="distance-result-box" class="hidden bg-dark-950/80 rounded-xl p-5 border border-emerald-500/30 transition-all mt-4 text-left shadow-[0_0_20px_rgba(16,185,129,0.1)]">
                         <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                            <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 text-xl">
                                 <i class="fa-solid fa-car-side"></i>
                             </div>
                             <div>
-                                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Estimasi Tiba</p>
-                                <p id="distance-result-text" class="text-sm font-bold text-white">Hanya 15 Menit (5 km) dari lokasi Anda!</p>
+                                <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1">Estimasi Tiba</p>
+                                <p id="distance-result-text" class="text-base font-bold text-white">Hanya 15 Menit (5 km) dari lokasi Anda!</p>
                                 <p class="text-xs text-slate-400 mt-1"><i class="fa-solid fa-circle-info text-brand-400 mr-1"></i> Kampus terdekat: <strong class="text-brand-300">Bali Seed Peliatan</strong></p>
                             </div>
                         </div>
@@ -1120,7 +1120,7 @@
             <div class="flex items-center justify-center gap-2.5 mb-6 opacity-70 hover:opacity-100 transition-opacity cursor-pointer" onclick="window.scrollTo(0,0)">
                 <img src="assets/logo/leskoding_community.png" alt="LesKodingSpace" class="h-6 md:h-10 w-auto object-contain">
             </div>
-            <p class="text-slate-500 text-[11px] mb-6 font-mono bg-dark-900/60 backdrop-blur-xlpx-4 py-2 rounded-lg border border-white/5">
+            <p class="text-slate-500 text-[11px] mb-6 font-mono bg-dark-900/60 backdrop-blur-xl px-4 py-2 rounded-lg border border-white/5">
                 <span class="text-brand-400">les</span>.<span class="text-gold-400">koding</span>() => "Education Technology &amp; Community"
             </p>
             <div class="text-[9px] text-slate-600 font-bold uppercase tracking-[0.2em]">
@@ -1130,7 +1130,7 @@
     </footer>
 
     <!-- Reward Modal -->
-    <div id="reward-modal" class="fixed inset-0 bg-dark-950/90z-[150] flex items-center justify-center hidden opacity-0 transition-opacity duration-500">
+    <div id="reward-modal" class="fixed inset-0 bg-dark-950/90 z-[150] flex items-center justify-center hidden opacity-0 transition-opacity duration-500">
         <div class="bg-dark-900/60 backdrop-blur-xl border border-brand-500/30 rounded-[2rem] w-full max-w-[400px] mx-4 p-8 text-center shadow-[0_0_60px_rgba(14,165,233,0.15)] transform scale-95 transition-all duration-500" id="reward-content">
             <div class="w-16 h-16 mx-auto bg-gradient-to-br from-brand-400 to-purpleBrand-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(14,165,233,0.3)] animate-bounce border border-white/10">
                 <i class="fa-solid fa-unlock-keyhole text-2xl text-white"></i>
