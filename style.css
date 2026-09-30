@@ -341,7 +341,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
 
 /* Subtle Animated Roadmap Line */
 .roadmap-line {
-    background: repeating-linear-gradient(90deg, #14b8a6, #14b8a6 10px, transparent 10px, transparent 20px);
+    background: repeating-linear-gradient(90deg, #0ea5e9, #0ea5e9 10px, transparent 10px, transparent 20px);
     background-size: 40px 100%;
     animation: moveLine 2s linear infinite;
     opacity: 0.8;
@@ -378,7 +378,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
 
 :root {
     --emerald-rgb: 16, 185, 129;
-    --brand-rgb: 20, 184, 166;
+    --brand-rgb: 14, 165, 233;
     --purpleBrand-rgb: 147, 51, 234;
     --gold-rgb: 250, 204, 21;
 }
