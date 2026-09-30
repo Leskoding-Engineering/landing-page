@@ -570,7 +570,7 @@
             </div>
 
             <!-- Course Paths Container -->
-            <div class="relative max-w-5xl mx-auto min-h-[300px] bg-dark-900/40 border border-white/5 rounded-3xl p-8 md:p-12 backdrop-blur-sm shadow-2xl">
+            <div class="relative max-w-5xl mx-auto min-h-[300px] bg-dark-900/80 border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden rpg-map-bg backdrop-blur-sm shadow-2xl">
                 
                 <!-- GAME PATH -->
                 <div id="path-game" class="course-path block transition-opacity duration-500">
@@ -588,45 +588,81 @@
                         <!-- Nodes -->
                         <div class="flex flex-col md:flex-row justify-between relative z-10 gap-8 md:gap-0">
                             <!-- Node 1 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 1: Dasar', 'Scratch 2D', 'fa-compass', 'emerald-500', 'Pelajari dasar-dasar logika pemrograman menggunakan platform visual block-coding Scratch. Sempurna untuk pemula yang ingin memahami algoritma secara interaktif.', '+500 XP', '4 Minggu', ['Pengenalan Koordinat X & Y', 'Logika Perulangan (Loops)', 'Kondisional (If-Else)', 'Membuat Mini Game Platformer'])">
-                                <div class="w-16 h-16 rounded-full  border-4 border-emerald-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(16,185,129,0.3)] mb-4 group-hover:scale-110 group-hover:bg-emerald-900 transition-all cursor-pointer">
-                                    <i class="fa-solid fa-compass text-emerald-500 group-hover:text-white transition-colors"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-white mb-1">Scratch 2D</h5>
-                                    <p class="text-[10px] text-slate-400">Logika Dasar</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 1: Dasar', 'Scratch 2D', 'fa-compass', 'emerald-500', 'Pelajari dasar-dasar logika pemrograman menggunakan platform visual block-coding Scratch. Sempurna untuk pemula yang ingin memahami algoritma secara interaktif.', '+500 XP', '4 Minggu', ['Pengenalan Koordinat X & Y', 'Logika Perulangan (Loops)', 'Kondisional (If-Else)', 'Membuat Mini Game Platformer'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-emerald-500/20 border-2 border-emerald-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--emerald-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-emerald-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-emerald-400 group-hover:text-emerald-300 transition-colors z-10">
+                <i class="fa-solid fa-compass group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-emerald-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 1</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-emerald-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">Scratch 2D</h5>
+            <p class="text-[9px] text-emerald-400 uppercase tracking-widest font-mono relative z-10">Logika Dasar</p>
+        </div>
+    </div>
                             <!-- Node 2 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 2: Menengah', 'Roblox Studio', 'fa-cube', 'brand-500', 'Mulai membangun dunia 3D sendiri menggunakan Roblox Studio. Eksplorasi pembuatan terrain, model bangunan, dan sistem fisika dasar.', '+1000 XP', '6 Minggu', ['Navigasi Roblox Studio', '3D Modeling Dasar', 'Lighting & Environment', 'Obstacle Course (Obby)'])">
-                                <div class="w-16 h-16 rounded-full  border-4 border-brand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(20,184,166,0.3)] mb-4 group-hover:scale-110 group-hover:bg-brand-900 transition-all cursor-pointer">
-                                    <i class="fa-solid fa-cube text-brand-500 group-hover:text-white transition-colors"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-white mb-1">Roblox Studio</h5>
-                                    <p class="text-[10px] text-slate-400">Environment 3D</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 2: Menengah', 'Roblox Studio', 'fa-cube', 'brand-500', 'Mulai membangun dunia 3D sendiri menggunakan Roblox Studio. Eksplorasi pembuatan terrain, model bangunan, dan sistem fisika dasar.', '+1000 XP', '6 Minggu', ['Navigasi Roblox Studio', '3D Modeling Dasar', 'Lighting & Environment', 'Obstacle Course (Obby)'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-brand-500/20 border-2 border-brand-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--brand-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-brand-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-brand-400 group-hover:text-brand-300 transition-colors z-10">
+                <i class="fa-solid fa-cube group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-brand-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 2</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-brand-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">Roblox Studio</h5>
+            <p class="text-[9px] text-brand-400 uppercase tracking-widest font-mono relative z-10">Environment 3D</p>
+        </div>
+    </div>
                             <!-- Node 3 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 3: Lanjutan', 'Lua Scripting', 'fa-wand-magic-sparkles', 'purpleBrand-500', 'Tambahkan nyawa ke dalam game! Belajar bahasa pemrograman Lua untuk mengontrol mekanika, AI sederhana, dan interaksi pemain.', '+1500 XP', '8 Minggu', ['Sintaks Dasar Lua', 'Variabel & Fungsi', 'GUI & HUD System', 'Sistem Poin & Leaderboard'])">
-                                <div class="w-16 h-16 rounded-full  border-4 border-purpleBrand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(147,51,234,0.3)] mb-4 group-hover:scale-110 group-hover:bg-purpleBrand-900 transition-all cursor-pointer">
-                                    <i class="fa-solid fa-wand-magic-sparkles text-purpleBrand-500 group-hover:text-white transition-colors"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-white mb-1">Lua Scripting</h5>
-                                    <p class="text-[10px] text-slate-400">Kode & Mekanika</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 3: Lanjutan', 'Lua Scripting', 'fa-wand-magic-sparkles', 'purpleBrand-500', 'Tambahkan nyawa ke dalam game! Belajar bahasa pemrograman Lua untuk mengontrol mekanika, AI sederhana, dan interaksi pemain.', '+1500 XP', '8 Minggu', ['Sintaks Dasar Lua', 'Variabel & Fungsi', 'GUI & HUD System', 'Sistem Poin & Leaderboard'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-purpleBrand-500/20 border-2 border-purpleBrand-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--purpleBrand-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-purpleBrand-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-purpleBrand-400 group-hover:text-purpleBrand-300 transition-colors z-10">
+                <i class="fa-solid fa-wand-magic-sparkles group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-purpleBrand-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 3</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-purpleBrand-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-purpleBrand-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">Lua Scripting</h5>
+            <p class="text-[9px] text-purpleBrand-400 uppercase tracking-widest font-mono relative z-10">Kode & Mekanika</p>
+        </div>
+    </div>
                             <!-- Node 4 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 4: Spesial', 'Game Release', 'fa-crown', 'gold-500', 'Tahap akhir perjalanan. Poles karya menjadi mahakarya, publikasikan ke jutaan pemain, dan pahami dasar monetisasi game.', '+3000 XP', '4 Minggu', ['Testing & Bug Fixing', 'Security & Anti-Exploit', 'Game Passes (Monetisasi)', 'Publishing ke Global Server'])">
-                                <div class="w-16 h-16 rounded-full bg-gold-500 border-4 border-gold-300 flex items-center justify-center text-xl text-dark-950 font-black shadow-[0_0_30px_rgba(250,204,21,0.6)] mb-4 group-hover:scale-110 transition-transform cursor-pointer">
-                                    <i class="fa-solid fa-crown text-dark-950"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-gold-400 mb-1">Game Release</h5>
-                                    <p class="text-[10px] text-slate-400">Masterpiece & Monetisasi</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 4: Spesial', 'Game Release', 'fa-crown', 'gold-500', 'Tahap akhir perjalanan. Poles karya menjadi mahakarya, publikasikan ke jutaan pemain, dan pahami dasar monetisasi game.', '+3000 XP', '4 Minggu', ['Testing & Bug Fixing', 'Security & Anti-Exploit', 'Game Passes (Monetisasi)', 'Publishing ke Global Server'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-gold-500/20 border-2 border-gold-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--gold-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-gold-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-gold-400 group-hover:text-gold-300 transition-colors z-10">
+                <i class="fa-solid fa-crown group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-gold-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 4</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-gold-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-gold-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">Game Release</h5>
+            <p class="text-[9px] text-gold-400 uppercase tracking-widest font-mono relative z-10">Masterpiece & Monetisasi</p>
+        </div>
+    </div>
                         </div>
                     </div>
                 </div>
@@ -647,45 +683,81 @@
                         <!-- Nodes -->
                         <div class="flex flex-col md:flex-row justify-between relative z-10 gap-8 md:gap-0">
                             <!-- Node 1 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 1: Dasar', 'HTML & CSS', 'fa-layer-group', 'emerald-500', 'Mulai membangun struktur halaman web dan berikan gaya visual yang memukau. Belajar membuat desain yang responsif di segala perangkat.', '+500 XP', '4 Minggu', ['Tag HTML Fundamental', 'CSS Flexbox & Grid', 'Responsive Web Design', 'Hosting ke Netlify'])">
-                                <div class="w-16 h-16 rounded-full  border-4 border-emerald-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(16,185,129,0.3)] mb-4 group-hover:scale-110 group-hover:bg-emerald-900 transition-all cursor-pointer">
-                                    <i class="fa-solid fa-layer-group text-emerald-500 group-hover:text-white transition-colors"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-white mb-1">HTML & CSS</h5>
-                                    <p class="text-[10px] text-slate-400">Struktur & Gaya</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 1: Dasar', 'HTML & CSS', 'fa-layer-group', 'emerald-500', 'Mulai membangun struktur halaman web dan berikan gaya visual yang memukau. Belajar membuat desain yang responsif di segala perangkat.', '+500 XP', '4 Minggu', ['Tag HTML Fundamental', 'CSS Flexbox & Grid', 'Responsive Web Design', 'Hosting ke Netlify'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-emerald-500/20 border-2 border-emerald-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--emerald-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-emerald-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-emerald-400 group-hover:text-emerald-300 transition-colors z-10">
+                <i class="fa-solid fa-layer-group group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-emerald-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 1</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-emerald-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">HTML & CSS</h5>
+            <p class="text-[9px] text-emerald-400 uppercase tracking-widest font-mono relative z-10">Struktur & Gaya</p>
+        </div>
+    </div>
                             <!-- Node 2 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 2: Menengah', 'JavaScript Magic', 'fa-bolt', 'brand-500', 'Buat halaman web menjadi hidup! Terapkan logika JavaScript untuk animasi, kalkulasi, dan manipulasi elemen web secara langsung.', '+1000 XP', '8 Minggu', ['Variabel, Array & Looping', 'DOM Manipulation', 'Event Listeners', 'Membuat Web Kalkulator'])">
-                                <div class="w-16 h-16 rounded-full  border-4 border-brand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(20,184,166,0.3)] mb-4 group-hover:scale-110 group-hover:bg-brand-900 transition-all cursor-pointer">
-                                    <i class="fa-solid fa-bolt text-brand-500 group-hover:text-white transition-colors"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-white mb-1">JavaScript</h5>
-                                    <p class="text-[10px] text-slate-400">Interaktivitas</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 2: Menengah', 'JavaScript Magic', 'fa-bolt', 'brand-500', 'Buat halaman web menjadi hidup! Terapkan logika JavaScript untuk animasi, kalkulasi, dan manipulasi elemen web secara langsung.', '+1000 XP', '8 Minggu', ['Variabel, Array & Looping', 'DOM Manipulation', 'Event Listeners', 'Membuat Web Kalkulator'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-brand-500/20 border-2 border-brand-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--brand-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-brand-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-brand-400 group-hover:text-brand-300 transition-colors z-10">
+                <i class="fa-solid fa-bolt group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-brand-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 2</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-brand-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">JavaScript</h5>
+            <p class="text-[9px] text-brand-400 uppercase tracking-widest font-mono relative z-10">Interaktivitas</p>
+        </div>
+    </div>
                             <!-- Node 3 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 3: Lanjutan', 'Modern Frameworks', 'fa-cubes', 'purpleBrand-500', 'Masuki dunia arsitektur modern. Pelajari React/Vue untuk membangun aplikasi satu halaman (SPA) yang sangat cepat dan scalable.', '+1500 XP', '8 Minggu', ['Konsep Komponen', 'State & Props', 'Lifecycle', 'Integrasi API/Fetch'])">
-                                <div class="w-16 h-16 rounded-full  border-4 border-purpleBrand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(147,51,234,0.3)] mb-4 group-hover:scale-110 group-hover:bg-purpleBrand-900 transition-all cursor-pointer">
-                                    <i class="fa-solid fa-cubes text-purpleBrand-500 group-hover:text-white transition-colors"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-white mb-1">Frameworks</h5>
-                                    <p class="text-[10px] text-slate-400">Aplikasi SPA (React)</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 3: Lanjutan', 'Modern Frameworks', 'fa-cubes', 'purpleBrand-500', 'Masuki dunia arsitektur modern. Pelajari React/Vue untuk membangun aplikasi satu halaman (SPA) yang sangat cepat dan scalable.', '+1500 XP', '8 Minggu', ['Konsep Komponen', 'State & Props', 'Lifecycle', 'Integrasi API/Fetch'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-purpleBrand-500/20 border-2 border-purpleBrand-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--purpleBrand-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-purpleBrand-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-purpleBrand-400 group-hover:text-purpleBrand-300 transition-colors z-10">
+                <i class="fa-solid fa-cubes group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-purpleBrand-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 3</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-purpleBrand-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-purpleBrand-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">Frameworks</h5>
+            <p class="text-[9px] text-purpleBrand-400 uppercase tracking-widest font-mono relative z-10">Aplikasi SPA (React)</p>
+        </div>
+    </div>
                             <!-- Node 4 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 4: Spesial', 'Full-Stack Mastery', 'fa-server', 'gold-500', 'Kuasai seluruh sistem. Hubungkan aplikasi web ke database, amankan data pengguna, dan luncurkan ke server cloud sesungguhnya.', '+3000 XP', '6 Minggu', ['Node.js & Backend Logic', 'Manajemen Database', 'Sistem Autentikasi', 'Cloud Deployment'])">
-                                <div class="w-16 h-16 rounded-full bg-gold-500 border-4 border-gold-300 flex items-center justify-center text-xl text-dark-950 font-black shadow-[0_0_30px_rgba(250,204,21,0.6)] mb-4 group-hover:scale-110 transition-transform cursor-pointer">
-                                    <i class="fa-solid fa-server text-dark-950"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-gold-400 mb-1">Full-Stack Deploy</h5>
-                                    <p class="text-[10px] text-slate-400">Arsitektur Utuh</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 4: Spesial', 'Full-Stack Mastery', 'fa-server', 'gold-500', 'Kuasai seluruh sistem. Hubungkan aplikasi web ke database, amankan data pengguna, dan luncurkan ke server cloud sesungguhnya.', '+3000 XP', '6 Minggu', ['Node.js & Backend Logic', 'Manajemen Database', 'Sistem Autentikasi', 'Cloud Deployment'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-gold-500/20 border-2 border-gold-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--gold-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-gold-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-gold-400 group-hover:text-gold-300 transition-colors z-10">
+                <i class="fa-solid fa-server group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-gold-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 4</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-gold-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-gold-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">Full-Stack Deploy</h5>
+            <p class="text-[9px] text-gold-400 uppercase tracking-widest font-mono relative z-10">Arsitektur Utuh</p>
+        </div>
+    </div>
                         </div>
                     </div>
                 </div>
@@ -706,45 +778,81 @@
                         <!-- Nodes -->
                         <div class="flex flex-col md:flex-row justify-between relative z-10 gap-8 md:gap-0">
                             <!-- Node 1 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 1: Dasar', 'Electronics 101', 'fa-microchip', 'emerald-500', 'Pahami dunia sirkuit dan tegangan listrik. Merakit komponen dasar elektronik dengan aman menggunakan breadboard.', '+500 XP', '4 Minggu', ['Hukum Ohm & Tegangan', 'Merakit Resistor & LED', 'Logika Saklar Dasar', 'Keamanan Elektronik'])">
-                                <div class="w-16 h-16 rounded-full  border-4 border-emerald-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(16,185,129,0.3)] mb-4 group-hover:scale-110 group-hover:bg-emerald-900 transition-all cursor-pointer">
-                                    <i class="fa-solid fa-microchip text-emerald-500 group-hover:text-white transition-colors"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-white mb-1">Electronics</h5>
-                                    <p class="text-[10px] text-slate-400">Komponen Dasar</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 1: Dasar', 'Electronics 101', 'fa-microchip', 'emerald-500', 'Pahami dunia sirkuit dan tegangan listrik. Merakit komponen dasar elektronik dengan aman menggunakan breadboard.', '+500 XP', '4 Minggu', ['Hukum Ohm & Tegangan', 'Merakit Resistor & LED', 'Logika Saklar Dasar', 'Keamanan Elektronik'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-emerald-500/20 border-2 border-emerald-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--emerald-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-emerald-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-emerald-400 group-hover:text-emerald-300 transition-colors z-10">
+                <i class="fa-solid fa-microchip group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-emerald-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 1</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-emerald-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">Electronics</h5>
+            <p class="text-[9px] text-emerald-400 uppercase tracking-widest font-mono relative z-10">Komponen Dasar</p>
+        </div>
+    </div>
                             <!-- Node 2 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 2: Menengah', 'Microcontroller', 'fa-code-merge', 'brand-500', 'Menjadi penghubung software dan hardware. Belajar memprogram otak dari robot (Arduino) menggunakan bahasa C++.', '+1000 XP', '6 Minggu', ['Setup IDE Arduino', 'Menulis Kode C++', 'Mengontrol Perangkat Output', 'Pemrograman Motor Servo'])">
-                                <div class="w-16 h-16 rounded-full  border-4 border-brand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(20,184,166,0.3)] mb-4 group-hover:scale-110 group-hover:bg-brand-900 transition-all cursor-pointer">
-                                    <i class="fa-solid fa-code-merge text-brand-500 group-hover:text-white transition-colors"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-white mb-1">Microcontroller</h5>
-                                    <p class="text-[10px] text-slate-400">Pemrograman Arduino</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 2: Menengah', 'Microcontroller', 'fa-code-merge', 'brand-500', 'Menjadi penghubung software dan hardware. Belajar memprogram otak dari robot (Arduino) menggunakan bahasa C++.', '+1000 XP', '6 Minggu', ['Setup IDE Arduino', 'Menulis Kode C++', 'Mengontrol Perangkat Output', 'Pemrograman Motor Servo'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-brand-500/20 border-2 border-brand-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--brand-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-brand-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-brand-400 group-hover:text-brand-300 transition-colors z-10">
+                <i class="fa-solid fa-code-merge group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-brand-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 2</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-brand-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">Microcontroller</h5>
+            <p class="text-[9px] text-brand-400 uppercase tracking-widest font-mono relative z-10">Pemrograman Arduino</p>
+        </div>
+    </div>
                             <!-- Node 3 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 3: Lanjutan', 'Sensors & IoT', 'fa-satellite-dish', 'purpleBrand-500', 'Ubah mesin biasa menjadi cerdas. Hubungkan robotmu dengan sensor lingkungan dan internet (IoT) agar dapat berkomunikasi jarak jauh.', '+1500 XP', '8 Minggu', ['Kalibrasi Sensor Suhu/Cahaya', 'Sistem Radar Ultrasonik', 'Koneksi WiFi ESP32', 'Mengirim Data ke Dashboard Web'])">
-                                <div class="w-16 h-16 rounded-full  border-4 border-purpleBrand-500 flex items-center justify-center text-xl text-white shadow-[0_0_20px_rgba(147,51,234,0.3)] mb-4 group-hover:scale-110 group-hover:bg-purpleBrand-900 transition-all cursor-pointer">
-                                    <i class="fa-solid fa-satellite-dish text-purpleBrand-500 group-hover:text-white transition-colors"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-white mb-1">Sensors & IoT</h5>
-                                    <p class="text-[10px] text-slate-400">Konektivitas</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 3: Lanjutan', 'Sensors & IoT', 'fa-satellite-dish', 'purpleBrand-500', 'Ubah mesin biasa menjadi cerdas. Hubungkan robotmu dengan sensor lingkungan dan internet (IoT) agar dapat berkomunikasi jarak jauh.', '+1500 XP', '8 Minggu', ['Kalibrasi Sensor Suhu/Cahaya', 'Sistem Radar Ultrasonik', 'Koneksi WiFi ESP32', 'Mengirim Data ke Dashboard Web'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-purpleBrand-500/20 border-2 border-purpleBrand-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--purpleBrand-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-purpleBrand-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-purpleBrand-400 group-hover:text-purpleBrand-300 transition-colors z-10">
+                <i class="fa-solid fa-satellite-dish group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-purpleBrand-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 3</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-purpleBrand-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-purpleBrand-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">Sensors & IoT</h5>
+            <p class="text-[9px] text-purpleBrand-400 uppercase tracking-widest font-mono relative z-10">Konektivitas</p>
+        </div>
+    </div>
                             <!-- Node 4 -->
-                            <div class="group relative flex flex-col items-center md:w-1/4" onclick="openCourseModal('Tingkat 4: Spesial', 'Autonomous Robot', 'fa-robot', 'gold-500', 'Proyek akhir! Bangun robot yang dapat membuat keputusan sendiri. Robot cerdas pencari jalan atau drone darat.', '+3000 XP', '6 Minggu', ['Logika Pemecahan Labirin', 'Integrasi Multi-Sensor', 'AI & Machine Learning Dasar', 'Kompetisi Robotika Internal'])">
-                                <div class="w-16 h-16 rounded-full bg-gold-500 border-4 border-gold-300 flex items-center justify-center text-xl text-dark-950 font-black shadow-[0_0_30px_rgba(250,204,21,0.6)] mb-4 group-hover:scale-110 transition-transform cursor-pointer">
-                                    <i class="fa-solid fa-robot text-dark-950"></i>
-                                </div>
-                                <div class="text-center group-hover:-translate-y-1 transition-transform">
-                                    <h5 class="font-bold text-gold-400 mb-1">Autonomous</h5>
-                                    <p class="text-[10px] text-slate-400">Robot Mandiri!</p>
-                                </div>
-                            </div>
+                            <div class="group relative flex flex-col items-center md:w-1/4 cursor-pointer" onclick="openCourseModal('Tingkat 4: Spesial', 'Autonomous Robot', 'fa-robot', 'gold-500', 'Proyek akhir! Bangun robot yang dapat membuat keputusan sendiri. Robot cerdas pencari jalan atau drone darat.', '+3000 XP', '6 Minggu', ['Logika Pemecahan Labirin', 'Integrasi Multi-Sensor', 'AI & Machine Learning Dasar', 'Kompetisi Robotika Internal'])">
+        <div class="relative w-20 h-20 mb-6 flex justify-center items-center group-hover:scale-110 transition-transform duration-500 z-10">
+            <!-- Spinning background -->
+            <div class="absolute inset-0 bg-gold-500/20 border-2 border-gold-500/50 rotate-45 rounded-lg group-hover:animate-spin-slow shadow-[0_0_20px_rgba(var(--gold-rgb,20,184,166),0.4)]"></div>
+            <div class="absolute inset-2 bg-dark-950 border border-gold-400/50 rotate-45 rounded-md flex items-center justify-center"></div>
+            <!-- Icon inside -->
+            <div class="absolute inset-0 flex items-center justify-center text-2xl text-gold-400 group-hover:text-gold-300 transition-colors z-10">
+                <i class="fa-solid fa-robot group-hover:-translate-y-1 transition-transform"></i>
+            </div>
+            <!-- Level Badge -->
+            <div class="absolute -bottom-3 bg-dark-900 border border-gold-500 text-white text-[9px] font-bold px-3 py-1 rounded-full z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] whitespace-nowrap">LVL 4</div>
+        </div>
+        <div class="text-center bg-dark-950/80 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-lg group-hover:border-gold-500/50 group-hover:-translate-y-2 transition-all w-full relative z-10 overflow-hidden">
+            <div class="absolute inset-0 bg-gold-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h5 class="font-heading font-bold text-white text-base mb-1 relative z-10">Autonomous</h5>
+            <p class="text-[9px] text-gold-400 uppercase tracking-widest font-mono relative z-10">Robot Mandiri!</p>
+        </div>
+    </div>
                         </div>
                     </div>
                 </div>
