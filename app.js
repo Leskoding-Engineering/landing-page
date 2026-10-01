@@ -626,10 +626,16 @@ function switchCoursePath(courseId) {
     // 1. Reset all tabs to inactive state
     const allTabs = document.querySelectorAll('.course-tab-btn');
     allTabs.forEach(tab => {
-        tab.classList.remove('border-brand-500', 'border-purpleBrand-500', 'border-gold-500', 'bg-dark-900');
-        tab.classList.add('border-white/10', 'bg-dark-900/50');
+        tab.classList.remove(
+            'border-brand-500', 'border-purpleBrand-500', 'border-gold-500',
+            'bg-dark-900',
+            'shadow-[0_0_20px_rgba(14,165,233,0.15)]',
+            'shadow-[0_0_20px_rgba(168,85,247,0.15)]',
+            'shadow-[0_0_20px_rgba(250,204,21,0.15)]'
+        );
+        tab.classList.add('border-white/10', 'bg-dark-950/80');
         
-        // Hide bg opacity
+        // Hide bg opacity if exists
         const bg = tab.querySelector('.tab-bg');
         if (bg) { bg.classList.remove('opacity-100'); bg.classList.add('opacity-0'); }
         
@@ -668,15 +674,15 @@ function switchCoursePath(courseId) {
 
         // Apply specific brand colors based on course
         if (courseId === 'game') {
-            activeTab.classList.add('border-brand-500');
+            activeTab.classList.add('border-brand-500', 'shadow-[0_0_20px_rgba(14,165,233,0.15)]');
             if (icon) icon.classList.add('text-brand-400');
             if (subtitle) subtitle.classList.add('text-brand-200');
         } else if (courseId === 'web') {
-            activeTab.classList.add('border-purpleBrand-500');
+            activeTab.classList.add('border-purpleBrand-500', 'shadow-[0_0_20px_rgba(168,85,247,0.15)]');
             if (icon) icon.classList.add('text-purpleBrand-400');
             if (subtitle) subtitle.classList.add('text-purpleBrand-200');
         } else if (courseId === 'robotic') {
-            activeTab.classList.add('border-gold-500');
+            activeTab.classList.add('border-gold-500', 'shadow-[0_0_20px_rgba(250,204,21,0.15)]');
             if (icon) icon.classList.add('text-gold-400');
             if (subtitle) subtitle.classList.add('text-gold-200');
         }
@@ -867,7 +873,7 @@ function calculateDistance() {
         const randomCampus = campuses[Math.floor(Math.random() * campuses.length)];
         
         resultText.innerHTML = `Hanya <strong>${randomMins} Menit (${randomKm} km)</strong> dari lokasi Anda!`;
-        const nearestCampusText = resultBox.querySelector('.text-slate-700');
+        const nearestCampusText = resultBox.querySelector('strong');
         if (nearestCampusText) nearestCampusText.textContent = randomCampus;
         
         resultBox.classList.remove('hidden');
@@ -925,3 +931,28 @@ window.upvoteProject = function(btn) {
         btn.querySelector('i').classList.remove('animate-ping');
     }, 500);
 };
+
+// Mobile Navigation Drawer Toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileBtn.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    }
+});

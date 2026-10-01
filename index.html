@@ -35,7 +35,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="font-bodytext-slate-300 antialiased overflow-x-hidden selection:bg-brand-500/30 selection:text-white bg-grid-pattern">
+<body class="font-body text-slate-300 antialiased overflow-x-hidden selection:bg-brand-500/30 selection:text-white bg-grid-pattern">
     <!-- Global Animated Background -->
     <div class="global-bg-wrapper overflow-hidden">
         <div class="bg-texture-overlay"></div>
@@ -107,16 +107,38 @@
 
                 <!-- Mobile Menu Toggle -->
                 <div class="md:hidden flex items-center">
-                    <button class="text-brand-400 hover:text-white focus:outline-none w-8 h-8 flex items-center justify-center rounded-full bg-brand-500/10 border border-brand-500/20 active:scale-95 transition-transform">
+                    <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="text-brand-400 hover:text-white focus:outline-none w-9 h-9 flex items-center justify-center rounded-full bg-brand-500/10 border border-brand-500/20 active:scale-95 transition-transform">
                         <i class="fa-solid fa-bars-staggered text-sm"></i>
                     </button>
                 </div>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu" class="hidden md:hidden mt-3 bg-dark-950/95 backdrop-blur-2xl rounded-3xl border border-white/10 p-5 shadow-2xl flex flex-col gap-3 transition-all duration-300">
+                <a href="#hall-of-fame" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-gold-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
+                    <i class="fa-solid fa-crown text-gold-400 w-5"></i> Hall of Fame
+                </a>
+                <a href="#features" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-brand-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
+                    <i class="fa-solid fa-shield-halved text-brand-400 w-5"></i> Kelebihan
+                </a>
+                <a href="#course" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-brand-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
+                    <i class="fa-solid fa-compass text-brand-400 w-5"></i> Course
+                </a>
+                <a href="#tutors" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-purpleBrand-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
+                    <i class="fa-solid fa-user-astronaut text-purpleBrand-400 w-5"></i> Tutors
+                </a>
+                <a href="#location" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-emerald-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
+                    <i class="fa-solid fa-map-location-dot text-emerald-400 w-5"></i> Location
+                </a>
+                <a href="#register" class="mobile-nav-link flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold py-3 rounded-xl text-xs uppercase tracking-widest mt-1 shadow-lg">
+                    <i class="fa-solid fa-bolt"></i> Mulai Petualangan
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- Interactive Hero Section -->
-    <section id="home" class="relative h-screen flex items-center justify-center pt-24 md:pt-32 pb-12 overflow-hidden border-b border-white/5">
+    <section id="home" class="relative min-h-screen lg:h-screen lg:max-h-[100vh] flex items-center justify-center pt-24 md:pt-28 lg:pt-20 pb-12 lg:pb-6 overflow-hidden border-b border-white/5">
         <!-- Background & Overlays -->
         <div class="absolute inset-0 z-0"></div>
         <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity z-0" alt="Coding Background">
@@ -178,7 +200,7 @@
                     <div class="absolute bottom-10 right-0 bg-dark-900/80 backdrop-blur-xl border border-white/10 p-6 rounded-3xl shadow-2xl max-w-sm transform hover:-translate-y-2 transition-transform duration-500 z-30">
                         <i class="fa-solid fa-quote-right text-3xl text-brand-500/20 absolute top-4 right-6"></i>
                         <div class="flex items-center gap-4 mb-4">
-                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex&backgroundColor=transparent" alt="Alex" class="w-12 h-12 rounded-fullborder-2 border-brand-500/50">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex&backgroundColor=transparent" alt="Alex" class="w-12 h-12 rounded-full border-2 border-brand-500/50">
                             <div>
                                 <h4 class="text-white font-bold text-sm">Alex Pratama</h4>
                                 <div class="flex text-gold-400 text-[10px]">
@@ -190,7 +212,7 @@
                     </div>
 
                     <!-- Floating Jargon / Slogan Card -->
-                    <div class="absolute top-20 left-0 bg-dark-900/60 backdrop-blur-xl border border-brand-500/30 p-6 rounded-3xl shadow-[0_0_40px_rgba(14,165,233,0.15)] max-w-[280px] transform hover:scale-105 transition-all duration-500 animate-[bounce_5s_infinite] z-20 group">
+                    <div class="absolute top-20 left-0 bg-dark-900/60 backdrop-blur-xl border border-brand-500/30 p-6 rounded-3xl shadow-[0_0_40px_rgba(14,165,233,0.15)] max-w-[280px] transform hover:scale-105 transition-all duration-500 float-gentle z-20 group">
                         <i class="fa-solid fa-rocket text-4xl text-brand-500/20 absolute -top-3 -left-3 group-hover:rotate-12 transition-transform"></i>
                         <h4 class="font-heading font-black text-xl text-white tracking-wide mb-2 leading-tight">
                             Dari <span class="text-redBrand-400 line-through decoration-2 decoration-redBrand-500/50">Nol</span><br>
@@ -329,135 +351,126 @@
 
             <!-- Virtual Gallery Grid -->
             <div class="fade-in-up">
-                <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-8">
-                    <h3 class="text-lg font-heading font-bold text-white"><i class="fa-solid fa-layer-group text-slate-400 mr-3"></i> Galeri Eksibisi</h3>
-                    <div class="text-xs text-slate-500 font-mono">Menampilkan: <span class="text-white">Karya Teratas</span></div>
+                <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-10">
+                    <h3 class="text-lg font-heading font-bold text-white inline-flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
+                            <i class="fa-solid fa-layer-group text-slate-400 text-sm"></i>
+                        </div>
+                        Galeri Eksibisi
+                    </h3>
+                    <div class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">Karya Teratas</div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hof-grid">
-                    <!-- Gallery Card 1 (3D Flip) -->
-                    <div class="hof-card group/flip w-full h-[450px] perspective-1000">
-                        <div class="flip-inner relative w-full h-full transition-transform duration-700 preserve-3d">
-                            <!-- Front Side -->
-                            <div class="absolute inset-0 backface-hidden bg-dark-900 border border-gold-500/30 rounded-3xl overflow-hidden flex flex-col shadow-lg">
-                                <div class="relative h-2/3 overflow-hidden">
-                                    <div class="absolute inset-0 bg-dark-950/20 z-10 transition-opacity group-hover/flip:opacity-0"></div>
-                                    <div class="absolute top-4 left-4 z-20 badge-shine">
-                                        <span class="bg-purpleBrand-500/90 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg border border-purpleBrand-300/50"><i class="fa-solid fa-fire mr-1"></i> Terfavorit</span>
-                                    </div>
-                                    <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" class="w-full h-full object-cover" alt="Project">
-                                </div>
-                                <div class="p-6 h-1/3 flex flex-col justify-center items-center text-center">
-                                    <h4 class="font-heading font-bold text-white text-xl">Sistem AI Kasir Pintar</h4>
-                                    <p class="text-[10px] text-brand-400 mt-2 font-mono uppercase tracking-widest"><i class="fa-solid fa-arrow-rotate-right mr-1"></i> Arahkan Kursor</p>
-                                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Gallery Card 1 -->
+                    <div class="exhibit-card group rounded-2xl overflow-hidden border border-white/[0.06] bg-dark-950 transition-all duration-500 hover:border-gold-500/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+                        <!-- Image -->
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Project">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent pointer-events-none"></div>
+                            <!-- Badge -->
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="bg-dark-950/70 backdrop-blur-md text-purpleBrand-400 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg border border-purpleBrand-500/30 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-fire"></i> Terfavorit
+                                </span>
                             </div>
-                            <!-- Back Side -->
-                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-dark-900 via-dark-900/90 to-purpleBrand-950/40 border border-gold-400/50 rounded-3xl p-6 md:p-8 flex flex-col shadow-[0_0_40px_rgba(250,204,21,0.2)]">
-                                <div class="absolute -top-6 right-6 border-4 border-dark-900 rounded-full shadow-xl z-30">
-                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Budi" class="w-12 h-12 rounded-full " alt="User">
-                                </div>
-                                <p class="text-[10px] font-bold text-gold-400 uppercase tracking-wider mb-4 mt-2 border-b border-white/10 pb-2">Budi (14 Tahun) <span class="text-slate-400 font-normal">· Web Dev</span></p>
-                                <p class="text-sm text-slate-300 mb-4 leading-relaxed flex-grow">Aplikasi kasir berbasis web menggunakan logika JavaScript kompleks untuk kalkulasi inventaris dan struk real-time.</p>
-                                <div class="flex flex-wrap gap-2 mb-6">
-                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">JS</span>
-                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">HTML/CSS</span>
-                                </div>
-                                <div class="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
-                                    <button onclick="triggerConfetti()" class="text-[10px] font-bold uppercase tracking-widest text-dark-950 bg-gold-400 hover:bg-gold-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
-                                        Lihat <i class="fa-solid fa-play"></i>
-                                    </button>
-                                    <button onclick="upvoteProject(this)" class="upvote-btn text-slate-400 hover:text-red-500 transition-colors text-xs flex items-center gap-1.5 font-mono">
-                                        <i class="fa-solid fa-heart"></i> <span class="vote-count text-white font-bold">856</span>
-                                    </button>
-                                </div>
+                            <!-- Stats overlay -->
+                            <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
+                                <button onclick="upvoteProject(this)" class="upvote-btn flex items-center gap-1.5 bg-dark-950/60 backdrop-blur-md border border-white/10 hover:border-red-500/40 px-3 py-1.5 rounded-lg transition-all text-xs group/vote">
+                                    <i class="fa-solid fa-heart text-red-500/70 group-hover/vote:text-red-400 text-[10px]"></i>
+                                    <span class="vote-count text-white font-bold font-mono text-[10px]">856</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="p-5">
+                            <h4 class="font-heading font-bold text-white text-lg mb-1 group-hover:text-gold-400 transition-colors">Sistem AI Kasir Pintar</h4>
+                            <div class="flex items-center gap-2 mb-3">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Budi" class="w-5 h-5 rounded-full border border-dark-800 bg-dark-900" alt="User">
+                                <p class="text-[10px] text-slate-500">Budi (14 Tahun) <span class="text-slate-600">· Web Dev</span></p>
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">Aplikasi kasir berbasis web menggunakan logika JavaScript kompleks untuk kalkulasi inventaris dan struk real-time.</p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">JS</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">HTML/CSS</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Gallery Card 2 (3D Flip) -->
-                    <div class="hof-card group/flip w-full h-[450px] perspective-1000">
-                        <div class="flip-inner relative w-full h-full transition-transform duration-700 preserve-3d">
-                            <!-- Front Side -->
-                            <div class="absolute inset-0 backface-hidden bg-dark-900 border border-gold-500/30 rounded-3xl overflow-hidden flex flex-col shadow-lg">
-                                <div class="relative h-2/3 overflow-hidden">
-                                    <div class="absolute inset-0 bg-dark-950/20 z-10 transition-opacity group-hover/flip:opacity-0"></div>
-                                    <div class="absolute top-4 left-4 z-20 badge-shine">
-                                        <span class="bg-brand-500/90 text-dark-950 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg border border-brand-300/50"><i class="fa-solid fa-robot mr-1"></i> Future Tech</span>
-                                    </div>
-                                    <img src="assets/sessions/01M3JK50X16R206D3HK7Z9A9G0.jpeg" class="w-full h-full object-cover" alt="Project">
-                                </div>
-                                <div class="p-6 h-1/3 flex flex-col justify-center items-center text-center">
-                                    <h4 class="font-heading font-bold text-white text-xl">Robot Pemilah Sampah</h4>
-                                    <p class="text-[10px] text-brand-400 mt-2 font-mono uppercase tracking-widest"><i class="fa-solid fa-arrow-rotate-right mr-1"></i> Arahkan Kursor</p>
-                                </div>
+                    <!-- Gallery Card 2 -->
+                    <div class="exhibit-card group rounded-2xl overflow-hidden border border-white/[0.06] bg-dark-950 transition-all duration-500 hover:border-gold-500/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+                        <!-- Image -->
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="assets/sessions/01M3JK50X16R206D3HK7Z9A9G0.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Project">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent pointer-events-none"></div>
+                            <!-- Badge -->
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="bg-dark-950/70 backdrop-blur-md text-brand-400 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg border border-brand-500/30 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-robot"></i> Future Tech
+                                </span>
                             </div>
-                            <!-- Back Side -->
-                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-dark-900 via-dark-900/90 to-brand-950/40 border border-gold-400/50 rounded-3xl p-6 md:p-8 flex flex-col shadow-[0_0_40px_rgba(250,204,21,0.2)]">
-                                <div class="absolute -top-6 right-6 border-4 border-dark-900 rounded-full shadow-xl z-30">
-                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kevin" class="w-12 h-12 rounded-full " alt="User">
-                                </div>
-                                <p class="text-[10px] font-bold text-gold-400 uppercase tracking-wider mb-4 mt-2 border-b border-white/10 pb-2">Kevin (10 Tahun) <span class="text-slate-400 font-normal">· Robotics</span></p>
-                                <p class="text-sm text-slate-300 mb-4 leading-relaxed flex-grow">Proyek Arduino dengan sensor ultrasonik dan motor servo yang secara otomatis membuka tutup tempat sampah.</p>
-                                <div class="flex flex-wrap gap-2 mb-6">
-                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">Arduino</span>
-                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">C++</span>
-                                </div>
-                                <div class="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
-                                    <button onclick="triggerConfetti()" class="text-[10px] font-bold uppercase tracking-widest text-dark-950 bg-gold-400 hover:bg-gold-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
-                                        Lihat <i class="fa-solid fa-play"></i>
-                                    </button>
-                                    <button onclick="upvoteProject(this)" class="upvote-btn text-slate-400 hover:text-red-500 transition-colors text-xs flex items-center gap-1.5 font-mono">
-                                        <i class="fa-solid fa-heart"></i> <span class="vote-count text-white font-bold">642</span>
-                                    </button>
-                                </div>
+                            <!-- Stats overlay -->
+                            <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
+                                <button onclick="upvoteProject(this)" class="upvote-btn flex items-center gap-1.5 bg-dark-950/60 backdrop-blur-md border border-white/10 hover:border-red-500/40 px-3 py-1.5 rounded-lg transition-all text-xs group/vote">
+                                    <i class="fa-solid fa-heart text-red-500/70 group-hover/vote:text-red-400 text-[10px]"></i>
+                                    <span class="vote-count text-white font-bold font-mono text-[10px]">642</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="p-5">
+                            <h4 class="font-heading font-bold text-white text-lg mb-1 group-hover:text-gold-400 transition-colors">Robot Pemilah Sampah</h4>
+                            <div class="flex items-center gap-2 mb-3">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kevin" class="w-5 h-5 rounded-full border border-dark-800 bg-dark-900" alt="User">
+                                <p class="text-[10px] text-slate-500">Kevin (10 Tahun) <span class="text-slate-600">· Robotics</span></p>
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">Proyek Arduino dengan sensor ultrasonik dan motor servo yang secara otomatis membuka tutup tempat sampah.</p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">Arduino</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">C++</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Gallery Card 3 (3D Flip) -->
-                    <div class="hof-card group/flip w-full h-[450px] perspective-1000">
-                        <div class="flip-inner relative w-full h-full transition-transform duration-700 preserve-3d">
-                            <!-- Front Side -->
-                            <div class="absolute inset-0 backface-hidden bg-dark-900 border border-gold-500/30 rounded-3xl overflow-hidden flex flex-col shadow-lg">
-                                <div class="relative h-2/3 overflow-hidden">
-                                    <div class="absolute inset-0 bg-dark-950/20 z-10 transition-opacity group-hover/flip:opacity-0"></div>
-                                    <div class="absolute top-4 left-4 z-20 badge-shine">
-                                        <span class="bg-gold-500/90 text-dark-950 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg border border-gold-300/50"><i class="fa-solid fa-gem mr-1"></i> Desain Terbaik</span>
-                                    </div>
-                                    <img src="assets/sessions/01M3JK1KMW3XQ7DFP5F7YZ8J0D.jpg" class="w-full h-full object-cover" alt="Project">
-                                </div>
-                                <div class="p-6 h-1/3 flex flex-col justify-center items-center text-center">
-                                    <h4 class="font-heading font-bold text-white text-xl">Portofolio Animasi Web</h4>
-                                    <p class="text-[10px] text-brand-400 mt-2 font-mono uppercase tracking-widest"><i class="fa-solid fa-arrow-rotate-right mr-1"></i> Arahkan Kursor</p>
-                                </div>
+                    <!-- Gallery Card 3 -->
+                    <div class="exhibit-card group rounded-2xl overflow-hidden border border-white/[0.06] bg-dark-950 transition-all duration-500 hover:border-gold-500/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+                        <!-- Image -->
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="assets/sessions/01M3JK1KMW3XQ7DFP5F7YZ8J0D.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Project">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent pointer-events-none"></div>
+                            <!-- Badge -->
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="bg-dark-950/70 backdrop-blur-md text-gold-400 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg border border-gold-500/30 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-gem"></i> Desain Terbaik
+                                </span>
                             </div>
-                            <!-- Back Side -->
-                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-dark-900 via-dark-900/90 to-gold-950/40 border border-gold-400/50 rounded-3xl p-6 md:p-8 flex flex-col shadow-[0_0_40px_rgba(250,204,21,0.2)]">
-                                <div class="absolute -top-6 right-6 border-4 border-dark-900 rounded-full shadow-xl z-30">
-                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Nadia" class="w-12 h-12 rounded-full " alt="User">
-                                </div>
-                                <p class="text-[10px] font-bold text-gold-400 uppercase tracking-wider mb-4 mt-2 border-b border-white/10 pb-2">Nadia (15 Tahun) <span class="text-slate-400 font-normal">· Web Dev</span></p>
-                                <p class="text-sm text-slate-300 mb-4 leading-relaxed flex-grow">Website portofolio pribadi yang penuh dengan animasi CSS 3D dan transisi scroll mulus tanpa framework eksternal.</p>
-                                <div class="flex flex-wrap gap-2 mb-6">
-                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">TailwindCSS</span>
-                                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] text-slate-300 font-mono">JavaScript</span>
-                                </div>
-                                <div class="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
-                                    <button onclick="triggerConfetti()" class="text-[10px] font-bold uppercase tracking-widest text-dark-950 bg-gold-400 hover:bg-gold-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
-                                        Lihat <i class="fa-solid fa-play"></i>
-                                    </button>
-                                    <button onclick="upvoteProject(this)" class="upvote-btn text-slate-400 hover:text-red-500 transition-colors text-xs flex items-center gap-1.5 font-mono">
-                                        <i class="fa-solid fa-heart"></i> <span class="vote-count text-white font-bold">1100</span>
-                                    </button>
-                                </div>
+                            <!-- Stats overlay -->
+                            <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
+                                <button onclick="upvoteProject(this)" class="upvote-btn flex items-center gap-1.5 bg-dark-950/60 backdrop-blur-md border border-white/10 hover:border-red-500/40 px-3 py-1.5 rounded-lg transition-all text-xs group/vote">
+                                    <i class="fa-solid fa-heart text-red-500/70 group-hover/vote:text-red-400 text-[10px]"></i>
+                                    <span class="vote-count text-white font-bold font-mono text-[10px]">1.1k</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="p-5">
+                            <h4 class="font-heading font-bold text-white text-lg mb-1 group-hover:text-gold-400 transition-colors">Portofolio Animasi Web</h4>
+                            <div class="flex items-center gap-2 mb-3">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Nadia" class="w-5 h-5 rounded-full border border-dark-800 bg-dark-900" alt="User">
+                                <p class="text-[10px] text-slate-500">Nadia (15 Tahun) <span class="text-slate-600">· Web Dev</span></p>
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">Website portofolio pribadi yang penuh dengan animasi CSS 3D dan transisi scroll mulus tanpa framework eksternal.</p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">TailwindCSS</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">JavaScript</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="text-center mt-12">
-                    <button class="px-8 py-3.5 bg-dark-900/60 backdrop-blur-xl border border-white/10 hover:border-gold-500/50 hover:bg-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-300 hover:text-gold-400 transition-all shadow-lg flex items-center gap-3 mx-auto group">
+                    <button class="px-8 py-3.5 bg-dark-950 border border-white/10 hover:border-gold-500/30 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-gold-400 transition-all flex items-center gap-3 mx-auto group">
                         Muat Lebih Banyak Karya <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
                     </button>
                 </div>
@@ -469,7 +482,7 @@
     <section id="features" class="py-20 md:py-28 relative z-10 border-b border-white/5">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in-up">
-                <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-indigo-400 mb-2">Petualangan Belajar</h2>
+                <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-brand-400 mb-2">Petualangan Belajar</h2>
                 <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Mengapa Petualangan Ini Sangat Berharga?</h3>
                 <p class="text-sm md:text-base text-slate-400 max-w-2xl mx-auto">Di LesKoding, setiap kelas adalah sebuah eksplorasi baru.</p>
             </div>
@@ -545,7 +558,7 @@
                     <!-- Mentor 1 -->
                     <div class="bg-dark-900/60 backdrop-blur-xl border border-white/5 rounded-3xl p-8 hover:bg-dark-800 transition-colors shadow-xl group">
                         <div class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-br from-brand-400 to-purpleBrand-600 mb-6 group-hover:scale-110 transition-transform duration-500">
-                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=transparent" class="w-full h-fullrounded-full" alt="Mentor">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=transparent" class="w-full h-full rounded-full" alt="Mentor">
                         </div>
                         <h4 class="font-bold text-white text-xl mb-1">Felix R.</h4>
                         <p class="text-[10px] text-brand-400 font-bold uppercase tracking-widest mb-4">Ex-Google Engineer</p>
@@ -554,7 +567,7 @@
                     <!-- Mentor 2 -->
                     <div class="bg-dark-900/60 backdrop-blur-xl border border-white/5 rounded-3xl p-8 hover:bg-dark-800 transition-colors shadow-xl group">
                         <div class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-br from-gold-400 to-redBrand-500 mb-6 group-hover:scale-110 transition-transform duration-500">
-                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Anita&backgroundColor=transparent" class="w-full h-fullrounded-full" alt="Mentor">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Anita&backgroundColor=transparent" class="w-full h-full rounded-full" alt="Mentor">
                         </div>
                         <h4 class="font-bold text-white text-xl mb-1">Anita K.</h4>
                         <p class="text-[10px] text-gold-400 font-bold uppercase tracking-widest mb-4">Top Roblox Creator</p>
@@ -589,8 +602,7 @@
 
             <!-- Course Tabs -->
             <div class="flex flex-col md:flex-row justify-center gap-4 mb-16 fade-in-up">
-                <button onclick="switchCoursePath('game')" id="tab-game" class="course-tab-btn border-brand-500 bg-dark-900/60 backdrop-blur-xl relative px-8 py-4 border rounded-2xl flex flex-col items-center gap-2 transition-all group overflow-hidden">
-                    <div class="absolute inset-0 bg-brand-500/5 opacity-100 tab-bg rounded-2xl transition-opacity"></div>
+                <button onclick="switchCoursePath('game')" id="tab-game" class="course-tab-btn border-brand-500 bg-dark-900 shadow-[0_0_20px_rgba(14,165,233,0.15)] relative px-8 py-4 border rounded-2xl flex flex-col items-center gap-2 transition-all group overflow-hidden">
                     <i class="fa-solid fa-gamepad text-2xl text-brand-400 tab-icon mb-1 relative z-10 transition-colors"></i>
                     <span class="font-heading font-bold text-white tab-title relative z-10 transition-colors">Game Programming</span>
                     <span class="text-[9px] text-brand-200 tab-subtitle uppercase tracking-widest relative z-10 transition-colors">"Code Your Universe"</span>
@@ -621,7 +633,7 @@
                     
                     <div class="relative">
                         <!-- Connecting Line -->
-                        <div class="absolute top-1/2 left-0 w-full h-1 bg-dark-800 -translate-y-1/2 hidden md:block rounded-full">
+                        <div class="absolute top-10 left-0 w-full h-1 bg-dark-800 -translate-y-1/2 hidden md:block rounded-full">
                             <div class="h-full roadmap-line w-full rounded-full shadow-[0_0_10px_rgba(14,165,233,0.3)]"></div>
                         </div>
 
@@ -716,7 +728,7 @@
                     
                     <div class="relative">
                         <!-- Connecting Line -->
-                        <div class="absolute top-1/2 left-0 w-full h-1 bg-dark-800 -translate-y-1/2 hidden md:block rounded-full">
+                        <div class="absolute top-10 left-0 w-full h-1 bg-dark-800 -translate-y-1/2 hidden md:block rounded-full">
                             <div class="h-full bg-gradient-to-r from-emerald-500/50 via-brand-500 to-gold-500/50 w-full rounded-full shadow-[0_0_10px_rgba(147,51,234,0.5)]"></div>
                         </div>
 
@@ -811,7 +823,7 @@
                     
                     <div class="relative">
                         <!-- Connecting Line -->
-                        <div class="absolute top-1/2 left-0 w-full h-1 bg-dark-800 -translate-y-1/2 hidden md:block rounded-full">
+                        <div class="absolute top-10 left-0 w-full h-1 bg-dark-800 -translate-y-1/2 hidden md:block rounded-full">
                             <div class="h-full bg-gradient-to-r from-emerald-500/50 via-brand-500 to-gold-500/50 w-full rounded-full shadow-[0_0_10px_rgba(250,204,21,0.5)]"></div>
                         </div>
 
