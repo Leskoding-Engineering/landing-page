@@ -55,22 +55,12 @@
     </div>
 
     
-    <!-- Floating Quick Controls (Dark/Light Mode & Language) -->
-    <div class="fixed top-5 left-5 z-[100] flex items-center gap-2" id="hud">
-        <div class="flex items-center gap-2.5 bg-dark-950/85 border border-white/15 backdrop-blur-xl px-3.5 py-1.5 rounded-full shadow-2xl transition-all hover:border-white/25">
-            <!-- Theme Toggle Button (Dark / Light) -->
-            <button id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Dark/Light Mode" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-gold-400 bg-white/5 hover:bg-white/10 border border-white/10 transition-all focus:outline-none">
-                <i class="fa-solid fa-moon text-xs sm:text-sm" id="theme-icon"></i>
-            </button>
-            
-            <div class="w-px h-4 bg-white/10" id="hud-divider"></div>
-            
-            <!-- Language Toggle (EN / ID) - Default EN -->
-            <button id="lang-toggle-btn" onclick="toggleLanguage()" aria-label="Toggle Language" title="Switch Language (English / Indonesia)" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono font-bold transition-all focus:outline-none">
-                <i class="fa-solid fa-globe text-brand-400 text-xs"></i>
-                <span id="current-lang-text" class="text-white tracking-wider">EN</span>
-            </button>
-        </div>
+    <!-- Floating Language Switcher (EN / ID) -->
+    <div class="fixed top-5 left-5 z-[100] flex items-center" id="hud">
+        <button id="lang-toggle-btn" onclick="toggleLanguage()" aria-label="Toggle Language" title="Switch Language (English / Indonesia)" class="flex items-center gap-2 bg-dark-950/85 hover:bg-dark-900 border border-white/15 hover:border-brand-500/50 backdrop-blur-xl px-3.5 py-1.5 rounded-full shadow-2xl text-xs font-mono font-bold transition-all focus:outline-none group">
+            <i class="fa-solid fa-globe text-brand-400 text-xs group-hover:rotate-12 transition-transform"></i>
+            <span id="current-lang-text" class="text-white tracking-wider">EN</span>
+        </button>
     </div>
 
     <!-- Floating Sci-Fi Pill Navbar -->
@@ -132,19 +122,13 @@
                     <i class="fa-solid fa-bolt"></i> Start Adventure
                 </a>
                 
-                <!-- Mobile Settings (Theme & Lang) -->
+                <!-- Mobile Language Selector -->
                 <div class="flex items-center justify-between pt-3 border-t border-white/10 mt-1">
-                    <span class="text-[11px] font-mono text-slate-400">Theme &amp; Language:</span>
-                    <div class="flex items-center gap-2">
-                        <button onclick="toggleTheme()" class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">
-                            <i class="fa-solid fa-moon text-gold-400 text-xs" id="mobile-theme-icon"></i>
-                            <span id="mobile-theme-text">Dark</span>
-                        </button>
-                        <button onclick="toggleLanguage()" class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-xs text-brand-400 font-mono font-bold">
-                            <i class="fa-solid fa-globe text-xs"></i>
-                            <span id="mobile-lang-text">EN</span>
-                        </button>
-                    </div>
+                    <span class="text-[11px] font-mono text-slate-400">Language:</span>
+                    <button onclick="toggleLanguage()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs text-brand-400 font-mono font-bold">
+                        <i class="fa-solid fa-globe text-xs"></i>
+                        <span id="mobile-lang-text">EN</span>
+                    </button>
                 </div>
             </div>
         </div>

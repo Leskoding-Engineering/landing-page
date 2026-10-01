@@ -1379,29 +1379,7 @@ const i18nDictionary = {
     }
 };
 
-// Theme Toggle Functionality
-window.toggleTheme = function() {
-    const isLight = document.documentElement.classList.toggle('light-mode');
-    const newTheme = isLight ? 'light' : 'dark';
-    localStorage.setItem('leskoding_theme', newTheme);
-    updateThemeUI(newTheme);
-};
 
-function updateThemeUI(theme) {
-    const themeIcon = document.getElementById('theme-icon');
-    const mobileThemeIcon = document.getElementById('mobile-theme-icon');
-    const mobileThemeText = document.getElementById('mobile-theme-text');
-    
-    if (theme === 'light') {
-        if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-gold-500 text-xs sm:text-sm';
-        if (mobileThemeIcon) mobileThemeIcon.className = 'fa-solid fa-sun text-gold-500 text-xs';
-        if (mobileThemeText) mobileThemeText.textContent = 'Light';
-    } else {
-        if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-slate-400 text-xs sm:text-sm';
-        if (mobileThemeIcon) mobileThemeIcon.className = 'fa-solid fa-moon text-gold-400 text-xs';
-        if (mobileThemeText) mobileThemeText.textContent = 'Dark';
-    }
-}
 
 // Language Toggle Functionality (DEFAULT: 'en')
 window.toggleLanguage = function() {
@@ -1458,18 +1436,13 @@ window.applyLanguage = function(lang) {
     if (regPromo) regPromo.placeholder = lang === 'en' ? 'e.g. PETUALANGAN2026' : 'Cth: PETUALANGAN2026';
 };
 
-// Initialize Theme & Language on Page Load
+// Initialize Language on Page Load (DEFAULT: 'en')
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize Theme (Default: dark)
-    const savedTheme = localStorage.getItem('leskoding_theme') || 'dark';
-    if (savedTheme === 'light') {
-        document.documentElement.classList.add('light-mode');
-    } else {
-        document.documentElement.classList.remove('light-mode');
-    }
-    updateThemeUI(savedTheme);
+    // Ensure dark theme is active
+    document.documentElement.classList.remove('light-mode');
+    localStorage.removeItem('leskoding_theme');
 
-    // 2. Initialize Language (DEFAULT: 'en' as requested by user)
+    // Initialize Language (DEFAULT: 'en' as requested)
     const savedLang = localStorage.getItem('leskoding_lang') || 'en';
     applyLanguage(savedLang);
 });
