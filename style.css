@@ -264,9 +264,32 @@ h1, h2, h3, h4, h5, h6 {
     background: repeating-linear-gradient(90deg, #facc15, #facc15 10px, transparent 10px, transparent 20px);
 }
 
+/* Animated Dotted Lines for Web & Robotic Paths */
+.roadmap-line-dotted-purple {
+    background-image: radial-gradient(circle, #a855f7 3px, transparent 3.5px);
+    background-size: 16px 100%;
+    background-repeat: repeat-x;
+    background-position: 0 center;
+    animation: moveDots 1.8s linear infinite;
+    opacity: 0.95;
+}
+.roadmap-line-dotted-gold {
+    background-image: radial-gradient(circle, #facc15 3px, transparent 3.5px);
+    background-size: 16px 100%;
+    background-repeat: repeat-x;
+    background-position: 0 center;
+    animation: moveDots 1.8s linear infinite;
+    opacity: 0.95;
+}
+
 @keyframes moveLine {
     0% { background-position: 40px 0; }
     100% { background-position: 0 0; }
+}
+
+@keyframes moveDots {
+    0% { background-position: 16px center; }
+    100% { background-position: 0 center; }
 }
 
 /* RPG Adventure Map Canvas */
