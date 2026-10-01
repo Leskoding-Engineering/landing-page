@@ -55,17 +55,21 @@
     </div>
 
     
-    <!-- Floating HUD (Hidden on mobile) -->
-    <div class="fixed top-6 left-6 z-[100] hidden md:flex flex-col gap-3 pointer-events-none" id="hud">
-        <div class="pointer-events-auto flex items-center gap-4 bg-dark-950/80 border border-white/10 backdrop-blur-xl px-5 py-2.5 rounded-full shadow-2xl transition-all hover:border-white/20">
-            <button id="toggle-sound" class="text-slate-400 hover:text-brand-400 transition-colors flex items-center justify-center rounded-full focus:outline-none">
-                <i class="fa-solid fa-volume-xmark text-sm" id="sound-icon"></i>
+    <!-- Floating Quick Controls (Dark/Light Mode & Language) -->
+    <div class="fixed top-5 left-5 z-[100] flex items-center gap-2" id="hud">
+        <div class="flex items-center gap-2.5 bg-dark-950/85 border border-white/15 backdrop-blur-xl px-3.5 py-1.5 rounded-full shadow-2xl transition-all hover:border-white/25">
+            <!-- Theme Toggle Button (Dark / Light) -->
+            <button id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Dark/Light Mode" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-gold-400 bg-white/5 hover:bg-white/10 border border-white/10 transition-all focus:outline-none">
+                <i class="fa-solid fa-moon text-xs sm:text-sm" id="theme-icon"></i>
             </button>
-            <div class="w-px h-4 bg-white/10"></div>
-            <div class="flex items-center gap-2.5">
-                <i class="fa-solid fa-terminal text-brand-400 text-[10px]"></i>
-                <span class="font-mono font-semibold text-white tracking-[0.15em] text-sm" id="hud-score">0000</span>
-            </div>
+            
+            <div class="w-px h-4 bg-white/10" id="hud-divider"></div>
+            
+            <!-- Language Toggle (EN / ID) - Default EN -->
+            <button id="lang-toggle-btn" onclick="toggleLanguage()" aria-label="Toggle Language" title="Switch Language (English / Indonesia)" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono font-bold transition-all focus:outline-none">
+                <i class="fa-solid fa-globe text-brand-400 text-xs"></i>
+                <span id="current-lang-text" class="text-white tracking-wider">EN</span>
+            </button>
         </div>
     </div>
 
@@ -84,20 +88,20 @@
                 <!-- Center Links (Desktop - Terminal Style) -->
                 <div class="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
                     <a href="#hall-of-fame" class="group/link text-slate-400 hover:text-gold-400 font-mono font-bold transition-colors text-[10px] uppercase tracking-[0.2em] flex items-center gap-2 drop-shadow-[0_0_5px_rgba(250,204,21,0.4)]">
-                        <i class="fa-solid fa-crown text-gold-400"></i> Hall of Fame
+                        <i class="fa-solid fa-crown text-gold-400"></i><span data-i18n="nav_hof">Hall of Fame</span>
                     </a>
                     <a href="#course" class="group/link text-slate-400 hover:text-white font-mono font-medium transition-colors text-[10px] uppercase tracking-[0.2em] flex items-center gap-1">
-                        <span class="text-purpleBrand-400 opacity-0 group-hover/link:opacity-100 transition-opacity">&gt;</span> Course
+                        <span class="text-purpleBrand-400 opacity-0 group-hover/link:opacity-100 transition-opacity">&gt;</span><span data-i18n="nav_course">Course</span>
                     </a>
                     <a href="#location" class="group/link text-slate-400 hover:text-white font-mono font-medium transition-colors text-[10px] uppercase tracking-[0.2em] flex items-center gap-1">
-                        <span class="text-emerald-400 opacity-0 group-hover/link:opacity-100 transition-opacity">&gt;</span> Location
+                        <span class="text-emerald-400 opacity-0 group-hover/link:opacity-100 transition-opacity">&gt;</span><span data-i18n="nav_location">Location</span>
                     </a>
                 </div>
                 
                 <!-- Right CTA (Desktop) -->
                 <div class="hidden md:block">
                     <a href="#register" class="relative overflow-hidden inline-flex items-center justify-center bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold px-6 py-2 rounded-full text-[10px] uppercase tracking-[0.25em] transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.6)]">
-                        <span class="relative z-10 flex items-center gap-2"><i class="fa-solid fa-bolt text-dark-950"></i> Enroll</span>
+                        <span class="relative z-10 flex items-center gap-2"><i class="fa-solid fa-bolt text-dark-950"></i><span data-i18n="nav_enroll">Enroll</span></span>
                         <div class="absolute inset-0 bg-white/20 translate-y-full hover:translate-y-0 transition-transform"></div>
                     </a>
                 </div>
@@ -113,20 +117,35 @@
             <!-- Mobile Menu Dropdown -->
             <div id="mobile-menu" class="hidden md:hidden mt-3 bg-dark-950/95 backdrop-blur-2xl rounded-3xl border border-white/10 p-5 shadow-2xl flex flex-col gap-3 transition-all duration-300">
                 <a href="#hall-of-fame" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-gold-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
-                    <i class="fa-solid fa-crown text-gold-400 w-5"></i> Hall of Fame
+                    <i class="fa-solid fa-crown text-gold-400 w-5"></i><span data-i18n="nav_hof">Hall of Fame</span>
                 </a>
                 <a href="#features" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-brand-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
                     <i class="fa-solid fa-shield-halved text-brand-400 w-5"></i> Kelebihan
                 </a>
                 <a href="#course" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-brand-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
-                    <i class="fa-solid fa-compass text-brand-400 w-5"></i> Course
+                    <i class="fa-solid fa-compass text-brand-400 w-5"></i><span data-i18n="nav_course">Course</span>
                 </a>
                 <a href="#location" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-emerald-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
-                    <i class="fa-solid fa-map-location-dot text-emerald-400 w-5"></i> Location
+                    <i class="fa-solid fa-map-location-dot text-emerald-400 w-5"></i><span data-i18n="nav_location">Location</span>
                 </a>
-                <a href="#register" class="mobile-nav-link flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold py-3 rounded-xl text-xs uppercase tracking-widest mt-1 shadow-lg">
-                    <i class="fa-solid fa-bolt"></i> Mulai Petualangan
+                <a href="#register" data-i18n="nav_start_adventure" class="mobile-nav-link flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold py-3 rounded-xl text-xs uppercase tracking-widest mt-1 shadow-lg">
+                    <i class="fa-solid fa-bolt"></i> Start Adventure
                 </a>
+                
+                <!-- Mobile Settings (Theme & Lang) -->
+                <div class="flex items-center justify-between pt-3 border-t border-white/10 mt-1">
+                    <span class="text-[11px] font-mono text-slate-400">Theme &amp; Language:</span>
+                    <div class="flex items-center gap-2">
+                        <button onclick="toggleTheme()" class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 font-mono">
+                            <i class="fa-solid fa-moon text-gold-400 text-xs" id="mobile-theme-icon"></i>
+                            <span id="mobile-theme-text">Dark</span>
+                        </button>
+                        <button onclick="toggleLanguage()" class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-xs text-brand-400 font-mono font-bold">
+                            <i class="fa-solid fa-globe text-xs"></i>
+                            <span id="mobile-lang-text">EN</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -146,25 +165,25 @@
                 <div class="text-left fade-in-up pt-10">
                     
                     <h1 class="text-4xl sm:text-5xl md:text-6xl font-heading font-black text-white mb-6 leading-[1.15] tracking-tight">
-                        Rasakan Petualangan Coding yang <br class="hidden md:block">
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-gold-400 to-purpleBrand-500">Tak Terlupakan!</span>
+                        <span data-i18n="hero_title_1">Rasakan Petualangan Coding yang</span> <br class="hidden md:block">
+                        <span data-i18n="hero_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-gold-400 to-purpleBrand-500">Tak Terlupakan!</span>
                     </h1>
                     
                     <p class="text-sm md:text-base text-slate-300 mb-4 max-w-xl font-normal leading-relaxed">
-                        Setiap petualangan dimulai dengan langkah pertama. Di <span class="text-white font-bold">LesKoding</span>, kami tidak hanya mengajarkan coding – kami membawa Anda dalam perjalanan yang menggugah semangat, di mana kreativitas dan teknologi bertemu.
+                        <span data-i18n="hero_desc_1">Setiap petualangan dimulai dengan langkah pertama. Di <span class="text-white font-bold">LesKoding</span>, kami tidak hanya mengajarkan coding – kami membawa Anda dalam perjalanan yang menggugah semangat, di mana kreativitas dan teknologi bertemu.</span>
                     </p>
                     <p class="text-sm md:text-base text-slate-300 mb-10 max-w-xl font-normal leading-relaxed hidden sm:block">
-                        Apakah Anda siap untuk menjelajahi dunia yang penuh dengan kemungkinan? Bersiaplah untuk mengasah keterampilan Anda, berkolaborasi dengan teman baru, dan menyaksikan ide-ide Anda hidup. Mulailah petualangan Anda hari ini!
+                        <span data-i18n="hero_desc_2">Apakah Anda siap untuk menjelajahi dunia yang penuh dengan kemungkinan? Bersiaplah untuk mengasah keterampilan Anda, berkolaborasi dengan teman baru, dan menyaksikan ide-ide Anda hidup. Mulailah petualangan Anda hari ini!</span>
                     </p>
                     
                     <div class="flex flex-wrap items-center gap-4 mb-12">
                         <a href="#register" class="w-full sm:w-auto relative group px-8 py-4 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(14,165,233,0.2)] hover:shadow-[0_0_40px_rgba(14,165,233,0.4)] transition-all duration-300 bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold text-xs uppercase tracking-[0.1em] text-center">
                             <span class="relative z-10 flex items-center justify-center gap-2">
-                                Mulai Petualangan! <i class="fa-solid fa-rocket"></i>
+                                <span data-i18n="hero_btn_start">Mulai Petualangan!</span> <i class="fa-solid fa-rocket"></i>
                             </span>
                         </a>
                         <a href="#course" class="w-full sm:w-auto relative group px-8 py-4 rounded-xl overflow-hidden transition-all duration-300 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-bold text-xs uppercase tracking-[0.1em] text-center">
-                            Pelajari Rute Kami <i class="fa-solid fa-arrow-right ml-2"></i>
+                            <span data-i18n="hero_btn_route">Pelajari Rute Kami</span> <i class="fa-solid fa-arrow-right ml-2"></i>
                         </a>
                     </div>
 
@@ -172,11 +191,11 @@
                     <div class="grid grid-cols-2 gap-8 pt-8 border-t border-white/10">
                         <div>
                             <div class="text-3xl md:text-4xl font-heading font-black text-white mb-1"><span class="counter" data-target="15000">0</span>+</div>
-                            <div class="text-[10px] md:text-xs uppercase tracking-wider text-slate-400 font-bold">Siswa Aktif</div>
+                            <div class="text-[10px] md:text-xs uppercase tracking-wider text-slate-400 font-bold" data-i18n="stats_students">Siswa Aktif</div>
                         </div>
                         <div>
                             <div class="text-3xl md:text-4xl font-heading font-black text-brand-400 mb-1"><span class="counter" data-target="20000">0</span>+</div>
-                            <div class="text-[10px] md:text-xs uppercase tracking-wider text-slate-400 font-bold">Proyek Selesai</div>
+                            <div class="text-[10px] md:text-xs uppercase tracking-wider text-slate-400 font-bold" data-i18n="stats_projects">Proyek Selesai</div>
                         </div>
                     </div>
                 </div>
@@ -187,12 +206,11 @@
                     <div class="relative bg-dark-900/70 backdrop-blur-xl border border-brand-500/30 p-8 rounded-3xl shadow-[0_0_50px_rgba(14,165,233,0.18)] max-w-sm transform hover:scale-105 transition-all duration-500 float-gentle z-20 group">
                         <i class="fa-solid fa-rocket text-4xl text-brand-500/20 absolute -top-3 -left-3 group-hover:rotate-12 transition-transform"></i>
                         <h4 class="font-heading font-black text-2xl text-white tracking-wide mb-2 leading-tight">
-                            Dari <span class="text-redBrand-400 line-through decoration-2 decoration-redBrand-500/50">Nol</span><br>
-                            Menjadi <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purpleBrand-400">Kreator Teknologi!</span>
+                            <span data-i18n="hero_slogan_title">Dari <span class="text-redBrand-400 line-through decoration-2 decoration-redBrand-500/50">Nol</span><br>Menjadi <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purpleBrand-400">Kreator Teknologi!</span></span>
                         </h4>
                         <div class="w-14 h-1 bg-gradient-to-r from-brand-400 to-purpleBrand-400 rounded-full mb-4"></div>
                         <p class="text-slate-300 text-sm font-medium leading-relaxed">
-                            Bukan sekadar belajar biasa. Kami sulap rasa penasaranmu menjadi karya digital nyata berstandar masa depan.
+                            <span data-i18n="hero_slogan_desc">Bukan sekadar belajar biasa. Kami sulap rasa penasaranmu menjadi karya digital nyata berstandar masa depan.</span>
                         </p>
                     </div>
                 </div>
@@ -224,8 +242,8 @@
                     </svg>
                 </div>
                 
-                <h2 class="text-4xl md:text-5xl font-heading font-black text-white mb-6 tracking-tight">Kisah Sukses dari<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-yellow-600">Penjelajah Kami!</span></h2>
-                <p class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Di sinilah karya luar biasa dari siswa kami ditampilkan! Setiap proyek adalah petualangan yang menceritakan perjalanan kreativitas dan dedikasi. Terinspirasi oleh pencapaian mereka? Bergabunglah dan biarkan petualangan Anda dimulai!</p>
+                <h2 class="text-4xl md:text-5xl font-heading font-black text-white mb-6 tracking-tight"><span data-i18n="hof_title">Kisah Sukses dari<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-yellow-600">Penjelajah Kami!</span></span></h2>
+                <p class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed"><span data-i18n="hof_desc">Di sinilah karya luar biasa dari siswa kami ditampilkan! Setiap proyek adalah petualangan yang menceritakan perjalanan kreativitas dan dedikasi. Terinspirasi oleh pencapaian mereka? Bergabunglah dan biarkan petualangan Anda dimulai!</span></p>
             </div>
 
             <!-- Digital Trophy Wall (Masterpiece / Winner) -->
@@ -234,8 +252,7 @@
                     <div class="w-8 h-8 rounded-lg bg-gold-500/20 flex items-center justify-center">
                         <i class="fa-solid fa-trophy text-gold-400 text-sm"></i>
                     </div>
-                    Pajangan Proyek Pilihan
-                </h3>
+                    <span data-i18n="hof_masterpiece_heading">Pajangan Proyek Pilihan</span></h3>
                 
                 <!-- Museum Exhibit Card -->
                 <div class="masterpiece-exhibit relative rounded-[2rem] overflow-hidden group">
@@ -258,7 +275,7 @@
                             <!-- Crown Badge -->
                             <div class="absolute top-6 left-6 z-20 badge-shine">
                                 <span class="bg-dark-950/80 backdrop-blur-md text-gold-400 text-[10px] font-bold uppercase tracking-widest px-4 py-2.5 rounded-xl border border-gold-500/40 flex items-center gap-2 shadow-lg">
-                                    <i class="fa-solid fa-crown"></i> Masterpiece Terbaik
+                                    <i class="fa-solid fa-crown"></i> <span data-i18n="hof_badge_masterpiece">Masterpiece Terbaik</span>
                                 </span>
                             </div>
                             
@@ -280,7 +297,7 @@
                             <!-- Curator tag -->
                             <div class="inline-flex items-center gap-2 text-gold-400 font-mono text-[9px] uppercase tracking-[0.2em] mb-4">
                                 <div class="w-6 h-px bg-gold-500/60"></div>
-                                Pilihan Kurator
+                                <span data-i18n="hof_curator_pick">Pilihan Kurator</span>
                                 <div class="w-6 h-px bg-gold-500/60"></div>
                             </div>
 
@@ -314,7 +331,7 @@
                             
                             <!-- CTA -->
                             <button onclick="triggerConfetti()" class="self-start inline-flex items-center gap-3 bg-gold-500 hover:bg-gold-400 text-dark-950 font-black px-8 py-3.5 rounded-xl uppercase tracking-[0.1em] text-[11px] transition-all hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(250,204,21,0.25)] hover:shadow-[0_8px_30px_rgba(250,204,21,0.4)]">
-                                <i class="fa-solid fa-play text-xs"></i> Lihat Proyek
+                                <i class="fa-solid fa-play text-xs"></i> <span data-i18n="btn_view_project">Lihat Proyek</span>
                             </button>
                         </div>
                     </div>
@@ -328,9 +345,8 @@
                         <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
                             <i class="fa-solid fa-layer-group text-slate-400 text-sm"></i>
                         </div>
-                        Galeri Eksibisi
-                    </h3>
-                    <div class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">Karya Teratas</div>
+                        <span data-i18n="hof_gallery_heading">Galeri Eksibisi</span></h3>
+                    <div class="text-[10px] text-slate-500 font-mono uppercase tracking-widest"><span data-i18n="hof_top_creations">Karya Teratas</span></div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -443,7 +459,7 @@
                 
                 <div class="text-center mt-12">
                     <button class="px-8 py-3.5 bg-dark-950 border border-white/10 hover:border-gold-500/30 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-gold-400 transition-all flex items-center gap-3 mx-auto group">
-                        Muat Lebih Banyak Karya <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
+                        <span data-i18n="hof_btn_load_more">Muat Lebih Banyak Karya</span> <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
                     </button>
                 </div>
             </div>
@@ -454,9 +470,9 @@
     <section id="features" class="py-20 md:py-28 relative z-10 border-b border-white/5">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in-up">
-                <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-brand-400 mb-2">Petualangan Belajar</h2>
-                <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Mengapa Petualangan Ini Sangat Berharga?</h3>
-                <p class="text-sm md:text-base text-slate-400 max-w-2xl mx-auto">Di LesKoding, setiap kelas adalah sebuah eksplorasi baru.</p>
+                <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-brand-400 mb-2"><span data-i18n="feat_badge">Petualangan Belajar</span></h2>
+                <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4"><span data-i18n="feat_title">Mengapa Petualangan Ini Sangat Berharga?</span></h3>
+                <p class="text-sm md:text-base text-slate-400 max-w-2xl mx-auto"><span data-i18n="feat_desc">Di LesKoding, setiap kelas adalah sebuah eksplorasi baru.</span></p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -527,8 +543,8 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16 fade-in-up">
-                <h2 class="text-[11px] font-bold tracking-[0.3em] uppercase text-brand-400 mb-3 drop-shadow-[0_0_10px_rgba(14,165,233,0.3)]">Petualangan Menanti</h2>
-                <h3 class="text-3xl md:text-5xl font-heading font-black text-white mb-6">Pilih Jalur Petualanganmu!</h3>
+                <h2 class="text-[11px] font-bold tracking-[0.3em] uppercase text-brand-400 mb-3 drop-shadow-[0_0_10px_rgba(14,165,233,0.3)]"><span data-i18n="course_badge">Petualangan Menanti</span></h2>
+                <h3 class="text-3xl md:text-5xl font-heading font-black text-white mb-6"><span data-i18n="course_title">Pilih Jalur Petualanganmu!</span></h3>
                 <p class="text-slate-400/80 text-sm max-w-2xl mx-auto leading-relaxed">Temukan rute yang paling sesuai untuk Anda! Apakah Anda siap untuk menjelajahi dunia coding dengan cara yang menyenangkan?</p>
             </div>
 
@@ -854,7 +870,7 @@
                     <i class="fa-solid fa-map-location-dot text-brand-400 text-xs"></i>
                     <span class="text-[9px] font-bold tracking-[0.2em] uppercase text-brand-400">Kampus Tersedia</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Temukan Rute Menuju Petualangan Anda!</h2>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4"><span data-i18n="loc_title">Temukan Rute Menuju Petualangan Anda!</span></h2>
                 <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">Dari peta penduduk lokal hingga sistem transportasi, LesKoding terletak di tempat yang strategis untuk memudahkan Anda memulai perjalanan. Temukan lokasi kami dan manfaatkan kemudahan akses untuk memulai petualangan coding Anda!</p>
             </div>
 
@@ -954,7 +970,7 @@
                     <div class="w-12 h-12 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl mx-auto mb-4">
                         <i class="fa-solid fa-route"></i>
                     </div>
-                    <h3 class="text-xl font-heading font-black text-white mb-2">Cek Kampus Terdekat</h3>
+                    <h3 class="text-xl font-heading font-black text-white mb-2"><span data-i18n="loc_calc_title">Cek Kampus Terdekat</span></h3>
                     <p class="text-sm text-slate-400 mb-6">Masukkan area/kecamatan Anda untuk melihat cabang mana yang paling mudah diakses.</p>
                     
                     <div class="flex flex-col sm:flex-row gap-3 mb-2">
@@ -966,8 +982,7 @@
                         </div>
                         
                         <button id="check-distance-btn" onclick="calculateDistance()" class="sm:w-auto w-full bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold py-3.5 px-8 rounded-xl uppercase tracking-[0.15em] text-[10px] transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(56,189,248,0.3)]">
-                            <i class="fa-solid fa-magnifying-glass-location"></i> Cek Lokasi
-                        </button>
+                            <i class="fa-solid fa-magnifying-glass-location"></i> <span data-i18n="loc_btn_check">Cek Lokasi</span></button>
                     </div>
                     
                     <!-- Result Box (Hidden default) -->
@@ -994,12 +1009,12 @@
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12 fade-in-up">
                 <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-brand-400 mb-2">Pendaftaran</h2>
-                <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Daftar Petualangan Anda</h3>
+                <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4"><span data-i18n="reg_title">Daftar Petualangan Anda</span></h3>
                 <p class="text-slate-400 text-sm max-w-xl mx-auto">Isi formulir di bawah ini untuk memulai perjalanan digital anak Anda. Konfirmasi pendaftaran akan diproses otomatis melalui WhatsApp.</p>
             </div>
             
             <form id="registration-form" class=" border border-white/10 rounded-[2rem] p-6 md:p-10 shadow-2xl fade-in-up">
-                <h4 class="font-heading font-bold text-white text-lg mb-6 border-b border-white/10 pb-4 flex items-center gap-2.5"><i class="fa-solid fa-clipboard-list text-brand-400"></i> Formulir Pendaftaran Siswa Baru LesKoding</h4>
+                <h4 class="font-heading font-bold text-white text-lg mb-6 border-b border-white/10 pb-4 flex items-center gap-2.5"><i class="fa-solid fa-clipboard-list text-brand-400"></i> <span data-i18n="reg_form_header">Formulir Pendaftaran Siswa Baru LesKoding</span></h4>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Pilihan Learning Center (Enhanced Interactive Dropdown) -->
@@ -1141,8 +1156,7 @@
                 </div>
                 <div class="mt-8">
                     <button type="submit" class="w-full bg-[#25D366] hover:bg-[#1ebe5c] text-white font-bold py-4 rounded-xl uppercase tracking-[0.1em] text-sm transition-all shadow-[0_0_15px_rgba(37,211,102,0.3)] hover:shadow-[0_0_25px_rgba(37,211,102,0.5)] flex items-center justify-center gap-3">
-                        <i class="fa-brands fa-whatsapp text-xl"></i> Kirim Pendaftaran via WhatsApp
-                    </button>
+                        <i class="fa-brands fa-whatsapp text-xl"></i> <span data-i18n="reg_btn_submit">Kirim Pendaftaran via WhatsApp</span></button>
                 </div>
             </form>
         </div>

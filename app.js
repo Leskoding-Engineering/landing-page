@@ -1165,3 +1165,183 @@ document.addEventListener('click', (e) => {
         if (chevron) chevron.classList.remove('rotate-180');
     }
 });
+
+/* ========================================================
+   14. THEME & INTERNATIONALIZATION (I18N) ENGINE
+   ======================================================== */
+
+// Translation Dictionary (English Default & Indonesian)
+const i18nDictionary = {
+    en: {
+        nav_hof: "Hall of Fame",
+        nav_course: "Courses",
+        nav_location: "Locations",
+        nav_enroll: "Enroll",
+        nav_start_adventure: "Start Adventure",
+        
+        // Hero
+        hero_title_1: "Experience an Unforgettable",
+        hero_title_2: "Coding Adventure!",
+        hero_desc_1: "Every epic journey begins with a single step. At <span class=\"text-white font-bold\">LesKoding</span>, we don\'t just teach code – we guide young minds on an inspiring quest where boundless creativity meets cutting-edge technology.",
+        hero_desc_2: "Ready to explore a world of infinite possibilities? Sharpen your logic, build real games and robots alongside great friends, and watch your digital ideas come to life. Start your adventure today!",
+        hero_btn_start: "Start Adventure!",
+        hero_btn_route: "Explore Routes",
+        stats_students: "Active Students",
+        stats_projects: "Completed Projects",
+        hero_slogan_title: "From <span class=\"text-redBrand-400 line-through decoration-2 decoration-redBrand-500/50\">Zero</span><br>to <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purpleBrand-400\">Tech Creator!</span>",
+        hero_slogan_desc: "Far beyond ordinary classes. We transform children\'s curiosity into tangible, future-ready digital masterpieces.",
+        
+        // Hall of Fame
+        hof_title: "Success Stories from<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-yellow-600\">Our Explorers!</span>",
+        hof_desc: "This is where our students\' extraordinary creations take the spotlight! Each project is a milestone of relentless dedication, logic, and creativity. Inspired by their triumphs? Join us and ignite your own journey!",
+        hof_masterpiece_heading: "Curator\'s Masterpiece Showcase",
+        hof_badge_masterpiece: "Top Masterpiece",
+        hof_curator_pick: "Curator\'s Pick",
+        btn_view_project: "View Project",
+        hof_gallery_heading: "Exhibition Gallery",
+        hof_top_creations: "Top Student Projects",
+        hof_btn_load_more: "Load More Creations",
+        
+        // Features
+        feat_badge: "Learning Adventure",
+        feat_title: "Why is This Adventure Invaluable?",
+        feat_desc: "At LesKoding, every single class is a fresh, exciting digital expedition.",
+        
+        // Course
+        course_badge: "Adventure Awaits",
+        course_title: "Choose Your Learning Path!",
+        
+        // Location
+        loc_title: "Find Your Route to Adventure!",
+        loc_calc_title: "Check Nearest Campus",
+        loc_btn_check: "Check Location",
+        
+        // Registration Form
+        reg_title: "Enroll in Your Adventure",
+        reg_form_header: "LesKoding New Student Registration Form",
+        reg_btn_submit: "Submit Registration via WhatsApp"
+    },
+    id: {
+        nav_hof: "Hall of Fame",
+        nav_course: "Course",
+        nav_location: "Location",
+        nav_enroll: "Enroll",
+        nav_start_adventure: "Mulai Petualangan",
+        
+        // Hero
+        hero_title_1: "Rasakan Petualangan Coding yang",
+        hero_title_2: "Tak Terlupakan!",
+        hero_desc_1: "Setiap petualangan dimulai dengan langkah pertama. Di <span class=\"text-white font-bold\">LesKoding</span>, kami tidak hanya mengajarkan coding – kami membawa Anda dalam perjalanan yang menggugah semangat, di mana kreativitas dan teknologi bertemu.",
+        hero_desc_2: "Apakah Anda siap untuk menjelajahi dunia yang penuh dengan kemungkinan? Bersiaplah untuk mengasah keterampilan Anda, berkolaborasi dengan teman baru, dan menyaksikan ide-ide Anda hidup. Mulailah petualangan Anda hari ini!",
+        hero_btn_start: "Mulai Petualangan!",
+        hero_btn_route: "Pelajari Rute Kami",
+        stats_students: "Siswa Aktif",
+        stats_projects: "Proyek Selesai",
+        hero_slogan_title: "Dari <span class=\"text-redBrand-400 line-through decoration-2 decoration-redBrand-500/50\">Nol</span><br>Menjadi <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purpleBrand-400\">Kreator Teknologi!</span>",
+        hero_slogan_desc: "Bukan sekadar belajar biasa. Kami sulap rasa penasaranmu menjadi karya digital nyata berstandar masa depan.",
+        
+        // Hall of Fame
+        hof_title: "Kisah Sukses dari<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-yellow-600\">Penjelajah Kami!</span>",
+        hof_desc: "Di sinilah karya luar biasa dari siswa kami ditampilkan! Setiap proyek adalah petualangan yang menceritakan perjalanan kreativitas dan dedikasi. Terinspirasi oleh pencapaian mereka? Bergabunglah dan biarkan petualangan Anda dimulai!",
+        hof_masterpiece_heading: "Pajangan Proyek Pilihan",
+        hof_badge_masterpiece: "Masterpiece Terbaik",
+        hof_curator_pick: "Pilihan Kurator",
+        btn_view_project: "Lihat Proyek",
+        hof_gallery_heading: "Galeri Eksibisi",
+        hof_top_creations: "Karya Teratas",
+        hof_btn_load_more: "Muat Lebih Banyak Karya",
+        
+        // Features
+        feat_badge: "Petualangan Belajar",
+        feat_title: "Mengapa Petualangan Ini Sangat Berharga?",
+        feat_desc: "Di LesKoding, setiap kelas adalah sebuah eksplorasi baru.",
+        
+        // Course
+        course_badge: "Petualangan Menanti",
+        course_title: "Pilih Jalur Petualanganmu!",
+        
+        // Location
+        loc_title: "Temukan Rute Menuju Petualangan Anda!",
+        loc_calc_title: "Cek Kampus Terdekat",
+        loc_btn_check: "Cek Lokasi",
+        
+        // Registration Form
+        reg_title: "Daftar Petualangan Anda",
+        reg_form_header: "Formulir Pendaftaran Siswa Baru LesKoding",
+        reg_btn_submit: "Kirim Pendaftaran via WhatsApp"
+    }
+};
+
+// Theme Toggle Functionality
+window.toggleTheme = function() {
+    const isLight = document.documentElement.classList.toggle('light-mode');
+    const newTheme = isLight ? 'light' : 'dark';
+    localStorage.setItem('leskoding_theme', newTheme);
+    updateThemeUI(newTheme);
+};
+
+function updateThemeUI(theme) {
+    const themeIcon = document.getElementById('theme-icon');
+    const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+    const mobileThemeText = document.getElementById('mobile-theme-text');
+    
+    if (theme === 'light') {
+        if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-gold-400 text-xs sm:text-sm';
+        if (mobileThemeIcon) mobileThemeIcon.className = 'fa-solid fa-sun text-gold-400 text-xs';
+        if (mobileThemeText) mobileThemeText.textContent = 'Light';
+    } else {
+        if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-slate-400 text-xs sm:text-sm';
+        if (mobileThemeIcon) mobileThemeIcon.className = 'fa-solid fa-moon text-gold-400 text-xs';
+        if (mobileThemeText) mobileThemeText.textContent = 'Dark';
+    }
+}
+
+// Language Toggle Functionality (DEFAULT: 'en')
+window.toggleLanguage = function() {
+    const currentLang = localStorage.getItem('leskoding_lang') || 'en';
+    const nextLang = currentLang === 'en' ? 'id' : 'en';
+    localStorage.setItem('leskoding_lang', nextLang);
+    applyLanguage(nextLang);
+};
+
+window.applyLanguage = function(lang) {
+    const dict = i18nDictionary[lang] || i18nDictionary.en;
+    
+    // Update all [data-i18n] elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+            el.innerHTML = dict[key];
+        }
+    });
+    
+    // Update labels in buttons
+    const langText = document.getElementById('current-lang-text');
+    const mobileLangText = document.getElementById('mobile-lang-text');
+    const displayLabel = lang.toUpperCase();
+    
+    if (langText) langText.textContent = displayLabel;
+    if (mobileLangText) mobileLangText.textContent = displayLabel;
+    
+    // Update placeholders
+    const locInput = document.getElementById('user-location');
+    if (locInput) {
+        locInput.placeholder = lang === 'en' ? 'e.g. South Denpasar or Ubud' : 'Contoh: Denpasar Selatan atau Ubud';
+    }
+};
+
+// Initialize Theme & Language on Page Load
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize Theme (Default: dark)
+    const savedTheme = localStorage.getItem('leskoding_theme') || 'dark';
+    if (savedTheme === 'light') {
+        document.documentElement.classList.add('light-mode');
+    } else {
+        document.documentElement.classList.remove('light-mode');
+    }
+    updateThemeUI(savedTheme);
+
+    // 2. Initialize Language (DEFAULT: 'en' as requested by user)
+    const savedLang = localStorage.getItem('leskoding_lang') || 'en';
+    applyLanguage(savedLang);
+});

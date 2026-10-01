@@ -287,3 +287,136 @@ h1, h2, h3, h4, h5, h6 {
 .animate-spin-slow {
     animation: spin-slow 10s linear infinite;
 }
+
+/* ========================================================
+   LIGHT MODE THEME OVERRIDES
+   ======================================================== */
+html.light-mode {
+    color-scheme: light;
+}
+html.light-mode body {
+    background-color: #f8fafc;
+    color: #334155;
+}
+html.light-mode .global-bg-wrapper {
+    background-color: #f8fafc;
+}
+html.light-mode .bg-texture-overlay {
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+html.light-mode .bg-grid-pattern {
+    background-image: 
+        linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+}
+html.light-mode .animated-orb.orb-1 {
+    background-color: rgba(14, 165, 233, 0.12);
+}
+html.light-mode .animated-orb.orb-2 {
+    background-color: rgba(168, 85, 247, 0.1);
+}
+html.light-mode .animated-orb.orb-3 {
+    background-color: rgba(250, 204, 21, 0.1);
+}
+
+/* Light Mode Containers & Cards */
+html.light-mode #nav-container,
+html.light-mode #hud > div {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-color: rgba(226, 232, 240, 0.9);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+html.light-mode #hud-divider {
+    background-color: rgba(203, 213, 225, 0.8);
+}
+html.light-mode #hud button {
+    border-color: rgba(226, 232, 240, 0.9);
+    color: #475569;
+}
+html.light-mode #hud button:hover {
+    color: #0ea5e9;
+    background-color: rgba(241, 245, 249, 0.8);
+}
+html.light-mode #current-lang-text {
+    color: #0f172a;
+}
+
+/* Text Overrides for Light Mode */
+html.light-mode .text-white {
+    color: #0f172a !important;
+}
+html.light-mode .text-slate-300 {
+    color: #334155 !important;
+}
+html.light-mode .text-slate-400 {
+    color: #475569 !important;
+}
+html.light-mode .text-slate-500 {
+    color: #64748b !important;
+}
+
+/* Specific elements that need to stay white on light mode (buttons with solid brand backgrounds) */
+html.light-mode .bg-brand-500 .text-dark-950,
+html.light-mode .bg-brand-500,
+html.light-mode .bg-gold-500,
+html.light-mode .bg-gradient-to-r.from-brand-500,
+html.light-mode .btn-brand-solid {
+    color: #020617 !important;
+}
+
+/* Card Overrides in Light Mode */
+html.light-mode .masterpiece-exhibit,
+html.light-mode .exhibit-card,
+html.light-mode .bento-card,
+html.light-mode #registration-form,
+html.light-mode #custom-select-trigger,
+html.light-mode #custom-select-menu,
+html.light-mode #promo-modal-content,
+html.light-mode #mobile-menu,
+html.light-mode .bg-dark-900,
+html.light-mode .bg-dark-950,
+html.light-mode .bg-dark-900\/60,
+html.light-mode .bg-dark-900\/80,
+html.light-mode .bg-dark-950\/80,
+html.light-mode .bg-dark-950\/90,
+html.light-mode .bg-dark-950\/95 {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+html.light-mode .rpg-map-bg {
+    background-image: 
+        radial-gradient(circle at center, transparent 0%, #f1f5f9 100%),
+        linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode input,
+html.light-mode textarea,
+html.light-mode select {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+}
+html.light-mode input:focus,
+html.light-mode textarea:focus,
+html.light-mode select:focus {
+    background-color: #ffffff !important;
+    border-color: #0ea5e9 !important;
+}
+
+html.light-mode .border-white\/5,
+html.light-mode .border-white\/10,
+html.light-mode .border-white\/15,
+html.light-mode .border-white\/20 {
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode .bg-white\/5,
+html.light-mode .bg-white\/10 {
+    background-color: #f1f5f9 !important;
+}
