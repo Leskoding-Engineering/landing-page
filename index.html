@@ -1002,12 +1002,83 @@
                 <h4 class="font-heading font-bold text-white text-lg mb-6 border-b border-white/10 pb-4 flex items-center gap-2.5"><i class="fa-solid fa-clipboard-list text-brand-400"></i> Formulir Pendaftaran Siswa Baru LesKoding</h4>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Pilihan Learning Center -->
-                    <div class="space-y-2 md:col-span-2">
-                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400 flex items-center gap-2">
-                            <i class="fa-solid fa-school text-brand-400"></i> Pilihan Learning Center <span class="text-red-400">*</span>
-                        </label>
-                        <select id="reg-center" required class="w-full bg-dark-950 border border-white/15 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all text-sm font-medium">
+                    <!-- Pilihan Learning Center (Enhanced Interactive Dropdown) -->
+                    <div class="space-y-2 md:col-span-2 relative">
+                        <div class="flex items-center justify-between">
+                            <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400 flex items-center gap-2">
+                                <i class="fa-solid fa-school text-brand-400"></i> Pilihan Learning Center <span class="text-red-400">*</span>
+                            </label>
+                            <span class="text-[10px] text-slate-500 font-mono">3 Kampus Tersedia di Bali</span>
+                        </div>
+                        
+                        <!-- Custom Select Trigger Card -->
+                        <div id="custom-select-trigger" onclick="toggleCustomSelect()" class="w-full bg-dark-950 border border-white/15 hover:border-brand-500/50 rounded-2xl p-3.5 flex items-center justify-between cursor-pointer transition-all duration-300 shadow-lg group">
+                            <div class="flex items-center gap-3.5">
+                                <div id="selected-center-icon" class="w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/30 text-brand-400 flex items-center justify-center shrink-0 text-base transition-all">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                </div>
+                                <div class="text-left">
+                                    <div id="selected-center-name" class="text-sm font-bold text-white group-hover:text-brand-300 transition-colors">
+                                        Pilih Learning Center Terdekat
+                                    </div>
+                                    <div id="selected-center-sub" class="text-[11px] text-slate-500 font-mono">
+                                        Klik untuk memilih cabang belajar anak Anda
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 pr-1">
+                                <span id="selected-center-tag" class="hidden text-[9px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-md border"></span>
+                                <i id="custom-select-chevron" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
+                            </div>
+                        </div>
+
+                        <!-- Custom Dropdown Menu -->
+                        <div id="custom-select-menu" class="hidden absolute top-full left-0 right-0 mt-2 bg-dark-950/95 backdrop-blur-2xl border border-white/15 rounded-2xl p-2 shadow-2xl z-50 flex flex-col gap-1.5 transition-all duration-300">
+                            <!-- Option 1: Gianyar -->
+                            <div onclick="selectCustomCenter('Gents Robotic & Coding (Gianyar)', 'Jln Ksatrian No 8 Lingkungan Candi Baru, Gianyar', 'fa-microchip', 'brand', 'Gianyar')" class="p-3 rounded-xl hover:bg-brand-500/10 border border-transparent hover:border-brand-500/30 flex items-center justify-between cursor-pointer transition-all group/opt">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
+                                        <i class="fa-solid fa-microchip"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs sm:text-sm font-bold text-white group-hover/opt:text-brand-300 transition-colors">Gents Robotic &amp; Coding (Gianyar)</p>
+                                        <p class="text-[10px] text-slate-400">Jln Ksatrian No 8 Lingkungan Candi Baru, Gianyar</p>
+                                    </div>
+                                </div>
+                                <span class="text-[9px] font-mono font-bold uppercase tracking-wider bg-brand-500/15 text-brand-400 px-2 py-0.5 rounded-md border border-brand-500/20">Gianyar</span>
+                            </div>
+
+                            <!-- Option 2: Ubud Peliatan -->
+                            <div onclick="selectCustomCenter('Bali Seed Robotic & Coding Peliatan (Ubud)', 'Jalan Peliatan, No. 1, Ubud', 'fa-laptop-code', 'purpleBrand', 'Ubud')" class="p-3 rounded-xl hover:bg-purpleBrand-500/10 border border-transparent hover:border-purpleBrand-500/30 flex items-center justify-between cursor-pointer transition-all group/opt">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-purpleBrand-500/10 border border-purpleBrand-500/20 text-purpleBrand-400 flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
+                                        <i class="fa-solid fa-laptop-code"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs sm:text-sm font-bold text-white group-hover/opt:text-purpleBrand-300 transition-colors">Bali Seed Robotic &amp; Coding Peliatan</p>
+                                        <p class="text-[10px] text-slate-400">Jalan Peliatan, No. 1, Ubud</p>
+                                    </div>
+                                </div>
+                                <span class="text-[9px] font-mono font-bold uppercase tracking-wider bg-purpleBrand-500/15 text-purpleBrand-400 px-2 py-0.5 rounded-md border border-purpleBrand-500/20">Ubud</span>
+                            </div>
+
+                            <!-- Option 3: Bedulu -->
+                            <div onclick="selectCustomCenter('Bali Seed Bedulu Robotics & Coding', 'Jln Raya Semebaung, Bedulu', 'fa-robot', 'gold', 'Bedulu')" class="p-3 rounded-xl hover:bg-gold-500/10 border border-transparent hover:border-gold-500/30 flex items-center justify-between cursor-pointer transition-all group/opt">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-gold-500/10 border border-gold-500/20 text-gold-400 flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
+                                        <i class="fa-solid fa-robot"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs sm:text-sm font-bold text-white group-hover/opt:text-gold-300 transition-colors">Bali Seed Bedulu Robotics &amp; Coding</p>
+                                        <p class="text-[10px] text-slate-400">Jln Raya Semebaung, Bedulu</p>
+                                    </div>
+                                </div>
+                                <span class="text-[9px] font-mono font-bold uppercase tracking-wider bg-gold-500/15 text-gold-400 px-2 py-0.5 rounded-md border border-gold-500/20">Bedulu</span>
+                            </div>
+                        </div>
+
+                        <!-- Underlying Synchronized Select (for form validation & accessibility) -->
+                        <select id="reg-center" required class="sr-only">
                             <option value="" disabled selected>-- Pilih Learning Center Terdekat --</option>
                             <option value="Gents Robotic & Coding (Gianyar)">Gents Robotic & Coding (Gianyar)</option>
                             <option value="Bali Seed Robotic & Coding Peliatan (Ubud)">Bali Seed Robotic & Coding Peliatan (Ubud)</option>

@@ -576,7 +576,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const center = centerSelect ? centerSelect.value : '';
             if (!center) {
                 alert("Mohon pilih Learning Center terdekat terlebih dahulu.");
-                if (centerSelect) centerSelect.focus();
+                const trigger = document.getElementById('custom-select-trigger');
+                if (trigger) {
+                    trigger.classList.add('border-red-500', 'ring-2', 'ring-red-500/40');
+                    trigger.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    setTimeout(() => trigger.classList.remove('ring-2', 'ring-red-500/40'), 2500);
+                }
                 return;
             }
 
@@ -1034,11 +1039,16 @@ window.claimPromoAndRegister = function(promoCode = 'PETUALANGAN2026') {
         regSection.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // 4. Focus on learning center select
+    // 4. Focus on learning center select (open enhanced menu if not selected)
     setTimeout(() => {
         const centerSelect = document.getElementById('reg-center');
         if (centerSelect && !centerSelect.value) {
-            centerSelect.focus();
+            const menu = document.getElementById('custom-select-menu');
+            if (menu && menu.classList.contains('hidden')) {
+                window.toggleCustomSelect();
+            }
+            const trigger = document.getElementById('custom-select-trigger');
+            if (trigger) trigger.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
             const nameInput = document.getElementById('reg-nama');
             if (nameInput) nameInput.focus();
@@ -1071,5 +1081,87 @@ window.addEventListener('load', () => {
                 window.closePromoModal();
             }
         });
+    }
+});
+
+/* ========================================================
+   13. CUSTOM ENHANCED LEARNING CENTER DROPDOWN
+   ======================================================== */
+window.toggleCustomSelect = function() {
+    const menu = document.getElementById('custom-select-menu');
+    const chevron = document.getElementById('custom-select-chevron');
+    if (menu) {
+        const isClosed = menu.classList.contains('hidden');
+        if (isClosed) {
+            menu.classList.remove('hidden');
+            if (chevron) chevron.classList.add('rotate-180');
+        } else {
+            menu.classList.add('hidden');
+            if (chevron) chevron.classList.remove('rotate-180');
+        }
+    }
+};
+
+window.selectCustomCenter = function(name, address, iconClass, theme, badgeText) {
+    const nameEl = document.getElementById('selected-center-name');
+    const subEl = document.getElementById('selected-center-sub');
+    const iconEl = document.getElementById('selected-center-icon');
+    const tagEl = document.getElementById('selected-center-tag');
+    const trigger = document.getElementById('custom-select-trigger');
+    const select = document.getElementById('reg-center');
+
+    if (nameEl) nameEl.textContent = name;
+    if (subEl) subEl.textContent = address;
+    
+    let themeBg = 'bg-brand-500/10 border-brand-500/30 text-brand-400';
+    let tagBg = 'bg-brand-500/20 text-brand-400 border-brand-500/30';
+    let triggerBorder = 'border-brand-500/60 shadow-[0_0_20px_rgba(14,165,233,0.15)]';
+    
+    if (theme === 'purpleBrand') {
+        themeBg = 'bg-purpleBrand-500/10 border-purpleBrand-500/30 text-purpleBrand-400';
+        tagBg = 'bg-purpleBrand-500/20 text-purpleBrand-400 border-purpleBrand-500/30';
+        triggerBorder = 'border-purpleBrand-500/60 shadow-[0_0_20px_rgba(168,85,247,0.15)]';
+    } else if (theme === 'gold') {
+        themeBg = 'bg-gold-500/10 border-gold-500/30 text-gold-400';
+        tagBg = 'bg-gold-500/20 text-gold-400 border-gold-500/30';
+        triggerBorder = 'border-gold-500/60 shadow-[0_0_20px_rgba(250,204,21,0.15)]';
+    }
+
+    if (iconEl) {
+        iconEl.className = `w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-base transition-all border ${themeBg}`;
+        iconEl.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
+    }
+
+    if (tagEl) {
+        tagEl.className = `text-[9px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-md border ${tagBg}`;
+        tagEl.textContent = badgeText;
+        tagEl.classList.remove('hidden');
+    }
+
+    if (trigger) {
+        trigger.className = `w-full bg-dark-950 rounded-2xl p-3.5 flex items-center justify-between cursor-pointer transition-all duration-300 shadow-lg border ${triggerBorder}`;
+    }
+
+    // Sync underlying select
+    if (select) {
+        select.value = name;
+        select.dispatchEvent(new Event('change'));
+    }
+
+    // Close menu
+    const menu = document.getElementById('custom-select-menu');
+    const chevron = document.getElementById('custom-select-chevron');
+    if (menu) menu.classList.add('hidden');
+    if (chevron) chevron.classList.remove('rotate-180');
+};
+
+// Auto-close custom select when clicking outside
+document.addEventListener('click', (e) => {
+    const trigger = document.getElementById('custom-select-trigger');
+    const menu = document.getElementById('custom-select-menu');
+    const chevron = document.getElementById('custom-select-chevron');
+    if (trigger && menu && !trigger.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
     }
 });
