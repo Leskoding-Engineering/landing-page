@@ -1165,21 +1165,21 @@ document.addEventListener('click', (e) => {
         if (chevron) chevron.classList.remove('rotate-180');
     }
 });
-
 /* ========================================================
    14. THEME & INTERNATIONALIZATION (I18N) ENGINE
    ======================================================== */
 
-// Translation Dictionary (English Default & Indonesian)
+// Comprehensive Bilingual Translation Dictionary (English Default & Indonesian)
 const i18nDictionary = {
     en: {
+        // Navigation
         nav_hof: "Hall of Fame",
         nav_course: "Courses",
         nav_location: "Locations",
         nav_enroll: "Enroll",
         nav_start_adventure: "Start Adventure",
         
-        // Hero
+        // Hero Section
         hero_title_1: "Experience an Unforgettable",
         hero_title_2: "Coding Adventure!",
         hero_desc_1: "Every epic journey begins with a single step. At <span class=\"text-white font-bold\">LesKoding</span>, we don\'t just teach code – we guide young minds on an inspiring quest where boundless creativity meets cutting-edge technology.",
@@ -1197,38 +1197,92 @@ const i18nDictionary = {
         hof_masterpiece_heading: "Curator\'s Masterpiece Showcase",
         hof_badge_masterpiece: "Top Masterpiece",
         hof_curator_pick: "Curator\'s Pick",
+        hof_sarah_age: "(12 Years Old)",
+        hof_masterpiece_desc: "A massive 3D Roleplay universe built in Roblox Studio with cyberpunk architecture, virtual economies, and advanced interactive NPCs.",
         btn_view_project: "View Project",
         hof_gallery_heading: "Exhibition Gallery",
         hof_top_creations: "Top Student Projects",
+        hof_c1_badge: "Most Popular",
+        hof_c1_title: "Smart AI Cashier System",
+        hof_c1_author: "Budi (14 Years Old)",
+        hof_c1_desc: "Web-based cashier application utilizing complex JavaScript logic for real-time inventory calculations and dynamic receipt printing.",
+        hof_c2_badge: "Future Tech",
+        hof_c2_title: "Smart Waste Sorting Robot",
+        hof_c2_author: "Kevin (10 Years Old)",
+        hof_c2_desc: "Arduino-powered engineering project featuring ultrasonic sensors and servo motors to automate waste sorting and smart lid control.",
+        hof_c3_badge: "Best Design",
+        hof_c3_title: "3D Web Animation Portfolio",
+        hof_c3_author: "Nadia (15 Years Old)",
+        hof_c3_desc: "Personal portfolio website packed with seamless CSS 3D animations and fluid scroll transitions created without external libraries.",
         hof_btn_load_more: "Load More Creations",
         
-        // Features
+        // Features (Bento Grid)
         feat_badge: "Learning Adventure",
         feat_title: "Why is This Adventure Invaluable?",
         feat_desc: "At LesKoding, every single class is a fresh, exciting digital expedition.",
+        feat_f1_title: "Interactive Courses",
+        feat_f1_desc: "Follow a dynamic learning roadmap where each session propels you closer to your grand coding goals.",
+        feat_f2_title: "Expert Facilitators",
+        feat_f2_desc: "Your adventure guides are seasoned industry experts eager to share practical knowledge and inspiration.",
+        feat_f3_title: "Community Network",
+        feat_f3_desc: "Connect with fellow young explorers, share achievements, and inspire one another in a creative circle.",
+        feat_f4_title: "Micro-Learning RPG",
+        feat_f4_desc: "Lessons broken down into exciting quests. Learning code is as thrilling as leveling up in your favorite RPG.",
         
-        // Course
+        // Course Section
         course_badge: "Adventure Awaits",
         course_title: "Choose Your Learning Path!",
+        course_desc: "Find the route that fits you best! Are you ready to dive into the coding universe in an exciting way?",
+        course_game_title: "Game Developer Path",
+        course_game_desc: "From core algorithmic logic to building interactive 3D worlds played by thousands on Roblox.",
+        course_web_title: "Web Architect Path",
+        course_web_desc: "Build modern interactive websites and web apps from fundamental styling to full internet deployment.",
+        course_robotic_title: "Robotic Engineer Path",
+        course_robotic_desc: "Master electronic circuits, microcontroller coding, and engineer autonomous robots for the future.",
         
-        // Location
+        // Location Section
         loc_title: "Find Your Route to Adventure!",
+        loc_desc: "Visit one of our learning centers in Gianyar, Ubud, or Bedulu for in-person interactive classes.",
         loc_calc_title: "Check Nearest Campus",
+        loc_calc_desc: "Enter your district or area to discover which campus is closest to your location.",
         loc_btn_check: "Check Location",
+        loc_est_label: "Estimated Arrival",
         
         // Registration Form
         reg_title: "Enroll in Your Adventure",
+        reg_desc: "Fill out the form below to begin your child\'s digital journey. Confirmation is processed automatically via WhatsApp.",
         reg_form_header: "LesKoding New Student Registration Form",
-        reg_btn_submit: "Submit Registration via WhatsApp"
+        reg_campus_count: "3 Campuses Available in Bali",
+        reg_choose_center: "Choose Nearest Learning Center",
+        reg_choose_center_sub: "Click to choose your child\'s study center",
+        reg_promo_sub: "Auto-filled when claiming promo voucher",
+        reg_lbl_name: "Full Name",
+        reg_lbl_nickname: "Nickname",
+        reg_lbl_age: "Age",
+        reg_lbl_school: "School Name",
+        reg_lbl_parent: "Parent\'s Name",
+        reg_lbl_address: "Full Home Address",
+        reg_lbl_wa_parent: "Parent\'s WhatsApp",
+        reg_lbl_wa_child: "Child\'s WhatsApp (Optional)",
+        reg_btn_submit: "Submit Registration via WhatsApp",
+        
+        // Promo Popup
+        promo_badge: "Limited 2026 Promo",
+        promo_sub: "Free Trial + Registration Discount",
+        promo_title: "Launch Your Digital<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-yellow-500\">Creator Journey!</span>",
+        promo_body: "Claim a complimentary trial session and registration discount across all LesKoding Learning Centers now:",
+        promo_cta: "Enroll Now & Claim Promo",
+        promo_trigger: "2026 Promo"
     },
     id: {
+        // Navigation
         nav_hof: "Hall of Fame",
         nav_course: "Course",
         nav_location: "Location",
         nav_enroll: "Enroll",
         nav_start_adventure: "Mulai Petualangan",
         
-        // Hero
+        // Hero Section
         hero_title_1: "Rasakan Petualangan Coding yang",
         hero_title_2: "Tak Terlupakan!",
         hero_desc_1: "Setiap petualangan dimulai dengan langkah pertama. Di <span class=\"text-white font-bold\">LesKoding</span>, kami tidak hanya mengajarkan coding – kami membawa Anda dalam perjalanan yang menggugah semangat, di mana kreativitas dan teknologi bertemu.",
@@ -1246,29 +1300,82 @@ const i18nDictionary = {
         hof_masterpiece_heading: "Pajangan Proyek Pilihan",
         hof_badge_masterpiece: "Masterpiece Terbaik",
         hof_curator_pick: "Pilihan Kurator",
+        hof_sarah_age: "(12 Tahun)",
+        hof_masterpiece_desc: "Sebuah dunia Roleplay 3D masif yang dibangun dalam Roblox Studio — arsitektur cyberpunk, sistem mata uang virtual, dan NPC interaktif tingkat lanjut.",
         btn_view_project: "Lihat Proyek",
         hof_gallery_heading: "Galeri Eksibisi",
         hof_top_creations: "Karya Teratas",
+        hof_c1_badge: "Terfavorit",
+        hof_c1_title: "Sistem AI Kasir Pintar",
+        hof_c1_author: "Budi (14 Tahun)",
+        hof_c1_desc: "Aplikasi kasir berbasis web menggunakan logika JavaScript kompleks untuk kalkulasi inventaris dan struk real-time.",
+        hof_c2_badge: "Future Tech",
+        hof_c2_title: "Robot Pemilah Sampah",
+        hof_c2_author: "Kevin (10 Tahun)",
+        hof_c2_desc: "Proyek Arduino dengan sensor ultrasonik dan motor servo yang secara otomatis membuka tutup tempat sampah.",
+        hof_c3_badge: "Desain Terbaik",
+        hof_c3_title: "Portofolio Animasi Web",
+        hof_c3_author: "Nadia (15 Tahun)",
+        hof_c3_desc: "Website portofolio pribadi yang penuh dengan animasi CSS 3D dan transisi scroll mulus tanpa framework eksternal.",
         hof_btn_load_more: "Muat Lebih Banyak Karya",
         
-        // Features
+        // Features (Bento Grid)
         feat_badge: "Petualangan Belajar",
         feat_title: "Mengapa Petualangan Ini Sangat Berharga?",
         feat_desc: "Di LesKoding, setiap kelas adalah sebuah eksplorasi baru.",
+        feat_f1_title: "Kursus Interaktif",
+        feat_f1_desc: "Ikuti peta belajar yang dinamis, di mana setiap sesi membawa Anda lebih dekat menuju tujuan besar Anda dalam petualangan coding.",
+        feat_f2_title: "Fasilitator Ahli",
+        feat_f2_desc: "Pemandu Anda dalam petualangan ini adalah para ahli yang siap membagikan pengetahuan berharga.",
+        feat_f3_title: "Koneksi Komunitas",
+        feat_f3_desc: "Bergabunglah dengan sesama petualang, berbagi pengalaman, dan saling membantu dalam belajar.",
+        feat_f4_title: "Micro-Learning RPG",
+        feat_f4_desc: "Materi dipecah menjadi quest. Belajar koding semenarik menaikkan level karakter di game favorit Anda.",
         
-        // Course
+        // Course Section
         course_badge: "Petualangan Menanti",
         course_title: "Pilih Jalur Petualanganmu!",
+        course_desc: "Temukan rute yang paling sesuai untuk Anda! Apakah Anda siap untuk menjelajahi dunia coding dengan cara yang menyenangkan?",
+        course_game_title: "Jalur Game Developer",
+        course_game_desc: "Dari logika dasar hingga membangun dunia 3D interaktif yang dimainkan ribuan orang di Roblox.",
+        course_web_title: "Jalur Web Architect",
+        course_web_desc: "Bangun situs web interaktif dan aplikasi modern dari pondasi kode hingga rilis penuh ke internet.",
+        course_robotic_title: "Jalur Robotic Engineer",
+        course_robotic_desc: "Kuasai sirkuit elektronik, pemrograman mikrokontroler, dan bangun robot otomatis masa depan.",
         
-        // Location
+        // Location Section
         loc_title: "Temukan Rute Menuju Petualangan Anda!",
+        loc_desc: "Kunjungi salah satu pusat belajar kami di Gianyar, Ubud, atau Bedulu untuk petualangan tatap muka langsung.",
         loc_calc_title: "Cek Kampus Terdekat",
+        loc_calc_desc: "Masukkan area/kecamatan Anda untuk melihat cabang mana yang paling mudah diakses.",
         loc_btn_check: "Cek Lokasi",
+        loc_est_label: "Estimasi Tiba",
         
         // Registration Form
         reg_title: "Daftar Petualangan Anda",
+        reg_desc: "Isi formulir di bawah ini untuk memulai perjalanan digital anak Anda. Konfirmasi pendaftaran akan diproses otomatis melalui WhatsApp.",
         reg_form_header: "Formulir Pendaftaran Siswa Baru LesKoding",
-        reg_btn_submit: "Kirim Pendaftaran via WhatsApp"
+        reg_campus_count: "3 Kampus Tersedia di Bali",
+        reg_choose_center: "Pilih Learning Center Terdekat",
+        reg_choose_center_sub: "Klik untuk memilih cabang belajar anak Anda",
+        reg_promo_sub: "Otomatis terisi jika klaim voucher promo",
+        reg_lbl_name: "Nama Lengkap",
+        reg_lbl_nickname: "Panggilan",
+        reg_lbl_age: "Usia",
+        reg_lbl_school: "Asal Sekolah",
+        reg_lbl_parent: "Nama Orang Tua",
+        reg_lbl_address: "Alamat Lengkap",
+        reg_lbl_wa_parent: "WA Orang Tua",
+        reg_lbl_wa_child: "WA Anak (Opsional)",
+        reg_btn_submit: "Kirim Pendaftaran via WhatsApp",
+        
+        // Promo Popup
+        promo_badge: "Promo Terbatas 2026",
+        promo_sub: "Free Trial + Diskon Pendaftaran",
+        promo_title: "Mulai Petualangan<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-yellow-500\">Kreator Digital!</span>",
+        promo_body: "Klaim sesi uji coba gratis dan potongan biaya pendaftaran di seluruh Learning Center LesKoding sekarang:",
+        promo_cta: "Daftar Sekarang & Klaim Promo",
+        promo_trigger: "Promo 2026"
     }
 };
 
@@ -1286,8 +1393,8 @@ function updateThemeUI(theme) {
     const mobileThemeText = document.getElementById('mobile-theme-text');
     
     if (theme === 'light') {
-        if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-gold-400 text-xs sm:text-sm';
-        if (mobileThemeIcon) mobileThemeIcon.className = 'fa-solid fa-sun text-gold-400 text-xs';
+        if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-gold-500 text-xs sm:text-sm';
+        if (mobileThemeIcon) mobileThemeIcon.className = 'fa-solid fa-sun text-gold-500 text-xs';
         if (mobileThemeText) mobileThemeText.textContent = 'Light';
     } else {
         if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-slate-400 text-xs sm:text-sm';
@@ -1323,11 +1430,32 @@ window.applyLanguage = function(lang) {
     if (langText) langText.textContent = displayLabel;
     if (mobileLangText) mobileLangText.textContent = displayLabel;
     
-    // Update placeholders
+    // Update input placeholders
     const locInput = document.getElementById('user-location');
     if (locInput) {
         locInput.placeholder = lang === 'en' ? 'e.g. South Denpasar or Ubud' : 'Contoh: Denpasar Selatan atau Ubud';
     }
+
+    const regName = document.getElementById('reg-nama');
+    if (regName) regName.placeholder = lang === 'en' ? 'e.g. Putu Johan Lasya Hara' : 'Cth: Putu Johan Lasya Hara';
+
+    const regNick = document.getElementById('reg-panggilan');
+    if (regNick) regNick.placeholder = lang === 'en' ? 'e.g. Johan' : 'Cth: Johan';
+
+    const regAge = document.getElementById('reg-usia');
+    if (regAge) regAge.placeholder = lang === 'en' ? 'e.g. 10 yrs' : 'Cth: 10y';
+
+    const regSchool = document.getElementById('reg-sekolah');
+    if (regSchool) regSchool.placeholder = lang === 'en' ? 'e.g. SD Sutha Dharma' : 'Cth: SD Sutha Dharma';
+
+    const regParent = document.getElementById('reg-ortu');
+    if (regParent) regParent.placeholder = lang === 'en' ? 'e.g. Arik Ayu Rastini' : 'Cth: Arik Ayu Rastini';
+
+    const regAddress = document.getElementById('reg-alamat');
+    if (regAddress) regAddress.placeholder = lang === 'en' ? 'e.g. Br Katiklantang Singakerta Ubud' : 'Cth: Br Katiklantang Singakerta Ubud';
+
+    const regPromo = document.getElementById('reg-promo');
+    if (regPromo) regPromo.placeholder = lang === 'en' ? 'e.g. PETUALANGAN2026' : 'Cth: PETUALANGAN2026';
 };
 
 // Initialize Theme & Language on Page Load
