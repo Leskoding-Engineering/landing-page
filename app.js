@@ -572,8 +572,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const message = `*Form Pendaftaran Bali Seeds Robotic & Coding*
-            
+            const centerSelect = document.getElementById('reg-center');
+            const center = centerSelect ? centerSelect.value : '';
+            if (!center) {
+                alert("Mohon pilih Learning Center terdekat terlebih dahulu.");
+                if (centerSelect) centerSelect.focus();
+                return;
+            }
+
+            const promoInput = document.getElementById('reg-promo');
+            const promo = promoInput ? promoInput.value.trim() : '';
+
+            const message = `*Form Pendaftaran Siswa Baru Akademi LesKoding*
+
+Pilihan Learning Center: ${center}
+Kode / Nama Promo: ${promo || '-'}
+
 Nama Lengkap: ${nama}
 Panggilan: ${panggilan}
 Usia: ${usia}
@@ -585,8 +599,12 @@ WA Ortu: ${waOrtu}
 WA Anak (opsional): ${waAnak}`;
 
             const encodedMessage = encodeURIComponent(message);
-            // Replace with actual admin number
-            const adminWA = "6281239197127"; // Menggunakan nomor contoh WA ortu sebagai fallback jika tidak ada admin
+            
+            // Route to appropriate branch admin WhatsApp
+            let adminWA = "628518306798"; // default Gianyar / Bedulu
+            if (center.includes("Peliatan")) {
+                adminWA = "6285792736627"; // Bali Seed Peliatan Ubud
+            }
             const whatsappUrl = `https://wa.me/${adminWA}?text=${encodedMessage}`;
             
             window.open(whatsappUrl, '_blank');
@@ -952,6 +970,105 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('click', (e) => {
             if (!mobileMenu.contains(e.target) && !mobileBtn.contains(e.target)) {
                 mobileMenu.classList.add('hidden');
+            }
+        });
+    }
+});
+
+/* ========================================================
+   12. ACTIVE PROMOTION POPUP & AUTO-COMPLETE
+   ======================================================== */
+window.openPromoModal = function() {
+    const modal = document.getElementById('promo-modal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        requestAnimationFrame(() => {
+            modal.classList.remove('opacity-0');
+            modal.classList.add('opacity-100');
+            const content = document.getElementById('promo-modal-content');
+            if (content) {
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }
+        });
+    }
+};
+
+window.closePromoModal = function() {
+    const modal = document.getElementById('promo-modal');
+    if (modal) {
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0');
+        const content = document.getElementById('promo-modal-content');
+        if (content) {
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+        }
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
+};
+
+window.claimPromoAndRegister = function(promoCode = 'PETUALANGAN2026') {
+    // 1. Close modal
+    window.closePromoModal();
+
+    // 2. Auto-complete promo input
+    const promoInput = document.getElementById('reg-promo');
+    const badge = document.getElementById('promo-applied-badge');
+    if (promoInput) {
+        promoInput.value = promoCode;
+        promoInput.classList.add('border-gold-500', 'ring-2', 'ring-gold-500/40');
+        setTimeout(() => {
+            promoInput.classList.remove('ring-2', 'ring-gold-500/40');
+        }, 3000);
+    }
+    if (badge) {
+        badge.classList.remove('hidden');
+    }
+
+    // 3. Smooth scroll to registration section
+    const regSection = document.getElementById('register');
+    if (regSection) {
+        regSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 4. Focus on learning center select
+    setTimeout(() => {
+        const centerSelect = document.getElementById('reg-center');
+        if (centerSelect && !centerSelect.value) {
+            centerSelect.focus();
+        } else {
+            const nameInput = document.getElementById('reg-nama');
+            if (nameInput) nameInput.focus();
+        }
+    }, 500);
+
+    // Celebratory confetti
+    if (typeof confetti === 'function') {
+        confetti({
+            particleCount: 60,
+            spread: 70,
+            origin: { y: 0.7 },
+            colors: ['#facc15', '#0ea5e9', '#ffffff']
+        });
+    }
+};
+
+// Auto-trigger promo modal on load
+window.addEventListener('load', () => {
+    // Open active promotion popup after 1.5s
+    setTimeout(() => {
+        window.openPromoModal();
+    }, 1500);
+
+    // Close promo modal on backdrop click
+    const promoModal = document.getElementById('promo-modal');
+    if (promoModal) {
+        promoModal.addEventListener('click', (e) => {
+            if (e.target === promoModal) {
+                window.closePromoModal();
             }
         });
     }

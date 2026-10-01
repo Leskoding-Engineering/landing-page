@@ -999,9 +999,38 @@
             </div>
             
             <form id="registration-form" class=" border border-white/10 rounded-[2rem] p-6 md:p-10 shadow-2xl fade-in-up">
-                <h4 class="font-heading font-bold text-white text-lg mb-6 border-b border-white/10 pb-4">Form Pendaftaran Bali Seeds Robotic & Coding</h4>
+                <h4 class="font-heading font-bold text-white text-lg mb-6 border-b border-white/10 pb-4 flex items-center gap-2.5"><i class="fa-solid fa-clipboard-list text-brand-400"></i> Formulir Pendaftaran Siswa Baru LesKoding</h4>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Pilihan Learning Center -->
+                    <div class="space-y-2 md:col-span-2">
+                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-school text-brand-400"></i> Pilihan Learning Center <span class="text-red-400">*</span>
+                        </label>
+                        <select id="reg-center" required class="w-full bg-dark-950 border border-white/15 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all text-sm font-medium">
+                            <option value="" disabled selected>-- Pilih Learning Center Terdekat --</option>
+                            <option value="Gents Robotic & Coding (Gianyar)">Gents Robotic & Coding (Gianyar)</option>
+                            <option value="Bali Seed Robotic & Coding Peliatan (Ubud)">Bali Seed Robotic & Coding Peliatan (Ubud)</option>
+                            <option value="Bali Seed Bedulu Robotics & Coding">Bali Seed Bedulu Robotics & Coding</option>
+                        </select>
+                    </div>
+
+                    <!-- Kode Promo / Nama Promo -->
+                    <div class="space-y-2 md:col-span-2">
+                        <div class="flex items-center justify-between">
+                            <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400 flex items-center gap-2">
+                                <i class="fa-solid fa-ticket text-gold-400"></i> Kode / Nama Promo (Opsional)
+                            </label>
+                            <span class="text-[10px] text-slate-500 font-mono">Otomatis terisi jika klaim voucher promo</span>
+                        </div>
+                        <div class="relative">
+                            <input type="text" id="reg-promo" class="w-full bg-dark-950 border border-white/15 rounded-xl px-4 py-3 text-gold-400 focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all placeholder-slate-600 font-mono text-sm tracking-wider uppercase font-semibold" placeholder="Cth: PETUALANGAN2026">
+                            <span id="promo-applied-badge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 bg-gold-500/20 text-gold-400 border border-gold-500/40 text-[10px] font-mono px-2.5 py-1 rounded-md font-bold tracking-wider">
+                                <i class="fa-solid fa-check text-xs mr-1"></i> Promo Terpasang
+                            </span>
+                        </div>
+                    </div>
+
                     <div class="space-y-2">
                         <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Nama Lengkap</label>
                         <input type="text" id="reg-nama" required class="w-full bg-dark-900/60 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: Putu Johan Lasya Hara">
@@ -1047,6 +1076,67 @@
             </form>
         </div>
     </section>
+
+    <!-- Active Promotion Popup Modal -->
+    <div id="promo-modal" class="fixed inset-0 bg-dark-950/85 backdrop-blur-md z-[160] flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="relative bg-dark-900 border border-gold-500/30 rounded-3xl w-full max-w-md overflow-hidden shadow-[0_0_60px_rgba(250,204,21,0.2)] transform scale-95 transition-all duration-300" id="promo-modal-content">
+            <!-- Close Button -->
+            <button onclick="closePromoModal()" aria-label="Tutup Promo" class="absolute top-4 right-4 z-30 w-9 h-9 rounded-full bg-dark-950/80 border border-white/20 text-white/80 hover:text-white hover:bg-dark-950 flex items-center justify-center transition-all focus:outline-none shadow-lg">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+            
+            <!-- Promo Image Banner -->
+            <div class="relative h-64 sm:h-72 w-full overflow-hidden">
+                <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" class="w-full h-full object-cover" alt="Promo Spesial LesKoding">
+                <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent"></div>
+                
+                <!-- Badge -->
+                <div class="absolute top-4 left-4 z-20 badge-shine">
+                    <span class="bg-gradient-to-r from-gold-400 to-yellow-600 text-dark-950 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5 border border-gold-300">
+                        <i class="fa-solid fa-fire text-dark-950"></i> Promo Terbatas 2026
+                    </span>
+                </div>
+
+                <!-- Text Overlay on bottom of image -->
+                <div class="absolute bottom-4 left-5 right-5 z-20">
+                    <p class="text-[11px] font-mono text-gold-400 uppercase tracking-widest mb-1 drop-shadow font-bold">Free Trial + Diskon Pendaftaran</p>
+                    <h3 class="text-2xl sm:text-3xl font-heading font-black text-white leading-tight drop-shadow-lg">
+                        Mulai Petualangan<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-yellow-500">Kreator Digital!</span>
+                    </h3>
+                </div>
+            </div>
+
+            <!-- Content & CTA -->
+            <div class="p-6 pt-4 text-center">
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                    Klaim sesi uji coba gratis dan potongan biaya pendaftaran di seluruh Learning Center LesKoding sekarang:
+                </p>
+                
+                <!-- Promo Code Badge Display -->
+                <div class="inline-flex items-center gap-2.5 bg-dark-950 border border-gold-500/40 px-5 py-2.5 rounded-xl mb-5 shadow-inner">
+                    <i class="fa-solid fa-ticket text-gold-400 text-sm"></i>
+                    <span class="font-mono font-bold text-gold-400 text-sm tracking-wider">PETUALANGAN2026</span>
+                </div>
+                
+                <!-- CTA Button -->
+                <button onclick="claimPromoAndRegister('PETUALANGAN2026')" class="w-full inline-flex justify-center items-center gap-2.5 bg-gradient-to-r from-brand-500 to-brand-400 hover:from-brand-400 hover:to-brand-300 text-dark-950 font-black py-4 px-6 rounded-xl uppercase tracking-[0.1em] text-xs transition-all shadow-[0_0_25px_rgba(14,165,233,0.4)] hover:shadow-[0_0_35px_rgba(14,165,233,0.6)] hover:-translate-y-0.5">
+                    <span>Daftar Sekarang &amp; Klaim Promo</span> <i class="fa-solid fa-rocket text-sm"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Re-open Promo Trigger Badge (Bottom Right) -->
+    <div id="floating-promo-trigger" class="fixed bottom-6 right-6 z-40 hidden md:flex items-center">
+        <button onclick="openPromoModal()" class="flex items-center gap-2.5 bg-dark-950/90 hover:bg-dark-900 border border-gold-500/40 hover:border-gold-400 text-gold-400 px-4 py-2.5 rounded-full shadow-2xl backdrop-blur-xl transition-all hover:scale-105 group text-xs font-mono font-bold">
+            <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold-500"></span>
+            </span>
+            <i class="fa-solid fa-gift text-sm text-gold-400 group-hover:rotate-12 transition-transform"></i>
+            <span>Promo 2026</span>
+        </button>
+    </div>
 
     <!-- COURSE MODAL -->
     <div id="course-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 pointer-events-none">
