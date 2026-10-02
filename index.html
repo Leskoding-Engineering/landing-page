@@ -75,55 +75,61 @@
     </div>
 
     
-    <!-- Floating Language Switcher (EN / ID) -->
-    <div class="fixed top-5 left-5 z-[100] flex items-center" id="hud">
-        <button id="lang-toggle-btn" onclick="toggleLanguage()" aria-label="Toggle Language" title="Switch Language (English / Indonesia)" class="flex items-center gap-2 bg-dark-950/85 hover:bg-dark-900 border border-white/15 hover:border-brand-500/50 backdrop-blur-xl px-3.5 py-1.5 rounded-full shadow-2xl text-xs font-mono font-bold transition-all focus:outline-none group">
-            <i class="fa-solid fa-globe text-brand-400 text-xs group-hover:rotate-12 transition-transform"></i>
-            <span id="current-lang-text" class="text-white tracking-wider">EN</span>
-        </button>
-    </div>
-
     <!-- Floating Sci-Fi Pill Navbar -->
-    <nav class="fixed top-4 md:top-8 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl transition-all duration-500 group" id="navbar">
+    <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-6xl transition-all duration-500 group" id="navbar">
         <!-- Gradient Border Wrapper -->
         <div class="rounded-full p-[1px] bg-gradient-to-r from-brand-yellow/30 via-brand-blue/30 to-brand-purple/30 shadow-[0_15px_40px_rgba(0,0,0,0.6)] group-hover:from-brand-yellow/50 group-hover:via-brand-blue/50 group-hover:to-brand-purple/50 transition-colors duration-500">
             <!-- Inner Glass Container -->
-            <div id="nav-container" class="bg-dark-950/90 backdrop-blur-2xl rounded-full px-5 md:px-6 py-4 md:py-5 flex justify-between items-center w-full transition-all duration-500">
+            <div id="nav-container" class="bg-dark-950/90 backdrop-blur-2xl rounded-full px-5 sm:px-6 md:px-8 py-3.5 md:py-4 flex items-center justify-between gap-4 w-full transition-all duration-500">
                 
-                <!-- Logo -->
+                <!-- Left: Logo -->
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <img id="nav-logo" src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-8 md:h-10 w-auto object-contain hover:drop-shadow-[0_0_8px_rgba(255,200,61,0.4)] transition-all duration-500">
+                    <img id="nav-logo" src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-8 md:h-9 w-auto object-contain hover:drop-shadow-[0_0_8px_rgba(255,200,61,0.4)] transition-all duration-500">
                 </div>
                 
                 <!-- Center Links (Desktop) -->
-                <div class="hidden md:flex items-center gap-7 lg:gap-8 absolute left-1/2 -translate-x-1/2 text-xs font-semibold">
-                    <a href="#course" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                <div class="hidden lg:flex items-center gap-7 xl:gap-8 text-sm font-semibold">
+                    <a href="#course" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 py-1">
                         <span class="text-brand-blue opacity-0 group-hover/link:opacity-100 transition-opacity">•</span><span data-i18n="nav_program">Program</span>
                     </a>
-                    <a href="#cara-belajar" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                    <a href="#cara-belajar" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 py-1">
                         <span class="text-brand-yellow opacity-0 group-hover/link:opacity-100 transition-opacity">•</span><span data-i18n="nav_method">Cara Belajar</span>
                     </a>
-                    <a href="#hall-of-fame" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                    <a href="#hall-of-fame" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 py-1">
                         <span class="text-brand-purple opacity-0 group-hover/link:opacity-100 transition-opacity">•</span><span data-i18n="nav_works">Karya</span>
                     </a>
-                    <a href="#progress-wali" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                    <a href="#progress-wali" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 py-1">
                         <span class="text-emerald-400 opacity-0 group-hover/link:opacity-100 transition-opacity">•</span><span data-i18n="nav_progress">Progres</span>
                     </a>
-                    <a href="#faq" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                    <a href="#location" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 py-1">
+                        <span class="text-brand-blue opacity-0 group-hover/link:opacity-100 transition-opacity">•</span><span data-i18n="nav_location">Lokasi</span>
+                    </a>
+                    <a href="#faq" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 py-1">
                         <span class="text-brand-red opacity-0 group-hover/link:opacity-100 transition-opacity">•</span><span data-i18n="nav_faq">FAQ</span>
                     </a>
                 </div>
                 
-                <!-- Right CTA (Desktop: Yellow Primary Button, min-h 48px, dark text) -->
-                <div class="hidden md:block">
-                    <a href="#register" class="relative overflow-hidden inline-flex items-center justify-center bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold px-6 py-2.5 min-h-[44px] rounded-full text-xs uppercase tracking-wider transition-all shadow-[0_4px_20px_rgba(255,200,61,0.35)] hover:shadow-[0_6px_25px_rgba(255,200,61,0.55)] hover:-translate-y-0.5">
+                <!-- Right Action Utilities (Desktop: Language Switcher + CTA) -->
+                <div class="hidden md:flex items-center gap-3">
+                    <!-- Integrated Language Switcher -->
+                    <button id="lang-toggle-btn" onclick="toggleLanguage()" aria-label="Toggle Language" title="Switch Language (English / Indonesia)" class="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-brand-yellow/40 backdrop-blur-md px-3.5 py-2 rounded-full text-xs font-mono font-bold transition-all text-slate-200 hover:text-white focus:outline-none group/lang">
+                        <i class="fa-solid fa-globe text-brand-yellow text-xs group-hover/lang:rotate-12 transition-transform"></i>
+                        <span id="current-lang-text" class="tracking-wider">EN</span>
+                    </button>
+
+                    <!-- Primary CTA Button -->
+                    <a href="#register" class="relative overflow-hidden inline-flex items-center justify-center bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold px-5 lg:px-6 py-2.5 min-h-[44px] rounded-full text-xs uppercase tracking-wider transition-all shadow-[0_4px_20px_rgba(255,200,61,0.35)] hover:shadow-[0_6px_25px_rgba(255,200,61,0.55)] hover:-translate-y-0.5 whitespace-nowrap">
                         <span class="relative z-10 flex items-center gap-2"><i class="fa-solid fa-calendar-check text-[#101116]"></i><span data-i18n="nav_cta">Minta Info Kelas</span></span>
                     </a>
                 </div>
 
-                <!-- Mobile Menu Toggle -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="text-brand-yellow hover:text-white focus:outline-none w-9 h-9 flex items-center justify-center rounded-full bg-white/5 border border-white/10 active:scale-95 transition-transform">
+                <!-- Mobile Header Right (Lang Pill + Hamburger Button) -->
+                <div class="md:hidden flex items-center gap-2">
+                    <button onclick="toggleLanguage()" aria-label="Toggle Language" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono font-bold text-slate-200 active:scale-95 transition-transform">
+                        <i class="fa-solid fa-globe text-brand-yellow text-xs"></i>
+                        <span id="mobile-lang-top-text">EN</span>
+                    </button>
+                    <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="text-brand-yellow hover:text-white focus:outline-none w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 active:scale-95 transition-transform">
                         <i class="fa-solid fa-bars-staggered text-sm"></i>
                     </button>
                 </div>

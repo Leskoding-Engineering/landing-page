@@ -1468,10 +1468,12 @@ window.applyLanguage = function(lang) {
     
     // Update labels in buttons
     const langText = document.getElementById('current-lang-text');
+    const mobileLangTopText = document.getElementById('mobile-lang-top-text');
     const mobileLangText = document.getElementById('mobile-lang-text');
     const displayLabel = lang.toUpperCase();
     
     if (langText) langText.textContent = displayLabel;
+    if (mobileLangTopText) mobileLangTopText.textContent = displayLabel;
     if (mobileLangText) mobileLangText.textContent = displayLabel;
     
     // Update input placeholders
