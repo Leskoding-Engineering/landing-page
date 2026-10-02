@@ -653,88 +653,68 @@ WA Anak (opsional): ${waAnak}`;
 });
 
 /* ========================================================
-   8. COURSE ADVENTURE MAP TABS
+   8. COURSE FILTERING & PATH MANAGEMENT
    ======================================================== */
-function switchCoursePath(courseId) {
-    // 1. Reset all tabs to inactive state
-    const allTabs = document.querySelectorAll('.course-tab-btn');
-    allTabs.forEach(tab => {
-        tab.classList.remove(
-            'border-brand-500', 'border-purpleBrand-500', 'border-gold-500',
-            'bg-dark-900',
-            'shadow-[0_0_20px_rgba(14,165,233,0.15)]',
-            'shadow-[0_0_20px_rgba(168,85,247,0.15)]',
-            'shadow-[0_0_20px_rgba(250,204,21,0.15)]'
-        );
-        tab.classList.add('border-white/10', 'bg-dark-950/80');
-        
-        // Hide bg opacity if exists
-        const bg = tab.querySelector('.tab-bg');
-        if (bg) { bg.classList.remove('opacity-100'); bg.classList.add('opacity-0'); }
-        
-        // Reset text colors to slate
-        const icon = tab.querySelector('.tab-icon');
-        const title = tab.querySelector('.tab-title');
-        const subtitle = tab.querySelector('.tab-subtitle');
-        if (icon) { icon.classList.remove('text-brand-400', 'text-purpleBrand-400', 'text-gold-400'); icon.classList.add('text-slate-400'); }
-        if (title) { title.classList.remove('text-white'); title.classList.add('text-slate-300'); }
-        if (subtitle) { subtitle.classList.remove('text-brand-200', 'text-purpleBrand-200', 'text-gold-200'); subtitle.classList.add('text-slate-500'); }
+function filterCourses(category) {
+    // 1. Reset all filter buttons
+    const filterBtns = document.querySelectorAll('.course-filter-btn');
+    filterBtns.forEach(btn => {
+        btn.classList.remove('bg-[#004E98]', 'text-white', 'border-[#004E98]', 'shadow-sm');
+        btn.classList.add('bg-white', 'text-[#475467]', 'border-[#E5E7EB]');
     });
 
-    // 2. Hide all paths
-    const allPaths = document.querySelectorAll('.course-path');
-    allPaths.forEach(path => {
-        path.classList.remove('block', 'opacity-100');
-        path.classList.add('hidden', 'opacity-0');
-    });
+    // 2. Highlight active filter button
+    const activeBtn = document.getElementById(`course-filter-${category}`);
+    if (activeBtn) {
+        activeBtn.classList.remove('bg-white', 'text-[#475467]', 'border-[#E5E7EB]');
+        activeBtn.classList.add('bg-[#004E98]', 'text-white', 'border-[#004E98]', 'shadow-sm');
+    }
 
-    // 3. Activate selected tab
-    const activeTab = document.getElementById(`tab-${courseId}`);
-    if (activeTab) {
-        activeTab.classList.remove('border-white/10', 'bg-dark-900/50');
-        activeTab.classList.add('bg-dark-900');
-        
-        const bg = activeTab.querySelector('.tab-bg');
-        if (bg) { bg.classList.remove('opacity-0'); bg.classList.add('opacity-100'); }
-        
-        const icon = activeTab.querySelector('.tab-icon');
-        const title = activeTab.querySelector('.tab-title');
-        const subtitle = activeTab.querySelector('.tab-subtitle');
-        
-        if (icon) icon.classList.remove('text-slate-400');
-        if (title) { title.classList.remove('text-slate-300'); title.classList.add('text-white'); }
-        if (subtitle) subtitle.classList.remove('text-slate-500');
-
-        // Apply specific brand colors based on course
-        if (courseId === 'game') {
-            activeTab.classList.add('border-brand-500', 'shadow-[0_0_20px_rgba(14,165,233,0.15)]');
-            if (icon) icon.classList.add('text-brand-400');
-            if (subtitle) subtitle.classList.add('text-brand-200');
-        } else if (courseId === 'web') {
-            activeTab.classList.add('border-purpleBrand-500', 'shadow-[0_0_20px_rgba(168,85,247,0.15)]');
-            if (icon) icon.classList.add('text-purpleBrand-400');
-            if (subtitle) subtitle.classList.add('text-purpleBrand-200');
-        } else if (courseId === 'robotic') {
-            activeTab.classList.add('border-gold-500', 'shadow-[0_0_20px_rgba(250,204,21,0.15)]');
-            if (icon) icon.classList.add('text-gold-400');
-            if (subtitle) subtitle.classList.add('text-gold-200');
+    // 3. Toggle progression ladder roadmap visibility
+    const ladderGuide = document.getElementById('course-ladder-guide');
+    if (ladderGuide) {
+        if (category === 'specialist') {
+            ladderGuide.classList.add('hidden');
+        } else {
+            ladderGuide.classList.remove('hidden');
         }
     }
 
-    // 4. Show selected path
-    const activePath = document.getElementById(`path-${courseId}`);
-    if (activePath) {
-        activePath.classList.remove('hidden');
-        // small delay to allow display block to render before changing opacity for transition
-        setTimeout(() => {
-            activePath.classList.remove('opacity-0');
-            activePath.classList.add('opacity-100');
-        }, 50);
+    // 4. Filter course cards
+    const cards = document.querySelectorAll('.course-card');
+    cards.forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        if (category === 'all' || cardCat === category) {
+            card.classList.remove('hidden');
+            setTimeout(() => {
+                card.style.display = 'flex';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0) scale(1)';
+            }, 10);
+        } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(10px) scale(0.97)';
+            setTimeout(() => {
+                card.classList.add('hidden');
+                card.style.display = 'none';
+            }, 200);
+        }
+    });
+}
+
+// Fallback compatibility function for any legacy tab callers
+function switchCoursePath(courseId) {
+    if (courseId === 'game' || courseId === 'ladder') {
+        filterCourses('ladder');
+    } else if (courseId === 'web' || courseId === 'robotic' || courseId === 'specialist') {
+        filterCourses('specialist');
+    } else {
+        filterCourses('all');
     }
 }
 
 /* ========================================================
-   9. COURSE MODAL (GAMIFICATION DETAILS)
+   9. COURSE MODAL (CURRICULUM & SYLLABUS DETAILS)
    ======================================================== */
 function openCourseModal(level, title, iconClass, colorClass, desc, xp, duration, topics) {
     const modal = document.getElementById('course-modal');
@@ -742,59 +722,61 @@ function openCourseModal(level, title, iconClass, colorClass, desc, xp, duration
     
     if (!modal || !modalContent) return;
 
-    // Populate data
-    document.getElementById('modal-level').textContent = level;
-    document.getElementById('modal-title').textContent = title;
-    document.getElementById('modal-desc').textContent = desc;
-    document.getElementById('modal-xp').textContent = xp;
-    document.getElementById('modal-duration').textContent = duration;
+    // Populate text details
+    const modalLevel = document.getElementById('modal-level');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalXp = document.getElementById('modal-xp');
+    const modalDuration = document.getElementById('modal-duration');
+    
+    if (modalLevel) modalLevel.textContent = level;
+    if (modalTitle) modalTitle.textContent = title;
+    if (modalDesc) modalDesc.textContent = desc;
+    if (modalXp) modalXp.textContent = xp;
+    if (modalDuration) modalDuration.textContent = duration;
     
     // Icon
     const iconEl = document.getElementById('modal-icon');
-    iconEl.className = `fa-solid ${iconClass} text-white`;
+    if (iconEl) {
+        iconEl.className = `fa-solid ${iconClass} text-xl sm:text-2xl`;
+    }
 
-    // Colors
+    // Color bar & icon accent
     const colorBar = document.getElementById('modal-color-bar');
-    const iconContainer = document.getElementById('modal-icon-container');
-    const modalBtn = document.getElementById('modal-btn');
-    
-    // Reset previous color classes
-    colorBar.className = 'absolute top-0 left-0 w-full h-1.5';
-    iconContainer.className = 'w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg border border-white/10 bg-dark-950';
-    modalBtn.className = 'w-full inline-flex justify-center items-center gap-2 text-dark-950 font-bold py-3.5 rounded-xl uppercase tracking-[0.1em] text-xs transition-all';
-    
-    // Apply specific color theme
-    if (colorClass.includes('emerald')) {
-        colorBar.classList.add('bg-emerald-500');
-        iconContainer.classList.add('shadow-[0_0_15px_rgba(16,185,129,0.3)]');
-        modalBtn.classList.add('bg-emerald-500', 'hover:bg-emerald-400', 'shadow-[0_0_15px_rgba(16,185,129,0.3)]', 'hover:shadow-[0_0_25px_rgba(16,185,129,0.5)]');
-    } else if (colorClass.includes('brand')) {
-        colorBar.classList.add('bg-brand-500');
-        iconContainer.classList.add('shadow-[0_0_15px_rgba(20,184,166,0.3)]');
-        modalBtn.classList.add('bg-brand-500', 'hover:bg-brand-400', 'shadow-[0_0_15px_rgba(20,184,166,0.3)]', 'hover:shadow-[0_0_25px_rgba(20,184,166,0.5)]');
-    } else if (colorClass.includes('purple')) {
-        colorBar.classList.add('bg-purpleBrand-500');
-        iconContainer.classList.add('shadow-[0_0_15px_rgba(147,51,234,0.3)]');
-        modalBtn.classList.add('bg-purpleBrand-500', 'hover:bg-purpleBrand-400', 'shadow-[0_0_15px_rgba(147,51,234,0.3)]', 'hover:shadow-[0_0_25px_rgba(147,51,234,0.5)]');
-    } else if (colorClass.includes('gold')) {
-        colorBar.classList.add('bg-gold-500');
-        iconContainer.classList.add('shadow-[0_0_15px_rgba(250,204,21,0.3)]');
-        modalBtn.classList.add('bg-gold-500', 'hover:bg-gold-400', 'shadow-[0_0_15px_rgba(250,204,21,0.3)]', 'hover:shadow-[0_0_25px_rgba(250,204,21,0.5)]');
+    if (colorBar) {
+        colorBar.className = 'absolute top-0 left-0 w-full h-1.5';
+        if (colorClass.includes('emerald') || colorClass.includes('teal')) {
+            colorBar.classList.add('bg-emerald-500');
+            if (iconEl) iconEl.style.color = '#059669';
+        } else if (colorClass.includes('purple')) {
+            colorBar.classList.add('bg-[#5B0CB5]');
+            if (iconEl) iconEl.style.color = '#5B0CB5';
+        } else if (colorClass.includes('gold') || colorClass.includes('amber') || colorClass.includes('yellow')) {
+            colorBar.classList.add('bg-[#FFC83D]');
+            if (iconEl) iconEl.style.color = '#ca8a04';
+        } else if (colorClass.includes('red')) {
+            colorBar.classList.add('bg-[#F3261D]');
+            if (iconEl) iconEl.style.color = '#F3261D';
+        } else {
+            colorBar.classList.add('bg-[#004E98]');
+            if (iconEl) iconEl.style.color = '#004E98';
+        }
     }
 
     // Topics list
     const topicsUl = document.getElementById('modal-topics');
-    topicsUl.innerHTML = '';
-    topics.forEach(topic => {
-        const li = document.createElement('li');
-        li.className = 'flex items-start gap-2';
-        li.innerHTML = `<i class="fa-solid fa-check text-[10px] mt-1 text-slate-500"></i> <span>${topic}</span>`;
-        topicsUl.appendChild(li);
-    });
+    if (topicsUl) {
+        topicsUl.innerHTML = '';
+        topics.forEach(topic => {
+            const li = document.createElement('li');
+            li.className = 'flex items-start gap-2.5';
+            li.innerHTML = `<i class="fa-solid fa-circle-check text-xs mt-1 text-[#004E98] shrink-0"></i> <span class="leading-snug text-[#111827]">${topic}</span>`;
+            topicsUl.appendChild(li);
+        });
+    }
 
-    // Show modal
+    // Show modal with smooth transition
     modal.classList.remove('hidden');
-    // small delay for transition
     setTimeout(() => {
         modalContent.classList.remove('scale-95', 'opacity-0');
         modalContent.classList.add('scale-100', 'opacity-100');
@@ -812,7 +794,7 @@ function closeCourseModal() {
     
     setTimeout(() => {
         modal.classList.add('hidden');
-    }, 300);
+    }, 250);
 }
 
 /* ========================================================
@@ -1098,6 +1080,10 @@ window.addEventListener('load', () => {
             if (promoModal && !promoModal.classList.contains('hidden')) {
                 window.closePromoModal();
             }
+            const courseModal = document.getElementById('course-modal');
+            if (courseModal && !courseModal.classList.contains('hidden')) {
+                closeCourseModal();
+            }
         }
     });
 });
@@ -1241,7 +1227,7 @@ const i18nDictionary = {
         // Course Section
         course_badge: "Active Programs 2026",
         course_title: "Available Learning Programs",
-        course_desc: "Tailored step-by-step for ages 7–16. Project-based learning, interactive quizzes, and expert tutor mentoring.",
+        course_desc: "Structured step-by-step for ages 6–16. Real-world project-based curriculum, interactive challenges, and guidance from experienced mentors.",
         course_game_title: "Game Developer Path",
         course_game_desc: "From core algorithmic logic to building interactive 3D worlds played by thousands on Roblox.",
         course_web_title: "Web Architect Path",
@@ -1373,7 +1359,7 @@ const i18nDictionary = {
         // Course Section
         course_badge: "Program Aktif 2026",
         course_title: "Pilihan Program Belajar",
-        course_desc: "Dirancang bertahap untuk anak usia 7–16 tahun. Kurikulum berbasis proyek nyata, kuis interaktif, dan pendampingan tutor berpengalaman.",
+        course_desc: "Dirancang bertahap untuk anak usia 6–16 tahun. Kurikulum berbasis proyek nyata, kuis interaktif, dan pendampingan tutor berpengalaman.",
         course_game_title: "Jalur Game Developer",
         course_game_desc: "Dari logika dasar hingga membangun dunia 3D interaktif yang dimainkan ribuan orang di Roblox.",
         course_web_title: "Jalur Web Architect",
