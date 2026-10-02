@@ -11,16 +11,36 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        heading: ['Outfit', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
                         body: ['Plus Jakarta Sans', 'sans-serif'],
                         mono: ['Fira Code', 'monospace']
                     },
                     colors: {
-                        brand: { 200: '#bae6fd', 300: '#7dd3fc', 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7' },
-                        gold: { 200: '#fef08a', 300: '#fde047', 400: '#facc15', 500: '#eab308', 600: '#ca8a04' },
-                        purpleBrand: { 200: '#e9d5ff', 300: '#d8b4fe', 400: '#c084fc', 500: '#a855f7', 600: '#9333ea', 700: '#7e22ce' },
-                        redBrand: { 400: '#f87171', 500: '#ef4444', 600: '#dc2626' },
-                        dark: { 800: '#0c1322', 900: '#050b14', 950: '#020617' }
+                        brand: {
+                            yellow: '#FFC83D',
+                            red: '#F3261D',
+                            blue: '#0788F5',
+                            'blue-dark': '#056ac2',
+                            purple: '#5B0CB5',
+                            500: '#0788F5',
+                            400: '#38bdf8'
+                        },
+                        ink: '#101116',
+                        surface: {
+                            DEFAULT: '#FFFFFF',
+                            soft: '#F7F8FA'
+                        },
+                        borderLight: '#E5E7EB',
+                        textMuted: '#667085',
+                        gold: { 200: '#fef08a', 300: '#fde047', 400: '#FFC83D', 500: '#eab308', 600: '#ca8a04' },
+                        purpleBrand: { 200: '#e9d5ff', 300: '#d8b4fe', 400: '#c084fc', 500: '#5B0CB5', 600: '#4c0aa0' },
+                        redBrand: { 400: '#f87171', 500: '#F3261D', 600: '#dc2626' },
+                        dark: { 800: '#161922', 900: '#101116', 950: '#090a0d' }
+                    },
+                    borderRadius: {
+                        'input': '12px',
+                        'card': '16px',
+                        'hero': '24px'
                     }
                 }
             }
@@ -66,39 +86,44 @@
     <!-- Floating Sci-Fi Pill Navbar -->
     <nav class="fixed top-4 md:top-8 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl transition-all duration-500 group" id="navbar">
         <!-- Gradient Border Wrapper -->
-        <div class="rounded-full p-[1px] bg-gradient-to-r from-brand-500/20 via-purpleBrand-500/20 to-brand-500/20 shadow-[0_15px_40px_rgba(0,0,0,0.6)] group-hover:from-brand-500/40 group-hover:via-purpleBrand-500/40 group-hover:to-brand-500/40 transition-colors duration-500">
+        <div class="rounded-full p-[1px] bg-gradient-to-r from-brand-yellow/30 via-brand-blue/30 to-brand-purple/30 shadow-[0_15px_40px_rgba(0,0,0,0.6)] group-hover:from-brand-yellow/50 group-hover:via-brand-blue/50 group-hover:to-brand-purple/50 transition-colors duration-500">
             <!-- Inner Glass Container -->
             <div id="nav-container" class="bg-dark-950/90 backdrop-blur-2xl rounded-full px-5 md:px-6 py-4 md:py-5 flex justify-between items-center w-full transition-all duration-500">
                 
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <img id="nav-logo" src="assets/logo/leskoding_community.png" alt="LesKodingSpace" class="h-8 md:h-10 w-auto object-contain hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-500">
+                    <img id="nav-logo" src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-8 md:h-10 w-auto object-contain hover:drop-shadow-[0_0_8px_rgba(255,200,61,0.4)] transition-all duration-500">
                 </div>
                 
-                <!-- Center Links (Desktop - Terminal Style) -->
-                <div class="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
-                    <a href="#hall-of-fame" class="group/link text-slate-400 hover:text-gold-400 font-mono font-bold transition-colors text-[10px] uppercase tracking-[0.2em] flex items-center gap-2 drop-shadow-[0_0_5px_rgba(250,204,21,0.4)]">
-                        <i class="fa-solid fa-crown text-gold-400"></i><span data-i18n="nav_hof">Hall of Fame</span>
+                <!-- Center Links (Desktop) -->
+                <div class="hidden md:flex items-center gap-7 lg:gap-8 absolute left-1/2 -translate-x-1/2 text-xs font-semibold">
+                    <a href="#course" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                        <span class="text-brand-blue opacity-0 group-hover/link:opacity-100 transition-opacity">•</span><span data-i18n="nav_program">Program</span>
                     </a>
-                    <a href="#course" class="group/link text-slate-400 hover:text-white font-mono font-medium transition-colors text-[10px] uppercase tracking-[0.2em] flex items-center gap-1">
-                        <span class="text-purpleBrand-400 opacity-0 group-hover/link:opacity-100 transition-opacity">&gt;</span><span data-i18n="nav_course">Course</span>
+                    <a href="#cara-belajar" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                        <span class="text-brand-yellow opacity-0 group-hover/link:opacity-100 transition-opacity">•</span><span data-i18n="nav_method">Cara Belajar</span>
                     </a>
-                    <a href="#location" class="group/link text-slate-400 hover:text-white font-mono font-medium transition-colors text-[10px] uppercase tracking-[0.2em] flex items-center gap-1">
-                        <span class="text-emerald-400 opacity-0 group-hover/link:opacity-100 transition-opacity">&gt;</span><span data-i18n="nav_location">Location</span>
+                    <a href="#hall-of-fame" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                        <span class="text-brand-purple opacity-0 group-hover/link:opacity-100 transition-opacity">•</span><span data-i18n="nav_works">Karya</span>
+                    </a>
+                    <a href="#progress-wali" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                        <span class="text-emerald-400 opacity-0 group-hover/link:opacity-100 transition-opacity">•</span><span data-i18n="nav_progress">Progres</span>
+                    </a>
+                    <a href="#faq" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                        <span class="text-brand-red opacity-0 group-hover/link:opacity-100 transition-opacity">•</span><span data-i18n="nav_faq">FAQ</span>
                     </a>
                 </div>
                 
-                <!-- Right CTA (Desktop) -->
+                <!-- Right CTA (Desktop: Yellow Primary Button, min-h 48px, dark text) -->
                 <div class="hidden md:block">
-                    <a href="#register" class="relative overflow-hidden inline-flex items-center justify-center bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold px-6 py-2 rounded-full text-[10px] uppercase tracking-[0.25em] transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.6)]">
-                        <span class="relative z-10 flex items-center gap-2"><i class="fa-solid fa-bolt text-dark-950"></i><span data-i18n="nav_enroll">Enroll</span></span>
-                        <div class="absolute inset-0 bg-white/20 translate-y-full hover:translate-y-0 transition-transform"></div>
+                    <a href="#register" class="relative overflow-hidden inline-flex items-center justify-center bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold px-6 py-2.5 min-h-[44px] rounded-full text-xs uppercase tracking-wider transition-all shadow-[0_4px_20px_rgba(255,200,61,0.35)] hover:shadow-[0_6px_25px_rgba(255,200,61,0.55)] hover:-translate-y-0.5">
+                        <span class="relative z-10 flex items-center gap-2"><i class="fa-solid fa-calendar-check text-[#101116]"></i><span data-i18n="nav_cta">Minta Info Kelas</span></span>
                     </a>
                 </div>
 
                 <!-- Mobile Menu Toggle -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="text-brand-400 hover:text-white focus:outline-none w-9 h-9 flex items-center justify-center rounded-full bg-brand-500/10 border border-brand-500/20 active:scale-95 transition-transform">
+                    <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="text-brand-yellow hover:text-white focus:outline-none w-9 h-9 flex items-center justify-center rounded-full bg-white/5 border border-white/10 active:scale-95 transition-transform">
                         <i class="fa-solid fa-bars-staggered text-sm"></i>
                     </button>
                 </div>
@@ -106,26 +131,32 @@
 
             <!-- Mobile Menu Dropdown -->
             <div id="mobile-menu" class="hidden md:hidden mt-3 bg-dark-950/95 backdrop-blur-2xl rounded-3xl border border-white/10 p-5 shadow-2xl flex flex-col gap-3 transition-all duration-300">
-                <a href="#hall-of-fame" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-gold-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
-                    <i class="fa-solid fa-crown text-gold-400 w-5"></i><span data-i18n="nav_hof">Hall of Fame</span>
+                <a href="#course" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-xs font-semibold py-2.5 border-b border-white/5">
+                    <i class="fa-solid fa-graduation-cap text-brand-blue w-5"></i><span data-i18n="nav_program">Program</span>
                 </a>
-                <a href="#features" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-brand-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
-                    <i class="fa-solid fa-shield-halved text-brand-400 w-5"></i> Kelebihan
+                <a href="#cara-belajar" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-xs font-semibold py-2.5 border-b border-white/5">
+                    <i class="fa-solid fa-route text-brand-yellow w-5"></i><span data-i18n="nav_method">Cara Belajar</span>
                 </a>
-                <a href="#course" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-brand-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
-                    <i class="fa-solid fa-compass text-brand-400 w-5"></i><span data-i18n="nav_course">Course</span>
+                <a href="#hall-of-fame" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-xs font-semibold py-2.5 border-b border-white/5">
+                    <i class="fa-solid fa-trophy text-brand-purple w-5"></i><span data-i18n="nav_works">Karya Siswa</span>
                 </a>
-                <a href="#location" class="mobile-nav-link flex items-center gap-3 text-slate-300 hover:text-emerald-400 font-mono text-xs uppercase tracking-wider py-2 border-b border-white/5">
-                    <i class="fa-solid fa-map-location-dot text-emerald-400 w-5"></i><span data-i18n="nav_location">Location</span>
+                <a href="#progress-wali" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-xs font-semibold py-2.5 border-b border-white/5">
+                    <i class="fa-solid fa-chart-line text-emerald-400 w-5"></i><span data-i18n="nav_progress">Laporan Progres Wali</span>
                 </a>
-                <a href="#register" data-i18n="nav_start_adventure" class="mobile-nav-link flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold py-3 rounded-xl text-xs uppercase tracking-widest mt-1 shadow-lg">
-                    <i class="fa-solid fa-bolt"></i> Start Adventure
+                <a href="#location" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-xs font-semibold py-2.5 border-b border-white/5">
+                    <i class="fa-solid fa-map-location-dot text-brand-blue w-5"></i><span data-i18n="nav_location">Lokasi Belajar</span>
+                </a>
+                <a href="#faq" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-xs font-semibold py-2.5 border-b border-white/5">
+                    <i class="fa-solid fa-circle-question text-brand-red w-5"></i><span data-i18n="nav_faq">FAQ</span>
+                </a>
+                <a href="#register" class="mobile-nav-link flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider mt-2 shadow-lg">
+                    <i class="fa-solid fa-calendar-check"></i> <span data-i18n="nav_cta">Minta Info / Jadwal</span>
                 </a>
                 
                 <!-- Mobile Language Selector -->
                 <div class="flex items-center justify-between pt-3 border-t border-white/10 mt-1">
-                    <span class="text-[11px] font-mono text-slate-400">Language:</span>
-                    <button onclick="toggleLanguage()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs text-brand-400 font-mono font-bold">
+                    <span class="text-[11px] text-slate-400">Language:</span>
+                    <button onclick="toggleLanguage()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs text-brand-yellow font-bold">
                         <i class="fa-solid fa-globe text-xs"></i>
                         <span id="mobile-lang-text">EN</span>
                     </button>
@@ -134,68 +165,126 @@
         </div>
     </nav>
 
-    <!-- Interactive Hero Section -->
-    <section id="home" class="relative min-h-screen lg:h-screen lg:max-h-[100vh] flex items-center justify-center pt-24 md:pt-28 lg:pt-20 pb-12 lg:pb-6 overflow-hidden border-b border-white/5">
+    <!-- Interactive Hero Section (Dark/Ink Background with Logo Accent) -->
+    <section id="home" class="relative min-h-[90vh] flex items-center justify-center pt-28 md:pt-36 pb-16 md:pb-24 overflow-hidden border-b border-white/5 bg-[#101116]">
         <!-- Background & Overlays -->
         <div class="absolute inset-0 z-0"></div>
-        <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity z-0" alt="Coding Background">
-        <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent z-0"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-dark-950 via-dark-950/60 to-transparent z-0 hidden lg:block"></div>
+        <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity z-0" alt="Suasana Belajar LesKoding">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#101116] via-[#101116]/85 to-[#101116]/60 z-0"></div>
+        
+        <!-- Ambient accents from logo palette -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FFC83D]/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-[#0788F5]/15 rounded-full blur-[160px] pointer-events-none"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                 
-                <!-- Left: Text Content & CTAs -->
-                <div class="text-left fade-in-up pt-10">
+                <!-- Left: Text Content & CTAs (7 cols) -->
+                <div class="lg:col-span-7 text-left fade-in-up">
                     
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-heading font-black text-white mb-6 leading-[1.15] tracking-tight">
-                        <span data-i18n="hero_title_1">Rasakan Petualangan Coding yang</span> <br class="hidden md:block">
-                        <span data-i18n="hero_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-gold-400 to-purpleBrand-500">Tak Terlupakan!</span>
+                    <!-- Pill Tagline / Value Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-md">
+                        <span class="w-2 h-2 rounded-full bg-[#FFC83D] animate-pulse"></span>
+                        <span data-i18n="hero_badge" class="text-xs font-semibold text-slate-300">Playful Future Lab — Coding &amp; Robotic Bali</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-white mb-6 leading-[1.15] tracking-tight">
+                        <span data-i18n="hero_title_1">Ubah rasa penasaran jadi</span> <br class="hidden sm:block">
+                        <span data-i18n="hero_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#0788F5] to-[#c084fc]">karya digital.</span>
                     </h1>
                     
-                    <p class="text-sm md:text-base text-slate-300 mb-4 max-w-xl font-normal leading-relaxed">
-                        <span data-i18n="hero_desc_1">Setiap petualangan dimulai dengan langkah pertama. Di <span class="text-white font-bold">LesKoding</span>, kami tidak hanya mengajarkan coding – kami membawa Anda dalam perjalanan yang menggugah semangat, di mana kreativitas dan teknologi bertemu.</span>
-                    </p>
-                    <p class="text-sm md:text-base text-slate-300 mb-10 max-w-xl font-normal leading-relaxed hidden sm:block">
-                        <span data-i18n="hero_desc_2">Apakah Anda siap untuk menjelajahi dunia yang penuh dengan kemungkinan? Bersiaplah untuk mengasah keterampilan Anda, berkolaborasi dengan teman baru, dan menyaksikan ide-ide Anda hidup. Mulailah petualangan Anda hari ini!</span>
+                    <p class="text-base sm:text-lg text-slate-300 mb-8 max-w-xl font-normal leading-relaxed">
+                        <span data-i18n="hero_desc_main">Anak belajar langkah demi langkah, mencoba tantangan seru, dan melihat progres belajarnya setiap sesi bersama tutor berpengalaman.</span>
                     </p>
                     
-                    <div class="flex flex-wrap items-center gap-4 mb-12">
-                        <a href="#register" class="w-full sm:w-auto relative group px-8 py-4 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(14,165,233,0.2)] hover:shadow-[0_0_40px_rgba(14,165,233,0.4)] transition-all duration-300 bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold text-xs uppercase tracking-[0.1em] text-center">
-                            <span class="relative z-10 flex items-center justify-center gap-2">
-                                <span data-i18n="hero_btn_start">Mulai Petualangan!</span> <i class="fa-solid fa-rocket"></i>
-                            </span>
+                    <!-- Primary & Secondary Buttons -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
+                        <!-- Primary CTA (Yellow with Dark Ink Text, min-h 48px) -->
+                        <a href="#register" class="inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold px-8 py-3.5 min-h-[48px] rounded-xl text-sm transition-all shadow-[0_6px_25px_rgba(255,200,61,0.35)] hover:shadow-[0_8px_30px_rgba(255,200,61,0.5)] hover:-translate-y-0.5 text-center">
+                            <i class="fa-solid fa-calendar-check text-[#101116]"></i>
+                            <span data-i18n="hero_btn_info">Minta Info / Jadwal Kelas</span>
                         </a>
-                        <a href="#course" class="w-full sm:w-auto relative group px-8 py-4 rounded-xl overflow-hidden transition-all duration-300 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-bold text-xs uppercase tracking-[0.1em] text-center">
-                            <span data-i18n="hero_btn_route">Pelajari Rute Kami</span> <i class="fa-solid fa-arrow-right ml-2"></i>
+                        
+                        <!-- Secondary CTA (Outline White on Dark Hero) -->
+                        <a href="#hall-of-fame" class="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/10 border border-white/20 hover:border-white/40 text-white font-semibold px-7 py-3.5 min-h-[48px] rounded-xl text-sm transition-all text-center">
+                            <i class="fa-solid fa-eye text-slate-300"></i>
+                            <span data-i18n="hero_btn_works">Lihat Karya Siswa</span>
                         </a>
                     </div>
 
-                    <!-- Statistics -->
-                    <div class="grid grid-cols-2 gap-8 pt-8 border-t border-white/10">
-                        <div>
-                            <div class="text-3xl md:text-4xl font-heading font-black text-white mb-1"><span class="counter" data-target="15000">0</span>+</div>
-                            <div class="text-[10px] md:text-xs uppercase tracking-wider text-slate-400 font-bold" data-i18n="stats_students">Siswa Aktif</div>
+                    <!-- Verified Features (Trust Signals) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-[#0788F5]/15 border border-[#0788F5]/30 flex items-center justify-center text-[#0788F5] shrink-0 text-sm">
+                                <i class="fa-solid fa-layer-group"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-white" data-i18n="hero_trust_1_title">Kurikulum Bertahap</div>
+                                <div class="text-[11px] text-slate-400" data-i18n="hero_trust_1_sub">Pemula hingga Mahir</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="text-3xl md:text-4xl font-heading font-black text-brand-400 mb-1"><span class="counter" data-target="20000">0</span>+</div>
-                            <div class="text-[10px] md:text-xs uppercase tracking-wider text-slate-400 font-bold" data-i18n="stats_projects">Proyek Selesai</div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-[#FFC83D]/15 border border-[#FFC83D]/30 flex items-center justify-center text-[#FFC83D] shrink-0 text-sm">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-white" data-i18n="hero_trust_2_title">Laporan Wali Murid</div>
+                                <div class="text-[11px] text-slate-400" data-i18n="hero_trust_2_sub">Pantau Progres Belajar</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 col-span-2 sm:col-span-1">
+                            <div class="w-9 h-9 rounded-lg bg-[#5B0CB5]/20 border border-[#5B0CB5]/40 flex items-center justify-center text-purpleBrand-400 shrink-0 text-sm">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-white" data-i18n="hero_trust_3_title">3 Learning Center</div>
+                                <div class="text-[11px] text-slate-400" data-i18n="hero_trust_3_sub">Gianyar, Ubud &amp; Bedulu</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right: Floating Slogan Card -->
-                <div class="relative hidden lg:flex items-center justify-center h-full">
-                    <!-- Floating Jargon / Slogan Card -->
-                    <div class="relative bg-dark-900/70 backdrop-blur-xl border border-brand-500/30 p-8 rounded-3xl shadow-[0_0_50px_rgba(14,165,233,0.18)] max-w-sm transform hover:scale-105 transition-all duration-500 float-gentle z-20 group">
-                        <i class="fa-solid fa-rocket text-4xl text-brand-500/20 absolute -top-3 -left-3 group-hover:rotate-12 transition-transform"></i>
-                        <h4 class="font-heading font-black text-2xl text-white tracking-wide mb-2 leading-tight">
-                            <span data-i18n="hero_slogan_title">Dari <span class="text-redBrand-400 line-through decoration-2 decoration-redBrand-500/50">Nol</span><br>Menjadi <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purpleBrand-400">Kreator Teknologi!</span></span>
-                        </h4>
-                        <div class="w-14 h-1 bg-gradient-to-r from-brand-400 to-purpleBrand-400 rounded-full mb-4"></div>
-                        <p class="text-slate-300 text-sm font-medium leading-relaxed">
-                            <span data-i18n="hero_slogan_desc">Bukan sekadar belajar biasa. Kami sulap rasa penasaranmu menjadi karya digital nyata berstandar masa depan.</span>
-                        </p>
+                <!-- Right: Visual Student Work Showcase (5 cols) -->
+                <div class="lg:col-span-5 relative flex items-center justify-center">
+                    
+                    <!-- Decorative Geometric Frames inspired by Logo -->
+                    <div class="absolute -top-6 -right-6 w-36 h-36 border-2 border-[#FFC83D]/30 rounded-3xl -rotate-6 pointer-events-none"></div>
+                    <div class="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-[#0788F5]/30 rounded-3xl rotate-12 pointer-events-none"></div>
+                    
+                    <!-- Main Hero Visual Card -->
+                    <div class="relative bg-dark-900/90 backdrop-blur-xl border border-white/15 rounded-hero p-5 shadow-[0_20px_50px_rgba(0,0,0,0.6)] w-full max-w-md group overflow-hidden">
+                        
+                        <!-- Real Session Image with Rounded Corner -->
+                        <div class="relative h-64 sm:h-72 w-full rounded-card overflow-hidden mb-4">
+                            <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Aktivitas Belajar Koding dan Robotik">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-transparent to-transparent"></div>
+                            
+                            <!-- Badges on image -->
+                            <div class="absolute top-3 left-3 flex items-center gap-2">
+                                <span class="bg-[#101116]/80 backdrop-blur-md text-[#FFC83D] text-[10px] font-bold px-3 py-1 rounded-full border border-[#FFC83D]/40 flex items-center gap-1.5 shadow-md">
+                                    <i class="fa-solid fa-fire text-[#F3261D]"></i> Sesi Nyata Siswa
+                                </span>
+                            </div>
+                            
+                            <div class="absolute bottom-3 left-3 right-3 text-left">
+                                <span class="text-[10px] font-mono uppercase tracking-wider text-[#38bdf8] font-bold block mb-0.5">Project Showcase</span>
+                                <h4 class="text-white text-base font-bold leading-tight">Robotika &amp; Mini Game Interaktif</h4>
+                            </div>
+                        </div>
+
+                        <!-- Mini feedback / progress bar snippet -->
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-[#0788F5]/20 border border-[#0788F5]/40 flex items-center justify-center text-[#0788F5] text-xs">
+                                    <i class="fa-solid fa-user-check"></i>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-xs font-bold text-white">Feedback Tutor Setiap Sesi</div>
+                                    <div class="text-[10px] text-slate-400">Catatan perkembangan langsung ke wali</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-md">Aktif</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -203,353 +292,37 @@
         </div>
     </section>
 
-    <!-- HALL OF FAME: PREMIUM MUSEUM -->
-    <section id="hall-of-fame" class="pt-32 pb-20 md:pt-40 md:pb-28 relative z-10 border-b border-white/5 overflow-hidden bg-gradient-to-b from-transparent via-[#2e1065]/40 to-[#020617]">
-        <!-- Ambient lighting -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-gold-500/10 blur-[150px] pointer-events-none rounded-full"></div>
-        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purpleBrand-500/10 blur-[120px] pointer-events-none rounded-full"></div>
+<section id="course" class="py-20 md:py-28 relative z-10 bg-[#F7F8FA] border-b border-[#E5E7EB] text-[#101116]">
+        <!-- Subtle accent glow -->
+        <div class="absolute top-0 right-0 w-[450px] h-[450px] bg-[#0788F5]/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#FFC83D]/10 rounded-full blur-[100px] pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <!-- Header -->
-            <div class="text-center mb-16 fade-in-up flex flex-col items-center">
-                <!-- SVG Trophy Icon -->
-                <div class="mb-6 w-24 h-24 bg-dark-900/80 backdrop-blur-xl rounded-full border border-gold-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(250,204,21,0.2)] group hover:shadow-[0_0_50px_rgba(250,204,21,0.4)] transition-all cursor-default">
-                    <svg class="w-12 h-12 transform group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-                        <path d="M32 0C15.296 0 2 9.681 2 24c0 2.831 1.903 5.498 2 9.476C1.192 36.879 0 41.368 0 46.8v6.6C0 58.918 5.082 64 11.4 64h41.2c6.318 0 11.4-5.082 11.4-11.6V46.8c0-5.432-1.192-9.921-4-12.324 0-3.978 2-6.645 2-9.476 0-14.319-13.296-24-30-24z" fill="url(#goldGrad)"/>
-                        <defs>
-                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#fef08a;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#eab308;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#a16207;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
+            <div class="text-center mb-14 fade-in-up">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E5E7EB] shadow-sm mb-3">
+                    <span class="w-2 h-2 rounded-full bg-[#0788F5]"></span>
+                    <span data-i18n="course_badge" class="text-xs font-bold tracking-wider uppercase text-[#0788F5]">Program Aktif 2026</span>
                 </div>
-                
-                <h2 class="text-4xl md:text-5xl font-heading font-black text-white mb-6 tracking-tight"><span data-i18n="hof_title">Kisah Sukses dari<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-yellow-600">Penjelajah Kami!</span></span></h2>
-                <p class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed"><span data-i18n="hof_desc">Di sinilah karya luar biasa dari siswa kami ditampilkan! Setiap proyek adalah petualangan yang menceritakan perjalanan kreativitas dan dedikasi. Terinspirasi oleh pencapaian mereka? Bergabunglah dan biarkan petualangan Anda dimulai!</span></p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#101116] mb-4 tracking-tight"><span data-i18n="course_title">Pilihan Program Belajar</span></h2>
+                <p data-i18n="course_desc" class="text-[#667085] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">Dirancang bertahap untuk anak usia 7–16 tahun. Kurikulum berbasis proyek nyata, kuis interaktif, dan pendampingan tutor berpengalaman.</p>
             </div>
 
-            <!-- Digital Trophy Wall (Masterpiece / Winner) -->
-            <div class="mb-24 fade-in-up">
-                <h3 class="text-lg font-heading font-bold text-white mb-10 border-b border-gold-500/20 pb-4 inline-flex items-center gap-3 pr-12">
-                    <div class="w-8 h-8 rounded-lg bg-gold-500/20 flex items-center justify-center">
-                        <i class="fa-solid fa-trophy text-gold-400 text-sm"></i>
-                    </div>
-                    <span data-i18n="hof_masterpiece_heading">Pajangan Proyek Pilihan</span></h3>
-                
-                <!-- Museum Exhibit Card -->
-                <div class="masterpiece-exhibit relative rounded-[2rem] overflow-hidden group">
-                    <!-- Inner solid bg -->
-                    <div class="absolute inset-0 bg-dark-950 rounded-[2rem] z-0"></div>
-                    
-                    <!-- Subtle corner ornaments -->
-                    <div class="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-gold-500/30 rounded-tl-[2rem] z-10 pointer-events-none"></div>
-                    <div class="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-gold-500/30 rounded-br-[2rem] z-10 pointer-events-none"></div>
-
-                    <div class="relative z-10 flex flex-col lg:flex-row">
-                        <!-- Left: Cinematic Image -->
-                        <div class="w-full lg:w-[55%] relative overflow-hidden">
-                            <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="w-full h-[320px] lg:h-[480px] object-cover transition-transform duration-1000 group-hover:scale-105" alt="Masterpiece Project">
-                            
-                            <!-- Gradient overlays -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/30 to-transparent pointer-events-none"></div>
-                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-dark-950 pointer-events-none hidden lg:block"></div>
-                            
-                            <!-- Crown Badge -->
-                            <div class="absolute top-6 left-6 z-20 badge-shine">
-                                <span class="bg-dark-950/80 backdrop-blur-md text-gold-400 text-[10px] font-bold uppercase tracking-widest px-4 py-2.5 rounded-xl border border-gold-500/40 flex items-center gap-2 shadow-lg">
-                                    <i class="fa-solid fa-crown"></i> <span data-i18n="hof_badge_masterpiece">Masterpiece Terbaik</span>
-                                </span>
-                            </div>
-                            
-                            <!-- Vote count overlay (bottom-left of image) -->
-                            <div class="absolute bottom-6 left-6 z-20 flex items-center gap-3">
-                                <button onclick="upvoteProject(this)" class="upvote-btn flex items-center gap-2 bg-dark-950/70 backdrop-blur-md border border-white/10 hover:border-red-500/50 px-4 py-2.5 rounded-xl transition-all group/vote">
-                                    <i class="fa-solid fa-heart text-red-500/80 group-hover/vote:text-red-400 group-hover/vote:scale-110 transition-all"></i>
-                                    <span class="vote-count text-white text-sm font-bold font-mono">1.4k</span>
-                                </button>
-                                <div class="flex items-center gap-2 bg-dark-950/70 backdrop-blur-md border border-white/10 px-4 py-2.5 rounded-xl">
-                                    <i class="fa-solid fa-eye text-brand-400 text-xs"></i>
-                                    <span class="text-white text-sm font-bold font-mono">12k</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right: Content Panel -->
-                        <div class="w-full lg:w-[45%] p-8 lg:p-10 flex flex-col justify-center relative">
-                            <!-- Curator tag -->
-                            <div class="inline-flex items-center gap-2 text-gold-400 font-mono text-[9px] uppercase tracking-[0.2em] mb-4">
-                                <div class="w-6 h-px bg-gold-500/60"></div>
-                                <span data-i18n="hof_curator_pick">Pilihan Kurator</span>
-                                <div class="w-6 h-px bg-gold-500/60"></div>
-                            </div>
-
-                            <!-- Title -->
-                            <h4 class="text-3xl lg:text-4xl font-heading font-black text-white mb-5 leading-tight">
-                                Cyber City<br>
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-200">RP Game</span>
-                            </h4>
-                            
-                            <!-- Creator profile -->
-                            <div class="flex items-center gap-3 mb-6">
-                                <div class="relative shrink-0">
-                                    <div class="absolute -inset-0.5 bg-gradient-to-r from-gold-500 to-purpleBrand-500 rounded-full opacity-60 blur-[2px]"></div>
-                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" class="relative w-10 h-10 rounded-full border-2 border-dark-950 bg-dark-950" alt="Sarah">
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-white">Sarah <span data-i18n="hof_sarah_age" class="text-slate-500 font-normal">(12 Tahun)</span></p>
-                                    <p class="text-[9px] text-gold-400/80 font-mono uppercase tracking-widest">Lead Roblox Creator</p>
-                                </div>
-                            </div>
-
-                            <!-- Description -->
-                            <p data-i18n="hof_masterpiece_desc" class="text-slate-400 text-sm leading-relaxed mb-6">Sebuah dunia Roleplay 3D masif yang dibangun dalam Roblox Studio — arsitektur cyberpunk, sistem mata uang virtual, dan NPC interaktif tingkat lanjut.</p>
-                            
-                            <!-- Tech tags -->
-                            <div class="flex flex-wrap gap-2 mb-8">
-                                <span class="px-3 py-1.5 bg-white/[0.03] border border-white/10 rounded-lg text-[10px] text-slate-300 font-mono">Roblox Studio</span>
-                                <span class="px-3 py-1.5 bg-white/[0.03] border border-white/10 rounded-lg text-[10px] text-slate-300 font-mono">Lua</span>
-                                <span class="px-3 py-1.5 bg-white/[0.03] border border-white/10 rounded-lg text-[10px] text-slate-300 font-mono">3D Modeling</span>
-                            </div>
-                            
-                            <!-- CTA -->
-                            <button onclick="triggerConfetti()" class="self-start inline-flex items-center gap-3 bg-gold-500 hover:bg-gold-400 text-dark-950 font-black px-8 py-3.5 rounded-xl uppercase tracking-[0.1em] text-[11px] transition-all hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(250,204,21,0.25)] hover:shadow-[0_8px_30px_rgba(250,204,21,0.4)]">
-                                <i class="fa-solid fa-play text-xs"></i> <span data-i18n="btn_view_project">Lihat Proyek</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Virtual Gallery Grid -->
-            <div class="fade-in-up">
-                <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-10">
-                    <h3 class="text-lg font-heading font-bold text-white inline-flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-                            <i class="fa-solid fa-layer-group text-slate-400 text-sm"></i>
-                        </div>
-                        <span data-i18n="hof_gallery_heading">Galeri Eksibisi</span></h3>
-                    <div class="text-[10px] text-slate-500 font-mono uppercase tracking-widest"><span data-i18n="hof_top_creations">Karya Teratas</span></div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                    <!-- Gallery Card 1 -->
-                    <div class="exhibit-card group rounded-2xl overflow-hidden border border-white/[0.06] bg-dark-950 transition-all duration-500 hover:border-gold-500/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
-                        <!-- Image -->
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Project">
-                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent pointer-events-none"></div>
-                            <!-- Badge -->
-                            <div class="absolute top-4 left-4 z-10">
-                                <span class="bg-dark-950/70 backdrop-blur-md text-purpleBrand-400 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg border border-purpleBrand-500/30 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-fire"></i> <span data-i18n="hof_c1_badge">Terfavorit</span>
-                                </span>
-                            </div>
-                            <!-- Stats overlay -->
-                            <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
-                                <button onclick="upvoteProject(this)" class="upvote-btn flex items-center gap-1.5 bg-dark-950/60 backdrop-blur-md border border-white/10 hover:border-red-500/40 px-3 py-1.5 rounded-lg transition-all text-xs group/vote">
-                                    <i class="fa-solid fa-heart text-red-500/70 group-hover/vote:text-red-400 text-[10px]"></i>
-                                    <span class="vote-count text-white font-bold font-mono text-[10px]">856</span>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- Content -->
-                        <div class="p-5">
-                            <h4 data-i18n="hof_c1_title" class="font-heading font-bold text-white text-lg mb-1 group-hover:text-gold-400 transition-colors">Sistem AI Kasir Pintar</h4>
-                            <div class="flex items-center gap-2 mb-3">
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Budi" class="w-5 h-5 rounded-full border border-dark-800 bg-dark-900" alt="User">
-                                <p class="text-[10px] text-slate-500"><span data-i18n="hof_c1_author">Budi (14 Tahun)</span> <span class="text-slate-600">· Web Dev</span></p>
-                            </div>
-                            <p data-i18n="hof_c1_desc" class="text-xs text-slate-400 leading-relaxed mb-4">Aplikasi kasir berbasis web menggunakan logika JavaScript kompleks untuk kalkulasi inventaris dan struk real-time.</p>
-                            <div class="flex flex-wrap gap-1.5">
-                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">JS</span>
-                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">HTML/CSS</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Gallery Card 2 -->
-                    <div class="exhibit-card group rounded-2xl overflow-hidden border border-white/[0.06] bg-dark-950 transition-all duration-500 hover:border-gold-500/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
-                        <!-- Image -->
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="assets/sessions/01M3JK50X16R206D3HK7Z9A9G0.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Project">
-                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent pointer-events-none"></div>
-                            <!-- Badge -->
-                            <div class="absolute top-4 left-4 z-10">
-                                <span class="bg-dark-950/70 backdrop-blur-md text-brand-400 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg border border-brand-500/30 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-robot"></i> <span data-i18n="hof_c2_badge">Future Tech</span>
-                                </span>
-                            </div>
-                            <!-- Stats overlay -->
-                            <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
-                                <button onclick="upvoteProject(this)" class="upvote-btn flex items-center gap-1.5 bg-dark-950/60 backdrop-blur-md border border-white/10 hover:border-red-500/40 px-3 py-1.5 rounded-lg transition-all text-xs group/vote">
-                                    <i class="fa-solid fa-heart text-red-500/70 group-hover/vote:text-red-400 text-[10px]"></i>
-                                    <span class="vote-count text-white font-bold font-mono text-[10px]">642</span>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- Content -->
-                        <div class="p-5">
-                            <h4 data-i18n="hof_c2_title" class="font-heading font-bold text-white text-lg mb-1 group-hover:text-gold-400 transition-colors">Robot Pemilah Sampah</h4>
-                            <div class="flex items-center gap-2 mb-3">
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kevin" class="w-5 h-5 rounded-full border border-dark-800 bg-dark-900" alt="User">
-                                <p class="text-[10px] text-slate-500"><span data-i18n="hof_c2_author">Kevin (10 Tahun)</span> <span class="text-slate-600">· Robotics</span></p>
-                            </div>
-                            <p data-i18n="hof_c2_desc" class="text-xs text-slate-400 leading-relaxed mb-4">Proyek Arduino dengan sensor ultrasonik dan motor servo yang secara otomatis membuka tutup tempat sampah.</p>
-                            <div class="flex flex-wrap gap-1.5">
-                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">Arduino</span>
-                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">C++</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Gallery Card 3 -->
-                    <div class="exhibit-card group rounded-2xl overflow-hidden border border-white/[0.06] bg-dark-950 transition-all duration-500 hover:border-gold-500/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
-                        <!-- Image -->
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="assets/sessions/01M3JK1KMW3XQ7DFP5F7YZ8J0D.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Project">
-                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent pointer-events-none"></div>
-                            <!-- Badge -->
-                            <div class="absolute top-4 left-4 z-10">
-                                <span class="bg-dark-950/70 backdrop-blur-md text-gold-400 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg border border-gold-500/30 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-gem"></i> <span data-i18n="hof_c3_badge">Desain Terbaik</span>
-                                </span>
-                            </div>
-                            <!-- Stats overlay -->
-                            <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
-                                <button onclick="upvoteProject(this)" class="upvote-btn flex items-center gap-1.5 bg-dark-950/60 backdrop-blur-md border border-white/10 hover:border-red-500/40 px-3 py-1.5 rounded-lg transition-all text-xs group/vote">
-                                    <i class="fa-solid fa-heart text-red-500/70 group-hover/vote:text-red-400 text-[10px]"></i>
-                                    <span class="vote-count text-white font-bold font-mono text-[10px]">1.1k</span>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- Content -->
-                        <div class="p-5">
-                            <h4 data-i18n="hof_c3_title" class="font-heading font-bold text-white text-lg mb-1 group-hover:text-gold-400 transition-colors">Portofolio Animasi Web</h4>
-                            <div class="flex items-center gap-2 mb-3">
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Nadia" class="w-5 h-5 rounded-full border border-dark-800 bg-dark-900" alt="User">
-                                <p class="text-[10px] text-slate-500"><span data-i18n="hof_c3_author">Nadia (15 Tahun)</span> <span class="text-slate-600">· Web Dev</span></p>
-                            </div>
-                            <p data-i18n="hof_c3_desc" class="text-xs text-slate-400 leading-relaxed mb-4">Website portofolio pribadi yang penuh dengan animasi CSS 3D dan transisi scroll mulus tanpa framework eksternal.</p>
-                            <div class="flex flex-wrap gap-1.5">
-                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">TailwindCSS</span>
-                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">JavaScript</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-12">
-                    <button class="px-8 py-3.5 bg-dark-950 border border-white/10 hover:border-gold-500/30 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-gold-400 transition-all flex items-center gap-3 mx-auto group">
-                        <span data-i18n="hof_btn_load_more">Muat Lebih Banyak Karya</span> <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bento Grid Features (Magnetic Hover) -->
-    <section id="features" class="py-20 md:py-28 relative z-10 border-b border-white/5">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in-up">
-                <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-brand-400 mb-2"><span data-i18n="feat_badge">Petualangan Belajar</span></h2>
-                <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4"><span data-i18n="feat_title">Mengapa Petualangan Ini Sangat Berharga?</span></h3>
-                <p class="text-sm md:text-base text-slate-400 max-w-2xl mx-auto"><span data-i18n="feat_desc">Di LesKoding, setiap kelas adalah sebuah eksplorasi baru.</span></p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <!-- Item 1 (Wide) -->
-                <div class="bento-card md:col-span-2 rounded-[1.5rem] bg-dark-900/60 backdrop-blur-xl border border-white/5 p-6 md:p-8 relative overflow-hidden group fade-in-up min-h-[240px] flex flex-col justify-end">
-                    <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-500" alt="Session">
-                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent pointer-events-none"></div>
-                    <div class="absolute inset-0 bg-gradient-to-br from-brand-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-                    
-                    <div class="relative z-10 w-full">
-                        <h4 class="text-xl font-heading font-bold text-white mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-map text-brand-400"></i> <span data-i18n="feat_f1_title">Kursus Interaktif</span>
-                        </h4>
-                        <p data-i18n="feat_f1_desc" class="text-slate-300 text-xs md:text-sm leading-relaxed">Ikuti peta belajar yang dinamis, di mana setiap sesi membawa Anda lebih dekat menuju tujuan besar Anda dalam petualangan coding.</p>
-                    </div>
-                </div>
-
-                <!-- Item 2 (Square) -->
-                <div class="bento-card rounded-[1.5rem] bg-dark-900/60 backdrop-blur-xl border border-white/5 p-6 md:p-8 relative overflow-hidden group fade-in-up min-h-[240px] flex flex-col justify-end" style="transition-delay: 100ms;">
-                    <img src="assets/sessions/01M3H323B1QJV4PH2CCWGH9AQ2.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500" alt="Session">
-                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent pointer-events-none"></div>
-                    <div class="absolute inset-0 bg-gradient-to-br from-purpleBrand-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-                    
-                    <div class="relative z-10 w-full">
-                        <h4 class="text-lg font-heading font-bold text-white mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-user-astronaut text-purpleBrand-400"></i> <span data-i18n="feat_f2_title">Fasilitator Ahli</span>
-                        </h4>
-                        <p data-i18n="feat_f2_desc" class="text-slate-300 text-xs leading-relaxed">Pemandu Anda dalam petualangan ini adalah para ahli yang siap membagikan pengetahuan berharga.</p>
-                    </div>
-                </div>
-
-                <!-- Item 3 (Square) -->
-                <div class="bento-card rounded-[1.5rem] bg-dark-900/60 backdrop-blur-xl border border-white/5 p-6 md:p-8 relative overflow-hidden group fade-in-up min-h-[240px] flex flex-col justify-end" style="transition-delay: 200ms;">
-                    <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500" alt="Session">
-                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent pointer-events-none"></div>
-                    <div class="absolute inset-0 bg-gradient-to-br from-gold-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-                    
-                    <div class="relative z-10 w-full">
-                        <h4 class="text-lg font-heading font-bold text-white mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-users text-gold-400"></i> <span data-i18n="feat_f3_title">Koneksi Komunitas</span>
-                        </h4>
-                        <p data-i18n="feat_f3_desc" class="text-slate-300 text-xs leading-relaxed">Bergabunglah dengan sesama petualang, berbagi pengalaman, dan saling membantu dalam belajar.</p>
-                    </div>
-                </div>
-
-                <!-- Item 4 (Wide) -->
-                <div class="bento-card md:col-span-2 rounded-[1.5rem] bg-dark-900/60 backdrop-blur-xl border border-white/5 p-6 md:p-8 relative overflow-hidden group fade-in-up min-h-[240px] flex flex-col justify-end" style="transition-delay: 300ms;">
-                    <img src="assets/sessions/01M3RVHT4R9SQ961Z3GTWJD72Y.jpg" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-500" alt="Session">
-                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent pointer-events-none"></div>
-                    <div class="absolute inset-0 bg-gradient-to-br from-redBrand-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-                    
-                    <div class="relative z-10 w-full md:w-3/4">
-                        <h4 class="text-xl font-heading font-bold text-white mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-bolt text-redBrand-400"></i> <span data-i18n="feat_f4_title">Micro-Learning RPG</span>
-                        </h4>
-                        <p data-i18n="feat_f4_desc" class="text-slate-300 text-xs md:text-sm leading-relaxed">Materi dipecah menjadi *quest*. Belajar koding semenarik menaikkan level karakter di game favorit Anda.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- COURSE ADVENTURE MAP -->
-    <section id="course" class="py-24 md:py-32 relative z-10 border-b border-white/5 overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purpleBrand-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16 fade-in-up">
-                <h2 class="text-[11px] font-bold tracking-[0.3em] uppercase text-brand-400 mb-3 drop-shadow-[0_0_10px_rgba(14,165,233,0.3)]"><span data-i18n="course_badge">Petualangan Menanti</span></h2>
-                <h3 class="text-3xl md:text-5xl font-heading font-black text-white mb-6"><span data-i18n="course_title">Pilih Jalur Petualanganmu!</span></h3>
-                <p data-i18n="course_desc" class="text-slate-400/80 text-sm max-w-2xl mx-auto leading-relaxed">Temukan rute yang paling sesuai untuk Anda! Apakah Anda siap untuk menjelajahi dunia coding dengan cara yang menyenangkan?</p>
-            </div>
-
-            <!-- Course Tabs -->
-            <div class="flex flex-col md:flex-row justify-center gap-4 mb-16 fade-in-up">
-                <button onclick="switchCoursePath('game')" id="tab-game" class="course-tab-btn border-brand-500 bg-dark-900 shadow-[0_0_20px_rgba(14,165,233,0.15)] relative px-8 py-4 border rounded-2xl flex flex-col items-center gap-2 transition-all group overflow-hidden">
-                    <i class="fa-solid fa-gamepad text-2xl text-brand-400 tab-icon mb-1 relative z-10 transition-colors"></i>
-                    <span class="font-heading font-bold text-white tab-title relative z-10 transition-colors">Game Programming</span>
-                    <span class="text-[9px] text-brand-200 tab-subtitle uppercase tracking-widest relative z-10 transition-colors">"Code Your Universe"</span>
+            <!-- Course Tabs (Light theme cards) -->
+            <div class="flex flex-col md:flex-row justify-center gap-4 mb-14 fade-in-up">
+                <button onclick="switchCoursePath('game')" id="tab-game" class="course-tab-btn border-[#0788F5] bg-white shadow-md relative px-7 py-4 border-2 rounded-2xl flex flex-col items-center gap-1.5 transition-all group">
+                    <i class="fa-solid fa-gamepad text-2xl text-[#0788F5] tab-icon mb-1"></i>
+                    <span class="font-bold text-[#101116] tab-title text-base">Game Programming</span>
+                    <span class="text-[11px] text-[#667085] tab-subtitle font-medium">Usia 7–14 Thn · Logika &amp; 3D</span>
                 </button>
-                <button onclick="switchCoursePath('web')" id="tab-web" class="course-tab-btn border-white/10 bg-dark-900/50 hover:border-purpleBrand-500/50 relative px-8 py-4 border rounded-2xl flex flex-col items-center gap-2 transition-all group overflow-hidden">
-                    <div class="absolute inset-0 bg-purpleBrand-500/10 opacity-0 group-hover:opacity-100 tab-bg transition-opacity"></div>
-                    <i class="fa-solid fa-code text-2xl text-slate-400 group-hover:text-purpleBrand-400 tab-icon mb-1 relative z-10 transition-colors"></i>
-                    <span class="font-heading font-bold text-slate-300 group-hover:text-white tab-title relative z-10 transition-colors">Web Programming</span>
-                    <span class="text-[9px] text-slate-500 group-hover:text-purpleBrand-200 tab-subtitle uppercase tracking-widest relative z-10 transition-colors">"Architect The Web"</span>
+                <button onclick="switchCoursePath('web')" id="tab-web" class="course-tab-btn border-[#E5E7EB] bg-white hover:border-[#5B0CB5]/50 relative px-7 py-4 border-2 rounded-2xl flex flex-col items-center gap-1.5 transition-all group">
+                    <i class="fa-solid fa-code text-2xl text-[#667085] group-hover:text-[#5B0CB5] tab-icon mb-1"></i>
+                    <span class="font-bold text-[#667085] group-hover:text-[#101116] tab-title text-base">Web Programming</span>
+                    <span class="text-[11px] text-[#667085] tab-subtitle font-medium">Usia 11–16 Thn · Frontend &amp; Web</span>
                 </button>
-                <button onclick="switchCoursePath('robotic')" id="tab-robotic" class="course-tab-btn border-white/10 bg-dark-900/50 hover:border-gold-500/50 relative px-8 py-4 border rounded-2xl flex flex-col items-center gap-2 transition-all group overflow-hidden">
-                    <div class="absolute inset-0 bg-gold-500/10 opacity-0 group-hover:opacity-100 tab-bg transition-opacity"></div>
-                    <i class="fa-solid fa-robot text-2xl text-slate-400 group-hover:text-gold-400 tab-icon mb-1 relative z-10 transition-colors"></i>
-                    <span class="font-heading font-bold text-slate-300 group-hover:text-white tab-title relative z-10 transition-colors">Robotic Engineering</span>
-                    <span class="text-[9px] text-slate-500 group-hover:text-gold-200 tab-subtitle uppercase tracking-widest relative z-10 transition-colors">"Bring Machines To Life"</span>
+                <button onclick="switchCoursePath('robotic')" id="tab-robotic" class="course-tab-btn border-[#E5E7EB] bg-white hover:border-[#FFC83D] relative px-7 py-4 border-2 rounded-2xl flex flex-col items-center gap-1.5 transition-all group">
+                    <i class="fa-solid fa-robot text-2xl text-[#667085] group-hover:text-[#ca8a04] tab-icon mb-1"></i>
+                    <span class="font-bold text-[#667085] group-hover:text-[#101116] tab-title text-base">Robotic Engineering</span>
+                    <span class="text-[11px] text-[#667085] tab-subtitle font-medium">Usia 8–15 Thn · Elektronika &amp; IoT</span>
                 </button>
             </div>
 
@@ -845,103 +618,606 @@
         </div>
     </section>
 
-    <!-- Location & Access Section -->
-    <section id="location" class="py-20 md:py-28 relative z-10 border-y border-white/5 overflow-hidden text-slate-300">
+
+    <!-- CARA BELAJAR SECTION (Materi -> Praktik -> Feedback -> Progres) -->
+    <section id="cara-belajar" class="py-20 md:py-28 relative z-10 bg-white border-b border-[#E5E7EB] text-[#101116]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Header -->
+            <div class="text-center mb-16 fade-in-up">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7F8FA] border border-[#E5E7EB] mb-3">
+                    <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
+                    <span data-i18n="method_badge" class="text-xs font-bold tracking-wider uppercase text-[#101116]">Metodologi Belajar</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#101116] mb-4 tracking-tight">
+                    <span data-i18n="method_title">Cara Belajar di LesKoding</span>
+                </h2>
+                <p data-i18n="method_desc" class="text-[#667085] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                    Kami memandu anak melalui 4 tahapan belajar yang terbukti efektif: bukan sekadar teori hafalan, melainkan proses langsung berkreasi dan melihat hasil nyata.
+                </p>
+            </div>
+
+            <!-- 4-Step Learning Journey Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                
+                <!-- Step 1: Materi Ringkas & Menyenangkan -->
+                <div class="bento-card rounded-2xl bg-[#F7F8FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#0788F5]/40 hover:shadow-lg transition-all">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-[#0788F5]/10 border border-[#0788F5]/20 flex items-center justify-center text-[#0788F5] text-xl mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-mono font-bold uppercase text-[#0788F5] tracking-widest">Langkah 01</span>
+                            <span class="text-xs text-slate-400 font-semibold">15 Menit</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#101116] mb-2" data-i18n="method_s1_title">Materi Konsep</h3>
+                        <p class="text-xs sm:text-sm text-[#667085] leading-relaxed" data-i18n="method_s1_desc">
+                            Konsep koding dan robotika disajikan melalui analogi visual sederhana dan kuis interaktif yang mudah dipahami anak tanpa rasa jenuh.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#101116]">
+                        <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                        <span>Visual block & kuis seru</span>
+                    </div>
+                </div>
+
+                <!-- Step 2: Praktik Proyek Nyata -->
+                <div class="bento-card rounded-2xl bg-[#F7F8FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#FFC83D]/60 hover:shadow-lg transition-all">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-[#FFC83D]/20 border border-[#FFC83D]/40 flex items-center justify-center text-[#ca8a04] text-xl mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-mono font-bold uppercase text-[#ca8a04] tracking-widest">Langkah 02</span>
+                            <span class="text-xs text-slate-400 font-semibold">50 Menit</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#101116] mb-2" data-i18n="method_s2_title">Praktik Eksploratif</h3>
+                        <p class="text-xs sm:text-sm text-[#667085] leading-relaxed" data-i18n="method_s2_desc">
+                            Anak langsung merakit game, menyusun baris logika kode, atau merangkai sensor robot. Fokus pada trial & error yang menumbuhkan pemecahan masalah.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#101116]">
+                        <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                        <span>Hands-on langsung di kelas</span>
+                    </div>
+                </div>
+
+                <!-- Step 3: Feedback Tutor Personal -->
+                <div class="bento-card rounded-2xl bg-[#F7F8FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#5B0CB5]/40 hover:shadow-lg transition-all">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-[#5B0CB5]/10 border border-[#5B0CB5]/20 flex items-center justify-center text-[#5B0CB5] text-xl mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-mono font-bold uppercase text-[#5B0CB5] tracking-widest">Langkah 03</span>
+                            <span class="text-xs text-slate-400 font-semibold">Setiap Sesi</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#101116] mb-2" data-i18n="method_s3_title">Feedback Tutor</h3>
+                        <p class="text-xs sm:text-sm text-[#667085] leading-relaxed" data-i18n="method_s3_desc">
+                            Tutor membimbing secara personal, mengulas logika kode, memberikan tips penyempurnaan, serta apresiasi atas ide unik yang dikembangkan siswa.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#101116]">
+                        <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                        <span>Rasio tutor 1:4 anak</span>
+                    </div>
+                </div>
+
+                <!-- Step 4: Progres & XP Terukur -->
+                <div class="bento-card rounded-2xl bg-[#F7F8FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#F3261D]/40 hover:shadow-lg transition-all">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-[#F3261D]/10 border border-[#F3261D]/20 flex items-center justify-center text-[#F3261D] text-xl mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-mono font-bold uppercase text-[#F3261D] tracking-widest">Langkah 04</span>
+                            <span class="text-xs text-slate-400 font-semibold">Tercatat Nyata</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#101116] mb-2" data-i18n="method_s4_title">Pencapaian & Progres</h3>
+                        <p class="text-xs sm:text-sm text-[#667085] leading-relaxed" data-i18n="method_s4_desc">
+                            Setiap pencapaian tercatat dalam sistem: poin XP bertambah, proyek masuk portofolio, dan laporan capaian diteruskan langsung ke orang tua.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#101116]">
+                        <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                        <span>Portofolio & sertifikat level</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+<section id="hall-of-fame" class="pt-32 pb-20 md:pt-40 md:pb-28 relative z-10 border-b border-white/5 overflow-hidden bg-gradient-to-b from-transparent via-[#2e1065]/40 to-[#020617]">
+        <!-- Ambient lighting -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-gold-500/10 blur-[150px] pointer-events-none rounded-full"></div>
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purpleBrand-500/10 blur-[120px] pointer-events-none rounded-full"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Header -->
+            <div class="text-center mb-16 fade-in-up flex flex-col items-center">
+                <!-- SVG Trophy Icon -->
+                <div class="mb-6 w-24 h-24 bg-dark-900/80 backdrop-blur-xl rounded-full border border-gold-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(250,204,21,0.2)] group hover:shadow-[0_0_50px_rgba(250,204,21,0.4)] transition-all cursor-default">
+                    <svg class="w-12 h-12 transform group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                        <path d="M32 0C15.296 0 2 9.681 2 24c0 2.831 1.903 5.498 2 9.476C1.192 36.879 0 41.368 0 46.8v6.6C0 58.918 5.082 64 11.4 64h41.2c6.318 0 11.4-5.082 11.4-11.6V46.8c0-5.432-1.192-9.921-4-12.324 0-3.978 2-6.645 2-9.476 0-14.319-13.296-24-30-24z" fill="url(#goldGrad)"/>
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fef08a;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#eab308;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#a16207;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                
+                <h2 class="text-4xl md:text-5xl font-heading font-black text-white mb-6 tracking-tight"><span data-i18n="hof_title">Kisah Sukses dari<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-yellow-600">Penjelajah Kami!</span></span></h2>
+                <p class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed"><span data-i18n="hof_desc">Di sinilah karya luar biasa dari siswa kami ditampilkan! Setiap proyek adalah petualangan yang menceritakan perjalanan kreativitas dan dedikasi. Terinspirasi oleh pencapaian mereka? Bergabunglah dan biarkan petualangan Anda dimulai!</span></p>
+            </div>
+
+            <!-- Digital Trophy Wall (Masterpiece / Winner) -->
+            <div class="mb-24 fade-in-up">
+                <h3 class="text-lg font-heading font-bold text-white mb-10 border-b border-gold-500/20 pb-4 inline-flex items-center gap-3 pr-12">
+                    <div class="w-8 h-8 rounded-lg bg-gold-500/20 flex items-center justify-center">
+                        <i class="fa-solid fa-trophy text-gold-400 text-sm"></i>
+                    </div>
+                    <span data-i18n="hof_masterpiece_heading">Pajangan Proyek Pilihan</span></h3>
+                
+                <!-- Museum Exhibit Card -->
+                <div class="masterpiece-exhibit relative rounded-[2rem] overflow-hidden group">
+                    <!-- Inner solid bg -->
+                    <div class="absolute inset-0 bg-dark-950 rounded-[2rem] z-0"></div>
+                    
+                    <!-- Subtle corner ornaments -->
+                    <div class="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-gold-500/30 rounded-tl-[2rem] z-10 pointer-events-none"></div>
+                    <div class="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-gold-500/30 rounded-br-[2rem] z-10 pointer-events-none"></div>
+
+                    <div class="relative z-10 flex flex-col lg:flex-row">
+                        <!-- Left: Cinematic Image -->
+                        <div class="w-full lg:w-[55%] relative overflow-hidden">
+                            <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="w-full h-[320px] lg:h-[480px] object-cover transition-transform duration-1000 group-hover:scale-105" alt="Masterpiece Project">
+                            
+                            <!-- Gradient overlays -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/30 to-transparent pointer-events-none"></div>
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-dark-950 pointer-events-none hidden lg:block"></div>
+                            
+                            <!-- Crown Badge -->
+                            <div class="absolute top-6 left-6 z-20 badge-shine">
+                                <span class="bg-dark-950/80 backdrop-blur-md text-gold-400 text-[10px] font-bold uppercase tracking-widest px-4 py-2.5 rounded-xl border border-gold-500/40 flex items-center gap-2 shadow-lg">
+                                    <i class="fa-solid fa-crown"></i> <span data-i18n="hof_badge_masterpiece">Masterpiece Terbaik</span>
+                                </span>
+                            </div>
+                            
+                            <!-- Vote count overlay (bottom-left of image) -->
+                            <div class="absolute bottom-6 left-6 z-20 flex items-center gap-3">
+                                <button onclick="upvoteProject(this)" class="upvote-btn flex items-center gap-2 bg-dark-950/70 backdrop-blur-md border border-white/10 hover:border-red-500/50 px-4 py-2.5 rounded-xl transition-all group/vote">
+                                    <i class="fa-solid fa-heart text-red-500/80 group-hover/vote:text-red-400 group-hover/vote:scale-110 transition-all"></i>
+                                    <span class="vote-count text-white text-sm font-bold font-mono">1.4k</span>
+                                </button>
+                                <div class="flex items-center gap-2 bg-dark-950/70 backdrop-blur-md border border-white/10 px-4 py-2.5 rounded-xl">
+                                    <i class="fa-solid fa-eye text-brand-400 text-xs"></i>
+                                    <span class="text-white text-sm font-bold font-mono">12k</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Content Panel -->
+                        <div class="w-full lg:w-[45%] p-8 lg:p-10 flex flex-col justify-center relative">
+                            <!-- Curator tag -->
+                            <div class="inline-flex items-center gap-2 text-gold-400 font-mono text-[9px] uppercase tracking-[0.2em] mb-4">
+                                <div class="w-6 h-px bg-gold-500/60"></div>
+                                <span data-i18n="hof_curator_pick">Pilihan Kurator</span>
+                                <div class="w-6 h-px bg-gold-500/60"></div>
+                            </div>
+
+                            <!-- Title -->
+                            <h4 class="text-3xl lg:text-4xl font-heading font-black text-white mb-5 leading-tight">
+                                Cyber City<br>
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-200">RP Game</span>
+                            </h4>
+                            
+                            <!-- Creator profile -->
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="relative shrink-0">
+                                    <div class="absolute -inset-0.5 bg-gradient-to-r from-gold-500 to-purpleBrand-500 rounded-full opacity-60 blur-[2px]"></div>
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" class="relative w-10 h-10 rounded-full border-2 border-dark-950 bg-dark-950" alt="Sarah">
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-white">Sarah <span data-i18n="hof_sarah_age" class="text-slate-500 font-normal">(12 Tahun)</span></p>
+                                    <p class="text-[9px] text-gold-400/80 font-mono uppercase tracking-widest">Lead Roblox Creator</p>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <p data-i18n="hof_masterpiece_desc" class="text-slate-400 text-sm leading-relaxed mb-6">Sebuah dunia Roleplay 3D masif yang dibangun dalam Roblox Studio — arsitektur cyberpunk, sistem mata uang virtual, dan NPC interaktif tingkat lanjut.</p>
+                            
+                            <!-- Tech tags -->
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="px-3 py-1.5 bg-white/[0.03] border border-white/10 rounded-lg text-[10px] text-slate-300 font-mono">Roblox Studio</span>
+                                <span class="px-3 py-1.5 bg-white/[0.03] border border-white/10 rounded-lg text-[10px] text-slate-300 font-mono">Lua</span>
+                                <span class="px-3 py-1.5 bg-white/[0.03] border border-white/10 rounded-lg text-[10px] text-slate-300 font-mono">3D Modeling</span>
+                            </div>
+                            
+                            <!-- CTA -->
+                            <button onclick="triggerConfetti()" class="self-start inline-flex items-center gap-3 bg-gold-500 hover:bg-gold-400 text-dark-950 font-black px-8 py-3.5 rounded-xl uppercase tracking-[0.1em] text-[11px] transition-all hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(250,204,21,0.25)] hover:shadow-[0_8px_30px_rgba(250,204,21,0.4)]">
+                                <i class="fa-solid fa-play text-xs"></i> <span data-i18n="btn_view_project">Lihat Proyek</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Virtual Gallery Grid -->
+            <div class="fade-in-up">
+                <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-10">
+                    <h3 class="text-lg font-heading font-bold text-white inline-flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
+                            <i class="fa-solid fa-layer-group text-slate-400 text-sm"></i>
+                        </div>
+                        <span data-i18n="hof_gallery_heading">Galeri Eksibisi</span></h3>
+                    <div class="text-[10px] text-slate-500 font-mono uppercase tracking-widest"><span data-i18n="hof_top_creations">Karya Teratas</span></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Gallery Card 1 -->
+                    <div class="exhibit-card group rounded-2xl overflow-hidden border border-white/[0.06] bg-dark-950 transition-all duration-500 hover:border-gold-500/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+                        <!-- Image -->
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Project">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent pointer-events-none"></div>
+                            <!-- Badge -->
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="bg-dark-950/70 backdrop-blur-md text-purpleBrand-400 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg border border-purpleBrand-500/30 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-fire"></i> <span data-i18n="hof_c1_badge">Terfavorit</span>
+                                </span>
+                            </div>
+                            <!-- Stats overlay -->
+                            <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
+                                <button onclick="upvoteProject(this)" class="upvote-btn flex items-center gap-1.5 bg-dark-950/60 backdrop-blur-md border border-white/10 hover:border-red-500/40 px-3 py-1.5 rounded-lg transition-all text-xs group/vote">
+                                    <i class="fa-solid fa-heart text-red-500/70 group-hover/vote:text-red-400 text-[10px]"></i>
+                                    <span class="vote-count text-white font-bold font-mono text-[10px]">856</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="p-5">
+                            <h4 data-i18n="hof_c1_title" class="font-heading font-bold text-white text-lg mb-1 group-hover:text-gold-400 transition-colors">Sistem AI Kasir Pintar</h4>
+                            <div class="flex items-center gap-2 mb-3">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Budi" class="w-5 h-5 rounded-full border border-dark-800 bg-dark-900" alt="User">
+                                <p class="text-[10px] text-slate-500"><span data-i18n="hof_c1_author">Budi (14 Tahun)</span> <span class="text-slate-600">· Web Dev</span></p>
+                            </div>
+                            <p data-i18n="hof_c1_desc" class="text-xs text-slate-400 leading-relaxed mb-4">Aplikasi kasir berbasis web menggunakan logika JavaScript kompleks untuk kalkulasi inventaris dan struk real-time.</p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">JS</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">HTML/CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Card 2 -->
+                    <div class="exhibit-card group rounded-2xl overflow-hidden border border-white/[0.06] bg-dark-950 transition-all duration-500 hover:border-gold-500/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+                        <!-- Image -->
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="assets/sessions/01M3JK50X16R206D3HK7Z9A9G0.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Project">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent pointer-events-none"></div>
+                            <!-- Badge -->
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="bg-dark-950/70 backdrop-blur-md text-brand-400 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg border border-brand-500/30 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-robot"></i> <span data-i18n="hof_c2_badge">Future Tech</span>
+                                </span>
+                            </div>
+                            <!-- Stats overlay -->
+                            <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
+                                <button onclick="upvoteProject(this)" class="upvote-btn flex items-center gap-1.5 bg-dark-950/60 backdrop-blur-md border border-white/10 hover:border-red-500/40 px-3 py-1.5 rounded-lg transition-all text-xs group/vote">
+                                    <i class="fa-solid fa-heart text-red-500/70 group-hover/vote:text-red-400 text-[10px]"></i>
+                                    <span class="vote-count text-white font-bold font-mono text-[10px]">642</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="p-5">
+                            <h4 data-i18n="hof_c2_title" class="font-heading font-bold text-white text-lg mb-1 group-hover:text-gold-400 transition-colors">Robot Pemilah Sampah</h4>
+                            <div class="flex items-center gap-2 mb-3">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kevin" class="w-5 h-5 rounded-full border border-dark-800 bg-dark-900" alt="User">
+                                <p class="text-[10px] text-slate-500"><span data-i18n="hof_c2_author">Kevin (10 Tahun)</span> <span class="text-slate-600">· Robotics</span></p>
+                            </div>
+                            <p data-i18n="hof_c2_desc" class="text-xs text-slate-400 leading-relaxed mb-4">Proyek Arduino dengan sensor ultrasonik dan motor servo yang secara otomatis membuka tutup tempat sampah.</p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">Arduino</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">C++</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Card 3 -->
+                    <div class="exhibit-card group rounded-2xl overflow-hidden border border-white/[0.06] bg-dark-950 transition-all duration-500 hover:border-gold-500/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+                        <!-- Image -->
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="assets/sessions/01M3JK1KMW3XQ7DFP5F7YZ8J0D.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Project">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent pointer-events-none"></div>
+                            <!-- Badge -->
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="bg-dark-950/70 backdrop-blur-md text-gold-400 text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg border border-gold-500/30 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-gem"></i> <span data-i18n="hof_c3_badge">Desain Terbaik</span>
+                                </span>
+                            </div>
+                            <!-- Stats overlay -->
+                            <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
+                                <button onclick="upvoteProject(this)" class="upvote-btn flex items-center gap-1.5 bg-dark-950/60 backdrop-blur-md border border-white/10 hover:border-red-500/40 px-3 py-1.5 rounded-lg transition-all text-xs group/vote">
+                                    <i class="fa-solid fa-heart text-red-500/70 group-hover/vote:text-red-400 text-[10px]"></i>
+                                    <span class="vote-count text-white font-bold font-mono text-[10px]">1.1k</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="p-5">
+                            <h4 data-i18n="hof_c3_title" class="font-heading font-bold text-white text-lg mb-1 group-hover:text-gold-400 transition-colors">Portofolio Animasi Web</h4>
+                            <div class="flex items-center gap-2 mb-3">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Nadia" class="w-5 h-5 rounded-full border border-dark-800 bg-dark-900" alt="User">
+                                <p class="text-[10px] text-slate-500"><span data-i18n="hof_c3_author">Nadia (15 Tahun)</span> <span class="text-slate-600">· Web Dev</span></p>
+                            </div>
+                            <p data-i18n="hof_c3_desc" class="text-xs text-slate-400 leading-relaxed mb-4">Website portofolio pribadi yang penuh dengan animasi CSS 3D dan transisi scroll mulus tanpa framework eksternal.</p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">TailwindCSS</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-md text-[9px] text-slate-400 font-mono">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button class="px-8 py-3.5 bg-dark-950 border border-white/10 hover:border-gold-500/30 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-gold-400 transition-all flex items-center gap-3 mx-auto group">
+                        <span data-i18n="hof_btn_load_more">Muat Lebih Banyak Karya</span> <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PROGRESS MONITORING UNTUK WALI (Laporan, perkembangan & feedback tutor) -->
+    <section id="progress-wali" class="py-20 md:py-28 relative z-10 bg-[#F7F8FA] border-b border-[#E5E7EB] text-[#101116]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left: Explanation for Parents (5 cols) -->
+                <div class="lg:col-span-5 text-left fade-in-up">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E5E7EB] shadow-sm mb-4">
+                        <i class="fa-solid fa-shield-heart text-[#0788F5] text-xs"></i>
+                        <span data-i18n="parent_badge" class="text-xs font-bold tracking-wider uppercase text-[#101116]">Transparansi untuk Wali Murid</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-[#101116] mb-5 leading-tight tracking-tight">
+                        <span data-i18n="parent_title">Pantau Perkembangan Anak dengan Jelas &amp; Nyata.</span>
+                    </h2>
+                    <p class="text-[#667085] text-sm sm:text-base leading-relaxed mb-6" data-i18n="parent_desc">
+                        Orang tua tidak perlu menebak apa yang dipelajari anak. Setiap akhir modul dan sesi berkala, Anda menerima laporan komprehensif berisi karya yang selesai, logika yang dikuasai, dan catatan evaluasi tutor.
+                    </p>
+
+                    <!-- Bullet points -->
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 text-xs mt-0.5">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-[#101116]" data-i18n="parent_f1_title">Laporan Capaian Kompetensi</h4>
+                                <p class="text-xs text-[#667085]" data-i18n="parent_f1_desc">Indikator pemahaman logika matematika, computational thinking, dan kreativitas mandiri.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-7 h-7 rounded-full bg-[#0788F5]/10 text-[#0788F5] flex items-center justify-center shrink-0 text-xs mt-0.5">
+                                <i class="fa-solid fa-link"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-[#101116]" data-i18n="parent_f2_title">Akses Portofolio Online</h4>
+                                <p class="text-xs text-[#667085]" data-i18n="parent_f2_desc">Link langsung untuk mencoba game atau melihat kode program yang dibuat anak sendiri.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-7 h-7 rounded-full bg-[#FFC83D]/30 text-[#ca8a04] flex items-center justify-center shrink-0 text-xs mt-0.5">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-[#101116]" data-i18n="parent_f3_title">Konsultasi Terbuka dengan Tutor</h4>
+                                <p class="text-xs text-[#667085]" data-i18n="parent_f3_desc">Tanya jawab langsung via WhatsApp mengenai minat khusus dan akselerasi belajar anak.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#register" class="inline-flex items-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md">
+                        <span data-i18n="parent_cta">Konsultasikan Kebutuhan Anak</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Right: Realistic Sample Report Mockup (7 cols) -->
+                <div class="lg:col-span-7 fade-in-up">
+                    <div class="bg-white rounded-2xl border border-[#E5E7EB] shadow-xl p-6 sm:p-8 relative overflow-hidden">
+                        
+                        <!-- Top Bar of Report -->
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#E5E7EB] gap-4">
+                            <div class="flex items-center gap-3.5">
+                                <div class="w-12 h-12 rounded-full bg-[#0788F5]/15 border border-[#0788F5]/30 flex items-center justify-center text-[#0788F5] font-bold text-lg">
+                                    A
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="text-base font-bold text-[#101116]">Ananda K.</h4>
+                                        <span class="text-[10px] font-mono bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">Level 2 Selesai</span>
+                                    </div>
+                                    <p class="text-xs text-[#667085]">Jalur: Game Programming (Roblox Studio & Lua) · Cabang Ubud</p>
+                                </div>
+                            </div>
+                            <div class="text-left sm:text-right">
+                                <span class="text-[11px] text-[#667085] block">Laporan Modul #4</span>
+                                <span class="text-xs font-bold text-[#101116] font-mono">Status: Terverifikasi</span>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bars & Metrics -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+                            <div class="bg-[#F7F8FA] border border-[#E5E7EB] p-4 rounded-xl">
+                                <div class="text-[11px] font-bold text-[#667085] uppercase tracking-wider mb-1">Kehadiran & Fokus</div>
+                                <div class="text-xl font-bold text-[#101116]">100%</div>
+                                <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2 overflow-hidden">
+                                    <div class="bg-emerald-500 h-full rounded-full" style="width: 100%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="bg-[#F7F8FA] border border-[#E5E7EB] p-4 rounded-xl">
+                                <div class="text-[11px] font-bold text-[#667085] uppercase tracking-wider mb-1">Logika Algoritma</div>
+                                <div class="text-xl font-bold text-[#0788F5]">Sangat Baik</div>
+                                <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2 overflow-hidden">
+                                    <div class="bg-[#0788F5] h-full rounded-full" style="width: 92%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="bg-[#F7F8FA] border border-[#E5E7EB] p-4 rounded-xl">
+                                <div class="text-[11px] font-bold text-[#667085] uppercase tracking-wider mb-1">Kreativitas Proyek</div>
+                                <div class="text-xl font-bold text-[#ca8a04]">Mandiri</div>
+                                <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2 overflow-hidden">
+                                    <div class="bg-[#FFC83D] h-full rounded-full" style="width: 95%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tutor Personalized Feedback Bubble -->
+                        <div class="bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl p-5 mb-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i class="fa-solid fa-quote-left text-[#0788F5] text-xs"></i>
+                                <span class="text-xs font-bold text-[#101116]">Catatan Evaluasi Tutor:</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#475467] leading-relaxed italic">
+                                "Ananda menunjukkan pemahaman yang sangat cepat pada konsep loops dan deteksi tabrakan (hitbox). Mampu menyelesaikan proyek arena 3D tanpa bantuan panduan ulang. Rekomendasi modul selanjutnya: pengenalan variabel dinamis dan sound effect triggers."
+                            </p>
+                            <div class="mt-3 flex items-center justify-between text-[11px] text-[#667085]">
+                                <span>Tutor: Kak Danu (Facilitator Game Dev)</span>
+                                <span class="text-emerald-600 font-semibold flex items-center gap-1">
+                                    <i class="fa-solid fa-badge-check"></i> Siap Naik Tingkat
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Project Attachment Link Preview -->
+                        <div class="flex items-center justify-between p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-[#5B0CB5]/10 text-[#5B0CB5] flex items-center justify-center">
+                                    <i class="fa-solid fa-cube"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-[#101116]">Karya Siswa: 'Cyber Quest 3D Arena'</div>
+                                    <div class="text-[10px] text-[#667085]">Dimainkan 80+ sesi latihan di lab</div>
+                                </div>
+                            </div>
+                            <span class="text-[11px] font-bold text-[#0788F5] hover:underline cursor-pointer">Lihat Karya &rarr;</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Location & Access Section (Bright Surface Theme) -->
+    <section id="location" class="py-20 md:py-28 relative z-10 bg-white border-b border-[#E5E7EB] text-[#101116]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- Header Section -->
             <div class="text-center mb-16 fade-in-up">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-500/30 bg-brand-500/10 mb-4">
-                    <i class="fa-solid fa-map-location-dot text-brand-400 text-xs"></i>
-                    <span class="text-[9px] font-bold tracking-[0.2em] uppercase text-brand-400">Kampus Tersedia</span>
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7F8FA] border border-[#E5E7EB] mb-3">
+                    <i class="fa-solid fa-map-location-dot text-[#0788F5] text-xs"></i>
+                    <span class="text-xs font-bold tracking-wider uppercase text-[#101116]">Kampus &amp; Laboratorium</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4"><span data-i18n="loc_title">Temukan Rute Menuju Petualangan Anda!</span></h2>
-                <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">Dari peta penduduk lokal hingga sistem transportasi, LesKoding terletak di tempat yang strategis untuk memudahkan Anda memulai perjalanan. Temukan lokasi kami dan manfaatkan kemudahan akses untuk memulai petualangan coding Anda!</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-[#101116] mb-4"><span data-i18n="loc_title">Lokasi Belajar di Bali</span></h2>
+                <p class="text-[#667085] text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Pilih Learning Center terdekat dari rumah Anda untuk kelas tatap muka interaktif. Setiap cabang dilengkapi dengan lab komputer ber-AC, perangkat robotika, dan tutor ramah.</p>
             </div>
 
             <!-- Locations Grid (3 Columns) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 fade-in-up">
                 
                 <!-- Cabang 1: Gianyar -->
-                <div class="bg-dark-900/50 backdrop-blur-sm rounded-3xl p-5 shadow-xl border border-white/10 hover:shadow-[0_0_20px_rgba(14,165,233,0.15)] hover:border-brand-500/50 transition-all group flex flex-col h-full">
-                    <h3 class="text-xl font-heading font-black text-white mb-3 group-hover:text-brand-400 transition-colors flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-sm">
+                <div class="bg-[#F7F8FA] rounded-2xl p-5 border border-[#E5E7EB] hover:border-[#0788F5]/40 hover:shadow-lg transition-all group flex flex-col h-full">
+                    <h3 class="text-lg font-bold text-[#101116] mb-3 group-hover:text-[#0788F5] transition-colors flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-[#0788F5]/10 text-[#0788F5] flex items-center justify-center text-sm">
                             <i class="fa-solid fa-building-flag"></i>
                         </div>
-                        Gents Robotic
+                        Gents Robotic Gianyar
                     </h3>
                     
-                    <div class="w-full h-[180px] rounded-2xl overflow-hidden mb-4 border border-white/10 opacity-90 group-hover:opacity-100 transition-opacity">
+                    <div class="w-full h-[180px] rounded-xl overflow-hidden mb-4 border border-[#E5E7EB]">
                         <iframe src="https://maps.google.com/maps?q=Jln%20Ksatrian%20No%208%20Lingkungan%20Candi%20Baru%20Gianyar&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
                     <div class="flex-grow">
-                        <p class="text-sm text-slate-400 mb-2 flex items-start gap-2">
-                            <i class="fa-solid fa-location-dot mt-1 text-slate-500"></i>
+                        <p class="text-xs text-[#667085] mb-2 flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-0.5 text-slate-400"></i>
                             <span>Jln Ksatrian, No. 8, Lingkungan Candi Baru, Gianyar</span>
                         </p>
                     </div>
-                    <div class="mt-2 pt-4 border-t border-white/5 flex items-center justify-between">
-                        <div class="flex items-center gap-2 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
-                            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
-                            <span class="text-xs font-bold text-slate-300">0851-8306-798</span>
+                    <div class="mt-2 pt-4 border-t border-slate-200 flex items-center justify-between">
+                        <div class="flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+                            <i class="fa-brands fa-whatsapp text-emerald-600 text-xs"></i>
+                            <span class="text-xs font-bold text-slate-700">0851-8306-798</span>
                         </div>
-                        <a href="https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-brand-400 hover:text-brand-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">Rute <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#0788F5] hover:underline flex items-center gap-1">Rute <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
 
                 <!-- Cabang 2: Peliatan -->
-                <div class="bg-dark-900/50 backdrop-blur-sm rounded-3xl p-5 shadow-xl border border-white/10 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] hover:border-purpleBrand-500/50 transition-all group flex flex-col h-full" style="transition-delay: 100ms;">
-                    <h3 class="text-xl font-heading font-black text-white mb-3 group-hover:text-purpleBrand-400 transition-colors flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-xl bg-purpleBrand-500/20 text-purpleBrand-400 flex items-center justify-center text-sm">
+                <div class="bg-[#F7F8FA] rounded-2xl p-5 border border-[#E5E7EB] hover:border-[#5B0CB5]/40 hover:shadow-lg transition-all group flex flex-col h-full" style="transition-delay: 100ms;">
+                    <h3 class="text-lg font-bold text-[#101116] mb-3 group-hover:text-[#5B0CB5] transition-colors flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-[#5B0CB5]/10 text-[#5B0CB5] flex items-center justify-center text-sm">
                             <i class="fa-solid fa-laptop-code"></i>
                         </div>
-                        Bali Seed Peliatan
+                        Bali Seed Peliatan Ubud
                     </h3>
                     
-                    <div class="w-full h-[180px] rounded-2xl overflow-hidden mb-4 border border-white/10 opacity-90 group-hover:opacity-100 transition-opacity">
+                    <div class="w-full h-[180px] rounded-xl overflow-hidden mb-4 border border-[#E5E7EB]">
                         <iframe src="https://maps.google.com/maps?q=Jalan%20Peliatan%20No%201%20Ubud&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
                     <div class="flex-grow">
-                        <p class="text-sm text-slate-400 mb-2 flex items-start gap-2">
-                            <i class="fa-solid fa-location-dot mt-1 text-slate-500"></i>
+                        <p class="text-xs text-[#667085] mb-2 flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-0.5 text-slate-400"></i>
                             <span>Jalan Peliatan, No. 1, Ubud</span>
                         </p>
                     </div>
-                    <div class="mt-2 pt-4 border-t border-white/5 flex items-center justify-between">
-                        <div class="flex items-center gap-2 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
-                            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
-                            <span class="text-xs font-bold text-slate-300">0857-9273-6627</span>
+                    <div class="mt-2 pt-4 border-t border-slate-200 flex items-center justify-between">
+                        <div class="flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+                            <i class="fa-brands fa-whatsapp text-emerald-600 text-xs"></i>
+                            <span class="text-xs font-bold text-slate-700">0857-9273-6627</span>
                         </div>
-                        <a href="https://maps.google.com/?q=Jalan+Peliatan+No+1+Ubud" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-purpleBrand-400 hover:text-purpleBrand-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">Rute <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="https://maps.google.com/?q=Jalan+Peliatan+No+1+Ubud" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#5B0CB5] hover:underline flex items-center gap-1">Rute <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
 
                 <!-- Cabang 3: Bedulu -->
-                <div class="bg-dark-900/50 backdrop-blur-sm rounded-3xl p-5 shadow-xl border border-white/10 hover:shadow-[0_0_20px_rgba(250,204,21,0.15)] hover:border-gold-500/50 transition-all group flex flex-col h-full" style="transition-delay: 200ms;">
-                    <h3 class="text-xl font-heading font-black text-white mb-3 group-hover:text-gold-400 transition-colors flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-sm">
+                <div class="bg-[#F7F8FA] rounded-2xl p-5 border border-[#E5E7EB] hover:border-[#FFC83D] hover:shadow-lg transition-all group flex flex-col h-full" style="transition-delay: 200ms;">
+                    <h3 class="text-lg font-bold text-[#101116] mb-3 group-hover:text-[#ca8a04] transition-colors flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-[#FFC83D]/20 text-[#ca8a04] flex items-center justify-center text-sm">
                             <i class="fa-solid fa-robot"></i>
                         </div>
                         Bali Seed Bedulu
                     </h3>
                     
-                    <div class="w-full h-[180px] rounded-2xl overflow-hidden mb-4 border border-white/10 opacity-90 group-hover:opacity-100 transition-opacity">
+                    <div class="w-full h-[180px] rounded-xl overflow-hidden mb-4 border border-[#E5E7EB]">
                         <iframe src="https://maps.google.com/maps?q=Jln%20Raya%20Semebaung%20Bedulu&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
                     <div class="flex-grow">
-                        <p class="text-sm text-slate-400 mb-2 flex items-start gap-2">
-                            <i class="fa-solid fa-location-dot mt-1 text-slate-500"></i>
+                        <p class="text-xs text-[#667085] mb-2 flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-0.5 text-slate-400"></i>
                             <span>Jln Raya Semebaung Bedulu</span>
                         </p>
                     </div>
-                    <div class="mt-2 pt-4 border-t border-white/5 flex items-center justify-between">
-                        <div class="flex items-center gap-2 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
-                            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
-                            <span class="text-xs font-bold text-slate-300">0851-8306-798</span>
+                    <div class="mt-2 pt-4 border-t border-slate-200 flex items-center justify-between">
+                        <div class="flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+                            <i class="fa-brands fa-whatsapp text-emerald-600 text-xs"></i>
+                            <span class="text-xs font-bold text-slate-700">0851-8306-798</span>
                         </div>
-                        <a href="https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-gold-400 hover:text-gold-300 flex items-center gap-1 group-hover:translate-x-1 transition-transform">Rute <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#ca8a04] hover:underline flex items-center gap-1">Rute <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
             </div>
@@ -950,35 +1226,35 @@
             <div class="max-w-2xl mx-auto fade-in-up" style="transition-delay: 300ms;">
                 
                 <!-- Distance Checker -->
-                <div class="bg-dark-900/50 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/10 text-center">
-                    <div class="w-12 h-12 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl mx-auto mb-4">
+                <div class="bg-[#F7F8FA] rounded-2xl p-6 sm:p-8 border border-[#E5E7EB] text-center">
+                    <div class="w-11 h-11 rounded-full bg-[#0788F5]/10 text-[#0788F5] flex items-center justify-center text-lg mx-auto mb-3">
                         <i class="fa-solid fa-route"></i>
                     </div>
-                    <h3 class="text-xl font-heading font-black text-white mb-2"><span data-i18n="loc_calc_title">Cek Kampus Terdekat</span></h3>
-                    <p data-i18n="loc_calc_desc" class="text-sm text-slate-400 mb-6">Masukkan area/kecamatan Anda untuk melihat cabang mana yang paling mudah diakses.</p>
+                    <h3 class="text-lg font-bold text-[#101116] mb-1.5"><span data-i18n="loc_calc_title">Cek Kampus Terdekat</span></h3>
+                    <p data-i18n="loc_calc_desc" class="text-xs text-[#667085] mb-5">Masukkan area atau kecamatan Anda untuk melihat cabang mana yang paling mudah diakses.</p>
                     
                     <div class="flex flex-col sm:flex-row gap-3 mb-2">
                         <div class="relative flex-grow">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fa-solid fa-location-crosshairs text-slate-500"></i>
+                                <i class="fa-solid fa-location-crosshairs text-slate-400"></i>
                             </div>
-                            <input type="text" id="user-location" placeholder="Contoh: Denpasar Selatan" class="w-full pl-11 pr-4 py-3.5 bg-dark-950 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all font-medium text-white placeholder-slate-600">
+                            <input type="text" id="user-location" placeholder="Contoh: Denpasar Selatan atau Gianyar" class="w-full pl-11 pr-4 py-3 bg-white border border-[#E5E7EB] rounded-xl text-sm focus:outline-none focus:border-[#0788F5] focus:ring-2 focus:ring-[#0788F5]/20 transition-all font-medium text-[#101116] placeholder-[#98a2b3]">
                         </div>
                         
-                        <button id="check-distance-btn" onclick="calculateDistance()" class="sm:w-auto w-full bg-brand-500 hover:bg-brand-400 text-dark-950 font-extrabold py-3.5 px-8 rounded-xl uppercase tracking-[0.15em] text-[10px] transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(56,189,248,0.3)]">
+                        <button id="check-distance-btn" onclick="calculateDistance()" class="sm:w-auto w-full bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold py-3 px-7 rounded-xl uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 shadow-sm shrink-0">
                             <i class="fa-solid fa-magnifying-glass-location"></i> <span data-i18n="loc_btn_check">Cek Lokasi</span></button>
                     </div>
                     
                     <!-- Result Box (Hidden default) -->
-                    <div id="distance-result-box" class="hidden bg-dark-950/80 rounded-xl p-5 border border-emerald-500/30 transition-all mt-4 text-left shadow-[0_0_20px_rgba(16,185,129,0.1)]">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 text-xl">
+                    <div id="distance-result-box" class="hidden bg-white rounded-xl p-4 border border-emerald-300 transition-all mt-4 text-left shadow-sm">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 text-lg">
                                 <i class="fa-solid fa-car-side"></i>
                             </div>
                             <div>
-                                <p data-i18n="loc_est_label" class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1">Estimasi Tiba</p>
-                                <p id="distance-result-text" class="text-base font-bold text-white">Hanya 15 Menit (5 km) dari lokasi Anda!</p>
-                                <p class="text-xs text-slate-400 mt-1"><i class="fa-solid fa-circle-info text-brand-400 mr-1"></i> Kampus terdekat: <strong class="text-brand-300">Bali Seed Peliatan</strong></p>
+                                <p data-i18n="loc_est_label" class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-0.5">Estimasi Perjalanan</p>
+                                <p id="distance-result-text" class="text-sm font-bold text-[#101116]">Hanya 15 Menit (5 km) dari lokasi Anda!</p>
+                                <p class="text-xs text-[#667085] mt-0.5">Kampus terdekat: <strong class="text-[#0788F5]">Bali Seed Peliatan</strong></p>
                             </div>
                         </div>
                     </div>
@@ -988,95 +1264,178 @@
         </div>
     </section>
 
-    <!-- Registration Form -->
-    <section id="register" class="py-20 md:py-28 relative z-10 bg-dark-900/60 backdrop-blur-xl border-b border-white/5">
+
+    <!-- FAQ SECTION (Pertanyaan Umum Orang Tua & Siswa) -->
+    <section id="faq" class="py-20 md:py-28 relative z-10 bg-white border-b border-[#E5E7EB] text-[#101116]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Header -->
+            <div class="text-center mb-14 fade-in-up">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7F8FA] border border-[#E5E7EB] mb-3">
+                    <span class="w-2 h-2 rounded-full bg-[#F3261D]"></span>
+                    <span data-i18n="faq_badge" class="text-xs font-bold tracking-wider uppercase text-[#101116]">Tanya Jawab</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-[#101116] mb-4 tracking-tight">
+                    <span data-i18n="faq_title">Pertanyaan yang Sering Diajukan</span>
+                </h2>
+                <p data-i18n="faq_desc" class="text-[#667085] text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+                    Jawaban transparan seputar jadwal belajar, perangkat, usia minimal, dan sistem kelas percobaan.
+                </p>
+            </div>
+
+            <!-- FAQ Accordions -->
+            <div class="space-y-4 fade-in-up">
+                
+                <details class="group bg-[#F7F8FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
+                    <summary class="flex items-center justify-between font-bold text-base text-[#101116]">
+                        <span data-i18n="faq_q1">Apakah anak yang belum pernah memegang coding bisa ikut?</span>
+                        <span class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#667085] group-open:rotate-180 transition-transform">
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </span>
+                    </summary>
+                    <p class="mt-4 text-xs sm:text-sm text-[#667085] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a1">
+                        Tentu bisa! 80% siswa baru kami memulai dari nol. Kami mengajarkan logika berpikir terstruktur (computational thinking) melalui blok visual interaktif terlebih dahulu sebelum beralih ke sintaks kode teks asli.
+                    </p>
+                </details>
+
+                <details class="group bg-[#F7F8FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
+                    <summary class="flex items-center justify-between font-bold text-base text-[#101116]">
+                        <span data-i18n="faq_q2">Apakah tersedia kelas percobaan (trial class)?</span>
+                        <summary-icon class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#667085] group-open:rotate-180 transition-transform">
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </summary-icon>
+                    </summary>
+                    <p class="mt-4 text-xs sm:text-sm text-[#667085] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a2">
+                        Ya, kami menyediakan sesi Free Trial di Learning Center Gianyar, Ubud Peliatan, dan Bedulu. Anda dapat mendaftarkan jadwal percobaan melalui form di bawah atau via WhatsApp admin kami.
+                    </p>
+                </details>
+
+                <details class="group bg-[#F7F8FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
+                    <summary class="flex items-center justify-between font-bold text-base text-[#101116]">
+                        <span data-i18n="faq_q3">Apakah siswa harus membawa laptop sendiri?</span>
+                        <summary-icon class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#667085] group-open:rotate-180 transition-transform">
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </summary-icon>
+                    </summary>
+                    <p class="mt-4 text-xs sm:text-sm text-[#667085] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a3">
+                        Setiap lab Learning Center kami sudah dilengkapi dengan PC/Laptop dan perangkat robotik siap pakai. Namun, siswa yang ingin membawa laptop pribadi agar proyek tersimpan langsung di perangkatnya sangat dipersilakan.
+                    </p>
+                </details>
+
+                <details class="group bg-[#F7F8FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
+                    <summary class="flex items-center justify-between font-bold text-base text-[#101116]">
+                        <span data-i18n="faq_q4">Berapa rasio tutor per siswa di setiap kelas?</span>
+                        <summary-icon class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#667085] group-open:rotate-180 transition-transform">
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </summary-icon>
+                    </summary>
+                    <p class="mt-4 text-xs sm:text-sm text-[#667085] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a4">
+                        Kami menjaga kualitas pembelajaran dengan kelas kecil: maksimal 4–6 anak per tutor agar setiap anak mendapat pendampingan intensif dan tidak ada yang tertinggal dalam proses praktek.
+                    </p>
+                </details>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- REGISTRATION SECTION (Form Singkat & Ramah Mobile) -->
+    <section id="register" class="py-20 md:py-28 relative z-10 bg-[#F7F8FA] border-b border-[#E5E7EB] text-[#101116]">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12 fade-in-up">
-                <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-brand-400 mb-2">Pendaftaran</h2>
-                <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4"><span data-i18n="reg_title">Daftar Petualangan Anda</span></h3>
-                <p data-i18n="reg_desc" class="text-slate-400 text-sm max-w-xl mx-auto">Isi formulir di bawah ini untuk memulai perjalanan digital anak Anda. Konfirmasi pendaftaran akan diproses otomatis melalui WhatsApp.</p>
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E5E7EB] shadow-sm mb-3">
+                    <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
+                    <span class="text-xs font-bold tracking-wider uppercase text-[#101116]">Formulir Pendaftaran</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-[#101116] mb-4 tracking-tight"><span data-i18n="reg_title">Mulai Petualangan Belajar</span></h2>
+                <p data-i18n="reg_desc" class="text-[#667085] text-sm max-w-xl mx-auto leading-relaxed">Isi data singkat berikut untuk konsultasi jadwal kelas reguler atau klaim kelas percobaan gratis (trial). Konfirmasi akan otomatis diteruskan ke WhatsApp admin cabang.</p>
             </div>
             
-            <form id="registration-form" class=" border border-white/10 rounded-[2rem] p-6 md:p-10 shadow-2xl fade-in-up">
-                <h4 class="font-heading font-bold text-white text-lg mb-6 border-b border-white/10 pb-4 flex items-center gap-2.5"><i class="fa-solid fa-clipboard-list text-brand-400"></i> <span data-i18n="reg_form_header">Formulir Pendaftaran Siswa Baru LesKoding</span></h4>
+            <form id="registration-form" class="bg-white border border-[#E5E7EB] rounded-2xl p-6 md:p-10 shadow-xl fade-in-up">
+                <div class="flex items-center justify-between border-b border-[#E5E7EB] pb-5 mb-6">
+                    <h4 class="font-bold text-[#101116] text-base sm:text-lg flex items-center gap-2.5">
+                        <i class="fa-solid fa-clipboard-list text-[#0788F5]"></i> 
+                        <span data-i18n="reg_form_header">Data Calon Siswa &amp; Wali Murid</span>
+                    </h4>
+                    <span class="text-[11px] text-[#667085] hidden sm:inline-block"><span class="text-[#F3261D]">*</span> Wajib diisi</span>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Pilihan Learning Center (Enhanced Interactive Dropdown) -->
+                    <!-- Pilihan Learning Center (Interactive Dropdown) -->
                     <div class="space-y-2 md:col-span-2 relative">
                         <div class="flex items-center justify-between">
-                            <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400 flex items-center gap-2">
-                                <i class="fa-solid fa-school text-brand-400"></i> Pilihan Learning Center <span class="text-red-400">*</span>
+                            <label class="text-xs font-bold uppercase tracking-wider text-[#101116] flex items-center gap-2">
+                                <i class="fa-solid fa-school text-[#0788F5]"></i> Pilihan Learning Center <span class="text-[#F3261D]">*</span>
                             </label>
-                            <span data-i18n="reg_campus_count" class="text-[10px] text-slate-500 font-mono">3 Kampus Tersedia di Bali</span>
+                            <span data-i18n="reg_campus_count" class="text-xs text-[#667085]">3 Kampus Tersedia di Bali</span>
                         </div>
                         
                         <!-- Custom Select Trigger Card -->
-                        <div id="custom-select-trigger" onclick="toggleCustomSelect()" class="w-full bg-dark-950 border border-white/15 hover:border-brand-500/50 rounded-2xl p-3.5 flex items-center justify-between cursor-pointer transition-all duration-300 shadow-lg group">
+                        <div id="custom-select-trigger" onclick="toggleCustomSelect()" class="w-full bg-[#F7F8FA] border border-[#E5E7EB] hover:border-[#0788F5] rounded-xl p-3.5 flex items-center justify-between cursor-pointer transition-all duration-300 group">
                             <div class="flex items-center gap-3.5">
-                                <div id="selected-center-icon" class="w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/30 text-brand-400 flex items-center justify-center shrink-0 text-base transition-all">
+                                <div id="selected-center-icon" class="w-10 h-10 rounded-xl bg-[#0788F5]/10 border border-[#0788F5]/20 text-[#0788F5] flex items-center justify-center shrink-0 text-base transition-all">
                                     <i class="fa-solid fa-map-location-dot"></i>
                                 </div>
                                 <div class="text-left">
-                                    <div id="selected-center-name" data-i18n="reg_choose_center" class="text-sm font-bold text-white group-hover:text-brand-300 transition-colors">
+                                    <div id="selected-center-name" data-i18n="reg_choose_center" class="text-sm font-bold text-[#101116] group-hover:text-[#0788F5] transition-colors">
                                         Pilih Learning Center Terdekat
                                     </div>
-                                    <div id="selected-center-sub" data-i18n="reg_choose_center_sub" class="text-[11px] text-slate-500 font-mono">
+                                    <div id="selected-center-sub" data-i18n="reg_choose_center_sub" class="text-xs text-[#667085]">
                                         Klik untuk memilih cabang belajar anak Anda
                                     </div>
                                 </div>
                             </div>
                             <div class="flex items-center gap-2 pr-1">
-                                <span id="selected-center-tag" class="hidden text-[9px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-md border"></span>
+                                <span id="selected-center-tag" class="hidden text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-md border"></span>
                                 <i id="custom-select-chevron" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
                             </div>
                         </div>
 
                         <!-- Custom Dropdown Menu -->
-                        <div id="custom-select-menu" class="hidden absolute top-full left-0 right-0 mt-2 bg-dark-950/95 backdrop-blur-2xl border border-white/15 rounded-2xl p-2 shadow-2xl z-50 flex flex-col gap-1.5 transition-all duration-300">
+                        <div id="custom-select-menu" class="hidden absolute top-full left-0 right-0 mt-2 bg-white border border-[#E5E7EB] rounded-2xl p-2 shadow-2xl z-50 flex flex-col gap-1.5 transition-all duration-300">
                             <!-- Option 1: Gianyar -->
-                            <div onclick="selectCustomCenter('Gents Robotic & Coding (Gianyar)', 'Jln Ksatrian No 8 Lingkungan Candi Baru, Gianyar', 'fa-microchip', 'brand', 'Gianyar')" class="p-3 rounded-xl hover:bg-brand-500/10 border border-transparent hover:border-brand-500/30 flex items-center justify-between cursor-pointer transition-all group/opt">
+                            <div onclick="selectCustomCenter('Gents Robotic & Coding (Gianyar)', 'Jln Ksatrian No 8 Lingkungan Candi Baru, Gianyar', 'fa-microchip', 'brand', 'Gianyar')" class="p-3 rounded-xl hover:bg-[#F7F8FA] border border-transparent hover:border-[#0788F5]/30 flex items-center justify-between cursor-pointer transition-all group/opt">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
+                                    <div class="w-9 h-9 rounded-lg bg-[#0788F5]/10 border border-[#0788F5]/20 text-[#0788F5] flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
                                         <i class="fa-solid fa-microchip"></i>
                                     </div>
                                     <div>
-                                        <p class="text-xs sm:text-sm font-bold text-white group-hover/opt:text-brand-300 transition-colors">Gents Robotic &amp; Coding (Gianyar)</p>
-                                        <p class="text-[10px] text-slate-400">Jln Ksatrian No 8 Lingkungan Candi Baru, Gianyar</p>
+                                        <p class="text-xs sm:text-sm font-bold text-[#101116] group-hover/opt:text-[#0788F5] transition-colors">Gents Robotic &amp; Coding (Gianyar)</p>
+                                        <p class="text-[11px] text-[#667085]">Jln Ksatrian No 8 Lingkungan Candi Baru, Gianyar</p>
                                     </div>
                                 </div>
-                                <span class="text-[9px] font-mono font-bold uppercase tracking-wider bg-brand-500/15 text-brand-400 px-2 py-0.5 rounded-md border border-brand-500/20">Gianyar</span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider bg-[#0788F5]/10 text-[#0788F5] px-2.5 py-1 rounded-md">Gianyar</span>
                             </div>
 
                             <!-- Option 2: Ubud Peliatan -->
-                            <div onclick="selectCustomCenter('Bali Seed Robotic & Coding Peliatan (Ubud)', 'Jalan Peliatan, No. 1, Ubud', 'fa-laptop-code', 'purpleBrand', 'Ubud')" class="p-3 rounded-xl hover:bg-purpleBrand-500/10 border border-transparent hover:border-purpleBrand-500/30 flex items-center justify-between cursor-pointer transition-all group/opt">
+                            <div onclick="selectCustomCenter('Bali Seed Robotic & Coding Peliatan (Ubud)', 'Jalan Peliatan, No. 1, Ubud', 'fa-laptop-code', 'purpleBrand', 'Ubud')" class="p-3 rounded-xl hover:bg-[#F7F8FA] border border-transparent hover:border-[#5B0CB5]/30 flex items-center justify-between cursor-pointer transition-all group/opt">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-lg bg-purpleBrand-500/10 border border-purpleBrand-500/20 text-purpleBrand-400 flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
+                                    <div class="w-9 h-9 rounded-lg bg-[#5B0CB5]/10 border border-[#5B0CB5]/20 text-[#5B0CB5] flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
                                         <i class="fa-solid fa-laptop-code"></i>
                                     </div>
                                     <div>
-                                        <p class="text-xs sm:text-sm font-bold text-white group-hover/opt:text-purpleBrand-300 transition-colors">Bali Seed Robotic &amp; Coding Peliatan</p>
-                                        <p class="text-[10px] text-slate-400">Jalan Peliatan, No. 1, Ubud</p>
+                                        <p class="text-xs sm:text-sm font-bold text-[#101116] group-hover/opt:text-[#5B0CB5] transition-colors">Bali Seed Robotic &amp; Coding Peliatan</p>
+                                        <p class="text-[11px] text-[#667085]">Jalan Peliatan, No. 1, Ubud</p>
                                     </div>
                                 </div>
-                                <span class="text-[9px] font-mono font-bold uppercase tracking-wider bg-purpleBrand-500/15 text-purpleBrand-400 px-2 py-0.5 rounded-md border border-purpleBrand-500/20">Ubud</span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider bg-[#5B0CB5]/10 text-[#5B0CB5] px-2.5 py-1 rounded-md">Ubud</span>
                             </div>
 
                             <!-- Option 3: Bedulu -->
-                            <div onclick="selectCustomCenter('Bali Seed Bedulu Robotics & Coding', 'Jln Raya Semebaung, Bedulu', 'fa-robot', 'gold', 'Bedulu')" class="p-3 rounded-xl hover:bg-gold-500/10 border border-transparent hover:border-gold-500/30 flex items-center justify-between cursor-pointer transition-all group/opt">
+                            <div onclick="selectCustomCenter('Bali Seed Bedulu Robotics & Coding', 'Jln Raya Semebaung, Bedulu', 'fa-robot', 'gold', 'Bedulu')" class="p-3 rounded-xl hover:bg-[#F7F8FA] border border-transparent hover:border-[#FFC83D]/60 flex items-center justify-between cursor-pointer transition-all group/opt">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-lg bg-gold-500/10 border border-gold-500/20 text-gold-400 flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
+                                    <div class="w-9 h-9 rounded-lg bg-[#FFC83D]/20 border border-[#FFC83D]/40 text-[#ca8a04] flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
                                         <i class="fa-solid fa-robot"></i>
                                     </div>
                                     <div>
-                                        <p class="text-xs sm:text-sm font-bold text-white group-hover/opt:text-gold-300 transition-colors">Bali Seed Bedulu Robotics &amp; Coding</p>
-                                        <p class="text-[10px] text-slate-400">Jln Raya Semebaung, Bedulu</p>
+                                        <p class="text-xs sm:text-sm font-bold text-[#101116] group-hover/opt:text-[#ca8a04] transition-colors">Bali Seed Bedulu Robotics &amp; Coding</p>
+                                        <p class="text-[11px] text-[#667085]">Jln Raya Semebaung, Bedulu</p>
                                     </div>
                                 </div>
-                                <span class="text-[9px] font-mono font-bold uppercase tracking-wider bg-gold-500/15 text-gold-400 px-2 py-0.5 rounded-md border border-gold-500/20">Bedulu</span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider bg-[#FFC83D]/20 text-[#ca8a04] px-2.5 py-1 rounded-md">Bedulu</span>
                             </div>
                         </div>
 
-                        <!-- Underlying Synchronized Select (for form validation & accessibility) -->
+                        <!-- Underlying Synchronized Select -->
                         <select id="reg-center" required class="sr-only">
                             <option value="" disabled selected>-- Pilih Learning Center Terdekat --</option>
                             <option value="Gents Robotic & Coding (Gianyar)">Gents Robotic & Coding (Gianyar)</option>
@@ -1088,63 +1447,71 @@
                     <!-- Kode Promo / Nama Promo -->
                     <div class="space-y-2 md:col-span-2">
                         <div class="flex items-center justify-between">
-                            <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400 flex items-center gap-2">
-                                <i class="fa-solid fa-ticket text-gold-400"></i> Kode / Nama Promo (Opsional)
+                            <label class="text-xs font-bold uppercase tracking-wider text-[#101116] flex items-center gap-2">
+                                <i class="fa-solid fa-ticket text-[#ca8a04]"></i> Kode / Nama Promo (Opsional)
                             </label>
-                            <span data-i18n="reg_promo_sub" class="text-[10px] text-slate-500 font-mono">Otomatis terisi jika klaim voucher promo</span>
+                            <span data-i18n="reg_promo_sub" class="text-xs text-[#667085]">Otomatis terisi jika klaim voucher</span>
                         </div>
                         <div class="relative">
-                            <input type="text" id="reg-promo" class="w-full bg-dark-950 border border-white/15 rounded-xl px-4 py-3 text-gold-400 focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all placeholder-slate-600 font-mono text-sm tracking-wider uppercase font-semibold" placeholder="Cth: PETUALANGAN2026">
-                            <span id="promo-applied-badge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 bg-gold-500/20 text-gold-400 border border-gold-500/40 text-[10px] font-mono px-2.5 py-1 rounded-md font-bold tracking-wider">
+                            <input type="text" id="reg-promo" class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#ca8a04] focus:outline-none focus:border-[#FFC83D] focus:ring-2 focus:ring-[#FFC83D]/20 transition-all placeholder-[#98a2b3] font-mono text-sm tracking-wider uppercase font-bold" placeholder="Cth: PETUALANGAN2026">
+                            <span id="promo-applied-badge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 bg-[#FFC83D]/20 text-[#ca8a04] border border-[#FFC83D]/40 text-[10px] font-mono px-2.5 py-1 rounded-md font-bold tracking-wider">
                                 <i class="fa-solid fa-check text-xs mr-1"></i> Promo Terpasang
                             </span>
                         </div>
                     </div>
 
-                    <div class="space-y-2">
-                        <label data-i18n="reg_lbl_name" class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Nama Lengkap</label>
-                        <input type="text" id="reg-nama" required class="w-full bg-dark-900/60 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: Putu Johan Lasya Hara">
+                    <div class="space-y-1.5">
+                        <label data-i18n="reg_lbl_name" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Nama Lengkap Siswa <span class="text-[#F3261D]">*</span></label>
+                        <input type="text" id="reg-nama" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: Putu Johan Lasya Hara">
                     </div>
-                    <div class="space-y-2">
-                        <label data-i18n="reg_lbl_nickname" class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Panggilan</label>
-                        <input type="text" id="reg-panggilan" required class="w-full bg-dark-900/60 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: Johan">
+                    <div class="space-y-1.5">
+                        <label data-i18n="reg_lbl_nickname" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Nama Panggilan <span class="text-[#F3261D]">*</span></label>
+                        <input type="text" id="reg-panggilan" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: Johan">
                     </div>
-                    <div class="space-y-2">
-                        <label data-i18n="reg_lbl_age" class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Usia</label>
-                        <input type="text" id="reg-usia" required class="w-full bg-dark-900/60 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: 10y">
+                    <div class="space-y-1.5">
+                        <label data-i18n="reg_lbl_age" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Usia Anak <span class="text-[#F3261D]">*</span></label>
+                        <input type="text" id="reg-usia" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: 10 Tahun">
                     </div>
-                    <div class="space-y-2">
-                        <label data-i18n="reg_lbl_school" class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Asal Sekolah</label>
-                        <input type="text" id="reg-sekolah" required class="w-full bg-dark-900/60 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: SD Sutha Dharma">
+                    <div class="space-y-1.5">
+                        <label data-i18n="reg_lbl_school" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Asal Sekolah <span class="text-[#F3261D]">*</span></label>
+                        <input type="text" id="reg-sekolah" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: SD Sutha Dharma">
                     </div>
-                    <div class="space-y-2">
-                        <label data-i18n="reg_lbl_parent" class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Nama Orang Tua</label>
-                        <input type="text" id="reg-ortu" required class="w-full bg-dark-900/60 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: Arik Ayu Rastini">
+                    <div class="space-y-1.5">
+                        <label data-i18n="reg_lbl_parent" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Nama Orang Tua / Wali <span class="text-[#F3261D]">*</span></label>
+                        <input type="text" id="reg-ortu" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: Arik Ayu Rastini">
                     </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Email</label>
-                        <input type="email" id="reg-email" required class="w-full bg-dark-900/60 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: ayuarik071@gmail.com">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-[#101116]">Email Orang Tua <span class="text-[#F3261D]">*</span></label>
+                        <input type="email" id="reg-email" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: ayuarik071@gmail.com">
                     </div>
-                    <div class="space-y-2 md:col-span-2">
-                        <label data-i18n="reg_lbl_address" class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Alamat Lengkap</label>
-                        <textarea id="reg-alamat" required rows="3" class="w-full bg-dark-900/60 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: Br Katiklantang Singakerta Ubud"></textarea>
+                    <div class="space-y-1.5 md:col-span-2">
+                        <label data-i18n="reg_lbl_address" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Alamat Domisili <span class="text-[#F3261D]">*</span></label>
+                        <textarea id="reg-alamat" required rows="2" class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: Br Katiklantang Singakerta Ubud"></textarea>
                     </div>
-                    <div class="space-y-2">
-                        <label data-i18n="reg_lbl_wa_parent" class="text-[10px] font-bold tracking-widest uppercase text-slate-400">WA Orang Tua</label>
-                        <input type="tel" id="reg-wa-ortu" required class="w-full bg-dark-900/60 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: 081239197127">
+                    <div class="space-y-1.5">
+                        <label data-i18n="reg_lbl_wa_parent" class="text-xs font-bold uppercase tracking-wider text-[#101116]">WhatsApp Orang Tua <span class="text-[#F3261D]">*</span></label>
+                        <input type="tel" id="reg-wa-ortu" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm font-mono" placeholder="Cth: 081239197127">
                     </div>
-                    <div class="space-y-2">
-                        <label data-i18n="reg_lbl_wa_child" class="text-[10px] font-bold tracking-widest uppercase text-slate-400">WA Anak (Opsional)</label>
-                        <input type="tel" id="reg-wa-anak" class="w-full bg-dark-900/60 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors placeholder-slate-600" placeholder="Cth: +62 815-4753-3884">
+                    <div class="space-y-1.5">
+                        <label data-i18n="reg_lbl_wa_child" class="text-xs font-bold uppercase tracking-wider text-[#101116]">WhatsApp Anak (Opsional)</label>
+                        <input type="tel" id="reg-wa-anak" class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm font-mono" placeholder="Cth: 081547533884">
                     </div>
                 </div>
-                <div class="mt-8">
-                    <button type="submit" class="w-full bg-[#25D366] hover:bg-[#1ebe5c] text-white font-bold py-4 rounded-xl uppercase tracking-[0.1em] text-sm transition-all shadow-[0_0_15px_rgba(37,211,102,0.3)] hover:shadow-[0_0_25px_rgba(37,211,102,0.5)] flex items-center justify-center gap-3">
-                        <i class="fa-brands fa-whatsapp text-xl"></i> <span data-i18n="reg_btn_submit">Kirim Pendaftaran via WhatsApp</span></button>
+                
+                <div class="mt-8 pt-6 border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p class="text-xs text-[#667085] text-center sm:text-left">
+                        Data Anda aman dan hanya digunakan untuk konfirmasi jadwal kelas oleh admin resmi LesKoding.
+                    </p>
+                    <button type="submit" class="w-full sm:w-auto min-h-[48px] bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold py-3.5 px-8 rounded-xl uppercase tracking-wider text-xs transition-all shadow-[0_4px_20px_rgba(255,200,61,0.35)] hover:shadow-[0_6px_25px_rgba(255,200,61,0.55)] flex items-center justify-center gap-2 shrink-0">
+                        <i class="fa-brands fa-whatsapp text-base"></i> 
+                        <span data-i18n="reg_btn_submit">Kirim via WhatsApp</span>
+                    </button>
                 </div>
             </form>
         </div>
     </section>
+
+
 
     <!-- Active Promotion Popup Modal -->
     <div id="promo-modal" class="fixed inset-0 bg-dark-950/85 backdrop-blur-md z-[160] flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
@@ -1258,19 +1625,88 @@
     </div>
 
     <!-- Footer -->
-    <footer class=" border-t border-white/5 py-10 text-center z-10 relative">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
-            <div class="flex items-center justify-center gap-2.5 mb-6 opacity-70 hover:opacity-100 transition-opacity cursor-pointer" onclick="window.scrollTo(0,0)">
-                <img src="assets/logo/leskoding_community.png" alt="LesKodingSpace" class="h-6 md:h-10 w-auto object-contain">
+    
+    <!-- Footer: kontak, lokasi, sosial, privasi -->
+    <footer class="bg-[#101116] border-t border-white/10 py-14 text-slate-400 z-10 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="md:col-span-1">
+                    <div class="flex items-center gap-2.5 mb-4 cursor-pointer" onclick="window.scrollTo(0,0)">
+                        <img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-8 w-auto object-contain">
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                        Akademi Pemrograman &amp; Robotika Masa Depan di Bali. Membimbing anak mengubah rasa penasaran menjadi karya teknologi nyata.
+                    </p>
+                    <div class="flex items-center gap-3 text-slate-400">
+                        <a href="https://instagram.com" target="_blank" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-[#FFC83D] hover:border-[#FFC83D] transition-colors"><i class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="https://wa.me/628518306798" target="_blank" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-emerald-400 hover:border-emerald-400 transition-colors"><i class="fa-brands fa-whatsapp text-xs"></i></a>
+                        <a href="https://youtube.com" target="_blank" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-red-400 hover:border-red-400 transition-colors"><i class="fa-brands fa-youtube text-xs"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Program Belajar -->
+                <div>
+                    <h5 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Program Belajar</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#course" class="hover:text-white transition-colors">Game Programming (Scratch &amp; Roblox)</a></li>
+                        <li><a href="#course" class="hover:text-white transition-colors">Web Programming (Frontend &amp; Apps)</a></li>
+                        <li><a href="#course" class="hover:text-white transition-colors">Robotic Engineering (Arduino &amp; IoT)</a></li>
+                        <li><a href="#register" class="hover:text-[#FFC83D] transition-colors font-semibold">Jadwal Kelas Percobaan (Trial)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Learning Center di Bali -->
+                <div>
+                    <h5 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Learning Center</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li><strong class="text-slate-300">Gianyar:</strong> Jln Ksatrian No. 8, Candi Baru</li>
+                        <li><strong class="text-slate-300">Ubud Peliatan:</strong> Jalan Peliatan No. 1</li>
+                        <li><strong class="text-slate-300">Bedulu:</strong> Jln Raya Semebaung Bedulu</li>
+                        <li class="pt-1"><a href="#location" class="text-[#0788F5] hover:underline font-semibold flex items-center gap-1">Cek Peta &amp; Rute Terdekat &rarr;</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Kontak & Bantuan -->
+                <div>
+                    <h5 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Kontak &amp; Konsultasi</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                            <span>0851-8306-798 (Gianyar/Bedulu)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                            <span>0857-9273-6627 (Ubud Peliatan)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-slate-400"></i>
+                            <span>halo@leskoding.id</span>
+                        </li>
+                        <li class="pt-2">
+                            <a href="#register" class="inline-block bg-white/10 hover:bg-white/20 text-white font-bold px-4 py-2 rounded-lg text-[11px] transition-colors">
+                                Formulir Pendaftaran Online
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
-            <p class="text-slate-500 text-[11px] mb-6 font-mono bg-dark-900/60 backdrop-blur-xl px-4 py-2 rounded-lg border border-white/5">
-                <span class="text-brand-400">les</span>.<span class="text-gold-400">koding</span>() => "Education Technology &amp; Community"
-            </p>
-            <div class="text-[9px] text-slate-600 font-bold uppercase tracking-[0.2em]">
-                &copy; 2026 LesKoding — Education Technology &amp; Community
+
+            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-4">
+                <div>
+                    &copy; 2026 LesKoding Bali. All rights reserved. Education Technology &amp; Community.
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="#home" class="hover:text-slate-300 transition-colors">Kembali ke Atas</a>
+                    <a href="#cara-belajar" class="hover:text-slate-300 transition-colors">Metode Belajar</a>
+                    <a href="#register" class="hover:text-slate-300 transition-colors">Kebijakan &amp; Privasi</a>
+                </div>
             </div>
         </div>
     </footer>
+
 
     <!-- Reward Modal -->
     <div id="reward-modal" class="fixed inset-0 bg-dark-950/90 z-[150] flex items-center justify-center hidden opacity-0 transition-opacity duration-500">

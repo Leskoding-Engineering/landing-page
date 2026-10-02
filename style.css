@@ -10,15 +10,26 @@ body {
     font-family: 'Plus Jakarta Sans', sans-serif; 
 }
 h1, h2, h3, h4, h5, h6 { 
-    font-family: 'Outfit', sans-serif; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
 }
 
 /* CSS Variables */
 :root {
+    --brand-yellow: #FFC83D;
+    --brand-red: #F3261D;
+    --brand-blue: #0788F5;
+    --brand-blue-dark: #056ac2;
+    --brand-purple: #5B0CB5;
+    --ink: #101116;
+    --surface: #FFFFFF;
+    --surface-soft: #F7F8FA;
+    --border: #E5E7EB;
+    --text-muted: #667085;
+    
     --emerald-rgb: 16, 185, 129;
-    --brand-rgb: 14, 165, 233;
-    --purpleBrand-rgb: 168, 85, 247;
-    --gold-rgb: 250, 204, 21;
+    --brand-rgb: 7, 136, 245;
+    --purpleBrand-rgb: 91, 12, 181;
+    --gold-rgb: 255, 200, 61;
 }
 
 /* Grid Pattern Background for subtle tech texture */
