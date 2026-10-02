@@ -617,27 +617,37 @@ WA Anak (opsional): ${waAnak}`;
     }
 
     /* ========================================================
-       7. DYNAMIC NAVBAR RESIZE
+       7. DYNAMIC NAVBAR SCROLL EFFECT
        ======================================================== */
+    const navbar = document.getElementById('navbar');
     const navContainer = document.getElementById('nav-container');
     const navLogo = document.getElementById('nav-logo');
     
-    if (navContainer && navLogo) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 40) {
-                // Shrink when scrolled
+    if (navbar && navContainer && navLogo) {
+        const handleNavScroll = () => {
+            if (window.scrollY > 30) {
+                // Scrolled: Frosted Glass / Translucent Dark with border and shadow
+                navbar.classList.add('bg-[#101116]/85', 'backdrop-blur-2xl', 'border-white/10', 'shadow-[0_10px_30px_rgba(0,0,0,0.6)]');
+                navbar.classList.remove('bg-transparent', 'border-transparent');
+                
                 navContainer.classList.add('h-16', 'md:h-18');
                 navContainer.classList.remove('h-20', 'md:h-24');
                 navLogo.classList.add('h-8', 'md:h-9');
                 navLogo.classList.remove('h-9', 'sm:h-10', 'md:h-11');
             } else {
-                // Spacious when at the top
+                // Top: Completely Transparent
+                navbar.classList.add('bg-transparent', 'border-transparent');
+                navbar.classList.remove('bg-[#101116]/85', 'backdrop-blur-2xl', 'border-white/10', 'shadow-[0_10px_30px_rgba(0,0,0,0.6)]');
+                
                 navContainer.classList.add('h-20', 'md:h-24');
                 navContainer.classList.remove('h-16', 'md:h-18');
                 navLogo.classList.add('h-9', 'sm:h-10', 'md:h-11');
                 navLogo.classList.remove('h-8', 'md:h-9');
             }
-        });
+        };
+
+        window.addEventListener('scroll', handleNavScroll);
+        handleNavScroll(); // Run on initial load in case user refreshed while scrolled
     }
 
 });
