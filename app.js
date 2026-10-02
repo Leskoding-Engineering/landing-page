@@ -1092,7 +1092,63 @@ window.addEventListener('load', () => {
             }
         });
     }
+
+    // Close report modal on backdrop click & ESC key
+    const reportModal = document.getElementById('report-modal');
+    if (reportModal) {
+        reportModal.addEventListener('click', (e) => {
+            if (e.target === reportModal) {
+                window.closeReportModal();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (reportModal && !reportModal.classList.contains('hidden')) {
+                window.closeReportModal();
+            }
+            if (promoModal && !promoModal.classList.contains('hidden')) {
+                window.closePromoModal();
+            }
+        }
+    });
 });
+
+/* ========================================================
+   12B. STUDENT SPACE REPORT PREVIEW MODAL
+   ======================================================== */
+window.openReportModal = function() {
+    const modal = document.getElementById('report-modal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        requestAnimationFrame(() => {
+            modal.classList.remove('opacity-0');
+            modal.classList.add('opacity-100');
+            const content = document.getElementById('report-modal-content');
+            if (content) {
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }
+        });
+    }
+};
+
+window.closeReportModal = function() {
+    const modal = document.getElementById('report-modal');
+    if (modal) {
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0');
+        const content = document.getElementById('report-modal-content');
+        if (content) {
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+        }
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
+};
 
 /* ========================================================
    13. CUSTOM ENHANCED LEARNING CENTER DROPDOWN
@@ -1223,16 +1279,12 @@ const i18nDictionary = {
         method_s4_desc: "Milestones recorded automatically: XP points, published student portfolio, and transparent reports sent to parents.",
 
         // Parent Progress Section
-        parent_badge: "Transparency for Parents",
-        parent_title: "Track Your Child\'s Progress with Crystal Clarity.",
-        parent_desc: "Parents never need to guess what their children are learning. After modules and periodic milestones, you receive a clear report showing completed projects, logic mastered, and tutor evaluation.",
-        parent_f1_title: "Competency Achievement Report",
-        parent_f1_desc: "Clear indicators of mathematical logic, computational thinking, and independent creativity.",
-        parent_f2_title: "Live Online Portfolio Access",
-        parent_f2_desc: "Direct link to play games or inspect code crafted entirely by your child.",
-        parent_f3_title: "Direct Tutor WhatsApp Consultations",
-        parent_f3_desc: "Open communication with tutors regarding your child\'s special tech passions and accelerated growth.",
-        parent_cta: "Consult Your Child\'s Potential",
+        parent_badge: "Learning reports parents can truly understand",
+        parent_title: "Know what your child learns—and what comes next.",
+        parent_desc: "Once a session report is published, parents can review attendance, skills evaluated by tutors, child strengths, current focus areas, and next-step recommendations. Progress is also tracked seamlessly over time.",
+        parent_cta_preview: "View Sample Report",
+        parent_cta_consult: "Consult Your Child's Needs",
+        parent_cta: "Consult Your Child's Needs",
 
         // Course Section
         course_badge: "Active Programs 2026",
@@ -1359,15 +1411,11 @@ const i18nDictionary = {
         method_s4_desc: "Setiap pencapaian tercatat dalam sistem: poin XP bertambah, proyek masuk portofolio, dan laporan capaian diteruskan langsung ke orang tua.",
 
         // Parent Progress Section
-        parent_badge: "Transparansi untuk Wali Murid",
-        parent_title: "Pantau Perkembangan Anak dengan Jelas &amp; Nyata.",
-        parent_desc: "Orang tua tidak perlu menebak apa yang dipelajari anak. Setiap akhir modul dan sesi berkala, Anda menerima laporan komprehensif berisi karya yang selesai, logika yang dikuasai, dan catatan evaluasi tutor.",
-        parent_f1_title: "Laporan Capaian Kompetensi",
-        parent_f1_desc: "Indikator pemahaman logika matematika, computational thinking, dan kreativitas mandiri.",
-        parent_f2_title: "Akses Portofolio Online",
-        parent_f2_desc: "Link langsung untuk mencoba game atau melihat kode program yang dibuat anak sendiri.",
-        parent_f3_title: "Konsultasi Terbuka dengan Tutor",
-        parent_f3_desc: "Tanya jawab langsung via WhatsApp mengenai minat khusus dan akselerasi belajar anak.",
+        parent_badge: "Laporan belajar yang bisa dipahami wali",
+        parent_title: "Tahu apa yang anak pelajari—dan langkah berikutnya.",
+        parent_desc: "Setelah laporan sesi diterbitkan, wali dapat melihat kehadiran, keterampilan yang dinilai tutor, kekuatan anak, hal yang sedang dilatih, dan rekomendasi untuk sesi berikutnya. Progres juga bisa dipantau dari waktu ke waktu.",
+        parent_cta_preview: "Lihat Contoh Laporan",
+        parent_cta_consult: "Konsultasikan Kebutuhan Anak",
         parent_cta: "Konsultasikan Kebutuhan Anak",
 
         // Course Section

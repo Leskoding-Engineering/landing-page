@@ -995,142 +995,202 @@
     </section>
 
 
-    <!-- PROGRESS MONITORING UNTUK WALI (Laporan, perkembangan & feedback tutor) -->
+    <!-- PROGRESS MONITORING UNTUK WALI (Laporan belajar yang bisa dipahami wali) -->
     <section id="progress-wali" class="py-20 md:py-28 relative z-10 bg-[#F7F8FA] border-b border-[#E5E7EB] text-[#101116]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
                 
                 <!-- Left: Explanation for Parents (5 cols) -->
                 <div class="lg:col-span-5 text-left fade-in-up">
                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E5E7EB] shadow-sm mb-4">
-                        <i class="fa-solid fa-shield-heart text-[#0788F5] text-xs"></i>
-                        <span data-i18n="parent_badge" class="text-xs font-bold tracking-wider uppercase text-[#101116]">Transparansi untuk Wali Murid</span>
+                        <i class="fa-solid fa-clipboard-check text-[#0788F5] text-xs"></i>
+                        <span data-i18n="parent_badge" class="text-xs font-bold tracking-wider uppercase text-[#101116]">Laporan belajar yang bisa dipahami wali</span>
                     </div>
+
                     <h2 class="text-3xl sm:text-4xl font-bold text-[#101116] mb-5 leading-tight tracking-tight">
-                        <span data-i18n="parent_title">Pantau Perkembangan Anak dengan Jelas &amp; Nyata.</span>
+                        <span data-i18n="parent_title">Tahu apa yang anak pelajari—dan langkah berikutnya.</span>
                     </h2>
+
                     <p class="text-[#667085] text-sm sm:text-base leading-relaxed mb-6" data-i18n="parent_desc">
-                        Orang tua tidak perlu menebak apa yang dipelajari anak. Setiap akhir modul dan sesi berkala, Anda menerima laporan komprehensif berisi karya yang selesai, logika yang dikuasai, dan catatan evaluasi tutor.
+                        Setelah laporan sesi diterbitkan, wali dapat melihat kehadiran, keterampilan yang dinilai tutor, kekuatan anak, hal yang sedang dilatih, dan rekomendasi untuk sesi berikutnya. Progres juga bisa dipantau dari waktu ke waktu.
                     </p>
 
-                    <!-- Bullet points -->
+                    <!-- Feature Breakdown List -->
                     <div class="space-y-4 mb-8">
                         <div class="flex items-start gap-3.5">
-                            <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 text-xs mt-0.5">
-                                <i class="fa-solid fa-check"></i>
+                            <div class="w-8 h-8 rounded-xl bg-[#0788F5]/10 text-[#0788F5] flex items-center justify-center shrink-0 text-sm mt-0.5">
+                                <i class="fa-solid fa-chart-simple"></i>
                             </div>
                             <div>
-                                <h4 class="text-sm font-bold text-[#101116]" data-i18n="parent_f1_title">Laporan Capaian Kompetensi</h4>
-                                <p class="text-xs text-[#667085]" data-i18n="parent_f1_desc">Indikator pemahaman logika matematika, computational thinking, dan kreativitas mandiri.</p>
+                                <h4 class="text-sm font-bold text-[#101116]">Keterampilan &amp; Parameter Dinamis</h4>
+                                <p class="text-xs text-[#667085]">Skor logika, debugging, dan kreativitas lengkap dengan alasan evaluasi tutor di setiap sesi.</p>
                             </div>
                         </div>
 
                         <div class="flex items-start gap-3.5">
-                            <div class="w-7 h-7 rounded-full bg-[#0788F5]/10 text-[#0788F5] flex items-center justify-center shrink-0 text-xs mt-0.5">
-                                <i class="fa-solid fa-link"></i>
+                            <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0 text-sm mt-0.5">
+                                <i class="fa-solid fa-bullseye"></i>
                             </div>
                             <div>
-                                <h4 class="text-sm font-bold text-[#101116]" data-i18n="parent_f2_title">Akses Portofolio Online</h4>
-                                <p class="text-xs text-[#667085]" data-i18n="parent_f2_desc">Link langsung untuk mencoba game atau melihat kode program yang dibuat anak sendiri.</p>
+                                <h4 class="text-sm font-bold text-[#101116]">Kekuatan &amp; Hal yang Sedang Dilatih</h4>
+                                <p class="text-xs text-[#667085]">Bukan sekadar nilai angka, melainkan umpan balik kualitatif mengenai kemandirian dan ketelitian anak.</p>
                             </div>
                         </div>
 
                         <div class="flex items-start gap-3.5">
-                            <div class="w-7 h-7 rounded-full bg-[#FFC83D]/30 text-[#ca8a04] flex items-center justify-center shrink-0 text-xs mt-0.5">
-                                <i class="fa-solid fa-user-tie"></i>
+                            <div class="w-8 h-8 rounded-xl bg-[#FFC83D]/25 text-[#ca8a04] flex items-center justify-center shrink-0 text-sm mt-0.5">
+                                <i class="fa-solid fa-lightbulb"></i>
                             </div>
                             <div>
-                                <h4 class="text-sm font-bold text-[#101116]" data-i18n="parent_f3_title">Konsultasi Terbuka dengan Tutor</h4>
-                                <p class="text-xs text-[#667085]" data-i18n="parent_f3_desc">Tanya jawab langsung via WhatsApp mengenai minat khusus dan akselerasi belajar anak.</p>
+                                <h4 class="text-sm font-bold text-[#101116]">Rekomendasi Tutor &amp; Ide Latihan di Rumah</h4>
+                                <p class="text-xs text-[#667085]">Panduan praktis bagi orang tua untuk mendampingi dan memicu rasa ingin tahu anak di rumah.</p>
                             </div>
                         </div>
                     </div>
 
-                    <a href="#register" class="inline-flex items-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md">
-                        <span data-i18n="parent_cta">Konsultasikan Kebutuhan Anak</span> <i class="fa-solid fa-arrow-right text-xs"></i>
-                    </a>
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+                        <button onclick="openReportModal()" class="inline-flex items-center justify-center gap-2.5 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-extrabold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider transition-all shadow-[0_4px_20px_rgba(255,200,61,0.35)] hover:shadow-[0_6px_25px_rgba(255,200,61,0.55)] hover:-translate-y-0.5">
+                            <i class="fa-solid fa-file-invoice text-sm"></i>
+                            <span data-i18n="parent_cta_preview">Lihat Contoh Laporan</span>
+                        </button>
+                        <a href="#register" class="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#F7F8FA] border border-[#E5E7EB] hover:border-[#0788F5]/40 text-[#101116] font-bold px-5 py-3.5 rounded-xl text-xs transition-all">
+                            <span data-i18n="parent_cta_consult">Konsultasikan Kebutuhan Anak</span>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Right: Realistic Sample Report Mockup (7 cols) -->
                 <div class="lg:col-span-7 fade-in-up">
-                    <div class="bg-white rounded-2xl border border-[#E5E7EB] shadow-xl p-6 sm:p-8 relative overflow-hidden">
+                    <div class="bg-white rounded-3xl border border-[#E5E7EB] shadow-2xl p-6 sm:p-8 relative overflow-hidden">
                         
-                        <!-- Top Bar of Report -->
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#E5E7EB] gap-4">
-                            <div class="flex items-center gap-3.5">
-                                <div class="w-12 h-12 rounded-full bg-[#0788F5]/15 border border-[#0788F5]/30 flex items-center justify-center text-[#0788F5] font-bold text-lg">
-                                    A
-                                </div>
-                                <div>
-                                    <div class="flex items-center gap-2">
-                                        <h4 class="text-base font-bold text-[#101116]">Ananda K.</h4>
-                                        <span class="text-[10px] font-mono bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">Level 2 Selesai</span>
-                                    </div>
-                                    <p class="text-xs text-[#667085]">Jalur: Game Programming (Roblox Studio & Lua) · Cabang Ubud</p>
+                        <!-- Disclaimer Banner -->
+                        <div class="mb-5 px-3.5 py-2 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] flex items-center justify-between text-[11px] text-[#667085]">
+                            <span class="flex items-center gap-2 font-medium">
+                                <i class="fa-solid fa-circle-info text-[#0788F5]"></i>
+                                <span class="font-bold text-[#101116]">Contoh ilustratif</span> — bukan laporan siswa aktual
+                            </span>
+                            <span class="font-mono text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-bold border border-emerald-200">
+                                Sesi Terverifikasi
+                            </span>
+                        </div>
+
+                        <!-- Header of Report -->
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-[#E5E7EB] gap-3">
+                            <div>
+                                <span class="text-[10px] font-mono uppercase tracking-widest text-[#0788F5] font-bold">LAPORAN SESI</span>
+                                <div class="flex items-center gap-2.5 mt-0.5">
+                                    <h4 class="text-lg font-extrabold text-[#101116]">Status: Selesai</h4>
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                                 </div>
                             </div>
                             <div class="text-left sm:text-right">
-                                <span class="text-[11px] text-[#667085] block">Laporan Modul #4</span>
-                                <span class="text-xs font-bold text-[#101116] font-mono">Status: Terverifikasi</span>
+                                <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
+                                    <i class="fa-solid fa-user-check text-[11px]"></i> Hadir
+                                </span>
+                                <span class="text-[11px] text-[#667085] block mt-1 font-mono">12 Sep · 15.30 WITA</span>
                             </div>
                         </div>
 
-                        <!-- Progress Bars & Metrics -->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
-                            <div class="bg-[#F7F8FA] border border-[#E5E7EB] p-4 rounded-xl">
-                                <div class="text-[11px] font-bold text-[#667085] uppercase tracking-wider mb-1">Kehadiran & Fokus</div>
-                                <div class="text-xl font-bold text-[#101116]">100%</div>
-                                <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2 overflow-hidden">
-                                    <div class="bg-emerald-500 h-full rounded-full" style="width: 100%;"></div>
-                                </div>
+                        <!-- Metadata Row (Program & Tutor) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-4 border-b border-[#E5E7EB] bg-[#F7F8FA]/70 -mx-6 sm:-mx-8 px-6 sm:px-8">
+                            <div>
+                                <span class="text-[10px] uppercase font-bold text-[#667085] tracking-wider block">Program</span>
+                                <span class="text-xs font-bold text-[#101116] flex items-center gap-1.5 mt-0.5">
+                                    <i class="fa-solid fa-gamepad text-[#0788F5] text-xs"></i> Game Programming (Lua 3D)
+                                </span>
                             </div>
-
-                            <div class="bg-[#F7F8FA] border border-[#E5E7EB] p-4 rounded-xl">
-                                <div class="text-[11px] font-bold text-[#667085] uppercase tracking-wider mb-1">Logika Algoritma</div>
-                                <div class="text-xl font-bold text-[#0788F5]">Sangat Baik</div>
-                                <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2 overflow-hidden">
-                                    <div class="bg-[#0788F5] h-full rounded-full" style="width: 92%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="bg-[#F7F8FA] border border-[#E5E7EB] p-4 rounded-xl">
-                                <div class="text-[11px] font-bold text-[#667085] uppercase tracking-wider mb-1">Kreativitas Proyek</div>
-                                <div class="text-xl font-bold text-[#ca8a04]">Mandiri</div>
-                                <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2 overflow-hidden">
-                                    <div class="bg-[#FFC83D] h-full rounded-full" style="width: 95%;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tutor Personalized Feedback Bubble -->
-                        <div class="bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl p-5 mb-6">
-                            <div class="flex items-center gap-2 mb-2">
-                                <i class="fa-solid fa-quote-left text-[#0788F5] text-xs"></i>
-                                <span class="text-xs font-bold text-[#101116]">Catatan Evaluasi Tutor:</span>
-                            </div>
-                            <p class="text-xs sm:text-sm text-[#475467] leading-relaxed italic">
-                                "Ananda menunjukkan pemahaman yang sangat cepat pada konsep loops dan deteksi tabrakan (hitbox). Mampu menyelesaikan proyek arena 3D tanpa bantuan panduan ulang. Rekomendasi modul selanjutnya: pengenalan variabel dinamis dan sound effect triggers."
-                            </p>
-                            <div class="mt-3 flex items-center justify-between text-[11px] text-[#667085]">
-                                <span>Tutor: Kak Danu (Facilitator Game Dev)</span>
-                                <span class="text-emerald-600 font-semibold flex items-center gap-1">
-                                    <i class="fa-solid fa-badge-check"></i> Siap Naik Tingkat
+                            <div>
+                                <span class="text-[10px] uppercase font-bold text-[#667085] tracking-wider block">Tutor Pembimbing</span>
+                                <span class="text-xs font-bold text-[#101116] flex items-center gap-1.5 mt-0.5">
+                                    <i class="fa-solid fa-chalkboard-user text-[#ca8a04] text-xs"></i> Danu (Facilitator)
                                 </span>
                             </div>
                         </div>
 
-                        <!-- Project Attachment Link Preview -->
-                        <div class="flex items-center justify-between p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-[#5B0CB5]/10 text-[#5B0CB5] flex items-center justify-center">
-                                    <i class="fa-solid fa-cube"></i>
+                        <!-- Parameters Evaluated (Skills Cards) -->
+                        <div class="my-5">
+                            <span class="text-[11px] font-mono uppercase tracking-wider font-extrabold text-[#101116] block mb-3">
+                                KETERAMPILAN YANG DINILAI
+                            </span>
+                            <div class="space-y-3">
+                                <!-- Skill 1: Logika -->
+                                <div class="p-3.5 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB]">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-xs font-bold text-[#101116]">Logika Berpikir</span>
+                                        <span class="text-xs font-extrabold font-mono text-[#0788F5] bg-[#0788F5]/10 px-2 py-0.5 rounded">8 / 10</span>
+                                    </div>
+                                    <div class="w-full bg-[#E5E7EB] h-1.5 rounded-full overflow-hidden mb-2">
+                                        <div class="bg-[#0788F5] h-full rounded-full" style="width: 80%;"></div>
+                                    </div>
+                                    <p class="text-xs text-[#475467] leading-relaxed">
+                                        Mampu menyusun urutan langkah algoritma untuk menyelesaikan tantangan arena secara mandiri.
+                                    </p>
                                 </div>
-                                <div>
-                                    <div class="font-bold text-[#101116]">Karya Siswa: 'Cyber Quest 3D Arena'</div>
-                                    <div class="text-[10px] text-[#667085]">Dimainkan 80+ sesi latihan di lab</div>
+
+                                <!-- Skill 2: Debugging -->
+                                <div class="p-3.5 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB]">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-xs font-bold text-[#101116]">Debugging</span>
+                                        <span class="text-xs font-extrabold font-mono text-[#ca8a04] bg-[#FFC83D]/20 px-2 py-0.5 rounded">6 / 10</span>
+                                    </div>
+                                    <div class="w-full bg-[#E5E7EB] h-1.5 rounded-full overflow-hidden mb-2">
+                                        <div class="bg-[#FFC83D] h-full rounded-full" style="width: 60%;"></div>
+                                    </div>
+                                    <p class="text-xs text-[#475467] leading-relaxed">
+                                        Sedang berlatih memeriksa kembali langkah saat program belum berjalan sesuai skenario.
+                                    </p>
                                 </div>
                             </div>
-                            <span class="text-[11px] font-bold text-[#0788F5] hover:underline cursor-pointer">Lihat Karya &rarr;</span>
+                        </div>
+
+                        <!-- Feedback Breakdown Grid (Strengths & Improvements) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                            <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200">
+                                <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5 mb-1.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600"></i> KEKUATAN
+                                </span>
+                                <p class="text-xs text-[#1e3a29] leading-relaxed">
+                                    Mampu menjelaskan idenya dengan percaya diri dan berani mencoba menyelesaikan tantangan.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200">
+                                <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-800 flex items-center gap-1.5 mb-1.5">
+                                    <i class="fa-solid fa-arrows-rotate text-amber-600"></i> SEDANG DILATIH
+                                </span>
+                                <p class="text-xs text-[#3d2c0d] leading-relaxed">
+                                    Lebih teliti saat mencari baris yang menyebabkan error syntax pada script game.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Tutor Recommendation & Home Practice -->
+                        <div class="p-4 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] space-y-3 mb-5">
+                            <div>
+                                <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0788F5] block mb-1">
+                                    REKOMENDASI TUTOR
+                                </span>
+                                <p class="text-xs text-[#101116] leading-relaxed">
+                                    Pada sesi berikutnya, coba uji solusi dengan beberapa contoh input berbeda sebelum finalisasi kode.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-[#E5E7EB]">
+                                <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#5B0CB5] block mb-1">
+                                    IDE LATIHAN DI RUMAH
+                                </span>
+                                <p class="text-xs text-[#475467] leading-relaxed">
+                                    Minta anak menceritakan langkah logika yang ia coba dan alasan mengapa memilih langkah tersebut.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Footer Action Card -->
+                        <div class="flex items-center justify-between pt-3 border-t border-[#E5E7EB] text-xs">
+                            <button onclick="openReportModal()" class="text-xs font-bold text-[#0788F5] hover:text-[#056ac2] transition-colors flex items-center gap-1.5">
+                                <span>Lihat progres sesi sebelumnya</span>
+                                <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                            </button>
+                            <span class="text-[11px] text-[#667085] font-mono">Student Space v2.4</span>
                         </div>
 
                     </div>
@@ -1637,9 +1697,217 @@
                     </ul>
                 </div>
                 
-                <a href="#register" onclick="closeCourseModal()" id="modal-btn" class="w-full inline-flex justify-center items-center gap-2 bg-brand-500 hover:bg-brand-400 text-dark-950 font-bold py-3.5 rounded-xl uppercase tracking-[0.1em] text-xs transition-all shadow-[0_0_15px_rgba(14,165,233,0.3)] hover:shadow-[0_0_25px_rgba(14,165,233,0.5)]">
-                    Mulai Petualangan <i class="fa-solid fa-arrow-right"></i>
-                </a>
+    <!-- PARENT REPORT PREVIEW MODAL (Student Space Interactive Simulation) -->
+    <div id="report-modal" class="fixed inset-0 z-[120] hidden flex items-center justify-center p-3 sm:p-5 pointer-events-none">
+        <div class="absolute inset-0 bg-dark-950/80 backdrop-blur-md modal-overlay pointer-events-auto cursor-pointer" onclick="closeReportModal()"></div>
+        <div class="bg-white rounded-3xl w-full max-w-2xl max-h-[92vh] overflow-y-auto relative z-10 shadow-2xl border border-[#E5E7EB] transform scale-95 opacity-0 transition-all duration-300 pointer-events-auto text-[#101116]" id="report-modal-content">
+            
+            <!-- Sticky Modal Top Header -->
+            <div class="sticky top-0 bg-white/95 backdrop-blur-md px-6 py-4 border-b border-[#E5E7EB] flex items-center justify-between z-20">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-[#0788F5]/10 text-[#0788F5] flex items-center justify-center text-sm font-bold">
+                        <i class="fa-solid fa-file-invoice"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-[#101116]">Preview Laporan Student Space</h3>
+                        <p class="text-[10px] text-[#667085]">Contoh ilustratif interaktif · Data fiktif</p>
+                    </div>
+                </div>
+                <button onclick="closeReportModal()" aria-label="Tutup Preview" class="w-8 h-8 rounded-full bg-[#F7F8FA] hover:bg-[#E5E7EB] text-[#667085] hover:text-[#101116] flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="p-6 sm:p-8 space-y-6">
+                
+                <!-- Notice Banner -->
+                <div class="p-3.5 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] flex items-center justify-between text-xs text-[#667085]">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-[#0788F5]"></i>
+                        <span>Format ini otomatis terbit ke portal wali setiap akhir sesi pembelajaran.</span>
+                    </span>
+                    <span class="font-mono text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">
+                        Final Terbit
+                    </span>
+                </div>
+
+                <!-- Session Meta Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-[#E5E7EB] gap-4">
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-wider text-[#0788F5] font-bold">LAPORAN SESI RESMI</span>
+                        <h4 class="text-xl font-extrabold text-[#101116] mt-0.5">Sesi #6: Autonomous Logic</h4>
+                        <p class="text-xs text-[#667085] mt-1">12 September 2026 · 15.30 – 17.00 WITA · Learning Center Ubud</p>
+                    </div>
+                    <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <i class="fa-solid fa-user-check text-xs"></i> Presensi: Hadir
+                        </span>
+                        <span class="text-[11px] text-[#667085] font-mono">Tutor: Kak Danu</span>
+                    </div>
+                </div>
+
+                <!-- Evaluated Parameters (parameters[]) -->
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono font-bold uppercase tracking-wider text-[#101116]">
+                            KETERAMPILAN YANG DINILAI (PARAMETERS)
+                        </span>
+                        <span class="text-[10px] text-[#667085] font-medium">Berdasarkan rubrik aktif tutor</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <!-- Param 1 -->
+                        <div class="p-4 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs font-bold text-[#101116]">Logika Berpikir (Logic)</span>
+                                    <span class="text-xs font-bold font-mono text-[#0788F5] bg-[#0788F5]/10 px-2 py-0.5 rounded">8 / 10</span>
+                                </div>
+                                <div class="w-full bg-[#E5E7EB] h-1.5 rounded-full overflow-hidden my-2">
+                                    <div class="bg-[#0788F5] h-full rounded-full" style="width: 80%;"></div>
+                                </div>
+                                <p class="text-xs text-[#475467] leading-relaxed">
+                                    Mampu menyusun urutan langkah algoritma untuk menyelesaikan tantangan rintangan secara terstruktur.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Param 2 -->
+                        <div class="p-4 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs font-bold text-[#101116]">Debugging &amp; Troubleshooting</span>
+                                    <span class="text-xs font-bold font-mono text-[#ca8a04] bg-[#FFC83D]/25 px-2 py-0.5 rounded">6 / 10</span>
+                                </div>
+                                <div class="w-full bg-[#E5E7EB] h-1.5 rounded-full overflow-hidden my-2">
+                                    <div class="bg-[#FFC83D] h-full rounded-full" style="width: 60%;"></div>
+                                </div>
+                                <p class="text-xs text-[#475467] leading-relaxed">
+                                    Sedang berlatih memeriksa kembali langkah saat program belum berjalan sesuai skenario yang diinginkan.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Param 3 -->
+                        <div class="p-4 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs font-bold text-[#101116]">Kreativitas &amp; Ide Mandiri</span>
+                                    <span class="text-xs font-bold font-mono text-purple-700 bg-purple-100 px-2 py-0.5 rounded">9 / 10</span>
+                                </div>
+                                <div class="w-full bg-[#E5E7EB] h-1.5 rounded-full overflow-hidden my-2">
+                                    <div class="bg-[#5B0CB5] h-full rounded-full" style="width: 90%;"></div>
+                                </div>
+                                <p class="text-xs text-[#475467] leading-relaxed">
+                                    Menambahkan variasi mekanisme skor dan custom obstacle yang belum pernah diajarkan sebelumnya.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Param 4 -->
+                        <div class="p-4 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs font-bold text-[#101116]">Fokus &amp; Resiliensi</span>
+                                    <span class="text-xs font-bold font-mono text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">8 / 10</span>
+                                </div>
+                                <div class="w-full bg-[#E5E7EB] h-1.5 rounded-full overflow-hidden my-2">
+                                    <div class="bg-emerald-500 h-full rounded-full" style="width: 80%;"></div>
+                                </div>
+                                <p class="text-xs text-[#475467] leading-relaxed">
+                                    Tetap tenang dan gigih mencoba kembali saat terjadi kendala koneksi perangkat simulasi.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Qualitative Feedback Grid (strengths & improvements) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200">
+                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5 mb-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600"></i> KEKUATAN SISWA (STRENGTHS)
+                        </span>
+                        <p class="text-xs sm:text-sm text-[#1e3a29] leading-relaxed">
+                            Mampu menjelaskan idenya dan mencoba menyelesaikan tantangan secara mandiri sebelum memanggil tutor.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200">
+                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-800 flex items-center gap-1.5 mb-2">
+                            <i class="fa-solid fa-arrows-rotate text-amber-600"></i> SEDANG DILATIH (IMPROVEMENTS)
+                        </span>
+                        <p class="text-xs sm:text-sm text-[#3d2c0d] leading-relaxed">
+                            Lebih teliti saat mencari bagian yang menyebabkan error dan belajar membaca pesan console kesalahan.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tutor Recommendation & Parent Tips -->
+                <div class="p-5 rounded-2xl bg-[#F7F8FA] border border-[#E5E7EB] space-y-4">
+                    <div>
+                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0788F5] block mb-1">
+                            REKOMENDASI TUTOR (RECOMMENDATION)
+                        </span>
+                        <p class="text-xs sm:text-sm text-[#101116] leading-relaxed">
+                            Pada sesi berikutnya, coba uji solusi dengan beberapa contoh input berbeda untuk memastikan tidak ada edge-case yang lolos.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-[#E5E7EB]">
+                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#5B0CB5] block mb-1">
+                            IDE LATIHAN DI RUMAH (PARENT TIPS)
+                        </span>
+                        <p class="text-xs sm:text-sm text-[#475467] leading-relaxed">
+                            Minta anak menceritakan langkah yang ia coba di sesi ini dan tanyakan alasan di balik keputusan logikanya.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Progress Over Time (summaries[]) -->
+                <div class="p-4 rounded-2xl bg-white border border-[#E5E7EB]">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#101116]">
+                            PROGRES WAKTU KE WAKTU (SUMMARIES)
+                        </span>
+                        <span class="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                            Tren Positif (+18% Logika)
+                        </span>
+                    </div>
+                    <div class="flex items-end justify-between gap-2 h-24 pt-4 px-2">
+                        <div class="flex-1 flex flex-col items-center gap-1.5">
+                            <span class="text-[10px] font-mono font-bold text-[#667085]">Sesi 3</span>
+                            <div class="w-full max-w-[36px] bg-slate-200 rounded-t-md h-10"></div>
+                            <span class="text-[9px] text-[#667085]">5.5</span>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center gap-1.5">
+                            <span class="text-[10px] font-mono font-bold text-[#667085]">Sesi 4</span>
+                            <div class="w-full max-w-[36px] bg-[#0788F5]/30 rounded-t-md h-14"></div>
+                            <span class="text-[9px] text-[#667085]">6.8</span>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center gap-1.5">
+                            <span class="text-[10px] font-mono font-bold text-[#667085]">Sesi 5</span>
+                            <div class="w-full max-w-[36px] bg-[#0788F5]/60 rounded-t-md h-16"></div>
+                            <span class="text-[9px] text-[#667085]">7.4</span>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center gap-1.5">
+                            <span class="text-[10px] font-mono font-bold text-[#0788F5]">Sesi 6</span>
+                            <div class="w-full max-w-[36px] bg-[#0788F5] rounded-t-md h-20 shadow-sm"></div>
+                            <span class="text-[9px] font-bold text-[#0788F5]">8.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Call to Action in Modal -->
+                <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <p class="text-xs text-[#667085] text-center sm:text-left">
+                        Ingin tahu lebih lanjut kurikulum dan sistem laporan untuk anak Anda?
+                    </p>
+                    <a href="#register" onclick="closeReportModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md shrink-0">
+                        <span>Daftarkan Anak Sekarang</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
