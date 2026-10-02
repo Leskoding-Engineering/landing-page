@@ -560,14 +560,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const waOrtu = document.getElementById('reg-wa-ortu').value;
             const waAnak = document.getElementById('reg-wa-anak').value || '-';
             
+            const currentLang = localStorage.getItem('leskoding_lang') || 'en';
             // Simple Validation
             if (!/^[0-9\+\-\s]+$/.test(waOrtu)) {
-                alert("Mohon masukkan format Nomor WA Orang Tua yang valid (angka).");
+                alert(currentLang === 'en' ? "Please enter a valid Parent WhatsApp number (digits only)." : "Mohon masukkan format Nomor WA Orang Tua yang valid (angka).");
                 document.getElementById('reg-wa-ortu').focus();
                 return;
             }
             if (waOrtu.length < 9) {
-                alert("Nomor WA terlalu pendek.");
+                alert(currentLang === 'en' ? "WhatsApp number is too short." : "Nomor WA terlalu pendek.");
                 document.getElementById('reg-wa-ortu').focus();
                 return;
             }
@@ -575,7 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const centerSelect = document.getElementById('reg-center');
             const center = centerSelect ? centerSelect.value : '';
             if (!center) {
-                alert("Mohon pilih Learning Center terdekat terlebih dahulu.");
+                alert(currentLang === 'en' ? "Please choose your nearest Learning Center first." : "Mohon pilih Learning Center terdekat terlebih dahulu.");
                 const trigger = document.getElementById('custom-select-trigger');
                 if (trigger) {
                     trigger.classList.add('border-red-500', 'ring-2', 'ring-red-500/40');
@@ -588,7 +589,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const promoInput = document.getElementById('reg-promo');
             const promo = promoInput ? promoInput.value.trim() : '';
 
-            const message = `*Form Pendaftaran Siswa Baru Akademi LesKoding*
+            const message = currentLang === 'en' ?
+`*New Student Registration Form — LesKoding Academy*
+
+Learning Center: ${center}
+Promo Code: ${promo || '-'}
+
+Student Full Name: ${nama}
+Nickname: ${panggilan}
+Child Age: ${usia}
+School: ${sekolah}
+Parent/Guardian Name: ${ortu}
+Parent Email: ${email}
+Home Address: ${alamat}
+Parent WhatsApp: ${waOrtu}
+Child WhatsApp (optional): ${waAnak}`
+:
+`*Form Pendaftaran Siswa Baru Akademi LesKoding*
 
 Pilihan Learning Center: ${center}
 Kode / Nama Promo: ${promo || '-'}
@@ -716,6 +733,311 @@ function switchCoursePath(courseId) {
 /* ========================================================
    9. COURSE MODAL (CURRICULUM & SYLLABUS DETAILS)
    ======================================================== */
+
+/* ========================================================
+   COURSES DATA (BILINGUAL SYLLABUS & DETAILS)
+   ======================================================== */
+const coursesData = {
+    'komputer-dasar': {
+        icon: 'fa-desktop',
+        color: 'blue',
+        xp: '+500 XP',
+        id: {
+            level: 'Level 0: Fondasi Digital',
+            title: 'Komputer Dasar',
+            duration: '4–6 Minggu',
+            desc: 'Pengenalan perangkat keras komputer, ketangkasan mouse & keyboard, navigasi software yang aman, serta logika digital awal melalui aktivitas visual yang interaktif.',
+            topics: [
+                'Pengenalan Hardware & Fungsi Komputer',
+                'Ketangkasan Keyboard & Navigasi Mouse Cepat',
+                'Keamanan Digital Dasar & Etika Berinternet',
+                'Eksplorasi Aplikasi Kreatif & Logika Komputasi Sederhana'
+            ]
+        },
+        en: {
+            level: 'Level 0: Digital Foundation',
+            title: 'Basic Computing',
+            duration: '4–6 Weeks',
+            desc: 'Introduction to computer hardware, keyboard & mouse dexterity, safe software navigation, and fundamental computational logic through playful interactive activities.',
+            topics: [
+                'Hardware Essentials & Computer Functions',
+                'Keyboard Speed & Accurate Mouse Navigation',
+                'Foundational Digital Safety & Web Etiquette',
+                'Creative Applications & Core Computational Logic'
+            ]
+        }
+    },
+    'beginner-1': {
+        icon: 'fa-shapes',
+        color: 'emerald',
+        xp: '+750 XP',
+        id: {
+            level: 'Level 1: Visual Logic',
+            title: 'Beginner 1',
+            duration: '6–8 Minggu',
+            desc: 'Membangun pondasi computational thinking dan logika algoritma dasar menggunakan visual block programming (Scratch). Mengubah imajinasi menjadi animasi cerita pertama.',
+            topics: [
+                'Pengenalan Workspace & Konsep Blok Kode',
+                'Urutan Perintah (Sequencing) & Event Listeners',
+                'Animasi Sprite, Kostum & Rekaman Suara',
+                'Proyek: Buku Cerita Interaktif & Mini Game Sederhana'
+            ]
+        },
+        en: {
+            level: 'Level 1: Visual Logic',
+            title: 'Beginner 1',
+            duration: '6–8 Weeks',
+            desc: 'Establish core computational thinking and algorithmic sequencing using visual block programming (Scratch). Turn creative ideas into interactive story animations.',
+            topics: [
+                'Scratch Workspace & Visual Block Concept',
+                'Sequencing Commands & Event Listeners',
+                'Sprite Animation, Costumes & Sound Recording',
+                'Project: Interactive Storybook & Mini Arcade Game'
+            ]
+        }
+    },
+    'beginner-2': {
+        icon: 'fa-gamepad',
+        color: 'teal',
+        xp: '+1000 XP',
+        id: {
+            level: 'Level 2: Game Logic',
+            title: 'Beginner 2',
+            duration: '6–8 Minggu',
+            desc: 'Memperdalam logika percabangan, koordinat ruang gerak 2D, perulangan dinamis, dan sistem variabel untuk menciptakan game arcade interaktif.',
+            topics: [
+                'Logika Koordinat Sumbu X & Y dan Deteksi Tabrakan',
+                'Konsep Perulangan Lanjutan (Loops & Nested Loops)',
+                'Percabangan Kondisional (If-Else & Boolean Logic)',
+                'Proyek: Game Tangkap Objek & Penghitung Skor Otomatis'
+            ]
+        },
+        en: {
+            level: 'Level 2: Game Logic',
+            title: 'Beginner 2',
+            duration: '6–8 Weeks',
+            desc: 'Deepen conditional branching, 2D movement coordinates, dynamic loops, and variable systems to build interactive arcade games.',
+            topics: [
+                'X & Y Axis Coordinate Logic & Collision Detection',
+                'Advanced Loops & Nested Loops Concept',
+                'Conditional Branching (If-Else & Boolean Logic)',
+                'Project: Object Catching Arcade Game & Automatic Score Counter'
+            ]
+        }
+    },
+    'intermediate-1': {
+        icon: 'fa-layer-group',
+        color: 'blue',
+        xp: '+1500 XP',
+        id: {
+            level: 'Level 3: Multi-Level Game',
+            title: 'Intermediate 1',
+            duration: '8 Minggu',
+            desc: 'Menghadirkan mekanika game multi-level yang kompleks, kloning sprite dinamis, algoritma matematika game, serta interaksi logika multi-objek.',
+            topics: [
+                'Kloning Sprite Dinamis & Manajemen Memori Objek',
+                'Variabel Global, Lokal & List (Struktur Data Sederhana)',
+                'Pembuatan Fisika Lompatan & Gravitasi Platformer',
+                'Proyek: Game Petualangan Multi-Level dengan Tantangan Waktu'
+            ]
+        },
+        en: {
+            level: 'Level 3: Multi-Level Game',
+            title: 'Intermediate 1',
+            duration: '8 Weeks',
+            desc: 'Implement complex multi-level game mechanics, dynamic sprite cloning, game math algorithms, and multi-object logic interactions.',
+            topics: [
+                'Dynamic Sprite Cloning & Object Memory Management',
+                'Global, Local Variables & Lists (Simple Data Structures)',
+                'Jumping Physics & Platformer Gravity Mechanics',
+                'Project: Multi-Level Adventure Game with Timed Challenges'
+            ]
+        }
+    },
+    'intermediate-2': {
+        icon: 'fa-code',
+        color: 'purple',
+        xp: '+2000 XP',
+        id: {
+            level: 'Level 4: Pre-Syntax',
+            title: 'Intermediate 2',
+            duration: '8 Minggu',
+            desc: 'Jembatan transisi dari blok visual menuju logika teks (pseudocode & syntax programming). Memahami abstraksi fungsi, modularitas, dan debugging terstruktur.',
+            topics: [
+                'Abstraksi & Pembuatan Fungsi Mandiri (Custom Blocks with Inputs)',
+                'Algoritma Pencarian & Pengurutan Data Sederhana',
+                'Pengenalan Konsep Sintaks Pemrograman Tekstual & Pseudocode',
+                'Proyek: Game Boss Battle Interaktif dengan Strategi AI Sederhana'
+            ]
+        },
+        en: {
+            level: 'Level 4: Pre-Syntax',
+            title: 'Intermediate 2',
+            duration: '8 Weeks',
+            desc: 'A bridging transition from visual blocks to text-based code logic (pseudocode & typed syntax). Master function abstraction, modularity, and structured debugging.',
+            topics: [
+                'Abstraction & Custom Function Creation (Custom Blocks with Inputs)',
+                'Fundamental Search & Data Sorting Algorithms',
+                'Introduction to Textual Syntax Concepts & Pseudocode',
+                'Project: Interactive Boss Battle Game with Basic Enemy AI'
+            ]
+        }
+    },
+    'innovator': {
+        icon: 'fa-rocket',
+        color: 'gold',
+        xp: '+3000 XP',
+        id: {
+            level: 'Level 5: Capstone Level',
+            title: 'Innovator',
+            duration: '8–10 Minggu',
+            desc: 'Puncak petualangan kurikulum bertahap. Siswa merancang proyek mandiri berskala besar (Capstone Project), mengintegrasikan berbagai konsep, presentasi karya, dan portofolio digital.',
+            topics: [
+                'Desain Proyek Mandiri (Ideasi, Wireframe & Arsitektur)',
+                'Penerapan Advanced Computational Thinking & Error Handling',
+                'Pengujian Kualitas (Testing, Peer Review & Bug Fixing)',
+                'Proyek: Capstone Showcase Karya Mandiri & Publikasi Portofolio'
+            ]
+        },
+        en: {
+            level: 'Level 5: Capstone Level',
+            title: 'Innovator',
+            duration: '8–10 Weeks',
+            desc: 'The capstone summit of the progression curriculum. Students design a major independent project, integrate diverse engineering concepts, and build a showcase digital portfolio.',
+            topics: [
+                'Independent Project Design (Ideation, Wireframing & Architecture)',
+                'Advanced Computational Thinking & Proactive Error Handling',
+                'Quality Testing (Peer Review, Automated Checks & Bug Fixing)',
+                'Project: Capstone Showcase of Independent Work & Digital Portfolio Release'
+            ]
+        }
+    },
+    'roblox': {
+        icon: 'fa-cube',
+        color: 'red',
+        xp: '+2500 XP',
+        id: {
+            level: 'Peminatan: Game 3D & Lua',
+            title: 'Roblox',
+            duration: '8–10 Minggu',
+            desc: 'Membangun dunia game 3D multiplayer di Roblox Studio dan memprogram mekanika permainan interaktif menggunakan bahasa pemrograman tekstual Lua Scripting.',
+            topics: [
+                'Navigasi Roblox Studio & 3D Environment Modeling',
+                'Dasar Pemrograman Lua: Variabel, Function, Event, & Loops',
+                'Mekanika Interaktif: Traps, Leaderstats & GUI / HUD Game',
+                'Proyek: Game Obby / Survival Multiplayer & Rilis ke Roblox Server'
+            ]
+        },
+        en: {
+            level: 'Specialist: 3D Game & Lua',
+            title: 'Roblox',
+            duration: '8–10 Weeks',
+            desc: 'Build multiplayer 3D game worlds in Roblox Studio and program interactive gameplay mechanics using textual Lua scripting.',
+            topics: [
+                'Roblox Studio Navigation & 3D Environment Modeling',
+                'Lua Programming Fundamentals: Variables, Functions, Events, & Loops',
+                'Interactive Mechanics: Traps, Leaderboards & Game GUI / HUD',
+                'Project: Multiplayer Obby / Survival Game Published to Roblox Servers'
+            ]
+        }
+    },
+    'robotika': {
+        icon: 'fa-robot',
+        color: 'gold',
+        xp: '+2500 XP',
+        id: {
+            level: 'Peminatan: Hardware & IoT',
+            title: 'Robotika',
+            duration: '8–10 Minggu',
+            desc: 'Merakit sirkuit elektronik di breadboard, menghubungkan aneka sensor fisik dan aktuator, serta memprogram mikrokontroler (Arduino / ESP32) untuk otomasi dan IoT.',
+            topics: [
+                'Dasar Rangkaian Elektronika, Tegangan Listrik & Breadboard',
+                'Pemrograman Arduino C++ & Kontrol Output (LED, Buzzer, Servo)',
+                'Integrasi Sensor Ultrasonik, Suhu, Cahaya & Gerak',
+                'Proyek: Robot Pengikut Jalur (Line Follower) / Smart Home IoT'
+            ]
+        },
+        en: {
+            level: 'Specialist: Hardware & IoT',
+            title: 'Robotics',
+            duration: '8–10 Weeks',
+            desc: 'Wire electronic circuits on breadboards, interface real-world physical sensors and actuators, and code microcontrollers (Arduino / ESP32) for smart automation and IoT.',
+            topics: [
+                'Electronic Circuit Basics, Voltage Distribution & Breadboard Prototyping',
+                'Arduino C++ Coding & Actuator Control (LED, Buzzer, Servo Motors)',
+                'Sensor Integration: Ultrasonic Distance, Temperature, Light & Motion',
+                'Project: Autonomous Line Follower Robot / Smart Home IoT Automation'
+            ]
+        }
+    },
+    'web': {
+        icon: 'fa-globe',
+        color: 'blue',
+        xp: '+2500 XP',
+        id: {
+            level: 'Peminatan: Frontend & Web',
+            title: 'Web Programming',
+            duration: '8–10 Minggu',
+            desc: 'Mempelajari fondasi pembuatan website modern dari struktur semantik HTML, tata letak responsif CSS (Flexbox & Grid), hingga logika interaktif dengan JavaScript modern.',
+            topics: [
+                'Struktur Dokumen HTML5 Semantik & Aksesibilitas',
+                'Styling Modern dengan CSS3, Flexbox, Grid & Responsive Design',
+                'JavaScript Fundamental & Manipulasi DOM Real-Time',
+                'Proyek: Pembuatan Web Portofolio Responsif & Hosting Online'
+            ]
+        },
+        en: {
+            level: 'Specialist: Frontend & Web',
+            title: 'Web Programming',
+            duration: '8–10 Weeks',
+            desc: 'Learn modern website creation fundamentals from semantic HTML structure and responsive CSS layouts (Flexbox & Grid) to dynamic logic with modern JavaScript.',
+            topics: [
+                'Semantic HTML5 Document Structure & Web Accessibility Principles',
+                'Modern Styling with CSS3, Flexbox, CSS Grid & Responsive Layouts',
+                'Modern JavaScript Fundamentals & Real-Time DOM Manipulation',
+                'Project: Responsive Personal Portfolio Website & Online Cloud Deployment'
+            ]
+        }
+    },
+    'app': {
+        icon: 'fa-mobile-screen-button',
+        color: 'purple',
+        xp: '+2500 XP',
+        id: {
+            level: 'Peminatan: Mobile App',
+            title: 'App Programming',
+            duration: '8–10 Minggu',
+            desc: 'Merancang antarmuka aplikasi seluler (UI/UX), mengolah logika interaksi aplikasi, memanfaatkan komponen perangkat (GPS, Kamera), serta membangun aplikasi mobile yang fungsional.',
+            topics: [
+                'Prinsip Desain UI/UX Aplikasi Mobile Modern',
+                'Event-Driven Programming & Navigasi Multi-Layar (Multi-Screen)',
+                'Pemanfaatan Sensor Mobile, Local Storage & API Sederhana',
+                'Proyek: Aplikasi Utilitas / Kuis Interaktif Siap Uji di Smartphone'
+            ]
+        },
+        en: {
+            level: 'Specialist: Mobile App',
+            title: 'App Programming',
+            duration: '8–10 Weeks',
+            desc: 'Design mobile application interfaces (UI/UX), architect interaction logic, harness hardware sensors (GPS, Camera), and assemble fully functional smartphone apps.',
+            topics: [
+                'Modern Mobile UI/UX Design Principles & Touch-Friendly Layouts',
+                'Event-Driven Programming & Seamless Multi-Screen Navigation',
+                'Mobile Sensor Integration, Local Storage & Simple REST APIs',
+                'Project: Interactive Utility App / Quiz App Ready to Test on Smartphones'
+            ]
+        }
+    }
+};
+
+window.openCourseModalById = function(courseKey) {
+    const lang = localStorage.getItem('leskoding_lang') || 'en';
+    const course = coursesData[courseKey];
+    if (!course) return;
+    const data = course[lang] || course.en;
+    openCourseModal(data.level, data.title, course.icon, course.color, data.desc, course.xp, data.duration, data.topics);
+};
+
 function openCourseModal(level, title, iconClass, colorClass, desc, xp, duration, topics) {
     const modal = document.getElementById('course-modal');
     const modalContent = document.getElementById('course-modal-content');
@@ -774,6 +1096,21 @@ function openCourseModal(level, title, iconClass, colorClass, desc, xp, duration
             topicsUl.appendChild(li);
         });
     }
+
+    // Update static modal labels according to active lang
+    const lang = localStorage.getItem('leskoding_lang') || 'en';
+    const dict = i18nDictionary[lang] || i18nDictionary.en;
+    const xpLabel = document.getElementById('modal-xp-label');
+    const durLabel = document.getElementById('modal-dur-label');
+    const topicsLabel = document.getElementById('modal-topics-label');
+    const modalBtn = document.getElementById('modal-btn');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+
+    if (xpLabel && dict.modal_xp_label) xpLabel.innerHTML = dict.modal_xp_label;
+    if (durLabel && dict.modal_duration_label) durLabel.innerHTML = dict.modal_duration_label;
+    if (topicsLabel && dict.modal_topics_label) topicsLabel.innerHTML = dict.modal_topics_label;
+    if (modalBtn && dict.modal_btn_enroll) modalBtn.innerHTML = `${dict.modal_btn_enroll} <i class="fa-solid fa-arrow-right"></i>`;
+    if (modalCloseBtn && dict.modal_btn_close) modalCloseBtn.textContent = dict.modal_btn_close;
 
     // Show modal with smooth transition
     modal.classList.remove('hidden');
@@ -865,15 +1202,16 @@ function calculateDistance() {
     const resultBox = document.getElementById('distance-result-box');
     const resultText = document.getElementById('distance-result-text');
     const btn = document.getElementById('check-distance-btn');
+    const lang = localStorage.getItem('leskoding_lang') || 'en';
     
     if(!input.value.trim()) {
-        alert("Silakan masukkan lokasi Anda terlebih dahulu.");
+        alert(lang === 'en' ? "Please enter your location or district first." : "Silakan masukkan lokasi Anda terlebih dahulu.");
         return;
     }
     
     // Animate button
     const originalText = btn.innerHTML;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menghitung...';
+    btn.innerHTML = lang === 'en' ? '<i class="fa-solid fa-spinner fa-spin"></i> Calculating...' : '<i class="fa-solid fa-spinner fa-spin"></i> Menghitung...';
     btn.classList.add('opacity-80');
     
     // Mock API call (simulate delay)
@@ -887,8 +1225,13 @@ function calculateDistance() {
         const campuses = ['Gents Robotic Gianyar', 'Bali Seed Peliatan', 'Bali Seed Bedulu'];
         const randomCampus = campuses[Math.floor(Math.random() * campuses.length)];
         
-        resultText.innerHTML = `Hanya <strong>${randomMins} Menit (${randomKm} km)</strong> dari lokasi Anda!`;
-        const nearestCampusText = resultBox.querySelector('strong');
+        if (lang === 'en') {
+            resultText.innerHTML = `Only <strong>${randomMins} Minutes (${randomKm} km)</strong> from your location!`;
+        } else {
+            resultText.innerHTML = `Hanya <strong>${randomMins} Menit (${randomKm} km)</strong> dari lokasi Anda!`;
+        }
+        
+        const nearestCampusText = resultBox.querySelector('strong.nearest-campus-name') || resultBox.querySelectorAll('strong')[1];
         if (nearestCampusText) nearestCampusText.textContent = randomCampus;
         
         resultBox.classList.remove('hidden');
@@ -1176,272 +1519,616 @@ document.addEventListener('click', (e) => {
 // Comprehensive Bilingual Translation Dictionary (English Default & Indonesian)
 const i18nDictionary = {
     en: {
-        // Navigation
-        nav_program: "Programs",
-        nav_method: "Method",
-        nav_works: "Works",
-        nav_progress: "Progress",
-        nav_location: "Locations",
-        nav_faq: "FAQ",
-        nav_cta: "Get Info",
-        nav_hof: "Hall of Fame",
-        nav_course: "Programs",
-        nav_enroll: "Enroll Now",
-        nav_start_adventure: "Request Info",
-        
-        // Hero Section
-        hero_badge: "Playful Future Lab — Coding &amp; Robotic Bali",
-        hero_title_1: "Turn curiosity into",
-        hero_title_2: "digital creations.",
-        hero_desc_main: "Children learn step by step, conquer hands-on challenges, and track their growth each session guided by expert tutors.",
-        hero_btn_info: "Request Info / Schedule",
-        hero_btn_works: "View Student Works",
-        hero_trust_1_title: "Structured Curriculum",
-        hero_trust_1_sub: "Beginner to Advanced",
-        hero_trust_2_title: "Parent Progress Reports",
-        hero_trust_2_sub: "Track Learning Milestones",
-        hero_trust_3_title: "3 Learning Centers",
-        hero_trust_3_sub: "Gianyar, Ubud &amp; Bedulu",
-        
-        // Method (Cara Belajar)
-        method_badge: "Learning Methodology",
-        method_title: "How Students Learn at LesKoding",
-        method_desc: "We guide young minds through 4 proven stages: not just textbook memorization, but creating real digital projects and experiencing true mastery.",
-        method_s1_title: "Core Concepts",
-        method_s1_desc: "Coding and engineering concepts explained via visual analogies and engaging quizzes kids genuinely love.",
-        method_s2_title: "Hands-on Practice",
-        method_s2_desc: "Kids assemble real games, write clean logic, and wire robot sensors. Emphasizing trial and error for problem solving.",
-        method_s3_title: "Personal Tutor Feedback",
-        method_s3_desc: "Dedicated mentors guide each child, refine code structure, and appreciate unique inventive ideas.",
-        method_s4_title: "Real Progress & XP",
-        method_s4_desc: "Milestones recorded automatically: XP points, published student portfolio, and transparent reports sent to parents.",
-
-        // Parent Progress Section
-        parent_badge: "Learning reports parents can truly understand",
-        parent_title: "Know what your child learns—and what comes next.",
-        parent_desc: "Once a session report is published, parents can review attendance, skills evaluated by tutors, child strengths, current focus areas, and next-step recommendations. Progress is also tracked seamlessly over time.",
-        parent_cta_preview: "View Sample Report",
-        parent_cta_consult: "Consult Your Child's Needs",
-        parent_cta: "Consult Your Child's Needs",
-
-        // Course Section
-        course_badge: "Active Programs 2026",
-        course_title: "Available Learning Programs",
-        course_desc: "Structured step-by-step for ages 6–16. Real-world project-based curriculum, interactive challenges, and guidance from experienced mentors.",
-        course_game_title: "Game Developer Path",
-        course_game_desc: "From core algorithmic logic to building interactive 3D worlds played by thousands on Roblox.",
-        course_web_title: "Web Architect Path",
-        course_web_desc: "Build modern interactive websites and web apps from fundamental styling to full internet deployment.",
-        course_robotic_title: "Robotic Engineer Path",
-        course_robotic_desc: "Master electronic circuits, microcontroller coding, and engineer autonomous robots for the future.",
-        
-        // Hall of Fame
-        hof_title: "Success Stories from<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-yellow-600\">Our Explorers!</span>",
-        hof_desc: "This is where our students\' extraordinary creations take the spotlight! Each project is a milestone of relentless dedication, logic, and creativity.",
-        hof_masterpiece_heading: "Curator\'s Masterpiece Showcase",
-        hof_badge_masterpiece: "Top Masterpiece",
-        hof_curator_pick: "Curator\'s Pick",
-        hof_sarah_age: "(12 Years Old)",
-        hof_masterpiece_desc: "A massive 3D Roleplay universe built in Roblox Studio with cyberpunk architecture, virtual economies, and advanced interactive NPCs.",
-        btn_view_project: "View Project",
-        hof_gallery_heading: "Exhibition Gallery",
-        hof_top_creations: "Top Student Projects",
-        hof_c1_badge: "Most Popular",
-        hof_c1_title: "Smart AI Cashier System",
-        hof_c1_author: "Budi (14 Years Old)",
-        hof_c1_desc: "Web-based cashier application utilizing complex JavaScript logic for real-time inventory calculations and dynamic receipt printing.",
-        hof_c2_badge: "Future Tech",
-        hof_c2_title: "Smart Waste Sorting Robot",
-        hof_c2_author: "Kevin (10 Years Old)",
-        hof_c2_desc: "Arduino-powered engineering project featuring ultrasonic sensors and servo motors to automate waste sorting and smart lid control.",
-        hof_c3_badge: "Best Design",
-        hof_c3_title: "3D Web Animation Portfolio",
-        hof_c3_author: "Nadia (15 Years Old)",
-        hof_c3_desc: "Personal portfolio website packed with seamless CSS 3D animations and fluid scroll transitions created without external libraries.",
-        hof_btn_load_more: "Load More Creations",
-        
-        // Location Section
-        loc_title: "Learning Centers in Bali",
-        loc_desc: "Visit one of our learning centers in Gianyar, Ubud, or Bedulu for in-person interactive classes with air-conditioned labs and friendly tutors.",
-        loc_calc_title: "Check Nearest Campus",
-        loc_calc_desc: "Enter your district or area to discover which campus is closest to your home.",
-        loc_btn_check: "Check Location",
-        loc_est_label: "Estimated Travel Time",
-        
-        // FAQ Section
-        faq_badge: "Questions & Answers",
-        faq_title: "Frequently Asked Questions",
-        faq_desc: "Transparent answers about class schedules, hardware, age requirements, and free trial sessions.",
-        faq_q1: "Can a child with zero prior coding experience join?",
-        faq_a1: "Absolutely! Over 80% of our new students start from scratch. We introduce structured computational thinking through intuitive visual blocks before advancing to real typed syntax.",
-        faq_q2: "Is a trial class available?",
-        faq_a2: "Yes, we offer complimentary Free Trial sessions across Gianyar, Ubud Peliatan, and Bedulu centers. Book a slot using the form below or chat with our admin.",
-        faq_q3: "Does my child need to bring their own laptop?",
-        faq_a3: "Our labs are fully equipped with dedicated PCs and robotic equipment. However, students who prefer to use their own laptop to keep projects directly on their machine are welcome.",
-        faq_q4: "What is the tutor-to-student ratio per class?",
-        faq_a4: "We maintain small interactive classes of 4 to 6 students per tutor, ensuring personalized guidance and immediate support during hands-on projects.",
-
-        // Registration Form
-        reg_title: "Start Your Child\'s Tech Journey",
-        reg_desc: "Fill in the brief form below to schedule a class consultation or book a free trial. Confirmation will be sent directly via WhatsApp.",
-        reg_form_header: "Student &amp; Parent Registration Details",
-        reg_campus_count: "3 Campuses Available in Bali",
-        reg_choose_center: "Choose Nearest Learning Center",
-        reg_choose_center_sub: "Click to choose your child\'s study center",
-        reg_promo_sub: "Auto-filled when claiming promo voucher",
-        reg_lbl_name: "Full Student Name",
-        reg_lbl_nickname: "Nickname",
-        reg_lbl_age: "Child\'s Age",
-        reg_lbl_school: "School Name",
-        reg_lbl_parent: "Parent / Guardian Name",
-        reg_lbl_address: "Home Address",
-        reg_lbl_wa_parent: "Parent\'s WhatsApp",
-        reg_lbl_wa_child: "Child\'s WhatsApp (Optional)",
-        reg_btn_submit: "Send via WhatsApp",
-        
-        // Promo Popup
-        promo_badge: "Limited 2026 Promo",
-        promo_sub: "Free Trial + Registration Discount",
-        promo_title: "Launch Your Digital<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-yellow-500\">Creator Journey!</span>",
-        promo_body: "Claim a complimentary trial session and registration discount across all LesKoding Learning Centers now:",
-        promo_cta: "Enroll Now & Claim Promo",
-        promo_trigger: "2026 Promo"
-    },
+        "nav_program": "Programs",
+        "nav_method": "How We Teach",
+        "nav_works": "Student Works",
+        "nav_progress": "Progress Tracking",
+        "nav_location": "Locations",
+        "nav_faq": "FAQ",
+        "nav_cta": "Get Info",
+        "nav_cta_short": "Enroll",
+        "nav_mobile_lang_label": "Select Language:",
+        "hero_badge": "Playful Future Lab — Coding &amp; Robotics Bali",
+        "hero_title_1": "Turn curiosity into",
+        "hero_title_2": "digital creations.",
+        "hero_desc_main": "Children learn step by step, conquer exciting hands-on challenges, and track their growth every session guided by experienced tutors.",
+        "hero_btn_info": "Request Info / Schedule",
+        "hero_btn_works": "View Student Works",
+        "hero_trust_1_title": "Structured Curriculum",
+        "hero_trust_1_sub": "Beginner to Advanced",
+        "hero_trust_2_title": "Parent Progress Reports",
+        "hero_trust_2_sub": "Track Learning Milestones",
+        "hero_trust_3_title": "3 Learning Centers",
+        "hero_trust_3_sub": "Gianyar, Ubud &amp; Bedulu",
+        "hero_vis_badge": "Real Student Session",
+        "hero_vis_tag": "Project Showcase",
+        "hero_vis_title": "Robotics &amp; Interactive Mini Games",
+        "hero_vis_feedback_title": "Tutor Feedback Every Session",
+        "hero_vis_feedback_sub": "Real-time progress notes sent directly to parents",
+        "hero_vis_active": "Active",
+        "course_badge": "Active Programs 2026",
+        "course_title": "Available Learning Programs",
+        "course_desc": "Structured step-by-step for ages 6–16. Real-world project-based curriculum, interactive challenges, and guidance from experienced mentors.",
+        "course_tab_all": "All Programs (10)",
+        "course_tab_ladder": "Progression Track (6)",
+        "course_tab_specialist": "Specialist Track (4)",
+        "course_ladder_tag": "Continuous Learning Pathway",
+        "course_ladder_title": "Student Progression Ladder (Level 0 to Level 5)",
+        "course_ladder_badge": "Milestone assessment &amp; graduation certificate for each level advancement",
+        "course_lvl0_tag": "LEVEL 0",
+        "course_lvl0_name": "Basic Computing",
+        "course_lvl0_age": "Ages 6–8 Yrs",
+        "course_lvl1_tag": "LEVEL 1",
+        "course_lvl1_name": "Beginner 1",
+        "course_lvl1_age": "Ages 7–9 Yrs",
+        "course_lvl2_tag": "LEVEL 2",
+        "course_lvl2_name": "Beginner 2",
+        "course_lvl2_age": "Ages 8–10 Yrs",
+        "course_lvl3_tag": "LEVEL 3",
+        "course_lvl3_name": "Intermediate 1",
+        "course_lvl3_age": "Ages 9–12 Yrs",
+        "course_lvl4_tag": "LEVEL 4",
+        "course_lvl4_name": "Intermediate 2",
+        "course_lvl4_age": "Ages 10–14 Yrs",
+        "course_lvl5_tag": "LEVEL 5",
+        "course_lvl5_name": "Innovator",
+        "course_lvl5_age": "Ages 11–16 Yrs",
+        "course_btn_syllabus": "View Syllabus &amp; Details",
+        "c1_lvl": "Level 0 · Foundation",
+        "c1_age": "Ages 6–8 Yrs",
+        "c1_title": "Basic Computing",
+        "c1_desc": "Introduction to computer hardware, mouse &amp; keyboard dexterity, safe software navigation, and fundamental digital logic.",
+        "c1_b1": "Hardware &amp; operating system basics",
+        "c1_b2": "Typing dexterity &amp; mouse navigation",
+        "c1_b3": "Internet safety &amp; digital ethics",
+        "c1_b4": "Creative software &amp; foundational logic",
+        "c1_dur": "4–6 Weeks",
+        "c2_lvl": "Level 1 · Visual Logic",
+        "c2_age": "Ages 7–9 Yrs",
+        "c2_title": "Beginner 1",
+        "c2_desc": "Build computational thinking foundations through visual block coding (Scratch). Turn imagination into first interactive animations.",
+        "c2_b1": "Algorithmic logic &amp; command sequencing",
+        "c2_b2": "Scratch workspace &amp; event triggers",
+        "c2_b3": "Character motion, costumes &amp; audio",
+        "c2_b4": "Project: Interactive story &amp; mini game",
+        "c2_dur": "6–8 Weeks",
+        "c3_lvl": "Level 2 · Game Logic",
+        "c3_age": "Ages 8–10 Yrs",
+        "c3_title": "Beginner 2",
+        "c3_desc": "Master conditional branching, 2D coordinates, dynamic loops, and variable systems to build interactive arcade games.",
+        "c3_b1": "X &amp; Y coordinates &amp; collision detection",
+        "c3_b2": "Advanced loops &amp; nested loops",
+        "c3_b3": "Conditional branching (if-else logic)",
+        "c3_b4": "Project: Object catching arcade game &amp; score tracking",
+        "c3_dur": "6–8 Weeks",
+        "c4_lvl": "Level 3 · Platformer",
+        "c4_age": "Ages 9–12 Yrs",
+        "c4_title": "Intermediate 1",
+        "c4_desc": "Complex multi-level game mechanics, dynamic sprite cloning, mathematical algorithms, and platformer gravity physics.",
+        "c4_b1": "Dynamic sprite cloning &amp; memory management",
+        "c4_b2": "Jumping physics, inertia &amp; gravity",
+        "c4_b3": "Global/local variables &amp; list data structures",
+        "c4_b4": "Project: Multi-level challenge platformer game",
+        "c4_dur": "8 Weeks",
+        "c5_lvl": "Level 4 · Pre-Syntax",
+        "c5_age": "Ages 10–14 Yrs",
+        "c5_title": "Intermediate 2",
+        "c5_desc": "Bridge the transition from visual blocks to text-based syntax. Understand function abstraction (custom blocks) and structured debugging.",
+        "c5_b1": "Modular functions (custom blocks with parameters)",
+        "c5_b2": "Search &amp; sorting algorithm logic",
+        "c5_b3": "Introduction to typed syntax &amp; pseudocode",
+        "c5_b4": "Project: Boss battle game with enemy AI",
+        "c5_dur": "8 Weeks",
+        "c6_lvl": "Level 5 · Capstone",
+        "c6_age": "Ages 11–16 Yrs",
+        "c6_title": "Innovator",
+        "c6_desc": "The capstone summit of the progression curriculum. Students design a major independent project, integrate diverse engineering concepts, and build a showcase digital portfolio.",
+        "c6_b1": "Idea design, wireframing &amp; system architecture",
+        "c6_b2": "Advanced computational thinking &amp; error handling",
+        "c6_b3": "Quality testing, peer review &amp; bug fixing",
+        "c6_b4": "Project: Capstone showcase &amp; digital portfolio exhibition",
+        "c6_dur": "8–10 Weeks",
+        "c7_lvl": "Specialist · 3D Game",
+        "c7_age": "Ages 10–16 Yrs",
+        "c7_title": "Roblox",
+        "c7_desc": "Build multiplayer 3D worlds in Roblox Studio and program gameplay interactions with real typed Lua code.",
+        "c7_b1": "Roblox Studio navigation &amp; 3D terrain design",
+        "c7_b2": "Lua syntax: Variables, functions &amp; events",
+        "c7_b3": "Interactive mechanics, leaderboards &amp; game HUD",
+        "c7_b4": "Project: Multiplayer Obby game published to Roblox",
+        "c7_dur": "8–10 Weeks",
+        "c8_lvl": "Specialist · Hardware",
+        "c8_age": "Ages 8–15 Yrs",
+        "c8_title": "Robotics",
+        "c8_desc": "Wire breadboard electronic circuits, interface real-world sensors, and program microcontrollers (Arduino/ESP32).",
+        "c8_b1": "Core electronic circuits &amp; breadboards",
+        "c8_b2": "Arduino C++ &amp; microcontroller programming",
+        "c8_b3": "Ultrasonic, light &amp; motor sensor integration",
+        "c8_b4": "Project: Line follower robot &amp; smart IoT system",
+        "c8_dur": "8–10 Weeks",
+        "c9_lvl": "Specialist · Modern Web",
+        "c9_age": "Ages 11–16 Yrs",
+        "c9_title": "Web Programming",
+        "c9_desc": "Learn modern responsive website development from semantic HTML5 structure and CSS3 layouts to interactive JavaScript logic.",
+        "c9_b1": "Semantic HTML5 &amp; web accessibility",
+        "c9_b2": "Responsive CSS3 styling, Flexbox &amp; Grid",
+        "c9_b3": "Modern JavaScript interactivity &amp; DOM events",
+        "c9_b4": "Project: Responsive portfolio published to the cloud",
+        "c9_dur": "8–10 Weeks",
+        "c10_lvl": "Specialist · Mobile App",
+        "c10_age": "Ages 11–16 Yrs",
+        "c10_title": "App Programming",
+        "c10_desc": "Design mobile app interfaces (UI/UX), architect multi-screen flows, leverage smartphone sensors, and test live apps on phones.",
+        "c10_b1": "Intuitive mobile UI/UX design principles",
+        "c10_b2": "Event-driven programming &amp; multi-screen logic",
+        "c10_b3": "Smartphone sensors &amp; local storage integration",
+        "c10_b4": "Project: Interactive utility app tested on real smartphones",
+        "c10_dur": "8–10 Weeks",
+        "method_badge": "Learning Methodology",
+        "method_title": "How Students Learn at LesKoding",
+        "method_desc": "We guide young minds through 4 proven stages: not just rote memorization, but creating real digital projects and experiencing true mastery.",
+        "method_s1_step": "Step 01",
+        "method_s1_dur": "15 Mins",
+        "method_s1_title": "Concept Fundamentals",
+        "method_s1_desc": "Coding and engineering concepts explained via intuitive visual analogies and engaging quizzes kids genuinely love.",
+        "method_s1_note": "Visual blocks &amp; fun quizzes",
+        "method_s2_step": "Step 02",
+        "method_s2_dur": "50 Mins",
+        "method_s2_title": "Exploratory Practice",
+        "method_s2_desc": "Kids assemble real games, write clean logic, and wire robot sensors. Emphasizing trial and error for problem solving.",
+        "method_s2_note": "Direct hands-on in class",
+        "method_s3_step": "Step 03",
+        "method_s3_dur": "Every Session",
+        "method_s3_title": "Personal Tutor Feedback",
+        "method_s3_desc": "Dedicated mentors guide each child, refine code structure, and appreciate unique inventive ideas.",
+        "method_s3_note": "1:4 tutor-to-student ratio",
+        "method_s4_step": "Step 04",
+        "method_s4_dur": "Tracked Milestones",
+        "method_s4_title": "Measurable Progress &amp; XP",
+        "method_s4_desc": "Milestones recorded automatically: XP points, published student portfolio, and transparent reports sent to parents.",
+        "method_s4_note": "Portfolio &amp; level certificates",
+        "hof_title": "Success Stories from<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-amber-400 to-yellow-500\">Our Explorers!</span>",
+        "hof_desc": "This is where our students' extraordinary creations take the spotlight! Each project is a milestone of relentless dedication, logic, and creativity. Inspired by their achievements? Join us and begin your journey!",
+        "hof_masterpiece_heading": "Featured Project Spotlight",
+        "hof_badge_masterpiece": "Top Masterpiece",
+        "hof_curator_pick": "Curator's Pick",
+        "hof_sarah_age": "(12 Years Old)",
+        "hof_sarah_role": "Lead Roblox Creator",
+        "hof_masterpiece_desc": "A massive 3D Roleplay universe built in Roblox Studio with cyberpunk architecture, virtual economies, and advanced interactive NPCs.",
+        "btn_view_project": "View Project",
+        "hof_gallery_heading": "Exhibition Gallery",
+        "hof_top_creations": "Top Creations",
+        "hof_c1_badge": "Most Popular",
+        "hof_c1_title": "Smart AI Cashier System",
+        "hof_c1_author": "Budi (14 Years Old)",
+        "hof_web_dev_tag": "· Web Dev",
+        "hof_c1_desc": "Web-based cashier application utilizing complex JavaScript logic for real-time inventory calculations and dynamic receipt printing.",
+        "hof_c2_badge": "Future Tech",
+        "hof_c2_title": "Smart Waste Sorting Robot",
+        "hof_c2_author": "Kevin (10 Years Old)",
+        "hof_robotics_tag": "· Robotics",
+        "hof_c2_desc": "Arduino-powered engineering project featuring ultrasonic sensors and servo motors to automate waste sorting and smart lid control.",
+        "hof_c3_badge": "Best Design",
+        "hof_c3_title": "3D Web Animation Portfolio",
+        "hof_c3_author": "Nadia (15 Years Old)",
+        "hof_c3_desc": "Personal portfolio website packed with seamless CSS 3D animations and fluid scroll transitions created without external libraries.",
+        "hof_btn_load_more": "Load More Creations",
+        "parent_badge": "Learning reports parents can truly understand",
+        "parent_title": "Know what your child learns—and what comes next.",
+        "parent_desc": "Once a session report is published, parents can review attendance, skills evaluated by tutors, child strengths, current focus areas, and next-step recommendations. Progress is also tracked seamlessly over time.",
+        "parent_p1_title": "Concept Understanding &amp; Problem Solving",
+        "parent_p1_desc": "Measures the student's grasp of concepts based on their ability to solve challenges and problems.",
+        "parent_p2_title": "Creativity &amp; Innovation",
+        "parent_p2_desc": "Evaluates whether the student can develop and modify projects beyond given examples.",
+        "parent_p3_title": "Active Participation &amp; Enthusiasm",
+        "parent_p3_desc": "Assesses the student's motivation, curiosity, and engagement throughout the learning session.",
+        "parent_sync": "Automatic synchronization with Student Space app",
+        "report_course_title": "Game Programming (Roblox &amp; Lua)",
+        "report_session": "Session #4",
+        "report_present": "Present",
+        "report_tutor_role": "Lead Tutor",
+        "report_tutor_name": "Danu (Facilitator)",
+        "report_verified": "Verified Session",
+        "report_superhero_label": "Superhero Character",
+        "report_superhero_name": "Iron Man (The Innovator)",
+        "report_superhero_quote": "\"Diligently solves obstacle logic problems and courageously explores new tech solutions independently.\"",
+        "report_rubric_header": "Skill Evaluation (Active Rubric)",
+        "report_r1_name": "Concept Understanding &amp; Problem Solving",
+        "report_r1_desc": "Measures the student's grasp of concepts based on structured arena problem solving.",
+        "report_r2_name": "Creativity &amp; Innovation",
+        "report_r2_desc": "Evaluates the student's ability to expand and modify projects beyond base examples with unique features.",
+        "report_r3_name": "Active Participation &amp; Enthusiasm",
+        "report_r3_desc": "Assesses high motivation, curiosity, and lively discussion throughout the learning session.",
+        "report_eval_header": "Tutor Evaluation",
+        "report_strengths_label": "Strengths",
+        "report_strengths_desc": "Confidently explains ideas and tries to solve challenges independently before asking for help.",
+        "report_improvements_label": "Focus Area (Currently Practicing)",
+        "report_improvements_desc": "More thorough when checking lines of code that cause syntax errors in the game script.",
+        "report_recommendation_label": "Tutor Recommendation",
+        "report_recommendation_desc": "\"In the next session, test solutions with several different inputs to ensure no error loopholes.\"",
+        "report_parent_tips_label": "Home Practice Ideas (Parent Tips)",
+        "report_parent_tips_desc": "Ask your child to share the steps they attempted and their reasoning behind them to foster computational thinking.",
+        "loc_badge": "Campuses &amp; Laboratories",
+        "loc_title": "Learning Centers in Bali",
+        "loc_desc": "Choose the nearest learning center from your home for interactive in-person classes. Each campus is equipped with air-conditioned labs, robotics hardware, and friendly mentors.",
+        "loc_directions": "Directions",
+        "loc_calc_title": "Find Nearest Campus",
+        "loc_calc_desc": "Enter your neighborhood or district to discover which campus is closest to your home.",
+        "loc_btn_check": "Check Location",
+        "loc_est_label": "Estimated Travel Time",
+        "loc_calc_nearest_label": "Nearest campus:",
+        "faq_badge": "Questions &amp; Answers",
+        "faq_title": "Frequently Asked Questions",
+        "faq_desc": "Transparent answers about class schedules, hardware, age requirements, and free trial sessions.",
+        "faq_q1": "Can a child with zero prior coding experience join?",
+        "faq_a1": "Absolutely! Over 80% of our new students start from scratch. We introduce structured computational thinking through intuitive visual blocks before advancing to real typed syntax.",
+        "faq_q2": "Is a free trial class available?",
+        "faq_a2": "Yes, we offer complimentary Free Trial sessions across Gianyar, Ubud Peliatan, and Bedulu centers. Book a slot using the form below or chat directly with our campus admin.",
+        "faq_q3": "Does my child need to bring their own laptop?",
+        "faq_a3": "Our labs are fully equipped with dedicated PCs and robotic hardware ready for each student. However, students who prefer to bring their own laptop so projects stay on their machine are welcome.",
+        "faq_q4": "What is the tutor-to-student ratio per class?",
+        "faq_a4": "We maintain small interactive classes of 4 to 6 students per tutor, ensuring personalized guidance and immediate support during hands-on projects.",
+        "reg_badge": "Registration Form",
+        "reg_title": "Start Your Child's Tech Journey",
+        "reg_desc": "Fill in the brief form below to schedule a class consultation or book a free trial. Confirmation will be sent directly via WhatsApp.",
+        "reg_form_header": "Student &amp; Parent Registration Details",
+        "reg_required_notice": "Required",
+        "reg_lbl_center": "Learning Center Choice",
+        "reg_campus_count": "3 Campuses Available in Bali",
+        "reg_choose_center": "Choose Nearest Learning Center",
+        "reg_choose_center_sub": "Click to select your child's study center",
+        "reg_select_default": "-- Choose Nearest Learning Center --",
+        "reg_lbl_promo": "Promo Code / Voucher (Optional)",
+        "reg_promo_sub": "Auto-filled when claiming promo voucher",
+        "reg_promo_applied": "Promo Applied",
+        "reg_lbl_name": "Full Student Name",
+        "reg_lbl_nickname": "Nickname",
+        "reg_lbl_age": "Child's Age",
+        "reg_lbl_school": "School Name",
+        "reg_lbl_parent": "Parent / Guardian Name",
+        "reg_lbl_email": "Parent's Email",
+        "reg_lbl_address": "Home Address",
+        "reg_lbl_wa_parent": "Parent's WhatsApp",
+        "reg_lbl_wa_child": "Child's WhatsApp (Optional)",
+        "reg_security_note": "Your information is secure and exclusively used for class scheduling confirmation by official LesKoding mentors.",
+        "reg_btn_submit": "Send via WhatsApp",
+        "promo_badge": "Limited 2026 Promo",
+        "promo_sub": "Free Trial + Registration Discount",
+        "promo_title": "Launch Your Digital<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-yellow-500\">Creator Journey!</span>",
+        "promo_body": "Claim a complimentary trial session and registration discount across all LesKoding Learning Centers now:",
+        "promo_cta": "Enroll Now &amp; Claim Promo",
+        "promo_trigger": "2026 Promo",
+        "modal_xp_label": "XP Achievement",
+        "modal_duration_label": "Estimated Duration",
+        "modal_topics_label": "Syllabus Learning Topics:",
+        "modal_btn_enroll": "Enroll / Consultation Schedule",
+        "modal_btn_close": "Close",
+        "footer_tagline": "Future Programming &amp; Robotics Academy in Bali. Guiding children to transform curiosity into real technology.",
+        "footer_col_prog": "Learning Programs",
+        "footer_f1": "Foundation Level: Basic Computing &amp; Beginner",
+        "footer_f2": "Advanced Level: Intermediate &amp; Innovator",
+        "footer_f3": "Specialist: Roblox (3D &amp; Lua)",
+        "footer_f4": "Specialist: Robotics &amp; IoT Engineering",
+        "footer_f5": "Specialist: Web &amp; App Programming",
+        "footer_f6": "Free Trial Class Schedule &rarr;",
+        "footer_col_center": "Learning Centers",
+        "footer_c_check": "Check Map &amp; Nearest Route &rarr;",
+        "footer_col_contact": "Contact &amp; Inquiries",
+        "footer_form_btn": "Online Registration Form",
+        "footer_rights": "&copy; 2026 LesKoding Bali. All rights reserved. Education Technology &amp; Community.",
+        "footer_back_top": "Back to Top",
+        "footer_nav_method": "How We Teach",
+        "footer_nav_privacy": "Privacy Policy",
+        "reward_title": "SYSTEM UNLOCKED",
+        "reward_desc": "Target [1000 Points] Reached!",
+        "reward_btn": "Claim Reward"
+},
     id: {
-        // Navigation
-        nav_program: "Program",
-        nav_method: "Cara Belajar",
-        nav_works: "Karya",
-        nav_progress: "Progres",
-        nav_location: "Lokasi",
-        nav_faq: "FAQ",
-        nav_cta: "Minta Info",
-        nav_hof: "Karya",
-        nav_course: "Program",
-        nav_enroll: "Daftar",
-        nav_start_adventure: "Minta Jadwal",
-        
-        // Hero Section
-        hero_badge: "Playful Future Lab — Coding &amp; Robotic Bali",
-        hero_title_1: "Ubah rasa penasaran jadi",
-        hero_title_2: "karya digital.",
-        hero_desc_main: "Anak belajar langkah demi langkah, mencoba tantangan seru, dan melihat progres belajarnya setiap sesi bersama tutor berpengalaman.",
-        hero_btn_info: "Minta Info / Jadwal Kelas",
-        hero_btn_works: "Lihat Karya Siswa",
-        hero_trust_1_title: "Kurikulum Bertahap",
-        hero_trust_1_sub: "Pemula hingga Mahir",
-        hero_trust_2_title: "Laporan Wali Murid",
-        hero_trust_2_sub: "Pantau Progres Belajar",
-        hero_trust_3_title: "3 Learning Center",
-        hero_trust_3_sub: "Gianyar, Ubud &amp; Bedulu",
-
-        // Method (Cara Belajar)
-        method_badge: "Metodologi Belajar",
-        method_title: "Cara Belajar di LesKoding",
-        method_desc: "Kami memandu anak melalui 4 tahapan belajar yang terbukti efektif: bukan sekadar teori hafalan, melainkan proses langsung berkreasi dan melihat hasil nyata.",
-        method_s1_title: "Materi Konsep",
-        method_s1_desc: "Konsep koding dan robotika disajikan melalui analogi visual sederhana dan kuis interaktif yang mudah dipahami anak tanpa rasa jenuh.",
-        method_s2_title: "Praktik Eksploratif",
-        method_s2_desc: "Anak langsung merakit game, menyusun baris logika kode, atau merangkai sensor robot. Fokus pada trial & error yang menumbuhkan pemecahan masalah.",
-        method_s3_title: "Feedback Tutor",
-        method_s3_desc: "Tutor membimbing secara personal, mengulas logika kode, memberikan tips penyempurnaan, serta apresiasi atas ide unik yang dikembangkan siswa.",
-        method_s4_title: "Pencapaian & Progres",
-        method_s4_desc: "Setiap pencapaian tercatat dalam sistem: poin XP bertambah, proyek masuk portofolio, dan laporan capaian diteruskan langsung ke orang tua.",
-
-        // Parent Progress Section
-        parent_badge: "Laporan belajar yang bisa dipahami wali",
-        parent_title: "Tahu apa yang anak pelajari—dan langkah berikutnya.",
-        parent_desc: "Setelah laporan sesi diterbitkan, wali dapat melihat kehadiran, keterampilan yang dinilai tutor, kekuatan anak, hal yang sedang dilatih, dan rekomendasi untuk sesi berikutnya. Progres juga bisa dipantau dari waktu ke waktu.",
-        parent_cta_preview: "Lihat Contoh Laporan",
-        parent_cta_consult: "Konsultasikan Kebutuhan Anak",
-        parent_cta: "Konsultasikan Kebutuhan Anak",
-
-        // Course Section
-        course_badge: "Program Aktif 2026",
-        course_title: "Pilihan Program Belajar",
-        course_desc: "Dirancang bertahap untuk anak usia 6–16 tahun. Kurikulum berbasis proyek nyata, kuis interaktif, dan pendampingan tutor berpengalaman.",
-        course_game_title: "Jalur Game Developer",
-        course_game_desc: "Dari logika dasar hingga membangun dunia 3D interaktif yang dimainkan ribuan orang di Roblox.",
-        course_web_title: "Jalur Web Architect",
-        course_web_desc: "Bangun situs web interaktif dan aplikasi modern dari pondasi kode hingga rilis penuh ke internet.",
-        course_robotic_title: "Jalur Robotic Engineer",
-        course_robotic_desc: "Kuasai sirkuit elektronik, pemrograman mikrokontroler, dan bangun robot otomatis masa depan.",
-        
-        // Hall of Fame
-        hof_title: "Kisah Sukses dari<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-yellow-600\">Penjelajah Kami!</span>",
-        hof_desc: "Di sinilah karya luar biasa dari siswa kami ditampilkan! Setiap proyek adalah petualangan yang menceritakan perjalanan kreativitas dan dedikasi.",
-        hof_masterpiece_heading: "Pajangan Proyek Pilihan",
-        hof_badge_masterpiece: "Masterpiece Terbaik",
-        hof_curator_pick: "Pilihan Kurator",
-        hof_sarah_age: "(12 Tahun)",
-        hof_masterpiece_desc: "Sebuah dunia Roleplay 3D masif yang dibangun dalam Roblox Studio — arsitektur cyberpunk, sistem mata uang virtual, dan NPC interaktif tingkat lanjut.",
-        btn_view_project: "Lihat Proyek",
-        hof_gallery_heading: "Galeri Eksibisi",
-        hof_top_creations: "Karya Teratas",
-        hof_c1_badge: "Terfavorit",
-        hof_c1_title: "Sistem AI Kasir Pintar",
-        hof_c1_author: "Budi (14 Tahun)",
-        hof_c1_desc: "Aplikasi kasir berbasis web menggunakan logika JavaScript kompleks untuk kalkulasi inventaris dan struk real-time.",
-        hof_c2_badge: "Future Tech",
-        hof_c2_title: "Robot Pemilah Sampah",
-        hof_c2_author: "Kevin (10 Tahun)",
-        hof_c2_desc: "Proyek Arduino dengan sensor ultrasonik dan motor servo yang secara otomatis membuka tutup tempat sampah.",
-        hof_c3_badge: "Desain Terbaik",
-        hof_c3_title: "Portofolio Animasi Web",
-        hof_c3_author: "Nadia (15 Tahun)",
-        hof_c3_desc: "Website portofolio pribadi yang penuh dengan animasi CSS 3D dan transisi scroll mulus tanpa framework eksternal.",
-        hof_btn_load_more: "Muat Lebih Banyak Karya",
-        
-        // Location Section
-        loc_title: "Lokasi Belajar di Bali",
-        loc_desc: "Pilih Learning Center terdekat dari rumah Anda untuk kelas tatap muka interaktif. Setiap cabang dilengkapi dengan lab komputer ber-AC, perangkat robotika, dan tutor ramah.",
-        loc_calc_title: "Cek Kampus Terdekat",
-        loc_calc_desc: "Masukkan area atau kecamatan Anda untuk melihat cabang mana yang paling mudah diakses.",
-        loc_btn_check: "Cek Lokasi",
-        loc_est_label: "Estimasi Perjalanan",
-        
-        // FAQ Section
-        faq_badge: "Tanya Jawab",
-        faq_title: "Pertanyaan yang Sering Diajukan",
-        faq_desc: "Jawaban transparan seputar jadwal belajar, perangkat, usia minimal, dan sistem kelas percobaan.",
-        faq_q1: "Apakah anak yang belum pernah memegang coding bisa ikut?",
-        faq_a1: "Tentu bisa! 80% siswa baru kami memulai dari nol. Kami mengajarkan logika berpikir terstruktur (computational thinking) melalui blok visual interaktif terlebih dahulu sebelum beralih ke sintaks kode teks asli.",
-        faq_q2: "Apakah tersedia kelas percobaan (trial class)?",
-        faq_a2: "Ya, kami menyediakan sesi Free Trial di Learning Center Gianyar, Ubud Peliatan, dan Bedulu. Anda dapat mendaftarkan jadwal percobaan melalui form di bawah atau via WhatsApp admin kami.",
-        faq_q3: "Apakah siswa harus membawa laptop sendiri?",
-        faq_a3: "Setiap lab Learning Center kami sudah dilengkapi dengan PC/Laptop dan perangkat robotik siap pakai. Namun, siswa yang ingin membawa laptop pribadi agar proyek tersimpan langsung di perangkatnya sangat dipersilakan.",
-        faq_q4: "Berapa rasio tutor per siswa di setiap kelas?",
-        faq_a4: "Kami menjaga kualitas pembelajaran dengan kelas kecil: maksimal 4–6 anak per tutor agar setiap anak mendapat pendampingan intensif dan tidak ada yang tertinggal dalam proses praktek.",
-
-        // Registration Form
-        reg_title: "Mulai Petualangan Belajar",
-        reg_desc: "Isi data singkat berikut untuk konsultasi jadwal kelas reguler atau klaim kelas percobaan gratis (trial). Konfirmasi akan otomatis diteruskan ke WhatsApp admin cabang.",
-        reg_form_header: "Data Calon Siswa &amp; Wali Murid",
-        reg_campus_count: "3 Kampus Tersedia di Bali",
-        reg_choose_center: "Pilih Learning Center Terdekat",
-        reg_choose_center_sub: "Klik untuk memilih cabang belajar anak Anda",
-        reg_promo_sub: "Otomatis terisi jika klaim voucher promo",
-        reg_lbl_name: "Nama Lengkap Siswa",
-        reg_lbl_nickname: "Nama Panggilan",
-        reg_lbl_age: "Usia Anak",
-        reg_lbl_school: "Asal Sekolah",
-        reg_lbl_parent: "Nama Orang Tua / Wali",
-        reg_lbl_address: "Alamat Domisili",
-        reg_lbl_wa_parent: "WhatsApp Orang Tua",
-        reg_lbl_wa_child: "WhatsApp Anak (Opsional)",
-        reg_btn_submit: "Kirim via WhatsApp",
-        
-        // Promo Popup
-        promo_badge: "Promo Terbatas 2026",
-        promo_sub: "Free Trial + Diskon Pendaftaran",
-        promo_title: "Mulai Petualangan<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-yellow-500\">Kreator Digital!</span>",
-        promo_body: "Klaim sesi uji coba gratis dan potongan biaya pendaftaran di seluruh Learning Center LesKoding sekarang:",
-        promo_cta: "Daftar Sekarang & Klaim Promo",
-        promo_trigger: "Promo 2026"
-    }
+        "nav_program": "Program",
+        "nav_method": "Cara Belajar",
+        "nav_works": "Karya",
+        "nav_progress": "Progres",
+        "nav_location": "Lokasi",
+        "nav_faq": "FAQ",
+        "nav_cta": "Minta Info",
+        "nav_cta_short": "Daftar",
+        "nav_mobile_lang_label": "Pilih Bahasa:",
+        "hero_badge": "Playful Future Lab — Coding &amp; Robotic Bali",
+        "hero_title_1": "Ubah rasa penasaran jadi",
+        "hero_title_2": "karya digital.",
+        "hero_desc_main": "Anak belajar langkah demi langkah, mencoba tantangan seru, dan melihat progres belajarnya setiap sesi bersama tutor berpengalaman.",
+        "hero_btn_info": "Minta Info / Jadwal Kelas",
+        "hero_btn_works": "Lihat Karya Siswa",
+        "hero_trust_1_title": "Kurikulum Bertahap",
+        "hero_trust_1_sub": "Pemula hingga Mahir",
+        "hero_trust_2_title": "Laporan Wali Murid",
+        "hero_trust_2_sub": "Pantau Progres Belajar",
+        "hero_trust_3_title": "3 Learning Center",
+        "hero_trust_3_sub": "Gianyar, Ubud &amp; Bedulu",
+        "hero_vis_badge": "Sesi Nyata Siswa",
+        "hero_vis_tag": "Pameran Proyek",
+        "hero_vis_title": "Robotika &amp; Mini Game Interaktif",
+        "hero_vis_feedback_title": "Feedback Tutor Setiap Sesi",
+        "hero_vis_feedback_sub": "Catatan perkembangan langsung ke wali",
+        "hero_vis_active": "Aktif",
+        "course_badge": "Program Aktif 2026",
+        "course_title": "Pilihan Program Belajar",
+        "course_desc": "Dirancang bertahap untuk anak usia 6–16 tahun. Kurikulum berbasis proyek nyata, kuis interaktif, dan pendampingan tutor berpengalaman.",
+        "course_tab_all": "Semua Program (10)",
+        "course_tab_ladder": "Jenjang Bertahap (6)",
+        "course_tab_specialist": "Peminatan Spesialis (4)",
+        "course_ladder_tag": "Alur Pembelajaran Berkelanjutan",
+        "course_ladder_title": "Tahapan Jenjang Siswa (Level 0 s/d Level 5)",
+        "course_ladder_badge": "Evaluasi capaian &amp; sertifikat kelulusan setiap kenaikan level",
+        "course_lvl0_tag": "LEVEL 0",
+        "course_lvl0_name": "Komputer Dasar",
+        "course_lvl0_age": "Usia 6–8 Thn",
+        "course_lvl1_tag": "LEVEL 1",
+        "course_lvl1_name": "Beginner 1",
+        "course_lvl1_age": "Usia 7–9 Thn",
+        "course_lvl2_tag": "LEVEL 2",
+        "course_lvl2_name": "Beginner 2",
+        "course_lvl2_age": "Usia 8–10 Thn",
+        "course_lvl3_tag": "LEVEL 3",
+        "course_lvl3_name": "Intermediate 1",
+        "course_lvl3_age": "Usia 9–12 Thn",
+        "course_lvl4_tag": "LEVEL 4",
+        "course_lvl4_name": "Intermediate 2",
+        "course_lvl4_age": "Usia 10–14 Thn",
+        "course_lvl5_tag": "LEVEL 5",
+        "course_lvl5_name": "Innovator",
+        "course_lvl5_age": "Usia 11–16 Thn",
+        "course_btn_syllabus": "Lihat Silabus &amp; Detail",
+        "c1_lvl": "Level 0 · Fondasi",
+        "c1_age": "Usia 6–8 Thn",
+        "c1_title": "Komputer Dasar",
+        "c1_desc": "Pengenalan perangkat keras komputer, ketangkasan mouse &amp; keyboard, navigasi software yang aman, serta logika digital awal.",
+        "c1_b1": "Pengenalan hardware &amp; sistem operasi",
+        "c1_b2": "Ketangkasan mengetik &amp; navigasi mouse",
+        "c1_b3": "Keamanan berinternet &amp; etika digital",
+        "c1_b4": "Eksplorasi aplikasi kreatif &amp; logika awal",
+        "c1_dur": "4–6 Minggu",
+        "c2_lvl": "Level 1 · Visual Logic",
+        "c2_age": "Usia 7–9 Thn",
+        "c2_title": "Beginner 1",
+        "c2_desc": "Membangun fondasi computational thinking melalui visual block coding (Scratch). Mengubah imajinasi menjadi animasi interaktif pertama.",
+        "c2_b1": "Logika algoritma &amp; urutan perintah (sequencing)",
+        "c2_b2": "Workspace Scratch &amp; event triggers",
+        "c2_b3": "Animasi gerak karakter, kostum &amp; audio",
+        "c2_b4": "Proyek: Storytelling interaktif &amp; mini game",
+        "c2_dur": "6–8 Minggu",
+        "c3_lvl": "Level 2 · Game Logic",
+        "c3_age": "Usia 8–10 Thn",
+        "c3_title": "Beginner 2",
+        "c3_desc": "Memperdalam logika percabangan, koordinat 2D, perulangan, dan sistem variabel untuk menciptakan game arcade interaktif.",
+        "c3_b1": "Koordinat X &amp; Y dan deteksi tabrakan",
+        "c3_b2": "Perulangan lanjutan (loops &amp; nested loops)",
+        "c3_b3": "Percabangan kondisional (if-else logic)",
+        "c3_b4": "Proyek: Game arcade tangkap objek &amp; skor",
+        "c3_dur": "6–8 Minggu",
+        "c4_lvl": "Level 3 · Platformer",
+        "c4_age": "Usia 9–12 Thn",
+        "c4_title": "Intermediate 1",
+        "c4_desc": "Mekanika game multi-level kompleks, kloning sprite dinamis, algoritma matematika game, serta fisika gravitasi platformer.",
+        "c4_b1": "Kloning sprite dinamis &amp; manajemen memori",
+        "c4_b2": "Fisika lompatan, inersia &amp; gravitasi",
+        "c4_b3": "Variabel global/lokal &amp; struktur data list",
+        "c4_b4": "Proyek: Game platformer multi-level tantangan",
+        "c4_dur": "8 Minggu",
+        "c5_lvl": "Level 4 · Pre-Syntax",
+        "c5_age": "Usia 10–14 Thn",
+        "c5_title": "Intermediate 2",
+        "c5_desc": "Transisi dari blok visual ke struktur pemrograman teks. Memahami abstraksi fungsi (custom blocks) dan debugging terstruktur.",
+        "c5_b1": "Fungsi mandiri (custom blocks with parameters)",
+        "c5_b2": "Algoritma pencarian &amp; pengurutan data",
+        "c5_b3": "Pengenalan sintaks teks &amp; pseudocode",
+        "c5_b4": "Proyek: Game boss battle dengan strategi AI",
+        "c5_dur": "8 Minggu",
+        "c6_lvl": "Level 5 · Capstone",
+        "c6_age": "Usia 11–16 Thn",
+        "c6_title": "Innovator",
+        "c6_desc": "Puncak kurikulum bertahap. Siswa mendesain proyek mandiri berskala besar (Capstone Project), problem solving nyata, dan pameran portofolio.",
+        "c6_b1": "Desain ideasi, wireframe &amp; arsitektur sistem",
+        "c6_b2": "Penerapan advanced computational thinking",
+        "c6_b3": "Quality testing, peer review &amp; bug fixing",
+        "c6_b4": "Proyek: Capstone showcase &amp; pameran portofolio",
+        "c6_dur": "8–10 Minggu",
+        "c7_lvl": "Peminatan · 3D Game",
+        "c7_age": "Usia 10–16 Thn",
+        "c7_title": "Roblox",
+        "c7_desc": "Membangun dunia 3D multiplayer di Roblox Studio dan memprogram interaksi permainan menggunakan bahasa pemrograman teks Lua.",
+        "c7_b1": "Navigasi Roblox Studio &amp; desain terrain 3D",
+        "c7_b2": "Sintaks Lua: Variabel, function &amp; events",
+        "c7_b3": "Mekanika interaktif, leaderboard &amp; HUD game",
+        "c7_b4": "Proyek: Game Obby / multiplayer rilis ke Roblox",
+        "c7_dur": "8–10 Minggu",
+        "c8_lvl": "Peminatan · Hardware",
+        "c8_age": "Usia 8–15 Thn",
+        "c8_title": "Robotika",
+        "c8_desc": "Merakit sirkuit elektronika breadboard, menghubungkan aneka sensor fisik, dan memprogram mikrokontroler (Arduino/ESP32).",
+        "c8_b1": "Rangkaian elektronika dasar &amp; breadboard",
+        "c8_b2": "Pemrograman Arduino C++ &amp; mikrokontroler",
+        "c8_b3": "Integrasi sensor ultrasonik, cahaya &amp; motor",
+        "c8_b4": "Proyek: Robot line follower &amp; sistem smart IoT",
+        "c8_dur": "8–10 Minggu",
+        "c9_lvl": "Peminatan · Modern Web",
+        "c9_age": "Usia 11–16 Thn",
+        "c9_title": "Web Programming",
+        "c9_desc": "Mempelajari pembuatan website modern responsif mulai dari struktur semantik HTML5, tata letak CSS3, hingga interaktivitas JavaScript.",
+        "c9_b1": "Struktur HTML5 semantik &amp; web accessibility",
+        "c9_b2": "Styling responsif CSS3, Flexbox &amp; Grid",
+        "c9_b3": "Interaktivitas JavaScript modern &amp; DOM event",
+        "c9_b4": "Proyek: Portofolio responsif &amp; deploy cloud",
+        "c9_dur": "8–10 Minggu",
+        "c10_lvl": "Peminatan · Mobile App",
+        "c10_age": "Usia 11–16 Thn",
+        "c10_title": "App Programming",
+        "c10_desc": "Merancang antarmuka mobile apps (UI/UX), menyusun alur multi-screen, memanfaatkan sensor smartphone, dan menguji aplikasi di ponsel.",
+        "c10_b1": "Prinsip desain antarmuka mobile intuitif (UI/UX)",
+        "c10_b2": "Event-driven programming &amp; multi-screen logic",
+        "c10_b3": "Pemanfaatan sensor smartphone &amp; local storage",
+        "c10_b4": "Proyek: Aplikasi utilitas diuji langsung di ponsel",
+        "c10_dur": "8–10 Minggu",
+        "method_badge": "Metodologi Belajar",
+        "method_title": "Cara Belajar di LesKoding",
+        "method_desc": "Kami memandu anak melalui 4 tahapan belajar yang terbukti efektif: bukan sekadar teori hafalan, melainkan proses langsung berkreasi dan melihat hasil nyata.",
+        "method_s1_step": "Langkah 01",
+        "method_s1_dur": "15 Menit",
+        "method_s1_title": "Materi Konsep",
+        "method_s1_desc": "Konsep koding dan robotika disajikan melalui analogi visual sederhana dan kuis interaktif yang mudah dipahami anak tanpa rasa jenuh.",
+        "method_s1_note": "Visual block &amp; kuis seru",
+        "method_s2_step": "Langkah 02",
+        "method_s2_dur": "50 Menit",
+        "method_s2_title": "Praktik Eksploratif",
+        "method_s2_desc": "Anak langsung merakit game, menyusun baris logika kode, atau merangkai sensor robot. Fokus pada trial &amp; error yang menumbuhkan pemecahan masalah.",
+        "method_s2_note": "Hands-on langsung di kelas",
+        "method_s3_step": "Langkah 03",
+        "method_s3_dur": "Setiap Sesi",
+        "method_s3_title": "Feedback Tutor",
+        "method_s3_desc": "Tutor membimbing secara personal, mengulas logika kode, memberikan tips penyempurnaan, serta apresiasi atas ide unik yang dikembangkan siswa.",
+        "method_s3_note": "Rasio tutor 1:4 anak",
+        "method_s4_step": "Langkah 04",
+        "method_s4_dur": "Tercatat Nyata",
+        "method_s4_title": "Pencapaian &amp; Progres",
+        "method_s4_desc": "Setiap pencapaian tercatat dalam sistem: poin XP bertambah, proyek masuk portofolio, dan laporan capaian diteruskan langsung ke orang tua.",
+        "method_s4_note": "Portofolio &amp; sertifikat level",
+        "hof_title": "Kisah Sukses dari<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-amber-400 to-yellow-500\">Penjelajah Kami!</span>",
+        "hof_desc": "Di sinilah karya luar biasa dari siswa kami ditampilkan! Setiap proyek adalah petualangan yang menceritakan perjalanan kreativitas dan dedikasi. Terinspirasi oleh pencapaian mereka? Bergabunglah dan biarkan petualangan Anda dimulai!",
+        "hof_masterpiece_heading": "Pajangan Proyek Pilihan",
+        "hof_badge_masterpiece": "Masterpiece Terbaik",
+        "hof_curator_pick": "Pilihan Kurator",
+        "hof_sarah_age": "(12 Tahun)",
+        "hof_sarah_role": "Lead Roblox Creator",
+        "hof_masterpiece_desc": "Sebuah dunia Roleplay 3D masif yang dibangun dalam Roblox Studio — arsitektur cyberpunk, sistem mata uang virtual, dan NPC interaktif tingkat lanjut.",
+        "btn_view_project": "Lihat Proyek",
+        "hof_gallery_heading": "Galeri Eksibisi",
+        "hof_top_creations": "Karya Teratas",
+        "hof_c1_badge": "Terfavorit",
+        "hof_c1_title": "Sistem AI Kasir Pintar",
+        "hof_c1_author": "Budi (14 Tahun)",
+        "hof_web_dev_tag": "· Web Dev",
+        "hof_c1_desc": "Aplikasi kasir berbasis web menggunakan logika JavaScript kompleks untuk kalkulasi inventaris dan struk real-time.",
+        "hof_c2_badge": "Teknologi Masa Depan",
+        "hof_c2_title": "Robot Pemilah Sampah",
+        "hof_c2_author": "Kevin (10 Tahun)",
+        "hof_robotics_tag": "· Robotika",
+        "hof_c2_desc": "Proyek Arduino dengan sensor ultrasonik dan motor servo yang secara otomatis membuka tutup tempat sampah.",
+        "hof_c3_badge": "Desain Terbaik",
+        "hof_c3_title": "Portofolio Animasi Web",
+        "hof_c3_author": "Nadia (15 Tahun)",
+        "hof_c3_desc": "Website portofolio pribadi yang penuh dengan animasi CSS 3D dan transisi scroll mulus tanpa framework eksternal.",
+        "hof_btn_load_more": "Muat Lebih Banyak Karya",
+        "parent_badge": "Laporan belajar yang bisa dipahami wali",
+        "parent_title": "Tahu apa yang anak pelajari—dan langkah berikutnya.",
+        "parent_desc": "Setelah laporan sesi diterbitkan, wali dapat melihat kehadiran, keterampilan yang dinilai tutor, kekuatan anak, hal yang sedang dilatih, dan rekomendasi untuk sesi berikutnya. Progres juga bisa dipantau dari waktu ke waktu.",
+        "parent_p1_title": "Pemahaman Konsep &amp; Problem Solving",
+        "parent_p1_desc": "Mengukur tingkat pemahaman konsep siswa berdasarkan kemampuan dalam menyelesaikan masalah dan tantangan.",
+        "parent_p2_title": "Kreativitas &amp; Inovasi",
+        "parent_p2_desc": "Mengukur apakah siswa dapat mengembangkan dan memodifikasi projek dari contoh yang diberikan.",
+        "parent_p3_title": "Keaktifan &amp; Antusiasme",
+        "parent_p3_desc": "Mengukur tingkat motivasi, rasa ingin tahu, dan keaktifan siswa saat proses belajar berlangsung.",
+        "parent_sync": "Sinkronisasi otomatis dengan aplikasi Student Space",
+        "report_course_title": "Game Programming (Roblox &amp; Lua)",
+        "report_session": "Sesi #4",
+        "report_present": "Hadir",
+        "report_tutor_role": "Tutor Utama",
+        "report_tutor_name": "Danu (Fasilitator)",
+        "report_verified": "Sesi Terverifikasi",
+        "report_superhero_label": "Karakter Superhero",
+        "report_superhero_name": "Iron Man (Sang Inovator)",
+        "report_superhero_quote": "\"Tekun memecahkan masalah logika rintangan dan berani mencoba solusi teknologi baru secara mandiri.\"",
+        "report_rubric_header": "Evaluasi Keterampilan (Rubrik Aktif)",
+        "report_r1_name": "Pemahaman Konsep &amp; Problem Solving",
+        "report_r1_desc": "Mengukur tingkat pemahaman konsep siswa berdasarkan kemampuan menyelesaikan masalah dan tantangan arena secara terstruktur.",
+        "report_r2_name": "Kreativitas &amp; Inovasi",
+        "report_r2_desc": "Mengukur kemampuan siswa mengembangkan dan memodifikasi projek di luar contoh dasar yang diberikan dengan fitur unik.",
+        "report_r3_name": "Keaktifan &amp; Antusiasme",
+        "report_r3_desc": "Mengukur tingkat motivasi, rasa ingin tahu yang tinggi, dan keaktifan berdiskusi selama sesi belajar berlangsung.",
+        "report_eval_header": "Evaluasi Tutor",
+        "report_strengths_label": "Kekuatan",
+        "report_strengths_desc": "Mampu menjelaskan idenya dengan percaya diri dan mencoba menyelesaikan tantangan secara mandiri sebelum bertanya.",
+        "report_improvements_label": "Sedang Dilatih",
+        "report_improvements_desc": "Lebih teliti saat memeriksa baris kode yang menyebabkan error syntax pada script game.",
+        "report_recommendation_label": "Rekomendasi Tutor",
+        "report_recommendation_desc": "\"Pada sesi berikutnya, coba uji solusi dengan beberapa contoh input berbeda untuk memastikan tidak ada celah error.\"",
+        "report_parent_tips_label": "Ide Latihan di Rumah",
+        "report_parent_tips_desc": "Minta anak menceritakan langkah yang ia coba dan alasan mengapa memilih langkah tersebut untuk melatih computational thinking.",
+        "loc_badge": "Kampus &amp; Laboratorium",
+        "loc_title": "Lokasi Belajar di Bali",
+        "loc_desc": "Pilih Learning Center terdekat dari rumah Anda untuk kelas tatap muka interaktif. Setiap cabang dilengkapi dengan lab komputer ber-AC, perangkat robotika, dan tutor ramah.",
+        "loc_directions": "Rute",
+        "loc_calc_title": "Cek Kampus Terdekat",
+        "loc_calc_desc": "Masukkan area atau kecamatan Anda untuk melihat cabang mana yang paling mudah diakses.",
+        "loc_btn_check": "Cek Lokasi",
+        "loc_est_label": "Estimasi Perjalanan",
+        "loc_calc_nearest_label": "Kampus terdekat:",
+        "faq_badge": "Tanya Jawab",
+        "faq_title": "Pertanyaan yang Sering Diajukan",
+        "faq_desc": "Jawaban transparan seputar jadwal belajar, perangkat, usia minimal, dan sistem kelas percobaan.",
+        "faq_q1": "Apakah anak yang belum pernah memegang coding bisa ikut?",
+        "faq_a1": "Tentu bisa! 80% siswa baru kami memulai dari nol. Kami mengajarkan logika berpikir terstruktur (computational thinking) melalui blok visual interaktif terlebih dahulu sebelum beralih ke sintaks kode teks asli.",
+        "faq_q2": "Apakah tersedia kelas percobaan (trial class)?",
+        "faq_a2": "Ya, kami menyediakan sesi Free Trial di Learning Center Gianyar, Ubud Peliatan, dan Bedulu. Anda dapat mendaftarkan jadwal percobaan melalui form di bawah atau via WhatsApp admin kami.",
+        "faq_q3": "Apakah siswa harus membawa laptop sendiri?",
+        "faq_a3": "Setiap lab Learning Center kami sudah dilengkapi dengan PC/Laptop dan perangkat robotik siap pakai. Namun, siswa yang ingin membawa laptop pribadi agar proyek tersimpan langsung di perangkatnya sangat dipersilakan.",
+        "faq_q4": "Berapa rasio tutor per siswa di setiap kelas?",
+        "faq_a4": "Kami menjaga kualitas pembelajaran dengan kelas kecil: maksimal 4–6 anak per tutor agar setiap anak mendapat pendampingan intensif dan tidak ada yang tertinggal dalam proses praktek.",
+        "reg_badge": "Formulir Pendaftaran",
+        "reg_title": "Mulai Petualangan Belajar",
+        "reg_desc": "Isi data singkat berikut untuk konsultasi jadwal kelas reguler atau klaim kelas percobaan gratis (trial). Konfirmasi akan otomatis diteruskan ke WhatsApp admin cabang.",
+        "reg_form_header": "Data Calon Siswa &amp; Wali Murid",
+        "reg_required_notice": "Wajib diisi",
+        "reg_lbl_center": "Pilihan Learning Center",
+        "reg_campus_count": "3 Kampus Tersedia di Bali",
+        "reg_choose_center": "Pilih Learning Center Terdekat",
+        "reg_choose_center_sub": "Klik untuk memilih cabang belajar anak Anda",
+        "reg_select_default": "-- Pilih Learning Center Terdekat --",
+        "reg_lbl_promo": "Kode / Nama Promo (Opsional)",
+        "reg_promo_sub": "Otomatis terisi jika klaim voucher promo",
+        "reg_promo_applied": "Promo Terpasang",
+        "reg_lbl_name": "Nama Lengkap Siswa",
+        "reg_lbl_nickname": "Nama Panggilan",
+        "reg_lbl_age": "Usia Anak",
+        "reg_lbl_school": "Asal Sekolah",
+        "reg_lbl_parent": "Nama Orang Tua / Wali",
+        "reg_lbl_email": "Email Orang Tua",
+        "reg_lbl_address": "Alamat Domisili",
+        "reg_lbl_wa_parent": "WhatsApp Orang Tua",
+        "reg_lbl_wa_child": "WhatsApp Anak (Opsional)",
+        "reg_security_note": "Data Anda aman dan hanya digunakan untuk konfirmasi jadwal kelas oleh admin resmi LesKoding.",
+        "reg_btn_submit": "Kirim via WhatsApp",
+        "promo_badge": "Promo Terbatas 2026",
+        "promo_sub": "Free Trial + Diskon Pendaftaran",
+        "promo_title": "Mulai Petualangan<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-yellow-500\">Kreator Digital!</span>",
+        "promo_body": "Klaim sesi uji coba gratis dan potongan biaya pendaftaran di seluruh Learning Center LesKoding sekarang:",
+        "promo_cta": "Daftar Sekarang &amp; Klaim Promo",
+        "promo_trigger": "Promo 2026",
+        "modal_xp_label": "Pencapaian XP",
+        "modal_duration_label": "Estimasi Durasi",
+        "modal_topics_label": "Topik Silabus Pembelajaran:",
+        "modal_btn_enroll": "Daftar / Konsultasi Jadwal",
+        "modal_btn_close": "Tutup",
+        "footer_tagline": "Akademi Pemrograman &amp; Robotika Masa Depan di Bali. Membimbing anak mengubah rasa penasaran menjadi karya teknologi nyata.",
+        "footer_col_prog": "Program Belajar",
+        "footer_f1": "Jenjang Dasar: Komputer Dasar &amp; Beginner",
+        "footer_f2": "Jenjang Lanjutan: Intermediate &amp; Innovator",
+        "footer_f3": "Peminatan: Roblox (3D &amp; Lua)",
+        "footer_f4": "Peminatan: Robotika &amp; IoT Engineering",
+        "footer_f5": "Peminatan: Web &amp; App Programming",
+        "footer_f6": "Jadwal Kelas Percobaan (Trial) &rarr;",
+        "footer_col_center": "Learning Center",
+        "footer_c_check": "Cek Peta &amp; Rute Terdekat &rarr;",
+        "footer_col_contact": "Kontak &amp; Konsultasi",
+        "footer_form_btn": "Formulir Pendaftaran Online",
+        "footer_rights": "&copy; 2026 LesKoding Bali. Hak cipta dilindungi. Education Technology &amp; Community.",
+        "footer_back_top": "Kembali ke Atas",
+        "footer_nav_method": "Cara Belajar",
+        "footer_nav_privacy": "Kebijakan &amp; Privasi",
+        "reward_title": "SYSTEM UNLOCKED",
+        "reward_desc": "Target [1000 Poin] Tercapai!",
+        "reward_btn": "Klaim Hadiah"
+}
 };
-
-
 
 // Language Toggle Functionality (DEFAULT: 'en')
 window.toggleLanguage = function() {
@@ -1485,7 +2172,7 @@ window.applyLanguage = function(lang) {
     if (regNick) regNick.placeholder = lang === 'en' ? 'e.g. Johan' : 'Cth: Johan';
 
     const regAge = document.getElementById('reg-usia');
-    if (regAge) regAge.placeholder = lang === 'en' ? 'e.g. 10 yrs' : 'Cth: 10y';
+    if (regAge) regAge.placeholder = lang === 'en' ? 'e.g. 10 yrs' : 'Cth: 10 Thn';
 
     const regSchool = document.getElementById('reg-sekolah');
     if (regSchool) regSchool.placeholder = lang === 'en' ? 'e.g. SD Sutha Dharma' : 'Cth: SD Sutha Dharma';
@@ -1493,11 +2180,28 @@ window.applyLanguage = function(lang) {
     const regParent = document.getElementById('reg-ortu');
     if (regParent) regParent.placeholder = lang === 'en' ? 'e.g. Arik Ayu Rastini' : 'Cth: Arik Ayu Rastini';
 
+    const regEmail = document.getElementById('reg-email');
+    if (regEmail) regEmail.placeholder = lang === 'en' ? 'e.g. parent@gmail.com' : 'Cth: ayuarik071@gmail.com';
+
     const regAddress = document.getElementById('reg-alamat');
     if (regAddress) regAddress.placeholder = lang === 'en' ? 'e.g. Br Katiklantang Singakerta Ubud' : 'Cth: Br Katiklantang Singakerta Ubud';
 
     const regPromo = document.getElementById('reg-promo');
     if (regPromo) regPromo.placeholder = lang === 'en' ? 'e.g. PETUALANGAN2026' : 'Cth: PETUALANGAN2026';
+
+    const regCenterSelect = document.getElementById('reg-center');
+    if (regCenterSelect && !regCenterSelect.value) {
+        const triggerName = document.getElementById('selected-center-name');
+        const triggerSub = document.getElementById('selected-center-sub');
+        if (triggerName) triggerName.textContent = lang === 'en' ? 'Choose Nearest Learning Center' : 'Pilih Learning Center Terdekat';
+        if (triggerSub) triggerSub.textContent = lang === 'en' ? 'Click to select your child\'s study center' : 'Klik untuk memilih cabang belajar anak Anda';
+    }
+
+    // Update document title and html lang attribute
+    document.documentElement.lang = lang;
+    document.title = lang === 'en' 
+        ? "LesKoding Bali — Future Tech Academy | Coding & Robotics for Kids"
+        : "LesKoding Bali — Akademi Koding & Robotika Anak Modern di Bali";
 };
 
 // Initialize Language on Page Load (DEFAULT: 'en')
@@ -1506,7 +2210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.classList.remove('light-mode');
     localStorage.removeItem('leskoding_theme');
 
-    // Initialize Language (DEFAULT: 'en' as requested)
+    // Initialize Language (DEFAULT: 'en')
     const savedLang = localStorage.getItem('leskoding_lang') || 'en';
     applyLanguage(savedLang);
 });

@@ -148,7 +148,7 @@
                     <a href="#register" class="inline-flex items-center gap-1.5 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs uppercase tracking-wider shadow-md">
                         <i class="fa-solid fa-calendar-check text-xs"></i>
                         <span class="hidden sm:inline" data-i18n="nav_cta">Minta Info</span>
-                        <span class="sm:hidden">Daftar</span>
+                        <span class="sm:hidden" data-i18n="nav_cta_short">Daftar</span>
                     </a>
                     <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="text-white hover:text-brand-yellow focus:outline-none w-10 sm:w-11 h-10 sm:h-11 flex items-center justify-center rounded-xl bg-white/10 border border-white/15 shadow-sm active:scale-95 transition-transform">
                         <i class="fa-solid fa-bars-staggered text-base"></i>
@@ -184,7 +184,7 @@
                 
                 <!-- Mobile Language Selector in Drawer -->
                 <div class="flex items-center justify-between pt-3 border-t border-white/10 mt-1 px-1">
-                    <span class="text-xs text-slate-400 font-medium">Pilih Bahasa:</span>
+                    <span class="text-xs text-slate-400 font-medium" data-i18n="nav_mobile_lang_label">Pilih Bahasa:</span>
                     <button onclick="toggleLanguage()" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/10 border border-white/15 text-xs text-brand-yellow font-bold">
                         <i class="fa-solid fa-globe text-xs"></i>
                         <span id="mobile-lang-text">EN</span>
@@ -291,13 +291,13 @@
                             <!-- Badges on image -->
                             <div class="absolute top-3 left-3 flex items-center gap-2">
                                 <span class="bg-[#0B0F19]/85 backdrop-blur-md text-[#FFC83D] text-[10px] font-bold px-3 py-1 rounded-full border border-[#FFC83D]/40 flex items-center gap-1.5 shadow-md">
-                                    <i class="fa-solid fa-fire text-[#F87171]"></i> Sesi Nyata Siswa
+                                    <i class="fa-solid fa-fire text-[#F87171]"></i> <span data-i18n="hero_vis_badge">Sesi Nyata Siswa</span>
                                 </span>
                             </div>
                             
                             <div class="absolute bottom-3 left-3 right-3 text-left">
-                                <span class="text-[10px] font-mono uppercase tracking-wider text-[#38BDF8] font-bold block mb-0.5">Project Showcase</span>
-                                <h4 class="text-white text-base font-bold leading-tight">Robotika &amp; Mini Game Interaktif</h4>
+                                <span class="text-[10px] font-mono uppercase tracking-wider text-[#38BDF8] font-bold block mb-0.5" data-i18n="hero_vis_tag">Project Showcase</span>
+                                <h4 class="text-white text-base font-bold leading-tight" data-i18n="hero_vis_title">Robotika &amp; Mini Game Interaktif</h4>
                             </div>
                         </div>
 
@@ -308,11 +308,11 @@
                                     <i class="fa-solid fa-user-check"></i>
                                 </div>
                                 <div class="text-left">
-                                    <div class="text-xs font-bold text-white">Feedback Tutor Setiap Sesi</div>
-                                    <div class="text-[10px] text-slate-400">Catatan perkembangan langsung ke wali</div>
+                                    <div class="text-xs font-bold text-white" data-i18n="hero_vis_feedback_title">Feedback Tutor Setiap Sesi</div>
+                                    <div class="text-[10px] text-slate-400" data-i18n="hero_vis_feedback_sub">Catatan perkembangan langsung ke wali</div>
                                 </div>
                             </div>
-                            <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 rounded-md">Aktif</span>
+                            <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 rounded-md" data-i18n="hero_vis_active">Aktif</span>
                         </div>
                     </div>
                 </div>
@@ -339,13 +339,13 @@
             <!-- Course Filter Tabs -->
             <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-8 fade-in-up">
                 <button onclick="filterCourses('all')" id="course-filter-all" class="course-filter-btn min-h-[44px] px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm transition-all bg-[#0788F5] text-white shadow-md border border-[#0788F5]">
-                    Semua Program (10)
+                    <span data-i18n="course_tab_all">Semua Program (10)</span>
                 </button>
                 <button onclick="filterCourses('ladder')" id="course-filter-ladder" class="course-filter-btn min-h-[44px] px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm transition-all bg-[#1E293B] text-slate-300 border border-white/10 hover:bg-[#334155] hover:text-white">
-                    Jenjang Bertahap (6)
+                    <span data-i18n="course_tab_ladder">Jenjang Bertahap (6)</span>
                 </button>
                 <button onclick="filterCourses('specialist')" id="course-filter-specialist" class="course-filter-btn min-h-[44px] px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm transition-all bg-[#1E293B] text-slate-300 border border-white/10 hover:bg-[#334155] hover:text-white">
-                    Peminatan Spesialis (4)
+                    <span data-i18n="course_tab_specialist">Peminatan Spesialis (4)</span>
                 </button>
             </div>
 
@@ -353,43 +353,43 @@
             <div id="course-ladder-guide" class="mb-10 p-5 sm:p-6 bg-[#1E293B] border border-white/10 rounded-2xl shadow-xl fade-in-up">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-4 mb-4 border-b border-white/10">
                     <div>
-                        <span class="text-[11px] font-bold tracking-wider uppercase text-[#38BDF8] block">Alur Pembelajaran Berkelanjutan</span>
-                        <h4 class="text-base sm:text-lg font-bold text-white">Tahapan Jenjang Siswa (Level 0 s/d Level 5)</h4>
+                        <span class="text-[11px] font-bold tracking-wider uppercase text-[#38BDF8] block" data-i18n="course_ladder_tag">Alur Pembelajaran Berkelanjutan</span>
+                        <h4 class="text-base sm:text-lg font-bold text-white" data-i18n="course_ladder_title">Tahapan Jenjang Siswa (Level 0 s/d Level 5)</h4>
                     </div>
                     <span class="text-xs text-slate-300 font-medium bg-[#0F172A] border border-white/10 px-3 py-1.5 rounded-xl self-start md:self-auto">
-                        Evaluasi capaian &amp; sertifikat kelulusan setiap kenaikan level
+                        <span data-i18n="course_ladder_badge">Evaluasi capaian &amp; sertifikat kelulusan setiap kenaikan level</span>
                     </span>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
                     <div class="bg-[#0F172A] border border-white/10 p-3 rounded-xl text-center">
-                        <span class="text-[10px] font-mono font-bold text-[#38BDF8] block">LEVEL 0</span>
-                        <p class="text-xs font-bold text-white mt-0.5">Komputer Dasar</p>
-                        <span class="text-[10px] text-slate-400">Usia 6–8 Thn</span>
+                        <span data-i18n="course_lvl0_tag" class="text-[10px] font-mono font-bold text-[#38BDF8] block">LEVEL 0</span>
+                        <p data-i18n="course_lvl0_name" class="text-xs font-bold text-white mt-0.5">Komputer Dasar</p>
+                        <span data-i18n="course_lvl0_age" class="text-[10px] text-slate-400">Usia 6–8 Thn</span>
                     </div>
                     <div class="bg-[#0F172A] border border-white/10 p-3 rounded-xl text-center">
-                        <span class="text-[10px] font-mono font-bold text-emerald-400 block">LEVEL 1</span>
-                        <p class="text-xs font-bold text-white mt-0.5">Beginner 1</p>
-                        <span class="text-[10px] text-slate-400">Usia 7–9 Thn</span>
+                        <span data-i18n="course_lvl1_tag" class="text-[10px] font-mono font-bold text-emerald-400 block">LEVEL 1</span>
+                        <p data-i18n="course_lvl1_name" class="text-xs font-bold text-white mt-0.5">Beginner 1</p>
+                        <span data-i18n="course_lvl1_age" class="text-[10px] text-slate-400">Usia 7–9 Thn</span>
                     </div>
                     <div class="bg-[#0F172A] border border-white/10 p-3 rounded-xl text-center">
-                        <span class="text-[10px] font-mono font-bold text-teal-400 block">LEVEL 2</span>
-                        <p class="text-xs font-bold text-white mt-0.5">Beginner 2</p>
-                        <span class="text-[10px] text-slate-400">Usia 8–10 Thn</span>
+                        <span data-i18n="course_lvl2_tag" class="text-[10px] font-mono font-bold text-teal-400 block">LEVEL 2</span>
+                        <p data-i18n="course_lvl2_name" class="text-xs font-bold text-white mt-0.5">Beginner 2</p>
+                        <span data-i18n="course_lvl2_age" class="text-[10px] text-slate-400">Usia 8–10 Thn</span>
                     </div>
                     <div class="bg-[#0F172A] border border-white/10 p-3 rounded-xl text-center">
-                        <span class="text-[10px] font-mono font-bold text-[#38BDF8] block">LEVEL 3</span>
-                        <p class="text-xs font-bold text-white mt-0.5">Intermediate 1</p>
-                        <span class="text-[10px] text-slate-400">Usia 9–12 Thn</span>
+                        <span data-i18n="course_lvl3_tag" class="text-[10px] font-mono font-bold text-[#38BDF8] block">LEVEL 3</span>
+                        <p data-i18n="course_lvl3_name" class="text-xs font-bold text-white mt-0.5">Intermediate 1</p>
+                        <span data-i18n="course_lvl3_age" class="text-[10px] text-slate-400">Usia 9–12 Thn</span>
                     </div>
                     <div class="bg-[#0F172A] border border-white/10 p-3 rounded-xl text-center">
-                        <span class="text-[10px] font-mono font-bold text-purple-400 block">LEVEL 4</span>
-                        <p class="text-xs font-bold text-white mt-0.5">Intermediate 2</p>
-                        <span class="text-[10px] text-slate-400">Usia 10–14 Thn</span>
+                        <span data-i18n="course_lvl4_tag" class="text-[10px] font-mono font-bold text-purple-400 block">LEVEL 4</span>
+                        <p data-i18n="course_lvl4_name" class="text-xs font-bold text-white mt-0.5">Intermediate 2</p>
+                        <span data-i18n="course_lvl4_age" class="text-[10px] text-slate-400">Usia 10–14 Thn</span>
                     </div>
                     <div class="bg-[#0F172A] border border-white/10 p-3 rounded-xl text-center">
-                        <span class="text-[10px] font-mono font-bold text-[#FFC83D] block">LEVEL 5</span>
-                        <p class="text-xs font-bold text-white mt-0.5">Innovator</p>
-                        <span class="text-[10px] text-slate-400">Usia 11–16 Thn</span>
+                        <span data-i18n="course_lvl5_tag" class="text-[10px] font-mono font-bold text-[#FFC83D] block">LEVEL 5</span>
+                        <p data-i18n="course_lvl5_name" class="text-xs font-bold text-white mt-0.5">Innovator</p>
+                        <span data-i18n="course_lvl5_age" class="text-[10px] text-slate-400">Usia 11–16 Thn</span>
                     </div>
                 </div>
             </div>
@@ -405,28 +405,28 @@
                                 <i class="fa-solid fa-desktop"></i>
                             </div>
                             <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-[#0788F5]/20 text-[#38BDF8] border border-[#0788F5]/30 px-2.5 py-1 rounded-md">Level 0 · Fondasi</span>
-                                <span class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 6–8 Thn</span>
+                                <span data-i18n="c1_lvl" class="text-[10px] font-bold uppercase tracking-wider bg-[#0788F5]/20 text-[#38BDF8] border border-[#0788F5]/30 px-2.5 py-1 rounded-md">Level 0 · Fondasi</span>
+                                <span data-i18n="c1_age" class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 6–8 Thn</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-[#38BDF8] transition-colors mb-2">Komputer Dasar</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        <h3 data-i18n="c1_title" class="text-xl font-bold text-white group-hover:text-[#38BDF8] transition-colors mb-2">Komputer Dasar</h3>
+                        <p data-i18n="c1_desc" class="text-sm text-slate-300 leading-relaxed mb-4">
                             Pengenalan perangkat keras komputer, ketangkasan mouse &amp; keyboard, navigasi software yang aman, serta logika digital awal.
                         </p>
                         <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Pengenalan hardware &amp; sistem operasi</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Ketangkasan mengetik &amp; navigasi mouse</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Keamanan berinternet &amp; etika digital</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Eksplorasi aplikasi kreatif &amp; logika awal</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c1_b1">Pengenalan hardware &amp; sistem operasi</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c1_b2">Ketangkasan mengetik &amp; navigasi mouse</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c1_b3">Keamanan berinternet &amp; etika digital</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c1_b4">Eksplorasi aplikasi kreatif &amp; logika awal</span></li>
                         </ul>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
-                            <span class="font-medium"><i class="fa-regular fa-clock text-[#38BDF8] mr-1"></i> 4–6 Minggu</span>
+                            <span class="font-medium"><i class="fa-regular fa-clock text-[#38BDF8] mr-1"></i> <span data-i18n="c1_dur">4–6 Minggu</span></span>
                             <span class="font-mono font-bold text-[#FFC83D]"><i class="fa-solid fa-star mr-1"></i> +500 XP</span>
                         </div>
-                        <button onclick="openCourseModal('Level 0: Fondasi Digital', 'Komputer Dasar', 'fa-desktop', 'blue', 'Pengenalan perangkat keras komputer, ketangkasan mouse &amp; keyboard, navigasi software yang aman, serta logika digital awal melalui aktivitas visual yang interaktif.', '+500 XP', '4–6 Minggu', ['Pengenalan Hardware &amp; Fungsi Komputer', 'Ketangkasan Keyboard &amp; Navigasi Mouse Cepat', 'Keamanan Digital Dasar &amp; Etika Berinternet', 'Eksplorasi Aplikasi Kreatif &amp; Logika Komputasi Sederhana'])" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-[#0788F5] text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-[#0788F5] flex items-center justify-center gap-2">
-                            <span>Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        <button onclick="openCourseModalById('komputer-dasar')" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-[#0788F5] text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-[#0788F5] flex items-center justify-center gap-2">
+                            <span data-i18n="course_btn_syllabus">Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -439,28 +439,28 @@
                                 <i class="fa-solid fa-shapes"></i>
                             </div>
                             <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-md">Level 1 · Visual Logic</span>
-                                <span class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 7–9 Thn</span>
+                                <span data-i18n="c2_lvl" class="text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-md">Level 1 · Visual Logic</span>
+                                <span data-i18n="c2_age" class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 7–9 Thn</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">Beginner 1</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        <h3 data-i18n="c2_title" class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">Beginner 1</h3>
+                        <p data-i18n="c2_desc" class="text-sm text-slate-300 leading-relaxed mb-4">
                             Membangun fondasi computational thinking melalui visual block coding (Scratch). Mengubah imajinasi menjadi animasi interaktif pertama.
                         </p>
                         <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-emerald-400 mt-0.5 shrink-0"></i> <span>Logika algoritma &amp; urutan perintah (sequencing)</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-emerald-400 mt-0.5 shrink-0"></i> <span>Workspace Scratch &amp; event triggers</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-emerald-400 mt-0.5 shrink-0"></i> <span>Animasi gerak karakter, kostum &amp; audio</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-emerald-400 mt-0.5 shrink-0"></i> <span>Proyek: Storytelling interaktif &amp; mini game</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-emerald-400 mt-0.5 shrink-0"></i> <span data-i18n="c2_b1">Logika algoritma &amp; urutan perintah (sequencing)</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-emerald-400 mt-0.5 shrink-0"></i> <span data-i18n="c2_b2">Workspace Scratch &amp; event triggers</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-emerald-400 mt-0.5 shrink-0"></i> <span data-i18n="c2_b3">Animasi gerak karakter, kostum &amp; audio</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-emerald-400 mt-0.5 shrink-0"></i> <span data-i18n="c2_b4">Proyek: Storytelling interaktif &amp; mini game</span></li>
                         </ul>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
-                            <span class="font-medium"><i class="fa-regular fa-clock text-emerald-400 mr-1"></i> 6–8 Minggu</span>
+                            <span class="font-medium"><i class="fa-regular fa-clock text-emerald-400 mr-1"></i> <span data-i18n="c2_dur">6–8 Minggu</span></span>
                             <span class="font-mono font-bold text-[#FFC83D]"><i class="fa-solid fa-star mr-1"></i> +750 XP</span>
                         </div>
-                        <button onclick="openCourseModal('Level 1: Visual Logic', 'Beginner 1', 'fa-shapes', 'emerald', 'Membangun pondasi computational thinking dan logika algoritma dasar menggunakan visual block programming (Scratch). Mengubah imajinasi menjadi animasi cerita pertama.', '+750 XP', '6–8 Minggu', ['Pengenalan Workspace &amp; Konsep Blok Kode', 'Urutan Perintah (Sequencing) &amp; Event Listeners', 'Animasi Sprite, Kostum &amp; Rekaman Suara', 'Proyek: Buku Cerita Interaktif &amp; Mini Game Sederhana'])" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-emerald-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-emerald-600 flex items-center justify-center gap-2">
-                            <span>Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        <button onclick="openCourseModalById('beginner-1')" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-emerald-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-emerald-600 flex items-center justify-center gap-2">
+                            <span data-i18n="course_btn_syllabus">Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -473,28 +473,28 @@
                                 <i class="fa-solid fa-gamepad"></i>
                             </div>
                             <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-teal-500/20 text-teal-400 border border-teal-500/30 px-2.5 py-1 rounded-md">Level 2 · Game Logic</span>
-                                <span class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 8–10 Thn</span>
+                                <span data-i18n="c3_lvl" class="text-[10px] font-bold uppercase tracking-wider bg-teal-500/20 text-teal-400 border border-teal-500/30 px-2.5 py-1 rounded-md">Level 2 · Game Logic</span>
+                                <span data-i18n="c3_age" class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 8–10 Thn</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-teal-400 transition-colors mb-2">Beginner 2</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        <h3 data-i18n="c3_title" class="text-xl font-bold text-white group-hover:text-teal-400 transition-colors mb-2">Beginner 2</h3>
+                        <p data-i18n="c3_desc" class="text-sm text-slate-300 leading-relaxed mb-4">
                             Memperdalam logika percabangan, koordinat 2D, perulangan, dan sistem variabel untuk menciptakan game arcade interaktif.
                         </p>
                         <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-teal-400 mt-0.5 shrink-0"></i> <span>Koordinat X &amp; Y dan deteksi tabrakan</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-teal-400 mt-0.5 shrink-0"></i> <span>Perulangan lanjutan (loops &amp; nested loops)</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-teal-400 mt-0.5 shrink-0"></i> <span>Percabangan kondisional (if-else logic)</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-teal-400 mt-0.5 shrink-0"></i> <span>Proyek: Game arcade tangkap objek &amp; skor</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-teal-400 mt-0.5 shrink-0"></i> <span data-i18n="c3_b1">Koordinat X &amp; Y dan deteksi tabrakan</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-teal-400 mt-0.5 shrink-0"></i> <span data-i18n="c3_b2">Perulangan lanjutan (loops &amp; nested loops)</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-teal-400 mt-0.5 shrink-0"></i> <span data-i18n="c3_b3">Percabangan kondisional (if-else logic)</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-teal-400 mt-0.5 shrink-0"></i> <span data-i18n="c3_b4">Proyek: Game arcade tangkap objek &amp; skor</span></li>
                         </ul>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
-                            <span class="font-medium"><i class="fa-regular fa-clock text-teal-400 mr-1"></i> 6–8 Minggu</span>
+                            <span class="font-medium"><i class="fa-regular fa-clock text-teal-400 mr-1"></i> <span data-i18n="c3_dur">6–8 Minggu</span></span>
                             <span class="font-mono font-bold text-[#FFC83D]"><i class="fa-solid fa-star mr-1"></i> +1000 XP</span>
                         </div>
-                        <button onclick="openCourseModal('Level 2: Game Logic', 'Beginner 2', 'fa-gamepad', 'teal', 'Memperdalam logika percabangan, koordinat ruang gerak 2D, perulangan dinamis, dan sistem variabel untuk menciptakan game arcade interaktif.', '+1000 XP', '6–8 Minggu', ['Logika Koordinat Sumbu X &amp; Y dan Deteksi Tabrakan', 'Konsep Perulangan Lanjutan (Loops &amp; Nested Loops)', 'Percabangan Kondisional (If-Else &amp; Boolean Logic)', 'Proyek: Game Tangkap Objek &amp; Penghitung Skor Otomatis'])" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-teal-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-teal-600 flex items-center justify-center gap-2">
-                            <span>Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        <button onclick="openCourseModalById('beginner-2')" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-teal-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-teal-600 flex items-center justify-center gap-2">
+                            <span data-i18n="course_btn_syllabus">Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -507,28 +507,28 @@
                                 <i class="fa-solid fa-layer-group"></i>
                             </div>
                             <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-[#0788F5]/20 text-[#38BDF8] border border-[#0788F5]/30 px-2.5 py-1 rounded-md">Level 3 · Platformer</span>
-                                <span class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 9–12 Thn</span>
+                                <span data-i18n="c4_lvl" class="text-[10px] font-bold uppercase tracking-wider bg-[#0788F5]/20 text-[#38BDF8] border border-[#0788F5]/30 px-2.5 py-1 rounded-md">Level 3 · Platformer</span>
+                                <span data-i18n="c4_age" class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 9–12 Thn</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-[#38BDF8] transition-colors mb-2">Intermediate 1</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        <h3 data-i18n="c4_title" class="text-xl font-bold text-white group-hover:text-[#38BDF8] transition-colors mb-2">Intermediate 1</h3>
+                        <p data-i18n="c4_desc" class="text-sm text-slate-300 leading-relaxed mb-4">
                             Mekanika game multi-level kompleks, kloning sprite dinamis, algoritma matematika game, serta fisika gravitasi platformer.
                         </p>
                         <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Kloning sprite dinamis &amp; manajemen memori</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Fisika lompatan, inersia &amp; gravitasi</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Variabel global/lokal &amp; struktur data list</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Proyek: Game platformer multi-level tantangan</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c4_b1">Kloning sprite dinamis &amp; manajemen memori</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c4_b2">Fisika lompatan, inersia &amp; gravitasi</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c4_b3">Variabel global/lokal &amp; struktur data list</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c4_b4">Proyek: Game platformer multi-level tantangan</span></li>
                         </ul>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
-                            <span class="font-medium"><i class="fa-regular fa-clock text-[#38BDF8] mr-1"></i> 8 Minggu</span>
+                            <span class="font-medium"><i class="fa-regular fa-clock text-[#38BDF8] mr-1"></i> <span data-i18n="c4_dur">8 Minggu</span></span>
                             <span class="font-mono font-bold text-[#FFC83D]"><i class="fa-solid fa-star mr-1"></i> +1500 XP</span>
                         </div>
-                        <button onclick="openCourseModal('Level 3: Multi-Level Game', 'Intermediate 1', 'fa-layer-group', 'blue', 'Menghadirkan mekanika game multi-level yang kompleks, kloning sprite dinamis, algoritma matematika game, serta interaksi logika multi-objek.', '+1500 XP', '8 Minggu', ['Kloning Sprite Dinamis &amp; Manajemen Memori Objek', 'Variabel Global, Lokal &amp; List (Struktur Data Sederhana)', 'Pembuatan Fisika Lompatan &amp; Gravitasi Platformer', 'Proyek: Game Petualangan Multi-Level dengan Tantangan Waktu'])" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-[#0788F5] text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-[#0788F5] flex items-center justify-center gap-2">
-                            <span>Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        <button onclick="openCourseModalById('intermediate-1')" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-[#0788F5] text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-[#0788F5] flex items-center justify-center gap-2">
+                            <span data-i18n="course_btn_syllabus">Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -541,28 +541,28 @@
                                 <i class="fa-solid fa-code"></i>
                             </div>
                             <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-purple-500/20 text-purple-400 border border-purple-500/30 px-2.5 py-1 rounded-md">Level 4 · Pre-Syntax</span>
-                                <span class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 10–14 Thn</span>
+                                <span data-i18n="c5_lvl" class="text-[10px] font-bold uppercase tracking-wider bg-purple-500/20 text-purple-400 border border-purple-500/30 px-2.5 py-1 rounded-md">Level 4 · Pre-Syntax</span>
+                                <span data-i18n="c5_age" class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 10–14 Thn</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors mb-2">Intermediate 2</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        <h3 data-i18n="c5_title" class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors mb-2">Intermediate 2</h3>
+                        <p data-i18n="c5_desc" class="text-sm text-slate-300 leading-relaxed mb-4">
                             Transisi dari blok visual ke struktur pemrograman teks. Memahami abstraksi fungsi (custom blocks) dan debugging terstruktur.
                         </p>
                         <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span>Fungsi mandiri (custom blocks with parameters)</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span>Algoritma pencarian &amp; pengurutan data</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span>Pengenalan sintaks teks &amp; pseudocode</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span>Proyek: Game boss battle dengan strategi AI</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span data-i18n="c5_b1">Fungsi mandiri (custom blocks with parameters)</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span data-i18n="c5_b2">Algoritma pencarian &amp; pengurutan data</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span data-i18n="c5_b3">Pengenalan sintaks teks &amp; pseudocode</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span data-i18n="c5_b4">Proyek: Game boss battle dengan strategi AI</span></li>
                         </ul>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
-                            <span class="font-medium"><i class="fa-regular fa-clock text-purple-400 mr-1"></i> 8 Minggu</span>
+                            <span class="font-medium"><i class="fa-regular fa-clock text-purple-400 mr-1"></i> <span data-i18n="c5_dur">8 Minggu</span></span>
                             <span class="font-mono font-bold text-[#FFC83D]"><i class="fa-solid fa-star mr-1"></i> +2000 XP</span>
                         </div>
-                        <button onclick="openCourseModal('Level 4: Pre-Syntax', 'Intermediate 2', 'fa-code', 'purple', 'Jembatan transisi dari blok visual menuju logika teks (pseudocode &amp; syntax programming). Memahami abstraksi fungsi, modularitas, dan debugging terstruktur.', '+2000 XP', '8 Minggu', ['Abstraksi &amp; Pembuatan Fungsi Mandiri (Custom Blocks with Inputs)', 'Algoritma Pencarian &amp; Pengurutan Data Sederhana', 'Pengenalan Konsep Sintaks Pemrograman Tekstual &amp; Pseudocode', 'Proyek: Game Boss Battle Interaktif dengan Strategi AI Sederhana'])" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-purple-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-purple-600 flex items-center justify-center gap-2">
-                            <span>Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        <button onclick="openCourseModalById('intermediate-2')" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-purple-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-purple-600 flex items-center justify-center gap-2">
+                            <span data-i18n="course_btn_syllabus">Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -575,28 +575,28 @@
                                 <i class="fa-solid fa-rocket"></i>
                             </div>
                             <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-[#FFC83D]/20 text-[#FFC83D] border border-[#FFC83D]/30 px-2.5 py-1 rounded-md">Level 5 · Capstone</span>
-                                <span class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 11–16 Thn</span>
+                                <span data-i18n="c6_lvl" class="text-[10px] font-bold uppercase tracking-wider bg-[#FFC83D]/20 text-[#FFC83D] border border-[#FFC83D]/30 px-2.5 py-1 rounded-md">Level 5 · Capstone</span>
+                                <span data-i18n="c6_age" class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 11–16 Thn</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-[#FFC83D] transition-colors mb-2">Innovator</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        <h3 data-i18n="c6_title" class="text-xl font-bold text-white group-hover:text-[#FFC83D] transition-colors mb-2">Innovator</h3>
+                        <p data-i18n="c6_desc" class="text-sm text-slate-300 leading-relaxed mb-4">
                             Puncak kurikulum bertahap. Siswa mendesain proyek mandiri berskala besar (Capstone Project), problem solving nyata, dan pameran portofolio.
                         </p>
                         <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span>Desain ideasi, wireframe &amp; arsitektur sistem</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span>Penerapan advanced computational thinking</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span>Quality testing, peer review &amp; bug fixing</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span>Proyek: Capstone showcase &amp; pameran portofolio</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span data-i18n="c6_b1">Desain ideasi, wireframe &amp; arsitektur sistem</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span data-i18n="c6_b2">Penerapan advanced computational thinking</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span data-i18n="c6_b3">Quality testing, peer review &amp; bug fixing</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span data-i18n="c6_b4">Proyek: Capstone showcase &amp; pameran portofolio</span></li>
                         </ul>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
-                            <span class="font-medium"><i class="fa-regular fa-clock text-[#FFC83D] mr-1"></i> 8–10 Minggu</span>
+                            <span class="font-medium"><i class="fa-regular fa-clock text-[#FFC83D] mr-1"></i> <span data-i18n="c6_dur">8–10 Minggu</span></span>
                             <span class="font-mono font-bold text-[#FFC83D]"><i class="fa-solid fa-star mr-1"></i> +3000 XP</span>
                         </div>
-                        <button onclick="openCourseModal('Level 5: Capstone Level', 'Innovator', 'fa-rocket', 'gold', 'Puncak petualangan kurikulum bertahap. Siswa merancang proyek mandiri berskala besar (Capstone Project), mengintegrasikan berbagai konsep, presentasi karya, dan portofolio digital.', '+3000 XP', '8–10 Minggu', ['Desain Proyek Mandiri (Ideasi, Wireframe &amp; Arsitektur)', 'Penerapan Advanced Computational Thinking &amp; Error Handling', 'Pengujian Kualitas (Testing, Peer Review &amp; Bug Fixing)', 'Proyek: Capstone Showcase Karya Mandiri &amp; Publikasi Portofolio'])" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-[#FFC83D] text-white hover:text-[#111827] font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-[#FFC83D] flex items-center justify-center gap-2">
-                            <span>Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        <button onclick="openCourseModalById('innovator')" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-[#FFC83D] text-white hover:text-[#111827] font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-[#FFC83D] flex items-center justify-center gap-2">
+                            <span data-i18n="course_btn_syllabus">Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -609,28 +609,28 @@
                                 <i class="fa-solid fa-cube"></i>
                             </div>
                             <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/30 px-2.5 py-1 rounded-md">Peminatan · 3D Game</span>
-                                <span class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 10–16 Thn</span>
+                                <span data-i18n="c7_lvl" class="text-[10px] font-bold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/30 px-2.5 py-1 rounded-md">Peminatan · 3D Game</span>
+                                <span data-i18n="c7_age" class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 10–16 Thn</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors mb-2">Roblox</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        <h3 data-i18n="c7_title" class="text-xl font-bold text-white group-hover:text-red-400 transition-colors mb-2">Roblox</h3>
+                        <p data-i18n="c7_desc" class="text-sm text-slate-300 leading-relaxed mb-4">
                             Membangun dunia 3D multiplayer di Roblox Studio dan memprogram interaksi permainan menggunakan bahasa pemrograman teks Lua.
                         </p>
                         <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-red-400 mt-0.5 shrink-0"></i> <span>Navigasi Roblox Studio &amp; desain terrain 3D</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-red-400 mt-0.5 shrink-0"></i> <span>Sintaks Lua: Variabel, function &amp; events</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-red-400 mt-0.5 shrink-0"></i> <span>Mekanika interaktif, leaderboard &amp; HUD game</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-red-400 mt-0.5 shrink-0"></i> <span>Proyek: Game Obby / multiplayer rilis ke Roblox</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-red-400 mt-0.5 shrink-0"></i> <span data-i18n="c7_b1">Navigasi Roblox Studio &amp; desain terrain 3D</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-red-400 mt-0.5 shrink-0"></i> <span data-i18n="c7_b2">Sintaks Lua: Variabel, function &amp; events</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-red-400 mt-0.5 shrink-0"></i> <span data-i18n="c7_b3">Mekanika interaktif, leaderboard &amp; HUD game</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-red-400 mt-0.5 shrink-0"></i> <span data-i18n="c7_b4">Proyek: Game Obby / multiplayer rilis ke Roblox</span></li>
                         </ul>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
-                            <span class="font-medium"><i class="fa-regular fa-clock text-red-400 mr-1"></i> 8–10 Minggu</span>
+                            <span class="font-medium"><i class="fa-regular fa-clock text-red-400 mr-1"></i> <span data-i18n="c7_dur">8–10 Minggu</span></span>
                             <span class="font-mono font-bold text-[#FFC83D]"><i class="fa-solid fa-star mr-1"></i> +2500 XP</span>
                         </div>
-                        <button onclick="openCourseModal('Peminatan: Game 3D &amp; Lua', 'Roblox', 'fa-cube', 'red', 'Membangun dunia game 3D multiplayer di Roblox Studio dan memprogram mekanika permainan interaktif menggunakan bahasa pemrograman tekstual Lua Scripting.', '+2500 XP', '8–10 Minggu', ['Navigasi Roblox Studio &amp; 3D Environment Modeling', 'Dasar Pemrograman Lua: Variabel, Function, Event, &amp; Loops', 'Mekanika Interaktif: Traps, Leaderstats &amp; GUI / HUD Game', 'Proyek: Game Obby / Survival Multiplayer &amp; Rilis ke Roblox Server'])" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-red-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-red-600 flex items-center justify-center gap-2">
-                            <span>Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        <button onclick="openCourseModalById('roblox')" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-red-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-red-600 flex items-center justify-center gap-2">
+                            <span data-i18n="course_btn_syllabus">Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -643,28 +643,28 @@
                                 <i class="fa-solid fa-robot"></i>
                             </div>
                             <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-[#FFC83D]/20 text-[#FFC83D] border border-[#FFC83D]/30 px-2.5 py-1 rounded-md">Peminatan · Hardware</span>
-                                <span class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 8–15 Thn</span>
+                                <span data-i18n="c8_lvl" class="text-[10px] font-bold uppercase tracking-wider bg-[#FFC83D]/20 text-[#FFC83D] border border-[#FFC83D]/30 px-2.5 py-1 rounded-md">Peminatan · Hardware</span>
+                                <span data-i18n="c8_age" class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 8–15 Thn</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-[#FFC83D] transition-colors mb-2">Robotika</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        <h3 data-i18n="c8_title" class="text-xl font-bold text-white group-hover:text-[#FFC83D] transition-colors mb-2">Robotika</h3>
+                        <p data-i18n="c8_desc" class="text-sm text-slate-300 leading-relaxed mb-4">
                             Merakit sirkuit elektronika breadboard, menghubungkan aneka sensor fisik, dan memprogram mikrokontroler (Arduino/ESP32).
                         </p>
                         <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span>Rangkaian elektronika dasar &amp; breadboard</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span>Pemrograman Arduino C++ &amp; mikrokontroler</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span>Integrasi sensor ultrasonik, cahaya &amp; motor</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span>Proyek: Robot line follower &amp; sistem smart IoT</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span data-i18n="c8_b1">Rangkaian elektronika dasar &amp; breadboard</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span data-i18n="c8_b2">Pemrograman Arduino C++ &amp; mikrokontroler</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span data-i18n="c8_b3">Integrasi sensor ultrasonik, cahaya &amp; motor</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#FFC83D] mt-0.5 shrink-0"></i> <span data-i18n="c8_b4">Proyek: Robot line follower &amp; sistem smart IoT</span></li>
                         </ul>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
-                            <span class="font-medium"><i class="fa-regular fa-clock text-[#FFC83D] mr-1"></i> 8–10 Minggu</span>
+                            <span class="font-medium"><i class="fa-regular fa-clock text-[#FFC83D] mr-1"></i> <span data-i18n="c8_dur">8–10 Minggu</span></span>
                             <span class="font-mono font-bold text-[#FFC83D]"><i class="fa-solid fa-star mr-1"></i> +2500 XP</span>
                         </div>
-                        <button onclick="openCourseModal('Peminatan: Hardware &amp; IoT', 'Robotika', 'fa-robot', 'gold', 'Merakit sirkuit elektronik di breadboard, menghubungkan aneka sensor fisik dan aktuator, serta memprogram mikrokontroler (Arduino / ESP32) untuk otomasi dan IoT.', '+2500 XP', '8–10 Minggu', ['Dasar Rangkaian Elektronika, Tegangan Listrik &amp; Breadboard', 'Pemrograman Arduino C++ &amp; Kontrol Output (LED, Buzzer, Servo)', 'Integrasi Sensor Ultrasonik, Suhu, Cahaya &amp; Gerak', 'Proyek: Robot Pengikut Jalur (Line Follower) / Smart Home IoT'])" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-[#FFC83D] text-white hover:text-[#111827] font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-[#FFC83D] flex items-center justify-center gap-2">
-                            <span>Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        <button onclick="openCourseModalById('robotika')" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-[#FFC83D] text-white hover:text-[#111827] font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-[#FFC83D] flex items-center justify-center gap-2">
+                            <span data-i18n="course_btn_syllabus">Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -677,28 +677,28 @@
                                 <i class="fa-solid fa-globe"></i>
                             </div>
                             <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-[#0788F5]/20 text-[#38BDF8] border border-[#0788F5]/30 px-2.5 py-1 rounded-md">Peminatan · Modern Web</span>
-                                <span class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 11–16 Thn</span>
+                                <span data-i18n="c9_lvl" class="text-[10px] font-bold uppercase tracking-wider bg-[#0788F5]/20 text-[#38BDF8] border border-[#0788F5]/30 px-2.5 py-1 rounded-md">Peminatan · Modern Web</span>
+                                <span data-i18n="c9_age" class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 11–16 Thn</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-[#38BDF8] transition-colors mb-2">Web Programming</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        <h3 data-i18n="c9_title" class="text-xl font-bold text-white group-hover:text-[#38BDF8] transition-colors mb-2">Web Programming</h3>
+                        <p data-i18n="c9_desc" class="text-sm text-slate-300 leading-relaxed mb-4">
                             Mempelajari pembuatan website modern responsif mulai dari struktur semantik HTML5, tata letak CSS3, hingga interaktivitas JavaScript.
                         </p>
                         <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Struktur HTML5 semantik &amp; web accessibility</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Styling responsif CSS3, Flexbox &amp; Grid</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Interaktivitas JavaScript modern &amp; DOM event</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span>Proyek: Portofolio responsif &amp; deploy cloud</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c9_b1">Struktur HTML5 semantik &amp; web accessibility</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c9_b2">Styling responsif CSS3, Flexbox &amp; Grid</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c9_b3">Interaktivitas JavaScript modern &amp; DOM event</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-[#38BDF8] mt-0.5 shrink-0"></i> <span data-i18n="c9_b4">Proyek: Portofolio responsif &amp; deploy cloud</span></li>
                         </ul>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
-                            <span class="font-medium"><i class="fa-regular fa-clock text-[#38BDF8] mr-1"></i> 8–10 Minggu</span>
+                            <span class="font-medium"><i class="fa-regular fa-clock text-[#38BDF8] mr-1"></i> <span data-i18n="c9_dur">8–10 Minggu</span></span>
                             <span class="font-mono font-bold text-[#FFC83D]"><i class="fa-solid fa-star mr-1"></i> +2500 XP</span>
                         </div>
-                        <button onclick="openCourseModal('Peminatan: Frontend &amp; Web', 'Web Programming', 'fa-globe', 'blue', 'Mempelajari fondasi pembuatan website modern dari struktur semantik HTML, tata letak responsif CSS (Flexbox &amp; Grid), hingga logika interaktif dengan JavaScript modern.', '+2500 XP', '8–10 Minggu', ['Struktur Dokumen HTML5 Semantik &amp; Aksesibilitas', 'Styling Modern dengan CSS3, Flexbox, Grid &amp; Responsive Design', 'JavaScript Fundamental &amp; Manipulasi DOM Real-Time', 'Proyek: Pembuatan Web Portofolio Responsif &amp; Hosting Online'])" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-[#0788F5] text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-[#0788F5] flex items-center justify-center gap-2">
-                            <span>Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        <button onclick="openCourseModalById('web')" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-[#0788F5] text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-[#0788F5] flex items-center justify-center gap-2">
+                            <span data-i18n="course_btn_syllabus">Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -711,28 +711,28 @@
                                 <i class="fa-solid fa-mobile-screen-button"></i>
                             </div>
                             <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-purple-500/20 text-purple-400 border border-purple-500/30 px-2.5 py-1 rounded-md">Peminatan · Mobile App</span>
-                                <span class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 11–16 Thn</span>
+                                <span data-i18n="c10_lvl" class="text-[10px] font-bold uppercase tracking-wider bg-purple-500/20 text-purple-400 border border-purple-500/30 px-2.5 py-1 rounded-md">Peminatan · Mobile App</span>
+                                <span data-i18n="c10_age" class="text-[10px] font-bold text-slate-300 bg-[#0F172A] border border-white/10 px-2 py-1 rounded-md">Usia 11–16 Thn</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors mb-2">App Programming</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        <h3 data-i18n="c10_title" class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors mb-2">App Programming</h3>
+                        <p data-i18n="c10_desc" class="text-sm text-slate-300 leading-relaxed mb-4">
                             Merancang antarmuka mobile apps (UI/UX), menyusun alur multi-screen, memanfaatkan sensor smartphone, dan menguji aplikasi di ponsel.
                         </p>
                         <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span>Prinsip desain antarmuka mobile intuitif (UI/UX)</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span>Event-driven programming &amp; multi-screen logic</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span>Pemanfaatan sensor smartphone &amp; local storage</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span>Proyek: Aplikasi utilitas diuji langsung di ponsel</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span data-i18n="c10_b1">Prinsip desain antarmuka mobile intuitif (UI/UX)</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span data-i18n="c10_b2">Event-driven programming &amp; multi-screen logic</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span data-i18n="c10_b3">Pemanfaatan sensor smartphone &amp; local storage</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs text-purple-400 mt-0.5 shrink-0"></i> <span data-i18n="c10_b4">Proyek: Aplikasi utilitas diuji langsung di ponsel</span></li>
                         </ul>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
-                            <span class="font-medium"><i class="fa-regular fa-clock text-purple-400 mr-1"></i> 8–10 Minggu</span>
+                            <span class="font-medium"><i class="fa-regular fa-clock text-purple-400 mr-1"></i> <span data-i18n="c10_dur">8–10 Minggu</span></span>
                             <span class="font-mono font-bold text-[#FFC83D]"><i class="fa-solid fa-star mr-1"></i> +2500 XP</span>
                         </div>
-                        <button onclick="openCourseModal('Peminatan: Mobile App', 'App Programming', 'fa-mobile-screen-button', 'purple', 'Merancang antarmuka aplikasi seluler (UI/UX), mengolah logika interaksi aplikasi, memanfaatkan komponen perangkat (GPS, Kamera), serta membangun aplikasi mobile yang fungsional.', '+2500 XP', '8–10 Minggu', ['Prinsip Desain UI/UX Aplikasi Mobile Modern', 'Event-Driven Programming &amp; Navigasi Multi-Layar (Multi-Screen)', 'Pemanfaatan Sensor Mobile, Local Storage &amp; API Sederhana', 'Proyek: Aplikasi Utilitas / Kuis Interaktif Siap Uji di Smartphone'])" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-purple-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-purple-600 flex items-center justify-center gap-2">
-                            <span>Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        <button onclick="openCourseModalById('app')" class="w-full min-h-[44px] bg-[#0F172A] hover:bg-purple-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors border border-white/10 hover:border-purple-600 flex items-center justify-center gap-2">
+                            <span data-i18n="course_btn_syllabus">Lihat Silabus &amp; Detail</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -769,8 +769,8 @@
                             <i class="fa-solid fa-book-open-reader"></i>
                         </div>
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-[11px] font-mono font-bold uppercase text-[#38BDF8] tracking-widest">Langkah 01</span>
-                            <span class="text-xs text-slate-300 font-bold bg-[#0F172A] px-2 py-0.5 rounded-md border border-white/10">15 Menit</span>
+                            <span data-i18n="method_s1_step" class="text-[11px] font-mono font-bold uppercase text-[#38BDF8] tracking-widest">Langkah 01</span>
+                            <span data-i18n="method_s1_dur" class="text-xs text-slate-300 font-bold bg-[#0F172A] px-2 py-0.5 rounded-md border border-white/10">15 Menit</span>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2" data-i18n="method_s1_title">Materi Konsep</h3>
                         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="method_s1_desc">
@@ -779,7 +779,7 @@
                     </div>
                     <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-[11px] font-medium text-slate-300">
                         <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                        <span>Visual block &amp; kuis seru</span>
+                        <span data-i18n="method_s1_note">Visual block &amp; kuis seru</span>
                     </div>
                 </div>
 
@@ -790,8 +790,8 @@
                             <i class="fa-solid fa-laptop-code"></i>
                         </div>
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-[11px] font-mono font-bold uppercase text-[#FFC83D] tracking-widest">Langkah 02</span>
-                            <span class="text-xs text-slate-300 font-bold bg-[#0F172A] px-2 py-0.5 rounded-md border border-white/10">50 Menit</span>
+                            <span data-i18n="method_s2_step" class="text-[11px] font-mono font-bold uppercase text-[#FFC83D] tracking-widest">Langkah 02</span>
+                            <span data-i18n="method_s2_dur" class="text-xs text-slate-300 font-bold bg-[#0F172A] px-2 py-0.5 rounded-md border border-white/10">50 Menit</span>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2" data-i18n="method_s2_title">Praktik Eksploratif</h3>
                         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="method_s2_desc">
@@ -800,7 +800,7 @@
                     </div>
                     <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-[11px] font-medium text-slate-300">
                         <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                        <span>Hands-on langsung di kelas</span>
+                        <span data-i18n="method_s2_note">Hands-on langsung di kelas</span>
                     </div>
                 </div>
 
@@ -811,8 +811,8 @@
                             <i class="fa-solid fa-comments"></i>
                         </div>
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-[11px] font-mono font-bold uppercase text-purple-400 tracking-widest">Langkah 03</span>
-                            <span class="text-xs text-slate-300 font-bold bg-[#0F172A] px-2 py-0.5 rounded-md border border-white/10">Setiap Sesi</span>
+                            <span data-i18n="method_s3_step" class="text-[11px] font-mono font-bold uppercase text-purple-400 tracking-widest">Langkah 03</span>
+                            <span data-i18n="method_s3_dur" class="text-xs text-slate-300 font-bold bg-[#0F172A] px-2 py-0.5 rounded-md border border-white/10">Setiap Sesi</span>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2" data-i18n="method_s3_title">Feedback Tutor</h3>
                         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="method_s3_desc">
@@ -821,7 +821,7 @@
                     </div>
                     <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-[11px] font-medium text-slate-300">
                         <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                        <span>Rasio tutor 1:4 anak</span>
+                        <span data-i18n="method_s3_note">Rasio tutor 1:4 anak</span>
                     </div>
                 </div>
 
@@ -832,8 +832,8 @@
                             <i class="fa-solid fa-trophy"></i>
                         </div>
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-[11px] font-mono font-bold uppercase text-red-400 tracking-widest">Langkah 04</span>
-                            <span class="text-xs text-slate-300 font-bold bg-[#0F172A] px-2 py-0.5 rounded-md border border-white/10">Tercatat Nyata</span>
+                            <span data-i18n="method_s4_step" class="text-[11px] font-mono font-bold uppercase text-red-400 tracking-widest">Langkah 04</span>
+                            <span data-i18n="method_s4_dur" class="text-xs text-slate-300 font-bold bg-[#0F172A] px-2 py-0.5 rounded-md border border-white/10">Tercatat Nyata</span>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2" data-i18n="method_s4_title">Pencapaian &amp; Progres</h3>
                         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="method_s4_desc">
@@ -842,7 +842,7 @@
                     </div>
                     <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-[11px] font-medium text-slate-300">
                         <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                        <span>Portofolio &amp; sertifikat level</span>
+                        <span data-i18n="method_s4_note">Portofolio &amp; sertifikat level</span>
                     </div>
                 </div>
 
@@ -945,7 +945,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm font-bold text-white">Sarah <span data-i18n="hof_sarah_age" class="text-slate-400 font-normal">(12 Tahun)</span></p>
-                                    <p class="text-[9px] text-[#FFC83D]/90 font-mono uppercase tracking-widest">Lead Roblox Creator</p>
+                                    <p data-i18n="hof_sarah_role" class="text-[9px] text-[#FFC83D]/90 font-mono uppercase tracking-widest">Lead Roblox Creator</p>
                                 </div>
                             </div>
 
@@ -1006,7 +1006,7 @@
                             <h4 data-i18n="hof_c1_title" class="font-heading font-bold text-white text-lg mb-1 group-hover:text-[#38BDF8] transition-colors">Sistem AI Kasir Pintar</h4>
                             <div class="flex items-center gap-2 mb-3">
                                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Budi" class="w-5 h-5 rounded-full border border-slate-700 bg-slate-800" alt="User">
-                                <p class="text-[11px] text-slate-400"><span data-i18n="hof_c1_author">Budi (14 Tahun)</span> <span class="text-[#FFC83D] font-medium">· Web Dev</span></p>
+                                <p class="text-[11px] text-slate-400"><span data-i18n="hof_c1_author">Budi (14 Tahun)</span> <span data-i18n="hof_web_dev_tag" class="text-[#FFC83D] font-medium">· Web Dev</span></p>
                             </div>
                             <p data-i18n="hof_c1_desc" class="text-xs text-slate-300 leading-relaxed mb-4">Aplikasi kasir berbasis web menggunakan logika JavaScript kompleks untuk kalkulasi inventaris dan struk real-time.</p>
                             <div class="flex flex-wrap gap-1.5">
@@ -1041,7 +1041,7 @@
                             <h4 data-i18n="hof_c2_title" class="font-heading font-bold text-white text-lg mb-1 group-hover:text-[#38BDF8] transition-colors">Robot Pemilah Sampah</h4>
                             <div class="flex items-center gap-2 mb-3">
                                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kevin" class="w-5 h-5 rounded-full border border-slate-700 bg-slate-800" alt="User">
-                                <p class="text-[11px] text-slate-400"><span data-i18n="hof_c2_author">Kevin (10 Tahun)</span> <span class="text-cyan-400 font-medium">· Robotics</span></p>
+                                <p class="text-[11px] text-slate-400"><span data-i18n="hof_c2_author">Kevin (10 Tahun)</span> <span data-i18n="hof_robotics_tag" class="text-cyan-400 font-medium">· Robotika</span></p>
                             </div>
                             <p data-i18n="hof_c2_desc" class="text-xs text-slate-300 leading-relaxed mb-4">Proyek Arduino dengan sensor ultrasonik dan motor servo yang secara otomatis membuka tutup tempat sampah.</p>
                             <div class="flex flex-wrap gap-1.5">
@@ -1076,7 +1076,7 @@
                             <h4 data-i18n="hof_c3_title" class="font-heading font-bold text-white text-lg mb-1 group-hover:text-[#38BDF8] transition-colors">Portofolio Animasi Web</h4>
                             <div class="flex items-center gap-2 mb-3">
                                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Nadia" class="w-5 h-5 rounded-full border border-slate-700 bg-slate-800" alt="User">
-                                <p class="text-[11px] text-slate-400"><span data-i18n="hof_c3_author">Nadia (15 Tahun)</span> <span class="text-purple-300 font-medium">· Web Dev</span></p>
+                                <p class="text-[11px] text-slate-400"><span data-i18n="hof_c3_author">Nadia (15 Tahun)</span> <span data-i18n="hof_web_dev_tag" class="text-purple-300 font-medium">· Web Dev</span></p>
                             </div>
                             <p data-i18n="hof_c3_desc" class="text-xs text-slate-300 leading-relaxed mb-4">Website portofolio pribadi yang penuh dengan animasi CSS 3D dan transisi scroll mulus tanpa framework eksternal.</p>
                             <div class="flex flex-wrap gap-1.5">
@@ -1124,8 +1124,8 @@
                                 <i class="fa-solid fa-brain"></i>
                             </div>
                             <div>
-                                <h4 class="text-sm font-bold text-white">Pemahaman Konsep &amp; Problem Solving</h4>
-                                <p class="text-xs text-slate-400">Mengukur tingkat pemahaman konsep siswa berdasarkan kemampuan dalam menyelesaikan masalah dan tantangan.</p>
+                                <h4 data-i18n="parent_p1_title" class="text-sm font-bold text-white">Pemahaman Konsep &amp; Problem Solving</h4>
+                                <p data-i18n="parent_p1_desc" class="text-xs text-slate-400">Mengukur tingkat pemahaman konsep siswa berdasarkan kemampuan dalam menyelesaikan masalah dan tantangan.</p>
                             </div>
                         </div>
 
@@ -1134,8 +1134,8 @@
                                 <i class="fa-solid fa-lightbulb"></i>
                             </div>
                             <div>
-                                <h4 class="text-sm font-bold text-white">Kreativitas &amp; Inovasi</h4>
-                                <p class="text-xs text-slate-400">Mengukur apakah siswa dapat mengembangkan dan memodifikasi projek dari contoh yang diberikan.</p>
+                                <h4 data-i18n="parent_p2_title" class="text-sm font-bold text-white">Kreativitas &amp; Inovasi</h4>
+                                <p data-i18n="parent_p2_desc" class="text-xs text-slate-400">Mengukur apakah siswa dapat mengembangkan dan memodifikasi projek dari contoh yang diberikan.</p>
                             </div>
                         </div>
 
@@ -1144,8 +1144,8 @@
                                 <i class="fa-solid fa-fire"></i>
                             </div>
                             <div>
-                                <h4 class="text-sm font-bold text-white">Keaktifan &amp; Antusiasme</h4>
-                                <p class="text-xs text-slate-400">Mengukur tingkat motivasi, rasa ingin tahu, dan keaktifan siswa saat proses belajar berlangsung.</p>
+                                <h4 data-i18n="parent_p3_title" class="text-sm font-bold text-white">Keaktifan &amp; Antusiasme</h4>
+                                <p data-i18n="parent_p3_desc" class="text-xs text-slate-400">Mengukur tingkat motivasi, rasa ingin tahu, dan keaktifan siswa saat proses belajar berlangsung.</p>
                             </div>
                         </div>
                     </div>
@@ -1153,7 +1153,7 @@
                     <!-- Left side explanation (no CTA buttons) -->
                     <div class="mt-6 flex items-center gap-2 text-xs font-mono text-slate-400">
                         <i class="fa-solid fa-sync text-cyan-400 animate-spin-slow"></i>
-                        <span>Sinkronisasi otomatis dengan aplikasi Student Space</span>
+                        <span data-i18n="parent_sync">Sinkronisasi otomatis dengan aplikasi Student Space</span>
                     </div>
                 </div>
 
@@ -1170,12 +1170,12 @@
                                     <i class="fa-solid fa-microchip text-xl sm:text-2xl"></i>
                                 </div>
                                 <div class="min-w-0">
-                                    <h3 class="font-extrabold text-white text-base sm:text-lg leading-tight mb-1 truncate drop-shadow-sm">
+                                    <h3 data-i18n="report_course_title" class="font-extrabold text-white text-base sm:text-lg leading-tight mb-1 truncate drop-shadow-sm">
                                         Game Programming (Roblox &amp; Lua)
                                     </h3>
                                     <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest flex-wrap">
-                                        <span class="text-cyan-400 border border-cyan-500/30 bg-cyan-500/10 px-2 py-0.5 rounded-lg text-[10px] sm:text-xs shadow-[0_0_5px_rgba(34,211,238,0.2)]">
-                                            Session #4
+                                        <span data-i18n="report_session" class="text-cyan-400 border border-cyan-500/30 bg-cyan-500/10 px-2 py-0.5 rounded-lg text-[10px] sm:text-xs shadow-[0_0_5px_rgba(34,211,238,0.2)]">
+                                            Sesi #4
                                         </span>
                                         <span class="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-400">
                                             <i class="fa-regular fa-calendar text-cyan-400"></i> 12 Sep 2026
@@ -1185,7 +1185,7 @@
                             </div>
                             <div class="text-right shrink-0">
                                 <span class="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-400 bg-emerald-950/80 border border-emerald-500/40 px-2.5 py-1 rounded-xl">
-                                    <i class="fa-solid fa-check text-[10px]"></i> Present
+                                    <i class="fa-solid fa-check text-[10px]"></i> <span data-i18n="report_present">Hadir</span>
                                 </span>
                             </div>
                         </div>
@@ -1197,28 +1197,28 @@
                                     <i class="fa-solid fa-award text-sm"></i>
                                 </div>
                                 <div>
-                                    <span class="text-[9px] font-extrabold text-slate-500 uppercase tracking-widest block">Lead Tutor</span>
-                                    <span class="text-xs sm:text-sm font-extrabold text-white">Kak Danu (Facilitator)</span>
+                                    <span data-i18n="report_tutor_role" class="text-[9px] font-extrabold text-slate-500 uppercase tracking-widest block">Tutor Utama</span>
+                                    <span data-i18n="report_tutor_name" class="text-xs sm:text-sm font-extrabold text-white">Danu (Fasilitator)</span>
                                 </div>
                             </div>
                             <span class="text-[10px] font-mono text-cyan-400 bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800">
-                                Sesi Terverifikasi
+                                <span data-i18n="report_verified">Sesi Terverifikasi</span>
                             </span>
                         </div>
 
                         <!-- Superhero Character Section (Iron Man theme like Student Space) -->
                         <div class="mb-5">
-                            <span class="text-[10px] font-extrabold uppercase tracking-widest block mb-2 text-amber-400 drop-shadow-sm">
-                                Superhero Character
+                            <span data-i18n="report_superhero_label" class="text-[10px] font-extrabold uppercase tracking-widest block mb-2 text-amber-400 drop-shadow-sm">
+                                Karakter Superhero
                             </span>
                             <div class="relative overflow-hidden p-4 rounded-2xl border-2 border-b-[4px] bg-gradient-to-r from-red-500/10 to-amber-500/10 border-red-500/30 border-b-amber-500/30">
                                 <i class="fa-solid fa-shield-halved absolute -right-4 -bottom-4 text-7xl text-amber-400/10 pointer-events-none -rotate-12"></i>
                                 <div class="relative z-10">
                                     <div class="text-sm font-extrabold text-amber-400 mb-1 flex items-center gap-2">
-                                        <span>Iron Man (The Innovator)</span>
+                                        <span data-i18n="report_superhero_name">Iron Man (Sang Inovator)</span>
                                         <i class="fa-solid fa-bolt text-xs text-amber-400 animate-pulse"></i>
                                     </div>
-                                    <p class="text-xs font-medium text-slate-300 italic border-l-2 border-amber-500/50 pl-2 leading-relaxed">
+                                    <p data-i18n="report_superhero_quote" class="text-xs font-medium text-slate-300 italic border-l-2 border-amber-500/50 pl-2 leading-relaxed">
                                         "Tekun memecahkan masalah logika rintangan dan berani mencoba solusi teknologi baru secara mandiri."
                                     </p>
                                 </div>
@@ -1227,21 +1227,21 @@
 
                         <!-- Skill Evaluation: Exact 3 Parameters requested by user -->
                         <div class="mb-5">
-                            <span class="text-[10px] font-extrabold text-cyan-400 uppercase tracking-widest block mb-2.5 drop-shadow-[0_0_2px_rgba(34,211,238,0.5)]">
-                                Skill Evaluation (Rubrik Aktif)
+                            <span data-i18n="report_rubric_header" class="text-[10px] font-extrabold text-cyan-400 uppercase tracking-widest block mb-2.5 drop-shadow-[0_0_2px_rgba(34,211,238,0.5)]">
+                                Evaluasi Keterampilan (Rubrik Aktif)
                             </span>
                             <div class="grid gap-2.5">
                                 <!-- Parameter 1: Pemahaman Konsep & Problem Solving -->
                                 <div class="flex flex-col bg-slate-950/80 p-3.5 rounded-2xl border-2 border-slate-800 border-b-[4px]">
                                     <div class="flex justify-between items-center mb-1.5">
-                                        <span class="text-xs sm:text-sm font-bold text-slate-200 uppercase tracking-wider">
+                                        <span data-i18n="report_r1_name" class="text-xs sm:text-sm font-bold text-slate-200 uppercase tracking-wider">
                                             Pemahaman Konsep &amp; Problem Solving
                                         </span>
                                         <span class="text-xs font-extrabold text-cyan-400 bg-slate-900 border-2 border-cyan-500/30 px-2.5 py-0.5 rounded-xl font-mono">
                                             8.5 / 10
                                         </span>
                                     </div>
-                                    <p class="text-[11px] text-slate-200 font-medium border-l-2 border-cyan-500/50 pl-2 leading-relaxed">
+                                    <p data-i18n="report_r1_desc" class="text-[11px] text-slate-200 font-medium border-l-2 border-cyan-500/50 pl-2 leading-relaxed">
                                         Mengukur tingkat pemahaman konsep siswa berdasarkan kemampuan menyelesaikan masalah dan tantangan arena secara terstruktur.
                                     </p>
                                 </div>
@@ -1249,14 +1249,14 @@
                                 <!-- Parameter 2: Kreativitas & Inovasi -->
                                 <div class="flex flex-col bg-slate-950/80 p-3.5 rounded-2xl border-2 border-slate-800 border-b-[4px]">
                                     <div class="flex justify-between items-center mb-1.5">
-                                        <span class="text-xs sm:text-sm font-bold text-slate-200 uppercase tracking-wider">
+                                        <span data-i18n="report_r2_name" class="text-xs sm:text-sm font-bold text-slate-200 uppercase tracking-wider">
                                             Kreativitas &amp; Inovasi
                                         </span>
                                         <span class="text-xs font-extrabold text-amber-400 bg-slate-900 border-2 border-amber-500/30 px-2.5 py-0.5 rounded-xl font-mono">
                                             9.0 / 10
                                         </span>
                                     </div>
-                                    <p class="text-[11px] text-slate-200 font-medium border-l-2 border-amber-500/50 pl-2 leading-relaxed">
+                                    <p data-i18n="report_r2_desc" class="text-[11px] text-slate-200 font-medium border-l-2 border-amber-500/50 pl-2 leading-relaxed">
                                         Mengukur kemampuan siswa mengembangkan dan memodifikasi projek di luar contoh dasar yang diberikan dengan fitur unik.
                                     </p>
                                 </div>
@@ -1264,14 +1264,14 @@
                                 <!-- Parameter 3: Keaktifan & Antusiasme -->
                                 <div class="flex flex-col bg-slate-950/80 p-3.5 rounded-2xl border-2 border-slate-800 border-b-[4px]">
                                     <div class="flex justify-between items-center mb-1.5">
-                                        <span class="text-xs sm:text-sm font-bold text-slate-200 uppercase tracking-wider">
+                                        <span data-i18n="report_r3_name" class="text-xs sm:text-sm font-bold text-slate-200 uppercase tracking-wider">
                                             Keaktifan &amp; Antusiasme
                                         </span>
                                         <span class="text-xs font-extrabold text-emerald-400 bg-slate-900 border-2 border-emerald-500/30 px-2.5 py-0.5 rounded-xl font-mono">
                                             9.5 / 10
                                         </span>
                                     </div>
-                                    <p class="text-[11px] text-slate-200 font-medium border-l-2 border-emerald-500/50 pl-2 leading-relaxed">
+                                    <p data-i18n="report_r3_desc" class="text-[11px] text-slate-200 font-medium border-l-2 border-emerald-500/50 pl-2 leading-relaxed">
                                         Mengukur tingkat motivasi, rasa ingin tahu yang tinggi, dan keaktifan berdiskusi selama sesi belajar berlangsung.
                                     </p>
                                 </div>
@@ -1281,38 +1281,38 @@
                         <!-- Tutor Evaluation (Feedback) -->
                         <div>
                             <span class="text-[10px] font-extrabold text-cyan-400 uppercase tracking-widest block mb-2.5 flex items-center gap-2 drop-shadow-[0_0_2px_rgba(34,211,238,0.5)]">
-                                <i class="fa-regular fa-comment-dots text-xs"></i> Tutor Evaluation
+                                <i class="fa-regular fa-comment-dots text-xs"></i> <span data-i18n="report_eval_header">Evaluasi Tutor</span>
                             </span>
                             <div class="bg-slate-950/90 p-4 sm:p-5 rounded-2xl border-2 border-slate-800 border-b-[4px] space-y-3.5 text-xs">
                                 <div>
-                                    <span class="text-[10px] font-extrabold text-emerald-400 uppercase tracking-widest block mb-1">
-                                        Strengths (Kekuatan)
+                                    <span data-i18n="report_strengths_label" class="text-[10px] font-extrabold text-emerald-400 uppercase tracking-widest block mb-1">
+                                        Kekuatan
                                     </span>
-                                    <p class="text-slate-300 font-medium leading-relaxed">
+                                    <p data-i18n="report_strengths_desc" class="text-slate-300 font-medium leading-relaxed">
                                         Mampu menjelaskan idenya dengan percaya diri dan mencoba menyelesaikan tantangan secara mandiri sebelum bertanya.
                                     </p>
                                 </div>
                                 <div class="pt-3 border-t-2 border-slate-800">
-                                    <span class="text-[10px] font-extrabold text-fuchsia-400 uppercase tracking-widest block mb-1">
-                                        Needs Improvement (Sedang Dilatih)
+                                    <span data-i18n="report_improvements_label" class="text-[10px] font-extrabold text-fuchsia-400 uppercase tracking-widest block mb-1">
+                                        Sedang Dilatih
                                     </span>
-                                    <p class="text-slate-300 font-medium leading-relaxed">
+                                    <p data-i18n="report_improvements_desc" class="text-slate-300 font-medium leading-relaxed">
                                         Lebih teliti saat memeriksa baris kode yang menyebabkan error syntax pada script game.
                                     </p>
                                 </div>
                                 <div class="pt-3 border-t-2 border-slate-800">
-                                    <span class="text-[10px] font-extrabold text-amber-400 uppercase tracking-widest block mb-1">
-                                        Recommendation (Rekomendasi Tutor)
+                                    <span data-i18n="report_recommendation_label" class="text-[10px] font-extrabold text-amber-400 uppercase tracking-widest block mb-1">
+                                        Rekomendasi Tutor
                                     </span>
-                                    <p class="text-cyan-400/90 font-mono italic leading-relaxed">
+                                    <p data-i18n="report_recommendation_desc" class="text-cyan-400/90 font-mono italic leading-relaxed">
                                         "Pada sesi berikutnya, coba uji solusi dengan beberapa contoh input berbeda untuk memastikan tidak ada celah error."
                                     </p>
                                 </div>
                                 <div class="pt-3 border-t-2 border-slate-800">
-                                    <span class="text-[10px] font-extrabold text-blue-400 uppercase tracking-widest block mb-1">
-                                        Parent Tips (Ide Latihan di Rumah)
+                                    <span data-i18n="report_parent_tips_label" class="text-[10px] font-extrabold text-blue-400 uppercase tracking-widest block mb-1">
+                                        Ide Latihan di Rumah
                                     </span>
-                                    <p class="text-slate-300 font-medium leading-relaxed">
+                                    <p data-i18n="report_parent_tips_desc" class="text-slate-300 font-medium leading-relaxed">
                                         Minta anak menceritakan langkah yang ia coba dan alasan mengapa memilih langkah tersebut untuk melatih computational thinking.
                                     </p>
                                 </div>
@@ -1334,10 +1334,10 @@
             <div class="text-center mb-16 fade-in-up">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-3 shadow-sm">
                     <i class="fa-solid fa-map-location-dot text-[#38BDF8] text-xs"></i>
-                    <span class="text-xs font-bold tracking-wider uppercase text-white">Kampus &amp; Laboratorium</span>
+                    <span data-i18n="loc_badge" class="text-xs font-bold tracking-wider uppercase text-white">Kampus &amp; Laboratorium</span>
                 </div>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4"><span data-i18n="loc_title">Lokasi Belajar di Bali</span></h2>
-                <p class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Pilih Learning Center terdekat dari rumah Anda untuk kelas tatap muka interaktif. Setiap cabang dilengkapi dengan lab komputer ber-AC, perangkat robotika, dan tutor ramah.</p>
+                <p data-i18n="loc_desc" class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Pilih Learning Center terdekat dari rumah Anda untuk kelas tatap muka interaktif. Setiap cabang dilengkapi dengan lab komputer ber-AC, perangkat robotika, dan tutor ramah.</p>
             </div>
 
             <!-- Locations Grid (3 Columns) -->
@@ -1367,7 +1367,7 @@
                             <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i>
                             <span class="text-xs font-bold text-emerald-300">0851-8306-798</span>
                         </div>
-                        <a href="https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#38BDF8] underline hover:text-white flex items-center gap-1">Rute <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                        <a href="https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#38BDF8] underline hover:text-white flex items-center gap-1"><span data-i18n="loc_directions">Rute</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
 
@@ -1395,7 +1395,7 @@
                             <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i>
                             <span class="text-xs font-bold text-emerald-300">0857-9273-6627</span>
                         </div>
-                        <a href="https://maps.google.com/?q=Jalan+Peliatan+No+1+Ubud" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#38BDF8] underline hover:text-white flex items-center gap-1">Rute <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                        <a href="https://maps.google.com/?q=Jalan+Peliatan+No+1+Ubud" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#38BDF8] underline hover:text-white flex items-center gap-1"><span data-i18n="loc_directions">Rute</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
 
@@ -1423,7 +1423,7 @@
                             <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i>
                             <span class="text-xs font-bold text-emerald-300">0851-8306-798</span>
                         </div>
-                        <a href="https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#38BDF8] underline hover:text-white flex items-center gap-1">Rute <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                        <a href="https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#38BDF8] underline hover:text-white flex items-center gap-1"><span data-i18n="loc_directions">Rute</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
             </div>
@@ -1460,7 +1460,7 @@
                             <div>
                                 <p data-i18n="loc_est_label" class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-0.5">Estimasi Perjalanan</p>
                                 <p id="distance-result-text" class="text-sm font-bold text-white">Hanya 15 Menit (5 km) dari lokasi Anda!</p>
-                                <p class="text-xs text-slate-300 mt-0.5">Kampus terdekat: <strong class="text-[#38BDF8]">Bali Seed Peliatan</strong></p>
+                                <p class="text-xs text-slate-300 mt-0.5"><span data-i18n="loc_calc_nearest_label">Kampus terdekat:</span> <strong class="nearest-campus-name text-[#38BDF8]">Bali Seed Peliatan</strong></p>
                             </div>
                         </div>
                     </div>
@@ -1550,7 +1550,7 @@
             <div class="text-center mb-12 fade-in-up">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 shadow-sm mb-3">
                     <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
-                    <span class="text-xs font-bold tracking-wider uppercase text-white">Formulir Pendaftaran</span>
+                    <span data-i18n="reg_badge" class="text-xs font-bold tracking-wider uppercase text-white">Formulir Pendaftaran</span>
                 </div>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"><span data-i18n="reg_title">Mulai Petualangan Belajar</span></h2>
                 <p data-i18n="reg_desc" class="text-slate-300 text-sm max-w-xl mx-auto leading-relaxed">Isi data singkat berikut untuk konsultasi jadwal kelas reguler atau klaim kelas percobaan gratis (trial). Konfirmasi akan otomatis diteruskan ke WhatsApp admin cabang.</p>
@@ -1562,7 +1562,7 @@
                         <i class="fa-solid fa-clipboard-list text-[#38BDF8]"></i> 
                         <span data-i18n="reg_form_header">Data Calon Siswa &amp; Wali Murid</span>
                     </h4>
-                    <span class="text-[11px] text-slate-400 hidden sm:inline-block"><span class="text-[#F87171]">*</span> Wajib diisi</span>
+                    <span class="text-[11px] text-slate-400 hidden sm:inline-block"><span class="text-[#F87171]">*</span> <span data-i18n="reg_required_notice">Wajib diisi</span></span>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1570,7 +1570,7 @@
                     <div class="space-y-2 md:col-span-2 relative">
                         <div class="flex items-center justify-between">
                             <label class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
-                                <i class="fa-solid fa-school text-[#38BDF8]"></i> Pilihan Learning Center <span class="text-[#F87171]">*</span>
+                                <i class="fa-solid fa-school text-[#38BDF8]"></i> <span data-i18n="reg_lbl_center">Pilihan Learning Center</span> <span class="text-[#F87171]">*</span>
                             </label>
                             <span data-i18n="reg_campus_count" class="text-xs text-slate-400">3 Kampus Tersedia di Bali</span>
                         </div>
@@ -1643,7 +1643,7 @@
 
                         <!-- Underlying Synchronized Select -->
                         <select id="reg-center" required class="sr-only">
-                            <option value="" disabled selected>-- Pilih Learning Center Terdekat --</option>
+                            <option value="" disabled selected data-i18n="reg_select_default">-- Pilih Learning Center Terdekat --</option>
                             <option value="Gents Robotic & Coding (Gianyar)">Gents Robotic & Coding (Gianyar)</option>
                             <option value="Bali Seed Robotic & Coding Peliatan (Ubud)">Bali Seed Robotic & Coding Peliatan (Ubud)</option>
                             <option value="Bali Seed Bedulu Robotics & Coding">Bali Seed Bedulu Robotics & Coding</option>
@@ -1654,14 +1654,14 @@
                     <div class="space-y-2 md:col-span-2">
                         <div class="flex items-center justify-between">
                             <label class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
-                                <i class="fa-solid fa-ticket text-[#FFC83D]"></i> Kode / Nama Promo (Opsional)
+                                <i class="fa-solid fa-ticket text-[#FFC83D]"></i> <span data-i18n="reg_lbl_promo">Kode / Nama Promo (Opsional)</span>
                             </label>
                             <span data-i18n="reg_promo_sub" class="text-xs text-slate-400">Otomatis terisi jika klaim voucher</span>
                         </div>
                         <div class="relative">
                             <input type="text" id="reg-promo" class="w-full bg-[#0F172A] border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#0788F5]/20 focus:border-[#0788F5] transition-all placeholder-slate-500 font-mono text-sm tracking-wider uppercase font-bold" placeholder="Cth: PETUALANGAN2026">
                             <span id="promo-applied-badge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 bg-[#FFC83D]/20 text-[#FFC83D] border border-[#FFC83D]/40 text-[10px] font-mono px-2.5 py-1 rounded-md font-bold tracking-wider">
-                                <i class="fa-solid fa-check text-xs mr-1"></i> Promo Terpasang
+                                <i class="fa-solid fa-check text-xs mr-1"></i> <span data-i18n="reg_promo_applied">Promo Terpasang</span>
                             </span>
                         </div>
                     </div>
@@ -1687,7 +1687,7 @@
                         <input type="text" id="reg-ortu" required class="w-full bg-[#0F172A] border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#0788F5]/20 focus:border-[#0788F5] transition-all placeholder-slate-500 text-sm" placeholder="Cth: Arik Ayu Rastini">
                     </div>
                     <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-slate-200">Email Orang Tua <span class="text-[#F87171]">*</span></label>
+                        <label data-i18n="reg_lbl_email" class="text-xs font-bold uppercase tracking-wider text-slate-200">Email Orang Tua <span class="text-[#F87171]">*</span></label>
                         <input type="email" id="reg-email" required class="w-full bg-[#0F172A] border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#0788F5]/20 focus:border-[#0788F5] transition-all placeholder-slate-500 text-sm" placeholder="Cth: ayuarik071@gmail.com">
                     </div>
                     <div class="space-y-1.5 md:col-span-2">
@@ -1705,7 +1705,7 @@
                 </div>
                 
                 <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p class="text-xs text-slate-400 text-center sm:text-left">
+                    <p data-i18n="reg_security_note" class="text-xs text-slate-400 text-center sm:text-left">
                         Data Anda aman dan hanya digunakan untuk konfirmasi jadwal kelas oleh admin resmi LesKoding.
                     </p>
                     <button type="submit" class="w-full sm:w-auto min-h-[48px] bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold py-3.5 px-8 rounded-xl uppercase tracking-wider text-xs transition-all shadow-[0_4px_20px_rgba(255,200,61,0.35)] hover:shadow-[0_6px_25px_rgba(255,200,61,0.55)] flex items-center justify-center gap-2 shrink-0">
@@ -1803,13 +1803,13 @@
                 
                 <div class="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
                     <div class="bg-[#0F172A] border border-white/10 rounded-xl p-3 flex flex-col justify-center">
-                        <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mb-1">Pencapaian XP</span>
+                        <span id="modal-xp-label" data-i18n="modal_xp_label" class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mb-1">Pencapaian XP</span>
                         <div class="flex items-center gap-1.5 text-[#FFC83D] font-mono font-bold text-sm">
                             <i class="fa-solid fa-star"></i> <span id="modal-xp">+500 XP</span>
                         </div>
                     </div>
                     <div class="bg-[#0F172A] border border-white/10 rounded-xl p-3 flex flex-col justify-center">
-                        <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mb-1">Estimasi Durasi</span>
+                        <span id="modal-dur-label" data-i18n="modal_duration_label" class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mb-1">Estimasi Durasi</span>
                         <div class="flex items-center gap-1.5 text-[#38BDF8] font-mono font-bold text-sm">
                             <i class="fa-regular fa-clock"></i> <span id="modal-duration">4 Minggu</span>
                         </div>
@@ -1817,7 +1817,7 @@
                 </div>
                 
                 <div class="mb-6 bg-[#0F172A] rounded-2xl p-4 sm:p-5 border border-white/10">
-                    <span class="text-[11px] text-white uppercase font-bold block mb-3 tracking-wider border-b border-white/10 pb-2">Topik Silabus Pembelajaran:</span>
+                    <span id="modal-topics-label" data-i18n="modal_topics_label" class="text-[11px] text-white uppercase font-bold block mb-3 tracking-wider border-b border-white/10 pb-2">Topik Silabus Pembelajaran:</span>
                     <ul class="text-xs sm:text-sm text-slate-300 space-y-2.5" id="modal-topics">
                         <!-- JS fills this -->
                     </ul>
@@ -1825,10 +1825,10 @@
                 
                 <div class="flex flex-col sm:flex-row gap-3">
                     <a href="#register" onclick="closeCourseModal()" id="modal-btn" class="flex-1 inline-flex justify-center items-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold py-3.5 px-6 rounded-xl uppercase tracking-wider text-xs transition-all shadow-[0_4px_16px_rgba(255,200,61,0.35)]">
-                        Daftar / Konsultasi Jadwal <i class="fa-solid fa-arrow-right"></i>
+                        <span data-i18n="modal_btn_enroll">Daftar / Konsultasi Jadwal</span> <i class="fa-solid fa-arrow-right"></i>
                     </a>
-                    <button onclick="closeCourseModal()" class="px-5 py-3 rounded-xl border border-white/15 text-slate-300 hover:bg-white/5 font-bold text-xs uppercase tracking-wider transition-colors">
-                        Tutup
+                    <button id="modal-close-btn" onclick="closeCourseModal()" class="px-5 py-3 rounded-xl border border-white/15 text-slate-300 hover:bg-white/5 font-bold text-xs uppercase tracking-wider transition-colors">
+                        <span data-i18n="modal_btn_close">Tutup</span>
                     </button>
                 </div>
             </div>
@@ -1845,7 +1845,7 @@
                     <div class="flex items-center gap-2.5 mb-4 cursor-pointer" onclick="window.scrollTo(0,0)">
                         <img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-8 w-auto object-contain">
                     </div>
-                    <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                    <p data-i18n="footer_tagline" class="text-xs text-slate-400 leading-relaxed mb-4">
                         Akademi Pemrograman &amp; Robotika Masa Depan di Bali. Membimbing anak mengubah rasa penasaran menjadi karya teknologi nyata.
                     </p>
                     <div class="flex items-center gap-3 text-slate-400">
@@ -1857,31 +1857,31 @@
 
                 <!-- Col 2: Program Belajar -->
                 <div>
-                    <h5 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Program Belajar</h5>
+                    <h5 data-i18n="footer_col_prog" class="text-white text-xs font-bold uppercase tracking-wider mb-4">Program Belajar</h5>
                     <ul class="space-y-2 text-xs">
-                        <li><a href="#course" onclick="filterCourses('ladder')" class="text-slate-400 hover:text-white transition-colors">Jenjang Dasar: Komputer Dasar &amp; Beginner</a></li>
-                        <li><a href="#course" onclick="filterCourses('ladder')" class="text-slate-400 hover:text-white transition-colors">Jenjang Lanjutan: Intermediate &amp; Innovator</a></li>
-                        <li><a href="#course" onclick="filterCourses('specialist')" class="text-slate-400 hover:text-white transition-colors">Peminatan: Roblox (3D &amp; Lua)</a></li>
-                        <li><a href="#course" onclick="filterCourses('specialist')" class="text-slate-400 hover:text-white transition-colors">Peminatan: Robotika &amp; IoT Engineering</a></li>
-                        <li><a href="#course" onclick="filterCourses('specialist')" class="text-slate-400 hover:text-white transition-colors">Peminatan: Web &amp; App Programming</a></li>
-                        <li><a href="#register" class="hover:text-white transition-colors font-semibold text-[#38BDF8] flex items-center gap-1">Jadwal Kelas Percobaan (Trial) &rarr;</a></li>
+                        <li><a href="#course" onclick="filterCourses('ladder')" class="text-slate-400 hover:text-white transition-colors"><span data-i18n="footer_f1">Jenjang Dasar: Komputer Dasar &amp; Beginner</span></a></li>
+                        <li><a href="#course" onclick="filterCourses('ladder')" class="text-slate-400 hover:text-white transition-colors"><span data-i18n="footer_f2">Jenjang Lanjutan: Intermediate &amp; Innovator</span></a></li>
+                        <li><a href="#course" onclick="filterCourses('specialist')" class="text-slate-400 hover:text-white transition-colors"><span data-i18n="footer_f3">Peminatan: Roblox (3D &amp; Lua)</span></a></li>
+                        <li><a href="#course" onclick="filterCourses('specialist')" class="text-slate-400 hover:text-white transition-colors"><span data-i18n="footer_f4">Peminatan: Robotika &amp; IoT Engineering</span></a></li>
+                        <li><a href="#course" onclick="filterCourses('specialist')" class="text-slate-400 hover:text-white transition-colors"><span data-i18n="footer_f5">Peminatan: Web &amp; App Programming</span></a></li>
+                        <li><a href="#register" class="hover:text-white transition-colors font-semibold text-[#38BDF8] flex items-center gap-1"><span data-i18n="footer_f6">Jadwal Kelas Percobaan (Trial) &rarr;</span></a></li>
                     </ul>
                 </div>
 
                 <!-- Col 3: Learning Center di Bali -->
                 <div>
-                    <h5 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Learning Center</h5>
+                    <h5 data-i18n="footer_col_center" class="text-white text-xs font-bold uppercase tracking-wider mb-4">Learning Center</h5>
                     <ul class="space-y-2 text-xs">
                         <li><strong class="text-white">Gianyar:</strong> Jln Ksatrian No. 8, Candi Baru</li>
                         <li><strong class="text-white">Ubud Peliatan:</strong> Jalan Peliatan No. 1</li>
                         <li><strong class="text-white">Bedulu:</strong> Jln Raya Semebaung Bedulu</li>
-                        <li class="pt-1"><a href="#location" class="text-[#38BDF8] underline font-semibold flex items-center gap-1 hover:text-white">Cek Peta &amp; Rute Terdekat &rarr;</a></li>
+                        <li class="pt-1"><a href="#location" class="text-[#38BDF8] underline font-semibold flex items-center gap-1 hover:text-white"><span data-i18n="footer_c_check">Cek Peta &amp; Rute Terdekat &rarr;</span></a></li>
                     </ul>
                 </div>
 
                 <!-- Col 4: Kontak & Bantuan -->
                 <div>
-                    <h5 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Kontak &amp; Konsultasi</h5>
+                    <h5 data-i18n="footer_col_contact" class="text-white text-xs font-bold uppercase tracking-wider mb-4">Kontak &amp; Konsultasi</h5>
                     <ul class="space-y-2.5 text-xs">
                         <li class="flex items-center gap-2">
                             <i class="fa-brands fa-whatsapp text-emerald-400"></i>
@@ -1897,7 +1897,7 @@
                         </li>
                         <li class="pt-2">
                             <a href="#register" class="inline-block bg-[#0788F5] hover:bg-[#004E98] text-white font-bold px-4 py-2 rounded-lg text-[11px] transition-colors">
-                                Formulir Pendaftaran Online
+                                <span data-i18n="footer_form_btn">Formulir Pendaftaran Online</span>
                             </a>
                         </li>
                     </ul>
@@ -1907,12 +1907,12 @@
 
             <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-4">
                 <div>
-                    &copy; 2026 LesKoding Bali. All rights reserved. Education Technology &amp; Community.
+                    <span data-i18n="footer_rights">&copy; 2026 LesKoding Bali. All rights reserved. Education Technology &amp; Community.</span>
                 </div>
                 <div class="flex items-center gap-6">
-                    <a href="#home" class="hover:text-slate-300 transition-colors">Kembali ke Atas</a>
-                    <a href="#cara-belajar" class="hover:text-slate-300 transition-colors">Metode Belajar</a>
-                    <a href="#register" class="hover:text-slate-300 transition-colors">Kebijakan &amp; Privasi</a>
+                    <a href="#home" class="hover:text-slate-300 transition-colors"><span data-i18n="footer_back_top">Kembali ke Atas</span></a>
+                    <a href="#cara-belajar" class="hover:text-slate-300 transition-colors"><span data-i18n="footer_nav_method">Cara Belajar</span></a>
+                    <a href="#register" class="hover:text-slate-300 transition-colors"><span data-i18n="footer_nav_privacy">Kebijakan &amp; Privasi</span></a>
                 </div>
             </div>
         </div>
@@ -1925,8 +1925,8 @@
             <div class="w-16 h-16 mx-auto bg-gradient-to-br from-brand-400 to-purpleBrand-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(14,165,233,0.3)] animate-bounce border border-white/10">
                 <i class="fa-solid fa-unlock-keyhole text-2xl text-white"></i>
             </div>
-            <h3 class="font-heading font-bold text-2xl text-white mb-2 tracking-tight">SYSTEM UNLOCKED</h3>
-            <p class="text-slate-400 mb-6 font-mono text-[11px]">Target [1000 Poin] Tercapai!</p>
+            <h3 data-i18n="reward_title" class="font-heading font-bold text-2xl text-white mb-2 tracking-tight">SYSTEM UNLOCKED</h3>
+            <p data-i18n="reward_desc" class="text-slate-400 mb-6 font-mono text-[11px]">Target [1000 Poin] Tercapai!</p>
             
             <div class=" border border-white/10 rounded-xl p-4 mb-6 relative overflow-hidden group cursor-pointer" onclick="navigator.clipboard.writeText('ELITE2026'); alert('Secret code copied to clipboard!');">
                 <div class="absolute inset-0 bg-brand-500/5 group-hover:bg-brand-500/10 transition-colors"></div>
@@ -1938,7 +1938,7 @@
             </div>
             
             <button id="claim-reward" class="w-full bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold py-3.5 rounded-full uppercase tracking-[0.15em] text-[10px] transition-all shadow-md">
-                Klaim Hadiah
+                <span data-i18n="reward_btn">Klaim Hadiah</span>
             </button>
         </div>
     </div>
