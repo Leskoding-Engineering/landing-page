@@ -630,19 +630,19 @@ WA Anak (opsional): ${waAnak}`;
                 navbar.classList.add('bg-[#101116]/85', 'backdrop-blur-2xl', 'border-white/10', 'shadow-[0_10px_30px_rgba(0,0,0,0.6)]');
                 navbar.classList.remove('bg-transparent', 'border-transparent');
                 
-                navContainer.classList.add('h-16', 'md:h-18');
-                navContainer.classList.remove('h-20', 'md:h-24');
-                navLogo.classList.add('h-8', 'md:h-9');
-                navLogo.classList.remove('h-9', 'sm:h-10', 'md:h-11');
+                navContainer.classList.add('h-14', 'sm:h-16', 'lg:h-18');
+                navContainer.classList.remove('h-16', 'sm:h-20', 'lg:h-24');
+                navLogo.classList.add('h-7', 'sm:h-8', 'lg:h-9');
+                navLogo.classList.remove('h-8', 'sm:h-9', 'lg:h-11');
             } else {
                 // Top: Completely Transparent
                 navbar.classList.add('bg-transparent', 'border-transparent');
                 navbar.classList.remove('bg-[#101116]/85', 'backdrop-blur-2xl', 'border-white/10', 'shadow-[0_10px_30px_rgba(0,0,0,0.6)]');
                 
-                navContainer.classList.add('h-20', 'md:h-24');
-                navContainer.classList.remove('h-16', 'md:h-18');
-                navLogo.classList.add('h-9', 'sm:h-10', 'md:h-11');
-                navLogo.classList.remove('h-8', 'md:h-9');
+                navContainer.classList.add('h-16', 'sm:h-20', 'lg:h-24');
+                navContainer.classList.remove('h-14', 'sm:h-16', 'lg:h-18');
+                navLogo.classList.add('h-8', 'sm:h-9', 'lg:h-11');
+                navLogo.classList.remove('h-7', 'sm:h-8', 'lg:h-9');
             }
         };
 

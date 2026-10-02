@@ -78,15 +78,15 @@
     <!-- Modern Executive Sticky Header (Playful Future Lab) -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent border-b border-transparent" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="nav-container" class="flex items-center justify-between h-20 md:h-24 transition-all duration-300">
+            <div id="nav-container" class="flex items-center justify-between h-16 sm:h-20 lg:h-24 transition-all duration-300">
                 
                 <!-- Left: Brand Logo -->
                 <div class="flex-shrink-0 flex items-center cursor-pointer py-1" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                    <img id="nav-logo" src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-9 sm:h-10 md:h-11 w-auto object-contain hover:brightness-110 transition-all duration-300">
+                    <img id="nav-logo" src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-8 sm:h-9 lg:h-11 w-auto object-contain hover:brightness-110 transition-all duration-300">
                 </div>
                 
-                <!-- Center: Navigation Links (Desktop - Single Line, Generous Spacing) -->
-                <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-semibold tracking-wide">
+                <!-- Center: Navigation Links (Desktop: Single Line, Responsive Gaps) -->
+                <nav class="hidden xl:flex items-center gap-6 2xl:gap-8 text-sm font-semibold tracking-wide">
                     <a href="#course" class="group/link text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 py-2 whitespace-nowrap">
                         <span class="w-1.5 h-1.5 rounded-full bg-brand-blue opacity-0 group-hover/link:opacity-100 transition-opacity"></span>
                         <span data-i18n="nav_program">Program</span>
@@ -114,7 +114,7 @@
                 </nav>
                 
                 <!-- Right Action Utilities (Desktop: Language Switcher + Primary CTA) -->
-                <div class="hidden lg:flex items-center gap-3.5 flex-shrink-0">
+                <div class="hidden xl:flex items-center gap-3.5 flex-shrink-0">
                     <!-- Language Switcher Pill -->
                     <button id="lang-toggle-btn" onclick="toggleLanguage()" aria-label="Toggle Language" title="Switch Language (English / Indonesia)" class="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-brand-yellow/50 backdrop-blur-md px-3.5 py-2.5 rounded-xl text-xs font-mono font-bold transition-all text-slate-200 hover:text-white focus:outline-none group/lang">
                         <i class="fa-solid fa-globe text-brand-yellow text-xs group-hover/lang:rotate-12 transition-transform"></i>
@@ -130,50 +130,51 @@
                     </a>
                 </div>
 
-                <!-- Tablet & Mobile Action Buttons -->
-                <div class="lg:hidden flex items-center gap-2.5">
-                    <button onclick="toggleLanguage()" aria-label="Toggle Language" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono font-bold text-slate-200 active:scale-95 transition-transform">
+                <!-- Tablet & Mobile Action Header (Screen < 1280px) -->
+                <div class="xl:hidden flex items-center gap-2 sm:gap-3">
+                    <button onclick="toggleLanguage()" aria-label="Toggle Language" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 border border-white/15 text-xs font-mono font-bold text-slate-200 active:scale-95 transition-transform">
                         <i class="fa-solid fa-globe text-brand-yellow text-xs"></i>
                         <span id="mobile-lang-top-text">EN</span>
                     </button>
-                    <a href="#register" class="hidden sm:inline-flex items-center gap-1.5 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider">
+                    <a href="#register" class="inline-flex items-center gap-1.5 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-extrabold px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs uppercase tracking-wider shadow-md">
                         <i class="fa-solid fa-calendar-check text-xs"></i>
-                        <span data-i18n="nav_cta">Minta Info</span>
+                        <span class="hidden sm:inline" data-i18n="nav_cta">Minta Info</span>
+                        <span class="sm:hidden">Daftar</span>
                     </a>
-                    <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="text-brand-yellow hover:text-white focus:outline-none w-11 h-11 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 active:scale-95 transition-transform">
+                    <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="text-brand-yellow hover:text-white focus:outline-none w-10 sm:w-11 h-10 sm:h-11 flex items-center justify-center rounded-xl bg-white/10 border border-white/15 active:scale-95 transition-transform">
                         <i class="fa-solid fa-bars-staggered text-base"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Mobile / Tablet Drawer Menu -->
-            <div id="mobile-menu" class="hidden lg:hidden mb-6 bg-dark-900/95 backdrop-blur-2xl rounded-2xl border border-white/10 p-5 shadow-2xl flex flex-col gap-3 transition-all duration-300">
-                <a href="#course" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 border-b border-white/5">
+            <!-- Mobile & Tablet Full Drawer Menu -->
+            <div id="mobile-menu" class="hidden xl:hidden mb-6 bg-[#14161f]/95 backdrop-blur-2xl rounded-2xl border border-white/15 p-5 shadow-2xl flex flex-col gap-2.5 transition-all duration-300">
+                <a href="#course" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 px-3 rounded-lg hover:bg-white/5 border-b border-white/5">
                     <i class="fa-solid fa-graduation-cap text-brand-blue w-5"></i><span data-i18n="nav_program">Program</span>
                 </a>
-                <a href="#cara-belajar" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 border-b border-white/5">
+                <a href="#cara-belajar" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 px-3 rounded-lg hover:bg-white/5 border-b border-white/5">
                     <i class="fa-solid fa-route text-brand-yellow w-5"></i><span data-i18n="nav_method">Cara Belajar</span>
                 </a>
-                <a href="#hall-of-fame" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 border-b border-white/5">
+                <a href="#hall-of-fame" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 px-3 rounded-lg hover:bg-white/5 border-b border-white/5">
                     <i class="fa-solid fa-trophy text-brand-purple w-5"></i><span data-i18n="nav_works">Karya Siswa</span>
                 </a>
-                <a href="#progress-wali" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 border-b border-white/5">
+                <a href="#progress-wali" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 px-3 rounded-lg hover:bg-white/5 border-b border-white/5">
                     <i class="fa-solid fa-chart-line text-emerald-400 w-5"></i><span data-i18n="nav_progress">Laporan Progres Wali</span>
                 </a>
-                <a href="#location" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 border-b border-white/5">
+                <a href="#location" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 px-3 rounded-lg hover:bg-white/5 border-b border-white/5">
                     <i class="fa-solid fa-map-location-dot text-brand-blue w-5"></i><span data-i18n="nav_location">Lokasi Belajar</span>
                 </a>
-                <a href="#faq" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 border-b border-white/5">
+                <a href="#faq" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-2.5 px-3 rounded-lg hover:bg-white/5 border-b border-white/5">
                     <i class="fa-solid fa-circle-question text-brand-red w-5"></i><span data-i18n="nav_faq">FAQ</span>
                 </a>
-                <a href="#register" class="mobile-nav-link flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold py-3.5 rounded-xl text-sm uppercase tracking-wider mt-2 shadow-lg">
+                <a href="#register" class="mobile-nav-link flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-extrabold py-3.5 rounded-xl text-sm uppercase tracking-wider mt-2 shadow-lg">
                     <i class="fa-solid fa-calendar-check"></i> <span data-i18n="nav_cta">Minta Info / Jadwal</span>
                 </a>
                 
                 <!-- Mobile Language Selector in Drawer -->
-                <div class="flex items-center justify-between pt-3 border-t border-white/10 mt-1">
-                    <span class="text-xs text-slate-400">Pilih Bahasa:</span>
-                    <button onclick="toggleLanguage()" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs text-brand-yellow font-bold">
+                <div class="flex items-center justify-between pt-3 border-t border-white/10 mt-1 px-1">
+                    <span class="text-xs text-slate-400 font-medium">Pilih Bahasa:</span>
+                    <button onclick="toggleLanguage()" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/10 border border-white/15 text-xs text-brand-yellow font-bold">
                         <i class="fa-solid fa-globe text-xs"></i>
                         <span id="mobile-lang-text">EN</span>
                     </button>
