@@ -624,18 +624,18 @@ WA Anak (opsional): ${waAnak}`;
     
     if (navContainer && navLogo) {
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
+            if (window.scrollY > 40) {
                 // Shrink when scrolled
-                navContainer.classList.add('py-2.5', 'md:py-3');
-                navContainer.classList.remove('py-4', 'md:py-5');
-                navLogo.classList.add('h-5', 'md:h-6');
-                navLogo.classList.remove('h-8', 'md:h-10');
+                navContainer.classList.add('h-16', 'md:h-18');
+                navContainer.classList.remove('h-20', 'md:h-24');
+                navLogo.classList.add('h-8', 'md:h-9');
+                navLogo.classList.remove('h-9', 'sm:h-10', 'md:h-11');
             } else {
-                // Large when at the top
-                navContainer.classList.add('py-4', 'md:py-5');
-                navContainer.classList.remove('py-2.5', 'md:py-3');
-                navLogo.classList.add('h-8', 'md:h-10');
-                navLogo.classList.remove('h-5', 'md:h-6');
+                // Spacious when at the top
+                navContainer.classList.add('h-20', 'md:h-24');
+                navContainer.classList.remove('h-16', 'md:h-18');
+                navLogo.classList.add('h-9', 'sm:h-10', 'md:h-11');
+                navLogo.classList.remove('h-8', 'md:h-9');
             }
         });
     }
