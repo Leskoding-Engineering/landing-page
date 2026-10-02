@@ -1093,62 +1093,14 @@ window.addEventListener('load', () => {
         });
     }
 
-    // Close report modal on backdrop click & ESC key
-    const reportModal = document.getElementById('report-modal');
-    if (reportModal) {
-        reportModal.addEventListener('click', (e) => {
-            if (e.target === reportModal) {
-                window.closeReportModal();
-            }
-        });
-    }
-
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            if (reportModal && !reportModal.classList.contains('hidden')) {
-                window.closeReportModal();
-            }
             if (promoModal && !promoModal.classList.contains('hidden')) {
                 window.closePromoModal();
             }
         }
     });
 });
-
-/* ========================================================
-   12B. STUDENT SPACE REPORT PREVIEW MODAL
-   ======================================================== */
-window.openReportModal = function() {
-    const modal = document.getElementById('report-modal');
-    if (modal) {
-        modal.classList.remove('hidden');
-        requestAnimationFrame(() => {
-            modal.classList.remove('opacity-0');
-            modal.classList.add('opacity-100');
-            const content = document.getElementById('report-modal-content');
-            if (content) {
-                content.classList.remove('scale-95');
-                content.classList.add('scale-100');
-            }
-        });
-    }
-};
-
-window.closeReportModal = function() {
-    const modal = document.getElementById('report-modal');
-    if (modal) {
-        modal.classList.remove('opacity-100');
-        modal.classList.add('opacity-0');
-        const content = document.getElementById('report-modal-content');
-        if (content) {
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-        }
-        setTimeout(() => {
-            modal.classList.add('hidden');
-        }, 300);
-    }
-};
 
 /* ========================================================
    13. CUSTOM ENHANCED LEARNING CENTER DROPDOWN
