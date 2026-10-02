@@ -20,13 +20,13 @@ h1, h2, h3, h4, h5, h6 {
     --brand-blue: #0788F5;
     --brand-purple: #5B0CB5;
 
-    --action-blue: #004E98;
-    --ink: #111827;
-    --text-secondary: #475467;
-    --surface: #FFFFFF;
-    --surface-soft: #F5F7FA;
-    --border-control: #667085;
-    --error: #B42318;
+    --action-blue: #0788F5;
+    --ink: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --surface: #1E293B;
+    --surface-soft: #0F172A;
+    --border-control: #334155;
+    --error: #F87171;
 
     --radius-card: 16px;
     --radius-button: 12px;
@@ -34,21 +34,21 @@ h1, h2, h3, h4, h5, h6 {
     
     --emerald-rgb: 16, 185, 129;
     --brand-rgb: 7, 136, 245;
-    --purpleBrand-rgb: 91, 12, 181;
+    --purpleBrand-rgb: 168, 85, 247;
     --gold-rgb: 255, 200, 61;
 }
 
 /* Accessible focus ring */
 .focus-accessible:focus-visible {
-    outline: 3px solid var(--action-blue) !important;
+    outline: 3px solid var(--brand-blue) !important;
     outline-offset: 2px !important;
 }
 
 /* Grid Pattern Background for subtle tech texture */
 .bg-grid-pattern {
     background-image: 
-        linear-gradient(to right, rgba(17,24,39,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(17,24,39,0.03) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
     background-size: 40px 40px;
     background-position: center center;
 }
@@ -72,7 +72,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .bento-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(17, 24, 39, 0.08);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
 }
 
 /* Modal */
@@ -89,14 +89,14 @@ h1, h2, h3, h4, h5, h6 {
     width: 6px; 
 }
 ::-webkit-scrollbar-track { 
-    background: #F1F5F9; 
+    background: #0B0F19; 
 }
 ::-webkit-scrollbar-thumb { 
-    background: #CBD5E1; 
+    background: #334155; 
     border-radius: 10px; 
 }
 ::-webkit-scrollbar-thumb:hover { 
-    background: #94A3B8; 
+    background: #475467; 
 }
 
 /* Global Animated Background Effect */
@@ -105,15 +105,15 @@ h1, h2, h3, h4, h5, h6 {
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-color: #F8FAFC;
+    background-color: #0B0F19;
 }
 
 /* Subtle Geometric Texture Overlay */
 .bg-texture-overlay {
     position: absolute;
     inset: 0;
-    opacity: 0.035;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230f172a' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Animated Ambient Orbs */

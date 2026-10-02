@@ -627,7 +627,7 @@ WA Anak (opsional): ${waAnak}`;
         const handleNavScroll = () => {
             if (window.scrollY > 30) {
                 // Scrolled: Frosted Glass / Translucent Dark with border and shadow
-                navbar.classList.add('bg-white/90', 'backdrop-blur-xl', 'border-[#E5E7EB]', 'shadow-sm');
+                navbar.classList.add('bg-[#0B0F19]/90', 'backdrop-blur-xl', 'border-white/10', 'shadow-lg');
                 navbar.classList.remove('bg-transparent', 'border-transparent');
                 
                 navContainer.classList.add('h-14', 'sm:h-16', 'lg:h-18');
@@ -637,7 +637,7 @@ WA Anak (opsional): ${waAnak}`;
             } else {
                 // Top: Completely Transparent
                 navbar.classList.add('bg-transparent', 'border-transparent');
-                navbar.classList.remove('bg-white/90', 'backdrop-blur-xl', 'border-[#E5E7EB]', 'shadow-sm');
+                navbar.classList.remove('bg-[#0B0F19]/90', 'backdrop-blur-xl', 'border-white/10', 'shadow-lg');
                 
                 navContainer.classList.add('h-16', 'sm:h-20', 'lg:h-24');
                 navContainer.classList.remove('h-14', 'sm:h-16', 'lg:h-18');
@@ -659,15 +659,15 @@ function filterCourses(category) {
     // 1. Reset all filter buttons
     const filterBtns = document.querySelectorAll('.course-filter-btn');
     filterBtns.forEach(btn => {
-        btn.classList.remove('bg-[#004E98]', 'text-white', 'border-[#004E98]', 'shadow-sm');
-        btn.classList.add('bg-white', 'text-[#475467]', 'border-[#E5E7EB]');
+        btn.classList.remove('bg-[#0788F5]', 'text-white', 'border-[#0788F5]', 'shadow-md', 'shadow-blue-500/20');
+        btn.classList.add('bg-[#1E293B]', 'text-slate-300', 'border-white/10');
     });
 
     // 2. Highlight active filter button
     const activeBtn = document.getElementById(`course-filter-${category}`);
     if (activeBtn) {
-        activeBtn.classList.remove('bg-white', 'text-[#475467]', 'border-[#E5E7EB]');
-        activeBtn.classList.add('bg-[#004E98]', 'text-white', 'border-[#004E98]', 'shadow-sm');
+        activeBtn.classList.remove('bg-[#1E293B]', 'text-slate-300', 'border-white/10');
+        activeBtn.classList.add('bg-[#0788F5]', 'text-white', 'border-[#0788F5]', 'shadow-md', 'shadow-blue-500/20');
     }
 
     // 3. Toggle progression ladder roadmap visibility
@@ -770,7 +770,7 @@ function openCourseModal(level, title, iconClass, colorClass, desc, xp, duration
         topics.forEach(topic => {
             const li = document.createElement('li');
             li.className = 'flex items-start gap-2.5';
-            li.innerHTML = `<i class="fa-solid fa-circle-check text-xs mt-1 text-[#004E98] shrink-0"></i> <span class="leading-snug text-[#111827]">${topic}</span>`;
+            li.innerHTML = `<i class="fa-solid fa-circle-check text-xs mt-1 text-[#0788F5] shrink-0"></i> <span class="leading-snug text-slate-200">${topic}</span>`;
             topicsUl.appendChild(li);
         });
     }
