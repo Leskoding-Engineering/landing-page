@@ -627,7 +627,7 @@ WA Anak (opsional): ${waAnak}`;
         const handleNavScroll = () => {
             if (window.scrollY > 30) {
                 // Scrolled: Frosted Glass / Translucent Dark with border and shadow
-                navbar.classList.add('bg-[#101116]/85', 'backdrop-blur-2xl', 'border-white/10', 'shadow-[0_10px_30px_rgba(0,0,0,0.6)]');
+                navbar.classList.add('bg-[#111827]/85', 'backdrop-blur-2xl', 'border-white/10', 'shadow-[0_10px_30px_rgba(0,0,0,0.6)]');
                 navbar.classList.remove('bg-transparent', 'border-transparent');
                 
                 navContainer.classList.add('h-14', 'sm:h-16', 'lg:h-18');
@@ -637,7 +637,7 @@ WA Anak (opsional): ${waAnak}`;
             } else {
                 // Top: Completely Transparent
                 navbar.classList.add('bg-transparent', 'border-transparent');
-                navbar.classList.remove('bg-[#101116]/85', 'backdrop-blur-2xl', 'border-white/10', 'shadow-[0_10px_30px_rgba(0,0,0,0.6)]');
+                navbar.classList.remove('bg-[#111827]/85', 'backdrop-blur-2xl', 'border-white/10', 'shadow-[0_10px_30px_rgba(0,0,0,0.6)]');
                 
                 navContainer.classList.add('h-16', 'sm:h-20', 'lg:h-24');
                 navContainer.classList.remove('h-14', 'sm:h-16', 'lg:h-18');

@@ -20,22 +20,31 @@
                             yellow: '#FFC83D',
                             red: '#F3261D',
                             blue: '#0788F5',
-                            'blue-dark': '#056ac2',
                             purple: '#5B0CB5',
                             500: '#0788F5',
                             400: '#38bdf8'
                         },
-                        ink: '#101116',
+                        action: {
+                            blue: '#004E98',
+                            hover: '#003d77'
+                        },
+                        ink: '#111827',
+                        textSec: '#475467',
                         surface: {
                             DEFAULT: '#FFFFFF',
-                            soft: '#F7F8FA'
+                            soft: '#F5F7FA'
                         },
+                        borderControl: '#667085',
                         borderLight: '#E5E7EB',
-                        textMuted: '#667085',
+                        error: '#B42318',
+                        textMuted: '#475467',
                         gold: { 200: '#fef08a', 300: '#fde047', 400: '#FFC83D', 500: '#eab308', 600: '#ca8a04' },
                         purpleBrand: { 200: '#e9d5ff', 300: '#d8b4fe', 400: '#c084fc', 500: '#5B0CB5', 600: '#4c0aa0' },
                         redBrand: { 400: '#f87171', 500: '#F3261D', 600: '#dc2626' },
-                        dark: { 800: '#161922', 900: '#101116', 950: '#090a0d' }
+                        dark: { 800: '#161922', 900: '#111827', 950: '#0b0f19' }
+                    },
+                    maxWidth: {
+                        'container': '1200px'
                     },
                     borderRadius: {
                         'input': '12px',
@@ -77,7 +86,7 @@
     
     <!-- Modern Executive Sticky Header (Playful Future Lab) -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent border-b border-transparent" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8">
             <div id="nav-container" class="flex items-center justify-between h-16 sm:h-20 lg:h-24 transition-all duration-300">
                 
                 <!-- Left: Brand Logo -->
@@ -122,9 +131,9 @@
                     </button>
 
                     <!-- Primary Yellow Action Button -->
-                    <a href="#register" class="relative overflow-hidden inline-flex items-center justify-center bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-extrabold px-6 py-3 min-h-[46px] rounded-xl text-xs uppercase tracking-wider transition-all shadow-[0_4px_20px_rgba(255,200,61,0.35)] hover:shadow-[0_6px_25px_rgba(255,200,61,0.55)] hover:-translate-y-0.5 whitespace-nowrap">
+                    <a href="#register" class="relative overflow-hidden inline-flex items-center justify-center bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-6 py-3 min-h-[46px] rounded-xl text-xs uppercase tracking-wider transition-all shadow-[0_4px_20px_rgba(255,200,61,0.35)] hover:shadow-[0_6px_25px_rgba(255,200,61,0.55)] hover:-translate-y-0.5 whitespace-nowrap">
                         <span class="relative z-10 flex items-center gap-2">
-                            <i class="fa-solid fa-calendar-check text-[#101116] text-sm"></i>
+                            <i class="fa-solid fa-calendar-check text-[#111827] text-sm"></i>
                             <span data-i18n="nav_cta">Minta Info Kelas</span>
                         </span>
                     </a>
@@ -136,7 +145,7 @@
                         <i class="fa-solid fa-globe text-brand-yellow text-xs"></i>
                         <span id="mobile-lang-top-text">EN</span>
                     </button>
-                    <a href="#register" class="inline-flex items-center gap-1.5 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-extrabold px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs uppercase tracking-wider shadow-md">
+                    <a href="#register" class="inline-flex items-center gap-1.5 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs uppercase tracking-wider shadow-md">
                         <i class="fa-solid fa-calendar-check text-xs"></i>
                         <span class="hidden sm:inline" data-i18n="nav_cta">Minta Info</span>
                         <span class="sm:hidden">Daftar</span>
@@ -149,8 +158,8 @@
         </div>
 
         <!-- Mobile & Tablet Full Drawer Menu (Fixed overlay container under bar) -->
-        <div id="mobile-menu" class="hidden xl:hidden w-full px-4 sm:px-6 pb-6 pt-2 bg-[#101116]/98 backdrop-blur-2xl border-b border-white/10 shadow-2xl transition-all duration-300">
-            <div class="max-w-7xl mx-auto flex flex-col gap-1.5">
+        <div id="mobile-menu" class="hidden xl:hidden w-full px-4 sm:px-6 pb-6 pt-2 bg-[#111827]/98 backdrop-blur-2xl border-b border-white/10 shadow-2xl transition-all duration-300">
+            <div class="max-w-[1200px] mx-auto flex flex-col gap-1.5">
                 <a href="#course" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-3 px-3.5 rounded-xl hover:bg-white/5 border-b border-white/5 transition-colors">
                     <i class="fa-solid fa-graduation-cap text-brand-blue w-5"></i><span data-i18n="nav_program">Program</span>
                 </a>
@@ -169,7 +178,7 @@
                 <a href="#faq" class="mobile-nav-link flex items-center gap-3 text-slate-200 hover:text-brand-yellow text-sm font-semibold py-3 px-3.5 rounded-xl hover:bg-white/5 border-b border-white/5 transition-colors">
                     <i class="fa-solid fa-circle-question text-brand-red w-5"></i><span data-i18n="nav_faq">FAQ</span>
                 </a>
-                <a href="#register" class="mobile-nav-link flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-extrabold py-3.5 rounded-xl text-sm uppercase tracking-wider mt-2 shadow-lg">
+                <a href="#register" class="mobile-nav-link flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold py-3.5 rounded-xl text-sm uppercase tracking-wider mt-2 shadow-lg">
                     <i class="fa-solid fa-calendar-check"></i> <span data-i18n="nav_cta">Minta Info / Jadwal</span>
                 </a>
                 
@@ -186,17 +195,17 @@
     </header>
 
     <!-- Interactive Hero Section (Dark/Ink Background with Logo Accent) -->
-    <section id="home" class="relative min-h-[90vh] flex items-center justify-center pt-28 md:pt-36 pb-16 md:pb-24 overflow-hidden border-b border-white/5 bg-[#101116]">
+    <section id="home" class="relative min-h-[90vh] flex items-center justify-center pt-28 md:pt-36 pb-16 md:pb-24 overflow-hidden border-b border-white/5 bg-[#111827]">
         <!-- Background & Overlays -->
         <div class="absolute inset-0 z-0"></div>
         <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity z-0" alt="Suasana Belajar LesKoding">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#101116] via-[#101116]/85 to-[#101116]/60 z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#111827] via-[#111827]/85 to-[#111827]/60 z-0"></div>
         
         <!-- Ambient accents from logo palette -->
         <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FFC83D]/10 rounded-full blur-[140px] pointer-events-none"></div>
         <div class="absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-[#0788F5]/15 rounded-full blur-[160px] pointer-events-none"></div>
         
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative z-20 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                 
                 <!-- Left: Text Content & CTAs (7 cols) -->
@@ -220,14 +229,14 @@
                     <!-- Primary & Secondary Buttons -->
                     <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
                         <!-- Primary CTA (Yellow with Dark Ink Text, min-h 48px) -->
-                        <a href="#register" class="inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold px-8 py-3.5 min-h-[48px] rounded-xl text-sm transition-all shadow-[0_6px_25px_rgba(255,200,61,0.35)] hover:shadow-[0_8px_30px_rgba(255,200,61,0.5)] hover:-translate-y-0.5 text-center">
-                            <i class="fa-solid fa-calendar-check text-[#101116]"></i>
+                        <a href="#register" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-bold px-8 py-3.5 min-h-[48px] rounded-xl text-sm transition-all shadow-[0_6px_25px_rgba(255,200,61,0.35)] hover:shadow-[0_8px_30px_rgba(255,200,61,0.5)] hover:-translate-y-0.5 text-center">
+                            <i class="fa-solid fa-calendar-check text-[#111827]"></i>
                             <span data-i18n="hero_btn_info">Minta Info / Jadwal Kelas</span>
                         </a>
                         
-                        <!-- Secondary CTA (Outline White on Dark Hero) -->
-                        <a href="#hall-of-fame" class="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/10 border border-white/20 hover:border-white/40 text-white font-semibold px-7 py-3.5 min-h-[48px] rounded-xl text-sm transition-all text-center">
-                            <i class="fa-solid fa-eye text-slate-300"></i>
+                        <!-- Secondary CTA (Dark Action Blue with White Text) -->
+                        <a href="#hall-of-fame" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#004E98] hover:bg-[#003d77] border border-[#004E98] text-white font-semibold px-7 py-3.5 min-h-[48px] rounded-xl text-sm transition-all shadow-md text-center">
+                            <i class="fa-solid fa-eye text-white/90"></i>
                             <span data-i18n="hero_btn_works">Lihat Karya Siswa</span>
                         </a>
                     </div>
@@ -281,7 +290,7 @@
                             
                             <!-- Badges on image -->
                             <div class="absolute top-3 left-3 flex items-center gap-2">
-                                <span class="bg-[#101116]/80 backdrop-blur-md text-[#FFC83D] text-[10px] font-bold px-3 py-1 rounded-full border border-[#FFC83D]/40 flex items-center gap-1.5 shadow-md">
+                                <span class="bg-[#111827]/80 backdrop-blur-md text-[#FFC83D] text-[10px] font-bold px-3 py-1 rounded-full border border-[#FFC83D]/40 flex items-center gap-1.5 shadow-md">
                                     <i class="fa-solid fa-fire text-[#F3261D]"></i> Sesi Nyata Siswa
                                 </span>
                             </div>
@@ -312,37 +321,37 @@
         </div>
     </section>
 
-<section id="course" class="py-20 md:py-28 relative z-10 bg-[#F7F8FA] border-b border-[#E5E7EB] text-[#101116]">
+<section id="course" class="py-20 md:py-28 relative z-10 bg-[#F5F7FA] border-b border-[#E5E7EB] text-[#111827]">
         <!-- Subtle accent glow -->
         <div class="absolute top-0 right-0 w-[450px] h-[450px] bg-[#0788F5]/5 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#FFC83D]/10 rounded-full blur-[100px] pointer-events-none"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-14 fade-in-up">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E5E7EB] shadow-sm mb-3">
                     <span class="w-2 h-2 rounded-full bg-[#0788F5]"></span>
                     <span data-i18n="course_badge" class="text-xs font-bold tracking-wider uppercase text-[#0788F5]">Program Aktif 2026</span>
                 </div>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#101116] mb-4 tracking-tight"><span data-i18n="course_title">Pilihan Program Belajar</span></h2>
-                <p data-i18n="course_desc" class="text-[#667085] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">Dirancang bertahap untuk anak usia 7–16 tahun. Kurikulum berbasis proyek nyata, kuis interaktif, dan pendampingan tutor berpengalaman.</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#111827] mb-4 tracking-tight"><span data-i18n="course_title">Pilihan Program Belajar</span></h2>
+                <p data-i18n="course_desc" class="text-[#475467] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">Dirancang bertahap untuk anak usia 7–16 tahun. Kurikulum berbasis proyek nyata, kuis interaktif, dan pendampingan tutor berpengalaman.</p>
             </div>
 
             <!-- Course Tabs (Light theme cards) -->
             <div class="flex flex-col md:flex-row justify-center gap-4 mb-14 fade-in-up">
                 <button onclick="switchCoursePath('game')" id="tab-game" class="course-tab-btn border-[#0788F5] bg-white shadow-md relative px-7 py-4 border-2 rounded-2xl flex flex-col items-center gap-1.5 transition-all group">
                     <i class="fa-solid fa-gamepad text-2xl text-[#0788F5] tab-icon mb-1"></i>
-                    <span class="font-bold text-[#101116] tab-title text-base">Game Programming</span>
-                    <span class="text-[11px] text-[#667085] tab-subtitle font-medium">Usia 7–14 Thn · Logika &amp; 3D</span>
+                    <span class="font-bold text-[#111827] tab-title text-base">Game Programming</span>
+                    <span class="text-[11px] text-[#475467] tab-subtitle font-medium">Usia 7–14 Thn · Logika &amp; 3D</span>
                 </button>
                 <button onclick="switchCoursePath('web')" id="tab-web" class="course-tab-btn border-[#E5E7EB] bg-white hover:border-[#5B0CB5]/50 relative px-7 py-4 border-2 rounded-2xl flex flex-col items-center gap-1.5 transition-all group">
-                    <i class="fa-solid fa-code text-2xl text-[#667085] group-hover:text-[#5B0CB5] tab-icon mb-1"></i>
-                    <span class="font-bold text-[#667085] group-hover:text-[#101116] tab-title text-base">Web Programming</span>
-                    <span class="text-[11px] text-[#667085] tab-subtitle font-medium">Usia 11–16 Thn · Frontend &amp; Web</span>
+                    <i class="fa-solid fa-code text-2xl text-[#475467] group-hover:text-[#5B0CB5] tab-icon mb-1"></i>
+                    <span class="font-bold text-[#475467] group-hover:text-[#111827] tab-title text-base">Web Programming</span>
+                    <span class="text-[11px] text-[#475467] tab-subtitle font-medium">Usia 11–16 Thn · Frontend &amp; Web</span>
                 </button>
                 <button onclick="switchCoursePath('robotic')" id="tab-robotic" class="course-tab-btn border-[#E5E7EB] bg-white hover:border-[#FFC83D] relative px-7 py-4 border-2 rounded-2xl flex flex-col items-center gap-1.5 transition-all group">
-                    <i class="fa-solid fa-robot text-2xl text-[#667085] group-hover:text-[#ca8a04] tab-icon mb-1"></i>
-                    <span class="font-bold text-[#667085] group-hover:text-[#101116] tab-title text-base">Robotic Engineering</span>
-                    <span class="text-[11px] text-[#667085] tab-subtitle font-medium">Usia 8–15 Thn · Elektronika &amp; IoT</span>
+                    <i class="fa-solid fa-robot text-2xl text-[#475467] group-hover:text-[#ca8a04] tab-icon mb-1"></i>
+                    <span class="font-bold text-[#475467] group-hover:text-[#111827] tab-title text-base">Robotic Engineering</span>
+                    <span class="text-[11px] text-[#475467] tab-subtitle font-medium">Usia 8–15 Thn · Elektronika &amp; IoT</span>
                 </button>
             </div>
 
@@ -640,18 +649,18 @@
 
 
     <!-- CARA BELAJAR SECTION (Materi -> Praktik -> Feedback -> Progres) -->
-    <section id="cara-belajar" class="py-20 md:py-28 relative z-10 bg-white border-b border-[#E5E7EB] text-[#101116]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="cara-belajar" class="py-20 md:py-28 relative z-10 bg-white border-b border-[#E5E7EB] text-[#111827]">
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
             <!-- Header -->
             <div class="text-center mb-16 fade-in-up">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7F8FA] border border-[#E5E7EB] mb-3">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5F7FA] border border-[#E5E7EB] mb-3">
                     <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
-                    <span data-i18n="method_badge" class="text-xs font-bold tracking-wider uppercase text-[#101116]">Metodologi Belajar</span>
+                    <span data-i18n="method_badge" class="text-xs font-bold tracking-wider uppercase text-[#111827]">Metodologi Belajar</span>
                 </div>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#101116] mb-4 tracking-tight">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#111827] mb-4 tracking-tight">
                     <span data-i18n="method_title">Cara Belajar di LesKoding</span>
                 </h2>
-                <p data-i18n="method_desc" class="text-[#667085] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                <p data-i18n="method_desc" class="text-[#475467] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
                     Kami memandu anak melalui 4 tahapan belajar yang terbukti efektif: bukan sekadar teori hafalan, melainkan proses langsung berkreasi dan melihat hasil nyata.
                 </p>
             </div>
@@ -660,7 +669,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
                 
                 <!-- Step 1: Materi Ringkas & Menyenangkan -->
-                <div class="bento-card rounded-2xl bg-[#F7F8FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#0788F5]/40 hover:shadow-lg transition-all">
+                <div class="bento-card rounded-2xl bg-[#F5F7FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#0788F5]/40 hover:shadow-lg transition-all">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-[#0788F5]/10 border border-[#0788F5]/20 flex items-center justify-center text-[#0788F5] text-xl mb-5 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-book-open-reader"></i>
@@ -669,19 +678,19 @@
                             <span class="text-[11px] font-mono font-bold uppercase text-[#0788F5] tracking-widest">Langkah 01</span>
                             <span class="text-xs text-slate-400 font-semibold">15 Menit</span>
                         </div>
-                        <h3 class="text-lg font-bold text-[#101116] mb-2" data-i18n="method_s1_title">Materi Konsep</h3>
-                        <p class="text-xs sm:text-sm text-[#667085] leading-relaxed" data-i18n="method_s1_desc">
+                        <h3 class="text-lg font-bold text-[#111827] mb-2" data-i18n="method_s1_title">Materi Konsep</h3>
+                        <p class="text-xs sm:text-sm text-[#475467] leading-relaxed" data-i18n="method_s1_desc">
                             Konsep koding dan robotika disajikan melalui analogi visual sederhana dan kuis interaktif yang mudah dipahami anak tanpa rasa jenuh.
                         </p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#101116]">
+                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#111827]">
                         <i class="fa-solid fa-circle-check text-emerald-500"></i>
                         <span>Visual block & kuis seru</span>
                     </div>
                 </div>
 
                 <!-- Step 2: Praktik Proyek Nyata -->
-                <div class="bento-card rounded-2xl bg-[#F7F8FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#FFC83D]/60 hover:shadow-lg transition-all">
+                <div class="bento-card rounded-2xl bg-[#F5F7FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#FFC83D]/60 hover:shadow-lg transition-all">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-[#FFC83D]/20 border border-[#FFC83D]/40 flex items-center justify-center text-[#ca8a04] text-xl mb-5 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-laptop-code"></i>
@@ -690,19 +699,19 @@
                             <span class="text-[11px] font-mono font-bold uppercase text-[#ca8a04] tracking-widest">Langkah 02</span>
                             <span class="text-xs text-slate-400 font-semibold">50 Menit</span>
                         </div>
-                        <h3 class="text-lg font-bold text-[#101116] mb-2" data-i18n="method_s2_title">Praktik Eksploratif</h3>
-                        <p class="text-xs sm:text-sm text-[#667085] leading-relaxed" data-i18n="method_s2_desc">
+                        <h3 class="text-lg font-bold text-[#111827] mb-2" data-i18n="method_s2_title">Praktik Eksploratif</h3>
+                        <p class="text-xs sm:text-sm text-[#475467] leading-relaxed" data-i18n="method_s2_desc">
                             Anak langsung merakit game, menyusun baris logika kode, atau merangkai sensor robot. Fokus pada trial & error yang menumbuhkan pemecahan masalah.
                         </p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#101116]">
+                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#111827]">
                         <i class="fa-solid fa-circle-check text-emerald-500"></i>
                         <span>Hands-on langsung di kelas</span>
                     </div>
                 </div>
 
                 <!-- Step 3: Feedback Tutor Personal -->
-                <div class="bento-card rounded-2xl bg-[#F7F8FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#5B0CB5]/40 hover:shadow-lg transition-all">
+                <div class="bento-card rounded-2xl bg-[#F5F7FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#5B0CB5]/40 hover:shadow-lg transition-all">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-[#5B0CB5]/10 border border-[#5B0CB5]/20 flex items-center justify-center text-[#5B0CB5] text-xl mb-5 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-comments"></i>
@@ -711,19 +720,19 @@
                             <span class="text-[11px] font-mono font-bold uppercase text-[#5B0CB5] tracking-widest">Langkah 03</span>
                             <span class="text-xs text-slate-400 font-semibold">Setiap Sesi</span>
                         </div>
-                        <h3 class="text-lg font-bold text-[#101116] mb-2" data-i18n="method_s3_title">Feedback Tutor</h3>
-                        <p class="text-xs sm:text-sm text-[#667085] leading-relaxed" data-i18n="method_s3_desc">
+                        <h3 class="text-lg font-bold text-[#111827] mb-2" data-i18n="method_s3_title">Feedback Tutor</h3>
+                        <p class="text-xs sm:text-sm text-[#475467] leading-relaxed" data-i18n="method_s3_desc">
                             Tutor membimbing secara personal, mengulas logika kode, memberikan tips penyempurnaan, serta apresiasi atas ide unik yang dikembangkan siswa.
                         </p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#101116]">
+                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#111827]">
                         <i class="fa-solid fa-circle-check text-emerald-500"></i>
                         <span>Rasio tutor 1:4 anak</span>
                     </div>
                 </div>
 
                 <!-- Step 4: Progres & XP Terukur -->
-                <div class="bento-card rounded-2xl bg-[#F7F8FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#F3261D]/40 hover:shadow-lg transition-all">
+                <div class="bento-card rounded-2xl bg-[#F5F7FA] border border-[#E5E7EB] p-6 sm:p-7 relative flex flex-col justify-between group hover:border-[#F3261D]/40 hover:shadow-lg transition-all">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-[#F3261D]/10 border border-[#F3261D]/20 flex items-center justify-center text-[#F3261D] text-xl mb-5 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-trophy"></i>
@@ -732,12 +741,12 @@
                             <span class="text-[11px] font-mono font-bold uppercase text-[#F3261D] tracking-widest">Langkah 04</span>
                             <span class="text-xs text-slate-400 font-semibold">Tercatat Nyata</span>
                         </div>
-                        <h3 class="text-lg font-bold text-[#101116] mb-2" data-i18n="method_s4_title">Pencapaian & Progres</h3>
-                        <p class="text-xs sm:text-sm text-[#667085] leading-relaxed" data-i18n="method_s4_desc">
+                        <h3 class="text-lg font-bold text-[#111827] mb-2" data-i18n="method_s4_title">Pencapaian & Progres</h3>
+                        <p class="text-xs sm:text-sm text-[#475467] leading-relaxed" data-i18n="method_s4_desc">
                             Setiap pencapaian tercatat dalam sistem: poin XP bertambah, proyek masuk portofolio, dan laporan capaian diteruskan langsung ke orang tua.
                         </p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#101116]">
+                    <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] font-medium text-[#111827]">
                         <i class="fa-solid fa-circle-check text-emerald-500"></i>
                         <span>Portofolio & sertifikat level</span>
                     </div>
@@ -753,7 +762,7 @@
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-gold-500/10 blur-[150px] pointer-events-none rounded-full"></div>
         <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purpleBrand-500/10 blur-[120px] pointer-events-none rounded-full"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
             <!-- Header -->
             <div class="text-center mb-16 fade-in-up flex flex-col items-center">
                 <!-- SVG Trophy Icon -->
@@ -996,22 +1005,22 @@
 
 
     <!-- PROGRESS MONITORING UNTUK WALI (Laporan belajar yang bisa dipahami wali) -->
-    <section id="progress-wali" class="py-20 md:py-28 relative z-10 bg-[#F7F8FA] border-b border-[#E5E7EB] text-[#101116]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="progress-wali" class="py-20 md:py-28 relative z-10 bg-[#F5F7FA] border-b border-[#E5E7EB] text-[#111827]">
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
                 
                 <!-- Left: Explanation for Parents (5 cols) -->
                 <div class="lg:col-span-5 text-left fade-in-up">
                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E5E7EB] shadow-sm mb-4">
                         <i class="fa-solid fa-clipboard-check text-[#0788F5] text-xs"></i>
-                        <span data-i18n="parent_badge" class="text-xs font-bold tracking-wider uppercase text-[#101116]">Laporan belajar yang bisa dipahami wali</span>
+                        <span data-i18n="parent_badge" class="text-xs font-bold tracking-wider uppercase text-[#111827]">Laporan belajar yang bisa dipahami wali</span>
                     </div>
 
-                    <h2 class="text-3xl sm:text-4xl font-bold text-[#101116] mb-5 leading-tight tracking-tight">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-[#111827] mb-5 leading-tight tracking-tight">
                         <span data-i18n="parent_title">Tahu apa yang anak pelajari—dan langkah berikutnya.</span>
                     </h2>
 
-                    <p class="text-[#667085] text-sm sm:text-base leading-relaxed mb-6" data-i18n="parent_desc">
+                    <p class="text-[#475467] text-sm sm:text-base leading-relaxed mb-6" data-i18n="parent_desc">
                         Setelah laporan sesi diterbitkan, wali dapat melihat kehadiran, keterampilan yang dinilai tutor, kekuatan anak, hal yang sedang dilatih, dan rekomendasi untuk sesi berikutnya. Progres juga bisa dipantau dari waktu ke waktu.
                     </p>
 
@@ -1022,8 +1031,8 @@
                                 <i class="fa-solid fa-brain"></i>
                             </div>
                             <div>
-                                <h4 class="text-sm font-bold text-[#101116]">Pemahaman Konsep &amp; Problem Solving</h4>
-                                <p class="text-xs text-[#667085]">Mengukur tingkat pemahaman konsep siswa berdasarkan kemampuan dalam menyelesaikan masalah dan tantangan.</p>
+                                <h4 class="text-sm font-bold text-[#111827]">Pemahaman Konsep &amp; Problem Solving</h4>
+                                <p class="text-xs text-[#475467]">Mengukur tingkat pemahaman konsep siswa berdasarkan kemampuan dalam menyelesaikan masalah dan tantangan.</p>
                             </div>
                         </div>
 
@@ -1032,8 +1041,8 @@
                                 <i class="fa-solid fa-lightbulb"></i>
                             </div>
                             <div>
-                                <h4 class="text-sm font-bold text-[#101116]">Kreativitas &amp; Inovasi</h4>
-                                <p class="text-xs text-[#667085]">Mengukur apakah siswa dapat mengembangkan dan memodifikasi projek dari contoh yang diberikan.</p>
+                                <h4 class="text-sm font-bold text-[#111827]">Kreativitas &amp; Inovasi</h4>
+                                <p class="text-xs text-[#475467]">Mengukur apakah siswa dapat mengembangkan dan memodifikasi projek dari contoh yang diberikan.</p>
                             </div>
                         </div>
 
@@ -1042,14 +1051,14 @@
                                 <i class="fa-solid fa-fire"></i>
                             </div>
                             <div>
-                                <h4 class="text-sm font-bold text-[#101116]">Keaktifan &amp; Antusiasme</h4>
-                                <p class="text-xs text-[#667085]">Mengukur tingkat motivasi, rasa ingin tahu, dan keaktifan siswa saat proses belajar berlangsung.</p>
+                                <h4 class="text-sm font-bold text-[#111827]">Keaktifan &amp; Antusiasme</h4>
+                                <p class="text-xs text-[#475467]">Mengukur tingkat motivasi, rasa ingin tahu, dan keaktifan siswa saat proses belajar berlangsung.</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Left side explanation (no CTA buttons) -->
-                    <div class="mt-6 flex items-center gap-2 text-xs font-mono text-[#667085]">
+                    <div class="mt-6 flex items-center gap-2 text-xs font-mono text-[#475467]">
                         <i class="fa-solid fa-sync text-cyan-500 animate-spin-slow"></i>
                         <span>Sinkronisasi otomatis dengan aplikasi Student Space</span>
                     </div>
@@ -1226,24 +1235,24 @@
 
 
     <!-- Location & Access Section (Bright Surface Theme) -->
-    <section id="location" class="py-20 md:py-28 relative z-10 bg-white border-b border-[#E5E7EB] text-[#101116]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="location" class="py-20 md:py-28 relative z-10 bg-white border-b border-[#E5E7EB] text-[#111827]">
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
             <!-- Header Section -->
             <div class="text-center mb-16 fade-in-up">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7F8FA] border border-[#E5E7EB] mb-3">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5F7FA] border border-[#E5E7EB] mb-3">
                     <i class="fa-solid fa-map-location-dot text-[#0788F5] text-xs"></i>
-                    <span class="text-xs font-bold tracking-wider uppercase text-[#101116]">Kampus &amp; Laboratorium</span>
+                    <span class="text-xs font-bold tracking-wider uppercase text-[#111827]">Kampus &amp; Laboratorium</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-[#101116] mb-4"><span data-i18n="loc_title">Lokasi Belajar di Bali</span></h2>
-                <p class="text-[#667085] text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Pilih Learning Center terdekat dari rumah Anda untuk kelas tatap muka interaktif. Setiap cabang dilengkapi dengan lab komputer ber-AC, perangkat robotika, dan tutor ramah.</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-[#111827] mb-4"><span data-i18n="loc_title">Lokasi Belajar di Bali</span></h2>
+                <p class="text-[#475467] text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Pilih Learning Center terdekat dari rumah Anda untuk kelas tatap muka interaktif. Setiap cabang dilengkapi dengan lab komputer ber-AC, perangkat robotika, dan tutor ramah.</p>
             </div>
 
             <!-- Locations Grid (3 Columns) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 fade-in-up">
                 
                 <!-- Cabang 1: Gianyar -->
-                <div class="bg-[#F7F8FA] rounded-2xl p-5 border border-[#E5E7EB] hover:border-[#0788F5]/40 hover:shadow-lg transition-all group flex flex-col h-full">
-                    <h3 class="text-lg font-bold text-[#101116] mb-3 group-hover:text-[#0788F5] transition-colors flex items-center gap-2.5">
+                <div class="bg-[#F5F7FA] rounded-2xl p-5 border border-[#E5E7EB] hover:border-[#0788F5]/40 hover:shadow-lg transition-all group flex flex-col h-full">
+                    <h3 class="text-lg font-bold text-[#111827] mb-3 group-hover:text-[#0788F5] transition-colors flex items-center gap-2.5">
                         <div class="w-8 h-8 rounded-xl bg-[#0788F5]/10 text-[#0788F5] flex items-center justify-center text-sm">
                             <i class="fa-solid fa-building-flag"></i>
                         </div>
@@ -1255,7 +1264,7 @@
                     </div>
 
                     <div class="flex-grow">
-                        <p class="text-xs text-[#667085] mb-2 flex items-start gap-2">
+                        <p class="text-xs text-[#475467] mb-2 flex items-start gap-2">
                             <i class="fa-solid fa-location-dot mt-0.5 text-slate-400"></i>
                             <span>Jln Ksatrian, No. 8, Lingkungan Candi Baru, Gianyar</span>
                         </p>
@@ -1265,13 +1274,13 @@
                             <i class="fa-brands fa-whatsapp text-emerald-600 text-xs"></i>
                             <span class="text-xs font-bold text-slate-700">0851-8306-798</span>
                         </div>
-                        <a href="https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#0788F5] hover:underline flex items-center gap-1">Rute <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                        <a href="https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#004E98] underline hover:text-[#003d77] flex items-center gap-1">Rute <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
 
                 <!-- Cabang 2: Peliatan -->
-                <div class="bg-[#F7F8FA] rounded-2xl p-5 border border-[#E5E7EB] hover:border-[#5B0CB5]/40 hover:shadow-lg transition-all group flex flex-col h-full" style="transition-delay: 100ms;">
-                    <h3 class="text-lg font-bold text-[#101116] mb-3 group-hover:text-[#5B0CB5] transition-colors flex items-center gap-2.5">
+                <div class="bg-[#F5F7FA] rounded-2xl p-5 border border-[#E5E7EB] hover:border-[#5B0CB5]/40 hover:shadow-lg transition-all group flex flex-col h-full" style="transition-delay: 100ms;">
+                    <h3 class="text-lg font-bold text-[#111827] mb-3 group-hover:text-[#5B0CB5] transition-colors flex items-center gap-2.5">
                         <div class="w-8 h-8 rounded-xl bg-[#5B0CB5]/10 text-[#5B0CB5] flex items-center justify-center text-sm">
                             <i class="fa-solid fa-laptop-code"></i>
                         </div>
@@ -1283,7 +1292,7 @@
                     </div>
 
                     <div class="flex-grow">
-                        <p class="text-xs text-[#667085] mb-2 flex items-start gap-2">
+                        <p class="text-xs text-[#475467] mb-2 flex items-start gap-2">
                             <i class="fa-solid fa-location-dot mt-0.5 text-slate-400"></i>
                             <span>Jalan Peliatan, No. 1, Ubud</span>
                         </p>
@@ -1298,8 +1307,8 @@
                 </div>
 
                 <!-- Cabang 3: Bedulu -->
-                <div class="bg-[#F7F8FA] rounded-2xl p-5 border border-[#E5E7EB] hover:border-[#FFC83D] hover:shadow-lg transition-all group flex flex-col h-full" style="transition-delay: 200ms;">
-                    <h3 class="text-lg font-bold text-[#101116] mb-3 group-hover:text-[#ca8a04] transition-colors flex items-center gap-2.5">
+                <div class="bg-[#F5F7FA] rounded-2xl p-5 border border-[#E5E7EB] hover:border-[#FFC83D] hover:shadow-lg transition-all group flex flex-col h-full" style="transition-delay: 200ms;">
+                    <h3 class="text-lg font-bold text-[#111827] mb-3 group-hover:text-[#ca8a04] transition-colors flex items-center gap-2.5">
                         <div class="w-8 h-8 rounded-xl bg-[#FFC83D]/20 text-[#ca8a04] flex items-center justify-center text-sm">
                             <i class="fa-solid fa-robot"></i>
                         </div>
@@ -1311,7 +1320,7 @@
                     </div>
 
                     <div class="flex-grow">
-                        <p class="text-xs text-[#667085] mb-2 flex items-start gap-2">
+                        <p class="text-xs text-[#475467] mb-2 flex items-start gap-2">
                             <i class="fa-solid fa-location-dot mt-0.5 text-slate-400"></i>
                             <span>Jln Raya Semebaung Bedulu</span>
                         </p>
@@ -1330,22 +1339,22 @@
             <div class="max-w-2xl mx-auto fade-in-up" style="transition-delay: 300ms;">
                 
                 <!-- Distance Checker -->
-                <div class="bg-[#F7F8FA] rounded-2xl p-6 sm:p-8 border border-[#E5E7EB] text-center">
+                <div class="bg-[#F5F7FA] rounded-2xl p-6 sm:p-8 border border-[#E5E7EB] text-center">
                     <div class="w-11 h-11 rounded-full bg-[#0788F5]/10 text-[#0788F5] flex items-center justify-center text-lg mx-auto mb-3">
                         <i class="fa-solid fa-route"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-[#101116] mb-1.5"><span data-i18n="loc_calc_title">Cek Kampus Terdekat</span></h3>
-                    <p data-i18n="loc_calc_desc" class="text-xs text-[#667085] mb-5">Masukkan area atau kecamatan Anda untuk melihat cabang mana yang paling mudah diakses.</p>
+                    <h3 class="text-lg font-bold text-[#111827] mb-1.5"><span data-i18n="loc_calc_title">Cek Kampus Terdekat</span></h3>
+                    <p data-i18n="loc_calc_desc" class="text-xs text-[#475467] mb-5">Masukkan area atau kecamatan Anda untuk melihat cabang mana yang paling mudah diakses.</p>
                     
                     <div class="flex flex-col sm:flex-row gap-3 mb-2">
                         <div class="relative flex-grow">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <i class="fa-solid fa-location-crosshairs text-slate-400"></i>
                             </div>
-                            <input type="text" id="user-location" placeholder="Contoh: Denpasar Selatan atau Gianyar" class="w-full pl-11 pr-4 py-3 bg-white border border-[#E5E7EB] rounded-xl text-sm focus:outline-none focus:border-[#0788F5] focus:ring-2 focus:ring-[#0788F5]/20 transition-all font-medium text-[#101116] placeholder-[#98a2b3]">
+                            <input type="text" id="user-location" placeholder="Contoh: Denpasar Selatan atau Gianyar" class="w-full pl-11 pr-4 py-3 bg-white border border-[#E5E7EB] rounded-xl text-sm focus:outline-none focus:border-[#0788F5] focus:ring-2 focus:ring-[#0788F5]/20 transition-all font-medium text-[#111827] placeholder-[#98a2b3]">
                         </div>
                         
-                        <button id="check-distance-btn" onclick="calculateDistance()" class="sm:w-auto w-full bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold py-3 px-7 rounded-xl uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 shadow-sm shrink-0">
+                        <button id="check-distance-btn" onclick="calculateDistance()" class="sm:w-auto w-full bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-bold py-3 px-7 rounded-xl uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 shadow-sm shrink-0">
                             <i class="fa-solid fa-magnifying-glass-location"></i> <span data-i18n="loc_btn_check">Cek Lokasi</span></button>
                     </div>
                     
@@ -1357,8 +1366,8 @@
                             </div>
                             <div>
                                 <p data-i18n="loc_est_label" class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-0.5">Estimasi Perjalanan</p>
-                                <p id="distance-result-text" class="text-sm font-bold text-[#101116]">Hanya 15 Menit (5 km) dari lokasi Anda!</p>
-                                <p class="text-xs text-[#667085] mt-0.5">Kampus terdekat: <strong class="text-[#0788F5]">Bali Seed Peliatan</strong></p>
+                                <p id="distance-result-text" class="text-sm font-bold text-[#111827]">Hanya 15 Menit (5 km) dari lokasi Anda!</p>
+                                <p class="text-xs text-[#475467] mt-0.5">Kampus terdekat: <strong class="text-[#0788F5]">Bali Seed Peliatan</strong></p>
                             </div>
                         </div>
                     </div>
@@ -1370,18 +1379,18 @@
 
 
     <!-- FAQ SECTION (Pertanyaan Umum Orang Tua & Siswa) -->
-    <section id="faq" class="py-20 md:py-28 relative z-10 bg-white border-b border-[#E5E7EB] text-[#101116]">
+    <section id="faq" class="py-20 md:py-28 relative z-10 bg-white border-b border-[#E5E7EB] text-[#111827]">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- Header -->
             <div class="text-center mb-14 fade-in-up">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7F8FA] border border-[#E5E7EB] mb-3">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5F7FA] border border-[#E5E7EB] mb-3">
                     <span class="w-2 h-2 rounded-full bg-[#F3261D]"></span>
-                    <span data-i18n="faq_badge" class="text-xs font-bold tracking-wider uppercase text-[#101116]">Tanya Jawab</span>
+                    <span data-i18n="faq_badge" class="text-xs font-bold tracking-wider uppercase text-[#111827]">Tanya Jawab</span>
                 </div>
-                <h2 class="text-3xl sm:text-4xl font-bold text-[#101116] mb-4 tracking-tight">
+                <h2 class="text-3xl sm:text-4xl font-bold text-[#111827] mb-4 tracking-tight">
                     <span data-i18n="faq_title">Pertanyaan yang Sering Diajukan</span>
                 </h2>
-                <p data-i18n="faq_desc" class="text-[#667085] text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+                <p data-i18n="faq_desc" class="text-[#475467] text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
                     Jawaban transparan seputar jadwal belajar, perangkat, usia minimal, dan sistem kelas percobaan.
                 </p>
             </div>
@@ -1389,50 +1398,50 @@
             <!-- FAQ Accordions -->
             <div class="space-y-4 fade-in-up">
                 
-                <details class="group bg-[#F7F8FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
-                    <summary class="flex items-center justify-between font-bold text-base text-[#101116]">
+                <details class="group bg-[#F5F7FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
+                    <summary class="flex items-center justify-between font-bold text-base text-[#111827]">
                         <span data-i18n="faq_q1">Apakah anak yang belum pernah memegang coding bisa ikut?</span>
-                        <span class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#667085] group-open:rotate-180 transition-transform">
+                        <span class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#475467] group-open:rotate-180 transition-transform">
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </span>
                     </summary>
-                    <p class="mt-4 text-xs sm:text-sm text-[#667085] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a1">
+                    <p class="mt-4 text-xs sm:text-sm text-[#475467] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a1">
                         Tentu bisa! 80% siswa baru kami memulai dari nol. Kami mengajarkan logika berpikir terstruktur (computational thinking) melalui blok visual interaktif terlebih dahulu sebelum beralih ke sintaks kode teks asli.
                     </p>
                 </details>
 
-                <details class="group bg-[#F7F8FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
-                    <summary class="flex items-center justify-between font-bold text-base text-[#101116]">
+                <details class="group bg-[#F5F7FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
+                    <summary class="flex items-center justify-between font-bold text-base text-[#111827]">
                         <span data-i18n="faq_q2">Apakah tersedia kelas percobaan (trial class)?</span>
-                        <summary-icon class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#667085] group-open:rotate-180 transition-transform">
+                        <summary-icon class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#475467] group-open:rotate-180 transition-transform">
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </summary-icon>
                     </summary>
-                    <p class="mt-4 text-xs sm:text-sm text-[#667085] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a2">
+                    <p class="mt-4 text-xs sm:text-sm text-[#475467] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a2">
                         Ya, kami menyediakan sesi Free Trial di Learning Center Gianyar, Ubud Peliatan, dan Bedulu. Anda dapat mendaftarkan jadwal percobaan melalui form di bawah atau via WhatsApp admin kami.
                     </p>
                 </details>
 
-                <details class="group bg-[#F7F8FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
-                    <summary class="flex items-center justify-between font-bold text-base text-[#101116]">
+                <details class="group bg-[#F5F7FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
+                    <summary class="flex items-center justify-between font-bold text-base text-[#111827]">
                         <span data-i18n="faq_q3">Apakah siswa harus membawa laptop sendiri?</span>
-                        <summary-icon class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#667085] group-open:rotate-180 transition-transform">
+                        <summary-icon class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#475467] group-open:rotate-180 transition-transform">
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </summary-icon>
                     </summary>
-                    <p class="mt-4 text-xs sm:text-sm text-[#667085] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a3">
+                    <p class="mt-4 text-xs sm:text-sm text-[#475467] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a3">
                         Setiap lab Learning Center kami sudah dilengkapi dengan PC/Laptop dan perangkat robotik siap pakai. Namun, siswa yang ingin membawa laptop pribadi agar proyek tersimpan langsung di perangkatnya sangat dipersilakan.
                     </p>
                 </details>
 
-                <details class="group bg-[#F7F8FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
-                    <summary class="flex items-center justify-between font-bold text-base text-[#101116]">
+                <details class="group bg-[#F5F7FA] border border-[#E5E7EB] rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-white open:shadow-sm open:border-[#0788F5]/40 transition-all">
+                    <summary class="flex items-center justify-between font-bold text-base text-[#111827]">
                         <span data-i18n="faq_q4">Berapa rasio tutor per siswa di setiap kelas?</span>
-                        <summary-icon class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#667085] group-open:rotate-180 transition-transform">
+                        <summary-icon class="ml-4 shrink-0 rounded-full w-8 h-8 bg-white border border-[#E5E7EB] flex items-center justify-center text-[#475467] group-open:rotate-180 transition-transform">
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </summary-icon>
                     </summary>
-                    <p class="mt-4 text-xs sm:text-sm text-[#667085] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a4">
+                    <p class="mt-4 text-xs sm:text-sm text-[#475467] leading-relaxed pt-3 border-t border-slate-200" data-i18n="faq_a4">
                         Kami menjaga kualitas pembelajaran dengan kelas kecil: maksimal 4–6 anak per tutor agar setiap anak mendapat pendampingan intensif dan tidak ada yang tertinggal dalam proses praktek.
                     </p>
                 </details>
@@ -1443,47 +1452,47 @@
 
 
     <!-- REGISTRATION SECTION (Form Singkat & Ramah Mobile) -->
-    <section id="register" class="py-20 md:py-28 relative z-10 bg-[#F7F8FA] border-b border-[#E5E7EB] text-[#101116]">
+    <section id="register" class="py-20 md:py-28 relative z-10 bg-[#F5F7FA] border-b border-[#E5E7EB] text-[#111827]">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12 fade-in-up">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E5E7EB] shadow-sm mb-3">
                     <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
-                    <span class="text-xs font-bold tracking-wider uppercase text-[#101116]">Formulir Pendaftaran</span>
+                    <span class="text-xs font-bold tracking-wider uppercase text-[#111827]">Formulir Pendaftaran</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-[#101116] mb-4 tracking-tight"><span data-i18n="reg_title">Mulai Petualangan Belajar</span></h2>
-                <p data-i18n="reg_desc" class="text-[#667085] text-sm max-w-xl mx-auto leading-relaxed">Isi data singkat berikut untuk konsultasi jadwal kelas reguler atau klaim kelas percobaan gratis (trial). Konfirmasi akan otomatis diteruskan ke WhatsApp admin cabang.</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-[#111827] mb-4 tracking-tight"><span data-i18n="reg_title">Mulai Petualangan Belajar</span></h2>
+                <p data-i18n="reg_desc" class="text-[#475467] text-sm max-w-xl mx-auto leading-relaxed">Isi data singkat berikut untuk konsultasi jadwal kelas reguler atau klaim kelas percobaan gratis (trial). Konfirmasi akan otomatis diteruskan ke WhatsApp admin cabang.</p>
             </div>
             
             <form id="registration-form" class="bg-white border border-[#E5E7EB] rounded-2xl p-6 md:p-10 shadow-xl fade-in-up">
                 <div class="flex items-center justify-between border-b border-[#E5E7EB] pb-5 mb-6">
-                    <h4 class="font-bold text-[#101116] text-base sm:text-lg flex items-center gap-2.5">
+                    <h4 class="font-bold text-[#111827] text-base sm:text-lg flex items-center gap-2.5">
                         <i class="fa-solid fa-clipboard-list text-[#0788F5]"></i> 
                         <span data-i18n="reg_form_header">Data Calon Siswa &amp; Wali Murid</span>
                     </h4>
-                    <span class="text-[11px] text-[#667085] hidden sm:inline-block"><span class="text-[#F3261D]">*</span> Wajib diisi</span>
+                    <span class="text-[11px] text-[#475467] hidden sm:inline-block"><span class="text-[#F3261D]">*</span> Wajib diisi</span>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Pilihan Learning Center (Interactive Dropdown) -->
                     <div class="space-y-2 md:col-span-2 relative">
                         <div class="flex items-center justify-between">
-                            <label class="text-xs font-bold uppercase tracking-wider text-[#101116] flex items-center gap-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-[#111827] flex items-center gap-2">
                                 <i class="fa-solid fa-school text-[#0788F5]"></i> Pilihan Learning Center <span class="text-[#F3261D]">*</span>
                             </label>
-                            <span data-i18n="reg_campus_count" class="text-xs text-[#667085]">3 Kampus Tersedia di Bali</span>
+                            <span data-i18n="reg_campus_count" class="text-xs text-[#475467]">3 Kampus Tersedia di Bali</span>
                         </div>
                         
                         <!-- Custom Select Trigger Card -->
-                        <div id="custom-select-trigger" onclick="toggleCustomSelect()" class="w-full bg-[#F7F8FA] border border-[#E5E7EB] hover:border-[#0788F5] rounded-xl p-3.5 flex items-center justify-between cursor-pointer transition-all duration-300 group">
+                        <div id="custom-select-trigger" onclick="toggleCustomSelect()" class="w-full bg-white border border-[#667085] hover:border-[#004E98] focus:outline-none focus:ring-2 focus:ring-[#004E98] rounded-xl p-3.5 flex items-center justify-between cursor-pointer transition-all duration-300 group">
                             <div class="flex items-center gap-3.5">
                                 <div id="selected-center-icon" class="w-10 h-10 rounded-xl bg-[#0788F5]/10 border border-[#0788F5]/20 text-[#0788F5] flex items-center justify-center shrink-0 text-base transition-all">
                                     <i class="fa-solid fa-map-location-dot"></i>
                                 </div>
                                 <div class="text-left">
-                                    <div id="selected-center-name" data-i18n="reg_choose_center" class="text-sm font-bold text-[#101116] group-hover:text-[#0788F5] transition-colors">
+                                    <div id="selected-center-name" data-i18n="reg_choose_center" class="text-sm font-bold text-[#111827] group-hover:text-[#0788F5] transition-colors">
                                         Pilih Learning Center Terdekat
                                     </div>
-                                    <div id="selected-center-sub" data-i18n="reg_choose_center_sub" class="text-xs text-[#667085]">
+                                    <div id="selected-center-sub" data-i18n="reg_choose_center_sub" class="text-xs text-[#475467]">
                                         Klik untuk memilih cabang belajar anak Anda
                                     </div>
                                 </div>
@@ -1497,42 +1506,42 @@
                         <!-- Custom Dropdown Menu -->
                         <div id="custom-select-menu" class="hidden absolute top-full left-0 right-0 mt-2 bg-white border border-[#E5E7EB] rounded-2xl p-2 shadow-2xl z-50 flex flex-col gap-1.5 transition-all duration-300">
                             <!-- Option 1: Gianyar -->
-                            <div onclick="selectCustomCenter('Gents Robotic & Coding (Gianyar)', 'Jln Ksatrian No 8 Lingkungan Candi Baru, Gianyar', 'fa-microchip', 'brand', 'Gianyar')" class="p-3 rounded-xl hover:bg-[#F7F8FA] border border-transparent hover:border-[#0788F5]/30 flex items-center justify-between cursor-pointer transition-all group/opt">
+                            <div onclick="selectCustomCenter('Gents Robotic & Coding (Gianyar)', 'Jln Ksatrian No 8 Lingkungan Candi Baru, Gianyar', 'fa-microchip', 'brand', 'Gianyar')" class="p-3 rounded-xl hover:bg-[#F5F7FA] border border-transparent hover:border-[#0788F5]/30 flex items-center justify-between cursor-pointer transition-all group/opt">
                                 <div class="flex items-center gap-3">
                                     <div class="w-9 h-9 rounded-lg bg-[#0788F5]/10 border border-[#0788F5]/20 text-[#0788F5] flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
                                         <i class="fa-solid fa-microchip"></i>
                                     </div>
                                     <div>
-                                        <p class="text-xs sm:text-sm font-bold text-[#101116] group-hover/opt:text-[#0788F5] transition-colors">Gents Robotic &amp; Coding (Gianyar)</p>
-                                        <p class="text-[11px] text-[#667085]">Jln Ksatrian No 8 Lingkungan Candi Baru, Gianyar</p>
+                                        <p class="text-xs sm:text-sm font-bold text-[#111827] group-hover/opt:text-[#0788F5] transition-colors">Gents Robotic &amp; Coding (Gianyar)</p>
+                                        <p class="text-[11px] text-[#475467]">Jln Ksatrian No 8 Lingkungan Candi Baru, Gianyar</p>
                                     </div>
                                 </div>
                                 <span class="text-[10px] font-bold uppercase tracking-wider bg-[#0788F5]/10 text-[#0788F5] px-2.5 py-1 rounded-md">Gianyar</span>
                             </div>
 
                             <!-- Option 2: Ubud Peliatan -->
-                            <div onclick="selectCustomCenter('Bali Seed Robotic & Coding Peliatan (Ubud)', 'Jalan Peliatan, No. 1, Ubud', 'fa-laptop-code', 'purpleBrand', 'Ubud')" class="p-3 rounded-xl hover:bg-[#F7F8FA] border border-transparent hover:border-[#5B0CB5]/30 flex items-center justify-between cursor-pointer transition-all group/opt">
+                            <div onclick="selectCustomCenter('Bali Seed Robotic & Coding Peliatan (Ubud)', 'Jalan Peliatan, No. 1, Ubud', 'fa-laptop-code', 'purpleBrand', 'Ubud')" class="p-3 rounded-xl hover:bg-[#F5F7FA] border border-transparent hover:border-[#5B0CB5]/30 flex items-center justify-between cursor-pointer transition-all group/opt">
                                 <div class="flex items-center gap-3">
                                     <div class="w-9 h-9 rounded-lg bg-[#5B0CB5]/10 border border-[#5B0CB5]/20 text-[#5B0CB5] flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
                                         <i class="fa-solid fa-laptop-code"></i>
                                     </div>
                                     <div>
-                                        <p class="text-xs sm:text-sm font-bold text-[#101116] group-hover/opt:text-[#5B0CB5] transition-colors">Bali Seed Robotic &amp; Coding Peliatan</p>
-                                        <p class="text-[11px] text-[#667085]">Jalan Peliatan, No. 1, Ubud</p>
+                                        <p class="text-xs sm:text-sm font-bold text-[#111827] group-hover/opt:text-[#5B0CB5] transition-colors">Bali Seed Robotic &amp; Coding Peliatan</p>
+                                        <p class="text-[11px] text-[#475467]">Jalan Peliatan, No. 1, Ubud</p>
                                     </div>
                                 </div>
                                 <span class="text-[10px] font-bold uppercase tracking-wider bg-[#5B0CB5]/10 text-[#5B0CB5] px-2.5 py-1 rounded-md">Ubud</span>
                             </div>
 
                             <!-- Option 3: Bedulu -->
-                            <div onclick="selectCustomCenter('Bali Seed Bedulu Robotics & Coding', 'Jln Raya Semebaung, Bedulu', 'fa-robot', 'gold', 'Bedulu')" class="p-3 rounded-xl hover:bg-[#F7F8FA] border border-transparent hover:border-[#FFC83D]/60 flex items-center justify-between cursor-pointer transition-all group/opt">
+                            <div onclick="selectCustomCenter('Bali Seed Bedulu Robotics & Coding', 'Jln Raya Semebaung, Bedulu', 'fa-robot', 'gold', 'Bedulu')" class="p-3 rounded-xl hover:bg-[#F5F7FA] border border-transparent hover:border-[#FFC83D]/60 flex items-center justify-between cursor-pointer transition-all group/opt">
                                 <div class="flex items-center gap-3">
                                     <div class="w-9 h-9 rounded-lg bg-[#FFC83D]/20 border border-[#FFC83D]/40 text-[#ca8a04] flex items-center justify-center shrink-0 text-sm group-hover/opt:scale-105 transition-transform">
                                         <i class="fa-solid fa-robot"></i>
                                     </div>
                                     <div>
-                                        <p class="text-xs sm:text-sm font-bold text-[#101116] group-hover/opt:text-[#ca8a04] transition-colors">Bali Seed Bedulu Robotics &amp; Coding</p>
-                                        <p class="text-[11px] text-[#667085]">Jln Raya Semebaung, Bedulu</p>
+                                        <p class="text-xs sm:text-sm font-bold text-[#111827] group-hover/opt:text-[#ca8a04] transition-colors">Bali Seed Bedulu Robotics &amp; Coding</p>
+                                        <p class="text-[11px] text-[#475467]">Jln Raya Semebaung, Bedulu</p>
                                     </div>
                                 </div>
                                 <span class="text-[10px] font-bold uppercase tracking-wider bg-[#FFC83D]/20 text-[#ca8a04] px-2.5 py-1 rounded-md">Bedulu</span>
@@ -1551,13 +1560,13 @@
                     <!-- Kode Promo / Nama Promo -->
                     <div class="space-y-2 md:col-span-2">
                         <div class="flex items-center justify-between">
-                            <label class="text-xs font-bold uppercase tracking-wider text-[#101116] flex items-center gap-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-[#111827] flex items-center gap-2">
                                 <i class="fa-solid fa-ticket text-[#ca8a04]"></i> Kode / Nama Promo (Opsional)
                             </label>
-                            <span data-i18n="reg_promo_sub" class="text-xs text-[#667085]">Otomatis terisi jika klaim voucher</span>
+                            <span data-i18n="reg_promo_sub" class="text-xs text-[#475467]">Otomatis terisi jika klaim voucher</span>
                         </div>
                         <div class="relative">
-                            <input type="text" id="reg-promo" class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#ca8a04] focus:outline-none focus:border-[#FFC83D] focus:ring-2 focus:ring-[#FFC83D]/20 transition-all placeholder-[#98a2b3] font-mono text-sm tracking-wider uppercase font-bold" placeholder="Cth: PETUALANGAN2026">
+                            <input type="text" id="reg-promo" class="w-full bg-white border border-[#667085] rounded-xl px-4 py-3 text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#004E98] focus:border-[#004E98] transition-all placeholder-[#475467] font-mono text-sm tracking-wider uppercase font-bold" placeholder="Cth: PETUALANGAN2026">
                             <span id="promo-applied-badge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 bg-[#FFC83D]/20 text-[#ca8a04] border border-[#FFC83D]/40 text-[10px] font-mono px-2.5 py-1 rounded-md font-bold tracking-wider">
                                 <i class="fa-solid fa-check text-xs mr-1"></i> Promo Terpasang
                             </span>
@@ -1565,48 +1574,48 @@
                     </div>
 
                     <div class="space-y-1.5">
-                        <label data-i18n="reg_lbl_name" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Nama Lengkap Siswa <span class="text-[#F3261D]">*</span></label>
-                        <input type="text" id="reg-nama" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: Putu Johan Lasya Hara">
+                        <label data-i18n="reg_lbl_name" class="text-xs font-bold uppercase tracking-wider text-[#111827]">Nama Lengkap Siswa <span class="text-[#F3261D]">*</span></label>
+                        <input type="text" id="reg-nama" required class="w-full bg-white border border-[#667085] rounded-xl px-4 py-3 text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#004E98] focus:border-[#004E98] transition-all placeholder-[#475467] text-sm" placeholder="Cth: Putu Johan Lasya Hara">
                     </div>
                     <div class="space-y-1.5">
-                        <label data-i18n="reg_lbl_nickname" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Nama Panggilan <span class="text-[#F3261D]">*</span></label>
-                        <input type="text" id="reg-panggilan" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: Johan">
+                        <label data-i18n="reg_lbl_nickname" class="text-xs font-bold uppercase tracking-wider text-[#111827]">Nama Panggilan <span class="text-[#F3261D]">*</span></label>
+                        <input type="text" id="reg-panggilan" required class="w-full bg-white border border-[#667085] rounded-xl px-4 py-3 text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#004E98] focus:border-[#004E98] transition-all placeholder-[#475467] text-sm" placeholder="Cth: Johan">
                     </div>
                     <div class="space-y-1.5">
-                        <label data-i18n="reg_lbl_age" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Usia Anak <span class="text-[#F3261D]">*</span></label>
-                        <input type="text" id="reg-usia" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: 10 Tahun">
+                        <label data-i18n="reg_lbl_age" class="text-xs font-bold uppercase tracking-wider text-[#111827]">Usia Anak <span class="text-[#F3261D]">*</span></label>
+                        <input type="text" id="reg-usia" required class="w-full bg-white border border-[#667085] rounded-xl px-4 py-3 text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#004E98] focus:border-[#004E98] transition-all placeholder-[#475467] text-sm" placeholder="Cth: 10 Tahun">
                     </div>
                     <div class="space-y-1.5">
-                        <label data-i18n="reg_lbl_school" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Asal Sekolah <span class="text-[#F3261D]">*</span></label>
-                        <input type="text" id="reg-sekolah" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: SD Sutha Dharma">
+                        <label data-i18n="reg_lbl_school" class="text-xs font-bold uppercase tracking-wider text-[#111827]">Asal Sekolah <span class="text-[#F3261D]">*</span></label>
+                        <input type="text" id="reg-sekolah" required class="w-full bg-white border border-[#667085] rounded-xl px-4 py-3 text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#004E98] focus:border-[#004E98] transition-all placeholder-[#475467] text-sm" placeholder="Cth: SD Sutha Dharma">
                     </div>
                     <div class="space-y-1.5">
-                        <label data-i18n="reg_lbl_parent" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Nama Orang Tua / Wali <span class="text-[#F3261D]">*</span></label>
-                        <input type="text" id="reg-ortu" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: Arik Ayu Rastini">
+                        <label data-i18n="reg_lbl_parent" class="text-xs font-bold uppercase tracking-wider text-[#111827]">Nama Orang Tua / Wali <span class="text-[#F3261D]">*</span></label>
+                        <input type="text" id="reg-ortu" required class="w-full bg-white border border-[#667085] rounded-xl px-4 py-3 text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#004E98] focus:border-[#004E98] transition-all placeholder-[#475467] text-sm" placeholder="Cth: Arik Ayu Rastini">
                     </div>
                     <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-[#101116]">Email Orang Tua <span class="text-[#F3261D]">*</span></label>
-                        <input type="email" id="reg-email" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: ayuarik071@gmail.com">
+                        <label class="text-xs font-bold uppercase tracking-wider text-[#111827]">Email Orang Tua <span class="text-[#F3261D]">*</span></label>
+                        <input type="email" id="reg-email" required class="w-full bg-white border border-[#667085] rounded-xl px-4 py-3 text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#004E98] focus:border-[#004E98] transition-all placeholder-[#475467] text-sm" placeholder="Cth: ayuarik071@gmail.com">
                     </div>
                     <div class="space-y-1.5 md:col-span-2">
-                        <label data-i18n="reg_lbl_address" class="text-xs font-bold uppercase tracking-wider text-[#101116]">Alamat Domisili <span class="text-[#F3261D]">*</span></label>
-                        <textarea id="reg-alamat" required rows="2" class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm" placeholder="Cth: Br Katiklantang Singakerta Ubud"></textarea>
+                        <label data-i18n="reg_lbl_address" class="text-xs font-bold uppercase tracking-wider text-[#111827]">Alamat Domisili <span class="text-[#F3261D]">*</span></label>
+                        <textarea id="reg-alamat" required rows="2" class="w-full bg-white border border-[#667085] rounded-xl px-4 py-3 text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#004E98] focus:border-[#004E98] transition-all placeholder-[#475467] text-sm" placeholder="Cth: Br Katiklantang Singakerta Ubud"></textarea>
                     </div>
                     <div class="space-y-1.5">
-                        <label data-i18n="reg_lbl_wa_parent" class="text-xs font-bold uppercase tracking-wider text-[#101116]">WhatsApp Orang Tua <span class="text-[#F3261D]">*</span></label>
-                        <input type="tel" id="reg-wa-ortu" required class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm font-mono" placeholder="Cth: 081239197127">
+                        <label data-i18n="reg_lbl_wa_parent" class="text-xs font-bold uppercase tracking-wider text-[#111827]">WhatsApp Orang Tua <span class="text-[#F3261D]">*</span></label>
+                        <input type="tel" id="reg-wa-ortu" required class="w-full bg-white border border-[#667085] rounded-xl px-4 py-3 text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#004E98] focus:border-[#004E98] transition-all placeholder-[#475467] text-sm font-mono" placeholder="Cth: 081239197127">
                     </div>
                     <div class="space-y-1.5">
-                        <label data-i18n="reg_lbl_wa_child" class="text-xs font-bold uppercase tracking-wider text-[#101116]">WhatsApp Anak (Opsional)</label>
-                        <input type="tel" id="reg-wa-anak" class="w-full bg-[#F7F8FA] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#101116] focus:outline-none focus:border-[#0788F5] focus:bg-white transition-colors placeholder-[#98a2b3] text-sm font-mono" placeholder="Cth: 081547533884">
+                        <label data-i18n="reg_lbl_wa_child" class="text-xs font-bold uppercase tracking-wider text-[#111827]">WhatsApp Anak (Opsional)</label>
+                        <input type="tel" id="reg-wa-anak" class="w-full bg-white border border-[#667085] rounded-xl px-4 py-3 text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#004E98] focus:border-[#004E98] transition-all placeholder-[#475467] text-sm font-mono" placeholder="Cth: 081547533884">
                     </div>
                 </div>
                 
                 <div class="mt-8 pt-6 border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p class="text-xs text-[#667085] text-center sm:text-left">
+                    <p class="text-xs text-[#475467] text-center sm:text-left">
                         Data Anda aman dan hanya digunakan untuk konfirmasi jadwal kelas oleh admin resmi LesKoding.
                     </p>
-                    <button type="submit" class="w-full sm:w-auto min-h-[48px] bg-[#FFC83D] hover:bg-[#fed368] text-[#101116] font-bold py-3.5 px-8 rounded-xl uppercase tracking-wider text-xs transition-all shadow-[0_4px_20px_rgba(255,200,61,0.35)] hover:shadow-[0_6px_25px_rgba(255,200,61,0.55)] flex items-center justify-center gap-2 shrink-0">
+                    <button type="submit" class="w-full sm:w-auto min-h-[48px] bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-bold py-3.5 px-8 rounded-xl uppercase tracking-wider text-xs transition-all shadow-[0_4px_20px_rgba(255,200,61,0.35)] hover:shadow-[0_6px_25px_rgba(255,200,61,0.55)] flex items-center justify-center gap-2 shrink-0">
                         <i class="fa-brands fa-whatsapp text-base"></i> 
                         <span data-i18n="reg_btn_submit">Kirim via WhatsApp</span>
                     </button>
@@ -1730,8 +1739,8 @@
     <!-- Footer -->
     
     <!-- Footer: kontak, lokasi, sosial, privasi -->
-    <footer class="bg-[#101116] border-t border-white/10 py-14 text-slate-400 z-10 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer class="bg-[#111827] border-t border-white/10 py-14 text-slate-400 z-10 relative">
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
                 
                 <!-- Col 1: Brand Info -->

@@ -18,18 +18,30 @@ h1, h2, h3, h4, h5, h6 {
     --brand-yellow: #FFC83D;
     --brand-red: #F3261D;
     --brand-blue: #0788F5;
-    --brand-blue-dark: #056ac2;
     --brand-purple: #5B0CB5;
-    --ink: #101116;
+
+    --action-blue: #004E98;
+    --ink: #111827;
+    --text-secondary: #475467;
     --surface: #FFFFFF;
-    --surface-soft: #F7F8FA;
-    --border: #E5E7EB;
-    --text-muted: #667085;
+    --surface-soft: #F5F7FA;
+    --border-control: #667085;
+    --error: #B42318;
+
+    --radius-card: 16px;
+    --radius-button: 12px;
+    --container-max: 1200px;
     
     --emerald-rgb: 16, 185, 129;
     --brand-rgb: 7, 136, 245;
     --purpleBrand-rgb: 91, 12, 181;
     --gold-rgb: 255, 200, 61;
+}
+
+/* Accessible focus ring */
+.focus-accessible:focus-visible {
+    outline: 3px solid var(--action-blue) !important;
+    outline-offset: 2px !important;
 }
 
 /* Grid Pattern Background for subtle tech texture */
