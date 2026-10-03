@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi FAQ</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .opsi-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem 1rem; margin-bottom:2rem; }
+  .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .9rem; border-radius:999px; background:#1E293B; border:1px solid rgba(255,255,255,.1); font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+  .grad { background:linear-gradient(90deg,#FFC83D,#38BDF8,#C084FC); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .cta { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#FFC83D; color:#111827; font-weight:800; padding:.8rem 1.3rem; min-height:44px; border-radius:.75rem; font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; transition:all .25s; box-shadow:0 4px 20px rgba(255,200,61,.25); }
+  .cta:hover { background:#fed368; transform:translateY(-2px); }
+  .link-cta { display:inline-flex; align-items:center; gap:.4rem; font-size:.75rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; }
+  .link-cta:hover { text-decoration:underline; }
+  .grid-bg { background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:32px 32px; }
+  .swap { animation:swap .4s ease; }
+  @keyframes swap { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+  /* 1 · Accordion */
+  .acc-body { display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
+  .acc[aria-expanded="true"] + .acc-body { grid-template-rows:1fr; }
+  .acc[aria-expanded="true"] .acc-plus { transform:rotate(45deg); background:#FFC83D; color:#111827; }
+  .acc-item:has(.acc[aria-expanded="true"]) { border-color:rgba(255,200,61,.4); background:#131c2e; }
+  .chip[aria-pressed="true"] { background:#FFC83D; color:#111827; border-color:#FFC83D; }
+  mark { background:rgba(255,200,61,.3); color:#fff; border-radius:3px; padding:0 2px; }
+
+  /* 2 · Chat */
+  .bubble-in { animation:bubbleIn .35s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes bubbleIn { from { opacity:0; transform:translateY(10px) scale(.96); } to { opacity:1; transform:none; } }
+  .typing span { width:6px; height:6px; border-radius:50%; background:#94A3B8; display:inline-block; animation:typing 1s infinite; }
+  .typing span:nth-child(2) { animation-delay:.15s; } .typing span:nth-child(3) { animation-delay:.3s; }
+  @keyframes typing { 0%,60%,100% { transform:translateY(0); opacity:.5; } 30% { transform:translateY(-4px); opacity:1; } }
+  .chat-bg { background-color:#0B141A; background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px); background-size:18px 18px; }
+
+  /* 3 · Terminal */
+  .cmd[aria-pressed="true"] { background:rgba(52,211,153,.12); border-color:rgba(52,211,153,.5); color:#6EE7B7; }
+  .caret::after { content:'▋'; color:#34D399; animation:blink 1s steps(1) infinite; margin-left:2px; }
+  @keyframes blink { 50% { opacity:0; } }
+
+  /* 4 · TL;DR */
+  .tl-card .tl-more { display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
+  .tl-card[aria-expanded="true"] .tl-more { grid-template-rows:1fr; }
+  .tl-card[aria-expanded="true"] { border-color:var(--c); box-shadow:0 20px 50px -25px var(--c); }
+  .tl-card[aria-expanded="true"] .tl-chev { transform:rotate(180deg); }
+
+  /* 5 · Master-detail */
+  .md-q[aria-selected="true"] { background:#1E293B; border-color:var(--c); }
+  .md-q[aria-selected="true"] .md-no { background:var(--c); color:#0B0F19; }
+
+  /* 6 · Mitos vs Fakta */
+  .mf { perspective:1200px; }
+  .mf-inner { position:relative; height:100%; transition:transform .7s cubic-bezier(.4,.2,.2,1); transform-style:preserve-3d; }
+  .mf.is-fact .mf-inner { transform:rotateY(180deg); }
+  .mf-face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:1.5rem; }
+  .mf-face.back { transform:rotateY(180deg); }
+  .strike { position:relative; }
+  .mf:hover .strike::after, .mf:focus-visible .strike::after { transform:scaleX(1); }
+  .strike::after { content:''; position:absolute; left:0; right:0; top:55%; height:3px; background:#F87171; transform:scaleX(0); transform-origin:left; transition:transform .4s ease; border-radius:3px; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI · FAQ</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Cari &amp; Kategori</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Tanya Admin</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Terminal</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Jawaban Singkat</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Daftar + Panel</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Mitos vs Fakta</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-12 pb-10">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// section: #faq</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">6 konsep untuk section <span class="grad">FAQ.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Isi pertanyaan dan jawaban mengikuti <b class="text-white">KB §13</b> (6 pertanyaan resmi). Setiap jawaban punya versi singkat dan tombol lanjutan yang relevan (daftar trial, lihat lokasi, chat admin, dan seterusnya), jadi FAQ juga mengarahkan ke langkah berikutnya, bukan hanya menjawab.</p>
+</header>
+
+<!-- ============================ OPSI 1 ============================ -->
+<section id="opsi-1" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span><h2 class="font-display text-2xl font-extrabold">Cari &amp; Kategori</h2><p class="text-sm text-slate-400 max-w-3xl">Accordion yang disempurnakan: kolom pencarian dengan sorotan kata, filter kategori, dan kartu kontak yang menempel di samping. Tetap mudah dipindai, siap menampung banyak pertanyaan nanti.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <div class="lg:col-span-4 lg:sticky lg:top-24">
+        <div class="badge mb-4"><i class="fa-solid fa-circle-question text-[#38BDF8]"></i> Tanya Jawab</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Ada yang <span class="grad">ingin ditanyakan?</span></h3>
+        <p class="text-slate-300 mt-4">Jawaban jujur seputar kelas, perangkat, biaya, dan kelas percobaan.</p>
+        <div class="mt-8 rounded-2xl border border-white/10 bg-[#0B0F19] p-5">
+          <div class="flex items-center gap-3"><div class="w-11 h-11 rounded-xl bg-emerald-500/15 text-emerald-400 grid place-items-center text-xl"><i class="fa-brands fa-whatsapp"></i></div><div><div class="font-bold">Belum terjawab?</div><div class="text-xs text-slate-400">Admin kami siap membantu.</div></div></div>
+          <a href="https://wa.me/628518306798" target="_blank" rel="noopener" class="cta w-full mt-4 !bg-emerald-400 hover:!bg-emerald-300 !shadow-none"><i class="fa-brands fa-whatsapp"></i> Chat 0851-8306-798</a>
+        </div>
+      </div>
+      <div class="lg:col-span-8">
+        <div class="relative mb-4">
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+          <input id="acc-search" type="search" placeholder="Cari: laptop, trial, biaya, sertifikat…" class="w-full bg-[#0B0F19] border border-white/10 focus:border-[#38BDF8] focus:outline-none rounded-xl pl-11 pr-4 py-3.5 text-sm placeholder:text-slate-500" aria-label="Cari pertanyaan">
+        </div>
+        <div class="flex flex-wrap gap-2 mb-6" id="acc-chips"></div>
+        <div class="space-y-3" id="acc-list"></div>
+        <p id="acc-empty" class="hidden text-sm text-slate-400 text-center py-10 rounded-2xl border border-dashed border-white/15">Tidak ada pertanyaan yang cocok. <a href="https://wa.me/628518306798" target="_blank" rel="noopener" class="text-emerald-400 font-bold underline">Tanya admin langsung →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 2 ============================ -->
+<section id="opsi-2" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span><h2 class="font-display text-2xl font-extrabold">Tanya Admin (Chat)</h2><p class="text-sm text-slate-400 max-w-3xl">FAQ dalam bentuk percakapan ala WhatsApp: pilih pertanyaan dari "balasan cepat", muncul indikator mengetik, lalu admin menjawab. Akrab bagi orang tua dan mulus mengarah ke chat WhatsApp sungguhan.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-5">
+        <div class="badge mb-4"><i class="fa-solid fa-comments text-emerald-400"></i> Tanya Jawab</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Tanya apa saja, <span class="grad">seperti chat biasa.</span></h3>
+        <p class="text-slate-300 mt-4">Pilih pertanyaan di bawah layar chat. Kalau masih penasaran, lanjutkan obrolannya langsung dengan admin kami di WhatsApp.</p>
+        <ul class="mt-6 space-y-2 text-sm text-slate-300">
+          <li><i class="fa-solid fa-check text-emerald-400 mr-2"></i>Jawaban resmi dari tim LesKoding</li>
+          <li><i class="fa-solid fa-check text-emerald-400 mr-2"></i>Satu nomor untuk semua lokasi &amp; metode belajar</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="mx-auto max-w-[520px] rounded-[1.75rem] border border-white/10 overflow-hidden shadow-2xl">
+          <div class="bg-[#1F2C33] px-4 py-3 flex items-center gap-3">
+            <img src="assets/logo/leskoding_community_sm.png" alt="" class="w-10 h-10 rounded-full bg-white p-1 object-contain">
+            <div class="leading-tight"><div class="font-bold text-sm">Admin LesKoding</div><div class="text-[11px] text-emerald-400" id="chat-status">online</div></div>
+            <button id="chat-reset" class="ml-auto text-slate-400 hover:text-white text-sm w-9 h-9" aria-label="Mulai ulang percakapan"><i class="fa-solid fa-rotate-left"></i></button>
+          </div>
+          <div class="chat-bg h-[400px] overflow-y-auto p-4 space-y-3" id="chat-log" aria-live="polite"></div>
+          <div class="bg-[#1F2C33] p-3">
+            <div class="text-[10px] mono text-slate-400 mb-2 px-1">BALASAN CEPAT</div>
+            <div class="flex gap-2 overflow-x-auto pb-1" id="chat-quick"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 3 ============================ -->
+<section id="opsi-3" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span><h2 class="font-display text-2xl font-extrabold">Terminal FAQ</h2><p class="text-sm text-slate-400 max-w-3xl">Gaya konsol coding yang sesuai brand: setiap pertanyaan adalah "perintah", jawabannya diketik di terminal. Bisa juga diketik manual (misalnya <span class="mono">trial</span>). Menunjukkan "ini tempat belajar coding" tanpa kata-kata.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="badge mb-4"><i class="fa-solid fa-terminal text-emerald-400"></i> leskoding --help</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Jalankan <span class="grad">pertanyaanmu.</span></h3>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <div class="lg:col-span-4 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0" id="term-cmds"></div>
+      <div class="lg:col-span-8 rounded-2xl border border-white/15 bg-[#05070D] shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-2 px-4 py-2.5 bg-[#1E293B] border-b border-white/10">
+          <span class="w-3 h-3 rounded-full bg-[#F87171]"></span><span class="w-3 h-3 rounded-full bg-[#FFC83D]"></span><span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+          <span class="mono text-[11px] text-slate-400 ml-2">orangtua@leskoding: ~/faq</span>
+        </div>
+        <div class="p-5 mono text-[13px] leading-relaxed h-[360px] overflow-y-auto" id="term-out"></div>
+        <form class="flex items-center gap-2 px-5 py-3 border-t border-white/10 mono text-[13px]" id="term-form">
+          <span class="text-emerald-400">$</span><span class="text-slate-500">leskoding</span>
+          <input id="term-in" autocomplete="off" spellcheck="false" class="flex-1 bg-transparent outline-none text-white placeholder:text-slate-600" placeholder="ketik: pemula, trial, laptop, rasio, sertifikat, biaya" aria-label="Ketik perintah FAQ">
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 4 ============================ -->
+<section id="opsi-4" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span><h2 class="font-display text-2xl font-extrabold">Jawaban Singkat (TL;DR)</h2><p class="text-sm text-slate-400 max-w-3xl">Grid kartu di mana jawaban singkatnya tampil besar (<b>Bisa!</b>, <b>Gratis</b>, <b>1:5</b>…). Orang tua yang terburu-buru langsung dapat jawabannya. Klik "Selengkapnya" untuk penjelasan resmi.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="badge mb-4"><i class="fa-solid fa-bolt text-[#FFC83D]"></i> Jawaban Cepat</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Enam pertanyaan, <span class="grad">enam jawaban singkat.</span></h3>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start" id="tl-grid"></div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 5 ============================ -->
+<section id="opsi-5" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span><h2 class="font-display text-2xl font-extrabold">Daftar + Panel Jawaban</h2><p class="text-sm text-slate-400 max-w-3xl">Daftar pertanyaan di kiri, satu panel jawaban besar di kanan dengan ikon, jawaban singkat, penjelasan, dan tombol lanjutan yang relevan. Jawaban tidak saling berdesakan. Di HP berubah jadi accordion biasa.</p></div>
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div>
+        <div class="badge mb-4"><i class="fa-solid fa-circle-question text-[#38BDF8]"></i> Tanya Jawab</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Pertanyaan yang <span class="grad">sering diajukan.</span></h3>
+      </div>
+      <p class="text-slate-400 text-sm max-w-sm">Gunakan tombol panah ↑ ↓ untuk berpindah pertanyaan.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <div class="lg:col-span-5 space-y-2" role="tablist" aria-orientation="vertical" id="md-list"></div>
+      <div class="lg:col-span-7 hidden lg:block" id="md-panel" role="tabpanel"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 6 ============================ -->
+<section id="opsi-6" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span><h2 class="font-display text-2xl font-extrabold">Mitos vs Fakta</h2><p class="text-sm text-slate-400 max-w-3xl">Pertanyaan dibingkai sebagai kekhawatiran umum orang tua ("Mitos"), lalu kartu dibalik untuk menampilkan fakta dari KB. Lebih persuasif karena langsung menjawab keraguan. Hover untuk mencoret mitosnya.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="badge mb-4"><i class="fa-solid fa-scale-balanced text-[#F87171]"></i> Mitos vs Fakta</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Masih ragu? <span class="grad">Cek faktanya.</span></h3>
+      <p class="text-slate-300 mt-4">Ketuk kartu untuk membalik.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="mf-grid"></div>
+    <div class="text-center mt-8"><button id="mf-all" class="text-xs font-bold uppercase tracking-wider text-[#38BDF8] hover:underline"><i class="fa-solid fa-rotate mr-1"></i> Balik semua kartu</button></div>
+  </div>
+</section>
+
+<!-- ============================ PERBANDINGAN ============================ -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <h2 class="font-display text-3xl font-extrabold mb-6">Perbandingan</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[720px]">
+        <thead class="bg-[#1E293B] text-[11px] mono uppercase tracking-wider text-slate-400"><tr><th class="text-left p-3">Opsi</th><th class="text-left p-3">Kekuatan</th><th class="text-left p-3">Catatan</th><th class="text-left p-3">Cocok jika…</th></tr></thead>
+        <tbody class="divide-y divide-white/5">
+          <tr><td class="p-3 font-bold">1 · Cari &amp; Kategori</td><td class="p-3 text-slate-300">Familiar, mudah dipindai, siap untuk banyak pertanyaan</td><td class="p-3 text-slate-400">Paling konvensional</td><td class="p-3 text-slate-300">FAQ akan terus bertambah</td></tr>
+          <tr><td class="p-3 font-bold">2 · Tanya Admin</td><td class="p-3 text-slate-300">Hangat, terasa personal, mengarah ke WhatsApp</td><td class="p-3 text-slate-400">Satu jawaban per klik; animasi mengetik menambah jeda</td><td class="p-3 text-slate-300">WhatsApp adalah kanal utama</td></tr>
+          <tr><td class="p-3 font-bold">3 · Terminal</td><td class="p-3 text-slate-300">Paling "coding", unik, berkesan</td><td class="p-3 text-slate-400">Orang tua non-teknis bisa merasa asing (ada tombol sebagai jalan pintas)</td><td class="p-3 text-slate-300">ingin menonjolkan identitas brand</td></tr>
+          <tr><td class="p-3 font-bold">4 · Jawaban Singkat</td><td class="p-3 text-slate-300">Semua jawaban inti terlihat tanpa klik</td><td class="p-3 text-slate-400">Butuh jawaban singkat yang disetujui tim</td><td class="p-3 text-slate-300">pengunjung banyak yang skim dari HP</td></tr>
+          <tr><td class="p-3 font-bold">5 · Daftar + Panel</td><td class="p-3 text-slate-300">Rapi di desktop, tiap jawaban punya CTA relevan</td><td class="p-3 text-slate-400">Di HP menjadi accordion biasa</td><td class="p-3 text-slate-300">ingin FAQ yang mendorong konversi</td></tr>
+          <tr><td class="p-3 font-bold">6 · Mitos vs Fakta</td><td class="p-3 text-slate-300">Paling persuasif, menjawab keraguan</td><td class="p-3 text-slate-400">"Mitos" ditulis oleh kita, bukan kutipan nyata</td><td class="p-3 text-slate-300">ingin FAQ sekaligus bagian persuasi</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rounded-2xl border border-[#F87171]/30 bg-[#F87171]/5 p-5 text-sm mt-6">
+      <div class="font-bold mb-2 text-[#F87171]"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Temuan di FAQ index.html saat ini (bertentangan dengan KB)</div>
+      <ul class="list-disc pl-5 text-slate-300 space-y-1">
+        <li><b>Jawaban Q1</b> menulis "80% siswa baru kami memulai dari nol". Ini statistik yang tidak bisa dibuktikan (KB §14.2). Di eksplorasi ini sudah diganti dengan jawaban resmi KB.</li>
+        <li><b>Jawaban Q4</b> menulis "maksimal 4–6 anak per tutor", padahal KB menetapkan <b>1:5</b>.</li>
+        <li>Belum ada pertanyaan tentang <b>Kelas Online</b>, karena detailnya belum ada di KB.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+/* ===================== DATA (KB §13) ===================== */
+const WA = 'https://wa.me/628518306798?text=' + encodeURIComponent('Halo LesKoding, saya ingin bertanya.');
+const CAT = { mulai: 'Memulai', kelas: 'Di Kelas', hasil: 'Hasil Belajar', biaya: 'Biaya & Jadwal' };
+const F = [
+  { id: 'pemula', cat: 'mulai', ic: 'fa-seedling', c: '#34D399', q: 'Apakah anak yang belum pernah belajar coding atau komputer bisa ikut?', tl: 'Bisa!', tlSub: 'mulai dari nol',
+    a: 'Tentu bisa! Banyak siswa LesKoding memulai dari nol. Pembelajaran dirancang ramah anak melalui visual blok interaktif dan analogi dunia nyata terlebih dahulu, sebelum perlahan dikenalkan pada logika kode teks.',
+    myth: 'Anak harus sudah bisa komputer sebelum ikut les coding.', cta: ['Lihat program pemula', '#course'] },
+  { id: 'trial', cat: 'mulai', ic: 'fa-gift', c: '#FFC83D', q: 'Apakah tersedia kelas percobaan (trial class) dan berapa biayanya?', tl: 'Gratis', tlSub: '1 sesi Free Trial',
+    a: 'Ya, kami menyediakan 1 sesi Free Trial Class (100% gratis) di Learning Center Gianyar dan Bedulu, serta opsi konsultasi/trial untuk Kelas Private di rumah. Cukup isi formulir atau hubungi admin via WhatsApp untuk memilih jadwal, tanpa ikatan.',
+    myth: 'Kelas percobaan pasti berbayar atau mengikat.', cta: ['Daftar Free Trial', '#register'] },
+  { id: 'laptop', cat: 'kelas', ic: 'fa-laptop', c: '#38BDF8', q: 'Apakah siswa harus membawa laptop sendiri?', tl: 'Tidak wajib', tlSub: 'lab sudah lengkap',
+    a: 'Tidak wajib. Seluruh laboratorium LesKoding sudah dilengkapi komputer/laptop serta kit robotika lengkap yang siap pakai. Namun, siswa yang ingin membawa laptop pribadi agar proyeknya tersimpan langsung di perangkat sendiri sangat dipersilakan.',
+    myth: 'Anak harus punya laptop canggih sendiri.', cta: ['Lihat Learning Center', '#location'] },
+  { id: 'rasio', cat: 'kelas', ic: 'fa-user-group', c: '#C084FC', q: 'Berapa rasio tutor per siswa di setiap kelas?', tl: '1 : 5', tlSub: 'tutor : siswa',
+    a: 'LesKoding menerapkan kelas kecil dengan rasio 1:5, yaitu 1 tutor mengajar maksimal 5 siswa. Setiap siswa mendapat bimbingan intensif dan tidak ada anak yang tertinggal saat praktik langsung.',
+    myth: 'Kelasnya ramai, anak tidak akan diperhatikan.', cta: ['Lihat cara belajar', '#cara-belajar'] },
+  { id: 'sertifikat', cat: 'hasil', ic: 'fa-award', c: '#F97316', q: 'Apakah siswa mendapatkan sertifikat?', tl: 'Ya', tlSub: 'setelah lulus course',
+    a: 'Ya. Setiap siswa yang menyelesaikan course mendapatkan sertifikat kelulusan dari LesKoding sebagai bukti capaian belajar, melengkapi portofolio karya yang sudah dibuat.',
+    myth: 'Les coding tidak ada bukti hasilnya.', cta: ['Lihat karya siswa', '#hall-of-fame'] },
+  { id: 'biaya', cat: 'biaya', ic: 'fa-calendar-check', c: '#F87171', q: 'Berapa biaya kursus dan bagaimana jadwal kelasnya?', tl: 'Fleksibel', tlSub: 'biaya via admin',
+    a: 'Informasi biaya disampaikan oleh admin saat konsultasi setelah Anda mendaftar. Jadwal kelas bersifat fleksibel dan ditentukan bersama sesuai kesepakatan dengan orang tua.',
+    myth: 'Jadwalnya kaku dan harus ikut jam yang sudah ditentukan.', cta: ['Konsultasi via WhatsApp', WA, true] },
+];
+const ctaHTML = (f, cls = 'link-cta') => `<a href="${f.cta[1]}" ${f.cta[2] ? 'target="_blank" rel="noopener"' : 'onclick="return false"'} class="${cls}" style="${cls === 'link-cta' ? `color:${f.c}` : ''}">${f.cta[2] ? '<i class="fa-brands fa-whatsapp"></i>' : ''}${f.cta[0]} <i class="fa-solid fa-arrow-right text-[10px]"></i></a>`;
+const esc = s => s.replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+
+/* ===================== 1 · ACCORDION + CARI ===================== */
+(() => {
+  const list = document.getElementById('acc-list'), chips = document.getElementById('acc-chips'), search = document.getElementById('acc-search'), empty = document.getElementById('acc-empty');
+  let cat = 'all';
+  chips.innerHTML = [['all', 'Semua'], ...Object.entries(CAT)].map(([k, l]) => `<button class="chip px-3.5 py-1.5 min-h-[36px] rounded-full border border-white/15 text-xs font-bold transition" data-cat="${k}" aria-pressed="${k === 'all'}">${l}</button>`).join('');
+  const hl = (t, q) => q ? esc(t).replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark>$1</mark>') : esc(t);
+  const render = () => {
+    const q = search.value.trim();
+    const rows = F.filter(f => (cat === 'all' || f.cat === cat) && (!q || (f.q + ' ' + f.a).toLowerCase().includes(q.toLowerCase())));
+    list.innerHTML = rows.map((f, i) => `
+      <div class="acc-item rounded-2xl border border-white/10 bg-[#0B0F19] transition">
+        <button class="acc w-full flex items-center gap-4 p-4 sm:p-5 text-left" aria-expanded="${i === 0 && !q ? 'true' : q ? 'true' : 'false'}" aria-controls="acc-a-${f.id}" id="acc-q-${f.id}">
+          <span class="w-9 h-9 shrink-0 rounded-xl grid place-items-center text-sm" style="background:${f.c}1f;color:${f.c}"><i class="fa-solid ${f.ic}"></i></span>
+          <span class="flex-1 font-bold text-[15px] leading-snug">${hl(f.q, q)}</span>
+          <span class="acc-plus w-8 h-8 shrink-0 rounded-full bg-white/5 grid place-items-center text-xs transition"><i class="fa-solid fa-plus"></i></span>
+        </button>
+        <div class="acc-body" id="acc-a-${f.id}" role="region" aria-labelledby="acc-q-${f.id}"><div class="overflow-hidden"><div class="px-4 sm:px-5 pb-5 sm:pl-[4.25rem]">
+          <p class="text-sm text-slate-300 leading-relaxed">${hl(f.a, q)}</p>
+          <div class="mt-3 flex items-center gap-3"><span class="mono text-[10px] px-2 py-0.5 rounded bg-white/5 text-slate-400">${CAT[f.cat]}</span>${ctaHTML(f)}</div>
+        </div></div></div>
+      </div>`).join('');
+    empty.classList.toggle('hidden', rows.length > 0);
+  };
+  list.addEventListener('click', e => { const b = e.target.closest('.acc'); if (b) b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') !== 'true'); });
+  chips.addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; cat = b.dataset.cat; chips.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === b)); render(); });
+  search.addEventListener('input', render);
+  render();
+})();
+
+/* ===================== 2 · CHAT ===================== */
+(() => {
+  const log = document.getElementById('chat-log'), quick = document.getElementById('chat-quick'), status = document.getElementById('chat-status');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let asked = new Set(), busy = false;
+  const time = () => new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+  const add = html => { log.insertAdjacentHTML('beforeend', html); log.scrollTop = log.scrollHeight; };
+  const admin = (text, extra = '') => add(`<div class="bubble-in flex"><div class="max-w-[85%] rounded-2xl rounded-tl-sm bg-[#202C33] px-3.5 py-2.5 text-[13.5px] leading-relaxed">${text}${extra}<div class="text-[10px] text-slate-500 text-right mt-1">${time()}</div></div></div>`);
+  const me = text => add(`<div class="bubble-in flex justify-end"><div class="max-w-[85%] rounded-2xl rounded-tr-sm bg-[#005C4B] px-3.5 py-2.5 text-[13.5px] leading-relaxed">${text}<div class="text-[10px] text-emerald-200/60 text-right mt-1">${time()} <i class="fa-solid fa-check-double text-[#53BDEB]"></i></div></div></div>`);
+  const renderQuick = () => {
+    quick.innerHTML = F.map(f => `<button class="shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold transition ${asked.has(f.id) ? 'border-white/10 text-slate-500' : 'border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10'}" data-id="${f.id}"><i class="fa-solid ${f.ic} mr-1"></i>${f.q.split(' ').slice(0, 5).join(' ')}…</button>`).join('')
+      + `<a href="${WA}" target="_blank" rel="noopener" class="shrink-0 rounded-full bg-emerald-500 text-[#052e22] px-3 py-1.5 text-xs font-extrabold"><i class="fa-brands fa-whatsapp mr-1"></i>Chat admin sungguhan</a>`;
+  };
+  const ask = id => {
+    if (busy) return; const f = F.find(x => x.id === id); busy = true; asked.add(id); renderQuick();
+    me(f.q);
+    status.textContent = 'mengetik…';
+    add('<div class="flex" id="typing"><div class="typing rounded-2xl rounded-tl-sm bg-[#202C33] px-4 py-3 flex gap-1"><span></span><span></span><span></span></div></div>');
+    setTimeout(() => {
+      document.getElementById('typing')?.remove(); status.textContent = 'online';
+      admin(f.a, `<div class="mt-2">${ctaHTML(f)}</div>`);
+      busy = false;
+    }, reduce ? 0 : 900);
+  };
+  const start = () => { log.innerHTML = ''; asked = new Set(); busy = false; add('<div class="text-center"><span class="text-[10px] mono bg-[#182229] text-slate-400 px-2 py-1 rounded">HARI INI</span></div>'); admin('Halo, Bapak/Ibu! 👋 Ada yang ingin ditanyakan tentang kelas coding &amp; robotika di LesKoding? Pilih pertanyaan di bawah, ya.'); renderQuick(); };
+  quick.addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) ask(b.dataset.id); });
+  document.getElementById('chat-reset').onclick = start;
+  start();
+})();
+
+/* ===================== 3 · TERMINAL ===================== */
+(() => {
+  const cmds = document.getElementById('term-cmds'), out = document.getElementById('term-out'), form = document.getElementById('term-form'), input = document.getElementById('term-in');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let typingTimer = null;
+  cmds.innerHTML = F.map(f => `<button class="cmd shrink-0 lg:w-full text-left rounded-xl border border-white/10 bg-[#0B0F19] px-4 py-3 transition hover:border-white/25" data-id="${f.id}" aria-pressed="false">
+      <span class="mono text-[11px] text-emerald-400">$ leskoding ${f.id}</span>
+      <span class="hidden lg:block text-[13px] font-semibold text-slate-200 mt-0.5">${f.q}</span></button>`).join('');
+  const print = html => { out.insertAdjacentHTML('beforeend', html); out.scrollTop = out.scrollHeight; };
+  const run = id => {
+    const f = F.find(x => x.id === id);
+    clearInterval(typingTimer); out.querySelectorAll('.caret').forEach(c => c.classList.remove('caret'));
+    cmds.querySelectorAll('.cmd').forEach(b => b.setAttribute('aria-pressed', b.dataset.id === id));
+    if (!f) { print(`<div class="mt-3"><span class="text-emerald-400">$</span> leskoding ${esc(id)}</div><div class="text-[#F87171]">perintah tidak dikenal. coba: ${F.map(x => x.id).join(', ')}</div>`); return; }
+    print(`<div class="mt-4"><span class="text-emerald-400">$</span> leskoding ${f.id}</div><div class="text-slate-500"># ${f.q}</div><div class="mt-1"><span style="color:${f.c}">➜ ${f.tl}</span> <span class="text-slate-500">(${f.tlSub})</span></div><div class="text-slate-200 caret" data-typing></div>`);
+    const el = out.querySelector('[data-typing]:last-of-type'); el.removeAttribute('data-typing');
+    if (reduce) { el.textContent = f.a; el.insertAdjacentHTML('afterend', `<div class="mt-2">${ctaHTML(f)}</div>`); return; }
+    let i = 0;
+    typingTimer = setInterval(() => {
+      i += 3; el.textContent = f.a.slice(0, i); out.scrollTop = out.scrollHeight;
+      if (i >= f.a.length) { clearInterval(typingTimer); el.classList.remove('caret'); el.insertAdjacentHTML('afterend', `<div class="mt-2">${ctaHTML(f)}</div>`); out.scrollTop = out.scrollHeight; }
+    }, 18);
+  };
+  print(`<div class="text-slate-400">LesKoding FAQ v1.0, ketik nama perintah atau klik daftar di samping.</div><div class="text-slate-500 mt-1">perintah tersedia: ${F.map(f => `<span class="text-emerald-400">${f.id}</span>`).join(' · ')}</div>`);
+  cmds.addEventListener('click', e => { const b = e.target.closest('.cmd'); if (b) run(b.dataset.id); });
+  form.addEventListener('submit', e => { e.preventDefault(); const v = input.value.trim().toLowerCase(); if (!v) return; input.value = ''; if (v === 'clear') { out.innerHTML = ''; return; } run(v); });
+})();
+
+/* ===================== 4 · TL;DR ===================== */
+(() => {
+  const grid = document.getElementById('tl-grid');
+  grid.innerHTML = F.map(f => `
+    <div class="tl-card rounded-[1.5rem] border border-white/10 bg-[#0F172A] p-6 transition" style="--c:${f.c}" aria-expanded="false">
+      <div class="flex items-start justify-between gap-3">
+        <span class="w-11 h-11 rounded-xl grid place-items-center text-lg" style="background:${f.c}1f;color:${f.c}"><i class="fa-solid ${f.ic}"></i></span>
+        <span class="mono text-[10px] px-2 py-0.5 rounded bg-white/5 text-slate-400">${CAT[f.cat]}</span>
+      </div>
+      <p class="text-sm text-slate-300 mt-4 leading-snug min-h-[2.5rem]">${f.q}</p>
+      <div class="font-display font-black text-4xl mt-3 leading-none" style="color:${f.c}">${f.tl}</div>
+      <div class="mono text-[11px] text-slate-500 mt-1">${f.tlSub}</div>
+      <div class="tl-more"><div class="overflow-hidden"><p class="text-[13px] text-slate-300 leading-relaxed pt-4 mt-4 border-t border-white/10">${f.a}</p><div class="mt-3">${ctaHTML(f)}</div></div></div>
+      <button class="tl-toggle mt-4 text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5" aria-expanded="false">Selengkapnya <i class="tl-chev fa-solid fa-chevron-down text-[10px] transition-transform"></i></button>
+    </div>`).join('');
+  grid.addEventListener('click', e => {
+    const b = e.target.closest('.tl-toggle'); if (!b) return;
+    const card = b.closest('.tl-card'), open = card.getAttribute('aria-expanded') !== 'true';
+    card.setAttribute('aria-expanded', open); b.setAttribute('aria-expanded', open);
+    b.firstChild.textContent = open ? 'Tutup ' : 'Selengkapnya ';
+  });
+})();
+
+/* ===================== 5 · MASTER-DETAIL ===================== */
+(() => {
+  const list = document.getElementById('md-list'), panel = document.getElementById('md-panel');
+  const detail = f => `
+    <div class="swap h-full rounded-[1.75rem] border bg-[#0B0F19] p-7 sm:p-9 relative overflow-hidden" style="border-color:${f.c}55">
+      <div class="absolute -right-6 -bottom-8 text-[11rem] opacity-[.05] pointer-events-none" style="color:${f.c}"><i class="fa-solid ${f.ic}"></i></div>
+      <div class="relative">
+        <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl grid place-items-center text-xl" style="background:${f.c};color:#0B0F19"><i class="fa-solid ${f.ic}"></i></span><span class="mono text-[11px] font-bold uppercase tracking-widest" style="color:${f.c}">${CAT[f.cat]}</span></div>
+        <h4 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight mt-5">${f.q}</h4>
+        <div class="inline-flex items-baseline gap-2 mt-5 px-4 py-2 rounded-xl" style="background:${f.c}14"><span class="font-display font-black text-2xl" style="color:${f.c}">${f.tl}</span><span class="text-xs text-slate-400">${f.tlSub}</span></div>
+        <p class="text-[15px] text-slate-300 leading-relaxed mt-5">${f.a}</p>
+        <div class="mt-7">${ctaHTML(f, 'cta')}</div>
+      </div>
+    </div>`;
+  list.innerHTML = F.map((f, i) => `
+    <div>
+      <button role="tab" class="md-q w-full flex items-center gap-3 rounded-2xl border border-white/10 bg-[#0B0F19] p-4 text-left transition hover:border-white/25" style="--c:${f.c}" data-i="${i}" aria-selected="false" id="md-tab-${f.id}">
+        <span class="md-no w-8 h-8 shrink-0 rounded-lg bg-white/5 grid place-items-center mono text-xs font-bold transition">${String(i + 1).padStart(2, '0')}</span>
+        <span class="flex-1 font-semibold text-sm leading-snug">${f.q}</span>
+        <i class="fa-solid fa-chevron-right text-xs text-slate-500 hidden lg:block"></i><i class="fa-solid fa-chevron-down text-xs text-slate-500 lg:hidden"></i>
+      </button>
+      <div class="md-inline lg:hidden mt-2" hidden></div>
+    </div>`).join('');
+  const tabs = [...list.querySelectorAll('.md-q')];
+  const show = (i, focus) => {
+    const f = F[i];
+    tabs.forEach((t, k) => t.setAttribute('aria-selected', k === i));
+    panel.innerHTML = detail(f);
+    list.querySelectorAll('.md-inline').forEach((d, k) => { const on = k === i && !d.hidden ? false : k === i; d.hidden = !on; d.innerHTML = on ? detail(f) : ''; });
+    if (focus) tabs[i].focus();
+  };
+  list.addEventListener('click', e => { const b = e.target.closest('.md-q'); if (b) show(+b.dataset.i); });
+  list.addEventListener('keydown', e => {
+    const i = tabs.indexOf(document.activeElement); if (i < 0) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); show((i + 1) % tabs.length, true); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); show((i - 1 + tabs.length) % tabs.length, true); }
+  });
+  // desktop: panel kanan; mobile: accordion di bawah pertanyaan
+  tabs.forEach((t, k) => t.setAttribute('aria-selected', k === 0));
+  panel.innerHTML = detail(F[0]);
+})();
+
+/* ===================== 6 · MITOS VS FAKTA ===================== */
+(() => {
+  const grid = document.getElementById('mf-grid');
+  grid.innerHTML = F.map(f => `
+    <div class="mf h-[300px] cursor-pointer" tabindex="0" role="button" aria-pressed="false" aria-label="Balik kartu: ${esc(f.myth)}">
+      <div class="mf-inner">
+        <div class="mf-face front border border-[#F87171]/25 bg-[#0F172A] p-6 flex flex-col">
+          <div class="flex items-center justify-between"><span class="mono text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#F87171]/15 text-[#F87171]"><i class="fa-solid fa-xmark mr-1"></i>MITOS</span><i class="fa-solid fa-rotate text-slate-500 text-sm"></i></div>
+          <p class="font-display text-2xl font-extrabold leading-snug mt-6"><span class="strike">"${f.myth}"</span></p>
+          <div class="mt-auto text-xs text-slate-400"><i class="fa-solid fa-hand-pointer mr-1"></i>Ketuk untuk melihat fakta</div>
+        </div>
+        <div class="mf-face back border p-6 flex flex-col" style="border-color:${f.c}66;background:linear-gradient(160deg,${f.c}1f,#0F172A 55%)">
+          <div class="flex items-center justify-between"><span class="mono text-[11px] font-bold px-2.5 py-1 rounded-full" style="background:${f.c};color:#0B0F19"><i class="fa-solid fa-check mr-1"></i>FAKTA</span><span class="font-display font-black text-xl" style="color:${f.c}">${f.tl}</span></div>
+          <p class="text-[13.5px] text-slate-200 leading-relaxed mt-4 flex-1 overflow-y-auto">${f.a}</p>
+          <div class="mt-3" onclick="event.stopPropagation()">${ctaHTML(f)}</div>
+        </div>
+      </div>
+    </div>`).join('');
+  const flip = c => { c.classList.toggle('is-fact'); c.setAttribute('aria-pressed', c.classList.contains('is-fact')); };
+  grid.addEventListener('click', e => { const c = e.target.closest('.mf'); if (c) flip(c); });
+  grid.addEventListener('keydown', e => { const c = e.target.closest('.mf'); if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); flip(c); } });
+  document.getElementById('mf-all').onclick = () => { const cards = [...grid.children]; const anyMyth = cards.some(c => !c.classList.contains('is-fact')); cards.forEach(c => { if (c.classList.contains('is-fact') !== anyMyth) flip(c); }); };
+})();
+})();
+</script>
+</body>
+</html>

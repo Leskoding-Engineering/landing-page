@@ -628,7 +628,7 @@ WA Anak (opsional): ${waAnak}`;
             const encodedMessage = encodeURIComponent(message);
             
             // Semua lokasi & metode belajar dilayani satu nomor admin
-            const adminWA = "628518306798";
+            const adminWA = "6285117535970";
             const whatsappUrl = `https://wa.me/${adminWA}?text=${encodedMessage}`;
             
             window.open(whatsappUrl, '_blank');
@@ -2494,37 +2494,10 @@ window.upvoteProject = function(btn) {
 /* ========================================================
    12. ACTIVE PROMOTION POPUP & AUTO-COMPLETE
    ======================================================== */
-window.openPromoModal = function() {
-    const modal = document.getElementById('promo-modal');
-    if (modal) {
-        modal.classList.remove('hidden');
-        requestAnimationFrame(() => {
-            modal.classList.remove('opacity-0');
-            modal.classList.add('opacity-100');
-            const content = document.getElementById('promo-modal-content');
-            if (content) {
-                content.classList.remove('scale-95');
-                content.classList.add('scale-100');
-            }
-        });
-    }
-};
-
-window.closePromoModal = function() {
-    const modal = document.getElementById('promo-modal');
-    if (modal) {
-        modal.classList.remove('opacity-100');
-        modal.classList.add('opacity-0');
-        const content = document.getElementById('promo-modal-content');
-        if (content) {
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-        }
-        setTimeout(() => {
-            modal.classList.add('hidden');
-        }, 300);
-    }
-};
+// Popup promo diganti top bar + section #promo (lihat bagian 20). Dipertahankan sebagai no-op
+// agar pemanggil lama tidak error.
+window.openPromoModal = function () { document.getElementById('promo')?.scrollIntoView({ behavior: 'smooth' }); };
+window.closePromoModal = function () {};
 
 window.claimPromoAndRegister = function(promoCode = 'PETUALANGAN2026') {
     // 1. Close modal
@@ -2577,34 +2550,13 @@ window.claimPromoAndRegister = function(promoCode = 'PETUALANGAN2026') {
     }
 };
 
-// Auto-trigger promo modal on load
-window.addEventListener('load', () => {
-    // Open active promotion popup after 1.5s
-    setTimeout(() => {
-        window.openPromoModal();
-    }, 1500);
-
-    // Close promo modal on backdrop click
-    const promoModal = document.getElementById('promo-modal');
-    if (promoModal) {
-        promoModal.addEventListener('click', (e) => {
-            if (e.target === promoModal) {
-                window.closePromoModal();
-            }
-        });
+// Escape menutup modal kurikulum
+document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const courseModal = document.getElementById('course-modal');
+    if (courseModal && !courseModal.classList.contains('hidden') && typeof closeCourseModal === 'function') {
+        closeCourseModal();
     }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            if (promoModal && !promoModal.classList.contains('hidden')) {
-                window.closePromoModal();
-            }
-            const courseModal = document.getElementById('course-modal');
-            if (courseModal && !courseModal.classList.contains('hidden')) {
-                closeCourseModal();
-            }
-        }
-    });
 });
 
 /* 13. Pilihan Learning Center: lihat bagian 15 (kartu pilihan) */
@@ -2652,6 +2604,65 @@ const i18nDictionary = {
         "cb3_replay": "Replay",
         "cb3_range_label": "Session minute",
         "cb3_note": "Up to 120 minutes per session. Screen shown is an illustration.",
+        "promo2_bar_1": "PROMO 2026: 1 Free Trial session + registration fee discount",
+        "promo2_bar_2": "Use code",
+        "promo2_bar_cta": "Claim",
+        "promo2_title_1": "Start the adventure,",
+        "promo2_title_2": "try it free first.",
+        "promo2_desc": "Use the promo code when you register: your child gets 1 Free Trial session, and you get a registration fee discount.",
+        "promo2_s1_t": "Fill in the form",
+        "promo2_s1_d": "+ promo code",
+        "promo2_s2_t": "Free Trial",
+        "promo2_s2_d": "1 session, free",
+        "promo2_s3_t": "Discount",
+        "promo2_s3_d": "on registration fee",
+        "promo2_code_label": "PROMO CODE",
+        "promo2_copy": "Copy",
+        "promo2_copied": "Copied ✓",
+        "promo2_cta": "Use Code &amp; Register",
+        "promo2_note": "The code is filled into the form automatically. The discount amount is shared by our admin during consultation.",
+        "promo2_close": "Close promo",
+        "faq5_title_1": "Frequently asked",
+        "faq5_title_2": "questions.",
+        "faq5_hint": "Use the ↑ ↓ arrow keys to move between questions.",
+        "faq5_cat_start": "Getting Started",
+        "faq5_cat_class": "In Class",
+        "faq5_cat_result": "Outcomes",
+        "faq5_cat_fee": "Fees &amp; Schedule",
+        "faq5_still_t": "Still have questions?",
+        "faq5_still_d": "Our admin is happy to help on WhatsApp.",
+        "faq5_chat": "Chat Mr. Irvan",
+        "footer_wa_name": "Mr. Irvan",
+        "faq5_q1": "Can a child with no coding or computer experience join?",
+        "faq5_tl1": "Yes!",
+        "faq5_sub1": "starting from zero",
+        "faq5_a1": "Absolutely! Many LesKoding students start from zero. Lessons are child-friendly, using interactive visual blocks and real-world analogies first, before gradually introducing text-based code.",
+        "faq5_cta1": "See beginner programs",
+        "faq5_q2": "Is there a trial class, and how much does it cost?",
+        "faq5_tl2": "Free",
+        "faq5_sub2": "1 Free Trial session",
+        "faq5_a2": "Yes, we offer 1 Free Trial Class session (100% free) at our Gianyar and Bedulu Learning Centers, plus consultation/trial options for Private Home Visit classes. Just fill in the form or message our admin on WhatsApp to pick a slot, with no commitment.",
+        "faq5_cta2": "Book a Free Trial",
+        "faq5_q3": "Does my child need to bring their own laptop?",
+        "faq5_tl3": "Recommended",
+        "faq5_sub3": "bring a personal laptop",
+        "faq5_a3": "We recommend that students bring their own laptop so their projects are saved and learning is more effective. If a student cannot bring one, LesKoding will try to provide a device when available.",
+        "faq5_cta3": "See Learning Centers",
+        "faq5_q4": "What is the tutor-to-student ratio in each class?",
+        "faq5_tl4": "1 : 5",
+        "faq5_sub4": "tutor : students",
+        "faq5_a4": "LesKoding keeps classes small with a 1:5 ratio: 1 tutor teaches a maximum of 5 students. Every student gets close guidance and no child is left behind during hands-on practice.",
+        "faq5_cta4": "See how we teach",
+        "faq5_q5": "Do students receive a certificate?",
+        "faq5_tl5": "Yes",
+        "faq5_sub5": "after completing a course",
+        "faq5_a5": "Yes. Every student who completes a course receives a graduation certificate from LesKoding as proof of their achievement, alongside the portfolio of projects they have built.",
+        "faq5_cta5": "See student work",
+        "faq5_q6": "What are the course fees and class schedules?",
+        "faq5_tl6": "Flexible",
+        "faq5_sub6": "fees shared by admin",
+        "faq5_a6": "Fee details are shared by our admin during a consultation after you register. Class schedules are flexible and arranged together with parents.",
+        "faq5_cta6": "Ask via WhatsApp",
         "loc5_title_1": "Learn wherever",
         "loc5_title_2": "works best for you.",
         "loc5_desc": "Come to a Learning Center, have a tutor visit your home, or join an online class. Same curriculum.",
@@ -2663,7 +2674,7 @@ const i18nDictionary = {
         "loc5_kind_lab": "Learning Center",
         "loc5_kind_private": "Tutor visits home",
         "loc5_kind_online": "Remote learning",
-        "loc5_lab_p1": "Computer lab &amp; complete robotics kits",
+        "loc5_lab_p1": "Complete robotics kits · personal laptop recommended",
         "loc5_lab_p2": "Air-conditioned, clean &amp; child-friendly",
         "loc5_lab_p3": "1 tutor : max. 5 students",
         "loc5_pv_p1": "The tutor comes straight to your home",
@@ -3175,7 +3186,7 @@ const i18nDictionary = {
         "faq_q2": "Is a free trial class available?",
         "faq_a2": "Yes, we offer complimentary Free Trial sessions at our Gianyar and Bedulu centers, as well as consultation/trial options for Private Home Visit classes. Book a slot using the form below or chat directly with our team.",
         "faq_q3": "Does my child need to bring their own laptop?",
-        "faq_a3": "Our labs are fully equipped with dedicated PCs and robotic hardware ready for each student. However, students who prefer to bring their own laptop so projects stay on their machine are welcome.",
+        "faq_a3": "We recommend that students bring their own laptop so their projects are saved and learning is more effective. If a student cannot bring one, LesKoding will try to provide a device when available.",
         "faq_q4": "What is the tutor-to-student ratio per class?",
         "faq_a4": "We maintain small interactive classes of 4 to 6 students per tutor, ensuring personalized guidance and immediate support during hands-on projects.",
         "reg_badge": "Registration Form",
@@ -3271,6 +3282,65 @@ const i18nDictionary = {
         "cb3_replay": "Putar ulang",
         "cb3_range_label": "Menit sesi",
         "cb3_note": "Maksimal 120 menit per sesi. Tampilan layar adalah ilustrasi.",
+        "promo2_bar_1": "PROMO 2026: 1 sesi Free Trial gratis + potongan biaya pendaftaran",
+        "promo2_bar_2": "Gunakan kode",
+        "promo2_bar_cta": "Klaim",
+        "promo2_title_1": "Mulai petualangan,",
+        "promo2_title_2": "coba dulu gratis.",
+        "promo2_desc": "Pakai kode promo saat mendaftar: anak mendapat 1 sesi Free Trial, dan Anda mendapat potongan biaya pendaftaran.",
+        "promo2_s1_t": "Isi formulir",
+        "promo2_s1_d": "+ kode promo",
+        "promo2_s2_t": "Free Trial",
+        "promo2_s2_d": "1 sesi, gratis",
+        "promo2_s3_t": "Potongan",
+        "promo2_s3_d": "biaya pendaftaran",
+        "promo2_code_label": "KODE PROMO",
+        "promo2_copy": "Salin",
+        "promo2_copied": "Tersalin ✓",
+        "promo2_cta": "Pakai &amp; Daftar Sekarang",
+        "promo2_note": "Kode terisi otomatis di formulir. Besaran potongan diinformasikan admin saat konsultasi.",
+        "promo2_close": "Tutup promo",
+        "faq5_title_1": "Pertanyaan yang",
+        "faq5_title_2": "sering diajukan.",
+        "faq5_hint": "Gunakan tombol panah ↑ ↓ untuk berpindah pertanyaan.",
+        "faq5_cat_start": "Memulai",
+        "faq5_cat_class": "Di Kelas",
+        "faq5_cat_result": "Hasil Belajar",
+        "faq5_cat_fee": "Biaya &amp; Jadwal",
+        "faq5_still_t": "Masih ada pertanyaan?",
+        "faq5_still_d": "Admin kami siap membantu lewat WhatsApp.",
+        "faq5_chat": "Chat Mr. Irvan",
+        "footer_wa_name": "a.n. Mr. Irvan",
+        "faq5_q1": "Apakah anak yang belum pernah belajar coding atau komputer bisa ikut?",
+        "faq5_tl1": "Bisa!",
+        "faq5_sub1": "mulai dari nol",
+        "faq5_a1": "Tentu bisa! Banyak siswa LesKoding memulai dari nol. Pembelajaran dirancang ramah anak melalui visual blok interaktif dan analogi dunia nyata terlebih dahulu, sebelum perlahan dikenalkan pada logika kode teks.",
+        "faq5_cta1": "Lihat program pemula",
+        "faq5_q2": "Apakah tersedia kelas percobaan (trial class) dan berapa biayanya?",
+        "faq5_tl2": "Gratis",
+        "faq5_sub2": "1 sesi Free Trial",
+        "faq5_a2": "Ya, kami menyediakan 1 sesi Free Trial Class (100% gratis) di Learning Center Gianyar dan Bedulu, serta opsi konsultasi/trial untuk Kelas Private di rumah. Cukup isi formulir atau hubungi admin via WhatsApp untuk memilih jadwal, tanpa ikatan.",
+        "faq5_cta2": "Daftar Free Trial",
+        "faq5_q3": "Apakah siswa harus membawa laptop sendiri?",
+        "faq5_tl3": "Disarankan",
+        "faq5_sub3": "bawa laptop pribadi",
+        "faq5_a3": "Kami menyarankan siswa membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, LesKoding akan mengusahakan menyediakan perangkat apabila tersedia.",
+        "faq5_cta3": "Lihat Learning Center",
+        "faq5_q4": "Berapa rasio tutor per siswa di setiap kelas?",
+        "faq5_tl4": "1 : 5",
+        "faq5_sub4": "tutor : siswa",
+        "faq5_a4": "LesKoding menerapkan kelas kecil dengan rasio 1:5, yaitu 1 tutor mengajar maksimal 5 siswa. Setiap siswa mendapat bimbingan intensif dan tidak ada anak yang tertinggal saat praktik langsung.",
+        "faq5_cta4": "Lihat cara belajar",
+        "faq5_q5": "Apakah siswa mendapatkan sertifikat?",
+        "faq5_tl5": "Ya",
+        "faq5_sub5": "setelah lulus course",
+        "faq5_a5": "Ya. Setiap siswa yang menyelesaikan course mendapatkan sertifikat kelulusan dari LesKoding sebagai bukti capaian belajar, melengkapi portofolio karya yang sudah dibuat.",
+        "faq5_cta5": "Lihat karya siswa",
+        "faq5_q6": "Berapa biaya kursus dan bagaimana jadwal kelasnya?",
+        "faq5_tl6": "Fleksibel",
+        "faq5_sub6": "biaya via admin",
+        "faq5_a6": "Informasi biaya disampaikan oleh admin saat konsultasi setelah Anda mendaftar. Jadwal kelas bersifat fleksibel dan ditentukan bersama sesuai kesepakatan dengan orang tua.",
+        "faq5_cta6": "Konsultasi via WhatsApp",
         "loc5_title_1": "Belajar di mana pun",
         "loc5_title_2": "yang paling pas.",
         "loc5_desc": "Datang ke Learning Center, tutor yang datang ke rumah, atau ikut kelas online. Kurikulumnya sama.",
@@ -3282,7 +3352,7 @@ const i18nDictionary = {
         "loc5_kind_lab": "Learning Center",
         "loc5_kind_private": "Tutor ke rumah",
         "loc5_kind_online": "Belajar jarak jauh",
-        "loc5_lab_p1": "Lab komputer &amp; kit robotik lengkap",
+        "loc5_lab_p1": "Kit robotik lengkap · laptop pribadi disarankan",
         "loc5_lab_p2": "Ruang ber-AC, bersih &amp; ramah anak",
         "loc5_lab_p3": "Rasio 1 tutor : maks. 5 siswa",
         "loc5_pv_p1": "Tutor datang langsung ke rumah",
@@ -3794,7 +3864,7 @@ const i18nDictionary = {
         "faq_q2": "Apakah tersedia kelas percobaan (trial class)?",
         "faq_a2": "Ya, kami menyediakan sesi Free Trial di Learning Center Gianyar dan Bedulu, serta opsi kelas Private di rumah sendiri (Home Visit). Anda dapat mendaftarkan jadwal percobaan melalui form di bawah atau via WhatsApp admin kami.",
         "faq_q3": "Apakah siswa harus membawa laptop sendiri?",
-        "faq_a3": "Setiap lab Learning Center kami sudah dilengkapi dengan PC/Laptop dan perangkat robotik siap pakai. Namun, siswa yang ingin membawa laptop pribadi agar proyek tersimpan langsung di perangkatnya sangat dipersilakan.",
+        "faq_a3": "Kami menyarankan siswa membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, LesKoding akan mengusahakan menyediakan perangkat apabila tersedia.",
         "faq_q4": "Berapa rasio tutor per siswa di setiap kelas?",
         "faq_a4": "Kami menjaga kualitas pembelajaran dengan kelas kecil: maksimal 4–6 anak per tutor agar setiap anak mendapat pendampingan intensif dan tidak ada yang tertinggal dalam proses praktek.",
         "reg_badge": "Formulir Pendaftaran",
@@ -4749,4 +4819,97 @@ document.addEventListener('leskoding:lang', () => renderA());
             if (choice) choice.click();
         }
     });
+})();
+
+/* ========================================================
+   19. FAQ (opsi 5): DAFTAR PERTANYAAN + PANEL JAWABAN
+   Desktop: tab vertikal + panel kanan. HP (<1024px): panel dipindah ke bawah
+   pertanyaannya dan berperilaku seperti accordion.
+   ======================================================== */
+(() => {
+    const list = document.getElementById('faq5-list');
+    const col = document.getElementById('faq5-panels');
+    if (!list || !col) return;
+    const tabs = [...list.querySelectorAll('.faq5-q')];
+    const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    let active = 0;          // desktop: selalu ada satu yang aktif
+    let open = -1;           // HP: boleh semua tertutup
+
+    const render = () => {
+        const isDesk = desktop.matches;
+        tabs.forEach((t, i) => {
+            const on = isDesk ? i === active : i === open;
+            t.setAttribute('aria-selected', on);
+            t.tabIndex = (isDesk ? i === active : true) ? 0 : -1;
+            panels[i].hidden = !on;
+        });
+    };
+    const place = () => {
+        if (desktop.matches) panels.forEach(p => col.appendChild(p));
+        else panels.forEach((p, i) => tabs[i].parentElement.appendChild(p));
+        render();
+    };
+
+    list.addEventListener('click', e => {
+        const t = e.target.closest('.faq5-q');
+        if (!t) return;
+        const i = tabs.indexOf(t);
+        if (desktop.matches) active = i;
+        else open = open === i ? -1 : i;
+        render();
+    });
+    list.addEventListener('keydown', e => {
+        if (!desktop.matches) return;
+        const i = tabs.indexOf(document.activeElement);
+        if (i < 0) return;
+        const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+        if (!step) return;
+        e.preventDefault();
+        active = (i + step + tabs.length) % tabs.length;
+        render();
+        tabs[active].focus();
+    });
+    desktop.addEventListener('change', place);
+    place();
+})();
+
+/* ========================================================
+   20. PROMO (opsi 4 + 6): TOP BAR BERJALAN + PIL + SECTION #promo
+   Bar mendorong header & halaman turun lewat --promo-bar-h. Setelah ditutup,
+   muncul pil di pojok; pilihan ini diingat selama sesi browser.
+   ======================================================== */
+(() => {
+    const bar = document.getElementById('promo-bar');
+    const pill = document.getElementById('promo-pill');
+    const closeBtn = document.getElementById('promo-bar-close');
+    const copyBtn = document.getElementById('promo-copy');
+    const root = document.documentElement;
+    const KEY = 'leskoding_promo_bar_closed';
+    const t = key => {
+        const dict = i18nDictionary[localStorage.getItem('leskoding_lang') || 'en'] || i18nDictionary.en;
+        return dict[key] || i18nDictionary.id[key] || key;
+    };
+    let closed = false;
+    try { closed = sessionStorage.getItem(KEY) === '1'; } catch (e) { /* storage diblokir: tampilkan bar */ }
+
+    const render = () => {
+        if (bar) bar.hidden = closed;
+        root.style.setProperty('--promo-bar-h', closed || !bar ? '0px' : '40px');
+        if (pill) { pill.classList.toggle('hidden', !closed); pill.classList.toggle('flex', closed); }
+    };
+    if (closeBtn) closeBtn.addEventListener('click', () => {
+        closed = true;
+        try { sessionStorage.setItem(KEY, '1'); } catch (e) { /* abaikan */ }
+        render();
+    });
+    if (copyBtn) copyBtn.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText('PETUALANGAN2026'); } catch (e) { /* clipboard tidak tersedia */ }
+        const label = copyBtn.querySelector('span');
+        if (label) { label.textContent = t('promo2_copied'); setTimeout(() => { label.textContent = t('promo2_copy'); }, 1800); }
+    });
+    const relabel = () => { if (closeBtn) closeBtn.setAttribute('aria-label', t('promo2_close')); };
+    document.addEventListener('leskoding:lang', relabel);
+    relabel();
+    render();
 })();

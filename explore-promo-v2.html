@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Promosi</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .opsi-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem 1rem; margin-bottom:2rem; }
+  .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .9rem; border-radius:999px; background:#1E293B; border:1px solid rgba(255,255,255,.1); font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+  .grad { background:linear-gradient(90deg,#FFC83D,#38BDF8,#C084FC); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .cta { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#FFC83D; color:#111827; font-weight:800; padding:.85rem 1.4rem; min-height:48px; border-radius:.75rem; font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; transition:all .25s; box-shadow:0 4px 20px rgba(255,200,61,.3); }
+  .cta:hover { background:#fed368; transform:translateY(-2px); }
+  .ghost { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border:1px solid rgba(255,255,255,.15); color:#fff; font-weight:700; padding:.7rem 1.1rem; min-height:44px; border-radius:.75rem; font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; transition:background .25s; }
+  .ghost:hover { background:rgba(255,255,255,.06); }
+  .grid-bg { background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:32px 32px; }
+
+  /* Mock browser stage: overlay promos render inside it, not over this page */
+  .stage { position:relative; height:540px; border-radius:1.5rem; border:1px solid rgba(255,255,255,.12); background:#0B0F19; overflow:hidden; }
+  .stage-bar { height:38px; display:flex; align-items:center; gap:6px; padding:0 14px; background:#1E293B; border-bottom:1px solid rgba(255,255,255,.08); }
+  .stage-bar i.d { width:9px; height:9px; border-radius:50%; display:inline-block; }
+  .faux { position:absolute; inset:38px 0 0 0; padding:28px; }
+  .sk { background:rgba(255,255,255,.06); border-radius:10px; }
+  .code-box { font-family:'Fira Code',monospace; font-weight:600; letter-spacing:.14em; }
+
+  /* 1 · Slide-in */
+  .slidein { transform:translateY(130%); transition:transform .6s cubic-bezier(.2,.9,.2,1); }
+  .slidein.show { transform:none; }
+  .ticket-edge { background:radial-gradient(circle at 0 50%, #0B0F19 9px, transparent 10px) left/18px 100% no-repeat, radial-gradient(circle at 100% 50%, #0B0F19 9px, transparent 10px) right/18px 100% no-repeat; }
+
+  /* 2 · Voucher modal */
+  .vm-back { opacity:0; transition:opacity .3s; pointer-events:none; }
+  .vm-back.show { opacity:1; pointer-events:auto; }
+  .voucher { transform:scale(.9) translateY(20px); transition:transform .45s cubic-bezier(.2,.9,.2,1.2); }
+  .vm-back.show .voucher { transform:none; }
+  .perf { position:relative; border-top:2px dashed rgba(17,24,39,.25); }
+  .perf::before, .perf::after { content:''; position:absolute; top:-12px; width:22px; height:22px; border-radius:50%; background:rgba(5,7,13,.85); }
+  .perf::before { left:-11px; } .perf::after { right:-11px; }
+
+  /* 3 · Scratch */
+  .scratch-wrap canvas { position:absolute; inset:0; width:100%; height:100%; border-radius:1rem; cursor:grab; touch-action:none; }
+  .scratch-wrap.done canvas { opacity:0; transition:opacity .5s; pointer-events:none; }
+
+  /* 4 · Top bar */
+  .tb-track { display:flex; width:max-content; animation:tbroll 28s linear infinite; }
+  .tb:hover .tb-track { animation-play-state:paused; }
+  @keyframes tbroll { to { transform:translateX(-50%); } }
+
+  /* 5 · Gift box */
+  .gift { position:relative; width:150px; height:150px; cursor:pointer; }
+  .gift .box { position:absolute; bottom:0; left:10px; right:10px; height:100px; border-radius:10px; background:linear-gradient(160deg,#C084FC,#7C3AED); box-shadow:inset 0 -10px 0 rgba(0,0,0,.15); }
+  .gift .lid { position:absolute; bottom:92px; left:0; right:0; height:32px; border-radius:8px; background:linear-gradient(160deg,#D8B4FE,#8B5CF6); transition:transform .6s cubic-bezier(.3,1.6,.5,1); transform-origin:left bottom; }
+  .gift .rib-v { position:absolute; left:50%; width:22px; transform:translateX(-50%); background:#FFC83D; }
+  .gift .bow { position:absolute; bottom:120px; left:50%; transform:translateX(-50%); color:#FFC83D; font-size:34px; transition:transform .6s; }
+  .gift:not(.open) { animation:wiggle 2.4s ease-in-out infinite; }
+  @keyframes wiggle { 0%,80%,100% { transform:rotate(0); } 84% { transform:rotate(-6deg); } 88% { transform:rotate(6deg); } 92% { transform:rotate(-4deg); } 96% { transform:rotate(3deg); } }
+  .gift.open .lid { transform:translate(-120px,95px) rotate(-18deg); }
+  .gift.open .bow { transform:translate(60px,100px) rotate(35deg); }
+  .pop-card { opacity:0; transform:translateY(40px) scale(.9); transition:all .55s cubic-bezier(.2,.9,.2,1.2) .15s; pointer-events:none; }
+  .pop-card.show { opacity:1; transform:none; pointer-events:auto; }
+
+  /* 6 · Inline */
+  .step-line { background:repeating-linear-gradient(90deg, rgba(255,200,61,.5) 0 8px, transparent 8px 16px); height:2px; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI · Promosi</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Kartu Slide-in</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Voucher</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Gosok Kode</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Top Bar</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Kado Misteri</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Banner Inline</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-12 pb-10">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// sekarang: #promo-modal (popup otomatis 1,5 detik) + tombol mengambang</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">6 konsep untuk <span class="grad">Promosi.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Isi promo mengikuti <b class="text-white">KB §11.2</b>: kode <span class="mono text-[#FFC83D]">PETUALANGAN2026</span> = <b class="text-white">1 sesi Free Trial gratis + potongan biaya pendaftaran</b> (besarannya diinformasikan admin). Tidak ada persen diskon, batas waktu, atau kuota yang dikarang. Opsi yang berupa overlay ditampilkan di dalam <b class="text-white">bingkai browser tiruan</b>, dengan tombol "Putar ulang" untuk melihat animasinya lagi.</p>
+</header>
+
+<!-- ============================ OPSI 1 ============================ -->
+<section id="opsi-1" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span><h2 class="font-display text-2xl font-extrabold">Kartu Slide-in</h2><p class="text-sm text-slate-400 max-w-3xl">Tidak menutupi halaman. Kartu tiket kecil meluncur dari pojok kiri bawah setelah pengunjung scroll ±40% (bukan langsung saat halaman terbuka). Bisa diperkecil jadi pil "Promo 2026", dan tidak muncul lagi di sesi yang sama setelah ditutup.</p></div>
+    <div class="flex justify-end mb-3"><button class="ghost" data-replay="1"><i class="fa-solid fa-rotate-left"></i> Putar ulang</button></div>
+    <div class="stage" id="st1">
+      <div class="stage-bar"><i class="d bg-[#F87171]"></i><i class="d bg-[#FFC83D]"></i><i class="d bg-emerald-400"></i><span class="mono text-[11px] text-slate-500 ml-3">leskoding.id · setelah scroll 40%</span></div>
+      <div class="faux"><div class="sk h-8 w-1/3 mb-4"></div><div class="sk h-4 w-2/3 mb-2"></div><div class="sk h-4 w-1/2 mb-8"></div><div class="grid grid-cols-3 gap-4"><div class="sk h-40"></div><div class="sk h-40"></div><div class="sk h-40"></div></div></div>
+      <div class="slidein absolute left-4 bottom-4 w-[340px] max-w-[calc(100%-2rem)]" id="si-card">
+        <div class="ticket-edge rounded-2xl bg-[#1E293B] border border-[#FFC83D]/40 shadow-[0_20px_50px_-15px_rgba(255,200,61,.35)] overflow-hidden">
+          <div class="flex">
+            <div class="w-20 shrink-0 bg-[#FFC83D] text-[#111827] grid place-items-center relative">
+              <div class="text-center"><i class="fa-solid fa-gift text-2xl"></i><div class="mono text-[9px] font-bold mt-1">PROMO<br>2026</div></div>
+            </div>
+            <div class="p-4 flex-1 border-l-2 border-dashed border-[#FFC83D]/30">
+              <div class="flex items-start justify-between gap-2">
+                <div class="font-display font-extrabold leading-tight">Free Trial + potongan biaya pendaftaran</div>
+                <button class="text-slate-400 hover:text-white w-7 h-7 -mt-1 -mr-1 shrink-0" aria-label="Perkecil" id="si-min"><i class="fa-solid fa-minus"></i></button>
+              </div>
+              <div class="mt-2 flex items-center gap-2"><span class="code-box text-[11px] text-[#FFC83D] bg-black/30 border border-dashed border-[#FFC83D]/40 rounded-md px-2 py-1">PETUALANGAN2026</span><button class="text-[11px] font-bold text-slate-300 hover:text-white" data-copy><i class="fa-regular fa-copy mr-1"></i>Salin</button></div>
+              <button class="mt-3 w-full inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold rounded-lg py-2.5 text-[11px] uppercase tracking-wider" data-claim>Klaim &amp; Daftar <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="absolute left-4 bottom-4 hidden items-center gap-2 rounded-full bg-[#1E293B] border border-[#FFC83D]/50 text-[#FFC83D] px-4 py-2.5 text-xs font-bold shadow-lg" id="si-pill"><i class="fa-solid fa-gift"></i> Promo 2026 <span class="w-2 h-2 rounded-full bg-[#F87171] animate-pulse"></span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 2 ============================ -->
+<section id="opsi-2" class="py-16 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span><h2 class="font-display text-2xl font-extrabold">Voucher Fisik</h2><p class="text-sm text-slate-400 max-w-3xl">Popup tetap ada, tapi didesain ulang menjadi voucher kertas dengan sobekan berlubang. Tombol "Salin kode" disertai konfeti kecil. Benefit dibuat jelas dalam dua baris. Paling dekat dengan yang sekarang, tapi lebih berkarakter.</p></div>
+    <div class="flex justify-end mb-3"><button class="ghost" data-replay="2"><i class="fa-solid fa-rotate-left"></i> Putar ulang</button></div>
+    <div class="stage" id="st2">
+      <div class="stage-bar"><i class="d bg-[#F87171]"></i><i class="d bg-[#FFC83D]"></i><i class="d bg-emerald-400"></i><span class="mono text-[11px] text-slate-500 ml-3">leskoding.id · popup</span></div>
+      <div class="faux"><div class="sk h-10 w-1/2 mb-4"></div><div class="sk h-4 w-2/3 mb-2"></div><div class="sk h-4 w-1/2 mb-8"></div><div class="sk h-56"></div></div>
+      <div class="vm-back absolute inset-0 top-[38px] bg-[#05070D]/85 backdrop-blur-sm grid place-items-center p-4" id="vm">
+        <div class="voucher relative w-full max-w-[380px]">
+          <button class="absolute -top-3 -right-3 z-10 w-9 h-9 rounded-full bg-[#1E293B] border border-white/20 text-white" aria-label="Tutup" id="vm-close"><i class="fa-solid fa-xmark"></i></button>
+          <div class="rounded-3xl overflow-hidden bg-[#FFF8E6] text-[#111827] shadow-[0_30px_80px_-20px_rgba(255,200,61,.45)]">
+            <div class="relative p-6 pb-5 bg-[#FFC83D] overflow-hidden">
+              <div class="absolute -right-6 -top-6 text-[8rem] text-white/25 rotate-12"><i class="fa-solid fa-rocket"></i></div>
+              <div class="relative mono text-[10px] font-bold tracking-[.25em]">VOUCHER · PROMO 2026</div>
+              <div class="relative font-display font-black text-3xl leading-[1.05] mt-2">Mulai petualangan<br>digital anak.</div>
+            </div>
+            <div class="p-6 pt-5 space-y-3">
+              <div class="flex gap-3 items-start"><span class="w-8 h-8 rounded-lg bg-[#111827] text-[#FFC83D] grid place-items-center shrink-0"><i class="fa-solid fa-gift text-sm"></i></span><div><div class="font-bold">1 sesi Free Trial</div><div class="text-xs text-[#475467]">Gratis, tanpa ikatan</div></div></div>
+              <div class="flex gap-3 items-start"><span class="w-8 h-8 rounded-lg bg-[#111827] text-[#FFC83D] grid place-items-center shrink-0"><i class="fa-solid fa-tag text-sm"></i></span><div><div class="font-bold">Potongan biaya pendaftaran</div><div class="text-xs text-[#475467]">Besaran diinformasikan admin saat konsultasi</div></div></div>
+            </div>
+            <div class="perf mx-0 px-6 py-5 bg-[#FFF1C7]">
+              <div class="mono text-[10px] text-[#475467] mb-2">KODE PROMO</div>
+              <div class="flex gap-2">
+                <div class="code-box flex-1 text-center rounded-xl border-2 border-dashed border-[#111827]/30 py-2.5 text-[15px]">PETUALANGAN2026</div>
+                <button class="rounded-xl bg-[#111827] text-white px-4 text-xs font-bold" data-copy><i class="fa-regular fa-copy mr-1"></i>Salin</button>
+              </div>
+              <button class="mt-3 w-full inline-flex items-center justify-center gap-2 bg-[#0788F5] hover:bg-[#38BDF8] text-white font-extrabold rounded-xl py-3 text-xs uppercase tracking-wider transition" data-claim>Daftar &amp; Klaim Promo <i class="fa-solid fa-rocket"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 3 ============================ -->
+<section id="opsi-3" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span><h2 class="font-display text-2xl font-extrabold">Gosok Kode</h2><p class="text-sm text-slate-400 max-w-3xl">Kartu gosok: kode tersembunyi di balik lapisan perak. Gosok dengan jari/mouse, dan setelah ±45% terbuka, kode muncul penuh dengan konfeti. Gamifikasi yang disukai anak, dan anak bisa diajak "menggosok" bersama orang tua. Ada tombol "Buka langsung" untuk yang tidak ingin menggosok.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <div class="badge mb-4"><i class="fa-solid fa-wand-magic-sparkles text-[#FFC83D]"></i> Hadiah Petualangan</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Gosok &amp; temukan <span class="grad">kode rahasianya.</span></h3>
+        <p class="text-slate-300 mt-4">Di balik kartu ini ada kode untuk 1 sesi Free Trial gratis dan potongan biaya pendaftaran.</p>
+        <ul class="mt-5 space-y-2 text-sm text-slate-300"><li><i class="fa-solid fa-check text-[#FFC83D] mr-2"></i>Berlaku di Gianyar, Bedulu, Private &amp; Online</li><li><i class="fa-solid fa-check text-[#FFC83D] mr-2"></i>Besaran potongan diinformasikan admin</li></ul>
+      </div>
+      <div class="flex flex-col items-center">
+        <div class="w-full max-w-[400px] rounded-[1.75rem] p-5 bg-gradient-to-br from-[#FFC83D] via-[#F59E0B] to-[#F97316] shadow-[0_30px_70px_-25px_rgba(255,200,61,.6)]">
+          <div class="flex items-center justify-between text-[#111827] mb-3"><span class="mono text-[10px] font-bold tracking-[.2em]">LESKODING · KARTU HADIAH</span><i class="fa-solid fa-star"></i></div>
+          <div class="scratch-wrap relative rounded-2xl bg-[#111827] h-[150px] grid place-items-center text-center select-none" id="scratch">
+            <div><div class="mono text-[10px] text-slate-400">KODE PROMO</div><div class="code-box text-2xl text-[#FFC83D] mt-1">PETUALANGAN2026</div><div class="text-[11px] text-slate-400 mt-1">Free Trial + potongan pendaftaran</div></div>
+            <canvas id="scratch-canvas" aria-hidden="true"></canvas>
+          </div>
+          <div class="flex items-center justify-between mt-3 text-[#111827]"><span class="text-xs font-bold" id="scratch-hint"><i class="fa-solid fa-hand-pointer mr-1"></i>Gosok area perak</span><button class="text-xs font-bold underline" id="scratch-skip">Buka langsung</button></div>
+        </div>
+        <div class="flex gap-3 mt-5 opacity-40 pointer-events-none transition" id="scratch-actions">
+          <button class="ghost" data-copy><i class="fa-regular fa-copy"></i> Salin kode</button>
+          <button class="cta" data-claim><i class="fa-solid fa-rocket"></i> Klaim &amp; Daftar</button>
+        </div>
+        <button class="text-xs text-slate-400 hover:text-white mt-4" data-replay="3"><i class="fa-solid fa-rotate-left mr-1"></i> Tutup lagi kartunya</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 4 ============================ -->
+<section id="opsi-4" class="py-16 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span><h2 class="font-display text-2xl font-extrabold">Top Bar + Pil</h2><p class="text-sm text-slate-400 max-w-3xl">Paling tidak mengganggu: bar tipis di atas navbar dengan teks berjalan, plus pil mengambang di pojok setelah bar ditutup. Promo selalu terlihat tanpa popup sama sekali. Cocok kalau popup dirasa mengganggu orang tua.</p></div>
+    <div class="flex justify-end mb-3"><button class="ghost" data-replay="4"><i class="fa-solid fa-rotate-left"></i> Putar ulang</button></div>
+    <div class="stage" id="st4">
+      <div class="stage-bar"><i class="d bg-[#F87171]"></i><i class="d bg-[#FFC83D]"></i><i class="d bg-emerald-400"></i><span class="mono text-[11px] text-slate-500 ml-3">leskoding.id</span></div>
+      <div class="absolute inset-x-0 top-[38px]">
+        <div class="tb relative bg-gradient-to-r from-[#FFC83D] via-[#FBBF24] to-[#FFC83D] text-[#111827] overflow-hidden flex items-center h-10 transition-all" id="tb">
+          <div class="tb-track text-xs font-bold whitespace-nowrap">
+            <span class="px-6"><i class="fa-solid fa-gift mr-1.5"></i>PROMO 2026: 1 sesi Free Trial gratis + potongan biaya pendaftaran</span><span class="px-6">Gunakan kode <span class="code-box bg-[#111827] text-[#FFC83D] px-2 py-0.5 rounded">PETUALANGAN2026</span></span><span class="px-6"><i class="fa-solid fa-location-dot mr-1"></i>Gianyar · Bedulu · Private · Online</span>
+            <span class="px-6"><i class="fa-solid fa-gift mr-1.5"></i>PROMO 2026: 1 sesi Free Trial gratis + potongan biaya pendaftaran</span><span class="px-6">Gunakan kode <span class="code-box bg-[#111827] text-[#FFC83D] px-2 py-0.5 rounded">PETUALANGAN2026</span></span><span class="px-6"><i class="fa-solid fa-location-dot mr-1"></i>Gianyar · Bedulu · Private · Online</span>
+          </div>
+          <div class="absolute right-0 inset-y-0 flex items-center gap-1 pl-6 pr-2 bg-gradient-to-l from-[#FFC83D] via-[#FFC83D] to-transparent">
+            <button class="bg-[#111827] text-[#FFC83D] text-[11px] font-extrabold uppercase tracking-wider rounded-md px-3 py-1.5" data-claim>Klaim →</button>
+            <button class="w-8 h-8 text-[#111827]" aria-label="Tutup bar promo" id="tb-close"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        </div>
+        <div class="flex items-center justify-between px-6 h-14 bg-[#0B0F19]/90 border-b border-white/10">
+          <img src="assets/logo/leskoding_community_sm.png" alt="" class="h-7"><div class="flex gap-4"><span class="sk h-3 w-16"></span><span class="sk h-3 w-16"></span><span class="sk h-3 w-12"></span></div><span class="rounded-lg bg-[#FFC83D] w-24 h-8"></span>
+        </div>
+        <div class="p-7"><div class="sk h-10 w-1/2 mb-4"></div><div class="sk h-4 w-2/3 mb-2"></div><div class="sk h-4 w-1/2"></div></div>
+      </div>
+      <button class="absolute right-4 bottom-4 hidden items-center gap-2 rounded-full bg-[#FFC83D] text-[#111827] pl-2 pr-4 py-2 text-xs font-extrabold shadow-[0_10px_30px_-5px_rgba(255,200,61,.5)]" id="tb-pill"><span class="w-7 h-7 rounded-full bg-[#111827] text-[#FFC83D] grid place-items-center"><i class="fa-solid fa-gift"></i></span> Promo 2026</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 5 ============================ -->
+<section id="opsi-5" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span><h2 class="font-display text-2xl font-extrabold">Kado Misteri</h2><p class="text-sm text-slate-400 max-w-3xl">Ikon kado yang bergoyang di pojok layar mengundang klik. Saat diklik, tutupnya terlempar, lalu voucher muncul dari dalam kotak disertai konfeti. Rasa penasaran membuat lebih banyak orang mengklik. Tidak muncul paksa.</p></div>
+    <div class="flex justify-end mb-3"><button class="ghost" data-replay="5"><i class="fa-solid fa-rotate-left"></i> Putar ulang</button></div>
+    <div class="stage grid-bg" id="st5">
+      <div class="stage-bar"><i class="d bg-[#F87171]"></i><i class="d bg-[#FFC83D]"></i><i class="d bg-emerald-400"></i><span class="mono text-[11px] text-slate-500 ml-3">leskoding.id · klik kadonya</span></div>
+      <div class="absolute inset-0 top-[38px] grid place-items-center pt-40">
+        <div class="relative flex flex-col items-center">
+          <div class="pop-card absolute z-20 bottom-[165px] w-[300px] rounded-2xl bg-[#1E293B] border border-[#C084FC]/50 p-5 text-center shadow-[0_30px_60px_-20px_rgba(192,132,252,.5)]" id="gift-card">
+            <div class="mono text-[10px] font-bold text-[#C084FC] tracking-[.2em]">KAMU DAPAT HADIAH!</div>
+            <div class="font-display font-black text-2xl leading-tight mt-2">Free Trial + potongan biaya pendaftaran</div>
+            <div class="code-box text-[#FFC83D] mt-3 rounded-lg border border-dashed border-[#FFC83D]/40 bg-black/20 py-2">PETUALANGAN2026</div>
+            <div class="flex gap-2 mt-3"><button class="flex-1 ghost !min-h-[40px] !py-2 !px-2" data-copy><i class="fa-regular fa-copy"></i> Salin</button><button class="flex-1 cta !min-h-[40px] !py-2 !px-2" data-claim>Klaim</button></div>
+          </div>
+          <button class="gift" id="gift" aria-label="Buka kado promo">
+            <span class="box"><span class="rib-v absolute top-0 bottom-0"></span></span>
+            <span class="lid"><span class="rib-v absolute top-0 bottom-0"></span></span>
+            <span class="bow"><i class="fa-solid fa-ribbon"></i></span>
+          </button>
+          <div class="mt-6 text-sm text-slate-400" id="gift-hint">Ada kejutan untuk Anda. Klik kadonya!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 6 ============================ -->
+<section id="opsi-6" class="py-16 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span><h2 class="font-display text-2xl font-extrabold">Banner Inline</h2><p class="text-sm text-slate-400 max-w-3xl">Tanpa popup: promo menjadi section penuh tepat sebelum formulir. Ada 3 langkah klaim (isi formulir → Free Trial → potongan pendaftaran), kode yang bisa disalin, dan CTA ke formulir. Promo dijelaskan, bukan sekadar diumumkan.</p></div>
+    <div class="relative rounded-[2rem] overflow-hidden border border-[#FFC83D]/30 bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#0B0F19]">
+      <div class="absolute inset-0 grid-bg opacity-60"></div>
+      <div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-[#FFC83D]/10 blur-3xl"></div>
+      <div class="relative grid grid-cols-1 lg:grid-cols-12 gap-8 p-7 sm:p-10 lg:p-12 items-center">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 rounded-full bg-[#FFC83D] text-[#111827] px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-wider"><i class="fa-solid fa-fire"></i> Promo 2026</div>
+          <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05] mt-5">Mulai petualangan, <span class="grad">coba dulu gratis.</span></h3>
+          <p class="text-slate-300 mt-4 max-w-xl">Pakai kode promo saat mendaftar: anak mendapat 1 sesi Free Trial, dan Anda mendapat potongan biaya pendaftaran.</p>
+          <div class="mt-8 grid grid-cols-3 gap-2 items-start">
+            <div class="text-center"><div class="w-12 h-12 mx-auto rounded-2xl bg-[#38BDF8]/15 text-[#38BDF8] grid place-items-center text-lg"><i class="fa-solid fa-pen-to-square"></i></div><div class="text-xs font-bold mt-2">Isi formulir</div><div class="text-[11px] text-slate-400">+ kode promo</div></div>
+            <div class="text-center"><div class="w-12 h-12 mx-auto rounded-2xl bg-[#FFC83D]/15 text-[#FFC83D] grid place-items-center text-lg"><i class="fa-solid fa-gift"></i></div><div class="text-xs font-bold mt-2">Free Trial</div><div class="text-[11px] text-slate-400">1 sesi, gratis</div></div>
+            <div class="text-center"><div class="w-12 h-12 mx-auto rounded-2xl bg-[#C084FC]/15 text-[#C084FC] grid place-items-center text-lg"><i class="fa-solid fa-tag"></i></div><div class="text-xs font-bold mt-2">Potongan</div><div class="text-[11px] text-slate-400">biaya pendaftaran</div></div>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="rounded-2xl bg-[#0B0F19] border border-white/10 p-6">
+            <div class="mono text-[10px] text-slate-400 mb-2">KODE PROMO</div>
+            <div class="flex gap-2">
+              <div class="code-box flex-1 text-center rounded-xl border-2 border-dashed border-[#FFC83D]/50 text-[#FFC83D] py-3 text-lg">PETUALANGAN2026</div>
+              <button class="rounded-xl bg-white/10 hover:bg-white/15 px-4 text-xs font-bold" data-copy><i class="fa-regular fa-copy mr-1"></i>Salin</button>
+            </div>
+            <button class="cta w-full mt-4" data-claim><i class="fa-solid fa-rocket"></i> Pakai &amp; Daftar Sekarang</button>
+            <p class="text-[11px] text-slate-500 mt-4 leading-relaxed">Kode terisi otomatis di formulir. Besaran potongan diinformasikan admin saat konsultasi. Berlaku di Gianyar, Bedulu, Private, dan Online.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PERBANDINGAN ============================ -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <h2 class="font-display text-3xl font-extrabold mb-6">Perbandingan</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[760px]">
+        <thead class="bg-[#1E293B] text-[11px] mono uppercase tracking-wider text-slate-400"><tr><th class="text-left p-3">Opsi</th><th class="text-left p-3">Mengganggu?</th><th class="text-left p-3">Kekuatan</th><th class="text-left p-3">Catatan</th></tr></thead>
+        <tbody class="divide-y divide-white/5">
+          <tr><td class="p-3 font-bold">1 · Kartu Slide-in</td><td class="p-3 text-emerald-400">Rendah</td><td class="p-3 text-slate-300">Muncul saat pengunjung sudah tertarik (scroll 40%)</td><td class="p-3 text-slate-400">Bisa terlewat di HP jika kecil</td></tr>
+          <tr><td class="p-3 font-bold">2 · Voucher</td><td class="p-3 text-[#F87171]">Tinggi (popup)</td><td class="p-3 text-slate-300">Paling jelas dan paling mudah dipasang (ganti tampilan modal lama)</td><td class="p-3 text-slate-400">Disarankan tidak muncul di 1,5 detik pertama</td></tr>
+          <tr><td class="p-3 font-bold">3 · Gosok Kode</td><td class="p-3 text-[#FFC83D]">Sedang</td><td class="p-3 text-slate-300">Gamifikasi, berkesan untuk anak</td><td class="p-3 text-slate-400">Bisa dipakai di popup maupun sebagai section</td></tr>
+          <tr><td class="p-3 font-bold">4 · Top Bar + Pil</td><td class="p-3 text-emerald-400">Sangat rendah</td><td class="p-3 text-slate-300">Selalu terlihat, standar e-commerce</td><td class="p-3 text-slate-400">Navbar perlu turun 40px saat bar tampil</td></tr>
+          <tr><td class="p-3 font-bold">5 · Kado Misteri</td><td class="p-3 text-emerald-400">Rendah</td><td class="p-3 text-slate-300">Rasa penasaran, pengunjung sendiri yang memilih membuka</td><td class="p-3 text-slate-400">Butuh posisi pojok yang tidak bentrok dengan tombol lain</td></tr>
+          <tr><td class="p-3 font-bold">6 · Banner Inline</td><td class="p-3 text-emerald-400">Tidak ada</td><td class="p-3 text-slate-300">Menjelaskan cara klaim, tepat sebelum formulir</td><td class="p-3 text-slate-400">Hanya terlihat oleh yang scroll sampai bawah, jadi bisa dikombinasikan dengan opsi 4</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4 mt-6">
+      <div class="rounded-2xl border border-white/10 bg-[#1E293B]/50 p-5 text-sm">
+        <div class="font-bold mb-2"><i class="fa-solid fa-lightbulb text-[#FFC83D] mr-1"></i> Saran kombinasi</div>
+        <p class="text-slate-300"><b>Opsi 4 + 6</b> (bar di atas + section sebelum formulir) tanpa popup sama sekali, atau <b>Opsi 1 + 6</b> jika ingin tetap ada "dorongan" saat scroll. Semua opsi memakai fungsi yang sudah ada (<span class="mono">claimPromoAndRegister</span>) untuk mengisi kode di formulir.</p>
+      </div>
+      <div class="rounded-2xl border border-[#F87171]/30 bg-[#F87171]/5 p-5 text-sm">
+        <div class="font-bold mb-2 text-[#F87171]"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Perlu dikonfirmasi</div>
+        <ul class="list-disc pl-5 text-slate-300 space-y-1">
+          <li>Apakah promo berlaku juga untuk <b>Kelas Online</b>? (KB §11.2 menyebut "seluruh cabang")</li>
+          <li>Ada batas waktu promo? Kalau ada, bisa ditambah hitung mundur (sekarang sengaja tidak ada).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[60] rounded-xl bg-[#1E293B] border border-white/15 px-4 py-2.5 text-sm font-semibold shadow-2xl transition-all opacity-0 translate-y-4 pointer-events-none" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+const CODE = 'PETUALANGAN2026';
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const toastEl = document.getElementById('toast');
+let toastT;
+const toast = msg => { toastEl.textContent = msg; toastEl.classList.remove('opacity-0', 'translate-y-4'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.add('opacity-0', 'translate-y-4'), 2200); };
+const burst = el => {
+  if (reduce || !window.confetti) return;
+  const r = el.getBoundingClientRect();
+  confetti({ particleCount: 70, spread: 70, startVelocity: 30, origin: { x: (r.left + r.width / 2) / innerWidth, y: (r.top + r.height / 2) / innerHeight }, colors: ['#FFC83D', '#38BDF8', '#C084FC', '#34D399'] });
+};
+document.addEventListener('click', async e => {
+  const c = e.target.closest('[data-copy]');
+  if (c) {
+    try { await navigator.clipboard.writeText(CODE); toast('Kode PETUALANGAN2026 tersalin ✓'); }
+    catch { toast('Kode: PETUALANGAN2026'); }
+    burst(c);
+  }
+  if (e.target.closest('[data-claim]')) toast('Di index: formulir terisi kode & scroll ke pendaftaran');
+});
+
+/* 1 · Slide-in */
+const si = document.getElementById('si-card'), siPill = document.getElementById('si-pill');
+const play1 = () => { si.classList.remove('show'); siPill.classList.add('hidden'); siPill.classList.remove('flex'); setTimeout(() => si.classList.add('show'), 600); };
+document.getElementById('si-min').onclick = () => { si.classList.remove('show'); setTimeout(() => { siPill.classList.remove('hidden'); siPill.classList.add('flex'); }, 400); };
+siPill.onclick = () => { siPill.classList.add('hidden'); siPill.classList.remove('flex'); si.classList.add('show'); };
+
+/* 2 · Voucher */
+const vm = document.getElementById('vm');
+const play2 = () => { vm.classList.remove('show'); setTimeout(() => vm.classList.add('show'), 500); };
+document.getElementById('vm-close').onclick = () => vm.classList.remove('show');
+vm.addEventListener('click', e => { if (e.target === vm) vm.classList.remove('show'); });
+
+/* 3 · Scratch */
+const wrap = document.getElementById('scratch'), cv = document.getElementById('scratch-canvas'), ctx = cv.getContext('2d');
+const actions = document.getElementById('scratch-actions'), hint = document.getElementById('scratch-hint');
+let drawing = false, moves = 0;
+const coat = () => {
+  const r = wrap.getBoundingClientRect(), dpr = devicePixelRatio || 1;
+  cv.width = r.width * dpr; cv.height = r.height * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.globalCompositeOperation = 'source-over';
+  const g = ctx.createLinearGradient(0, 0, r.width, r.height);
+  g.addColorStop(0, '#CBD5E1'); g.addColorStop(.5, '#F1F5F9'); g.addColorStop(1, '#94A3B8');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, r.width, r.height);
+  ctx.fillStyle = 'rgba(15,23,42,.55)'; ctx.font = '700 13px "Fira Code", monospace'; ctx.textAlign = 'center';
+  for (let y = 26; y < r.height; y += 34) for (let x = 40; x < r.width; x += 120) ctx.fillText('GOSOK ★', x + (y % 68 ? 50 : 0), y);
+  wrap.classList.remove('done'); actions.classList.add('opacity-40', 'pointer-events-none');
+  hint.innerHTML = '<i class="fa-solid fa-hand-pointer mr-1"></i>Gosok area perak';
+};
+const reveal = () => {
+  if (wrap.classList.contains('done')) return;
+  wrap.classList.add('done'); actions.classList.remove('opacity-40', 'pointer-events-none');
+  hint.innerHTML = '<i class="fa-solid fa-star mr-1"></i>Kode terbuka!'; burst(wrap);
+};
+const pct = () => { const d = ctx.getImageData(0, 0, cv.width, cv.height).data; let clear = 0; for (let i = 3; i < d.length; i += 64) if (d[i] === 0) clear++; return clear / (d.length / 64); };
+const scratchAt = e => {
+  const r = cv.getBoundingClientRect();
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.beginPath(); ctx.arc(e.clientX - r.left, e.clientY - r.top, 20, 0, Math.PI * 2); ctx.fill();
+  if (++moves % 8 === 0 && pct() > .45) reveal();
+};
+cv.addEventListener('pointerdown', e => { drawing = true; cv.setPointerCapture(e.pointerId); scratchAt(e); });
+cv.addEventListener('pointermove', e => { if (drawing) scratchAt(e); });
+cv.addEventListener('pointerup', () => drawing = false);
+document.getElementById('scratch-skip').onclick = reveal;
+const play3 = coat;
+
+/* 4 · Top bar */
+const tb = document.getElementById('tb'), tbPill = document.getElementById('tb-pill');
+const play4 = () => { tb.style.display = ''; tbPill.classList.add('hidden'); tbPill.classList.remove('flex'); };
+document.getElementById('tb-close').onclick = () => { tb.style.display = 'none'; tbPill.classList.remove('hidden'); tbPill.classList.add('flex'); };
+tbPill.onclick = play4;
+
+/* 5 · Gift */
+const gift = document.getElementById('gift'), giftCard = document.getElementById('gift-card'), giftHint = document.getElementById('gift-hint');
+gift.onclick = () => {
+  if (gift.classList.contains('open')) return;
+  gift.classList.add('open'); giftCard.classList.add('show'); giftHint.textContent = 'Selamat! Kode promo untuk Anda.';
+  setTimeout(() => burst(giftCard), 300);
+};
+const play5 = () => { gift.classList.remove('open'); giftCard.classList.remove('show'); giftHint.textContent = 'Ada kejutan untuk Anda. Klik kadonya!'; };
+
+const PLAY = { 1: play1, 2: play2, 3: play3, 4: play4, 5: play5 };
+document.querySelectorAll('[data-replay]').forEach(b => b.addEventListener('click', () => PLAY[b.dataset.replay]()));
+
+// putar animasi saat bingkai pertama kali terlihat
+const io = new IntersectionObserver(es => es.forEach(en => {
+  if (!en.isIntersecting) return;
+  io.unobserve(en.target);
+  ({ st1: play1, st2: play2 })[en.target.id]?.();
+}), { threshold: .4 });
+['st1', 'st2'].forEach(id => io.observe(document.getElementById(id)));
+coat();
+addEventListener('resize', () => { if (!wrap.classList.contains('done')) coat(); });
+})();
+</script>
+</body>
+</html>

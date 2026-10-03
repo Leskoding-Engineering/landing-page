@@ -78,6 +78,17 @@
 
 </head>
 <body class="font-body text-slate-200 antialiased overflow-x-hidden selection:bg-brand-500/30 selection:text-white bg-grid-pattern bg-[#0B0F19]">
+    <!-- PROMO: top bar berjalan (opsi 4). Ditutup → pil di pojok kanan bawah -->
+    <div id="promo-bar" class="promo-bar fixed top-0 inset-x-0 z-[60] h-10 bg-gradient-to-r from-[#FFC83D] via-[#FBBF24] to-[#FFC83D] text-[#111827] overflow-hidden flex items-center" role="region" aria-label="Promo 2026" hidden>
+        <div class="promo-bar-track text-xs font-bold whitespace-nowrap" aria-hidden="true"><span class="px-6"><i class="fa-solid fa-gift mr-1.5"></i><span data-i18n="promo2_bar_1">PROMO 2026: 1 sesi Free Trial gratis + potongan biaya pendaftaran</span></span><span class="px-6"><span data-i18n="promo2_bar_2">Gunakan kode</span> <span class="font-mono font-semibold tracking-[.12em] bg-[#111827] text-[#FFC83D] px-2 py-0.5 rounded">PETUALANGAN2026</span></span><span class="px-6"><i class="fa-solid fa-gift mr-1.5"></i><span data-i18n="promo2_bar_1">PROMO 2026: 1 sesi Free Trial gratis + potongan biaya pendaftaran</span></span><span class="px-6"><span data-i18n="promo2_bar_2">Gunakan kode</span> <span class="font-mono font-semibold tracking-[.12em] bg-[#111827] text-[#FFC83D] px-2 py-0.5 rounded">PETUALANGAN2026</span></span><span class="px-6"><i class="fa-solid fa-gift mr-1.5"></i><span data-i18n="promo2_bar_1">PROMO 2026: 1 sesi Free Trial gratis + potongan biaya pendaftaran</span></span><span class="px-6"><span data-i18n="promo2_bar_2">Gunakan kode</span> <span class="font-mono font-semibold tracking-[.12em] bg-[#111827] text-[#FFC83D] px-2 py-0.5 rounded">PETUALANGAN2026</span></span><span class="px-6"><i class="fa-solid fa-gift mr-1.5"></i><span data-i18n="promo2_bar_1">PROMO 2026: 1 sesi Free Trial gratis + potongan biaya pendaftaran</span></span><span class="px-6"><span data-i18n="promo2_bar_2">Gunakan kode</span> <span class="font-mono font-semibold tracking-[.12em] bg-[#111827] text-[#FFC83D] px-2 py-0.5 rounded">PETUALANGAN2026</span></span></div>
+        <span class="sr-only" data-i18n="promo2_bar_1">PROMO 2026: 1 sesi Free Trial gratis + potongan biaya pendaftaran</span>
+        <div class="absolute right-0 inset-y-0 flex items-center gap-1 pl-8 pr-2 bg-gradient-to-l from-[#FFC83D] via-[#FFC83D] to-transparent">
+            <a href="#promo" class="bg-[#111827] hover:bg-black text-[#FFC83D] text-[11px] font-extrabold uppercase tracking-wider rounded-md px-3 py-1.5 transition"><span data-i18n="promo2_bar_cta">Klaim</span> →</a>
+            <button type="button" id="promo-bar-close" class="w-9 h-9 text-[#111827] hover:bg-black/10 rounded-md" aria-label="Tutup promo"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </div>
+    <a href="#promo" id="promo-pill" class="fixed right-5 bottom-5 z-40 items-center gap-2 rounded-full bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] pl-2 pr-4 py-2 text-xs font-extrabold shadow-[0_10px_30px_-5px_rgba(255,200,61,.5)] transition hidden"><span class="w-7 h-7 rounded-full bg-[#111827] text-[#FFC83D] grid place-items-center"><i class="fa-solid fa-gift"></i></span><span data-i18n="promo_trigger">Promo 2026</span></a>
+
     <!-- Global Animated Background -->
     <div class="global-bg-wrapper overflow-hidden">
         <div class="bg-texture-overlay"></div>
@@ -782,7 +793,7 @@
                     <i class="fa-solid fa-clipboard-check text-[#38BDF8] text-xs"></i>
                     <span data-i18n="parent_badge" class="text-xs font-bold tracking-wider uppercase text-white">Laporan belajar yang bisa dipahami wali</span>
                 </div>
-                <h2 class="text-3xl sm:text-4xl font-bold leading-tight tracking-tight">
+                <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[1.08] tracking-tight">
                     <span data-i18n="rpt3_title_1">Bukan sekadar nilai.</span>
                     <span data-i18n="rpt3_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">Penjelasan yang bisa ditindaklanjuti.</span>
                 </h2>
@@ -1047,9 +1058,9 @@
                             <div><div class="font-mono text-[10px] font-bold uppercase tracking-widest" style="color:#38BDF8" data-i18n="loc5_kind_lab">Learning Center</div><h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight">Gents Robotic Gianyar</h3></div>
                         </div>
                         <p class="text-sm text-slate-300 mt-5 flex gap-2"><i class="fa-solid fa-location-dot mt-0.5" style="color:#38BDF8"></i>Jln. Ksatrian No. 8, Lingkungan Candi Baru, Gianyar</p>
-                        <ul class="mt-5 space-y-2.5"><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#38BDF8"></i><span data-i18n="loc5_lab_p1">Lab komputer &amp; kit robotik lengkap</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#38BDF8"></i><span data-i18n="loc5_lab_p2">Ruang ber-AC, bersih &amp; ramah anak</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#38BDF8"></i><span data-i18n="loc5_lab_p3">Rasio 1 tutor : maks. 5 siswa</span></li></ul>
+                        <ul class="mt-5 space-y-2.5"><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#38BDF8"></i><span data-i18n="loc5_lab_p1">Kit robotik lengkap · laptop pribadi disarankan</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#38BDF8"></i><span data-i18n="loc5_lab_p2">Ruang ber-AC, bersih &amp; ramah anak</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#38BDF8"></i><span data-i18n="loc5_lab_p3">Rasio 1 tutor : maks. 5 siswa</span></li></ul>
                         <div class="mt-auto pt-6 flex flex-wrap items-center gap-3">
-                            <a href="https://wa.me/628518306798?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Gents%20Robotic%20Gianyar." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>0851-8306-798</a>
+                            <a href="https://wa.me/6285117535970?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Gents%20Robotic%20Gianyar." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>+62 851-1753-5970 · Mr. Irvan</a>
                             <span class="flex-1"></span>
                             <a href="https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 border border-white/15 hover:bg-white/5 text-white font-bold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition"><i class="fa-solid fa-route"></i> <span data-i18n="loc_directions">Rute</span></a><a href="#register" data-pick-center="Gents Robotic &amp; Coding (Gianyar)" class="inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><i class="fa-solid fa-rocket"></i> <span data-i18n="loc5_cta_trial">Coba Gratis</span></a>
                         </div>
@@ -1070,9 +1081,9 @@
                             <div><div class="font-mono text-[10px] font-bold uppercase tracking-widest" style="color:#FFC83D" data-i18n="loc5_kind_lab">Learning Center</div><h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight">Bali Seed Bedulu</h3></div>
                         </div>
                         <p class="text-sm text-slate-300 mt-5 flex gap-2"><i class="fa-solid fa-location-dot mt-0.5" style="color:#FFC83D"></i>Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar</p>
-                        <ul class="mt-5 space-y-2.5"><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#FFC83D"></i><span data-i18n="loc5_lab_p1">Lab komputer &amp; kit robotik lengkap</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#FFC83D"></i><span data-i18n="loc5_lab_p2">Ruang ber-AC, bersih &amp; ramah anak</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#FFC83D"></i><span data-i18n="loc5_lab_p3">Rasio 1 tutor : maks. 5 siswa</span></li></ul>
+                        <ul class="mt-5 space-y-2.5"><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#FFC83D"></i><span data-i18n="loc5_lab_p1">Kit robotik lengkap · laptop pribadi disarankan</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#FFC83D"></i><span data-i18n="loc5_lab_p2">Ruang ber-AC, bersih &amp; ramah anak</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#FFC83D"></i><span data-i18n="loc5_lab_p3">Rasio 1 tutor : maks. 5 siswa</span></li></ul>
                         <div class="mt-auto pt-6 flex flex-wrap items-center gap-3">
-                            <a href="https://wa.me/628518306798?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Bali%20Seed%20Bedulu." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>0851-8306-798</a>
+                            <a href="https://wa.me/6285117535970?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Bali%20Seed%20Bedulu." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>+62 851-1753-5970 · Mr. Irvan</a>
                             <span class="flex-1"></span>
                             <a href="https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 border border-white/15 hover:bg-white/5 text-white font-bold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition"><i class="fa-solid fa-route"></i> <span data-i18n="loc_directions">Rute</span></a><a href="#register" data-pick-center="Bali Seed Bedulu Robotics &amp; Coding" class="inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><i class="fa-solid fa-rocket"></i> <span data-i18n="loc5_cta_trial">Coba Gratis</span></a>
                         </div>
@@ -1095,7 +1106,7 @@
                         <p class="text-sm text-slate-300 mt-5 flex gap-2"><i class="fa-solid fa-map-pin mt-0.5" style="color:#C084FC"></i><span data-i18n="loc_c2_addr">Jangkauan Area: Gianyar, Ubud, Denpasar &amp; sekitarnya</span></p>
                         <ul class="mt-5 space-y-2.5"><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#C084FC"></i><span data-i18n="loc5_pv_p1">Tutor datang langsung ke rumah</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#C084FC"></i><span data-i18n="loc5_pv_p2">1-on-1 atau grup kecil privat</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#C084FC"></i><span data-i18n="loc5_pv_p3">Jadwal disepakati bersama admin</span></li></ul>
                         <div class="mt-auto pt-6 flex flex-wrap items-center gap-3">
-                            <a href="https://wa.me/628518306798?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Kelas%20Private%20%28Home%20Visit%29." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>0851-8306-798</a>
+                            <a href="https://wa.me/6285117535970?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Kelas%20Private%20%28Home%20Visit%29." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>+62 851-1753-5970 · Mr. Irvan</a>
                             <span class="flex-1"></span>
                             <a href="#register" data-pick-center="Kelas Private (Home Visit / Di Rumah)" class="inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><i class="fa-solid fa-rocket"></i> <span data-i18n="loc_c2_cta">Daftar Private</span></a>
                         </div>
@@ -1117,7 +1128,7 @@
                         <p class="text-sm text-slate-300 mt-5 flex gap-2"><i class="fa-solid fa-wifi mt-0.5" style="color:#34D399"></i><span data-i18n="loc5_on_where">Dari mana saja, cukup laptop &amp; internet</span></p>
                         <ul class="mt-5 space-y-2.5"><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#34D399"></i><span data-i18n="loc5_on_p1">Sesi live bersama tutor via video call</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#34D399"></i><span data-i18n="loc5_on_p2">Tanpa perjalanan, dari rumah sendiri</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#34D399"></i><span data-i18n="loc5_on_p3">Paling cocok untuk program berbasis software</span></li></ul>
                         <div class="mt-auto pt-6 flex flex-wrap items-center gap-3">
-                            <a href="https://wa.me/628518306798?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Kelas%20Online." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>0851-8306-798</a>
+                            <a href="https://wa.me/6285117535970?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Kelas%20Online." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>+62 851-1753-5970 · Mr. Irvan</a>
                             <span class="flex-1"></span>
                             <a href="#register" data-pick-center="Kelas Online" class="inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><i class="fa-solid fa-rocket"></i> <span data-i18n="loc5_cta_online">Daftar Online</span></a>
                         </div>
@@ -1144,100 +1155,188 @@
 
     <!-- FAQ SECTION (Pertanyaan Umum Orang Tua & Siswa) -->
     <section id="faq" class="py-20 md:py-28 relative z-10 bg-[#0F172A] border-b border-white/10 text-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <!-- Header -->
-            <div class="text-center mb-14 fade-in-up">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-3 shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-[#F87171]"></span>
-                    <span data-i18n="faq_badge" class="text-xs font-bold tracking-wider uppercase text-white">Tanya Jawab</span>
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 fade-in-up">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-4">
+                        <i class="fa-solid fa-circle-question text-[#38BDF8] text-xs"></i>
+                        <span data-i18n="faq_badge" class="text-xs font-bold tracking-wider uppercase text-white">Tanya Jawab</span>
+                    </div>
+                    <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">
+                        <span data-i18n="faq5_title_1">Pertanyaan yang</span>
+                        <span data-i18n="faq5_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">sering diajukan.</span>
+                    </h2>
                 </div>
-                <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
-                    <span data-i18n="faq_title">Pertanyaan yang Sering Diajukan</span>
-                </h2>
-                <p data-i18n="faq_desc" class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-                    Jawaban transparan seputar jadwal belajar, perangkat, usia minimal, dan sistem kelas percobaan.
-                </p>
+                <p class="hidden lg:block text-slate-400 text-sm max-w-sm" data-i18n="faq5_hint">Gunakan tombol panah ↑ ↓ untuk berpindah pertanyaan.</p>
             </div>
 
-            <!-- FAQ Accordions -->
-            <div class="space-y-4 fade-in-up">
-                
-                <details class="group bg-[#1E293B] border border-white/10 rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-[#1E293B] open:shadow-xl open:border-[#0788F5]/60 transition-all">
-                    <summary class="flex items-center justify-between font-bold text-base text-white group-hover:text-[#38BDF8] transition-colors">
-                        <span data-i18n="faq_q1">Apakah anak yang belum pernah memegang coding bisa ikut?</span>
-                        <span class="ml-4 shrink-0 rounded-full w-8 h-8 bg-[#0F172A] border border-white/10 flex items-center justify-center text-slate-300 group-open:rotate-180 transition-transform">
-                            <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </span>
-                    </summary>
-                    <p class="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed pt-3 border-t border-white/10" data-i18n="faq_a1">
-                        Tentu bisa! Banyak siswa kami memulai dari nol. Kami mengajarkan logika berpikir terstruktur (computational thinking) melalui blok visual interaktif terlebih dahulu sebelum beralih ke sintaks kode teks asli.
-                    </p>
-                </details>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                <div class="lg:col-span-5 space-y-2" role="tablist" aria-orientation="vertical" id="faq5-list" aria-label="FAQ">
+                <div class="faq5-item">
+                    <button type="button" role="tab" id="faq5-tab-1" aria-controls="faq5-panel-1" aria-selected="true" tabindex="0" class="faq5-q w-full flex items-center gap-3 rounded-2xl border border-white/10 bg-[#0B0F19] p-4 text-left transition hover:border-white/25" style="--c:#34D399">
+                        <span class="faq5-no w-8 h-8 shrink-0 rounded-lg bg-white/5 grid place-items-center font-mono text-xs font-bold transition">01</span>
+                        <span class="flex-1 font-semibold text-sm leading-snug" data-i18n="faq5_q1">Apakah anak yang belum pernah belajar coding atau komputer bisa ikut?</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-500 hidden lg:block"></i><i class="faq5-chev fa-solid fa-chevron-down text-xs text-slate-500 lg:hidden transition-transform"></i>
+                    </button>
+                </div>
+                <div class="faq5-item">
+                    <button type="button" role="tab" id="faq5-tab-2" aria-controls="faq5-panel-2" aria-selected="false" tabindex="-1" class="faq5-q w-full flex items-center gap-3 rounded-2xl border border-white/10 bg-[#0B0F19] p-4 text-left transition hover:border-white/25" style="--c:#FFC83D">
+                        <span class="faq5-no w-8 h-8 shrink-0 rounded-lg bg-white/5 grid place-items-center font-mono text-xs font-bold transition">02</span>
+                        <span class="flex-1 font-semibold text-sm leading-snug" data-i18n="faq5_q2">Apakah tersedia kelas percobaan (trial class) dan berapa biayanya?</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-500 hidden lg:block"></i><i class="faq5-chev fa-solid fa-chevron-down text-xs text-slate-500 lg:hidden transition-transform"></i>
+                    </button>
+                </div>
+                <div class="faq5-item">
+                    <button type="button" role="tab" id="faq5-tab-3" aria-controls="faq5-panel-3" aria-selected="false" tabindex="-1" class="faq5-q w-full flex items-center gap-3 rounded-2xl border border-white/10 bg-[#0B0F19] p-4 text-left transition hover:border-white/25" style="--c:#38BDF8">
+                        <span class="faq5-no w-8 h-8 shrink-0 rounded-lg bg-white/5 grid place-items-center font-mono text-xs font-bold transition">03</span>
+                        <span class="flex-1 font-semibold text-sm leading-snug" data-i18n="faq5_q3">Apakah siswa harus membawa laptop sendiri?</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-500 hidden lg:block"></i><i class="faq5-chev fa-solid fa-chevron-down text-xs text-slate-500 lg:hidden transition-transform"></i>
+                    </button>
+                </div>
+                <div class="faq5-item">
+                    <button type="button" role="tab" id="faq5-tab-4" aria-controls="faq5-panel-4" aria-selected="false" tabindex="-1" class="faq5-q w-full flex items-center gap-3 rounded-2xl border border-white/10 bg-[#0B0F19] p-4 text-left transition hover:border-white/25" style="--c:#C084FC">
+                        <span class="faq5-no w-8 h-8 shrink-0 rounded-lg bg-white/5 grid place-items-center font-mono text-xs font-bold transition">04</span>
+                        <span class="flex-1 font-semibold text-sm leading-snug" data-i18n="faq5_q4">Berapa rasio tutor per siswa di setiap kelas?</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-500 hidden lg:block"></i><i class="faq5-chev fa-solid fa-chevron-down text-xs text-slate-500 lg:hidden transition-transform"></i>
+                    </button>
+                </div>
+                <div class="faq5-item">
+                    <button type="button" role="tab" id="faq5-tab-5" aria-controls="faq5-panel-5" aria-selected="false" tabindex="-1" class="faq5-q w-full flex items-center gap-3 rounded-2xl border border-white/10 bg-[#0B0F19] p-4 text-left transition hover:border-white/25" style="--c:#F97316">
+                        <span class="faq5-no w-8 h-8 shrink-0 rounded-lg bg-white/5 grid place-items-center font-mono text-xs font-bold transition">05</span>
+                        <span class="flex-1 font-semibold text-sm leading-snug" data-i18n="faq5_q5">Apakah siswa mendapatkan sertifikat?</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-500 hidden lg:block"></i><i class="faq5-chev fa-solid fa-chevron-down text-xs text-slate-500 lg:hidden transition-transform"></i>
+                    </button>
+                </div>
+                <div class="faq5-item">
+                    <button type="button" role="tab" id="faq5-tab-6" aria-controls="faq5-panel-6" aria-selected="false" tabindex="-1" class="faq5-q w-full flex items-center gap-3 rounded-2xl border border-white/10 bg-[#0B0F19] p-4 text-left transition hover:border-white/25" style="--c:#F87171">
+                        <span class="faq5-no w-8 h-8 shrink-0 rounded-lg bg-white/5 grid place-items-center font-mono text-xs font-bold transition">06</span>
+                        <span class="flex-1 font-semibold text-sm leading-snug" data-i18n="faq5_q6">Berapa biaya kursus dan bagaimana jadwal kelasnya?</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-500 hidden lg:block"></i><i class="faq5-chev fa-solid fa-chevron-down text-xs text-slate-500 lg:hidden transition-transform"></i>
+                    </button>
+                </div>
+                </div>
+                <div class="hidden lg:block lg:col-span-7" id="faq5-panels">
+                <div role="tabpanel" id="faq5-panel-1" aria-labelledby="faq5-tab-1" class="faq5-panel">
+                    <div class="h-full rounded-[1.75rem] border bg-[#0B0F19] p-7 sm:p-9 relative overflow-hidden" style="border-color:#34D39955">
+                        <div class="absolute -right-6 -bottom-8 text-[11rem] opacity-[.05] pointer-events-none" style="color:#34D399" aria-hidden="true"><i class="fa-solid fa-seedling"></i></div>
+                        <div class="relative">
+                            <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl grid place-items-center text-xl" style="background:#34D399;color:#0B0F19"><i class="fa-solid fa-seedling"></i></span><span class="font-mono text-[11px] font-bold uppercase tracking-widest" style="color:#34D399" data-i18n="faq5_cat_start">Memulai</span></div>
+                            <h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight mt-5" data-i18n="faq5_q1">Apakah anak yang belum pernah belajar coding atau komputer bisa ikut?</h3>
+                            <div class="inline-flex items-baseline gap-2 mt-5 px-4 py-2 rounded-xl" style="background:#34D39914"><span class="font-display font-black text-2xl" style="color:#34D399" data-i18n="faq5_tl1">Bisa!</span><span class="text-xs text-slate-400" data-i18n="faq5_sub1">mulai dari nol</span></div>
+                            <p class="text-[15px] text-slate-300 leading-relaxed mt-5" data-i18n="faq5_a1">Tentu bisa! Banyak siswa LesKoding memulai dari nol. Pembelajaran dirancang ramah anak melalui visual blok interaktif dan analogi dunia nyata terlebih dahulu, sebelum perlahan dikenalkan pada logika kode teks.</p>
+                            <a href="#course"  class="mt-7 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-5 py-3 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><span data-i18n="faq5_cta1">Lihat program pemula</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" id="faq5-panel-2" aria-labelledby="faq5-tab-2" class="faq5-panel" hidden>
+                    <div class="h-full rounded-[1.75rem] border bg-[#0B0F19] p-7 sm:p-9 relative overflow-hidden" style="border-color:#FFC83D55">
+                        <div class="absolute -right-6 -bottom-8 text-[11rem] opacity-[.05] pointer-events-none" style="color:#FFC83D" aria-hidden="true"><i class="fa-solid fa-gift"></i></div>
+                        <div class="relative">
+                            <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl grid place-items-center text-xl" style="background:#FFC83D;color:#0B0F19"><i class="fa-solid fa-gift"></i></span><span class="font-mono text-[11px] font-bold uppercase tracking-widest" style="color:#FFC83D" data-i18n="faq5_cat_start">Memulai</span></div>
+                            <h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight mt-5" data-i18n="faq5_q2">Apakah tersedia kelas percobaan (trial class) dan berapa biayanya?</h3>
+                            <div class="inline-flex items-baseline gap-2 mt-5 px-4 py-2 rounded-xl" style="background:#FFC83D14"><span class="font-display font-black text-2xl" style="color:#FFC83D" data-i18n="faq5_tl2">Gratis</span><span class="text-xs text-slate-400" data-i18n="faq5_sub2">1 sesi Free Trial</span></div>
+                            <p class="text-[15px] text-slate-300 leading-relaxed mt-5" data-i18n="faq5_a2">Ya, kami menyediakan 1 sesi Free Trial Class (100% gratis) di Learning Center Gianyar dan Bedulu, serta opsi konsultasi/trial untuk Kelas Private di rumah. Cukup isi formulir atau hubungi admin via WhatsApp untuk memilih jadwal, tanpa ikatan.</p>
+                            <a href="#register"  class="mt-7 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-5 py-3 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><span data-i18n="faq5_cta2">Daftar Free Trial</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" id="faq5-panel-3" aria-labelledby="faq5-tab-3" class="faq5-panel" hidden>
+                    <div class="h-full rounded-[1.75rem] border bg-[#0B0F19] p-7 sm:p-9 relative overflow-hidden" style="border-color:#38BDF855">
+                        <div class="absolute -right-6 -bottom-8 text-[11rem] opacity-[.05] pointer-events-none" style="color:#38BDF8" aria-hidden="true"><i class="fa-solid fa-laptop"></i></div>
+                        <div class="relative">
+                            <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl grid place-items-center text-xl" style="background:#38BDF8;color:#0B0F19"><i class="fa-solid fa-laptop"></i></span><span class="font-mono text-[11px] font-bold uppercase tracking-widest" style="color:#38BDF8" data-i18n="faq5_cat_class">Di Kelas</span></div>
+                            <h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight mt-5" data-i18n="faq5_q3">Apakah siswa harus membawa laptop sendiri?</h3>
+                            <div class="inline-flex items-baseline gap-2 mt-5 px-4 py-2 rounded-xl" style="background:#38BDF814"><span class="font-display font-black text-2xl" style="color:#38BDF8" data-i18n="faq5_tl3">Disarankan</span><span class="text-xs text-slate-400" data-i18n="faq5_sub3">bawa laptop pribadi</span></div>
+                            <p class="text-[15px] text-slate-300 leading-relaxed mt-5" data-i18n="faq5_a3">Kami menyarankan siswa membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, LesKoding akan mengusahakan menyediakan perangkat apabila tersedia.</p>
+                            <a href="#location"  class="mt-7 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-5 py-3 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><span data-i18n="faq5_cta3">Lihat Learning Center</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" id="faq5-panel-4" aria-labelledby="faq5-tab-4" class="faq5-panel" hidden>
+                    <div class="h-full rounded-[1.75rem] border bg-[#0B0F19] p-7 sm:p-9 relative overflow-hidden" style="border-color:#C084FC55">
+                        <div class="absolute -right-6 -bottom-8 text-[11rem] opacity-[.05] pointer-events-none" style="color:#C084FC" aria-hidden="true"><i class="fa-solid fa-user-group"></i></div>
+                        <div class="relative">
+                            <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl grid place-items-center text-xl" style="background:#C084FC;color:#0B0F19"><i class="fa-solid fa-user-group"></i></span><span class="font-mono text-[11px] font-bold uppercase tracking-widest" style="color:#C084FC" data-i18n="faq5_cat_class">Di Kelas</span></div>
+                            <h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight mt-5" data-i18n="faq5_q4">Berapa rasio tutor per siswa di setiap kelas?</h3>
+                            <div class="inline-flex items-baseline gap-2 mt-5 px-4 py-2 rounded-xl" style="background:#C084FC14"><span class="font-display font-black text-2xl" style="color:#C084FC" data-i18n="faq5_tl4">1 : 5</span><span class="text-xs text-slate-400" data-i18n="faq5_sub4">tutor : siswa</span></div>
+                            <p class="text-[15px] text-slate-300 leading-relaxed mt-5" data-i18n="faq5_a4">LesKoding menerapkan kelas kecil dengan rasio 1:5, yaitu 1 tutor mengajar maksimal 5 siswa. Setiap siswa mendapat bimbingan intensif dan tidak ada anak yang tertinggal saat praktik langsung.</p>
+                            <a href="#cara-belajar"  class="mt-7 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-5 py-3 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><span data-i18n="faq5_cta4">Lihat cara belajar</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" id="faq5-panel-5" aria-labelledby="faq5-tab-5" class="faq5-panel" hidden>
+                    <div class="h-full rounded-[1.75rem] border bg-[#0B0F19] p-7 sm:p-9 relative overflow-hidden" style="border-color:#F9731655">
+                        <div class="absolute -right-6 -bottom-8 text-[11rem] opacity-[.05] pointer-events-none" style="color:#F97316" aria-hidden="true"><i class="fa-solid fa-award"></i></div>
+                        <div class="relative">
+                            <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl grid place-items-center text-xl" style="background:#F97316;color:#0B0F19"><i class="fa-solid fa-award"></i></span><span class="font-mono text-[11px] font-bold uppercase tracking-widest" style="color:#F97316" data-i18n="faq5_cat_result">Hasil Belajar</span></div>
+                            <h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight mt-5" data-i18n="faq5_q5">Apakah siswa mendapatkan sertifikat?</h3>
+                            <div class="inline-flex items-baseline gap-2 mt-5 px-4 py-2 rounded-xl" style="background:#F9731614"><span class="font-display font-black text-2xl" style="color:#F97316" data-i18n="faq5_tl5">Ya</span><span class="text-xs text-slate-400" data-i18n="faq5_sub5">setelah lulus course</span></div>
+                            <p class="text-[15px] text-slate-300 leading-relaxed mt-5" data-i18n="faq5_a5">Ya. Setiap siswa yang menyelesaikan course mendapatkan sertifikat kelulusan dari LesKoding sebagai bukti capaian belajar, melengkapi portofolio karya yang sudah dibuat.</p>
+                            <a href="#hall-of-fame"  class="mt-7 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-5 py-3 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><span data-i18n="faq5_cta5">Lihat karya siswa</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" id="faq5-panel-6" aria-labelledby="faq5-tab-6" class="faq5-panel" hidden>
+                    <div class="h-full rounded-[1.75rem] border bg-[#0B0F19] p-7 sm:p-9 relative overflow-hidden" style="border-color:#F8717155">
+                        <div class="absolute -right-6 -bottom-8 text-[11rem] opacity-[.05] pointer-events-none" style="color:#F87171" aria-hidden="true"><i class="fa-solid fa-calendar-check"></i></div>
+                        <div class="relative">
+                            <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl grid place-items-center text-xl" style="background:#F87171;color:#0B0F19"><i class="fa-solid fa-calendar-check"></i></span><span class="font-mono text-[11px] font-bold uppercase tracking-widest" style="color:#F87171" data-i18n="faq5_cat_fee">Biaya &amp; Jadwal</span></div>
+                            <h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight mt-5" data-i18n="faq5_q6">Berapa biaya kursus dan bagaimana jadwal kelasnya?</h3>
+                            <div class="inline-flex items-baseline gap-2 mt-5 px-4 py-2 rounded-xl" style="background:#F8717114"><span class="font-display font-black text-2xl" style="color:#F87171" data-i18n="faq5_tl6">Fleksibel</span><span class="text-xs text-slate-400" data-i18n="faq5_sub6">biaya via admin</span></div>
+                            <p class="text-[15px] text-slate-300 leading-relaxed mt-5" data-i18n="faq5_a6">Informasi biaya disampaikan oleh admin saat konsultasi setelah Anda mendaftar. Jadwal kelas bersifat fleksibel dan ditentukan bersama sesuai kesepakatan dengan orang tua.</p>
+                            <a href="https://wa.me/6285117535970?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya." target="_blank" rel="noopener" class="mt-7 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-5 py-3 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><i class="fa-brands fa-whatsapp"></i><span data-i18n="faq5_cta6">Konsultasi via WhatsApp</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
 
-                <details class="group bg-[#1E293B] border border-white/10 rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-[#1E293B] open:shadow-xl open:border-[#0788F5]/60 transition-all">
-                    <summary class="flex items-center justify-between font-bold text-base text-white group-hover:text-[#38BDF8] transition-colors">
-                        <span data-i18n="faq_q2">Apakah tersedia kelas percobaan (trial class)?</span>
-                        <span class="ml-4 shrink-0 rounded-full w-8 h-8 bg-[#0F172A] border border-white/10 flex items-center justify-center text-slate-300 group-open:rotate-180 transition-transform">
-                            <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </span>
-                    </summary>
-                    <p class="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed pt-3 border-t border-white/10" data-i18n="faq_a2">
-                        Ya, kami menyediakan sesi Free Trial di Learning Center Gianyar dan Bedulu, serta opsi kelas Private di rumah sendiri (Home Visit). Anda dapat mendaftarkan jadwal percobaan melalui form di bawah atau via WhatsApp admin kami.
-                    </p>
-                </details>
-
-                <details class="group bg-[#1E293B] border border-white/10 rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-[#1E293B] open:shadow-xl open:border-[#0788F5]/60 transition-all">
-                    <summary class="flex items-center justify-between font-bold text-base text-white group-hover:text-[#38BDF8] transition-colors">
-                        <span data-i18n="faq_q3">Apakah siswa harus membawa laptop sendiri?</span>
-                        <span class="ml-4 shrink-0 rounded-full w-8 h-8 bg-[#0F172A] border border-white/10 flex items-center justify-center text-slate-300 group-open:rotate-180 transition-transform">
-                            <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </span>
-                    </summary>
-                    <p class="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed pt-3 border-t border-white/10" data-i18n="faq_a3">
-                        Setiap lab Learning Center kami sudah dilengkapi dengan PC/Laptop dan perangkat robotik siap pakai. Namun, siswa yang ingin membawa laptop pribadi agar proyek tersimpan langsung di perangkatnya sangat dipersilakan.
-                    </p>
-                </details>
-
-                <details class="group bg-[#1E293B] border border-white/10 rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-[#1E293B] open:shadow-xl open:border-[#0788F5]/60 transition-all">
-                    <summary class="flex items-center justify-between font-bold text-base text-white group-hover:text-[#38BDF8] transition-colors">
-                        <span data-i18n="faq_q4">Berapa rasio tutor per siswa di setiap kelas?</span>
-                        <span class="ml-4 shrink-0 rounded-full w-8 h-8 bg-[#0F172A] border border-white/10 flex items-center justify-center text-slate-300 group-open:rotate-180 transition-transform">
-                            <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </span>
-                    </summary>
-                    <p class="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed pt-3 border-t border-white/10" data-i18n="faq_a4">
-                        Kami menjaga kualitas pembelajaran dengan kelas kecil: rasio 1:5, yaitu 1 tutor mendampingi maksimal 5 siswa, agar setiap anak mendapat pendampingan intensif dan tidak ada yang tertinggal saat praktik.
-                    </p>
-                </details>
-
-                <details class="group bg-[#1E293B] border border-white/10 rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-[#1E293B] open:shadow-xl open:border-[#0788F5]/60 transition-all">
-                    <summary class="flex items-center justify-between font-bold text-base text-white group-hover:text-[#38BDF8] transition-colors">
-                        <span data-i18n="faq_q5">Apakah siswa mendapatkan sertifikat?</span>
-                        <span class="ml-4 shrink-0 rounded-full w-8 h-8 bg-[#0F172A] border border-white/10 flex items-center justify-center text-slate-300 group-open:rotate-180 transition-transform">
-                            <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </span>
-                    </summary>
-                    <p class="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed pt-3 border-t border-white/10" data-i18n="faq_a5">
-                        Ya. Setiap siswa yang menyelesaikan course akan mendapatkan sertifikat kelulusan dari LesKoding sebagai bukti capaian belajarnya, melengkapi portofolio karya yang sudah dibuat.
-                    </p>
-                </details>
-
-                <details class="group bg-[#1E293B] border border-white/10 rounded-2xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:bg-[#1E293B] open:shadow-xl open:border-[#0788F5]/60 transition-all">
-                    <summary class="flex items-center justify-between font-bold text-base text-white group-hover:text-[#38BDF8] transition-colors">
-                        <span data-i18n="faq_q6">Berapa biaya kursus dan bagaimana jadwal kelasnya?</span>
-                        <span class="ml-4 shrink-0 rounded-full w-8 h-8 bg-[#0F172A] border border-white/10 flex items-center justify-center text-slate-300 group-open:rotate-180 transition-transform">
-                            <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </span>
-                    </summary>
-                    <p class="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed pt-3 border-t border-white/10" data-i18n="faq_a6">
-                        Informasi biaya akan disampaikan oleh admin saat konsultasi setelah Anda mendaftar. Jadwal kelas bersifat fleksibel dan ditentukan bersama sesuai kesepakatan dengan orang tua.
-                    </p>
-                </details>
-
+            <div class="mt-10 rounded-2xl border border-white/10 bg-[#0B0F19] p-5 flex flex-col sm:flex-row sm:items-center gap-4">
+                <div class="flex items-center gap-3 flex-1">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-500/15 text-emerald-400 grid place-items-center text-xl shrink-0"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div><div class="font-bold" data-i18n="faq5_still_t">Masih ada pertanyaan?</div><div class="text-xs text-slate-400" data-i18n="faq5_still_d">Admin kami siap membantu lewat WhatsApp.</div></div>
+                </div>
+                <a href="https://wa.me/6285117535970?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya." target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-emerald-400 hover:bg-emerald-300 text-[#052e22] font-extrabold px-5 py-3 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="faq5_chat">Chat Mr. Irvan</span> · +62 851-1753-5970</a>
             </div>
         </div>
     </section>
 
+
+    <!-- PROMO: banner inline sebelum formulir (opsi 6) -->
+    <section id="promo" class="py-16 md:py-20 relative z-10 bg-[#0B0F19] text-white">
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8">
+            <div class="relative rounded-[2rem] overflow-hidden border border-[#FFC83D]/30 bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#0B0F19] fade-in-up">
+                <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] bg-[length:32px_32px] opacity-60"></div>
+                <div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-[#FFC83D]/10 blur-3xl pointer-events-none"></div>
+                <div class="relative grid grid-cols-1 lg:grid-cols-12 gap-8 p-7 sm:p-10 lg:p-12 items-center">
+                    <div class="lg:col-span-7">
+                        <div class="inline-flex items-center gap-2 rounded-full bg-[#FFC83D] text-[#111827] px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-wider"><i class="fa-solid fa-fire"></i> <span data-i18n="promo_trigger">Promo 2026</span></div>
+                        <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05] mt-5">
+                            <span data-i18n="promo2_title_1">Mulai petualangan,</span>
+                            <span data-i18n="promo2_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">coba dulu gratis.</span>
+                        </h2>
+                        <p class="text-slate-300 mt-4 max-w-xl" data-i18n="promo2_desc">Pakai kode promo saat mendaftar: anak mendapat 1 sesi Free Trial, dan Anda mendapat potongan biaya pendaftaran.</p>
+                        <div class="mt-8 grid grid-cols-3 gap-2 items-start">
+                            <div class="text-center"><div class="w-12 h-12 mx-auto rounded-2xl bg-[#38BDF8]/15 text-[#38BDF8] grid place-items-center text-lg"><i class="fa-solid fa-pen-to-square"></i></div><div class="text-xs font-bold mt-2" data-i18n="promo2_s1_t">Isi formulir</div><div class="text-[11px] text-slate-400" data-i18n="promo2_s1_d">+ kode promo</div></div>
+                            <div class="text-center"><div class="w-12 h-12 mx-auto rounded-2xl bg-[#FFC83D]/15 text-[#FFC83D] grid place-items-center text-lg"><i class="fa-solid fa-gift"></i></div><div class="text-xs font-bold mt-2" data-i18n="promo2_s2_t">Free Trial</div><div class="text-[11px] text-slate-400" data-i18n="promo2_s2_d">1 sesi, gratis</div></div>
+                            <div class="text-center"><div class="w-12 h-12 mx-auto rounded-2xl bg-[#C084FC]/15 text-[#C084FC] grid place-items-center text-lg"><i class="fa-solid fa-tag"></i></div><div class="text-xs font-bold mt-2" data-i18n="promo2_s3_t">Potongan</div><div class="text-[11px] text-slate-400" data-i18n="promo2_s3_d">biaya pendaftaran</div></div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-5">
+                        <div class="rounded-2xl bg-[#0B0F19] border border-white/10 p-6">
+                            <div class="font-mono text-[10px] text-slate-400 mb-2" data-i18n="promo2_code_label">KODE PROMO</div>
+                            <div class="flex gap-2">
+                                <div class="flex-1 text-center rounded-xl border-2 border-dashed border-[#FFC83D]/50 text-[#FFC83D] py-3 text-base sm:text-lg font-mono font-semibold tracking-[.14em]">PETUALANGAN2026</div>
+                                <button type="button" id="promo-copy" class="rounded-xl bg-white/10 hover:bg-white/15 px-4 text-xs font-bold transition"><i class="fa-regular fa-copy mr-1"></i><span data-i18n="promo2_copy">Salin</span></button>
+                            </div>
+                            <button type="button" onclick="claimPromoAndRegister('PETUALANGAN2026')" class="w-full mt-4 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-5 py-3.5 min-h-[48px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_20px_rgba(255,200,61,0.3)]"><i class="fa-solid fa-rocket"></i> <span data-i18n="promo2_cta">Pakai &amp; Daftar Sekarang</span></button>
+                            <p class="text-[11px] text-slate-500 mt-4 leading-relaxed" data-i18n="promo2_note">Kode terisi otomatis di formulir. Besaran potongan diinformasikan admin saat konsultasi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- REGISTRATION SECTION (Form Singkat & Ramah Mobile) -->
     <section id="register" class="py-20 md:py-28 relative z-10 bg-[#0B0F19] border-b border-white/10 text-white">
@@ -1247,7 +1346,7 @@
                     <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
                     <span data-i18n="reg_badge" class="text-xs font-bold tracking-wider uppercase text-white">Formulir Pendaftaran</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"><span data-i18n="reg_title">Mulai Petualangan Belajar</span></h2>
+                <h2 class="font-display text-4xl sm:text-5xl font-extrabold text-white mb-4 tracking-tight"><span data-i18n="reg_title">Mulai Petualangan Belajar</span></h2>
                 <p data-i18n="reg_desc" class="text-slate-300 text-sm max-w-xl mx-auto leading-relaxed">Isi data singkat berikut untuk konsultasi jadwal kelas reguler atau klaim kelas percobaan gratis (trial). Konfirmasi akan otomatis diteruskan ke WhatsApp admin cabang.</p>
             </div>
 
@@ -1435,66 +1534,6 @@
 
 
 
-    <!-- Active Promotion Popup Modal -->
-    <div id="promo-modal" class="fixed inset-0 bg-dark-950/85 backdrop-blur-md z-[160] flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
-        <div class="relative bg-dark-900 border border-amber-400/40 rounded-3xl w-full max-w-md overflow-hidden shadow-[0_0_60px_rgba(250,204,21,0.2)] transform scale-95 transition-all duration-300" id="promo-modal-content">
-            <!-- Close Button -->
-            <button onclick="closePromoModal()" aria-label="Tutup Promo" class="absolute top-4 right-4 z-30 w-9 h-9 rounded-full bg-dark-950/80 border border-white/20 text-white/80 hover:text-white hover:bg-dark-950 flex items-center justify-center transition-all focus:outline-none shadow-lg">
-                <i class="fa-solid fa-xmark text-sm"></i>
-            </button>
-            
-            <!-- Promo Image Banner -->
-            <div class="relative h-64 sm:h-72 w-full overflow-hidden">
-                <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" class="w-full h-full object-cover" alt="Promo Spesial LesKoding">
-                <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent"></div>
-                
-                <!-- Badge -->
-                <div class="absolute top-4 left-4 z-20 badge-shine">
-                    <span class="bg-gradient-to-r from-gold-400 to-yellow-600 text-dark-950 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5 border border-gold-300">
-                        <i class="fa-solid fa-fire text-dark-950"></i> <span data-i18n="promo_badge">Promo Terbatas 2026</span>
-                    </span>
-                </div>
-
-                <!-- Text Overlay on bottom of image -->
-                <div class="absolute bottom-4 left-5 right-5 z-20">
-                    <p data-i18n="promo_sub" class="text-[11px] font-mono text-gold-400 uppercase tracking-widest mb-1 drop-shadow font-bold">Free Trial + Diskon Pendaftaran</p>
-                    <h3 data-i18n="promo_title" class="text-2xl sm:text-3xl font-heading font-black text-white leading-tight drop-shadow-lg">
-                        Mulai Petualangan<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-yellow-500">Kreator Digital!</span>
-                    </h3>
-                </div>
-            </div>
-
-            <!-- Content & CTA -->
-            <div class="p-6 pt-4 text-center">
-                <p data-i18n="promo_body" class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
-                    Klaim sesi uji coba gratis dan potongan biaya pendaftaran di seluruh Learning Center LesKoding sekarang:
-                </p>
-                
-                <!-- Promo Code Badge Display -->
-                <div class="inline-flex items-center gap-2.5 bg-dark-950 border border-gold-500/40 px-5 py-2.5 rounded-xl mb-5 shadow-inner">
-                    <i class="fa-solid fa-ticket text-gold-400 text-sm"></i>
-                    <span class="font-mono font-bold text-gold-400 text-sm tracking-wider">PETUALANGAN2026</span>
-                </div>
-                
-                <!-- CTA Button -->
-                <button onclick="claimPromoAndRegister('PETUALANGAN2026')" class="w-full inline-flex justify-center items-center gap-2.5 bg-gradient-to-r from-brand-500 to-brand-400 hover:from-brand-400 hover:to-brand-300 text-dark-950 font-black py-4 px-6 rounded-xl uppercase tracking-[0.1em] text-xs transition-all shadow-[0_0_25px_rgba(14,165,233,0.4)] hover:shadow-[0_0_35px_rgba(14,165,233,0.6)] hover:-translate-y-0.5">
-                    <span data-i18n="promo_cta">Daftar Sekarang &amp; Klaim Promo</span> <i class="fa-solid fa-rocket text-sm"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Floating Re-open Promo Trigger Badge (Bottom Right) -->
-    <div id="floating-promo-trigger" class="fixed bottom-6 right-6 z-40 hidden md:flex items-center">
-        <button onclick="openPromoModal()" class="flex items-center gap-2.5 bg-dark-950/90 hover:bg-dark-900 border border-gold-500/40 hover:border-gold-400 text-gold-400 px-4 py-2.5 rounded-full shadow-2xl backdrop-blur-xl transition-all hover:scale-105 group text-xs font-mono font-bold">
-            <span class="relative flex h-2.5 w-2.5">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold-500"></span>
-            </span>
-            <i class="fa-solid fa-gift text-sm text-gold-400 group-hover:rotate-12 transition-transform"></i>
-            <span data-i18n="promo_trigger">Promo 2026</span>
-        </button>
-    </div>
 
     
 <!-- Footer: kontak, lokasi, sosial, privasi -->
@@ -1512,7 +1551,7 @@
                     </p>
                     <div class="flex items-center gap-3 text-slate-400">
                         <a href="https://instagram.com" target="_blank" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 shadow-sm flex items-center justify-center text-slate-300 hover:text-white hover:border-white/30 transition-colors"><i class="fa-brands fa-instagram text-xs"></i></a>
-                        <a href="https://wa.me/628518306798" target="_blank" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 hover:text-emerald-300 hover:border-emerald-400 transition-colors"><i class="fa-brands fa-whatsapp text-xs"></i></a>
+                        <a href="https://wa.me/6285117535970" target="_blank" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 hover:text-emerald-300 hover:border-emerald-400 transition-colors"><i class="fa-brands fa-whatsapp text-xs"></i></a>
                         <a href="https://youtube.com" target="_blank" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-red-400 hover:text-red-300 hover:border-red-400 transition-colors"><i class="fa-brands fa-youtube text-xs"></i></a>
                     </div>
                 </div>
@@ -1548,7 +1587,7 @@
                     <ul class="space-y-2.5 text-xs">
                         <li class="flex items-center gap-2">
                             <i class="fa-brands fa-whatsapp text-emerald-400"></i>
-                            <span>0851-8306-798 (<span data-i18n="footer_wa_all">Semua layanan</span>)</span>
+                            <span>+62 851-1753-5970 · <span data-i18n="footer_wa_name">a.n. Mr. Irvan</span> (<span data-i18n="footer_wa_all">Semua layanan</span>)</span>
                         </li>
                         <li class="flex items-center gap-2">
                             <i class="fa-solid fa-envelope text-slate-400"></i>

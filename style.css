@@ -631,3 +631,24 @@ h1, h2, h3, h4, h5, h6 {
 @keyframes loc-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
 .loc-new { font:700 9px 'Fira Code',monospace; letter-spacing:.08em; padding:.15rem .45rem; border-radius:999px; background:#34D399; color:#052e22; }
 @media (prefers-reduced-motion: reduce) { .loc-panel:not([hidden]) { animation:none; } }
+
+/* ---- FAQ (opsi 5): daftar pertanyaan + panel jawaban ---- */
+.faq5-q[aria-selected="true"] { background:#1E293B; border-color:var(--c); }
+.faq5-q[aria-selected="true"] .faq5-no { background:var(--c); color:#0B0F19; }
+.faq5-q[aria-selected="true"] .faq5-chev { transform:rotate(180deg); }
+.faq5-q:focus-visible { outline:2px solid var(--c); outline-offset:3px; }
+.faq5-panel[hidden] { display:none !important; }
+.faq5-panel:not([hidden]) { animation:faq5-in .4s ease; }
+.faq5-item > .faq5-panel { margin-top:.5rem; }
+#faq5-panels > .faq5-panel { height:100%; }
+@keyframes faq5-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce) { .faq5-panel:not([hidden]) { animation:none; } }
+
+/* ---- Promo (opsi 4 + 6): top bar berjalan ---- */
+body { padding-top:var(--promo-bar-h, 0px); }
+#main-header { top:var(--promo-bar-h, 0px) !important; }
+.promo-bar[hidden] { display:none !important; }
+.promo-bar-track { display:flex; width:max-content; animation:promo-roll 40s linear infinite; }
+.promo-bar:hover .promo-bar-track, .promo-bar:focus-within .promo-bar-track { animation-play-state:paused; }
+@keyframes promo-roll { to { transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .promo-bar-track { animation:none; } }

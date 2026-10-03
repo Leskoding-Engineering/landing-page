@@ -63,7 +63,7 @@
 
 ### 1.5 Saluran Kontak & Komunikasi Resmi
 - **Email Resmi:** `halo@leskoding.id`
-- **WhatsApp Admin (semua lokasi & metode belajar):** `0851-8306-798` (Internasional: `+628518306798`)
+- **WhatsApp Admin (semua lokasi & metode belajar):** `+62 851-1753-5970` a.n. **Mr. Irvan** (format wa.me: `6285117535970`)
 - **Hak Cipta:** © 2026 LesKoding Bali. All rights reserved.
 
 ---
@@ -74,9 +74,9 @@ LesKoding menyelenggarakan pembelajaran tatap muka (*offline/in-person classes*)
 
 | Cabang / Layanan | Nama Resmi / Deskripsi | Lokasi & Jangkauan | Nomor WhatsApp | Akses / Keterangan |
 |---|---|---|---|---|
-| **Gianyar (Pusat)** | Gents Robotic & Coding (Gianyar) | Jln. Ksatrian, No. 8, Lingkungan Candi Baru, Gianyar, Bali | `0851-8306-798` | [Rute Google Maps](https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar) |
-| **Bedulu** | Bali Seed Bedulu Robotics & Coding | Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar, Bali | `0851-8306-798` | [Rute Google Maps](https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu) |
-| **Private (Home Visit)** | Kelas Belajar di Rumah Sendiri | Area Gianyar, Ubud, Denpasar & sekitarnya | `0851-8306-798` | Tutor berkunjung langsung ke rumah, 1-on-1 atau kelompok privat |
+| **Gianyar (Pusat)** | Gents Robotic & Coding (Gianyar) | Jln. Ksatrian, No. 8, Lingkungan Candi Baru, Gianyar, Bali | `+62 851-1753-5970` | [Rute Google Maps](https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar) |
+| **Bedulu** | Bali Seed Bedulu Robotics & Coding | Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar, Bali | `+62 851-1753-5970` | [Rute Google Maps](https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu) |
+| **Private (Home Visit)** | Kelas Belajar di Rumah Sendiri | Area Gianyar, Ubud, Denpasar & sekitarnya | `+62 851-1753-5970` | Tutor berkunjung langsung ke rumah, 1-on-1 atau kelompok privat |
 
 > **Catatan Operasional:** Learning Center fisik di Ubud (Peliatan) sudah tidak beroperasi dan seluruh kebutuhan kelas di area Ubud dan sekitarnya dilayani secara personal melalui program **Kelas Private (Home Visit)** di mana tutor LesKoding datang langsung ke rumah siswa.
 
@@ -84,9 +84,9 @@ LesKoding menyelenggarakan pembelajaran tatap muka (*offline/in-person classes*)
 - **Gents Robotic / Genta:** Mitra strategis penyelenggaraan cabang Gianyar dengan fokus kuat pada integrasi robotika dan mikrokontroler fisik.
 - **Bali Seeds (Bali Seed Foundation):** Mitra pendidikan komunitas untuk cabang Bedulu, mendukung literasi digital berkelanjutan.
 
-### 2.2 Fasilitas Ruang Belajar (Laboratorium Komputer & Robotika)
+### 2.2 Fasilitas Ruang Belajar (Ruang Kelas & Laboratorium Robotika)
 - Ruang kelas berpendingin udara (Full AC) dirancang bersih, aman, dan ramah anak (*child-friendly*).
-- Komputer PC dan laptop laboratorium berperforma tinggi yang sudah terpasang software resmi.
+- **Perangkat belajar:** siswa disarankan membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, LesKoding akan mengusahakan menyediakan perangkat apabila tersedia (lihat FAQ Q3).
 - Perangkat keras robotik lengkap: board Arduino, aneka sensor (ultrasonik, suhu, PIR, LDR), motor servo, breadboard, kabel jumper, modul IoT.
 - Rasio kelas kecil **1:5**: 1 tutor mendampingi maksimal 5 siswa untuk menjamin perhatian personal dan bantuan langsung saat *hands-on*.
 
@@ -399,7 +399,7 @@ LesKoding menerapkan alur pedagogi interaktif dalam setiap sesi pertemuan tatap 
    - Tutor menerangkan konsep algoritma/elektronika baru menggunakan analogi visual sederhana dan kuis interaktif yang mengasyikkan.
    - Tidak ada sesi ceramah teoritis panjang yang membosankan.
 2. **Langkah 02: Praktik Eksploratif (50 Menit Inti):**
-   - Siswa langsung membuka software di PC laboratorium dan menyusun proyeknya sendiri (*hands-on practice*).
+   - Siswa langsung membuka software di laptop (pribadi, atau perangkat yang disediakan bila tersedia) dan menyusun proyeknya sendiri (*hands-on practice*).
    - Menekankan proses *trial & error* sehat; siswa diajak menelusuri bug sendiri sebelum dibantu.
 3. **Langkah 03: Feedback Personal Tutor (Setiap Sesi):**
    - Tutor memandu secara personal dengan rasio kelas kecil **1:5** (1 tutor maksimal 5 siswa).
@@ -521,7 +521,7 @@ Formulir pendaftaran digital mengumpulkan data terstruktur:
 12. Nomor WhatsApp Anak (Opsional)
 
 ### 11.4 Logika Routing WhatsApp Otomatis
-Semua pilihan lokasi / metode belajar (Gianyar, Bedulu, Kelas Private Home Visit, dan Kelas Online) diarahkan ke satu admin: **`628518306798`**.
+Semua pilihan lokasi / metode belajar (Gianyar, Bedulu, Kelas Private Home Visit, dan Kelas Online) diarahkan ke satu admin: **`6285117535970`**.
 
 #### Template Pesan WhatsApp Otomatis (Bahasa Indonesia):
 ```text
@@ -594,7 +594,7 @@ Berikut adalah ringkasan pertanyaan yang paling sering diajukan orang tua besert
 > **Jawaban Resmi:** Ya, kami menyediakan 1 sesi **Free Trial Class (100% Gratis)** di Learning Center kami (Gianyar dan Bedulu), serta opsi konsultasi/trial untuk program Kelas Private di rumah sendiri. Orang tua cukup mengisi formulir atau menghubungi admin via WhatsApp untuk memilih slot jadwal uji coba tanpa ikatan komitmen finansial.
 
 ### Q3: Apakah siswa harus membawa laptop sendiri dari rumah?
-> **Jawaban Resmi:** Tidak wajib. Seluruh laboratorium LesKoding telah dilengkapi dengan unit komputer/laptop performa tinggi serta kit robotika lengkap siap pakai. Namun, bagi siswa yang ingin membawa laptop pribadi agar proyek tersimpan langsung di perangkatnya, kami sangat menyambut baik.
+> **Jawaban Resmi:** Kami menyarankan siswa membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, LesKoding akan mengusahakan menyediakan perangkat apabila tersedia.
 
 ### Q4: Berapa rasio jumlah tutor per siswa di setiap kelas?
 > **Jawaban Resmi:** LesKoding menerapkan kebijakan kelas kecil (*small interactive class*) dengan rasio **1:5**, yaitu **1 tutor mengajar maksimal 5 siswa**. Hal ini memastikan setiap siswa mendapatkan bimbingan intensif dan tidak ada anak yang tertinggal dalam sesi praktik langsung.
