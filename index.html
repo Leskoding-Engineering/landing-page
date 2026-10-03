@@ -1962,8 +1962,6 @@ const bindFlip = el => {
         </div>
         <div class="grid sm:grid-cols-2 ${{ foundation:'lg:grid-cols-3', skills:'lg:grid-cols-2', specialization:'lg:grid-cols-4' }[k]} gap-5">${P.filter(p => p.pillar === k).map(cardHTML).join('')}</div>
       </div>`).join('');
-    
-    bindFlip(list);
 
     selectStation = buildMetro(map, svg, p => {
       list.querySelectorAll('.flip').forEach(c => c.classList.toggle('is-target', c.dataset.id === p.id));
@@ -1986,6 +1984,9 @@ const bindFlip = el => {
       }, currentFilter);
     }
   }
+
+  // dipasang sekali saja: renderCourses jalan ulang tiap ganti bahasa, listener ganda membuat kartu terbalik dua kali (tidak bergerak)
+  bindFlip(list);
 
   // hover kartu → nyalakan stasiun di peta
   list.addEventListener('mouseover', e => {
