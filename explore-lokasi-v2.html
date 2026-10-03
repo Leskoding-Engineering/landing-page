@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Learning Centers</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .opsi-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem 1rem; margin-bottom:2rem; }
+  .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .9rem; border-radius:999px; background:#1E293B; border:1px solid rgba(255,255,255,.1); font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+  .grad { background:linear-gradient(90deg,#FFC83D,#38BDF8,#C084FC); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .cta { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#FFC83D; color:#111827; font-weight:800; padding:.85rem 1.4rem; min-height:48px; border-radius:.75rem; font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; transition:all .25s; box-shadow:0 4px 20px rgba(255,200,61,.3); }
+  .cta:hover { background:#fed368; transform:translateY(-2px); }
+  .ghost { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border:1px solid rgba(255,255,255,.15); color:#fff; font-weight:700; padding:.85rem 1.3rem; min-height:48px; border-radius:.75rem; font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; transition:background .25s; }
+  .ghost:hover { background:rgba(255,255,255,.06); }
+  .wa { display:inline-flex; align-items:center; gap:.4rem; background:rgba(6,78,59,.8); border:1px solid rgba(16,185,129,.4); color:#6EE7B7; font-weight:700; font-size:.75rem; padding:.3rem .65rem; border-radius:.45rem; }
+  .plate { background:#fff; display:flex; align-items:center; justify-content:center; }
+  .plate img { object-fit:contain; }
+  .grid-bg { background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:32px 32px; }
+  .swap { animation:swap .4s ease; }
+  @keyframes swap { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+  .new-pill { font:700 9px 'Fira Code',monospace; letter-spacing:.08em; padding:.15rem .45rem; border-radius:999px; background:#34D399; color:#052e22; }
+
+  /* 1 · Mode picker */
+  .mp[aria-selected="true"] { border-color:var(--c); background:color-mix(in srgb,var(--c) 10%,#0F172A); box-shadow:0 18px 40px -22px var(--c); }
+  .mp[aria-selected="true"] .mp-ic { background:var(--c); color:#0B0F19; }
+
+  /* 2 · Kuis */
+  .qopt[aria-pressed="true"] { border-color:#FFC83D; background:rgba(255,200,61,.1); }
+  .qopt[aria-pressed="true"] .qdot { background:#FFC83D; border-color:#FFC83D; }
+
+  /* 3 · Peta */
+  .pin { position:absolute; transform:translate(-50%,-100%); }
+  .pin .dot { transition:transform .25s, box-shadow .25s; }
+  .pin:hover .dot, .pin[aria-pressed="true"] .dot { transform:scale(1.12); box-shadow:0 0 0 4px var(--c), 0 10px 30px -5px var(--c); }
+  .ping { position:absolute; left:50%; bottom:-6px; width:12px; height:12px; transform:translateX(-50%); border-radius:50%; background:var(--c); }
+  .ping::after { content:''; position:absolute; inset:0; border-radius:50%; background:var(--c); animation:ping 2s ease-out infinite; }
+  @keyframes ping { from{transform:scale(1); opacity:.7} to{transform:scale(3); opacity:0} }
+  .radius { animation:breathe 4s ease-in-out infinite; transform-origin:center; transform-box:fill-box; }
+  @keyframes breathe { 50% { transform:scale(1.04); opacity:.8; } }
+  .wifi span { position:absolute; left:50%; bottom:0; border:3px solid #34D399; border-color:#34D399 transparent transparent transparent; border-radius:50%; transform:translateX(-50%); animation:wifi 2s ease-in-out infinite; }
+  @keyframes wifi { 0%,100% { opacity:.25; } 50% { opacity:1; } }
+
+  /* 5 · Boarding pass */
+  .pass { --c:#38BDF8; position:relative; display:grid; grid-template-columns:1fr; background:#1E293B; border:1px solid rgba(255,255,255,.1); border-radius:1.25rem; overflow:hidden; transition:transform .3s, box-shadow .3s; }
+  .pass:hover { transform:translateY(-4px) rotate(-.4deg); box-shadow:0 24px 50px -24px var(--c); }
+  .pass .stub { border-top:2px dashed rgba(255,255,255,.15); position:relative; }
+  .pass .stub::before, .pass .stub::after { content:''; position:absolute; top:-11px; width:20px; height:20px; border-radius:50%; background:#0B0F19; }
+  .pass .stub::before { left:-11px; } .pass .stub::after { right:-11px; }
+  @media (min-width:768px) {
+    .pass { grid-template-columns:1fr 190px; }
+    .pass .stub { border-top:0; border-left:2px dashed rgba(255,255,255,.15); }
+    .pass .stub::before { left:-11px; top:-11px; } .pass .stub::after { left:-11px; right:auto; top:auto; bottom:-11px; }
+  }
+  .barcode { height:38px; background:repeating-linear-gradient(90deg,#fff 0 2px,transparent 2px 4px,#fff 4px 5px,transparent 5px 8px,#fff 8px 11px,transparent 11px 12px); opacity:.85; border-radius:2px; }
+
+  /* 6 · Switch */
+  .lsw { position:relative; display:inline-grid; grid-template-columns:1fr 1fr; padding:5px; border-radius:999px; background:#1E293B; border:1px solid rgba(255,255,255,.1); }
+  .lsw .knob { position:absolute; top:5px; bottom:5px; left:5px; width:calc(50% - 5px); border-radius:999px; background:#FFC83D; transition:transform .4s cubic-bezier(.2,.8,.2,1); }
+  .lsw[data-v="home"] .knob { transform:translateX(100%); background:#C084FC; }
+  .lsw button { position:relative; z-index:1; padding:.7rem 1.1rem; min-height:44px; font-weight:800; font-size:.8rem; border-radius:999px; transition:color .3s; white-space:nowrap; }
+  .lsw button[aria-checked="true"] { color:#111827; }
+  .pane { transition:opacity .45s, transform .45s; }
+  .pane[hidden] { display:none; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI · Learning Centers + Kelas Online</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Pilih Mode</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Kuis Cocok</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Peta Jangkauan</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Tabel Banding</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Boarding Pass</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Ke Lab / Dari Rumah</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-12 pb-10">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// section: #location</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">6 konsep untuk section <span class="grad">Learning Centers.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Setiap opsi memuat <b class="text-white">4 cara belajar</b>: Lab Gianyar, Lab Bedulu, Kelas Private (Home Visit), dan <b class="text-[#34D399]">Kelas Online</b> <span class="new-pill">BARU</span>. Data lab dan private diambil dari KB §2 dan §12. Kelas Online <b class="text-white">belum ada di KB</b>, jadi detailnya ditulis seminimal mungkin dan ditandai <span class="mono text-[#F87171]">perlu konfirmasi</span>.</p>
+</header>
+
+<!-- ============================ OPSI 1 ============================ -->
+<section id="opsi-1" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span><h2 class="font-display text-2xl font-extrabold">Pilih Mode Belajar</h2><p class="text-sm text-slate-400 max-w-3xl">Empat kartu pilihan di atas, satu panel detail besar di bawah. Peta Google hanya dimuat saat lab dipilih, jadi jauh lebih ringan daripada 2 iframe sekaligus seperti sekarang. Paling dekat dengan section yang ada.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="badge mb-4"><i class="fa-solid fa-map-location-dot text-[#38BDF8]"></i> Lokasi &amp; Cara Belajar</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Belajar di mana pun <span class="grad">yang paling pas.</span></h3>
+      <p class="text-slate-300 mt-4">Datang ke Learning Center, tutor yang datang ke rumah, atau ikut kelas online. Kurikulumnya sama.</p>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5" role="tablist" id="mp-tabs"></div>
+    <div id="mp-panel" class="rounded-[1.75rem] border border-white/10 bg-[#0F172A] overflow-hidden" role="tabpanel"></div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 2 ============================ -->
+<section id="opsi-2" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span><h2 class="font-display text-2xl font-extrabold">Kuis "Mana yang Cocok?"</h2><p class="text-sm text-slate-400 max-w-3xl">Tiga pertanyaan singkat, lalu muncul rekomendasi cara belajar beserta alasannya. Pilihan lain tetap tampil kecil di bawahnya. Membantu orang tua yang ragu tanpa harus membaca semua kartu.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="lg:col-span-5">
+        <div class="badge mb-4"><i class="fa-solid fa-wand-magic-sparkles text-[#FFC83D]"></i> 3 pertanyaan · 20 detik</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Cari cara belajar <span class="grad">yang paling cocok.</span></h3>
+        <p class="text-slate-300 mt-4">Jawab singkat, kami tunjukkan pilihan terbaik untuk keluarga Anda.</p>
+        <div class="flex gap-1.5 mt-6" id="q-steps"></div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="rounded-[1.75rem] border border-white/10 bg-[#0B0F19] p-5 sm:p-7 min-h-[360px]" id="q-box" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 3 ============================ -->
+<section id="opsi-3" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19] overflow-hidden">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span><h2 class="font-display text-2xl font-extrabold">Peta Jangkauan</h2><p class="text-sm text-slate-400 max-w-3xl">Peta ilustratif: dua pin lab, lingkaran jangkauan Private (Gianyar–Ubud–Denpasar), dan Kelas Online sebagai sinyal yang "keluar dari peta". Menjawab pertanyaan "rumah saya terjangkau atau tidak?" dalam sekali lihat.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <div class="lg:col-span-8 rounded-[1.75rem] border border-white/10 bg-[#0F172A] grid-bg relative overflow-hidden" id="map3-wrap">
+        <div class="relative w-full" style="aspect-ratio:16/11" id="map3">
+          <svg viewBox="0 0 800 550" class="absolute inset-0 w-full h-full" aria-hidden="true">
+            <defs><linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E293B"/><stop offset="1" stop-color="#162033"/></linearGradient></defs>
+            <path d="M60 300 C 90 200, 200 150, 330 130 S 560 90, 690 160 S 780 330, 700 400 S 520 470, 420 455 S 230 500, 150 450 S 40 380, 60 300 Z" fill="url(#land)" stroke="rgba(255,255,255,.12)" stroke-width="2"/>
+            <path d="M330 130 C 360 230, 420 300, 430 455" fill="none" stroke="rgba(56,189,248,.25)" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+            <path d="M150 450 C 260 380, 420 360, 690 300" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6" stroke-linecap="round"/>
+            <ellipse class="radius" cx="370" cy="330" rx="250" ry="150" fill="rgba(192,132,252,.08)" stroke="#C084FC" stroke-width="2" stroke-dasharray="8 8"/>
+            <g font-family="Fira Code" font-size="13" fill="#94A3B8" font-weight="600" text-anchor="middle">
+              <text x="230" y="420">Denpasar</text><text x="352" y="276">Ubud</text><text x="576" y="309">Gianyar</text><text x="456" y="386">Bedulu</text>
+            </g>
+            <circle cx="230" cy="400" r="4" fill="#64748B"/>
+            <text x="150" y="215" font-family="Outfit" font-size="15" font-weight="800" fill="#C084FC">Jangkauan Private</text>
+          </svg>
+          <button class="pin" style="left:72%;top:52%;--c:#38BDF8" data-k="gianyar" aria-pressed="false"><span class="ping"></span><span class="dot relative grid place-items-center w-9 h-9 sm:w-11 sm:h-11 text-base sm:text-lg rounded-2xl bg-[#38BDF8] text-[#0B0F19] text-lg"><i class="fa-solid fa-building-flag"></i></span></button>
+          <button class="pin" style="left:57%;top:66%;--c:#FFC83D" data-k="bedulu" aria-pressed="false"><span class="ping"></span><span class="dot relative grid place-items-center w-9 h-9 sm:w-11 sm:h-11 text-base sm:text-lg rounded-2xl bg-[#FFC83D] text-[#0B0F19] text-lg"><i class="fa-solid fa-robot"></i></span></button>
+          <button class="pin" style="left:44%;top:46%;--c:#C084FC" data-k="private" aria-pressed="false"><span class="dot relative grid place-items-center w-9 h-9 sm:w-11 sm:h-11 text-base sm:text-lg rounded-full bg-[#C084FC] text-[#0B0F19] text-lg"><i class="fa-solid fa-house-laptop"></i></span></button>
+          <button class="hidden sm:flex absolute right-[4%] top-[6%] rounded-2xl border border-[#34D399]/40 bg-[#0B0F19]/85 backdrop-blur px-4 py-3 text-left items-center gap-3 hover:border-[#34D399] transition" data-k="online" aria-pressed="false" style="--c:#34D399">
+            <span class="wifi relative w-8 h-6 shrink-0"><span style="width:30px;height:30px;bottom:-12px"></span><span style="width:18px;height:18px;bottom:-6px;animation-delay:.3s"></span><span style="width:6px;height:6px;bottom:0;border-width:3px;border-color:#34D399;animation-delay:.6s"></span></span>
+            <span><span class="block text-sm font-bold">Kelas Online <span class="new-pill ml-1">BARU</span></span><span class="block text-[11px] text-slate-400">dari mana saja</span></span>
+          </button>
+        </div>
+        <button class="sm:hidden mx-4 mb-10 w-[calc(100%-2rem)] rounded-2xl border border-[#34D399]/40 bg-[#0B0F19]/85 px-4 py-3 text-left flex items-center gap-3" data-k="online" aria-pressed="false"><i class="fa-solid fa-wifi text-[#34D399]"></i><span class="text-sm font-bold">Kelas Online <span class="new-pill ml-1">BARU</span></span><span class="ml-auto text-[11px] text-slate-400">dari mana saja</span></button>
+        <div class="absolute left-4 bottom-3 mono text-[10px] text-slate-500">peta ilustratif · bukan skala</div>
+      </div>
+      <div class="lg:col-span-4" id="map3-card"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 4 ============================ -->
+<section id="opsi-4" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span><h2 class="font-display text-2xl font-extrabold">Tabel Banding</h2><p class="text-sm text-slate-400 max-w-3xl">Gaya tabel paket (tanpa harga): empat kolom berdampingan dengan baris yang sama, sehingga perbedaannya langsung terlihat. Di HP berubah jadi kartu geser. Paling transparan, sesuai tone KB §14.2.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="badge mb-4"><i class="fa-solid fa-scale-balanced text-[#38BDF8]"></i> Bandingkan</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Satu kurikulum, <span class="grad">empat cara belajar.</span></h3>
+    </div>
+    <div class="flex lg:grid lg:grid-cols-4 gap-4 overflow-x-auto snap-x snap-mandatory pb-3 -mx-5 px-5 lg:mx-0 lg:px-0 lg:overflow-visible" id="cmp"></div>
+    <p class="text-center text-[11px] text-slate-500 mt-4">Jadwal semua mode ditentukan bersama admin setelah pendaftaran (KB §12.2). Biaya diinformasikan admin saat konsultasi.</p>
+  </div>
+</section>
+
+<!-- ============================ OPSI 5 ============================ -->
+<section id="opsi-5" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span><h2 class="font-display text-2xl font-extrabold">Boarding Pass</h2><p class="text-sm text-slate-400 max-w-3xl">Setiap cara belajar adalah "tiket" menuju petualangan coding: gate, tujuan, rasio kursi, dan sobekan tiket berisi tombol trial. Nyambung dengan kode promo <span class="mono">PETUALANGAN2026</span>. Playful dan cocok untuk anak.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="lg:col-span-4 lg:sticky lg:top-24">
+        <div class="badge mb-4"><i class="fa-solid fa-plane-departure text-[#38BDF8]"></i> Pilih Gerbangmu</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Tiket menuju <span class="grad">petualangan coding.</span></h3>
+        <p class="text-slate-300 mt-4">Empat gerbang, satu tujuan: anak yang percaya diri membuat karya digitalnya sendiri.</p>
+        <div class="mt-6 inline-flex items-center gap-2 rounded-xl border border-dashed border-[#FFC83D]/50 px-3 py-2 mono text-xs text-[#FFC83D]"><i class="fa-solid fa-ticket"></i> PETUALANGAN2026</div>
+      </div>
+      <div class="lg:col-span-8 space-y-4" id="passes"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 6 ============================ -->
+<section id="opsi-6" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span><h2 class="font-display text-2xl font-extrabold">Ke Lab / Dari Rumah</h2><p class="text-sm text-slate-400 max-w-3xl">Satu pertanyaan besar dulu ("anak belajar di mana?") lewat switch seperti di hero, lalu muncul pilihan yang relevan: 2 lab, atau Private + Online. Membagi 4 pilihan jadi 2+2 sehingga tidak membingungkan.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-8">
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Anak belajar <span class="grad" id="sw-word">di Lab.</span></h3>
+      <div class="mt-6 flex justify-center">
+        <div class="lsw" role="radiogroup" aria-label="Tempat belajar" data-v="lab" id="lsw">
+          <span class="knob"></span>
+          <button role="radio" aria-checked="true" data-v="lab"><i class="fa-solid fa-building mr-1.5"></i> Datang ke Lab</button>
+          <button role="radio" aria-checked="false" data-v="home"><i class="fa-solid fa-house mr-1.5"></i> Dari Rumah</button>
+        </div>
+      </div>
+    </div>
+    <div class="pane grid grid-cols-1 md:grid-cols-2 gap-5" data-pane="lab" id="pane-lab"></div>
+    <div class="pane grid grid-cols-1 md:grid-cols-2 gap-5" data-pane="home" id="pane-home" hidden></div>
+  </div>
+</section>
+
+<!-- ============================ PERBANDINGAN ============================ -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <h2 class="font-display text-3xl font-extrabold mb-6">Perbandingan</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[720px]">
+        <thead class="bg-[#1E293B] text-[11px] mono uppercase tracking-wider text-slate-400"><tr><th class="text-left p-3">Opsi</th><th class="text-left p-3">Kekuatan</th><th class="text-left p-3">Catatan</th><th class="text-left p-3">Cocok jika…</th></tr></thead>
+        <tbody class="divide-y divide-white/5">
+          <tr><td class="p-3 font-bold">1 · Pilih Mode</td><td class="p-3 text-slate-300">Rapi, detail lengkap, peta dimuat sesuai kebutuhan</td><td class="p-3 text-slate-400">Satu mode terlihat dalam satu waktu</td><td class="p-3 text-slate-300">ingin aman dan informatif</td></tr>
+          <tr><td class="p-3 font-bold">2 · Kuis Cocok</td><td class="p-3 text-slate-300">Membantu orang tua yang ragu, terasa personal</td><td class="p-3 text-slate-400">Butuh klik dulu sebelum melihat info</td><td class="p-3 text-slate-300">banyak pertanyaan "pilih yang mana?" ke admin</td></tr>
+          <tr><td class="p-3 font-bold">3 · Peta Jangkauan</td><td class="p-3 text-slate-300">Langsung menjawab "rumah saya terjangkau?"</td><td class="p-3 text-slate-400">Peta ilustratif, bukan skala</td><td class="p-3 text-slate-300">area Private ingin ditonjolkan</td></tr>
+          <tr><td class="p-3 font-bold">4 · Tabel Banding</td><td class="p-3 text-slate-300">Paling transparan, semua sekaligus</td><td class="p-3 text-slate-400">Visual paling "datar"</td><td class="p-3 text-slate-300">orang tua suka membandingkan</td></tr>
+          <tr><td class="p-3 font-bold">5 · Boarding Pass</td><td class="p-3 text-slate-300">Paling playful, nyambung ke promo</td><td class="p-3 text-slate-400">Cukup panjang (4 tiket)</td><td class="p-3 text-slate-300">ingin section yang berkesan</td></tr>
+          <tr><td class="p-3 font-bold">6 · Ke Lab / Dari Rumah</td><td class="p-3 text-slate-300">Keputusan dipecah 2 langkah, tidak membingungkan</td><td class="p-3 text-slate-400">Pilihan lain tersembunyi di balik switch</td><td class="p-3 text-slate-300">ingin konsisten dengan switch di hero</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4 mt-6">
+      <div class="rounded-2xl border border-white/10 bg-[#1E293B]/50 p-5 text-sm">
+        <div class="font-bold mb-2"><i class="fa-solid fa-plug text-[#38BDF8] mr-1"></i> Dampak ke bagian lain saat implementasi</div>
+        <ul class="list-disc pl-5 text-slate-300 space-y-1">
+          <li>Formulir pendaftaran perlu pilihan ke-4: <b>Kelas Online</b>.</li>
+          <li>Routing WhatsApp untuk Kelas Online perlu ditentukan.</li>
+          <li>KNOWLEDGE_BASE.md §2, §11.3, §11.4 perlu diperbarui.</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-[#F87171]/30 bg-[#F87171]/5 p-5 text-sm">
+        <div class="font-bold mb-2 text-[#F87171]"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Perlu dikonfirmasi (Kelas Online)</div>
+        <ul class="list-disc pl-5 text-slate-300 space-y-1">
+          <li>Nomor WhatsApp admin untuk Kelas Online.</li>
+          <li>Platform (Zoom / Google Meet / lainnya) dan format: 1-on-1 atau grup? Berapa rasionya?</li>
+          <li>Program apa saja yang tersedia online? (draf ini menulis: paling cocok untuk program berbasis software)</li>
+          <li>Apakah ada Free Trial online juga?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+/* ===================== DATA (KB §2, §12; Online = belum ada di KB) ===================== */
+const M = {
+  gianyar: { short: 'Lab Gianyar', name: 'Gents Robotic Gianyar', kind: 'Learning Center', c: '#38BDF8', ic: 'fa-building-flag', where: 'Jln. Ksatrian No. 8, Lingkungan Candi Baru, Gianyar',
+    wa: '0851-8306-798', waIntl: '628518306798', logo: 'assets/partners/genta.png',
+    maps: 'https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar',
+    embed: 'https://maps.google.com/maps?q=Jln%20Ksatrian%20No%208%20Lingkungan%20Candi%20Baru%20Gianyar&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    pts: ['Lab komputer & kit robotik lengkap', 'Ruang ber-AC, bersih & ramah anak', 'Rasio 1 tutor : maks. 5 siswa'], gate: 'G1', fmt: 'Tatap muka di lab' },
+  bedulu: { short: 'Lab Bedulu', name: 'Bali Seed Bedulu', kind: 'Learning Center', c: '#FFC83D', ic: 'fa-robot', where: 'Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar',
+    wa: '0851-8306-798', waIntl: '628518306798', logo: 'assets/partners/bali_seeds.jpg', photo: 'assets/sessions/thumbs/01M3RSJWMWDKRWTNA3D0HEP47C.jpg',
+    maps: 'https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu',
+    embed: 'https://maps.google.com/maps?q=Jln%20Raya%20Semebaung%20Bedulu&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    pts: ['Lab komputer & kit robotik lengkap', 'Ruang ber-AC, bersih & ramah anak', 'Rasio 1 tutor : maks. 5 siswa'], gate: 'G2', fmt: 'Tatap muka di lab' },
+  private: { short: 'Private', name: 'Kelas Private (Home Visit)', kind: 'Tutor ke rumah', c: '#C084FC', ic: 'fa-house-laptop', where: 'Area Gianyar, Ubud, Denpasar & sekitarnya',
+    wa: '0857-9273-6627', waIntl: '6285792736627',
+    pts: ['Tutor datang langsung ke rumah', '1-on-1 atau grup kecil privat', 'Jadwal disepakati bersama admin'], gate: 'G3', fmt: 'Tatap muka di rumah' },
+  online: { short: 'Online', name: 'Kelas Online', kind: 'Belajar jarak jauh', c: '#34D399', ic: 'fa-video', where: 'Dari mana saja, cukup laptop & internet', isNew: true, tbc: true,
+    wa: null, waIntl: null,
+    pts: ['Sesi live bersama tutor via video call', 'Tanpa perjalanan, dari rumah sendiri', 'Paling cocok untuk program berbasis software'], gate: 'G4', fmt: 'Live via video call' },
+};
+const ORDER = ['gianyar', 'bedulu', 'private', 'online'];
+const waLink = k => M[k].waIntl ? `https://wa.me/${M[k].waIntl}?text=${encodeURIComponent('Halo LesKoding, saya ingin bertanya tentang ' + M[k].name + '.')}` : '#';
+const newPill = k => M[k].isNew ? '<span class="new-pill ml-1.5 align-middle">BARU</span>' : '';
+const tbc = k => M[k].tbc ? '<span class="mono text-[10px] text-[#F87171] block mt-2">* detail Kelas Online perlu konfirmasi</span>' : '';
+const contact = k => M[k].wa
+  ? `<span class="wa"><i class="fa-brands fa-whatsapp"></i>${M[k].wa}</span>`
+  : `<span class="wa" style="background:rgba(52,211,153,.08);color:#94A3B8;border-color:rgba(255,255,255,.12)"><i class="fa-brands fa-whatsapp"></i>nomor menyusul</span>`;
+const actions = (k, compact) => {
+  const m = M[k];
+  const primary = m.maps
+    ? `<a href="${m.maps}" target="_blank" rel="noopener" class="ghost ${compact ? '!min-h-[40px] !px-3 !py-2' : ''}"><i class="fa-solid fa-route"></i> Rute</a>`
+    : '';
+  return `${primary}<a href="#" onclick="return false" class="cta ${compact ? '!min-h-[40px] !px-3 !py-2' : ''}"><i class="fa-solid fa-rocket"></i> ${k === 'online' ? 'Daftar Online' : k === 'private' ? 'Daftar Private' : 'Coba Gratis'}</a>`;
+};
+const visual = (k, h = 'h-full') => {
+  const m = M[k];
+  if (k === 'private') return `<div class="relative ${h} min-h-[220px] bg-gradient-to-br from-purple-950/70 via-[#0F172A] to-[#0B0F19] grid place-items-center overflow-hidden">
+      <div class="absolute inset-0 grid-bg opacity-60"></div>
+      <div class="relative text-center"><div class="w-20 h-20 mx-auto rounded-3xl bg-[#C084FC]/20 border border-[#C084FC]/40 grid place-items-center text-4xl text-[#C084FC]"><i class="fa-solid fa-house-chimney-user"></i></div>
+      <div class="mono text-[11px] text-slate-400 mt-3"><i class="fa-solid fa-car-side text-[#C084FC] mr-1"></i> tutor → rumah Anda</div></div></div>`;
+  if (k === 'online') return `<div class="relative ${h} min-h-[220px] bg-gradient-to-br from-emerald-950/70 via-[#0F172A] to-[#0B0F19] grid place-items-center p-6 overflow-hidden">
+      <div class="absolute inset-0 grid-bg opacity-60"></div>
+      <div class="relative w-full max-w-[300px] rounded-xl border border-white/15 bg-[#0B0F19] p-2 shadow-2xl">
+        <div class="flex gap-1 mb-2"><span class="w-2 h-2 rounded-full bg-[#F87171]"></span><span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span><span class="w-2 h-2 rounded-full bg-emerald-400"></span><span class="ml-auto mono text-[9px] text-[#F87171]">● LIVE</span></div>
+        <div class="grid grid-cols-3 gap-1.5">
+          <div class="col-span-2 row-span-2 rounded-md bg-[#1E293B] aspect-video grid place-items-center text-[#34D399]"><i class="fa-solid fa-chalkboard-user text-2xl"></i></div>
+          <div class="rounded-md bg-[#1E293B] aspect-video grid place-items-center text-slate-400"><i class="fa-solid fa-child"></i></div>
+          <div class="rounded-md bg-[#1E293B] aspect-video grid place-items-center text-slate-400"><i class="fa-solid fa-child-reaching"></i></div>
+        </div>
+        <div class="mt-2 rounded-md bg-[#1E293B] px-2 py-1 mono text-[9px] text-[#34D399]">tutor: "coba jalankan programnya 👀"</div>
+      </div></div>`;
+  return `<div class="relative ${h} min-h-[220px] bg-[#1E293B]" data-map="${k}">
+      <button class="absolute inset-0 grid place-items-center text-center bg-[#0F172A] grid-bg group" data-load-map="${k}">
+        <span><span class="w-14 h-14 mx-auto rounded-2xl grid place-items-center text-2xl" style="background:${m.c}22;color:${m.c}"><i class="fa-solid fa-map-location-dot"></i></span>
+        <span class="block text-sm font-bold mt-3 group-hover:underline">Tampilkan peta</span><span class="block mono text-[10px] text-slate-500 mt-1">Google Maps dimuat saat diklik</span></span>
+      </button></div>`;
+};
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-load-map]'); if (!b) return;
+  const k = b.dataset.loadMap;
+  b.parentElement.innerHTML = `<iframe src="${M[k].embed}" class="absolute inset-0 w-full h-full" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Peta ${M[k].name}"></iframe>`;
+});
+
+/* ===================== 1 · MODE PICKER ===================== */
+(() => {
+  const tabs = document.getElementById('mp-tabs'), panel = document.getElementById('mp-panel');
+  tabs.innerHTML = ORDER.map(k => { const m = M[k]; return `
+    <button role="tab" class="mp text-left rounded-2xl border border-white/10 bg-[#0F172A] p-4 transition hover:border-white/25" style="--c:${m.c}" data-k="${k}" aria-selected="false">
+      <span class="mp-ic w-10 h-10 rounded-xl grid place-items-center text-base transition" style="background:${m.c}22;color:${m.c}"><i class="fa-solid ${m.ic}"></i></span>
+      <span class="block font-bold mt-3 leading-tight">${m.short}${newPill(k)}</span>
+      <span class="block text-[11px] text-slate-400 mt-0.5">${m.kind}</span>
+    </button>`; }).join('');
+  const show = k => {
+    const m = M[k];
+    tabs.querySelectorAll('.mp').forEach(b => b.setAttribute('aria-selected', b.dataset.k === k));
+    panel.innerHTML = `<div class="grid grid-cols-1 lg:grid-cols-2 swap">
+      <div class="p-6 sm:p-8 flex flex-col">
+        <div class="flex items-center gap-3">
+          ${m.logo ? `<div class="plate w-14 h-14 rounded-xl p-1.5 shrink-0"><img src="${m.logo}" alt="" class="w-full h-full"></div>` : `<div class="w-14 h-14 rounded-xl grid place-items-center text-2xl shrink-0" style="background:${m.c}22;color:${m.c}"><i class="fa-solid ${m.ic}"></i></div>`}
+          <div><div class="mono text-[10px] font-bold uppercase tracking-widest" style="color:${m.c}">${m.kind}</div><h4 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight">${m.name}${newPill(k)}</h4></div>
+        </div>
+        <p class="text-sm text-slate-300 mt-5 flex gap-2"><i class="fa-solid ${m.maps ? 'fa-location-dot' : k === 'online' ? 'fa-wifi' : 'fa-map-pin'} mt-0.5" style="color:${m.c}"></i>${m.where}</p>
+        <ul class="mt-5 space-y-2.5">${m.pts.map(p => `<li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:${m.c}"></i>${p}</li>`).join('')}</ul>
+        ${tbc(k)}
+        <div class="mt-auto pt-6 flex flex-wrap items-center gap-3">${contact(k)}<span class="flex-1"></span>${actions(k, true)}</div>
+      </div>
+      <div class="border-t lg:border-t-0 lg:border-l border-white/10 relative min-h-[260px]">${visual(k)}</div>
+    </div>`;
+  };
+  tabs.addEventListener('click', e => { const b = e.target.closest('.mp'); if (b) show(b.dataset.k); });
+  tabs.addEventListener('keydown', e => {
+    if (!['ArrowRight', 'ArrowLeft'].includes(e.key)) return;
+    const bs = [...tabs.children], i = bs.indexOf(document.activeElement); if (i < 0) return;
+    const n = bs[(i + (e.key === 'ArrowRight' ? 1 : -1) + bs.length) % bs.length]; n.focus(); show(n.dataset.k);
+  });
+  show('gianyar');
+})();
+
+/* ===================== 2 · KUIS ===================== */
+(() => {
+  const box = document.getElementById('q-box'), steps = document.getElementById('q-steps');
+  const Q = [
+    { q: 'Anak lebih nyaman belajar di mana?', o: [['lab', 'fa-building', 'Di lab, bersama teman sekelas'], ['home', 'fa-house', 'Di rumah sendiri'], ['any', 'fa-shuffle', 'Mana saja, yang penting jalan']] },
+    { q: 'Tinggal di area mana?', o: [['gianyar', 'fa-location-dot', 'Gianyar kota & sekitarnya'], ['bedulu', 'fa-location-dot', 'Bedulu / Blahbatuh / Ubud'], ['denpasar', 'fa-location-dot', 'Denpasar & sekitarnya'], ['far', 'fa-earth-asia', 'Di luar area tersebut']] },
+    { q: 'Tertarik program robotika (perangkat fisik)?', o: [['yes', 'fa-robot', 'Ya, ingin merakit robot'], ['no', 'fa-laptop-code', 'Fokus coding / game / desain dulu'], ['unsure', 'fa-circle-question', 'Belum tahu, nanti ikut asesmen']] },
+  ];
+  const A = [];
+  const recommend = () => {
+    const [where, area, robot] = A;
+    let k, why = [];
+    if (area === 'far') { k = 'online'; why.push('Lokasi di luar area lab & jangkauan Private'); }
+    else if (where === 'home') { k = robot === 'no' ? 'online' : 'private'; why.push('Anak lebih nyaman belajar di rumah'); if (k === 'private') why.push('Tutor bisa datang & membawa pendampingan langsung'); else why.push('Program berbasis software bisa diikuti dari rumah'); }
+    else if (area === 'denpasar') { k = 'private'; why.push('Denpasar termasuk jangkauan Kelas Private'); }
+    else { k = area === 'bedulu' ? 'bedulu' : 'gianyar'; why.push(`Lab terdekat dari area Anda adalah ${M[k].short}`); }
+    if (robot === 'yes' && (k === 'gianyar' || k === 'bedulu')) why.push('Lab punya kit robotik lengkap (Arduino, sensor, servo)');
+    if (robot === 'unsure') why.push('Tutor membantu menentukan program saat Free Trial');
+    return { k, why };
+  };
+  const render = () => {
+    steps.innerHTML = Q.map((_, i) => `<span class="h-1.5 flex-1 rounded-full ${i < A.length ? 'bg-[#FFC83D]' : i === A.length ? 'bg-white/40' : 'bg-white/10'}"></span>`).join('') + `<span class="h-1.5 flex-1 rounded-full ${A.length === Q.length ? 'bg-[#34D399]' : 'bg-white/10'}"></span>`;
+    if (A.length < Q.length) {
+      const q = Q[A.length];
+      box.innerHTML = `<div class="swap">
+        <div class="mono text-[11px] text-slate-500 mb-2">PERTANYAAN ${A.length + 1} / ${Q.length}</div>
+        <h4 class="font-display text-2xl sm:text-3xl font-extrabold mb-6">${q.q}</h4>
+        <div class="grid gap-2.5">${q.o.map(([v, ic, l]) => `<button class="qopt flex items-center gap-3 rounded-xl border border-white/10 hover:border-white/30 px-4 py-3.5 text-left text-sm font-semibold transition" data-v="${v}" aria-pressed="false"><span class="qdot w-4 h-4 rounded-full border-2 border-white/30 shrink-0 transition"></span><i class="fa-solid ${ic} text-slate-400 w-4"></i>${l}</button>`).join('')}</div>
+        ${A.length ? '<button class="mt-5 text-xs font-bold text-slate-400 hover:text-white" data-back><i class="fa-solid fa-arrow-left mr-1"></i> Kembali</button>' : ''}
+      </div>`;
+      return;
+    }
+    const { k, why } = recommend(), m = M[k];
+    box.innerHTML = `<div class="swap">
+      <div class="mono text-[11px] font-bold text-[#34D399] mb-3"><i class="fa-solid fa-wand-magic-sparkles"></i> REKOMENDASI UNTUK ANDA</div>
+      <div class="rounded-2xl border p-5" style="border-color:${m.c}66;background:color-mix(in srgb,${m.c} 8%,#0B0F19)">
+        <div class="flex items-center gap-3"><div class="w-12 h-12 rounded-xl grid place-items-center text-xl" style="background:${m.c};color:#0B0F19"><i class="fa-solid ${m.ic}"></i></div>
+          <div><div class="font-display text-2xl font-extrabold leading-tight">${m.name}${newPill(k)}</div><div class="text-xs text-slate-400">${m.where}</div></div></div>
+        <ul class="mt-4 space-y-2">${why.map(w => `<li class="flex gap-2 text-sm"><i class="fa-solid fa-check mt-1" style="color:${m.c}"></i>${w}</li>`).join('')}</ul>
+        ${tbc(k)}
+        <div class="mt-5 flex flex-wrap gap-3">${actions(k, true)}</div>
+      </div>
+      <div class="mt-5 flex flex-wrap items-center gap-2 text-xs"><span class="text-slate-500">Pilihan lain:</span>${ORDER.filter(x => x !== k).map(x => `<span class="px-2.5 py-1 rounded-full border border-white/10 text-slate-300"><i class="fa-solid ${M[x].ic} mr-1" style="color:${M[x].c}"></i>${M[x].short}</span>`).join('')}
+        <button class="ml-auto font-bold text-[#38BDF8] hover:underline" data-reset><i class="fa-solid fa-rotate-left mr-1"></i>Ulangi</button></div>
+    </div>`;
+  };
+  box.addEventListener('click', e => {
+    const o = e.target.closest('.qopt');
+    if (o) { o.setAttribute('aria-pressed', 'true'); setTimeout(() => { A.push(o.dataset.v); render(); }, 220); return; }
+    if (e.target.closest('[data-back]')) { A.pop(); render(); }
+    if (e.target.closest('[data-reset]')) { A.length = 0; render(); }
+  });
+  render();
+})();
+
+/* ===================== 3 · PETA ===================== */
+(() => {
+  const map = document.getElementById('map3-wrap'), card = document.getElementById('map3-card');
+  const show = k => {
+    const m = M[k];
+    map.querySelectorAll('[data-k]').forEach(b => b.setAttribute('aria-pressed', b.dataset.k === k));
+    card.innerHTML = `<div class="swap h-full rounded-[1.75rem] border bg-[#0F172A] overflow-hidden flex flex-col" style="border-color:${m.c}55">
+      ${m.photo ? `<img src="${m.photo}" alt="Suasana ${m.name}" class="w-full h-36 object-cover">` : `<div class="h-2" style="background:${m.c}"></div>`}
+      <div class="p-6 flex-1 flex flex-col">
+        <div class="mono text-[10px] font-bold uppercase tracking-widest" style="color:${m.c}">${m.kind}</div>
+        <h4 class="font-display text-2xl font-extrabold leading-tight mt-1">${m.name}${newPill(k)}</h4>
+        <p class="text-sm text-slate-300 mt-3">${m.where}</p>
+        <ul class="mt-4 space-y-2">${m.pts.map(p => `<li class="flex gap-2 text-[13px]"><i class="fa-solid fa-check mt-1" style="color:${m.c}"></i>${p}</li>`).join('')}</ul>
+        ${tbc(k)}
+        <div class="mt-auto pt-5">${contact(k)}<div class="flex flex-wrap gap-2 mt-3">${actions(k, true)}</div></div>
+      </div></div>`;
+  };
+  map.addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (b) show(b.dataset.k); });
+  show('private');
+})();
+
+/* ===================== 4 · TABEL BANDING ===================== */
+(() => {
+  const ROWS = [
+    ['fa-location-dot', 'Tempat', { gianyar: 'Lab Gianyar', bedulu: 'Lab Bedulu', private: 'Rumah Anda', online: 'Dari mana saja' }],
+    ['fa-users', 'Format', { gianyar: 'Kelas kecil, maks. 5 siswa/tutor', bedulu: 'Kelas kecil, maks. 5 siswa/tutor', private: '1-on-1 atau grup kecil', online: 'Live via video call*' }],
+    ['fa-laptop', 'Perangkat', { gianyar: 'PC/laptop lab disediakan', bedulu: 'PC/laptop lab disediakan', private: 'Dibicarakan dengan admin', online: 'Laptop & internet di rumah' }],
+    ['fa-robot', 'Kit robotik fisik', { gianyar: true, bedulu: true, private: 'Dibicarakan', online: false }],
+    ['fa-car', 'Perlu perjalanan', { gianyar: true, bedulu: true, private: false, online: false }],
+    ['fa-calendar', 'Jadwal', { gianyar: 'Disepakati dengan admin', bedulu: 'Disepakati dengan admin', private: 'Disepakati dengan admin', online: 'Disepakati dengan admin' }],
+  ];
+  const cell = v => v === true ? '<i class="fa-solid fa-circle-check text-[#34D399]"></i> Ya' : v === false ? '<i class="fa-solid fa-circle-minus text-slate-600"></i> Tidak' : v;
+  document.getElementById('cmp').innerHTML = ORDER.map(k => { const m = M[k]; return `
+    <div class="snap-center shrink-0 w-[82%] sm:w-[48%] lg:w-auto rounded-[1.5rem] border border-white/10 bg-[#0B0F19] overflow-hidden flex flex-col hover:border-[color:var(--c)] transition" style="--c:${m.c}">
+      <div class="p-5 relative" style="background:linear-gradient(160deg,${m.c}26,transparent)">
+        ${m.isNew ? '<span class="new-pill absolute top-4 right-4">BARU</span>' : ''}
+        <div class="w-11 h-11 rounded-xl grid place-items-center text-lg" style="background:${m.c};color:#0B0F19"><i class="fa-solid ${m.ic}"></i></div>
+        <div class="font-display text-xl font-extrabold mt-3 leading-tight">${m.short}</div>
+        <div class="text-[11px] text-slate-400">${m.kind}</div>
+      </div>
+      <dl class="px-5 divide-y divide-white/5 flex-1">${ROWS.map(([ic, l, v]) => `<div class="py-3"><dt class="mono text-[10px] text-slate-500 uppercase"><i class="fa-solid ${ic} mr-1"></i>${l}</dt><dd class="text-[13px] font-semibold mt-0.5">${cell(v[k])}</dd></div>`).join('')}</dl>
+      <div class="p-5 pt-3 border-t border-white/5">${contact(k)}<a href="#" onclick="return false" class="mt-3 w-full inline-flex items-center justify-center gap-2 rounded-xl py-3 min-h-[44px] text-xs font-extrabold uppercase tracking-wider" style="background:${m.c};color:#0B0F19">${k === 'online' ? 'Daftar Online' : 'Coba Gratis'} <i class="fa-solid fa-arrow-right"></i></a>${tbc(k)}</div>
+    </div>`; }).join('');
+})();
+
+/* ===================== 5 · BOARDING PASS ===================== */
+(() => {
+  const DEST = { gianyar: 'GIANYAR', bedulu: 'BEDULU', private: 'RUMAH ANDA', online: 'ONLINE' };
+  const CODE = { gianyar: 'GNY', bedulu: 'BDL', private: 'HOM', online: 'WEB' };
+  document.getElementById('passes').innerHTML = ORDER.map(k => { const m = M[k]; return `
+    <article class="pass" style="--c:${m.c}">
+      <div class="p-5 sm:p-6">
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2 mono text-[10px] font-bold tracking-widest text-slate-400"><img src="assets/logo/leskoding_community_sm.png" alt="" class="w-5 h-5 object-contain">LESKODING AIR · ${m.kind.toUpperCase()}</div>
+          ${m.isNew ? '<span class="new-pill">BARU</span>' : `<span class="mono text-[10px] text-slate-500">${m.fmt}</span>`}
+        </div>
+        <div class="flex items-center gap-4 mt-4">
+          <div><div class="mono text-[10px] text-slate-500">DARI</div><div class="font-display text-3xl font-black">KID</div></div>
+          <div class="flex-1 flex items-center gap-2" style="color:${m.c}"><span class="flex-1 border-t-2 border-dashed" style="border-color:${m.c}66"></span><i class="fa-solid ${k === 'online' ? 'fa-satellite-dish' : 'fa-plane'}"></i><span class="flex-1 border-t-2 border-dashed" style="border-color:${m.c}66"></span></div>
+          <div class="text-right"><div class="mono text-[10px] text-slate-500">KE</div><div class="font-display text-3xl font-black" style="color:${m.c}">${CODE[k]}</div></div>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5 text-[12px]">
+          <div><div class="mono text-[9px] text-slate-500">TUJUAN</div><div class="font-bold">${DEST[k]}</div></div>
+          <div><div class="mono text-[9px] text-slate-500">GATE</div><div class="font-bold">${m.gate}</div></div>
+          <div><div class="mono text-[9px] text-slate-500">KURSI</div><div class="font-bold">${k === 'online' ? 'TBC*' : k === 'private' ? '1-on-1 / grup' : '1 tutor : 5'}</div></div>
+          <div><div class="mono text-[9px] text-slate-500">BOARDING</div><div class="font-bold">Jadwal fleksibel</div></div>
+        </div>
+        <p class="text-[12px] text-slate-400 mt-4"><i class="fa-solid ${m.maps ? 'fa-location-dot' : 'fa-circle-info'} mr-1" style="color:${m.c}"></i>${m.where}</p>
+      </div>
+      <div class="stub p-5 flex flex-col justify-between gap-3 bg-[#0F172A]">
+        <div><div class="mono text-[9px] text-slate-500">PENUMPANG</div><div class="font-bold text-sm">Calon Kreator</div></div>
+        ${contact(k)}
+        <div class="barcode"></div>
+        <a href="${m.maps || '#'}" ${m.maps ? 'target="_blank" rel="noopener"' : 'onclick="return false"'} class="inline-flex items-center justify-center gap-2 rounded-lg py-2.5 min-h-[40px] text-[11px] font-extrabold uppercase tracking-wider" style="background:${m.c};color:#0B0F19">${m.maps ? '<i class="fa-solid fa-route"></i> Rute' : '<i class="fa-solid fa-ticket"></i> Pesan trial'}</a>
+      </div>
+    </article>`; }).join('');
+})();
+
+/* ===================== 6 · SWITCH ===================== */
+(() => {
+  const sw = document.getElementById('lsw'), word = document.getElementById('sw-word');
+  const big = k => { const m = M[k]; return `
+    <div class="swap rounded-[1.75rem] border border-white/10 bg-[#0B0F19] overflow-hidden flex flex-col hover:border-[color:var(--c)] transition" style="--c:${m.c}">
+      <div class="relative h-52">${visual(k)}</div>
+      <div class="p-6 flex-1 flex flex-col">
+        <div class="flex items-center gap-3">
+          ${m.logo ? `<div class="plate w-11 h-11 rounded-lg p-1 shrink-0"><img src="${m.logo}" alt="" class="w-full h-full"></div>` : `<div class="w-11 h-11 rounded-lg grid place-items-center shrink-0" style="background:${m.c};color:#0B0F19"><i class="fa-solid ${m.ic}"></i></div>`}
+          <div><h4 class="font-display text-xl font-extrabold leading-tight">${m.name}${newPill(k)}</h4><div class="text-[11px] text-slate-400">${m.where}</div></div>
+        </div>
+        <ul class="mt-4 space-y-2">${m.pts.map(p => `<li class="flex gap-2 text-[13px]"><i class="fa-solid fa-check mt-1" style="color:${m.c}"></i>${p}</li>`).join('')}</ul>
+        ${tbc(k)}
+        <div class="mt-auto pt-5 flex flex-wrap items-center gap-3">${contact(k)}<span class="flex-1"></span>${actions(k, true)}</div>
+      </div>
+    </div>`; };
+  document.getElementById('pane-lab').innerHTML = big('gianyar') + big('bedulu');
+  document.getElementById('pane-home').innerHTML = big('private') + big('online');
+  const set = v => {
+    sw.dataset.v = v;
+    sw.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', b.dataset.v === v));
+    document.querySelectorAll('#opsi-6 .pane').forEach(p => p.hidden = p.dataset.pane !== v);
+    word.textContent = v === 'lab' ? 'di Lab.' : 'dari Rumah.';
+  };
+  sw.addEventListener('click', e => { const b = e.target.closest('button'); if (b) set(b.dataset.v); });
+  sw.addEventListener('keydown', e => { if (['ArrowLeft', 'ArrowRight'].includes(e.key)) { const v = sw.dataset.v === 'lab' ? 'home' : 'lab'; set(v); sw.querySelector(`[data-v="${v}"]`).focus(); } });
+})();
+})();
+</script>
+</body>
+</html>

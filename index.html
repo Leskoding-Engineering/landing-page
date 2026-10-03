@@ -235,6 +235,7 @@
                     </div>
                     <div class="flex items-center justify-between mt-5 pt-4 border-t border-white/10 text-xs">
                         <a href="#alur" class="text-slate-300 hover:text-white"><i class="fa-solid fa-map text-[#FFC83D] mr-1.5"></i><span data-i18n="nav2_alur">Alur Mudah: Mulai dari Mana?</span></a>
+                        <a href="#dokumentasi" class="text-slate-300 hover:text-white"><i class="fa-solid fa-film text-[#C084FC] mr-1.5"></i><span data-i18n="nav2_doc">Dokumentasi Kelas</span></a>
                         <a href="#register" class="font-bold text-[#FFC83D]" data-i18n="nav2_trial_link">Coba kelas gratis →</a>
                     </div>
                 </div>
@@ -260,6 +261,7 @@
                 <a href="#manfaat" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/[.03] text-sm text-slate-200"><i class="fa-solid fa-wand-magic-sparkles w-4 text-amber-400"></i><span data-i18n="nav2_m1_t">Manfaat Belajar</span></a>
                 <a href="#cara-belajar" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/[.03] text-sm text-slate-200"><i class="fa-solid fa-cubes-stacked w-4 text-emerald-400"></i><span data-i18n="nav2_m2_t">Cara Belajar</span></a>
                 <a href="#progress-wali" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/[.03] text-sm text-slate-200"><i class="fa-solid fa-chart-line w-4 text-blue-400"></i><span data-i18n="nav2_m3_t">Laporan Progres Wali</span></a>
+                <a href="#dokumentasi" class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/[.03] text-sm text-slate-200"><i class="fa-solid fa-film w-4 text-[#C084FC]"></i><span data-i18n="nav2_doc">Dokumentasi Kelas</span></a>
             </div></div></div>
         </div>
         <div class="mm-acc border-b border-white/5">
@@ -296,8 +298,8 @@
                     <span data-i18n="hero_badge" class="text-xs font-bold text-white">Playful Future Lab — Coding &amp; Robotic Bali</span>
                 </div>
                 <h1 class="text-4xl sm:text-5xl lg:text-[3.6rem] font-extrabold leading-[1.08] tracking-tight">
-                    <span data-i18n="hero7_title_1">Hari ini dia <span class="text-slate-400">main</span> game.</span><br>
-                    <span data-i18n="hero7_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">Besok dia yang bikin.</span>
+                    <span data-i18n="hero7_title_1">Yesterday they <span class="text-slate-400">play</span> game,</span><br>
+                    <span data-i18n="hero7_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">today they build them.</span>
                 </h1>
                 <p class="text-base sm:text-lg text-slate-300 mt-6 max-w-xl leading-relaxed" data-i18n="hero7_desc">Waktu layar yang sama, hasil yang berbeda. Di LesKoding, anak 6–17 tahun belajar mengubah game, animasi, dan aplikasi favoritnya menjadi <b class="text-white">karya buatan sendiri</b>, didampingi tutor setiap sesi.</p>
 
@@ -443,10 +445,10 @@
             <i class="fa-solid fa-map"></i> <span data-i18n="funnel_tag">Panduan Keputusan Orang Tua</span>
           </div>
           <h3 class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight" data-i18n="funnel_title">Alur Mudah: Saya Harus Mulai dari Mana?</h3>
-          <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">5 level santai menuju karya pertama si kecil. Pilih level di peta.</p>
+          <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl" data-i18n="funnel_desc">5 langkah terarah dari mengenal manfaat hingga si kecil menciptakan karya pertamanya.</p>
         </div>
         <div class="opsi-label text-xs text-slate-400 bg-white/5 border border-white/10 rounded-lg px-3 py-2 self-start md:self-auto">
-          LEVEL <span id="qm-lv" class="text-white font-bold">1</span>/5 · <span id="qm-xp" class="text-[#38BDF8]">0%</span> perjalanan
+          <span data-i18n="funnel_step_label">LANGKAH</span> <span id="qm-lv" class="text-white font-bold">1</span>/5 · <span id="qm-xp" class="text-[#38BDF8]">0%</span> <span data-i18n="funnel_progress_label">perjalanan</span>
         </div>
       </div>
 
@@ -573,9 +575,37 @@
 
 
 
+<section id="tech-flow" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden">
+  <div class="absolute inset-0 grain opacity-60 pointer-events-none"></div>
+  <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <!-- Text removed -->
+
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+      <!-- Left: headline + interest list -->
+      <div class="lg:col-span-5">
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight">
+          <span data-i18n="tf_title_1">Anak Anda suka apa?</span><br><span data-i18n="tf_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">Kami ubah jadi karya.</span>
+        </h2>
+        <p class="text-slate-300 mt-4 text-sm sm:text-base leading-relaxed max-w-md" data-i18n="tf_desc">Pilih yang paling menggambarkan anak Anda. Lihat software yang dipelajari dan karya yang dibawa pulang.</p>
+
+        <div class="flex gap-1.5 mt-7 mb-4 text-xs font-bold" id="a-age">
+          <button data-age="all" class="px-3.5 py-1.5 rounded-full bg-white text-[#0B0F19]" data-i18n="tf_age_all">Semua usia</button>
+          <button data-age="kids" class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300" data-i18n="tf_age_kids">Anak 6–14</button>
+          <button data-age="teens" class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300" data-i18n="tf_age_teens">Remaja 11–17</button>
+        </div>
+
+        <div class="space-y-2" id="a-list" role="tablist"></div>
+      </div>
+
+      <!-- Right: creation stage -->
+      <div class="lg:col-span-7 lg:sticky lg:top-24" id="a-stage"></div>
+    </div>
+  </div>
+</section>
+
 <style>
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-.animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 30s linear infinite; }
+.animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 30s linear infinite; will-change: transform; }
 .text-outline { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.15); }
 .group:hover .text-outline-hover { color: rgba(255,255,255,0.1); -webkit-text-stroke: 0px; }
 .card-noise { position: absolute; inset: 0; background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E'); opacity: 0.04; mix-blend-mode: overlay; pointer-events: none; z-index: 1; }
@@ -608,7 +638,7 @@
     <div class="rounded-[2rem] bg-[#0F172A] border border-white/10 overflow-hidden mb-12">
       <div class="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-b border-white/10">
         <div class="flex flex-wrap gap-2 text-[11px] font-bold" id="x-legend"></div>
-        <span class="text-[11px] text-slate-500"><i class="fa-solid fa-hand-pointer mr-1 text-[#38BDF8]"></i>Klik stasiun untuk lompat ke kartunya</span>
+        <span class="text-[11px] text-slate-500"><i class="fa-solid fa-hand-pointer mr-1 text-[#38BDF8]"></i><span data-i18n="course_click_station">Klik stasiun untuk lompat ke kartunya</span></span>
       </div>
       <div class="overflow-x-auto no-scrollbar grid-bg">
         <div class="relative min-w-[820px] max-w-[1080px] mx-auto" style="aspect-ratio:1000/440" id="x-map">
@@ -623,33 +653,7 @@
 </section>
 
 
-<section id="tech-flow" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden">
-  <div class="absolute inset-0 grain opacity-60 pointer-events-none"></div>
-  <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative">
-    <!-- Text removed -->
 
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-      <!-- Left: headline + interest list -->
-      <div class="lg:col-span-5">
-        <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight">
-          Anak Anda suka apa?<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">Kami ubah jadi karya.</span>
-        </h2>
-        <p class="text-slate-300 mt-4 text-sm sm:text-base leading-relaxed max-w-md">Pilih yang paling menggambarkan anak Anda. Lihat software yang dipelajari dan karya yang dibawa pulang.</p>
-
-        <div class="flex gap-1.5 mt-7 mb-4 text-xs font-bold" id="a-age">
-          <button data-age="all" class="px-3.5 py-1.5 rounded-full bg-white text-[#0B0F19]">Semua usia</button>
-          <button data-age="kids" class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300">Anak 6–14</button>
-          <button data-age="teens" class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300">Remaja 11–17</button>
-        </div>
-
-        <div class="space-y-2" id="a-list" role="tablist"></div>
-      </div>
-
-      <!-- Right: creation stage -->
-      <div class="lg:col-span-7 lg:sticky lg:top-24" id="a-stage"></div>
-    </div>
-  </div>
-</section>
 
 <section id="hall-of-fame" class="py-20 md:py-28 relative z-10 border-b border-white/10 bg-[#0F172A] text-white">
   <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -724,6 +728,50 @@
     </section>
 
 
+
+    <!-- DOKUMENTASI KELAS (Roll Film) -->
+    <section id="dokumentasi" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden bg-[#0B0F19] text-white">
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-10 fade-in-up">
+                <div class="lg:col-span-7">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-4">
+                        <i class="fa-solid fa-film text-[#C084FC] text-xs"></i>
+                        <span data-i18n="doc_badge" class="text-xs font-bold tracking-wider uppercase">Dokumentasi Kelas</span>
+                    </div>
+                    <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">
+                        <span data-i18n="doc_title_1">Setiap sesi,</span>
+                        <span data-i18n="doc_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">satu frame cerita.</span>
+                    </h2>
+                </div>
+                <p class="lg:col-span-5 text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="doc_desc">Fokus di depan laptop, tepuk tangan setelah program berjalan, foto bersama di hari event. Inilah keseharian siswa LesKoding.</p>
+            </div>
+        </div>
+        <div class="space-y-4 -rotate-[1.5deg] scale-[1.03]">
+            <div class="doc-film"><div class="doc-film-track" id="doc-film-a"></div></div>
+            <div class="doc-film"><div class="doc-film-track doc-rev" id="doc-film-b"></div></div>
+        </div>
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 mt-10 flex flex-wrap items-center justify-center gap-3">
+            <button type="button" id="doc-open-all" class="inline-flex items-center justify-center gap-2 border border-white/15 hover:bg-white/5 text-white font-bold px-6 py-3 min-h-[48px] rounded-xl text-xs uppercase tracking-wider transition"><i class="fa-solid fa-expand"></i> <span data-i18n="doc_open_all">Buka semua foto</span></button>
+            <span class="font-mono text-[11px] text-slate-500"><i class="fa-solid fa-hand-pointer mr-1"></i><span data-i18n="doc_hint">Arahkan kursor untuk menghentikan gulungan, klik foto untuk memperbesar</span></span>
+        </div>
+
+        <dialog id="doc-lb" class="doc-lb" aria-labelledby="doc-lb-cap">
+            <div class="w-full h-full flex flex-col text-white" data-doc-close-zone>
+                <div class="flex items-center justify-between px-4 py-3">
+                    <span class="font-mono text-xs text-slate-400" id="doc-lb-count"></span>
+                    <button type="button" id="doc-lb-close" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="flex-1 min-h-0 flex items-center justify-center gap-2 px-2 sm:px-4" data-doc-close-zone>
+                    <button type="button" id="doc-lb-prev" class="hidden sm:flex w-12 h-12 shrink-0 rounded-full bg-white/10 hover:bg-white/20 items-center justify-center"><i class="fa-solid fa-chevron-left"></i></button>
+                    <img id="doc-lb-img" alt="" class="max-h-full max-w-full object-contain rounded-lg select-none">
+                    <button type="button" id="doc-lb-next" class="hidden sm:flex w-12 h-12 shrink-0 rounded-full bg-white/10 hover:bg-white/20 items-center justify-center"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="px-4 py-4 text-center">
+                    <span class="inline-block font-mono text-[10px] font-bold px-2 py-0.5 rounded-md mr-2" id="doc-lb-tag"></span><span class="text-sm text-slate-200" id="doc-lb-cap"></span>
+                </div>
+            </div>
+        </dialog>
+    </section>
 
     <!-- PROGRESS MONITORING UNTUK WALI (Laporan belajar yang bisa dipahami wali) -->
     <section id="progress-wali" class="py-20 md:py-28 relative z-10 bg-[#0F172A] border-b border-white/10 text-white">
@@ -957,108 +1005,136 @@
     <!-- Location & Access Section (Dark Surface Theme) -->
     <section id="location" class="py-20 md:py-28 relative z-10 bg-[#0B0F19] border-b border-white/10 text-white">
         <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
-            <!-- Header Section -->
-            <div class="text-center mb-16 fade-in-up">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-3 shadow-sm">
+            <div class="text-center max-w-2xl mx-auto mb-10 fade-in-up">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-4">
                     <i class="fa-solid fa-map-location-dot text-[#38BDF8] text-xs"></i>
                     <span data-i18n="loc_badge" class="text-xs font-bold tracking-wider uppercase text-white">Kampus &amp; Laboratorium</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4"><span data-i18n="loc_title">Lokasi Belajar di Bali</span></h2>
-                <p data-i18n="loc_desc" class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Pilih Learning Center terdekat untuk kelas tatap muka interaktif, atau pilih layanan Private di mana tutor kami datang langsung mendampingi anak belajar di rumah sendiri.</p>
+                <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">
+                    <span data-i18n="loc5_title_1">Belajar di mana pun</span>
+                    <span data-i18n="loc5_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">yang paling pas.</span>
+                </h2>
+                <p class="text-slate-300 mt-4" data-i18n="loc5_desc">Datang ke Learning Center, tutor yang datang ke rumah, atau ikut kelas online. Kurikulumnya sama.</p>
             </div>
 
-            <!-- Locations Grid (3 Columns) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 fade-in-up">
-                
-                <!-- Cabang 1: Gianyar -->
-                <div class="bg-[#1E293B] rounded-2xl p-5 border border-white/10 hover:border-[#0788F5]/60 hover:shadow-2xl transition-all group flex flex-col h-full">
-                    <h3 class="text-lg font-bold text-white mb-3 group-hover:text-[#38BDF8] transition-colors flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-xl bg-[#0788F5]/15 border border-[#0788F5]/30 text-[#38BDF8] flex items-center justify-center text-sm">
-                            <i class="fa-solid fa-building-flag"></i>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5" role="tablist" id="loc-tabs" aria-label="Lokasi &amp; cara belajar">
+                <button type="button" role="tab" id="loc-tab-gianyar" aria-controls="loc-panel-gianyar" aria-selected="true" tabindex="0" class="loc-tab text-left rounded-2xl border border-white/10 bg-[#0F172A] p-4 transition hover:border-white/25" style="--c:#38BDF8" data-loc="gianyar">
+                    <span class="loc-tab-ic w-10 h-10 rounded-xl grid place-items-center text-base transition" style="background:#38BDF822;color:#38BDF8"><i class="fa-solid fa-building-flag"></i></span>
+                    <span class="block font-bold mt-3 leading-tight"><span data-i18n="loc5_tab_gianyar">Lab Gianyar</span></span>
+                    <span class="block text-[11px] text-slate-400 mt-0.5" data-i18n="loc5_kind_lab">Learning Center</span>
+                </button>
+                <button type="button" role="tab" id="loc-tab-bedulu" aria-controls="loc-panel-bedulu" aria-selected="false" tabindex="-1" class="loc-tab text-left rounded-2xl border border-white/10 bg-[#0F172A] p-4 transition hover:border-white/25" style="--c:#FFC83D" data-loc="bedulu">
+                    <span class="loc-tab-ic w-10 h-10 rounded-xl grid place-items-center text-base transition" style="background:#FFC83D22;color:#FFC83D"><i class="fa-solid fa-robot"></i></span>
+                    <span class="block font-bold mt-3 leading-tight"><span data-i18n="loc5_tab_bedulu">Lab Bedulu</span></span>
+                    <span class="block text-[11px] text-slate-400 mt-0.5" data-i18n="loc5_kind_lab">Learning Center</span>
+                </button>
+                <button type="button" role="tab" id="loc-tab-private" aria-controls="loc-panel-private" aria-selected="false" tabindex="-1" class="loc-tab text-left rounded-2xl border border-white/10 bg-[#0F172A] p-4 transition hover:border-white/25" style="--c:#C084FC" data-loc="private">
+                    <span class="loc-tab-ic w-10 h-10 rounded-xl grid place-items-center text-base transition" style="background:#C084FC22;color:#C084FC"><i class="fa-solid fa-house-laptop"></i></span>
+                    <span class="block font-bold mt-3 leading-tight"><span data-i18n="loc5_tab_private">Private</span></span>
+                    <span class="block text-[11px] text-slate-400 mt-0.5" data-i18n="loc5_kind_private">Tutor ke rumah</span>
+                </button>
+                <button type="button" role="tab" id="loc-tab-online" aria-controls="loc-panel-online" aria-selected="false" tabindex="-1" class="loc-tab text-left rounded-2xl border border-white/10 bg-[#0F172A] p-4 transition hover:border-white/25" style="--c:#34D399" data-loc="online">
+                    <span class="loc-tab-ic w-10 h-10 rounded-xl grid place-items-center text-base transition" style="background:#34D39922;color:#34D399"><i class="fa-solid fa-video"></i></span>
+                    <span class="block font-bold mt-3 leading-tight"><span data-i18n="loc5_tab_online">Online</span><span class="loc-new ml-1.5 align-middle" data-i18n="loc5_new">BARU</span></span>
+                    <span class="block text-[11px] text-slate-400 mt-0.5" data-i18n="loc5_kind_online">Belajar jarak jauh</span>
+                </button>
+            </div>
+            <div class="rounded-[1.75rem] border border-white/10 bg-[#0F172A] overflow-hidden">
+            <div id="loc-panel-gianyar" role="tabpanel" aria-labelledby="loc-tab-gianyar" class="loc-panel grid grid-cols-1 lg:grid-cols-2">
+                    <div class="p-6 sm:p-8 flex flex-col">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-white w-14 h-14 rounded-xl p-1.5 shrink-0 flex items-center justify-center"><img src="assets/partners/genta.png" alt="" class="w-full h-full object-contain" loading="lazy"></div>
+                            <div><div class="font-mono text-[10px] font-bold uppercase tracking-widest" style="color:#38BDF8" data-i18n="loc5_kind_lab">Learning Center</div><h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight">Gents Robotic Gianyar</h3></div>
                         </div>
-                        Gents Robotic Gianyar
-                    </h3>
-                    
-                    <div class="w-full h-[180px] rounded-xl overflow-hidden mb-4 border border-white/10">
-                        <iframe src="https://maps.google.com/maps?q=Jln%20Ksatrian%20No%208%20Lingkungan%20Candi%20Baru%20Gianyar&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-
-                    <div class="flex-grow">
-                        <p class="text-xs text-slate-300 mb-2 flex items-start gap-2">
-                            <i class="fa-solid fa-location-dot mt-0.5 text-slate-400"></i>
-                            <span>Jln Ksatrian, No. 8, Lingkungan Candi Baru, Gianyar</span>
-                        </p>
-                    </div>
-                    <div class="mt-2 pt-4 border-t border-white/10 flex items-center justify-between">
-                        <div class="flex items-center gap-1.5 bg-emerald-950/80 px-2.5 py-1 rounded-md border border-emerald-500/40">
-                            <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i>
-                            <span class="text-xs font-bold text-emerald-300">0851-8306-798</span>
+                        <p class="text-sm text-slate-300 mt-5 flex gap-2"><i class="fa-solid fa-location-dot mt-0.5" style="color:#38BDF8"></i>Jln. Ksatrian No. 8, Lingkungan Candi Baru, Gianyar</p>
+                        <ul class="mt-5 space-y-2.5"><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#38BDF8"></i><span data-i18n="loc5_lab_p1">Lab komputer &amp; kit robotik lengkap</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#38BDF8"></i><span data-i18n="loc5_lab_p2">Ruang ber-AC, bersih &amp; ramah anak</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#38BDF8"></i><span data-i18n="loc5_lab_p3">Rasio 1 tutor : maks. 5 siswa</span></li></ul>
+                        <div class="mt-auto pt-6 flex flex-wrap items-center gap-3">
+                            <a href="https://wa.me/628518306798?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Gents%20Robotic%20Gianyar." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>0851-8306-798</a>
+                            <span class="flex-1"></span>
+                            <a href="https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 border border-white/15 hover:bg-white/5 text-white font-bold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition"><i class="fa-solid fa-route"></i> <span data-i18n="loc_directions">Rute</span></a><a href="#register" data-pick-center="Gents Robotic &amp; Coding (Gianyar)" class="inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><i class="fa-solid fa-rocket"></i> <span data-i18n="loc5_cta_trial">Coba Gratis</span></a>
                         </div>
-                        <a href="https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#38BDF8] underline hover:text-white flex items-center gap-1"><span data-i18n="loc_directions">Rute</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                    </div>
+                    <div class="border-t lg:border-t-0 lg:border-l border-white/10 relative min-h-[260px]">
+                        <div class="absolute inset-0 bg-[#1E293B]">
+                            <button type="button" class="absolute inset-0 grid place-items-center text-center bg-[#0F172A] bg-[linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] bg-[length:32px_32px] group" data-loc-map="https://maps.google.com/maps?q=Jln%20Ksatrian%20No%208%20Lingkungan%20Candi%20Baru%20Gianyar&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed" data-loc-title="Gents Robotic Gianyar">
+                                <span><span class="w-14 h-14 mx-auto rounded-2xl grid place-items-center text-2xl" style="background:#38BDF822;color:#38BDF8"><i class="fa-solid fa-map-location-dot"></i></span>
+                                <span class="block text-sm font-bold mt-3 group-hover:underline" data-i18n="loc5_show_map">Tampilkan peta</span><span class="block font-mono text-[10px] text-slate-500 mt-1" data-i18n="loc5_map_note">Google Maps dimuat saat diklik</span></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Opsi 2: Kelas Private / Home Visit -->
-                <div class="bg-[#1E293B] rounded-2xl p-5 border border-white/10 hover:border-purple-500/60 hover:shadow-2xl transition-all group flex flex-col h-full" style="transition-delay: 100ms;">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors flex items-center gap-2.5">
-                            <div class="w-8 h-8 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center text-sm">
-                                <i class="fa-solid fa-house-laptop"></i>
+            <div id="loc-panel-bedulu" role="tabpanel" aria-labelledby="loc-tab-bedulu" class="loc-panel grid grid-cols-1 lg:grid-cols-2" hidden>
+                    <div class="p-6 sm:p-8 flex flex-col">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-white w-14 h-14 rounded-xl p-1.5 shrink-0 flex items-center justify-center"><img src="assets/partners/bali_seeds.jpg" alt="" class="w-full h-full object-contain" loading="lazy"></div>
+                            <div><div class="font-mono text-[10px] font-bold uppercase tracking-widest" style="color:#FFC83D" data-i18n="loc5_kind_lab">Learning Center</div><h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight">Bali Seed Bedulu</h3></div>
+                        </div>
+                        <p class="text-sm text-slate-300 mt-5 flex gap-2"><i class="fa-solid fa-location-dot mt-0.5" style="color:#FFC83D"></i>Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar</p>
+                        <ul class="mt-5 space-y-2.5"><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#FFC83D"></i><span data-i18n="loc5_lab_p1">Lab komputer &amp; kit robotik lengkap</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#FFC83D"></i><span data-i18n="loc5_lab_p2">Ruang ber-AC, bersih &amp; ramah anak</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#FFC83D"></i><span data-i18n="loc5_lab_p3">Rasio 1 tutor : maks. 5 siswa</span></li></ul>
+                        <div class="mt-auto pt-6 flex flex-wrap items-center gap-3">
+                            <a href="https://wa.me/628518306798?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Bali%20Seed%20Bedulu." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>0851-8306-798</a>
+                            <span class="flex-1"></span>
+                            <a href="https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 border border-white/15 hover:bg-white/5 text-white font-bold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition"><i class="fa-solid fa-route"></i> <span data-i18n="loc_directions">Rute</span></a><a href="#register" data-pick-center="Bali Seed Bedulu Robotics &amp; Coding" class="inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><i class="fa-solid fa-rocket"></i> <span data-i18n="loc5_cta_trial">Coba Gratis</span></a>
+                        </div>
+                    </div>
+                    <div class="border-t lg:border-t-0 lg:border-l border-white/10 relative min-h-[260px]">
+                        <div class="absolute inset-0 bg-[#1E293B]">
+                            <button type="button" class="absolute inset-0 grid place-items-center text-center bg-[#0F172A] bg-[linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] bg-[length:32px_32px] group" data-loc-map="https://maps.google.com/maps?q=Jln%20Raya%20Semebaung%20Bedulu&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed" data-loc-title="Bali Seed Bedulu">
+                                <span><span class="w-14 h-14 mx-auto rounded-2xl grid place-items-center text-2xl" style="background:#FFC83D22;color:#FFC83D"><i class="fa-solid fa-map-location-dot"></i></span>
+                                <span class="block text-sm font-bold mt-3 group-hover:underline" data-i18n="loc5_show_map">Tampilkan peta</span><span class="block font-mono text-[10px] text-slate-500 mt-1" data-i18n="loc5_map_note">Google Maps dimuat saat diklik</span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <div id="loc-panel-private" role="tabpanel" aria-labelledby="loc-tab-private" class="loc-panel grid grid-cols-1 lg:grid-cols-2" hidden>
+                    <div class="p-6 sm:p-8 flex flex-col">
+                        <div class="flex items-center gap-3">
+                            <div class="w-14 h-14 rounded-xl grid place-items-center text-2xl shrink-0" style="background:#C084FC22;color:#C084FC"><i class="fa-solid fa-house-laptop"></i></div>
+                            <div><div class="font-mono text-[10px] font-bold uppercase tracking-widest" style="color:#C084FC" data-i18n="loc5_kind_private">Tutor ke rumah</div><h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight"><span data-i18n="loc_c2_name">Kelas Private (Home Visit)</span></h3></div>
+                        </div>
+                        <p class="text-sm text-slate-300 mt-5 flex gap-2"><i class="fa-solid fa-map-pin mt-0.5" style="color:#C084FC"></i><span data-i18n="loc_c2_addr">Jangkauan Area: Gianyar, Ubud, Denpasar &amp; sekitarnya</span></p>
+                        <ul class="mt-5 space-y-2.5"><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#C084FC"></i><span data-i18n="loc5_pv_p1">Tutor datang langsung ke rumah</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#C084FC"></i><span data-i18n="loc5_pv_p2">1-on-1 atau grup kecil privat</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#C084FC"></i><span data-i18n="loc5_pv_p3">Jadwal disepakati bersama admin</span></li></ul>
+                        <div class="mt-auto pt-6 flex flex-wrap items-center gap-3">
+                            <a href="https://wa.me/628518306798?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Kelas%20Private%20%28Home%20Visit%29." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>0851-8306-798</a>
+                            <span class="flex-1"></span>
+                            <a href="#register" data-pick-center="Kelas Private (Home Visit / Di Rumah)" class="inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><i class="fa-solid fa-rocket"></i> <span data-i18n="loc_c2_cta">Daftar Private</span></a>
+                        </div>
+                    </div>
+                    <div class="border-t lg:border-t-0 lg:border-l border-white/10 relative min-h-[260px]">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-950/70 via-[#0F172A] to-[#0B0F19] grid place-items-center overflow-hidden">
+                            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] bg-[length:32px_32px] opacity-60"></div>
+                            <div class="relative text-center"><div class="w-20 h-20 mx-auto rounded-3xl bg-[#C084FC]/20 border border-[#C084FC]/40 grid place-items-center text-4xl text-[#C084FC]"><i class="fa-solid fa-house-chimney-user"></i></div>
+                            <div class="font-mono text-[11px] text-slate-400 mt-3"><i class="fa-solid fa-car-side text-[#C084FC] mr-1"></i> <span data-i18n="loc5_tutor_home">tutor → rumah Anda</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            <div id="loc-panel-online" role="tabpanel" aria-labelledby="loc-tab-online" class="loc-panel grid grid-cols-1 lg:grid-cols-2" hidden>
+                    <div class="p-6 sm:p-8 flex flex-col">
+                        <div class="flex items-center gap-3">
+                            <div class="w-14 h-14 rounded-xl grid place-items-center text-2xl shrink-0" style="background:#34D39922;color:#34D399"><i class="fa-solid fa-video"></i></div>
+                            <div><div class="font-mono text-[10px] font-bold uppercase tracking-widest" style="color:#34D399" data-i18n="loc5_kind_online">Belajar jarak jauh</div><h3 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight"><span data-i18n="loc5_on_name">Kelas Online</span><span class="loc-new ml-1.5 align-middle" data-i18n="loc5_new">BARU</span></h3></div>
+                        </div>
+                        <p class="text-sm text-slate-300 mt-5 flex gap-2"><i class="fa-solid fa-wifi mt-0.5" style="color:#34D399"></i><span data-i18n="loc5_on_where">Dari mana saja, cukup laptop &amp; internet</span></p>
+                        <ul class="mt-5 space-y-2.5"><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#34D399"></i><span data-i18n="loc5_on_p1">Sesi live bersama tutor via video call</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#34D399"></i><span data-i18n="loc5_on_p2">Tanpa perjalanan, dari rumah sendiri</span></li><li class="flex gap-2.5 text-sm"><i class="fa-solid fa-circle-check mt-0.5" style="color:#34D399"></i><span data-i18n="loc5_on_p3">Paling cocok untuk program berbasis software</span></li></ul>
+                        <div class="mt-auto pt-6 flex flex-wrap items-center gap-3">
+                            <a href="https://wa.me/628518306798?text=Halo%20LesKoding%2C%20saya%20ingin%20bertanya%20tentang%20Kelas%20Online." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>0851-8306-798</a>
+                            <span class="flex-1"></span>
+                            <a href="#register" data-pick-center="Kelas Online" class="inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_18px_rgba(255,200,61,0.25)]"><i class="fa-solid fa-rocket"></i> <span data-i18n="loc5_cta_online">Daftar Online</span></a>
+                        </div>
+                    </div>
+                    <div class="border-t lg:border-t-0 lg:border-l border-white/10 relative min-h-[260px]">
+                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/70 via-[#0F172A] to-[#0B0F19] grid place-items-center p-6 overflow-hidden">
+                            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] bg-[length:32px_32px] opacity-60"></div>
+                            <div class="relative w-full max-w-[300px] rounded-xl border border-white/15 bg-[#0B0F19] p-2 shadow-2xl" aria-hidden="true">
+                                <div class="flex gap-1 mb-2"><span class="w-2 h-2 rounded-full bg-[#F87171]"></span><span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span><span class="w-2 h-2 rounded-full bg-emerald-400"></span><span class="ml-auto font-mono text-[9px] text-[#F87171]">● LIVE</span></div>
+                                <div class="grid grid-cols-3 gap-1.5">
+                                    <div class="col-span-2 row-span-2 rounded-md bg-[#1E293B] grid place-items-center text-[#34D399]"><i class="fa-solid fa-chalkboard-user text-2xl"></i></div>
+                                    <div class="rounded-md bg-[#1E293B] aspect-video grid place-items-center text-slate-400"><i class="fa-solid fa-child"></i></div>
+                                    <div class="rounded-md bg-[#1E293B] aspect-video grid place-items-center text-slate-400"><i class="fa-solid fa-child-reaching"></i></div>
+                                </div>
+                                <div class="mt-2 rounded-md bg-[#1E293B] px-2 py-1 font-mono text-[9px] text-[#34D399]" data-i18n="loc5_online_chat">tutor: "coba jalankan programnya 👀"</div>
                             </div>
-                            <span data-i18n="loc_c2_name">Kelas Private (Home Visit)</span>
-                        </h3>
-                        <span class="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40" data-i18n="loc_c2_tag">Tutor ke Rumah</span>
-                    </div>
-                    
-                    <div class="w-full h-[180px] rounded-xl overflow-hidden mb-4 border border-white/10 bg-gradient-to-br from-purple-950/60 via-[#0F172A] to-[#0B0F19] p-4 flex flex-col justify-center items-center text-center relative group-hover:border-purple-500/40 transition-colors">
-                        <div class="absolute -top-10 -right-10 w-28 h-28 bg-purple-500/10 rounded-full blur-xl pointer-events-none"></div>
-                        <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/40 text-purple-300 flex items-center justify-center text-xl mb-2.5 shadow-lg shadow-purple-500/10">
-                            <i class="fa-solid fa-chalkboard-user"></i>
                         </div>
-                        <div class="font-bold text-white text-sm" data-i18n="loc_c2_box_title">Belajar di Rumah Sendiri</div>
-                        <p class="text-[11px] text-slate-300 mt-1 max-w-[240px]" data-i18n="loc_c2_box_sub">1-on-1 atau grup kecil. Tutor membawa kurikulum &amp; pendampingan langsung ke rumah Anda.</p>
-                    </div>
-
-                    <div class="flex-grow">
-                        <p class="text-xs text-slate-300 mb-2 flex items-start gap-2">
-                            <i class="fa-solid fa-map-pin mt-0.5 text-purple-400"></i>
-                            <span data-i18n="loc_c2_addr">Jangkauan Area: Gianyar, Ubud, Denpasar &amp; sekitarnya</span>
-                        </p>
-                    </div>
-                    <div class="mt-2 pt-4 border-t border-white/10 flex items-center justify-between">
-                        <div class="flex items-center gap-1.5 bg-emerald-950/80 px-2.5 py-1 rounded-md border border-emerald-500/40">
-                            <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i>
-                            <span class="text-xs font-bold text-emerald-300">0857-9273-6627</span>
-                        </div>
-                        <a href="#register" class="text-xs font-bold uppercase tracking-wider text-purple-400 hover:text-white flex items-center gap-1 transition-colors"><span data-i18n="loc_c2_cta">Daftar Private</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
-                    </div>
-                </div>
-
-                <!-- Cabang 3: Bedulu -->
-                <div class="bg-[#1E293B] rounded-2xl p-5 border border-white/10 hover:border-[#FFC83D]/60 hover:shadow-2xl transition-all group flex flex-col h-full" style="transition-delay: 200ms;">
-                    <h3 class="text-lg font-bold text-white mb-3 group-hover:text-[#FFC83D] transition-colors flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-xl bg-[#FFC83D]/15 border border-[#FFC83D]/30 text-[#FFC83D] flex items-center justify-center text-sm">
-                            <i class="fa-solid fa-robot"></i>
-                        </div>
-                        Bali Seed Bedulu
-                    </h3>
-                    
-                    <div class="w-full h-[180px] rounded-xl overflow-hidden mb-4 border border-white/10">
-                        <iframe src="https://maps.google.com/maps?q=Jln%20Raya%20Semebaung%20Bedulu&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-
-                    <div class="flex-grow">
-                        <p class="text-xs text-slate-300 mb-2 flex items-start gap-2">
-                            <i class="fa-solid fa-location-dot mt-0.5 text-slate-400"></i>
-                            <span>Jln Raya Semebaung Bedulu</span>
-                        </p>
-                    </div>
-                    <div class="mt-2 pt-4 border-t border-white/10 flex items-center justify-between">
-                        <div class="flex items-center gap-1.5 bg-emerald-950/80 px-2.5 py-1 rounded-md border border-emerald-500/40">
-                            <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i>
-                            <span class="text-xs font-bold text-emerald-300">0851-8306-798</span>
-                        </div>
-                        <a href="https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#38BDF8] underline hover:text-white flex items-center gap-1"><span data-i18n="loc_directions">Rute</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
             </div>
@@ -1226,9 +1302,9 @@
                     <!-- Learning center -->
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2" id="reg-center-label"><i class="fa-solid fa-school text-[#38BDF8]"></i> <span data-i18n="reg_lbl_center">Pilihan Lokasi / Metode Belajar</span> <span class="text-[#F87171]">*</span></span>
-                        <span data-i18n="reg_campus_count" class="text-xs text-slate-400 hidden sm:inline">2 Kampus + Layanan Private</span>
+                        <span data-i18n="reg_campus_count" class="text-xs text-slate-400 hidden sm:inline">2 Kampus + Private + Online</span>
                     </div>
-                    <div id="reg-center-cards" class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 rounded-2xl transition-shadow" role="radiogroup" aria-labelledby="reg-center-label">
+                    <div id="reg-center-cards" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 rounded-2xl transition-shadow" role="radiogroup" aria-labelledby="reg-center-label">
                         <button type="button" role="radio" aria-checked="false" class="reg-choice relative text-left rounded-xl border border-slate-700 bg-[#0F172A] p-3.5 transition" style="--c:#38BDF8" data-center="Gents Robotic & Coding (Gianyar)" data-short="Gianyar">
                             <i class="reg-tick fa-solid fa-circle-check absolute top-3 right-3 text-sm text-[#38BDF8]"></i>
                             <div class="w-9 h-9 rounded-lg flex items-center justify-center mb-2.5 bg-[#38BDF8]/15 text-[#38BDF8]"><i class="fa-solid fa-microchip"></i></div>
@@ -1247,12 +1323,19 @@
                             <div class="text-sm font-bold text-white">Bedulu</div>
                             <div class="text-[11px] text-slate-400 leading-snug mt-0.5">Jln Raya Semebaung, Bedulu</div>
                         </button>
+                        <button type="button" role="radio" aria-checked="false" class="reg-choice relative text-left rounded-xl border border-slate-700 bg-[#0F172A] p-3.5 transition" style="--c:#34D399" data-center="Kelas Online" data-short="Online">
+                            <i class="reg-tick fa-solid fa-circle-check absolute top-3 right-3 text-sm text-[#34D399]"></i>
+                            <div class="w-9 h-9 rounded-lg flex items-center justify-center mb-2.5 bg-[#34D399]/15 text-[#34D399]"><i class="fa-solid fa-video"></i></div>
+                            <div class="text-sm font-bold text-white" data-i18n="reg_choice_online_title">Kelas Online</div>
+                            <div class="text-[11px] text-slate-400 leading-snug mt-0.5" data-i18n="reg_choice_online_desc">Live via video call dari rumah</div>
+                        </button>
                     </div>
                     <select id="reg-center" class="sr-only" tabindex="-1" aria-hidden="true">
                         <option value="" selected data-i18n="reg_select_default">-- Pilih Lokasi / Metode Belajar --</option>
                         <option value="Gents Robotic & Coding (Gianyar)">Gents Robotic &amp; Coding (Gianyar)</option>
                         <option value="Kelas Private (Home Visit / Di Rumah)">Kelas Private (Home Visit / Di Rumah)</option>
                         <option value="Bali Seed Bedulu Robotics & Coding">Bali Seed Bedulu Robotics &amp; Coding</option>
+                        <option value="Kelas Online">Kelas Online</option>
                     </select>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -1454,6 +1537,7 @@
                         <li><strong class="text-white">Gianyar:</strong> Jln Ksatrian No. 8, Candi Baru</li>
                         <li><strong class="text-white">Bedulu:</strong> Jln Raya Semebaung Bedulu</li>
                         <li><strong class="text-white">Private:</strong> Belajar di rumah sendiri (Gianyar &amp; Ubud)</li>
+                        <li><strong class="text-white">Online:</strong> <span data-i18n="footer_online">Live via video call dari rumah</span></li>
                         <li class="pt-1"><a href="#location" class="text-[#38BDF8] underline font-semibold flex items-center gap-1 hover:text-white"><span data-i18n="footer_c_check">Cek Lokasi &amp; Info Private &rarr;</span></a></li>
                     </ul>
                 </div>
@@ -1464,11 +1548,7 @@
                     <ul class="space-y-2.5 text-xs">
                         <li class="flex items-center gap-2">
                             <i class="fa-brands fa-whatsapp text-emerald-400"></i>
-                            <span>0851-8306-798 (Gianyar/Bedulu)</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
-                            <span>0857-9273-6627 (Private / Home Visit)</span>
+                            <span>0851-8306-798 (<span data-i18n="footer_wa_all">Semua layanan</span>)</span>
                         </li>
                         <li class="flex items-center gap-2">
                             <i class="fa-solid fa-envelope text-slate-400"></i>
@@ -1575,93 +1655,144 @@
 <!-- OPSI 7 COURSE SCRIPTS -->
 <script>
 /* ===================== DATA (Knowledge Base §6) ===================== */
-const PILLARS = {
-  foundation: { label:'Fondasi Coding', short:'Kids · Fondasi', color:'#FFC83D' },
-  skills: { label:'Skill Digital', short:'Kids · Skill', color:'#38BDF8' },
-  specialization: { label:'Spesialisasi Remaja', short:'Teens', color:'#C084FC' },
+const PILLARS_DATA = {
+  foundation: { label_id:'Fondasi Coding', short_id:'Kids · Fondasi', label_en:'Coding Foundation', short_en:'Kids · Foundation', color:'#FFC83D' },
+  skills: { label_id:'Skill Digital', short_id:'Kids · Skill', label_en:'Digital Skills', short_en:'Kids · Skills', color:'#38BDF8' },
+  specialization: { label_id:'Spesialisasi Remaja', short_id:'Teens', label_en:'Teens Specialization', short_en:'Teens', color:'#C084FC' },
 };
+
 const P = [
   { id:'innovator', n:'01', sym:'In', name:'Innovator', pillar:'foundation', min:6, max:8, color:'#FFC83D', icon:'fa-cubes', tagline:'Explore, Play & Think',
-    desc:'Mengenalkan logika dan cara berpikir programmer lewat permainan dan aktivitas visual.', tools:['Scratch Jr','CodeMonkey'],
-    outputs:['Animasi cerita interaktif','Dongeng digital bersuara','Mini-game arkade'], tags:['animasi','game'],
-    syllabus:['Urutan perintah logis','Pola & percabangan sederhana','Event & kendali karakter','Animasi sprite & kostum','Proyek akhir: buku cerita & mini game'] },
+    desc:'Mengenalkan logika dan cara berpikir programmer lewat permainan dan aktivitas visual.',
+    desc_en:'Introduces programming logic and computational thinking through playful visual games.',
+    tools:['Scratch Jr','CodeMonkey'],
+    outputs:['Animasi cerita interaktif','Dongeng digital bersuara','Mini-game arkade'],
+    outputs_en:['Interactive animated stories','Voiced digital fairy tales','Arcade mini-games'],
+    tags:['animasi','game'],
+    syllabus:['Urutan perintah logis','Pola & percabangan sederhana','Event & kendali karakter','Animasi sprite & kostum','Proyek akhir: buku cerita & mini game'],
+    syllabus_en:['Sequential logical commands','Patterns & simple conditionals','Events & character control','Sprite animation & costumes','Final project: storybook & mini-game'] },
+
   { id:'beginner', n:'02', sym:'Bg', name:'Beginner', pillar:'foundation', min:8, max:11, color:'#10B981', icon:'fa-gamepad', tagline:'Code & Create',
-    desc:'Belajar block coding membuat program yang bergerak, berbunyi, dan merespons pemain.', tools:['Scratch','PictoBlox'],
-    outputs:['Game labirin','Kuis pilihan ganda','Game tangkap objek'], tags:['game','animasi'],
-    syllabus:['Event, motion, looks & sound','Perulangan (loop)','Sensing keyboard & mouse','Variabel & skor','If-else & game over','Proyek akhir: labirin, kuis & catching game'] },
+    desc:'Belajar block coding membuat program yang bergerak, berbunyi, dan merespons pemain.',
+    desc_en:'Learn block coding to build games and programs that move, make sounds, and interact.',
+    tools:['Scratch','PictoBlox'],
+    outputs:['Game labirin','Kuis pilihan ganda','Game tangkap objek'],
+    outputs_en:['Maze games','Multiple-choice quizzes','Catching object arcade games'],
+    tags:['game','animasi'],
+    syllabus:['Event, motion, looks & sound','Perulangan (loop)','Sensing keyboard & mouse','Variabel & skor','If-else & game over','Proyek akhir: labirin, kuis & catching game'],
+    syllabus_en:['Event, motion, looks & sound','Loops & repetitions','Keyboard & mouse sensing','Variables & scoring systems','If-else logic & game-over states','Final project: maze, quiz & catching game'] },
+
   { id:'intermediate', n:'03', sym:'Im', name:'Intermediate', pillar:'foundation', min:10, max:14, color:'#A855F7', icon:'fa-rocket', tagline:'Build, Solve & Create',
-    desc:'Membuat project kompleks, game design, dan pengenalan AI dasar dengan block programming tingkat lanjut.', tools:['Scratch','PictoBlox AI'],
-    outputs:['Platformer multi-level','Proyek AI kamera','Aplikasi kuis canggih'], tags:['game','ai'],
-    syllabus:['Variabel lanjutan & game state','Operator & logika AND/OR/NOT','Nested loop','Custom block (fungsi)','Teknik debugging','AI & kamera via PictoBlox','Proyek akhir: game multi-stage + prototipe AI'] },
+    desc:'Membuat project kompleks, game design, dan pengenalan AI dasar dengan block programming tingkat lanjut.',
+    desc_en:'Build complex games, interactive simulations, and basic AI models with advanced block programming.',
+    tools:['Scratch','PictoBlox AI'],
+    outputs:['Platformer multi-level','Proyek AI kamera','Aplikasi kuis canggih'],
+    outputs_en:['Multi-level platformer games','Camera AI vision projects','Advanced quiz apps'],
+    tags:['game','ai'],
+    syllabus:['Variabel lanjutan & game state','Operator & logika AND/OR/NOT','Nested loop','Custom block (fungsi)','Teknik debugging','AI & kamera via PictoBlox','Proyek akhir: game multi-stage + prototipe AI'],
+    syllabus_en:['Advanced variables & game states','Operators & AND/OR/NOT logic','Nested loops & functions','Custom reusable blocks','Debugging strategies','AI vision with PictoBlox','Final project: multi-stage game + AI prototype'] },
+
   { id:'komputer', n:'04', sym:'Kd', name:'Komputer Dasar', pillar:'skills', min:8, max:14, color:'#3B82F6', icon:'fa-desktop', tagline:'Learn, Create & Be Productive',
-    desc:'Literasi digital: mengetik 10 jari, membuat dokumen, mengolah tabel data, dan presentasi interaktif.', tools:['MS Word','MS Excel','MS PowerPoint'],
-    outputs:['Makalah sekolah rapi','Tabel data + grafik','Slide presentasi animasi'], tags:['dokumen'],
-    syllabus:['Mengetik 10 jari','Manajemen file & etika internet','Word: layout & formatting','Makalah: daftar isi & penomoran','PowerPoint: desain slide','Excel: SUM, AVERAGE, COUNT…','Proyek akhir: bundel portofolio digital'] },
+    desc:'Literasi digital: mengetik 10 jari, membuat dokumen, mengolah tabel data, dan presentasi interaktif.',
+    desc_en:'Essential digital literacy: touch typing, document design, spreadsheet formulas, and slide presentations.',
+    tools:['MS Word','MS Excel','MS PowerPoint'],
+    outputs:['Makalah sekolah rapi','Tabel data + grafik','Slide presentasi animasi'],
+    outputs_en:['School reports & essays','Data tables + charts','Animated presentation slides'],
+    tags:['dokumen'],
+    syllabus:['Mengetik 10 jari','Manajemen file & etika internet','Word: layout & formatting','Makalah: daftar isi & penomoran','PowerPoint: desain slide','Excel: SUM, AVERAGE, COUNT…','Proyek akhir: bundel portofolio digital'],
+    syllabus_en:['10-finger touch typing','File management & digital safety','MS Word: layout & formatting','Document indexing & pagination','PowerPoint: slide animation & design','Excel: formulas & chart analysis','Final project: digital office portfolio'] },
+
   { id:'desain', n:'05', sym:'Dg', name:'Desain Grafis', pillar:'skills', min:9, max:14, color:'#EC4899', icon:'fa-pen-nib', tagline:'Imagine, Design & Create',
-    desc:'Eksplorasi layout, tipografi, dan UI/UX untuk membuat poster dan konten media sosial.', tools:['Canva','Figma'],
-    outputs:['Poster promosi','Konten media sosial','Mockup UI aplikasi'], tags:['desain'],
-    syllabus:['Teori warna & moodboard','Tipografi digital','Layout & grid','Poster & feed medsos di Canva','Desain presentasi portofolio','UI/UX dasar di Figma','Proyek akhir: brand kit + prototipe UI'] },
-  { id:'game', n:'06', sym:'Gd', name:'Game Developer', pillar:'specialization', min:11, max:17, color:'#EF4444', icon:'fa-cube', tagline:'Game Developer (2D & 3D)', code:'Advance 1',
-    desc:'Game logic, fisika 3D, dan scripting Lua untuk mempublikasikan game yang bisa dimainkan bersama teman.', tools:['Roblox Studio (Lua)','Construct 3','Unity'],
-    outputs:['Dunia game 3D di Roblox','Game web HTML5'], tags:['game'],
-    syllabus:['Mekanika & physics engine','Karakter, controller & SFX','Level design 3D di Roblox','Scripting objek & server-client','Construct 3 & ekspor HTML5','Pengenalan Unity','Proyek akhir: game siap publikasi'] },
-  { id:'web', n:'07', sym:'Wd', name:'Junior Web Developer', pillar:'specialization', min:11, max:17, color:'#14B8A6', icon:'fa-code', tagline:'Junior Web Developer', code:'Advance 2',
-    desc:'Merancang website responsif dan portofolio dengan kode asli: HTML, CSS, dan JavaScript.', tools:['HTML5','CSS3','JavaScript','VS Code'],
-    outputs:['Website portofolio live','Web app interaktif'], tags:['web'],
-    syllabus:['HTML5 semantik & SEO dasar','Styling CSS3','Flexbox, Grid & media query','Komponen UI web','Dasar JavaScript','Manipulasi DOM','Proyek akhir: portofolio live online'] },
-  { id:'robotik', n:'08', sym:'Ro', name:'Robotika & IoT', pillar:'specialization', min:11, max:17, color:'#F97316', icon:'fa-microchip', tagline:'Hardware + Software', code:'Advance 3',
-    desc:'Merakit perangkat fisik dengan mikrokontroler, sensor, dan aktuator yang terhubung ke internet.', tools:['Arduino','PictoBlox IoT','Sensor & Servo'],
-    outputs:['Prototipe smart home','Alarm pendeteksi gerak','Stasiun cuaca IoT'], tags:['robot'],
-    syllabus:['Arsitektur Arduino & sirkuit aman','Pin digital & analog','Sensor jarak, suhu, cahaya, gerak','Servo, relay & buzzer','Kirim data ke IoT cloud','Logika otomasi berbasis ambang','Proyek akhir: smart home WiFi / robot'] },
-  { id:'apps', n:'09', sym:'Ap', name:'Apps Developer', pillar:'specialization', min:11, max:17, color:'#6366F1', icon:'fa-mobile-screen', tagline:'Mobile Android', code:'Advance 4',
-    desc:'Merancang UX, data, dan logika aplikasi Android sampai menjadi file APK di HP sendiri.', tools:['MIT App Inventor','Flutter (dasar)'],
-    outputs:['Aplikasi Android (APK)'], tags:['app'],
-    syllabus:['Desain UI mobile','Navigasi multi-layar','Event-driven programming','Kamera, GPS, timer & notifikasi','Penyimpanan data lokal','Proyek akhir: APK terpasang di HP'] },
+    desc:'Mendesain poster, ilustrasi, branding, dan antarmuka aplikasi dengan prinsip desain profesional.',
+    desc_en:'Create striking posters, brand graphics, and UI layouts following modern design principles.',
+    tools:['Canva','Figma'],
+    outputs:['Poster digital keren','Logo & identitas visual','Prototipe aplikasi mobile'],
+    outputs_en:['Digital posters & social art','Logo & brand identity','Mobile app UI prototypes'],
+    tags:['desain'],
+    syllabus:['Teori warna & tipografi','Canva: poster & konten visual','Figma dasar: frame & shape','Komposisi & hierarki visual','Desain UI aplikasi mobile','Proyek akhir: brand kit & prototipe UI'],
+    syllabus_en:['Color theory & typography','Canva: poster & social content','Figma fundamentals: frames & shapes','Visual hierarchy & layout balance','Mobile app UI design','Final project: full brand identity kit'] },
+
+  { id:'game', n:'06', sym:'Gm', name:'Game Developer', pillar:'specialization', code:'Roblox', min:11, max:17, color:'#EF4444', icon:'fa-cube', tagline:'Code Your 3D Universe',
+    desc:'Merancang game 3D di Roblox Studio dengan bahasa scripting Lua dan physics engine modern.',
+    desc_en:'Build 3D games in Roblox Studio utilizing Lua scripting and interactive real-time physics.',
+    tools:['Roblox Studio','Lua Scripting'],
+    outputs:['Game obby 3D multipemain','Sistem koin & leaderboard','Mekanik gameplay interaktif'],
+    outputs_en:['Multiplayer 3D obby game','Coins & leaderboard system','Interactive gameplay mechanics'],
+    tags:['game','teens'],
+    syllabus:['Workspace 3D & part modeling','Dasar scripting Lua','Humanoid & event kendali','Leaderboard & in-game currency','Publish & uji multipemain','Proyek akhir: game Roblox obby 3D'],
+    syllabus_en:['Roblox Studio 3D workspace','Lua scripting fundamentals','Events & player humanoid mechanics','Leaderboards & save states','Multiplayer testing & publishing','Final project: multiplayer obby game'] },
+
+  { id:'web', n:'07', sym:'Wb', name:'Junior Web Dev', pillar:'specialization', code:'Fullstack', min:11, max:17, color:'#14B8A6', icon:'fa-code', tagline:'Build the Modern Web',
+    desc:'Belajar coding web murni (HTML5, CSS3, JavaScript) untuk membuat website yang responsif dan live.',
+    desc_en:'Code real websites with pure HTML5, CSS3, and JavaScript, fully responsive and published online.',
+    tools:['HTML5','CSS3','JavaScript'],
+    outputs:['Website portofolio online','Halaman web responsif','Mini aplikasi interaktif'],
+    outputs_en:['Live portfolio website','Responsive multi-page site','Interactive JavaScript web app'],
+    tags:['web','teens'],
+    syllabus:['Struktur semantik HTML5','Styling CSS3 & flexbox layout','Desain responsif mobile-first','Dasar JavaScript & DOM','Event listener & interaktivitas','Proyek akhir: website portofolio online'],
+    syllabus_en:['Semantic HTML5 structure','CSS3 styling & flexbox layouts','Mobile-first responsive design','JavaScript & DOM manipulation','Event handling & dynamic interactions','Final project: live online portfolio'] },
+
+  { id:'robotik', n:'08', sym:'Rb', name:'Robotika & IoT', pillar:'specialization', code:'Hardware', min:11, max:17, color:'#F97316', icon:'fa-microchip', tagline:'Smart Sensors & Automations',
+    desc:'Mempelajari elektronika dasar, mikrokontroler Arduino, sensor cerdas, dan Internet of Things (IoT).',
+    desc_en:'Explore electronics, Arduino microcontrollers, smart sensors, and Internet of Things (IoT) systems.',
+    tools:['Arduino IDE','Sensor Pintar','IoT Cloud'],
+    outputs:['Lampu sensor otomatis','Alarm jarak ultrasonik','Sistem smart device IoT'],
+    outputs_en:['Automated sensor light','Ultrasonic smart alarm','Connected IoT smart device'],
+    tags:['robotik','teens'],
+    syllabus:['Komponen sirkuit & breadboard','Mikrokontroler Arduino dasar','Input sensor: cahaya & suhu','Output: LED, buzzer & servo motor','Logika kendali otomatis','Proyek akhir: prototipe smart device IoT'],
+    syllabus_en:['Circuit components & breadboards','Arduino microcontroller basics','Sensor inputs: light & ultrasonic','Outputs: LEDs, buzzers & servos','Automated control programming','Final project: working smart device prototype'] },
+
+  { id:'apps', n:'09', sym:'Ap', name:'Apps Developer', pillar:'specialization', code:'Mobile', min:11, max:17, color:'#6366F1', icon:'fa-mobile-screen', tagline:'Make Apps for Smartphone',
+    desc:'Membuat aplikasi mobile Android fungsional dengan antarmuka modern dan integrasi fitur smartphone.',
+    desc_en:'Develop functional Android mobile apps featuring modern UI and native smartphone capabilities.',
+    tools:['App Inventor','Flutter','Android Studio'],
+    outputs:['Aplikasi Android siap instal (.apk)','Kalkulator saku pintar','Aplikasi kuis mobile interaktif'],
+    outputs_en:['Installable Android .APK app','Smart mobile calculator','Interactive mobile quiz app'],
+    tags:['apps','teens'],
+    syllabus:['Desain UI mobile di App Inventor','Komponen & layout aplikasi','Logika event-driven blocks','Pemanfaatan sensor & kamera HP','Penyimpanan data lokal (TinyDB)','Proyek akhir: file APK aplikasi siap instal'],
+    syllabus_en:['Mobile UI design in App Inventor','App layouts & navigation components','Event-driven block programming','Device sensors & camera integration','Local data storage (TinyDB)','Final project: installable .APK mobile app'] },
 ];
+
 const byId = id => P.find(p => p.id === id);
 var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const ageLabel = p => `${p.min}–${p.max} thn`;
-const trackLabel = p => p.pillar === 'specialization' ? `Teens · ${p.code}` : PILLARS[p.pillar].short;
-const hex = (c, a) => c + a; // c is #RRGGBB, a is 2-digit alpha
-
-const ctaRow = p => `
-  <div class="flex flex-wrap gap-2 mt-5">
-    <a href="#register" class="inline-flex items-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_20px_rgba(255,200,61,0.25)]"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a>
-    <button class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/15 font-bold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition" onclick="this.closest('[data-detail]').querySelector('.syl').classList.toggle('hidden')"><i class="fa-solid fa-list-ol"></i> Silabus</button>
-  </div>`;
-const detailHTML = (p, opts = {}) => `
-  <div data-detail class="fade-swap">
-    <div class="flex items-start gap-4">
-      <div class="w-14 h-14 shrink-0 rounded-2xl flex flex-col items-center justify-center font-display font-black text-xl border" style="background:${hex(p.color,'1f')}; border-color:${hex(p.color,'55')}; color:${p.color}">${p.sym}</div>
-      <div class="min-w-0">
-        <div class="flex flex-wrap gap-1.5 mb-1.5">
-          <span class="text-[10px] mono font-bold uppercase px-2 py-0.5 rounded-full border" style="color:${p.color}; border-color:${hex(p.color,'40')}; background:${hex(p.color,'14')}">${trackLabel(p)}</span>
-          <span class="text-[10px] mono font-bold px-2 py-0.5 rounded-full bg-white/5 text-slate-300">${ageLabel(p)}</span>
-        </div>
-        <h4 class="font-display text-2xl font-bold leading-tight">${p.name}</h4>
-        <p class="text-xs italic text-slate-400">"${p.tagline}"</p>
-      </div>
-    </div>
-    <p class="text-sm text-slate-300 leading-relaxed mt-4">${p.desc}</p>
-    <div class="grid ${opts.wide ? 'sm:grid-cols-2' : ''} gap-4 mt-4">
-      <div><div class="text-[10px] mono font-bold text-slate-500 mb-1.5">TOOLS</div><div class="flex flex-wrap gap-1.5">${p.tools.map(t => `<span class="text-[11px] mono px-2 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">${t}</span>`).join('')}</div></div>
-      <div><div class="text-[10px] mono font-bold text-slate-500 mb-1.5">KARYA YANG DIBUAT</div><ul class="space-y-1">${p.outputs.map(o => `<li class="text-xs text-slate-300 flex gap-2"><i class="fa-solid fa-check mt-0.5" style="color:${p.color}"></i>${o}</li>`).join('')}</ul></div>
-    </div>
-    <ol class="syl hidden mt-4 space-y-1 border-t border-white/10 pt-3">${p.syllabus.map((s, i) => `<li class="text-xs text-slate-300 flex gap-2"><span class="mono text-slate-500 w-5">${String(i + 1).padStart(2, '0')}</span>${s}</li>`).join('')}</ol>
-    ${ctaRow(p)}
-    <p class="text-[10px] text-slate-500 mt-3"><i class="fa-solid fa-certificate mr-1 text-[#FFC83D]"></i>Sertifikat kelulusan setelah course selesai · rasio 1:5</p>
-  </div>`;
+const ageLabel = p => {
+  const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
+  return `${p.min}–${p.max} ${isEn ? 'yrs' : 'thn'}`;
+};
+const trackLabel = p => {
+  const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
+  if (p.pillar === 'specialization') return `Teens · ${p.code}`;
+  const pil = PILLARS_DATA[p.pillar];
+  return isEn ? pil.short_en : pil.short_id;
+};
+const hex = (c, a) => c + a;
 
 const tabs = (el, onChange, initial = 'all') => {
-  const opts = [['all','Semua Program'],['foundation','Fondasi Coding'],['skills','Skill Digital'],['specialization','Spesialisasi Remaja']];
+  const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
+  const opts = isEn ? [
+    ['all','All Programs'],
+    ['foundation','Coding Foundation'],
+    ['skills','Digital Skills'],
+    ['specialization','Teens Specialization']
+  ] : [
+    ['all','Semua Program'],
+    ['foundation','Fondasi Coding'],
+    ['skills','Skill Digital'],
+    ['specialization','Spesialisasi Remaja']
+  ];
   el.innerHTML = opts.map(([v, l]) => `<button data-v="${v}" aria-pressed="${v === initial}" class="tab-btn shrink-0 whitespace-nowrap px-4 py-2 rounded-full font-bold text-xs transition bg-transparent text-slate-400 border border-white/10 hover:border-white/30 hover:text-white">${l}</button>`).join('');
-  el.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
-    el.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); onChange(b.dataset.v); });
+  el.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    el.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    onChange(b.dataset.v);
+  });
 };
 
 /* ===================== SHARED · METRO MAP (Opsi 1 & 7) ===================== */
 let gradSeq = 0;
 function buildMetro(map, svg, onSelect) {
+  const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
   const gid = 'skillGrad' + (++gradSeq);
   const LINES = [
     { d:'M90 110 H470 L570 210', c:'#FFC83D', w:9, pillar:'foundation' },
@@ -1675,6 +1806,7 @@ function buildMetro(map, svg, onSelect) {
   svg.innerHTML = `<defs><linearGradient id="${gid}" gradientUnits="userSpaceOnUse" x1="90" y1="0" x2="470" y2="0"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#EC4899"/></linearGradient></defs>` +
     LINES.map(l => `<path class="metro-line" data-pillar="${l.pillar || ''}" d="${l.d}" fill="none" stroke="${l.grad ? `url(#${gid})` : l.c}" stroke-width="${l.w}" stroke-linecap="round" stroke-linejoin="round" ${l.dash ? `stroke-dasharray="${l.dash}"` : ''}/>`).join('');
 
+  map.querySelectorAll('.st').forEach(el => el.remove());
   const STATIONS = [
     ['innovator',130,110,'b'],['beginner',290,110,'b'],['intermediate',450,110,'b'],
     ['komputer',190,360,'t'],['desain',390,360,'t'],
@@ -1683,10 +1815,10 @@ function buildMetro(map, svg, onSelect) {
   const pos = (x, y) => `left:${x / 10}%; top:${y / 4.4}%`;
   map.insertAdjacentHTML('beforeend', `
     <div class="st" style="${pos(580,220)}"><div class="w-9 h-9 rotate-45 rounded-md bg-[#0B0F19] border-[3px] border-[#FFC83D] shadow-[0_0_24px_rgba(255,200,61,.5)]"></div>
-      <div class="lbl b !top-[calc(100%+12px)] !left-auto !right-[40%] !translate-x-0 text-right text-[#FFC83D]"><span class="text-[10px] mono block text-slate-400 font-semibold">STASIUN TRANSIT</span>Asesmen Free Trial</div></div>
-    <div class="st" style="${pos(70,110)}"><div class="w-4 h-4 rounded-full bg-[#FFC83D]"></div><div class="lbl t text-[10px] mono text-slate-400 !left-0 !translate-x-0 text-left">Mulai · usia 6</div></div>
-    <div class="st" style="${pos(70,220)}"><div class="w-4 h-4 rounded-full border-2 border-slate-400 bg-[#0B0F19]"></div><div class="lbl b text-[10px] mono text-slate-400 !left-0 !translate-x-0 text-left">Masuk langsung<br>usia 11+</div></div>
-    <div class="st" style="${pos(70,360)}"><div class="w-4 h-4 rounded-full bg-[#3B82F6]"></div><div class="lbl b text-[10px] mono text-slate-400 !left-0 !translate-x-0 text-left">Fleksibel<br>kapan saja</div></div>
+      <div class="lbl b !top-[calc(100%+12px)] !left-auto !right-[40%] !translate-x-0 text-right text-[#FFC83D]"><span class="text-[10px] mono block text-slate-400 font-semibold">${isEn ? 'TRANSIT HUB' : 'STASIUN TRANSIT'}</span>${isEn ? 'Free Trial Assessment' : 'Asesmen Free Trial'}</div></div>
+    <div class="st" style="${pos(70,110)}"><div class="w-4 h-4 rounded-full bg-[#FFC83D]"></div><div class="lbl t text-[10px] mono text-slate-400 !left-0 !translate-x-0 text-left">${isEn ? 'Start · age 6' : 'Mulai · usia 6'}</div></div>
+    <div class="st" style="${pos(70,220)}"><div class="w-4 h-4 rounded-full border-2 border-slate-400 bg-[#0B0F19]"></div><div class="lbl b text-[10px] mono text-slate-400 !left-0 !translate-x-0 text-left">${isEn ? 'Direct entry<br>ages 11+' : 'Masuk langsung<br>usia 11+'}</div></div>
+    <div class="st" style="${pos(70,360)}"><div class="w-4 h-4 rounded-full bg-[#3B82F6]"></div><div class="lbl b text-[10px] mono text-slate-400 !left-0 !translate-x-0 text-left">${isEn ? 'Flexible<br>anytime' : 'Fleksibel<br>kapan saja'}</div></div>
   `);
   STATIONS.forEach(([id, x, y, side]) => {
     const p = byId(id);
@@ -1706,62 +1838,91 @@ function buildMetro(map, svg, onSelect) {
   }
   return select;
 }
-const metroLegend = () => [['#FFC83D','Jalur Fondasi · berjenjang'],['linear-gradient(90deg,#3B82F6,#EC4899)','Jalur Skill Digital'],['linear-gradient(90deg,#EF4444,#14B8A6,#F97316,#6366F1)','Cabang Teens · pilih minat']]
-  .map(([c, l]) => `<span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300"><span class="w-5 h-1.5 rounded-full" style="background:${c}"></span>${l}</span>`).join('');
+
+const metroLegend = () => {
+  const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
+  return (isEn ? [
+    ['#FFC83D','Foundation Track · progressive'],
+    ['linear-gradient(90deg,#3B82F6,#EC4899)','Digital Skills Track'],
+    ['linear-gradient(90deg,#EF4444,#14B8A6,#F97316,#6366F1)','Teens Track · by interest']
+  ] : [
+    ['#FFC83D','Jalur Fondasi · berjenjang'],
+    ['linear-gradient(90deg,#3B82F6,#EC4899)','Jalur Skill Digital'],
+    ['linear-gradient(90deg,#EF4444,#14B8A6,#F97316,#6366F1)','Cabang Teens · pilih minat']
+  ]).map(([c, l]) => `<span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300"><span class="w-5 h-1.5 rounded-full" style="background:${c}"></span>${l}</span>`).join('');
+};
 
 /* ===================== SHARED · KARTU (Opsi 3 & 7) ===================== */
 const NEXT = {
-  innovator: { ids:['beginner'], note:'Lanjut ke jenjang berikutnya' },
-  beginner: { ids:['intermediate'], note:'Lanjut ke jenjang berikutnya' },
-  intermediate: { ids:['game','web','robotik','apps'], note:'Lanjut ke spesialisasi Teens' },
-  komputer: { ids:['desain'], note:'Bisa diambil bersama jalur lain' },
-  desain: { ids:['komputer'], note:'Bisa diambil bersama jalur lain' },
-  game: { ids:['web','robotik','apps'], note:'Bisa lanjut cabang Teens lain' },
-  web: { ids:['game','robotik','apps'], note:'Bisa lanjut cabang Teens lain' },
-  robotik: { ids:['game','web','apps'], note:'Bisa lanjut cabang Teens lain' },
-  apps: { ids:['game','web','robotik'], note:'Bisa lanjut cabang Teens lain' },
+  innovator: { ids:['beginner'], note:'Lanjut ke jenjang berikutnya', note_en:'Advance to next level' },
+  beginner: { ids:['intermediate'], note:'Lanjut ke jenjang berikutnya', note_en:'Advance to next level' },
+  intermediate: { ids:['game','web','robotik','apps'], note:'Lanjut ke spesialisasi Teens', note_en:'Advance to Teens Specialization' },
+  komputer: { ids:['desain'], note:'Bisa diambil bersama jalur lain', note_en:'Can be taken alongside other tracks' },
+  desain: { ids:['komputer'], note:'Bisa diambil bersama jalur lain', note_en:'Can be taken alongside other tracks' },
+  game: { ids:['web','robotik','apps'], note:'Bisa lanjut cabang Teens lain', note_en:'Can explore other Teens tracks' },
+  web: { ids:['game','robotik','apps'], note:'Bisa lanjut cabang Teens lain', note_en:'Can explore other Teens tracks' },
+  robotik: { ids:['game','web','apps'], note:'Bisa lanjut cabang Teens lain', note_en:'Can explore other Teens tracks' },
+  apps: { ids:['game','web','robotik'], note:'Bisa lanjut cabang Teens lain', note_en:'Can explore other Teens tracks' },
 };
-const pathLabel = p => p.pillar === 'foundation' ? `Jenjang ${P.filter(x => x.pillar === 'foundation').indexOf(p) + 1} dari 3`
-  : p.pillar === 'skills' ? 'Fleksibel' : 'Tanpa prasyarat';
-const cardHTML = p => `
-  <div class="flip h-[460px] cursor-pointer" data-pillar="${p.pillar}" data-id="${p.id}" style="--c:${hex(p.color,'66')}" tabindex="0" role="button" aria-label="Balik kartu ${p.name}">
+
+const pathLabel = p => {
+  const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
+  if (p.pillar === 'foundation') {
+    const idx = P.filter(x => x.pillar === 'foundation').indexOf(p) + 1;
+    return isEn ? `Level ${idx} of 3` : `Jenjang ${idx} dari 3`;
+  }
+  if (p.pillar === 'skills') return isEn ? 'Flexible' : 'Fleksibel';
+  return isEn ? 'No prerequisites' : 'Tanpa prasyarat';
+};
+
+const cardHTML = p => {
+  const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
+  const desc = isEn && p.desc_en ? p.desc_en : p.desc;
+  const outputs = isEn && p.outputs_en ? p.outputs_en : p.outputs;
+  const syllabus = isEn && p.syllabus_en ? p.syllabus_en : p.syllabus;
+  const nextNote = isEn ? (NEXT[p.id].note_en || NEXT[p.id].note) : NEXT[p.id].note;
+
+  return `
+  <div class="flip h-[460px] cursor-pointer" data-pillar="${p.pillar}" data-id="${p.id}" style="--c:${hex(p.color,'66')}" tabindex="0" role="button" aria-label="${isEn ? 'Flip card' : 'Balik kartu'} ${p.name}">
     <div class="flip-inner">
       <div class="face front bg-[#1E293B] border border-white/10 p-3 flex flex-col">
         <div class="relative rounded-2xl h-36 shrink-0 overflow-hidden flex items-center justify-center" style="background:radial-gradient(circle at 30% 20%,${hex(p.color,'55')},transparent 60%),linear-gradient(160deg,${hex(p.color,'33')},#0B0F19)">
           <div class="absolute inset-0 holo"></div>
           <div class="absolute inset-0 grid-bg opacity-60"></div>
-          <i class="fa-solid ${p.icon} text-5xl relative" style="color:${p.color}; filter:drop-shadow(0 0 20px ${hex(p.color,'aa')})"></i>
+          <i class="fa-solid ${p.icon} text-5xl relative" style="color:${p.color}; text-shadow:0 0 20px ${hex(p.color,'aa')}"></i>
           <span class="absolute top-3 left-3 font-display font-black text-white/80 text-lg">${p.n}</span>
           <span class="absolute top-3 right-3 text-[10px] mono font-bold px-2 py-0.5 rounded-full bg-[#0B0F19]/80" style="color:${p.color}">${ageLabel(p)}</span>
         </div>
         <div class="px-2 pt-4 flex-1 flex flex-col">
           <div class="text-[10px] mono font-bold uppercase" style="color:${p.color}">${trackLabel(p)}</div>
           <h4 class="font-display text-2xl font-bold leading-tight mt-0.5">${p.name}</h4>
-          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">${p.desc}</p>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">${desc}</p>
           <div class="mt-auto pt-3">
-            <div class="text-[10px] mono font-bold text-slate-500 mb-1.5">KARYA YANG DIBUAT</div>
-            <ul class="space-y-1">${p.outputs.slice(0, 3).map(o => `<li class="text-[12px] text-slate-200 flex gap-2"><i class="fa-solid fa-check text-[10px] mt-1" style="color:${p.color}"></i>${o}</li>`).join('')}</ul>
+            <div class="text-[10px] mono font-bold text-slate-500 mb-1.5">${isEn ? 'PROJECTS CREATED' : 'KARYA YANG DIBUAT'}</div>
+            <ul class="space-y-1">${outputs.slice(0, 3).map(o => `<li class="text-[12px] text-slate-200 flex gap-2"><i class="fa-solid fa-check text-[10px] mt-1" style="color:${p.color}"></i>${o}</li>`).join('')}</ul>
             <div class="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-white/5">
               <div class="min-w-0"><div class="text-[9px] mono text-slate-500">TOOLS</div><div class="text-[11px] font-semibold truncate">${p.tools.slice(0, 2).join(' · ')}</div></div>
-              <div><div class="text-[9px] mono text-slate-500">JALUR</div><div class="text-[11px] font-semibold">${pathLabel(p)}</div></div>
+              <div><div class="text-[9px] mono text-slate-500">${isEn ? 'TRACK' : 'JALUR'}</div><div class="text-[11px] font-semibold">${pathLabel(p)}</div></div>
             </div>
           </div>
         </div>
       </div>
       <div class="face back border p-6 flex flex-col" style="background:linear-gradient(170deg,${hex(p.color,'1f')},#0F172A 45%); border-color:${hex(p.color,'55')}">
-        <div class="flex items-center justify-between"><span class="font-display font-black text-3xl" style="color:${p.color}">${p.sym}</span><span class="text-[10px] mono text-slate-400"><i class="fa-solid fa-rotate mr-1"></i>balik</span></div>
+        <div class="flex items-center justify-between"><span class="font-display font-black text-3xl" style="color:${p.color}">${p.sym}</span><span class="text-[10px] mono text-slate-400"><i class="fa-solid fa-rotate mr-1"></i>${isEn ? 'flip' : 'balik'}</span></div>
         <div class="font-bold mt-1">${p.name} <span class="text-xs italic font-normal text-slate-400">· "${p.tagline}"</span></div>
         <div class="flex-1 overflow-y-auto min-h-0 py-2 mt-2 -mx-2 px-2 no-scrollbar">
-          <div class="text-[10px] mono font-bold text-slate-500 mb-1.5">SILABUS</div>
-          <ol class="space-y-1">${p.syllabus.map((s, i) => `<li class="text-[12px] text-slate-300 flex gap-2"><span class="mono text-slate-500">${i + 1}.</span>${s}</li>`).join('')}</ol>
-          <div class="text-[10px] mono font-bold text-slate-500 mt-4 mb-1">SETELAH INI</div>
-          <div class="text-[12px] text-slate-300">${NEXT[p.id].note}: <span class="text-white font-semibold">${NEXT[p.id].ids.map(id => byId(id).name).join(', ')}</span></div>
-          <div class="text-[11px] text-slate-400 mt-2"><i class="fa-solid fa-certificate text-[#FFC83D] mr-1"></i>Sertifikat kelulusan · rasio 1:5</div>
+          <div class="text-[10px] mono font-bold text-slate-500 mb-1.5">${isEn ? 'SYLLABUS' : 'SILABUS'}</div>
+          <ol class="space-y-1">${syllabus.map((s, i) => `<li class="text-[12px] text-slate-300 flex gap-2"><span class="mono text-slate-500">${i + 1}.</span>${s}</li>`).join('')}</ol>
+          <div class="text-[10px] mono font-bold text-slate-500 mt-4 mb-1">${isEn ? 'NEXT STEP' : 'SETELAH INI'}</div>
+          <div class="text-[12px] text-slate-300">${nextNote}: <span class="text-white font-semibold">${NEXT[p.id].ids.map(id => byId(id).name).join(', ')}</span></div>
+          <div class="text-[11px] text-slate-400 mt-2"><i class="fa-solid fa-certificate text-[#FFC83D] mr-1"></i>${isEn ? 'Graduation certificate · 1:5 ratio' : 'Sertifikat kelulusan · rasio 1:5'}</div>
         </div>
-        <a href="#register" onclick="event.stopPropagation()" class="mt-4 shrink-0 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition">Coba Kelas Gratis <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#register" onclick="event.stopPropagation()" class="mt-4 shrink-0 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition">${isEn ? 'Try a Free Class' : 'Coba Kelas Gratis'} <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
   </div>`;
+};
+
 const bindFlip = el => {
   el.addEventListener('click', e => { const c = e.target.closest('.flip'); if (c) c.classList.toggle('is-flipped'); });
   el.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('flip')) { e.preventDefault(); e.target.classList.toggle('is-flipped'); } });
@@ -1770,46 +1931,78 @@ const bindFlip = el => {
 /* ===================== OPSI 7 · PETA + LIST KARTU ===================== */
 (() => {
   const list = document.getElementById('x-list'), map = document.getElementById('x-map'), svg = document.getElementById('x-svg');
-  document.getElementById('x-legend').innerHTML = metroLegend();
-  const GROUPS = {
-    foundation: { line:'#FFC83D', title:'Jalur Fondasi', sub:'Berjenjang · Innovator → Beginner → Intermediate' },
-    skills: { line:'linear-gradient(90deg,#3B82F6,#EC4899)', title:'Jalur Skill Digital', sub:'Fleksibel · bisa diambil kapan saja, bersama jalur lain' },
-    specialization: { line:'linear-gradient(90deg,#EF4444,#14B8A6,#F97316,#6366F1)', title:'Cabang Teens', sub:'Tanpa prasyarat · dipilih setelah asesmen Free Trial' },
-  };
-  list.innerHTML = Object.entries(GROUPS).map(([k, g]) => `
-    <div class="x-group" data-pillar="${k}">
-      <div class="flex items-center gap-4 mb-5">
-        <span class="w-10 h-2 rounded-full shrink-0" style="background:${g.line}"></span>
-        <div><h4 class="font-display text-xl font-bold leading-tight">${g.title}</h4><p class="text-xs text-slate-400">${g.sub}</p></div>
-        <span class="flex-1 h-px bg-white/10"></span>
-        <span class="text-[11px] mono text-slate-500">${P.filter(p => p.pillar === k).length} program</span>
-      </div>
-      <div class="grid sm:grid-cols-2 ${{ foundation:'lg:grid-cols-3', skills:'lg:grid-cols-2', specialization:'lg:grid-cols-4' }[k]} gap-5">${P.filter(p => p.pillar === k).map(cardHTML).join('')}</div>
-    </div>`).join('');
-  bindFlip(list);
-
+  if (!list || !map || !svg) return;
+  
+  let currentFilter = 'all';
+  let selectStation = null;
+  // hanya klik stasiun / menu yang boleh menggulir ke kartu; hover cukup menyorot
   let scrollToCard = true;
-  const select = buildMetro(map, svg, p => {
-    list.querySelectorAll('.flip').forEach(c => c.classList.toggle('is-target', c.dataset.id === p.id));
-    if (scrollToCard) list.querySelector(`.flip[data-id="${p.id}"]`).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
-  });
-  // hover kartu → nyalakan stasiun di peta (tanpa scroll)
-  list.addEventListener('mouseover', e => {
-    const c = e.target.closest('.flip'); if (!c || c.classList.contains('is-target')) return;
-    scrollToCard = false; select(c.dataset.id); scrollToCard = true;
-  });
-  // Dipakai mega menu navbar: lompat & sorot kartu program
-  window.focusCourse = id => { scrollToCard = true; select(id); };
-  // filter → list + peta
-  tabs(document.getElementById('x-tabs'), v => {
-    list.querySelectorAll('.x-group').forEach(g => g.classList.toggle('hidden', v !== 'all' && g.dataset.pillar !== v));
-    svg.querySelectorAll('.metro-line').forEach(l => l.style.opacity = v === 'all' || !l.dataset.pillar || l.dataset.pillar === v ? 1 : .15);
-    map.querySelectorAll('button.st').forEach(b => b.style.opacity = v === 'all' || byId(b.dataset.id).pillar === v ? 1 : .25);
-    list.querySelectorAll('.flip').forEach(c => c.classList.remove('is-target'));
-    map.querySelectorAll('button.st').forEach(b => b.setAttribute('aria-pressed', false));
-  });
-})();
 
+  function renderCourses() {
+    const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
+    document.getElementById('x-legend').innerHTML = metroLegend();
+    
+    const GROUPS = isEn ? {
+      foundation: { line:'#FFC83D', title:'Foundation Track', sub:'Progressive · Innovator → Beginner → Intermediate' },
+      skills: { line:'linear-gradient(90deg,#3B82F6,#EC4899)', title:'Digital Skills Track', sub:'Flexible · take anytime alongside other tracks' },
+      specialization: { line:'linear-gradient(90deg,#EF4444,#14B8A6,#F97316,#6366F1)', title:'Teens Specialization', sub:'No prerequisites · selected after Free Trial Assessment' },
+    } : {
+      foundation: { line:'#FFC83D', title:'Jalur Fondasi', sub:'Berjenjang · Innovator → Beginner → Intermediate' },
+      skills: { line:'linear-gradient(90deg,#3B82F6,#EC4899)', title:'Jalur Skill Digital', sub:'Fleksibel · bisa diambil kapan saja, bersama jalur lain' },
+      specialization: { line:'linear-gradient(90deg,#EF4444,#14B8A6,#F97316,#6366F1)', title:'Cabang Teens', sub:'Tanpa prasyarat · dipilih setelah asesmen Free Trial' },
+    };
+
+    list.innerHTML = Object.entries(GROUPS).map(([k, g]) => `
+      <div class="x-group ${currentFilter !== 'all' && currentFilter !== k ? 'hidden' : ''}" data-pillar="${k}">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="w-10 h-2 rounded-full shrink-0" style="background:${g.line}"></span>
+          <div><h4 class="font-display text-xl font-bold leading-tight">${g.title}</h4><p class="text-xs text-slate-400">${g.sub}</p></div>
+          <span class="flex-1 h-px bg-white/10"></span>
+          <span class="text-[11px] mono text-slate-500">${P.filter(p => p.pillar === k).length} ${isEn ? 'programs' : 'program'}</span>
+        </div>
+        <div class="grid sm:grid-cols-2 ${{ foundation:'lg:grid-cols-3', skills:'lg:grid-cols-2', specialization:'lg:grid-cols-4' }[k]} gap-5">${P.filter(p => p.pillar === k).map(cardHTML).join('')}</div>
+      </div>`).join('');
+    
+    bindFlip(list);
+
+    selectStation = buildMetro(map, svg, p => {
+      list.querySelectorAll('.flip').forEach(c => c.classList.toggle('is-target', c.dataset.id === p.id));
+      if (scrollToCard) {
+        const target = list.querySelector(`.flip[data-id="${p.id}"]`);
+        if (target) target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      }
+    });
+
+    // tabs
+    const tabsEl = document.getElementById('x-tabs');
+    if (tabsEl) {
+      tabs(tabsEl, v => {
+        currentFilter = v;
+        list.querySelectorAll('.x-group').forEach(g => g.classList.toggle('hidden', v !== 'all' && g.dataset.pillar !== v));
+        svg.querySelectorAll('.metro-line').forEach(l => l.style.opacity = v === 'all' || !l.dataset.pillar || l.dataset.pillar === v ? 1 : .15);
+        map.querySelectorAll('button.st').forEach(b => b.style.opacity = v === 'all' || byId(b.dataset.id).pillar === v ? 1 : .25);
+        list.querySelectorAll('.flip').forEach(c => c.classList.remove('is-target'));
+        map.querySelectorAll('button.st').forEach(b => b.setAttribute('aria-pressed', false));
+      }, currentFilter);
+    }
+  }
+
+  // hover kartu → nyalakan stasiun di peta
+  list.addEventListener('mouseover', e => {
+    const c = e.target.closest('.flip');
+    if (!c || c.classList.contains('is-target') || !selectStation) return;
+    scrollToCard = false;
+    selectStation(c.dataset.id);
+    scrollToCard = true;
+  });
+
+  window.focusCourse = id => {
+    if (selectStation) selectStation(id);
+  };
+
+  renderCourses();
+  document.addEventListener('leskoding:lang', renderCourses);
+})();
 </script>
 
 <!-- HOF OPSI 2 SCRIPTS -->
@@ -1817,41 +2010,73 @@ const bindFlip = el => {
 /* ===================== DATA (Knowledge Base §10) ===================== */
 const img = f => 'assets/sessions/' + encodeURIComponent(f);
 const W = [
-  { id:'cyber', title:'Cyber City RP Game', t1:'Cyber City', t2:'RP Game', name:'Sarah', age:12, role:'Lead Roblox Creator', award:'Masterpiece Terbaik', category:'Pilihan Kurator', field:'Game Dev',
+  { id:'cyber', title:'Cyber City RP Game', t1:'Cyber City', t2:'RP Game', name:'Sarah', age:12,
+    role_id:'Lead Roblox Creator', role_en:'Lead Roblox Creator',
+    award_id:'Masterpiece Terbaik', award_en:'Best Masterpiece',
+    category_id:'Pilihan Kurator', category_en:'Curator\x27s Pick',
+    field_id:'Game Dev', field_en:'Game Dev',
     tools:['Roblox Studio','Lua','3D Modeling'], color:'#FFC83D', icon:'fa-crown', photo:img('01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg'),
-    desc:'Dunia roleplay 3D bernuansa kota cyberpunk, lengkap dengan sistem mata uang virtual, toko in-game, dan NPC interaktif.', stats:[['fa-heart','1,4k','votes'],['fa-eye','12k','penayangan']],
-    cta:{ label:'Mainkan di Roblox', icon:'fa-gamepad', link:'' } },
-  { id:'kasir', title:'Sistem AI Kasir Pintar', t1:'Sistem AI', t2:'Kasir Pintar', name:'Budi', age:14, role:'Web Developer', award:'Terfavorit', category:'Karya Terpopuler', field:'Web Dev',
+    desc_id:'Dunia roleplay 3D bernuansa kota cyberpunk, lengkap dengan sistem mata uang virtual, toko in-game, dan NPC interaktif.',
+    desc_en:'A 3D cyberpunk roleplay world featuring a virtual currency economy, custom in-game stores, and interactive NPCs.',
+    cta_id:{ label:'Mainkan di Roblox', icon:'fa-gamepad', link:'' },
+    cta_en:{ label:'Play on Roblox', icon:'fa-gamepad', link:'' } },
+
+  { id:'kasir', title:'Sistem AI Kasir Pintar', t1:'Sistem AI', t2:'Kasir Pintar', name:'Budi', age:14,
+    role_id:'Web Developer', role_en:'Web Developer',
+    award_id:'Terfavorit', award_en:'Community Favorite',
+    category_id:'Karya Terpopuler', category_en:'Most Popular Project',
+    field_id:'Web Dev', field_en:'Web Dev',
     tools:['JavaScript','HTML','CSS'], color:'#38BDF8', icon:'fa-fire', photo:img('WhatsApp Image 2026-02-22 at 20.04.37.jpeg'),
-    desc:'Aplikasi kasir berbasis web yang menghitung stok inventaris secara otomatis dan mencetak struk belanja real-time.',
-    cta:{ label:'Coba Aplikasinya', icon:'fa-cash-register', link:'' } },
-  { id:'robot', title:'Robot Pemilah Sampah', t1:'Robot', t2:'Pemilah Sampah', name:'Kevin', age:10, role:'Robotics Maker', award:'Future Tech', category:'Teknologi Masa Depan', field:'Robotika',
+    desc_id:'Aplikasi kasir berbasis web yang menghitung stok inventaris secara otomatis dan mencetak struk belanja real-time.',
+    desc_en:'A web-based smart POS application that tracks inventory automatically and prints real-time transaction receipts.',
+    cta_id:{ label:'Coba Aplikasinya', icon:'fa-cash-register', link:'' },
+    cta_en:{ label:'Try the App', icon:'fa-cash-register', link:'' } },
+
+  { id:'robot', title:'Robot Pemilah Sampah', t1:'Robot', t2:'Pemilah Sampah', name:'Kevin', age:10,
+    role_id:'Robotics Maker', role_en:'Robotics Maker',
+    award_id:'Future Tech', award_en:'Future Tech',
+    category_id:'Teknologi Masa Depan', category_en:'Future Technology',
+    field_id:'Robotika', field_en:'Robotics',
     tools:['Arduino','Sensor Ultrasonik','Motor Servo'], color:'#F97316', icon:'fa-microchip', photo:img('01M3RVHT4R9SQ961Z3GTWJD72Y.jpg'),
-    desc:'Tempat sampah pintar berbasis Arduino: sensor ultrasonik mendeteksi objek dan motor servo membuka tutupnya tanpa disentuh.',
-    cta:{ label:'Tonton Demo', icon:'fa-circle-play', link:'' } },
-  { id:'porto', title:'Portofolio Animasi Web', t1:'Portofolio', t2:'Animasi Web', name:'Nadia', age:15, role:'Web Designer', award:'Desain Terbaik', category:'Estetika Visual', field:'Web Design',
+    desc_id:'Tempat sampah pintar berbasis Arduino: sensor ultrasonik mendeteksi objek dan motor servo membuka tutupnya tanpa disentuh.',
+    desc_en:'An Arduino-powered smart waste bin: ultrasonic sensors detect incoming objects to trigger a contactless servo-motor lid.',
+    cta_id:{ label:'Tonton Demo', icon:'fa-circle-play', link:'' },
+    cta_en:{ label:'Watch Demo', icon:'fa-circle-play', link:'' } },
+
+  { id:'porto', title:'Portofolio Animasi Web', t1:'Portofolio', t2:'Animasi Web', name:'Nadia', age:15,
+    role_id:'Web Designer', role_en:'Web Designer',
+    award_id:'Desain Terbaik', award_en:'Best Visual Design',
+    category_id:'Estetika Visual', category_en:'Visual Aesthetics',
+    field_id:'Web Design', field_en:'Web Design',
     tools:['HTML','CSS 3D','JavaScript'], color:'#C084FC', icon:'fa-gem', photo:img('01M3H323B1QJV4PH2CCWGH9AQ2.jpeg'),
-    desc:'Website portofolio responsif dengan animasi CSS 3D dan efek scroll mulus, dibangun murni tanpa framework.',
-    cta:{ label:'Kunjungi Website', icon:'fa-arrow-up-right-from-square', link:'' } },
+    desc_id:'Website portofolio responsif dengan animasi CSS 3D dan efek scroll mulus, dibangun murni tanpa framework.',
+    desc_en:'A responsive portfolio website crafted with smooth CSS 3D transforms and seamless scrolling effects, coded from scratch.',
+    cta_id:{ label:'Kunjungi Website', icon:'fa-arrow-up-right-from-square', link:'' },
+    cta_en:{ label:'Visit Website', icon:'fa-arrow-up-right-from-square', link:'' } },
 ];
-var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const monogram = (w, size = 'w-10 h-10 text-sm') => `<span class="${size} rounded-full flex items-center justify-center font-display font-black text-[#111827] foil-bg shrink-0 shadow-[0_0_0_2px_#0B0F19,0_0_0_3px_rgba(255,200,61,.5)]">${w.name[0]}</span>`;
-/* CTA proyek: link kosong = placeholder (menampilkan toast) */
-const playBtn = (w, variant = 'gold', extra = '') => {
-  const cls = { gold:'btn-gold', ghost:'btn-ghost', chip:'inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.15em] text-[#fde68a] border border-[#FFC83D]/30 hover:bg-[#FFC83D]/10 rounded-full px-4 py-2 transition' }[variant];
-  const attrs = w.cta.link ? `href="${w.cta.link}" target="_blank" rel="noopener"` : `href="#" data-placeholder="${w.title}"`;
-  return `<a ${attrs} class="${cls} ${extra}" onclick="event.stopPropagation(); if (this.dataset.placeholder) { event.preventDefault(); showToast(this.dataset.placeholder); }"><i class="fa-solid ${w.cta.icon}"></i> ${w.cta.label}</a>`;
+
+const playBtn = (w, isEn) => {
+  const cta = isEn ? w.cta_en : w.cta_id;
+  const cls = 'inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.15em] text-[#fde68a] border border-[#FFC83D]/30 hover:bg-[#FFC83D]/10 rounded-full px-4 py-2 transition';
+  const attrs = cta.link ? `href="${cta.link}" target="_blank" rel="noopener"` : `href="#" data-placeholder="${w.title}"`;
+  return `<a ${attrs} class="${cls}" onclick="event.stopPropagation(); if (this.dataset.placeholder) { event.preventDefault(); showToast(this.dataset.placeholder); }"><i class="fa-solid ${cta.icon}"></i> ${cta.label}</a>`;
 };
-const trialBtn = (variant = 'ghost') => `<a href="#register" class="${variant === 'gold' ? 'btn-gold' : 'btn-ghost'}"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a>`;
+
 function showToast(title) {
   let t = document.getElementById('toast');
-  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] px-5 py-3 rounded-xl bg-[#1E293B] border border-[#FFC83D]/40 text-sm shadow-2xl transition-opacity'; document.body.appendChild(t); }
-  t.innerHTML = `<i class="fa-solid fa-link text-[#FFC83D] mr-2"></i>Link proyek <b>${title}</b> belum diisi (field <code class="mono text-[#fde68a]">cta.link</code>)`;
-  t.style.opacity = 1; clearTimeout(t._h); t._h = setTimeout(() => t.style.opacity = 0, 2600);
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toast';
+    t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] px-5 py-3 rounded-xl bg-[#1E293B] border border-[#FFC83D]/40 text-sm shadow-2xl transition-opacity';
+    document.body.appendChild(t);
+  }
+  const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
+  t.innerHTML = `<i class="fa-solid fa-link text-[#FFC83D] mr-2"></i>${isEn ? 'Project link for' : 'Link proyek'} <b>${title}</b> ${isEn ? 'coming soon' : 'belum diisi'}`;
+  t.style.opacity = 1;
+  clearTimeout(t._h);
+  t._h = setTimeout(() => t.style.opacity = 0, 2600);
 }
-const tagList = (w, cls = '') => w.tools.map(t => `<span class="text-[10px] mono px-2.5 py-1 rounded-md border border-[#FFC83D]/20 text-[#fde68a]/90 ${cls}">${t}</span>`).join('');
 
-/* Laurel wreath SVG */
 const laurel = (c = '#FFC83D') => {
   let g = '';
   for (let i = 0; i < 9; i++) {
@@ -1862,6 +2087,7 @@ const laurel = (c = '#FFC83D') => {
   }
   return `<svg viewBox="0 0 120 120" class="w-full h-full" aria-hidden="true"><defs><linearGradient id="lg${c.slice(1)}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset=".5" stop-color="${c}"/><stop offset="1" stop-color="#a16207"/></linearGradient></defs><g fill="url(#lg${c.slice(1)})">${g}</g><path d="M38 104 Q60 114 82 104" stroke="url(#lg${c.slice(1)})" stroke-width="2" fill="none"/></svg>`;
 };
+
 const laurelBadge = (top, main, sub, c, sm = false) => `
   <div class="relative aspect-square w-full">
     <div class="absolute inset-0">${laurel(c)}</div>
@@ -1874,53 +2100,94 @@ const laurelBadge = (top, main, sub, c, sm = false) => `
 
 /* ===================== OPSI 2 · MALAM ANUGERAH ===================== */
 (() => {
-  document.getElementById('aw-laurel').innerHTML = laurelBadge('LesKoding', 'Explorer Awards', 'Hall of Fame', '#FFC83D');
   const grid = document.getElementById('aw-grid');
-  const sparks = () => Array.from({ length: 10 }, (_, i) => { const a = i / 10 * Math.PI * 2; return `<span class="sparkle" style="left:50%; top:40%; --x:${Math.cos(a) * 110}px; --y:${Math.sin(a) * 110}px"></span>`; }).join('');
-  grid.innerHTML = W.map((w, i) => `
-    <div class="env relative h-[470px] rounded-2xl border border-[#FFC83D]/25 overflow-hidden bg-[#0F172A]" data-i="${i}">
-      <!-- Winner (under) -->
-      <div class="env-winner absolute inset-0 flex flex-col">
-        <div class="relative h-40 shrink-0 overflow-hidden"><img src="${w.photo}" alt="" class="w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] to-transparent"></div></div>
-        <div class="px-5 pb-5 -mt-10 relative flex-1 flex flex-col items-center text-center">
-          <div class="w-28">${laurelBadge('Pemenang', w.award, w.field, w.color, true)}</div>
-          <h4 class="font-display text-xl font-black leading-tight mt-1">${w.title}</h4>
-          <div class="text-sm text-[#fde68a] font-semibold mt-1">${w.name} · ${w.age} tahun</div>
-          <p class="text-xs text-slate-400 leading-relaxed mt-2 line-clamp-2">${w.desc}</p>
-          <div class="mt-auto pt-3">${playBtn(w, 'chip')}</div>
+  if (!grid) return;
+
+  function renderHof() {
+    const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
+    const laurelEl = document.getElementById('aw-laurel');
+    if (laurelEl) {
+      laurelEl.innerHTML = laurelBadge('LesKoding', 'Explorer Awards', 'Hall of Fame', '#FFC83D');
+    }
+    const sparks = () => Array.from({ length: 10 }, (_, i) => {
+      const a = i / 10 * Math.PI * 2;
+      return `<span class="sparkle" style="left:50%; top:40%; --x:${Math.cos(a) * 110}px; --y:${Math.sin(a) * 110}px"></span>`;
+    }).join('');
+
+    grid.innerHTML = W.map((w, i) => {
+      const award = isEn ? w.award_en : w.award_id;
+      const category = isEn ? w.category_en : w.category_id;
+      const field = isEn ? w.field_en : w.field_id;
+      const desc = isEn ? w.desc_en : w.desc_id;
+      const winnerLabel = isEn ? 'Winner' : 'Pemenang';
+      const ageLabelText = isEn ? `${w.age} years old` : `${w.age} tahun`;
+      const catEyebrow = isEn ? 'Category' : 'Kategori';
+      const openLabel = isEn ? 'Open envelope' : 'Buka amplop';
+
+      return `
+      <div class="env relative h-[470px] rounded-2xl border border-[#FFC83D]/25 overflow-hidden bg-[#0F172A]" data-i="${i}">
+        <!-- Winner (under) -->
+        <div class="env-winner absolute inset-0 flex flex-col">
+          <div class="relative h-40 shrink-0 overflow-hidden"><img src="${w.photo}" alt="" class="w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] to-transparent"></div></div>
+          <div class="px-5 pb-5 -mt-10 relative flex-1 flex flex-col items-center text-center">
+            <div class="w-28">${laurelBadge(winnerLabel, award, field, w.color, true)}</div>
+            <h4 class="font-display text-xl font-black leading-tight mt-1">${w.title}</h4>
+            <div class="text-sm text-[#fde68a] font-semibold mt-1">${w.name} · ${ageLabelText}</div>
+            <p class="text-xs text-slate-400 leading-relaxed mt-2 line-clamp-2">${desc}</p>
+            <div class="mt-auto pt-3">${playBtn(w, isEn)}</div>
+          </div>
         </div>
-      </div>
-      ${sparks()}
-      <!-- Envelope -->
-      <button class="env-body absolute inset-0 flex flex-col items-center justify-end pb-8 text-center" style="background:linear-gradient(170deg,#1E293B,#111827)" aria-label="Buka amplop ${w.category}">
-        <div class="absolute inset-3 border border-[#FFC83D]/25 rounded-xl pointer-events-none"></div>
-        <div class="eyebrow text-[#fde68a]/70 !text-[9px]">Kategori</div>
-        <div class="font-display text-2xl font-black foil mt-2 px-6 leading-tight">${w.award}</div>
-        <div class="text-[11px] text-slate-400 mt-1">${w.category}</div>
-        <div class="mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.2em] text-[#fde68a]"><i class="fa-solid fa-hand-pointer"></i> Buka amplop</div>
-      </button>
-      <div class="env-flap absolute inset-x-0 top-0 h-[58%] z-10 pointer-events-none" style="background:linear-gradient(180deg,#273449,#1a2436)">
-      </div>
-      <div class="env-flap absolute left-1/2 top-[52%] -translate-x-1/2 z-20 pointer-events-none" style="clip-path:none; transform-origin:center -130px">
-        <div class="seal w-14 h-14 rounded-full flex items-center justify-center font-display font-black text-white/90 text-sm -translate-y-1/2">LK</div>
-      </div>
-    </div>`).join('');
-  const open = el => el.classList.add('open');
-  grid.addEventListener('click', e => { const env = e.target.closest('.env'); if (env) open(env); });
-  document.getElementById('aw-all').onclick = () => grid.querySelectorAll('.env').forEach((el, i) => setTimeout(() => open(el), reduceMotion ? 0 : i * 250));
+        ${sparks()}
+        <!-- Envelope -->
+        <button class="env-body absolute inset-0 flex flex-col items-center justify-end pb-8 text-center" style="background:linear-gradient(170deg,#1E293B,#111827)" aria-label="${openLabel} ${category}">
+          <div class="absolute inset-3 border border-[#FFC83D]/25 rounded-xl pointer-events-none"></div>
+          <div class="eyebrow text-[#fde68a]/70 !text-[9px]">${catEyebrow}</div>
+          <div class="font-display text-2xl font-black foil mt-2 px-6 leading-tight">${award}</div>
+          <div class="text-[11px] text-slate-400 mt-1">${category}</div>
+          <div class="mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.2em] text-[#fde68a]"><i class="fa-solid fa-hand-pointer"></i> ${openLabel}</div>
+        </button>
+        <div class="env-flap absolute inset-x-0 top-0 h-[58%] z-10 pointer-events-none" style="background:linear-gradient(180deg,#273449,#1a2436)">
+        </div>
+        <div class="env-flap absolute left-1/2 top-[52%] -translate-x-1/2 z-20 pointer-events-none" style="clip-path:none; transform-origin:center -130px">
+          <div class="seal w-14 h-14 rounded-full flex items-center justify-center font-display font-black text-white/90 text-sm -translate-y-1/2">LK</div>
+        </div>
+      </div>`;
+    }).join('');
+
+    const open = el => el.classList.add('open');
+    grid.addEventListener('click', e => {
+      const env = e.target.closest('.env');
+      if (env) open(env);
+    });
+
+    const openAllBtn = document.getElementById('aw-all');
+    if (openAllBtn) {
+      openAllBtn.onclick = () => grid.querySelectorAll('.env').forEach((el, i) => setTimeout(() => open(el), reduceMotion ? 0 : i * 250));
+    }
+  }
+
+  renderHof();
+  document.addEventListener('leskoding:lang', renderHof);
 })();
 </script>
-
-
 <!-- OPSI 1 PETA PETUALANGAN SCRIPTS -->
 <script>
-const STEPS = [
-  { n:'01', key:'step1', title:'Kenali Manfaat', desc:'Pahami nilai nyata coding untuk pola pikir anak.', long:'Coding melatih logika terstruktur, mengubah screen-time pasif jadi waktu berkarya, dan membuat anak tidak takut salah saat debugging.', icon:'fa-lightbulb', color:'#38BDF8', href:'#manfaat', cta:'Pelajari Manfaat', reward:'Logika terstruktur', emoji:'💡' },
-  { n:'02', key:'step2', title:'Pilih Level Anak', desc:'Sesuaikan dengan usia dan kesiapan belajar saat ini.', long:'Kids (6–14 thn) mulai dari blok visual, Teens (11–17 thn) masuk ke kode teks, robotika, atau aplikasi. Ada 9 kelas untuk dipilih.', icon:'fa-compass', color:'#38BDF8', href:'#course', cta:'Lihat 9 Kelas', reward:'Kelas yang pas', emoji:'🧭' },
-  { n:'03', key:'step3', title:'Lihat Karya Project', desc:'Ketahui tools industri dan karya yang akan dibuat.', long:'Scratch, Roblox Studio, App Inventor, Arduino, hingga HTML/CSS. Hasilnya game, website, aplikasi APK, dan alat IoT.', icon:'fa-shapes', color:'#C084FC', href:'#tech-flow', cta:'Eksplorasi Tools', reward:'Gambaran karya', emoji:'🎮' },
-  { n:'04', key:'step4', title:'Coba Kelas Gratis', desc:'1 sesi trial santai untuk ukur minat anak tanpa biaya.', long:'Datang ke lab Gianyar, Bedulu, atau pilih kelas Private di rumah. Tutor mengamati minat dan kesiapan anak, tanpa biaya dan tanpa komitmen.', icon:'fa-star', color:'#FFC83D', href:'#register', cta:'Daftar Trial Sekarang', reward:'Rp0 · tanpa komitmen', emoji:'⭐', featured:true },
-  { n:'05', key:'step5', title:'Mulai Berkarya', desc:'Jadwal disepakati bersama admin, lalu pantau laporan setiap sesi.', long:'Jadwal dan biaya dibahas bersama admin. Anak belajar dengan rasio 1:5, orang tua menerima laporan sesi, dan sertifikat diberikan setelah course selesai.', icon:'fa-flag-checkered', color:'#34D399', href:'#register', cta:'Amankan Jadwal', reward:'Sertifikat kelulusan', emoji:'🏅' },
-];
+const STEPS_DATA = {
+  id: [
+    { n:'01', key:'step1', title:'Pelajari Manfaat', desc:'Pahami bagaimana koding melatih nalar, fokus, dan problem-solving sejak dini.', long:'Coding bukan sekadar duduk di depan komputer, melainkan melatih computational thinking: merangkai logika urut, menganalisis masalah secara kritis, dan mengalihkan kebiasaan screen-time pasif menjadi kebiasaan berkarya aktif yang membanggakan.', icon:'fa-lightbulb', color:'#38BDF8', href:'#manfaat', cta:'Pelajari Manfaat Coding', reward:'Logika & Problem Solving', emoji:'💡' },
+    { n:'02', key:'step2', title:'Pilih Program yang Cocok', desc:'Tentukan jalur belajar terbaik sesuai usia, minat, dan kesiapan si kecil.', long:'Tersedia 9 program terstruktur: jenjang Kids (6–14 tahun) mulai dari visual block coding & literasi komputer, hingga Teens (11–17 tahun) mendalami Python, Web Dev, Robotika IoT, dan Roblox Studio. Temukan kurikulum yang paling pas untuk buah hati Anda.', icon:'fa-compass', color:'#38BDF8', href:'#course', cta:'Lihat Program Belajar', reward:'Kurikulum Sesuai Usia', emoji:'🧭' },
+    { n:'03', key:'step3', title:'Lihat Karya Anak-Anak Kami', desc:'Buktikan hasil nyata: game, animasi, website, dan robot buatan siswa.', long:'Setiap siswa di LesKoding menghasilkan karya orisinal yang bisa dimainkan dan dipamerkan ke keluarga. Dari game 3D Roblox, animasi cerita Scratch, website portofolio online, hingga alat otomatis IoT dengan mikrokontroler. Buktikan apa yang bisa dicapai anak Anda.', icon:'fa-shapes', color:'#C084FC', href:'#tech-flow', cta:'Lihat Karya Siswa', reward:'Portofolio Nyata', emoji:'🎮' },
+    { n:'04', key:'step4', title:'Ikut Trial Gratis', desc:'1 sesi uji coba interaktif untuk mengukur minat anak tanpa pungutan biaya.', long:'Ajak anak merasakan langsung serunya belajar bersama tutor privat atau kelompok kecil (maksimal 5 siswa) di Lab Gianyar, Lab Bedulu, atau Guru Datang ke Rumah. Tutor mengamati kesiapan dan minat anak, 100% gratis tanpa komitmen apapun.', icon:'fa-star', color:'#FFC83D', href:'#register', cta:'Daftar Trial Gratis Sekarang', reward:'100% Gratis · Tanpa Komitmen', emoji:'⭐', featured:true },
+    { n:'05', key:'step5', title:'Mulai Berkarya', desc:'Atur jadwal fleksibel, pantau rapor setiap sesi, dan raih sertifikat resmi.', long:'Setelah sesi trial, jadwal belajar disepakati bersama admin dengan rasio pendampingan 1:5. Orang tua menerima laporan perkembangan terperinci di setiap akhir sesi dan sertifikat kelulusan resmi saat level selesai.', icon:'fa-flag-checkered', color:'#34D399', href:'#register', cta:'Mulai Petualangan Belajar', reward:'Laporan Sesi & Sertifikat Resmi', emoji:'🏅' },
+  ],
+  en: [
+    { n:'01', key:'step1', title:'Learn the Benefits', desc:'Discover how coding builds structured logic, focus, and computational problem-solving.', long:'Coding is far more than screen time—it teaches computational thinking: structuring sequential logic, solving problems systematically, and transforming passive gaming into active, creative problem-solving you can be proud of.', icon:'fa-lightbulb', color:'#38BDF8', href:'#manfaat', cta:'Explore Coding Benefits', reward:'Structured Logic & Focus', emoji:'💡' },
+    { n:'02', key:'step2', title:'Choose the Right Program', desc:'Find the ideal learning pathway matched to your child\x27s age, curiosity, and experience.', long:'Choose from 9 structured courses: Kids (ages 6–14) begin with visual block coding and digital skills, while Teens (ages 11–17) master real code with Web Dev, IoT Robotics, Python, and Roblox Studio. Find the ideal match for your child.', icon:'fa-compass', color:'#38BDF8', href:'#course', cta:'View Learning Programs', reward:'Age-Appropriate Pathway', emoji:'🧭' },
+    { n:'03', key:'step3', title:'See What Kids Build', desc:'Witness tangible student creations: games, animations, websites, and smart robots.', long:'Every student at LesKoding creates authentic, working projects they can share and showcase. From 3D Roblox worlds and interactive Scratch animations to personal websites and IoT automation devices. See what your child can achieve.', icon:'fa-shapes', color:'#C084FC', href:'#tech-flow', cta:'Explore Student Works', reward:'Real Portfolio Inspiration', emoji:'🎮' },
+    { n:'04', key:'step4', title:'Join a Free Trial Class', desc:'1 interactive trial session to explore your child\x27s interest at zero cost or commitment.', long:'Let your child experience the thrill of hands-on coding at our Gianyar Lab, Bedulu Lab, or with Private Home Tutoring (max 1:5 mentor ratio). Our tutors assess your child\x27s passion and aptitude—100% free with no obligation.', icon:'fa-star', color:'#FFC83D', href:'#register', cta:'Book Free Trial Class', reward:'100% Free · No Commitment', emoji:'⭐', featured:true },
+    { n:'05', key:'step5', title:'Start Creating & Building', desc:'Set a flexible schedule, receive per-session reports, and earn official certificates.', long:'Following the trial, our team helps finalize a flexible timetable with a 1:5 mentor ratio. Parents receive transparent session reports after every single session and an official certificate upon course graduation.', icon:'fa-flag-checkered', color:'#34D399', href:'#register', cta:'Start Building Today', reward:'Session Reports & Certificate', emoji:'🏅' },
+  ]
+};
 
 (() => {
   const POS = [[9,73.5],[29,32.4],[50,70.6],[71,27.9],[91,66.2]]; 
@@ -1928,83 +2195,93 @@ const STEPS = [
   const panel = document.getElementById('qm-panel'), token = document.getElementById('qm-token');
   
   if(!nodes || !mob || !panel || !token) return;
+  let current = 0;
 
-  STEPS.forEach((s, i) => {
-    const b = document.createElement('button');
-    b.className = 'qm-node group flex flex-col items-center gap-2';
-    b.style.left = POS[i][0] + '%'; b.style.top = POS[i][1] + '%';
-    b.dataset.i = i;
-    b.innerHTML = `
-      <span class="orb w-14 h-14 rounded-full flex items-center justify-center font-mono font-black text-sm border-4 ${s.featured ? 'ring-pulse' : ''}"
-        style="border-color:${s.color}; background:#0B0F19; color:${s.color}">${s.featured ? '<i class="fa-solid fa-star"></i>' : s.n}</span>
-      <span class="text-[11px] font-bold whitespace-nowrap px-2 py-0.5 rounded-full bg-[#0B0F19]/90 border border-white/10 ${s.featured ? 'text-[#FFC83D]' : 'text-slate-200'}">${s.title}</span>`;
-    b.setAttribute('aria-label', `Level ${i+1}: ${s.title}`);
-    b.onclick = () => select(i);
-    nodes.appendChild(b);
+  function renderNodes() {
+    const lang = localStorage.getItem('leskoding_lang') || 'en';
+    const steps = STEPS_DATA[lang] || STEPS_DATA.en;
+    nodes.innerHTML = '';
+    mob.innerHTML = '';
+    
+    steps.forEach((s, i) => {
+      const b = document.createElement('button');
+      b.className = 'qm-node group flex flex-col items-center gap-2';
+      b.style.left = POS[i][0] + '%'; b.style.top = POS[i][1] + '%';
+      b.dataset.i = i;
+      b.innerHTML = `
+        <span class="orb w-14 h-14 rounded-full flex items-center justify-center font-mono font-black text-sm border-4 ${s.featured ? 'ring-pulse' : ''}"
+          style="border-color:${s.color}; background:#0B0F19; color:${s.color}">${s.featured ? '<i class="fa-solid fa-star"></i>' : s.n}</span>
+        <span class="text-[11px] font-bold whitespace-nowrap px-2 py-0.5 rounded-full bg-[#0B0F19]/90 border border-white/10 ${s.featured ? 'text-[#FFC83D]' : 'text-slate-200'}">${s.title}</span>`;
+      b.setAttribute('aria-label', `${lang === 'en' ? 'Step' : 'Langkah'} ${i+1}: ${s.title}`);
+      b.onclick = () => select(i);
+      nodes.appendChild(b);
 
-    const m = document.createElement('button');
-    m.className = 'qm-m relative z-10 w-11 h-11 rounded-full border-[3px] font-mono font-black text-xs flex items-center justify-center bg-[#0B0F19] transition';
-    m.style.borderColor = s.color; m.style.color = s.color;
-    m.textContent = s.n; m.onclick = () => select(i);
-    m.setAttribute('aria-label', `Level ${i+1}: ${s.title}`);
-    mob.appendChild(m);
-  });
-  mob.insertAdjacentHTML('afterbegin', '<div class="absolute left-4 right-4 top-1/2 h-[3px] -translate-y-1/2 bg-gradient-to-r from-[#0788F5] via-[#A855F7] via-70% to-emerald-400 opacity-40"></div>');
+      const m = document.createElement('button');
+      m.className = 'qm-m relative z-10 w-11 h-11 rounded-full border-[3px] font-mono font-black text-xs flex items-center justify-center bg-[#0B0F19] transition';
+      m.style.borderColor = s.color; m.style.color = s.color;
+      m.textContent = s.n; m.onclick = () => select(i);
+      m.setAttribute('aria-label', `${lang === 'en' ? 'Step' : 'Langkah'} ${i+1}: ${s.title}`);
+      mob.appendChild(m);
+    });
+    mob.insertAdjacentHTML('afterbegin', '<div class="absolute left-4 right-4 top-1/2 h-[3px] -translate-y-1/2 bg-gradient-to-r from-[#0788F5] via-[#A855F7] via-70% to-emerald-400 opacity-40"></div>');
+  }
 
   function select(i) {
-    const s = STEPS[i];
+    const lang = localStorage.getItem('leskoding_lang') || 'en';
+    const isEn = lang === 'en';
+    const steps = STEPS_DATA[lang] || STEPS_DATA.en;
+    const s = steps[i];
     nodes.querySelectorAll('.qm-node').forEach((b, j) => {
       b.setAttribute('aria-pressed', i === j);
       const orb = b.querySelector('.orb');
-      orb.style.background = j < i ? STEPS[j].color + '33' : j === i ? STEPS[j].color : '#0B0F19';
-      orb.style.color = j === i ? '#0B0F19' : STEPS[j].color;
+      orb.style.background = j < i ? steps[j].color + '33' : j === i ? steps[j].color : '#0B0F19';
+      orb.style.color = j === i ? '#0B0F19' : steps[j].color;
       orb.style.boxShadow = j === i ? `0 0 30px ${s.color}88` : '';
     });
     mob.querySelectorAll('.qm-m').forEach((m, j) => {
-      m.style.background = j === i ? STEPS[j].color : j < i ? STEPS[j].color + '33' : '#0B0F19';
-      m.style.color = j === i ? '#0B0F19' : STEPS[j].color;
+      m.style.background = j === i ? steps[j].color : j < i ? steps[j].color + '33' : '#0B0F19';
+      m.style.color = j === i ? '#0B0F19' : steps[j].color;
       m.style.transform = j === i ? 'scale(1.15)' : '';
     });
     token.style.left = POS[i][0] + '%'; token.style.top = POS[i][1] + '%';
-    document.getElementById('qm-prog').style.strokeDashoffset = 100 - i * 25;
-    document.getElementById('qm-lv').textContent = i + 1;
-    document.getElementById('qm-xp').textContent = (i * 25) + '%';
+    const progEl = document.getElementById('qm-prog');
+    if (progEl) progEl.style.strokeDashoffset = 100 - i * 25;
+    const lvEl = document.getElementById('qm-lv');
+    if (lvEl) lvEl.textContent = i + 1;
+    const xpEl = document.getElementById('qm-xp');
+    if (xpEl) xpEl.textContent = (i * 25) + '%';
+    
     panel.innerHTML = `
       <div class="fade-swap flex gap-4 items-start">
         <div class="w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center text-2xl" style="background:${s.color}22; border:1px solid ${s.color}66">${s.emoji}</div>
         <div>
           <div class="flex flex-wrap items-center gap-2 mb-1">
-            <span class="font-mono text-[11px] font-bold" style="color:${s.color}">LEVEL ${s.n}</span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${s.featured ? 'bg-[#FFC83D] text-[#111827]' : 'bg-white/5 text-slate-300'}"><i class="fa-solid fa-gift mr-1"></i>Hadiah: ${s.reward}</span>
-            ${s.featured ? '<span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border border-[#FFC83D]/40 text-[#FFC83D]">KODE: PETUALANGAN2026</span>' : ''}
+            <span class="font-mono text-[11px] font-bold uppercase" style="color:${s.color}">${isEn ? 'STEP' : 'LANGKAH'} ${s.n}</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${s.featured ? 'bg-[#FFC83D] text-[#111827]' : 'bg-white/5 text-slate-300'}"><i class="fa-solid fa-gift mr-1"></i>${isEn ? 'Takeaway:' : 'Keuntungan:'} ${s.reward}</span>
+            ${s.featured ? `<span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border border-[#FFC83D]/40 text-[#FFC83D]">${isEn ? 'CODE: ADVENTURE2026' : 'KODE: PETUALANGAN2026'}</span>` : ''}
           </div>
-          <h4 class="text-lg font-extrabold ${s.featured ? 'text-[#FFC83D]' : 'text-white'}" data-i18n="${s.key}_title">${s.title}</h4>
+          <h4 class="text-lg font-extrabold ${s.featured ? 'text-[#FFC83D]' : 'text-white'}">${s.title}</h4>
           <p class="text-sm text-slate-300 mt-1 max-w-2xl">${s.long}</p>
         </div>
       </div>
       <div class="fade-swap flex gap-2 md:flex-col md:items-end">
         <a href="${s.href}" class="inline-flex items-center justify-center gap-2 font-extrabold px-5 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition ${s.featured ? 'bg-[#FFC83D] text-[#111827] hover:bg-[#fed368] shadow-[0_4px_20px_rgba(255,200,61,0.3)]' : 'bg-white/5 border border-white/15 hover:bg-white/10 text-white'}">${s.cta} <i class="fa-solid fa-arrow-right"></i></a>
-        ${i < 4 ? `<button class="text-xs text-slate-400 hover:text-white px-3 py-2" onclick="this.dispatchEvent(new CustomEvent('qm-next',{bubbles:true}))">Level berikutnya <i class="fa-solid fa-forward ml-1"></i></button>` : ''}
+        ${i < 4 ? `<button class="text-xs text-slate-400 hover:text-white px-3 py-2" onclick="this.dispatchEvent(new CustomEvent('qm-next',{bubbles:true}))">${isEn ? 'Next step' : 'Langkah berikutnya'} <i class="fa-solid fa-forward ml-1"></i></button>` : ''}
       </div>`;
-      
-    // Re-apply language translations if app.js is loaded
-    if (window.applyLanguage) {
-      window.applyLanguage(document.documentElement.lang || 'id');
-    }
     
     current = i;
   }
-  let current = 0;
+  
   panel.addEventListener('qm-next', () => select(Math.min(4, current + 1)));
   
-  // Wait slightly before selecting to allow CSS load
+  document.addEventListener('leskoding:lang', () => {
+    renderNodes();
+    select(current);
+  });
+  
+  renderNodes();
   setTimeout(() => select(0), 100);
 })();
-</script>
-<script>
-  if (window.applyLanguage) {
-    window.applyLanguage(document.documentElement.lang || 'id');
-  }
 </script>
 
 <!-- OPSI 7 HERO SCRIPTS -->

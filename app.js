@@ -627,11 +627,8 @@ WA Anak (opsional): ${waAnak}`;
 
             const encodedMessage = encodeURIComponent(message);
             
-            // Route to appropriate branch admin WhatsApp
-            let adminWA = "628518306798"; // default Gianyar / Bedulu
-            if (center.includes("Private") || center.includes("Peliatan") || center.includes("Rumah")) {
-                adminWA = "6285792736627"; // Private / Home Visit admin
-            }
+            // Semua lokasi & metode belajar dilayani satu nomor admin
+            const adminWA = "628518306798";
             const whatsappUrl = `https://wa.me/${adminWA}?text=${encodedMessage}`;
             
             window.open(whatsappUrl, '_blank');
@@ -751,6 +748,23 @@ const coursesData = {
 
         "funnel_tag": "Panduan Keputusan Orang Tua",
         "funnel_title": "Alur Mudah: Saya Harus Mulai dari Mana?",
+        "funnel_desc": "5 langkah terarah dari mengenal manfaat hingga si kecil menciptakan karya pertamanya.",
+        "funnel_step_label": "LANGKAH",
+        "funnel_progress_label": "perjalanan",
+        "step1_title": "Pelajari Manfaat",
+        "step2_title": "Pilih Program yang Cocok",
+        "step3_title": "Lihat Karya Anak-Anak Kami",
+        "step4_title": "Ikut Trial Gratis",
+        "step5_title": "Mulai Berkarya",
+        "tf_title_1": "Anak Anda suka apa?",
+        "tf_title_2": "Kami ubah jadi karya.",
+        "tf_desc": "Pilih yang paling menggambarkan anak Anda. Lihat software yang dipelajari dan karya yang dibawa pulang.",
+        "tf_age_all": "Semua usia",
+        "tf_age_kids": "Anak 6–14",
+        "tf_age_teens": "Remaja 11–17",
+        "course_click_station": "Klik stasiun untuk lompat ke kartunya",
+        "cb3_tutor_badge": "Tutor",
+        "funnel_title": "Alur Mudah: Saya Harus Mulai dari Mana?",
         "step1_title": "Kenali Manfaat",
         "step2_title": "Pilih Level Anak",
         "step3_title": "Lihat Karya Project",
@@ -825,6 +839,23 @@ const coursesData = {
         en: {
 
         "funnel_tag": "Parent Decision Guide",
+        "funnel_title": "5 Simple Steps: Where Should I Start?",
+        "funnel_desc": "A clear 5-step roadmap to guide your child from curious beginner to confident creator.",
+        "funnel_step_label": "STEP",
+        "funnel_progress_label": "journey completed",
+        "step1_title": "Learn the Benefits",
+        "step2_title": "Choose the Right Program",
+        "step3_title": "See What Kids Build",
+        "step4_title": "Join a Free Trial Class",
+        "step5_title": "Start Creating & Building",
+        "tf_title_1": "What does your child love?",
+        "tf_title_2": "We turn passion into creation.",
+        "tf_desc": "Pick the interest that best describes your child. Discover the tech tools they will master and the real projects they build.",
+        "tf_age_all": "All Ages",
+        "tf_age_kids": "Kids 6–14",
+        "tf_age_teens": "Teens 11–17",
+        "course_click_station": "Click a station to jump to its card",
+        "cb3_tutor_badge": "Mentor",
         "funnel_title": "Easy Flow: Where Should I Start?",
         "step1_title": "Understand the Benefits",
         "step2_title": "Choose Child's Level",
@@ -2585,6 +2616,30 @@ window.addEventListener('load', () => {
 // Comprehensive Bilingual Translation Dictionary (English Default & Indonesian)
 const i18nDictionary = {
     en: {
+        "funnel_tag": "Parent Decision Guide",
+        "funnel_title": "5 Simple Steps: Where Should I Start?",
+        "funnel_desc": "A clear 5-step roadmap to guide your child from curious beginner to confident creator.",
+        "funnel_step_label": "STEP",
+        "funnel_progress_label": "journey completed",
+        "step1_title": "Learn the Benefits",
+        "step2_title": "Choose the Right Program",
+        "step3_title": "See What Kids Build",
+        "step4_title": "Join a Free Trial Class",
+        "step5_title": "Start Creating & Building",
+        "tf_title_1": "What does your child love?",
+        "tf_title_2": "We turn passion into creation.",
+        "tf_desc": "Pick the interest that best describes your child. Discover the tech tools they will master and the real projects they build.",
+        "tf_age_all": "All Ages",
+        "tf_age_kids": "Kids 6–14",
+        "tf_age_teens": "Teens 11–17",
+        "course_click_station": "Click a station to jump to its card",
+        "cb3_tutor_badge": "Mentor",
+
+        "faq_q5": "Do students receive an official certificate?",
+        "faq_a5": "Yes. Every student who completes their course receives an official graduation certificate from LesKoding, complementing their live portfolio of projects.",
+        "faq_q6": "What are the course fees and class schedules?",
+        "faq_a6": "Tuition details are shared by our team during the free consultation after you register. Class schedules are fully flexible and arranged directly with parents.",
+
 
         /* --- cara belajar opsi 3 --- */
         "cb3_title": "Up to 120 minutes, <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]\">full of creation.</span>",
@@ -2597,6 +2652,65 @@ const i18nDictionary = {
         "cb3_replay": "Replay",
         "cb3_range_label": "Session minute",
         "cb3_note": "Up to 120 minutes per session. Screen shown is an illustration.",
+        "loc5_title_1": "Learn wherever",
+        "loc5_title_2": "works best for you.",
+        "loc5_desc": "Come to a Learning Center, have a tutor visit your home, or join an online class. Same curriculum.",
+        "loc5_tab_gianyar": "Gianyar Lab",
+        "loc5_tab_bedulu": "Bedulu Lab",
+        "loc5_tab_private": "Private",
+        "loc5_tab_online": "Online",
+        "loc5_new": "NEW",
+        "loc5_kind_lab": "Learning Center",
+        "loc5_kind_private": "Tutor visits home",
+        "loc5_kind_online": "Remote learning",
+        "loc5_lab_p1": "Computer lab &amp; complete robotics kits",
+        "loc5_lab_p2": "Air-conditioned, clean &amp; child-friendly",
+        "loc5_lab_p3": "1 tutor : max. 5 students",
+        "loc5_pv_p1": "The tutor comes straight to your home",
+        "loc5_pv_p2": "1-on-1 or a small private group",
+        "loc5_pv_p3": "Schedule agreed with our admin",
+        "loc5_on_name": "Online Classes",
+        "loc5_on_where": "From anywhere, just a laptop &amp; internet",
+        "loc5_on_p1": "Live sessions with a tutor via video call",
+        "loc5_on_p2": "No commute, right from home",
+        "loc5_on_p3": "Best suited to software-based programs",
+        "loc5_show_map": "Show map",
+        "loc5_map_note": "Google Maps loads when clicked",
+        "loc5_cta_trial": "Try for Free",
+        "loc5_cta_online": "Join Online",
+        "loc5_tutor_home": "tutor → your home",
+        "loc5_online_chat": "tutor: \"try running your program 👀\"",
+        "reg_choice_online_title": "Online Class",
+        "reg_choice_online_desc": "Live via video call from home",
+        "footer_online": "Live via video call from home",
+        "footer_wa_all": "All services",
+        "nav2_doc": "Class Gallery",
+        "doc_badge": "Class Gallery",
+        "doc_title_1": "Every session,",
+        "doc_title_2": "one frame of the story.",
+        "doc_desc": "Focused at the laptop, cheering when the program runs, group photos on event day. This is everyday life for LesKoding students.",
+        "doc_open_all": "View all photos",
+        "doc_hint": "Hover to pause the reel, click a photo to enlarge",
+        "doc_open_photo": "Enlarge photo",
+        "doc_close": "Close",
+        "doc_prev": "Previous photo",
+        "doc_next": "Next photo",
+        "doc_tag_kelas": "Class & Practice",
+        "doc_tag_event": "Event",
+        "doc_cap_k1": "Focused on finishing their own project",
+        "doc_cap_k2": "Hands-on practice at the laptop",
+        "doc_cap_k3": "Try, fail, then debug again",
+        "doc_cap_k4": "The program runs! Time to show it off",
+        "doc_cap_k5": "One algorithm step at a time",
+        "doc_cap_k6": "Serious, but still fun",
+        "doc_cap_k7": "Learning at their own pace",
+        "doc_cap_k8": "Ready to present their work",
+        "doc_cap_e1": "Event day: brave enough to present",
+        "doc_cap_e2": "Group photo after the event",
+        "doc_cap_e3": "Meeting fellow young coders",
+        "doc_cap_e4": "Proud of their work",
+        "doc_cap_e5": "One stage, many stories",
+        "doc_cap_e6": "Memories with family",
         "cb3_s1": "Concept",
         "cb3_s2": "Hands-on Practice",
         "cb3_s3": "Review &amp; Feedback",
@@ -2677,8 +2791,8 @@ const i18nDictionary = {
         "nav2_g1": "Programs &amp; Works",
         "nav2_g2": "Method &amp; Progress",
         "nav2_g3": "Campus Info",
-        "hero7_title_1": "Today they <span class=\"text-slate-400\">play</span> games.",
-        "hero7_title_2": "Tomorrow, they build them.",
+        "hero7_title_1": "Yesterday they <span class=\"text-slate-400\">play</span> game,",
+        "hero7_title_2": "today they build them.",
         "hero7_desc": "Same screen time, different outcome. At LesKoding, kids aged 6–17 learn to turn their favorite games, animations, and apps into <b class=\"text-white\">their own creations</b>, guided by a tutor every session.",
         "hero7_mode_watch": "Mode: Viewer",
         "hero7_mode_make": "Mode: Creator ✨",
@@ -3070,7 +3184,7 @@ const i18nDictionary = {
         "reg_form_header": "Student &amp; Parent Registration Details",
         "reg_required_notice": "Required",
         "reg_lbl_center": "Choose Campus or Learning Mode",
-        "reg_campus_count": "2 Campuses + Private Home Visit",
+        "reg_campus_count": "2 Campuses + Private + Online",
         "reg_choice_private_title": "Private / Home Visit",
         "reg_choice_private_desc": "Learn at your own home (Gianyar &amp; Ubud)",
         "reg_choose_center": "Choose Campus or Learning Mode",
@@ -3122,6 +3236,29 @@ const i18nDictionary = {
         "reward_btn": "Claim Reward"
 },
     id: {
+        "funnel_tag": "Panduan Keputusan Orang Tua",
+        "funnel_title": "Alur Mudah: Saya Harus Mulai dari Mana?",
+        "funnel_desc": "5 langkah terarah dari mengenal manfaat hingga si kecil menciptakan karya pertamanya.",
+        "funnel_step_label": "LANGKAH",
+        "funnel_progress_label": "perjalanan",
+        "step1_title": "Pelajari Manfaat",
+        "step2_title": "Pilih Program yang Cocok",
+        "step3_title": "Lihat Karya Anak-Anak Kami",
+        "step4_title": "Ikut Trial Gratis",
+        "step5_title": "Mulai Berkarya",
+        "tf_title_1": "Anak Anda suka apa?",
+        "tf_title_2": "Kami ubah jadi karya.",
+        "tf_desc": "Pilih yang paling menggambarkan anak Anda. Lihat software yang dipelajari dan karya yang dibawa pulang.",
+        "tf_age_all": "Semua usia",
+        "tf_age_kids": "Anak 6–14",
+        "tf_age_teens": "Remaja 11–17",
+        "course_click_station": "Klik stasiun untuk lompat ke kartunya",
+        "cb3_tutor_badge": "Tutor",
+        "faq_q5": "Apakah siswa mendapatkan sertifikat?",
+        "faq_a5": "Ya. Setiap siswa yang menyelesaikan course akan mendapatkan sertifikat kelulusan dari LesKoding sebagai bukti capaian belajarnya, melengkapi portofolio karya yang sudah dibuat.",
+        "faq_q6": "Berapa biaya kursus dan bagaimana jadwal kelasnya?",
+        "faq_a6": "Informasi biaya akan disampaikan oleh admin saat konsultasi setelah Anda mendaftar. Jadwal kelas bersifat fleksibel dan ditentukan bersama sesuai kesepakatan dengan orang tua.",
+
 
         /* --- cara belajar opsi 3 --- */
         "cb3_title": "Hingga 120 menit yang <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]\">penuh karya.</span>",
@@ -3134,6 +3271,65 @@ const i18nDictionary = {
         "cb3_replay": "Putar ulang",
         "cb3_range_label": "Menit sesi",
         "cb3_note": "Maksimal 120 menit per sesi. Tampilan layar adalah ilustrasi.",
+        "loc5_title_1": "Belajar di mana pun",
+        "loc5_title_2": "yang paling pas.",
+        "loc5_desc": "Datang ke Learning Center, tutor yang datang ke rumah, atau ikut kelas online. Kurikulumnya sama.",
+        "loc5_tab_gianyar": "Lab Gianyar",
+        "loc5_tab_bedulu": "Lab Bedulu",
+        "loc5_tab_private": "Private",
+        "loc5_tab_online": "Online",
+        "loc5_new": "BARU",
+        "loc5_kind_lab": "Learning Center",
+        "loc5_kind_private": "Tutor ke rumah",
+        "loc5_kind_online": "Belajar jarak jauh",
+        "loc5_lab_p1": "Lab komputer &amp; kit robotik lengkap",
+        "loc5_lab_p2": "Ruang ber-AC, bersih &amp; ramah anak",
+        "loc5_lab_p3": "Rasio 1 tutor : maks. 5 siswa",
+        "loc5_pv_p1": "Tutor datang langsung ke rumah",
+        "loc5_pv_p2": "1-on-1 atau grup kecil privat",
+        "loc5_pv_p3": "Jadwal disepakati bersama admin",
+        "loc5_on_name": "Kelas Online",
+        "loc5_on_where": "Dari mana saja, cukup laptop &amp; internet",
+        "loc5_on_p1": "Sesi live bersama tutor via video call",
+        "loc5_on_p2": "Tanpa perjalanan, dari rumah sendiri",
+        "loc5_on_p3": "Paling cocok untuk program berbasis software",
+        "loc5_show_map": "Tampilkan peta",
+        "loc5_map_note": "Google Maps dimuat saat diklik",
+        "loc5_cta_trial": "Coba Gratis",
+        "loc5_cta_online": "Daftar Online",
+        "loc5_tutor_home": "tutor → rumah Anda",
+        "loc5_online_chat": "tutor: \"coba jalankan programnya 👀\"",
+        "reg_choice_online_title": "Kelas Online",
+        "reg_choice_online_desc": "Live via video call dari rumah",
+        "footer_online": "Live via video call dari rumah",
+        "footer_wa_all": "Semua layanan",
+        "nav2_doc": "Dokumentasi Kelas",
+        "doc_badge": "Dokumentasi Kelas",
+        "doc_title_1": "Setiap sesi,",
+        "doc_title_2": "satu frame cerita.",
+        "doc_desc": "Fokus di depan laptop, tepuk tangan setelah program berjalan, foto bersama di hari event. Inilah keseharian siswa LesKoding.",
+        "doc_open_all": "Buka semua foto",
+        "doc_hint": "Arahkan kursor untuk menghentikan gulungan, klik foto untuk memperbesar",
+        "doc_open_photo": "Perbesar foto",
+        "doc_close": "Tutup",
+        "doc_prev": "Foto sebelumnya",
+        "doc_next": "Foto berikutnya",
+        "doc_tag_kelas": "Kelas & Praktik",
+        "doc_tag_event": "Event",
+        "doc_cap_k1": "Fokus menyelesaikan project sendiri",
+        "doc_cap_k2": "Praktik langsung di laptop",
+        "doc_cap_k3": "Mencoba, gagal, lalu debug lagi",
+        "doc_cap_k4": "Programnya jalan! Saatnya pamer",
+        "doc_cap_k5": "Satu langkah algoritma demi satu",
+        "doc_cap_k6": "Serius tapi tetap seru",
+        "doc_cap_k7": "Belajar dengan ritme sendiri",
+        "doc_cap_k8": "Siap menjelaskan karyanya",
+        "doc_cap_e1": "Hari event: berani tampil",
+        "doc_cap_e2": "Foto bersama setelah acara",
+        "doc_cap_e3": "Bertemu teman sesama coder",
+        "doc_cap_e4": "Bangga dengan karyanya",
+        "doc_cap_e5": "Satu panggung, banyak cerita",
+        "doc_cap_e6": "Kenangan bersama keluarga",
         "cb3_s1": "Materi Konsep",
         "cb3_s2": "Praktik Eksploratif",
         "cb3_s3": "Review &amp; Feedback",
@@ -3214,8 +3410,8 @@ const i18nDictionary = {
         "nav2_g1": "Program &amp; Karya",
         "nav2_g2": "Metode &amp; Progres",
         "nav2_g3": "Informasi Kampus",
-        "hero7_title_1": "Hari ini dia <span class=\"text-slate-400\">main</span> game.",
-        "hero7_title_2": "Besok dia yang bikin.",
+        "hero7_title_1": "Kemarin mereka <span class=\"text-slate-400\">main</span> game,",
+        "hero7_title_2": "hari ini mereka yang bikin.",
         "hero7_desc": "Waktu layar yang sama, hasil yang berbeda. Di LesKoding, anak 6–17 tahun belajar mengubah game, animasi, dan aplikasi favoritnya menjadi <b class=\"text-white\">karya buatan sendiri</b>, didampingi tutor setiap sesi.",
         "hero7_mode_watch": "Mode: Penonton",
         "hero7_mode_make": "Mode: Pencipta ✨",
@@ -3607,7 +3803,7 @@ const i18nDictionary = {
         "reg_form_header": "Data Calon Siswa &amp; Wali Murid",
         "reg_required_notice": "Wajib diisi",
         "reg_lbl_center": "Pilihan Lokasi / Metode Belajar",
-        "reg_campus_count": "2 Kampus + Layanan Private",
+        "reg_campus_count": "2 Kampus + Private + Online",
         "reg_choice_private_title": "Private / Home Visit",
         "reg_choice_private_desc": "Belajar di rumah sendiri (Gianyar &amp; Ubud)",
         "reg_choose_center": "Pilih Lokasi / Metode Belajar",
@@ -3740,61 +3936,110 @@ document.addEventListener('DOMContentLoaded', () => {
 const T = 'assets/tech/';
 const tracks = [
   { id:'k1', group:'kids', age:'6–14', color:'#FFC83D', icon:'fa-gamepad', art:'game',
-    interest:'Suka main game', title:'Bikin Game & Animasi', tag:'Jalur populer anak',
-    before:'Main game buatan orang lain berjam-jam', after:'Bikin game & kartun dengan karakter dan cerita sendiri',
-    idea:'Anak suka main game? Yuk ajak buat game sendiri dengan karakter, labirin, dan jalan cerita buatan mereka.',
-    skill:'Logika & pemecahan masalah',
+    id_data: {
+      interest:'Suka main game', title:'Bikin Game & Animasi', tag:'Jalur populer anak',
+      idea:'Anak suka main game? Yuk ajak buat game sendiri dengan karakter, labirin, dan jalan cerita buatan mereka.',
+      skill:'Logika game & computational thinking',
+      outputs:[['Game 2D buatan sendiri','Dimainkan bersama teman & keluarga'],['Kartun dongeng interaktif','Dengan rekaman suara anak sendiri']]
+    },
+    en_data: {
+      interest:'Loves playing games', title:'Game & Animation Creator', tag:'Popular Kids Track',
+      idea:'Does your child love playing games? Let us channel that energy into building original games with custom characters, mazes, and storylines.',
+      skill:'Game logic & computational thinking',
+      outputs:[['Self-made 2D Game','Playable with family & friends'],['Interactive Cartoon Story','With their own voice narration']]
+    },
     tools:[['Scratch','scratch.png'],['PictoBlox AI','pictoblox.png'],['CodeMonkey','codemonkey.png']],
-    outputs:[['Game 2D buatan sendiri','Dimainkan bersama teman & keluarga'],['Kartun dongeng interaktif','Dengan rekaman suara anak sendiri']],
     course:'beginner' },
   { id:'k2', group:'kids', age:'8–14', color:'#10B981', icon:'fa-desktop', art:'doc',
-    interest:'Sering mengerjakan tugas di laptop', title:'Pintar Komputer & Tugas Sekolah', tag:'Kebutuhan sekolah',
-    before:'Masih minta tolong orang tua untuk mengetik tugas', after:'Mengetik 10 jari, bikin makalah & slide presentasi sendiri',
-    idea:'Anak mandiri memakai komputer: mengetik tugas tanpa bantuan terus-menerus dan siap presentasi di kelas.',
-    skill:'Mengetik 10 jari & literasi digital',
-    tools:[['Word','ms_word.png'],['Excel','ms_excel.webp'],['PowerPoint','ms_powerpoint.webp']],
-    outputs:[['Makalah & laporan rapi','Margin, tabel, dan daftar isi otomatis'],['Slide presentasi keren','Percaya diri presentasi di kelas']],
-    course:'komputer-dasar' },
+    id_data: {
+      interest:'Sering pakai komputer sekolah', title:'Pintar Komputer & Ketik', tag:'Literasi digital penting',
+      idea:'Anak diajarkan mengetik 10 jari cepat, merapikan dokumen tugas sekolah, dan membuat tabel grafik otomatis.',
+      skill:'Mengetik cepat & produktivitas digital',
+      outputs:[['Tugas sekolah rapi standar kantor','Dokumen format profesional'],['Tabel data & grafik otomatis','Mengolah angka tanpa pusing']]
+    },
+    en_data: {
+      interest:'Uses school computers often', title:'Smart Computer & Typing', tag:'Essential Digital Literacy',
+      idea:'Kids learn fast 10-finger touch typing, neatly format school assignments, and build automated spreadsheets and charts.',
+      skill:'Touch typing & digital productivity',
+      outputs:[['Neat, office-ready assignments','Professional document formatting'],['Data tables & automated charts','Analyze numbers effortlessly']]
+    },
+    tools:[['MS Word','word.png'],['MS Excel','excel.png'],['PowerPoint','powerpoint.png']],
+    course:'komputer' },
   { id:'k3', group:'kids', age:'9–14', color:'#EC4899', icon:'fa-palette', art:'poster',
-    interest:'Suka menggambar & mewarnai', title:'Desain & Gambar Digital', tag:'Kreatif visual',
-    before:'Coretan gambar di buku tulis', after:'Poster & desain tampilan aplikasi yang siap dicetak',
-    idea:'Anak punya rasa seni? Salurkan ke media digital untuk membuat karya visual yang estetik dan membanggakan.',
-    skill:'Komposisi warna & tipografi',
+    id_data: {
+      interest:'Suka menggambar / kreatif', title:'Desain Grafis & Ilustrasi', tag:'Eksplorasi visual',
+      idea:'Imajinasi visual anak disalurkan untuk membuat poster keren, karakter kartun, dan desain antarmuka aplikasi.',
+      skill:'Desain visual, warna & tipografi',
+      outputs:[['Kumpulan poster digital keren','Siap cetak atau diposting online'],['Desain antarmuka aplikasi (UI)','Tampilan aplikasi yang memukau']]
+    },
+    en_data: {
+      interest:'Loves drawing & digital art', title:'Graphic Design & Illustration', tag:'Visual Exploration',
+      idea:'Channel your child visual creativity into stunning digital posters, character art, and mobile UI layouts.',
+      skill:'Visual layout, color theory & typography',
+      outputs:[['Stunning digital poster gallery','Ready to print or share online'],['Mobile app UI prototype','Eye-catching interactive screens']]
+    },
     tools:[['Canva','canva.png'],['Figma','figma.png']],
-    outputs:[['Poster edukasi','Siap dicetak dan dipajang di kamar'],['Desain tampilan aplikasi','Mockup layar buatan anak sendiri']],
-    course:'design-grafis' },
+    course:'desain' },
   { id:'t1', group:'teens', age:'11–17', color:'#0788F5', icon:'fa-cube', art:'world',
-    interest:'Hobi main Roblox / game 3D', title:'Game Developer 3D', tag:'Spesialisasi game',
-    before:'Main Roblox setiap hari', after:'Menerbitkan game Roblox sendiri yang dimainkan teman online',
-    idea:'Dari sekadar bermain, remaja diarahkan merancang dunia 3D dan aturan permainannya sendiri.',
-    skill:'Logika game, world building & scripting Lua',
+    id_data: {
+      interest:'Hobi main Roblox / game 3D', title:'Game Developer 3D', tag:'Spesialisasi game',
+      idea:'Dari sekadar bermain, remaja diarahkan merancang dunia 3D dan aturan permainannya sendiri dengan Roblox Studio dan bahasa Lua.',
+      skill:'Logika game, world building & scripting Lua',
+      outputs:[['Game 3D siap main di Roblox','Link bisa dibagikan ke teman'],['Game HTML5 di browser','Dibuka di HP tanpa install']]
+    },
+    en_data: {
+      interest:'Loves Roblox / 3D gaming', title:'3D Game Developer', tag:'Game Specialization',
+      idea:'Transform your teen from a gamer into a creator, designing 3D worlds and custom game mechanics with Roblox Studio and Lua.',
+      skill:'Game design, world building & Lua scripting',
+      outputs:[['Live 3D Roblox Game','Sharable link for friends online'],['Interactive HTML5 Game','Runs on mobile with no install']]
+    },
     tools:[['Roblox Studio','roblox_studio.png'],['Construct 3','construct.svg'],['Unity','unity.svg']],
-    outputs:[['Game 3D siap main di Roblox','Link bisa dibagikan ke teman'],['Game HTML5 di browser','Dibuka di HP tanpa install']],
-    course:'advance-1' },
+    course:'game' },
   { id:'t2', group:'teens', age:'11–17', color:'#8B5CF6', icon:'fa-code', art:'web',
-    interest:'Ingin punya website sendiri', title:'Junior Web Developer', tag:'Spesialisasi web',
-    before:'Hanya scroll website orang lain', after:'Punya website portofolio pribadi yang live di internet',
-    idea:'Website profil pribadi untuk memamerkan hobi, sertifikat, dan karya buatan sendiri.',
-    skill:'HTML, CSS & JavaScript asli',
+    id_data: {
+      interest:'Ingin punya website sendiri', title:'Junior Web Developer', tag:'Spesialisasi web',
+      idea:'Website profil pribadi untuk memamerkan hobi, sertifikat, dan karya buatan sendiri yang online di internet.',
+      skill:'HTML, CSS & JavaScript asli',
+      outputs:[['Website portofolio online','Live dan bisa dibuka di HP siapa saja'],['Tampilan responsif','Rapi di HP, tablet & laptop']]
+    },
+    en_data: {
+      interest:'Wants their own website', title:'Junior Web Developer', tag:'Web Specialization',
+      idea:'Build and deploy a real personal portfolio website to showcase hobbies, certificates, and achievements live on the web.',
+      skill:'Real HTML5, CSS3 & JavaScript',
+      outputs:[['Live personal portfolio website','Accessible by anyone on any device'],['Fully responsive layout','Pixel-perfect on phones, tablets & laptops']]
+    },
     tools:[['HTML5','html.webp'],['CSS3','css.webp'],['JavaScript','js.svg']],
-    outputs:[['Website portofolio online','Live dan bisa dibuka di HP siapa saja'],['Tampilan responsif','Rapi di HP, tablet & laptop']],
-    course:'advance-2' },
+    course:'web' },
   { id:'t3', group:'teens', age:'11–17', color:'#14B8A6', icon:'fa-microchip', art:'circuit',
-    interest:'Suka membongkar alat elektronik', title:'Robotika & IoT', tag:'Spesialisasi robotik',
-    before:'Penasaran kenapa lampu bisa menyala sendiri', after:'Merakit alat otomatis dengan sensor yang terhubung ke HP',
-    idea:'Bagaimana lampu bisa menyala sendiri saat orang masuk kamar? Remaja merangkai alat otomatis dengan sensor nyata.',
-    skill:'Elektronika dasar & otomasi',
+    id_data: {
+      interest:'Suka membongkar alat elektronik', title:'Robotika & IoT', tag:'Spesialisasi robotik',
+      idea:'Bagaimana lampu bisa menyala sendiri saat orang masuk kamar? Remaja merangkai alat otomatis dengan mikrokontroler dan sensor nyata.',
+      skill:'Elektronika dasar & otomasi IoT',
+      outputs:[['Prototipe alat otomatis','Lampu sensor gerak atau alarm'],['Alat terkoneksi HP (IoT)','Pantau data sensor dari smartphone']]
+    },
+    en_data: {
+      interest:'Tinkering with gadgets & electronics', title:'Robotics & IoT Engineering', tag:'Robotics Specialization',
+      idea:'How do automatic lights turn on? Teens wire real hardware, connect sensors, and code microcontrollers to automate their world.',
+      skill:'Electronics fundamentals & IoT automation',
+      outputs:[['Working automation prototype','Motion sensor light or smart alarm'],['Smart IoT device','Monitor sensor data live from a smartphone']]
+    },
     tools:[['Arduino','arduino.webp'],['PictoBlox IoT','pictoblox.png']],
-    outputs:[['Prototipe alat otomatis','Lampu sensor gerak atau alarm'],['Alat terkoneksi HP (IoT)','Pantau data sensor dari smartphone']],
-    course:'advance-3' },
+    course:'robotik' },
   { id:'t4', group:'teens', age:'11–17', color:'#F3261D', icon:'fa-mobile-screen', art:'phone',
-    interest:'Tidak pernah lepas dari HP', title:'Apps Developer', tag:'Spesialisasi aplikasi',
-    before:'Hanya memakai aplikasi buatan orang lain', after:'Aplikasi Android buatan sendiri terpasang di HP keluarga',
-    idea:'Punya ide aplikasi jadwal belajar, kalkulator uang saku, atau kuis seru? Remaja merancangnya jadi aplikasi ponsel.',
-    skill:'Desain UI & logika aplikasi mobile',
+    id_data: {
+      interest:'Tidak pernah lepas dari HP', title:'Apps Developer', tag:'Spesialisasi aplikasi',
+      idea:'Punya ide aplikasi jadwal belajar, kalkulator uang saku, atau kuis seru? Remaja merancangnya jadi aplikasi Android fungsional.',
+      skill:'Desain UI & logika aplikasi mobile',
+      outputs:[['Aplikasi terpasang di HP','File .apk yang berjalan mulus'],['Karya siap pamer','Ditunjukkan ke keluarga & teman']]
+    },
+    en_data: {
+      interest:'Always on their smartphone', title:'Mobile Apps Developer', tag:'Apps Specialization',
+      idea:'Have an idea for a study planner, calculator, or quiz game? Teens design and code real native Android applications.',
+      skill:'Mobile UI/UX & event-driven programming',
+      outputs:[['Installable Android App (.APK)','Runs smoothly on personal phones'],['Proud showcase project','Showcased to family and friends']]
+    },
     tools:[['App Inventor','mit_app_inventor.png'],['Flutter','flutter.webp']],
-    outputs:[['Aplikasi terpasang di HP','File .apk yang berjalan mulus'],['Karya siap pamer','Ditunjukkan ke keluarga & teman']],
-    course:'advance-4' },
+    course:'apps' },
 ];
 
 /* --------------------------------------------- ARTIFACT MOCKS (pure CSS) */
@@ -3884,57 +4129,70 @@ const filterBtns = (wrapId, onChange) => {
 /* ------------------------------------------------------------- OPSI A */
 let aAge = 'all', aSel = 'k1';
 function renderA() {
+  const lang = localStorage.getItem('leskoding_lang') || 'en';
+  const isEn = lang === 'en';
   const list = tracks.filter(t => aAge === 'all' || t.group === aAge);
   if (!list.find(t => t.id === aSel)) aSel = list[0].id;
-  document.getElementById('a-list').innerHTML = list.map((t, i) => `
+  const listEl = document.getElementById('a-list');
+  if (!listEl) return;
+  listEl.innerHTML = list.map((t, i) => {
+    const d = isEn ? t.en_data : t.id_data;
+    const groupLabel = t.group === 'kids' ? (isEn ? 'Kids' : 'Anak') : (isEn ? 'Teens' : 'Remaja');
+    const yrsLabel = isEn ? 'yrs' : 'thn';
+    return `
     <button role="tab" aria-selected="${t.id===aSel}" data-id="${t.id}" style="--c:${t.color}"
       class="interest-btn w-full text-left flex items-center gap-3.5 p-3.5 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/5 transition-all">
       <span class="dot w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-sm transition-colors"><i class="fa-solid ${t.icon}"></i></span>
       <span class="flex-1">
-        <span class="block font-bold text-sm sm:text-base">${t.interest}</span>
-        <span class="block text-[11px] text-slate-400">${t.group==='kids'?'Anak':'Remaja'} · ${t.age} thn</span>
+        <span class="block font-bold text-sm sm:text-base">${d.interest}</span>
+        <span class="block text-[11px] text-slate-400">${groupLabel} · ${t.age} ${yrsLabel}</span>
       </span>
       <i class="fa-solid fa-arrow-right text-xs text-slate-500"></i>
-    </button>`).join('');
+    </button>`;
+  }).join('');
   document.querySelectorAll('#a-list .interest-btn').forEach(b => b.onclick = () => { aSel = b.dataset.id; renderA(); });
 
   const t = tracks.find(x => x.id === aSel);
-  document.getElementById('a-stage').innerHTML = `
+  const d = isEn ? t.en_data : t.id_data;
+  const stageEl = document.getElementById('a-stage');
+  if (!stageEl) return;
+  stageEl.innerHTML = `
     <div class="fade rounded-[2rem] border border-white/10 bg-[#111827] p-5 sm:p-7 shadow-2xl relative overflow-hidden">
       <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-[100px] opacity-30" style="background:${t.color}"></div>
       <div class="relative">
         <div class="flex items-center justify-between mb-4">
-          <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md" style="color:${t.color};background:${t.color}1a;border:1px solid ${t.color}40">${t.tag}</span>
-          <span class="text-xs text-slate-400">Usia ${t.age} thn</span>
+          <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md" style="color:${t.color};background:${t.color}1a;border:1px solid ${t.color}40">${d.tag}</span>
+          <span class="text-xs text-slate-400">${isEn ? `Ages ${t.age} yrs` : `Usia ${t.age} thn`}</span>
         </div>
-        <h3 class="font-display text-2xl sm:text-3xl font-extrabold mb-5">${t.title}</h3>
+        <h3 class="font-display text-2xl sm:text-3xl font-extrabold mb-5">${d.title}</h3>
         ${art(t.art, t.color, 'lg')}
 
         <!-- 3-step ribbon -->
         <div class="grid sm:grid-cols-3 gap-3 mt-5">
           <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
-            <div class="text-[10px] font-mono font-bold text-slate-400 mb-2">01 · RASA PENASARAN</div>
-            <p class="text-xs text-slate-300 leading-relaxed">${t.idea}</p>
+            <div class="text-[10px] font-mono font-bold text-slate-400 mb-2">${isEn ? '01 · CURIOSITY' : '01 · RASA PENASARAN'}</div>
+            <p class="text-xs text-slate-300 leading-relaxed">${d.idea}</p>
           </div>
           <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
-            <div class="text-[10px] font-mono font-bold text-slate-400 mb-2">02 · BELAJAR PAKAI</div>
+            <div class="text-[10px] font-mono font-bold text-slate-400 mb-2">${isEn ? '02 · TOOLS & SKILLS' : '02 · BELAJAR PAKAI'}</div>
             <div class="flex flex-wrap gap-1.5">${t.tools.map(x=>toolChip(x)).join('')}</div>
-            <p class="text-[11px] text-slate-400 mt-2.5"><i class="fa-solid fa-bolt mr-1" style="color:${t.color}"></i>${t.skill}</p>
+            <p class="text-[11px] text-slate-400 mt-2.5"><i class="fa-solid fa-bolt mr-1" style="color:${t.color}"></i>${d.skill}</p>
           </div>
           <div class="rounded-2xl p-4 border" style="background:${t.color}12;border-color:${t.color}40">
-            <div class="text-[10px] font-mono font-bold mb-2" style="color:${t.color}">03 · DIBAWA PULANG</div>
-            <ul class="space-y-2">${t.outputs.map(([a,b])=>`<li><strong class="block text-xs">${a}</strong><span class="text-[11px] text-slate-400">${b}</span></li>`).join('')}</ul>
+            <div class="text-[10px] font-mono font-bold mb-2" style="color:${t.color}">${isEn ? '03 · PROJECT OUTCOME' : '03 · DIBAWA PULANG'}</div>
+            <ul class="space-y-2">${d.outputs.map(([a,b])=>`<li><strong class="block text-xs">${a}</strong><span class="text-[11px] text-slate-400">${b}</span></li>`).join('')}</ul>
           </div>
         </div>
         <div class="flex flex-col sm:flex-row gap-2.5 mt-5">
-          <a href="#" class="flex-1 text-center bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold py-3 rounded-xl text-xs uppercase tracking-wider">Lihat detail program →</a>
-          <a href="#" class="text-center px-5 py-3 rounded-xl border border-white/15 text-xs font-bold hover:bg-white/5"><i class="fa-solid fa-certificate text-[#FFC83D] mr-1"></i>Dapat sertifikat kelulusan</a>
+          <a href="#course" onclick="window.focusCourse && window.focusCourse('${t.course}')" class="flex-1 text-center bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold py-3 rounded-xl text-xs uppercase tracking-wider">${isEn ? 'View program details →' : 'Lihat detail program →'}</a>
+          <a href="#course" class="text-center px-5 py-3 rounded-xl border border-white/15 text-xs font-bold hover:bg-white/5"><i class="fa-solid fa-certificate text-[#FFC83D] mr-1"></i>${isEn ? 'Includes graduation certificate' : 'Dapat sertifikat kelulusan'}</a>
         </div>
       </div>
     </div>`;
 }
 filterBtns('a-age', v => { aAge = v; renderA(); });
 renderA();
+document.addEventListener('leskoding:lang', () => renderA());
 
 });
 
@@ -4280,4 +4538,215 @@ renderA();
     };
     document.addEventListener('leskoding:lang', relabel);
     relabel();
+})();
+
+/* ========================================================
+   17. DOKUMENTASI KELAS (opsi 2): ROLL FILM + LIGHTBOX
+   Thumbnail 600px di assets/sessions/thumbs/, foto asli hanya dimuat di lightbox
+   ======================================================== */
+(() => {
+    const trackA = document.getElementById('doc-film-a');
+    const trackB = document.getElementById('doc-film-b');
+    const lb = document.getElementById('doc-lb');
+    if (!trackA || !trackB || !lb) return;
+
+    const KELAS = [
+        "01M3H323B1QJV4PH2CCWGH9AQ2.jpeg",
+        "01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg",
+        "01M3RSJWMWDKRWTNA3D0HEP47C.jpg",
+        "01M3RVHT4R9SQ961Z3GTWJD72Y.jpg",
+        "WhatsApp Image 2026-02-22 at 20.04.35.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.36 (1).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.36.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.37 (1).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.37.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.38.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.41.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.44 (1).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.44.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.45 (1).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.45.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.46 (1).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.46.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.47 (1).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.47 (2).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.47.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.48.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.49.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.50 (1).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.50.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.51 (1).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.51 (2).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.51.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.52.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.53 (1).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.53 (2).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.53.jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.54 (1).jpeg",
+        "WhatsApp Image 2026-02-22 at 20.04.54.jpeg",
+    ];
+    const EVENT = [
+        "WhatsApp Image 2026-02-22 at 15.14.55.jpeg",
+        "WhatsApp Image 2026-02-22 at 15.14.56.jpeg",
+        "WhatsApp Image 2026-02-22 at 15.14.57.jpeg",
+        "WhatsApp Image 2026-02-22 at 15.15.06.jpeg",
+        "WhatsApp Image 2026-02-22 at 15.15.12.jpeg",
+        "WhatsApp Image 2026-02-22 at 15.15.16.jpeg",
+        "WhatsApp Image 2026-02-22 at 15.15.18.jpeg",
+        "WhatsApp Image 2026-02-22 at 15.15.20.jpeg",
+        "WhatsApp Image 2026-02-22 at 15.15.24.jpeg",
+        "WhatsApp Image 2026-02-22 at 15.15.26.jpeg",
+        "WhatsApp Image 2026-02-22 at 15.15.27.jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.13.jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.14.jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.15 (1).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.15 (2).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.15.jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.16.jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.33.jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.34 (1).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.34 (2).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.34 (3).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.34.jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.35 (1).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.35 (2).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.35.jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.36 (1).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.36 (2).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.36 (3).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.36 (4).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.36.jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.52 (1).jpeg",
+        "WhatsApp Image 2026-02-23 at 09.54.52.jpeg",
+        "WhatsApp Image 2026-02-23 at 09.55.13.jpeg",
+    ];
+    const CAP_KEYS = { kelas: 8, event: 6 };
+    const TAG_STYLE = { kelas: 'bg-[#38BDF8]/20 text-[#38BDF8]', event: 'bg-[#34D399]/20 text-[#34D399]' };
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let lang = localStorage.getItem('leskoding_lang') || 'en';
+    const t = key => (i18nDictionary[lang] || i18nDictionary.en)[key] || i18nDictionary.id[key] || key;
+    const full = f => 'assets/sessions/' + encodeURIComponent(f);
+    const thumb = f => 'assets/sessions/thumbs/' + encodeURIComponent(f);
+    const mk = c => (f, i) => ({ f, c, cap: `doc_cap_${c === 'kelas' ? 'k' : 'e'}${(i % CAP_KEYS[c]) + 1}` });
+    const K = KELAS.map(mk('kelas')), E = EVENT.map(mk('event'));
+    // selang-seling kelas & event agar kedua gulungan berisi campuran
+    const ALL = [];
+    for (let i = 0; i < Math.max(K.length, E.length); i++) { if (K[i]) ALL.push(K[i]); if (E[i]) ALL.push(E[i]); }
+
+    const half = Math.ceil(ALL.length / 2);
+    const frame = (p, i) => `<button type="button" class="doc-frame" data-doc-i="${i}"><img src="${thumb(p.f)}" alt="" loading="lazy" decoding="async"><span class="doc-no">LK-${String(i + 1).padStart(3, '0')}</span></button>`;
+    const fill = (track, list, offset) => {
+        const html = list.map((p, i) => frame(p, i + offset)).join('');
+        // isi digandakan untuk loop mulus; salinan kedua disembunyikan dari pembaca layar & tab
+        track.innerHTML = html + (reduceMotion ? '' : `<div class="contents" aria-hidden="true" inert>${html}</div>`);
+    };
+    fill(trackA, ALL.slice(0, half), 0);
+    fill(trackB, ALL.slice(half), half);
+
+    // ---- Lightbox ----
+    const img = document.getElementById('doc-lb-img');
+    const cap = document.getElementById('doc-lb-cap');
+    const tag = document.getElementById('doc-lb-tag');
+    const count = document.getElementById('doc-lb-count');
+    let cur = 0;
+    const show = () => {
+        const p = ALL[cur];
+        img.src = full(p.f);
+        img.alt = t(p.cap);
+        cap.textContent = t(p.cap);
+        tag.textContent = t(`doc_tag_${p.c}`);
+        tag.className = 'inline-block font-mono text-[10px] font-bold px-2 py-0.5 rounded-md mr-2 ' + TAG_STYLE[p.c];
+        count.textContent = `${cur + 1} / ${ALL.length}`;
+    };
+    const open = i => { cur = i; show(); if (!lb.open) lb.showModal(); };
+    const step = d => { cur = (cur + d + ALL.length) % ALL.length; show(); };
+
+    document.getElementById('dokumentasi').addEventListener('click', e => {
+        const b = e.target.closest('[data-doc-i]');
+        if (b) open(+b.dataset.docI);
+    });
+    document.getElementById('doc-open-all').addEventListener('click', () => open(0));
+    document.getElementById('doc-lb-prev').addEventListener('click', () => step(-1));
+    document.getElementById('doc-lb-next').addEventListener('click', () => step(1));
+    document.getElementById('doc-lb-close').addEventListener('click', () => lb.close());
+    lb.addEventListener('click', e => { if (e.target.hasAttribute('data-doc-close-zone') || e.target === lb) lb.close(); });
+    lb.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') step(1);
+        if (e.key === 'ArrowLeft') step(-1);
+    });
+    lb.addEventListener('close', () => { img.removeAttribute('src'); });
+    // geser (swipe) di HP; ketuk = foto berikutnya
+    let sx = null;
+    img.addEventListener('pointerdown', e => { sx = e.clientX; });
+    img.addEventListener('pointerup', e => {
+        if (sx === null) return;
+        const dx = e.clientX - sx;
+        step(Math.abs(dx) > 40 && dx > 0 ? -1 : 1);
+        sx = null;
+    });
+    img.addEventListener('dragstart', e => e.preventDefault());
+
+    const relabel = () => {
+        document.querySelectorAll('#dokumentasi [data-doc-i]').forEach(b => {
+            const p = ALL[+b.dataset.docI];
+            b.querySelector('img').alt = t(p.cap);
+            b.setAttribute('aria-label', `${t('doc_open_photo')}: ${t(p.cap)}`);
+        });
+        document.getElementById('doc-lb-close').setAttribute('aria-label', t('doc_close'));
+        document.getElementById('doc-lb-prev').setAttribute('aria-label', t('doc_prev'));
+        document.getElementById('doc-lb-next').setAttribute('aria-label', t('doc_next'));
+        lb.setAttribute('aria-label', t('doc_badge'));
+        if (lb.open) show();
+    };
+    document.addEventListener('leskoding:lang', e => { if (e.detail) lang = e.detail; relabel(); });
+    relabel();
+})();
+
+/* ========================================================
+   18. LEARNING CENTERS (opsi 1): TAB MODE BELAJAR
+   Peta Google baru dimuat saat diklik; tombol daftar memilih lokasi di formulir
+   ======================================================== */
+(() => {
+    const tabs = document.getElementById('loc-tabs');
+    if (!tabs) return;
+    const all = [...tabs.querySelectorAll('.loc-tab')];
+    const show = (btn, focus) => {
+        all.forEach(b => {
+            const on = b === btn;
+            b.setAttribute('aria-selected', on);
+            b.tabIndex = on ? 0 : -1;
+            document.getElementById(b.getAttribute('aria-controls')).hidden = !on;
+        });
+        if (focus) btn.focus();
+    };
+    tabs.addEventListener('click', e => { const b = e.target.closest('.loc-tab'); if (b) show(b); });
+    tabs.addEventListener('keydown', e => {
+        const i = all.indexOf(document.activeElement);
+        if (i < 0) return;
+        const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+        if (step) { e.preventDefault(); show(all[(i + step + all.length) % all.length], true); }
+        if (e.key === 'Home') { e.preventDefault(); show(all[0], true); }
+        if (e.key === 'End') { e.preventDefault(); show(all[all.length - 1], true); }
+    });
+
+    const section = document.getElementById('location');
+    section.addEventListener('click', e => {
+        const mapBtn = e.target.closest('[data-loc-map]');
+        if (mapBtn) {
+            const frame = document.createElement('iframe');
+            frame.src = mapBtn.dataset.locMap;
+            frame.title = mapBtn.dataset.locTitle;
+            frame.className = 'absolute inset-0 w-full h-full';
+            frame.style.border = '0';
+            frame.loading = 'lazy';
+            frame.referrerPolicy = 'no-referrer-when-downgrade';
+            mapBtn.replaceWith(frame);
+            return;
+        }
+        const pick = e.target.closest('[data-pick-center]');
+        if (pick) {
+            const choice = document.querySelector(`#reg-center-cards .reg-choice[data-center="${pick.dataset.pickCenter}"]`);
+            if (choice) choice.click();
+        }
+    });
 })();

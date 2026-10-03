@@ -40,9 +40,7 @@ Dokumentasi teknis landing page LesKoding Academy Bali. Informasi bisnis (progra
 5. **Distance Checker:** **simulasi/mock** (`calculateDistance` di `app.js`), bukan perhitungan jarak sungguhan.
 6. **Modal detail silabus:** tombol "Lihat Detail Kurikulum" di setiap kartu program membuka modal berisi tools, deskripsi, kompetensi, topik silabus, dan catatan sertifikat kelulusan.
 7. **Dropdown Learning Center kustom:** kartu cabang yang ramah sentuhan.
-8. **Form pendaftaran → WhatsApp:** pesan dikirim ke admin sesuai cabang:
-   - Pilihan Private / Home Visit → `6285792736627`
-   - Gianyar / Bedulu → `628518306798`
+8. **Form pendaftaran → WhatsApp:** semua pilihan (Gianyar, Bedulu, Private / Home Visit, Kelas Online) dikirim ke satu admin `628518306798`.
 
 ## Aturan Konten (wajib konsisten dengan KB)
 

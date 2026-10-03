@@ -63,8 +63,7 @@
 
 ### 1.5 Saluran Kontak & Komunikasi Resmi
 - **Email Resmi:** `halo@leskoding.id`
-- **WhatsApp Admin (Gianyar & Bedulu):** `0851-8306-798` (Internasional: `+628518306798`)
-- **WhatsApp Admin (Layanan Private / Home Visit):** `0857-9273-6627` (Internasional: `+6285792736627`)
+- **WhatsApp Admin (semua lokasi & metode belajar):** `0851-8306-798` (Internasional: `+628518306798`)
 - **Hak Cipta:** © 2026 LesKoding Bali. All rights reserved.
 
 ---
@@ -77,7 +76,7 @@ LesKoding menyelenggarakan pembelajaran tatap muka (*offline/in-person classes*)
 |---|---|---|---|---|
 | **Gianyar (Pusat)** | Gents Robotic & Coding (Gianyar) | Jln. Ksatrian, No. 8, Lingkungan Candi Baru, Gianyar, Bali | `0851-8306-798` | [Rute Google Maps](https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar) |
 | **Bedulu** | Bali Seed Bedulu Robotics & Coding | Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar, Bali | `0851-8306-798` | [Rute Google Maps](https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu) |
-| **Private (Home Visit)** | Kelas Belajar di Rumah Sendiri | Area Gianyar, Ubud, Denpasar & sekitarnya | `0857-9273-6627` | Tutor berkunjung langsung ke rumah, 1-on-1 atau kelompok privat |
+| **Private (Home Visit)** | Kelas Belajar di Rumah Sendiri | Area Gianyar, Ubud, Denpasar & sekitarnya | `0851-8306-798` | Tutor berkunjung langsung ke rumah, 1-on-1 atau kelompok privat |
 
 > **Catatan Operasional:** Learning Center fisik di Ubud (Peliatan) sudah tidak beroperasi dan seluruh kebutuhan kelas di area Ubud dan sekitarnya dilayani secara personal melalui program **Kelas Private (Home Visit)** di mana tutor LesKoding datang langsung ke rumah siswa.
 
@@ -522,12 +521,7 @@ Formulir pendaftaran digital mengumpulkan data terstruktur:
 12. Nomor WhatsApp Anak (Opsional)
 
 ### 11.4 Logika Routing WhatsApp Otomatis
-Sistem pendaftaran pada landing page secara cerdas mengarahkan pesan pendaftaran ke admin terkait berdasarkan pilihan metode belajar:
-
-- **Jika memilih opsi Kelas Private (Home Visit / Di Rumah):**  
-  ➔ Diarahkan ke admin Layanan Private: **`6285792736627`**
-- **Jika memilih kampus Gianyar atau Bedulu:**  
-  ➔ Diarahkan ke admin Gianyar / Bedulu: **`628518306798`**
+Semua pilihan lokasi / metode belajar (Gianyar, Bedulu, Kelas Private Home Visit, dan Kelas Online) diarahkan ke satu admin: **`628518306798`**.
 
 #### Template Pesan WhatsApp Otomatis (Bahasa Indonesia):
 ```text

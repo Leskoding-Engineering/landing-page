@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Dokumentasi</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .opsi-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem 1rem; margin-bottom:2rem; }
+  .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .9rem; border-radius:999px; background:#1E293B; border:1px solid rgba(255,255,255,.1); font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+  .grad { background:linear-gradient(90deg,#FFC83D,#38BDF8,#C084FC); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .cta { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#FFC83D; color:#111827; font-weight:800; padding:.85rem 1.6rem; min-height:48px; border-radius:.75rem; font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; transition:all .25s; box-shadow:0 4px 20px rgba(255,200,61,.3); }
+  .cta:hover { background:#fed368; transform:translateY(-2px); }
+  .ghost { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border:1px solid rgba(255,255,255,.15); color:#fff; font-weight:700; padding:.85rem 1.4rem; min-height:48px; border-radius:.75rem; font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; transition:background .25s; }
+  .ghost:hover { background:rgba(255,255,255,.06); }
+  .chip[aria-selected="true"] { background:#FFC83D; color:#111827; border-color:#FFC83D; }
+  .ph { background:#1E293B; }
+  .ph img { transition:transform .6s cubic-bezier(.2,.7,.2,1), opacity .4s; }
+  .ph:hover img { transform:scale(1.06); }
+  .no-scrollbar { scrollbar-width:none; } .no-scrollbar::-webkit-scrollbar { display:none; }
+
+  /* 1 · Galeri */
+  .g1-item { break-inside:avoid; }
+  .g1-cap { opacity:0; transform:translateY(8px); transition:all .3s; }
+  .g1-item:hover .g1-cap, .g1-item:focus-visible .g1-cap { opacity:1; transform:none; }
+  @media (hover:none) { .g1-cap { opacity:1; transform:none; } }
+
+  /* 2 · Roll film */
+  .film { position:relative; background:#05070D; padding:22px 0; }
+  .film::before, .film::after { content:''; position:absolute; left:0; right:0; height:10px;
+    background:repeating-linear-gradient(90deg, transparent 0 10px, rgba(255,255,255,.18) 10px 22px, transparent 22px 34px); }
+  .film::before { top:6px; } .film::after { bottom:6px; }
+  .film-track { display:flex; gap:10px; width:max-content; animation:roll 90s linear infinite; }
+  .film-track.rev { animation-direction:reverse; animation-duration:110s; }
+  .film:hover .film-track { animation-play-state:paused; }
+  @keyframes roll { to { transform:translateX(-50%); } }
+  .frame { position:relative; flex:none; height:11rem; aspect-ratio:4/3; border-radius:4px; overflow:hidden; }
+  @media (min-width:768px) { .frame { height:13rem; } }
+  .frame img { width:100%; height:100%; object-fit:cover; filter:saturate(.85) contrast(1.05); transition:filter .3s, transform .4s; }
+  .frame:hover img, .frame:focus-visible img { filter:none; transform:scale(1.05); }
+  .frame .no { position:absolute; left:6px; bottom:4px; font:600 10px 'Fira Code',monospace; color:#FFC83D; text-shadow:0 1px 2px #000; }
+
+  /* 3 · Polaroid */
+  .pola { flex:0 0 210px; scroll-snap-align:center; background:#F8FAFC; color:#0F172A; padding:10px 10px 14px; border-radius:4px;
+    box-shadow:0 18px 40px -12px rgba(0,0,0,.6); transform:rotate(var(--r)); transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s; cursor:zoom-in; }
+  .pola:hover, .pola:focus-visible { transform:rotate(0) scale(1.06); z-index:20; box-shadow:0 30px 60px -15px rgba(0,0,0,.8); }
+  .pola .tape { position:absolute; top:-10px; left:50%; width:70px; height:20px; transform:translateX(-50%) rotate(-3deg); background:rgba(255,200,61,.75); box-shadow:0 1px 2px rgba(0,0,0,.2); }
+  .pola img { width:100%; aspect-ratio:1; object-fit:cover; display:block; }
+  @media (min-width:1024px) {
+    .pola-board { position:relative; height:740px; display:block !important; overflow:visible !important; }
+    .pola { position:absolute; left:calc((100% - 230px) * var(--x)); top:var(--y); width:230px; }
+  }
+  .board-bg { background-color:#0F172A; background-image:radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size:22px 22px; }
+  .pola-in { animation:polaIn .5s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes polaIn { from { opacity:0; translate:0 -30px; } to { opacity:1; translate:0 0; } }
+
+  /* 4 · Story */
+  .story { aspect-ratio:9/16; }
+  .story-bar { flex:1; height:3px; border-radius:3px; background:rgba(255,255,255,.3); overflow:hidden; }
+  .story-bar i { display:block; height:100%; width:0; background:#fff; }
+  .story img { transition:opacity .4s; }
+  .ch[aria-current="true"] { border-color:#FFC83D; background:rgba(255,200,61,.08); }
+  .ch[aria-current="true"] .ch-no { background:#FFC83D; color:#111827; }
+
+  /* 5 · Bento */
+  .bento .tile-cap { transform:translateY(100%); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
+  .bento .ph:hover .tile-cap, .bento .ph:focus-visible .tile-cap { transform:none; }
+  @media (hover:none) { .bento .tile-cap { transform:none; } }
+
+  /* 6 · Spotlight */
+  .px-cube { position:absolute; width:18px; height:18px; background:#34D399; box-shadow:inset -4px -4px 0 rgba(0,0,0,.25); opacity:.7; animation:floaty 6s ease-in-out infinite; }
+  @keyframes floaty { 50% { transform:translateY(-10px); } }
+  .sp-thumb[aria-pressed="true"] { outline:3px solid #34D399; outline-offset:2px; }
+  .xfade { animation:xfade .5s ease; }
+  @keyframes xfade { from { opacity:0; transform:scale(1.02); } to { opacity:1; transform:none; } }
+
+  /* Lightbox */
+  #lb { padding:0; border:0; background:transparent; max-width:100vw; max-height:100vh; width:100vw; height:100vh; }
+  #lb::backdrop { background:rgba(5,7,13,.92); backdrop-filter:blur(6px); }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI · Dokumentasi (section baru)</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Galeri Bertab</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Roll Film</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Dinding Polaroid</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Story Sesi</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Bento Di Balik Layar</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Sorotan Event</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-12 pb-10">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// section baru: #dokumentasi</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">6 konsep untuk section <span class="grad">Dokumentasi.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Semua foto diambil dari <code class="mono text-slate-300">assets/sessions/</code> (<b class="text-white" data-count="all">0</b> foto), lalu dikelompokkan jadi dua: <b class="text-white">Kelas &amp; Praktik</b> (<span data-count="kelas">0</span>) dan <b class="text-white">Event</b> (<span data-count="event">0</span>, dengan spanduk <i>National Junior Coding Championship</i>). Caption ditulis umum dan apa adanya. Tidak ada nama anak, angka, atau klaim yang dikarang. Klik foto mana pun untuk membuka lightbox (bisa pakai panah keyboard atau geser).</p>
+</header>
+
+<!-- ============================ OPSI 1 ============================ -->
+<section id="opsi-1" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span><h2 class="font-display text-2xl font-extrabold">Galeri Bertab</h2><p class="text-sm text-slate-400 max-w-3xl">Galeri masonry yang rapi dengan filter kategori dan tombol "Muat lebih banyak". Paling fungsional: semua foto bisa diakses tanpa membuat halaman terlalu panjang.</p></div>
+
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="badge mb-4"><i class="fa-solid fa-camera-retro text-[#38BDF8]"></i> Dokumentasi Kelas</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Lihat sendiri suasana <span class="grad">belajarnya.</span></h3>
+      <p class="text-slate-300 mt-4">Momen nyata dari kelas, sesi praktik, dan event siswa LesKoding. Tanpa pose studio, apa adanya.</p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-2 mb-8" role="tablist" id="g1-tabs">
+      <button role="tab" class="chip px-4 py-2 min-h-[40px] rounded-full border border-white/15 text-xs font-bold transition" data-f="all" aria-selected="true">Semua <span class="opacity-60" data-count="all"></span></button>
+      <button role="tab" class="chip px-4 py-2 min-h-[40px] rounded-full border border-white/15 text-xs font-bold transition" data-f="kelas" aria-selected="false"><i class="fa-solid fa-laptop-code mr-1"></i> Kelas &amp; Praktik <span class="opacity-60" data-count="kelas"></span></button>
+      <button role="tab" class="chip px-4 py-2 min-h-[40px] rounded-full border border-white/15 text-xs font-bold transition" data-f="event" aria-selected="false"><i class="fa-solid fa-trophy mr-1"></i> Event <span class="opacity-60" data-count="event"></span></button>
+    </div>
+    <div id="g1-grid" class="columns-2 md:columns-3 lg:columns-4 gap-3 [&>*]:mb-3"></div>
+    <div class="text-center mt-6"><button id="g1-more" class="ghost"><i class="fa-solid fa-images"></i> Muat lebih banyak <span id="g1-left" class="opacity-60"></span></button></div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 2 ============================ -->
+<section id="opsi-2" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19] overflow-hidden">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span><h2 class="font-display text-2xl font-extrabold">Roll Film</h2><p class="text-sm text-slate-400 max-w-3xl">Dua gulungan film yang terus bergerak berlawanan arah, lengkap dengan lubang sprocket dan nomor frame. Terasa hidup tanpa perlu interaksi, berhenti saat di-hover, dan klik frame untuk memperbesar.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-10">
+      <div class="lg:col-span-7">
+        <div class="badge mb-4"><i class="fa-solid fa-film text-[#C084FC]"></i> Rekaman Kelas</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Setiap sesi, <span class="grad">satu frame cerita.</span></h3>
+      </div>
+      <div class="lg:col-span-5 text-slate-300 text-sm sm:text-base">Fokus di depan laptop, tepuk tangan setelah program berjalan, foto bersama di hari event. Inilah keseharian siswa LesKoding.</div>
+    </div>
+  </div>
+  <div class="space-y-4 -rotate-[1.5deg] scale-[1.03]">
+    <div class="film"><div class="film-track" id="film-a"></div></div>
+    <div class="film"><div class="film-track rev" id="film-b"></div></div>
+  </div>
+  <div class="max-w-[1200px] mx-auto px-5 mt-10 flex flex-wrap items-center justify-center gap-3">
+    <button class="ghost" data-open="all"><i class="fa-solid fa-expand"></i> Buka semua foto</button>
+    <span class="mono text-[11px] text-slate-500"><i class="fa-solid fa-hand-pointer mr-1"></i> arahkan kursor untuk menghentikan gulungan</span>
+  </div>
+</section>
+
+<!-- ============================ OPSI 3 ============================ -->
+<section id="opsi-3" class="py-16 md:py-24 border-t border-white/10 board-bg overflow-hidden">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span><h2 class="font-display text-2xl font-extrabold">Dinding Polaroid</h2><p class="text-sm text-slate-400 max-w-3xl">Polaroid yang ditempel miring di papan bertitik (motif dot grid yang sama dengan section lain). Caption bergaya komentar kode. Tombol "Kocok foto" menampilkan set foto acak lainnya. Di HP, polaroid berubah jadi carousel geser.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-6 lg:mb-0">
+      <div class="lg:col-span-6">
+        <div class="badge mb-4"><i class="fa-solid fa-thumbtack text-[#F87171]"></i> Papan Kenangan</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Momen yang kami <span class="grad">tempel di dinding.</span></h3>
+      </div>
+      <div class="lg:col-span-6 flex flex-wrap lg:justify-end gap-3">
+        <button id="pola-shuffle" class="cta"><i class="fa-solid fa-shuffle"></i> Kocok foto</button>
+        <button class="ghost" data-open="all"><i class="fa-solid fa-images"></i> Semua foto</button>
+      </div>
+    </div>
+    <div id="pola-board" class="pola-board flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar py-8 -mx-5 px-5"></div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 4 ============================ -->
+<section id="opsi-4" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19] overflow-hidden">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span><h2 class="font-display text-2xl font-extrabold">Story Sesi</h2><p class="text-sm text-slate-400 max-w-3xl">Format "story" ala media sosial yang sudah akrab bagi orang tua: progress bar, ketuk kiri/kanan, putar otomatis. Ceritanya mengikuti alur sesi 120 menit (konsep → praktik → review) lalu event. Urutan foto bersifat ilustratif.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-6 order-2 lg:order-1">
+        <div class="badge mb-4"><i class="fa-solid fa-circle-play text-[#FFC83D]"></i> Sehari di LesKoding</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Ikuti satu sesi, <span class="grad">dari awal sampai karya jadi.</span></h3>
+        <p class="text-slate-300 mt-4 mb-6">Ketuk sisi kanan layar untuk lanjut, sisi kiri untuk kembali, atau pilih babaknya langsung.</p>
+        <ol id="story-ch" class="space-y-2"></ol>
+      </div>
+      <div class="lg:col-span-6 order-1 lg:order-2 flex justify-center">
+        <div class="relative w-full max-w-[330px]">
+          <div class="absolute -inset-6 rounded-[3rem] bg-gradient-to-br from-[#FFC83D]/20 via-[#38BDF8]/10 to-[#C084FC]/20 blur-2xl"></div>
+          <div class="relative rounded-[2.2rem] border-[6px] border-[#1E293B] bg-black shadow-2xl overflow-hidden story" id="story">
+            <img id="story-img" alt="" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 pointer-events-none"></div>
+            <div class="absolute top-3 inset-x-3 flex gap-1" id="story-bars"></div>
+            <div class="absolute top-7 inset-x-3 flex items-center gap-2">
+              <img src="assets/logo/leskoding_community_sm.png" alt="" class="w-8 h-8 rounded-full bg-white p-0.5 object-contain">
+              <div class="leading-tight"><div class="text-xs font-bold">LesKoding Bali</div><div class="text-[10px] text-white/70 mono" id="story-time"></div></div>
+              <button id="story-pause" class="ml-auto w-9 h-9 rounded-full bg-black/30 text-white text-xs" aria-label="Jeda"><i class="fa-solid fa-pause"></i></button>
+            </div>
+            <button class="absolute left-0 top-16 bottom-0 w-1/3" id="story-prev" aria-label="Sebelumnya"></button>
+            <button class="absolute right-0 top-16 bottom-0 w-2/3" id="story-next" aria-label="Berikutnya"></button>
+            <div class="absolute bottom-0 inset-x-0 p-5 pointer-events-none" aria-live="polite">
+              <div class="inline-block mono text-[10px] font-bold px-2 py-1 rounded-md mb-2" id="story-tag"></div>
+              <div class="font-display text-2xl font-extrabold leading-tight" id="story-title"></div>
+              <p class="text-sm text-white/80 mt-1" id="story-text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 5 ============================ -->
+<section id="opsi-5" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span><h2 class="font-display text-2xl font-extrabold">Bento Di Balik Layar</h2><p class="text-sm text-slate-400 max-w-3xl">Grid bento yang mencampur foto dengan kartu fakta dari KB (rasio 1:5, maks. 120 menit, laporan sesi, sertifikat). Foto menjadi bukti fakta, dan fakta memberi konteks pada foto. Hover foto untuk melihat caption.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="badge mb-4"><i class="fa-solid fa-clapperboard text-[#38BDF8]"></i> Di Balik Layar</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Bukan cuma janji. <span class="grad">Ini kelasnya.</span></h3>
+    </div>
+    <div class="bento grid grid-cols-2 md:grid-cols-4 auto-rows-[150px] md:auto-rows-[180px] gap-3 [grid-auto-flow:dense]" id="bento"></div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 6 ============================ -->
+<section id="opsi-6" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19] relative overflow-hidden">
+  <span class="px-cube" style="left:6%;top:14%"></span>
+  <span class="px-cube" style="right:3%;top:6%;background:#38BDF8;animation-delay:-2s"></span>
+  <span class="px-cube" style="left:46%;bottom:8%;background:#FFC83D;animation-delay:-4s"></span>
+  <div class="max-w-[1200px] mx-auto px-5 relative">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span><h2 class="font-display text-2xl font-extrabold">Sorotan Event</h2><p class="text-sm text-slate-400 max-w-3xl">Menyorot satu event besar sebagai cerita utama, ditambah strip "kelas sehari-hari" di bawahnya. Kubus piksel mengikuti gaya spanduk event. Cocok untuk menonjolkan manfaat "percaya diri tampil" (KB §4).</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="lg:col-span-7">
+        <div class="relative rounded-2xl overflow-hidden border border-white/10 aspect-[4/3] ph">
+          <img id="sp-main" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none"></div>
+          <button class="absolute inset-0" id="sp-zoom" aria-label="Perbesar foto"></button>
+          <div class="absolute left-4 bottom-4 right-4 flex items-end justify-between gap-3 pointer-events-none">
+            <p class="text-sm text-white/90 font-semibold" id="sp-cap"></p>
+            <span class="mono text-[11px] text-white/70 shrink-0" id="sp-no"></span>
+          </div>
+        </div>
+        <div class="flex gap-2 overflow-x-auto no-scrollbar snap-x mt-3 pb-1" id="sp-thumbs"></div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="badge mb-4"><i class="fa-solid fa-trophy text-[#34D399]"></i> Sorotan Event</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">National Junior <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#34D399] via-[#38BDF8] to-[#FFC83D]">Coding Championship</span></h3>
+        <p class="text-slate-300 mt-4">Dari latihan di kelas ke panggung yang lebih besar. Siswa membawa karya, bertemu teman seangkatan dari sekolah lain, dan berani tampil.</p>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex gap-3"><i class="fa-solid fa-comments text-[#34D399] mt-1"></i><span><b>Berani tampil</b>: menjelaskan karya sendiri di depan orang baru.</span></li>
+          <li class="flex gap-3"><i class="fa-solid fa-people-group text-[#38BDF8] mt-1"></i><span><b>Bertemu komunitas</b>: anak-anak yang sama-sama suka coding.</span></li>
+          <li class="flex gap-3"><i class="fa-solid fa-laptop-code text-[#FFC83D] mt-1"></i><span><b>Bekal dari kelas</b>: logika dan debugging yang dilatih tiap sesi.</span></li>
+        </ul>
+        <div class="flex flex-wrap gap-3 mt-8">
+          <button class="cta" data-open="event"><i class="fa-solid fa-images"></i> Semua foto event</button>
+          <a href="#" class="ghost" onclick="return false"><i class="fa-solid fa-rocket"></i> Coba kelas gratis</a>
+        </div>
+        <p class="mono text-[10px] text-slate-500 mt-4">* nama event diambil dari spanduk di foto. Peran LesKoding di event ini perlu dikonfirmasi.</p>
+      </div>
+    </div>
+    <div class="mt-14">
+      <div class="flex items-center justify-between mb-3"><div class="mono text-xs font-bold uppercase tracking-widest text-slate-400"><i class="fa-solid fa-laptop-code text-[#38BDF8] mr-1"></i> Kelas sehari-hari</div><button class="text-xs font-bold text-[#38BDF8] hover:underline" data-open="kelas">Lihat semua →</button></div>
+      <div class="flex gap-3 overflow-x-auto no-scrollbar snap-x" id="sp-kelas"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PERBANDINGAN ============================ -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <h2 class="font-display text-3xl font-extrabold mb-6">Perbandingan</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[720px]">
+        <thead class="bg-[#1E293B] text-[11px] mono uppercase tracking-wider text-slate-400"><tr><th class="text-left p-3">Opsi</th><th class="text-left p-3">Kekuatan</th><th class="text-left p-3">Catatan</th><th class="text-left p-3">Cocok jika…</th></tr></thead>
+        <tbody class="divide-y divide-white/5">
+          <tr><td class="p-3 font-bold">1 · Galeri Bertab</td><td class="p-3 text-slate-300">Semua foto mudah diakses, ada filter</td><td class="p-3 text-slate-400">Paling "biasa" secara visual</td><td class="p-3 text-slate-300">foto akan terus bertambah</td></tr>
+          <tr><td class="p-3 font-bold">2 · Roll Film</td><td class="p-3 text-slate-300">Hidup, ringkas tinggi, tanpa interaksi</td><td class="p-3 text-slate-400">Memuat banyak thumbnail sekaligus</td><td class="p-3 text-slate-300">ingin pemisah visual antar-section</td></tr>
+          <tr><td class="p-3 font-bold">3 · Dinding Polaroid</td><td class="p-3 text-slate-300">Hangat, playful, cocok untuk anak</td><td class="p-3 text-slate-400">Tinggi ±740px di desktop</td><td class="p-3 text-slate-300">ingin kesan personal / kekeluargaan</td></tr>
+          <tr><td class="p-3 font-bold">4 · Story Sesi</td><td class="p-3 text-slate-300">Bercerita, nyambung ke metode 120 menit, terasa native di HP</td><td class="p-3 text-slate-400">Foto per babak bersifat ilustratif</td><td class="p-3 text-slate-300">ingin menjelaskan suasana satu sesi</td></tr>
+          <tr><td class="p-3 font-bold">5 · Bento</td><td class="p-3 text-slate-300">Foto + fakta = persuasi paling kuat</td><td class="p-3 text-slate-400">Fakta tumpang tindih dengan section Cara Belajar</td><td class="p-3 text-slate-300">section ini jadi bukti sebelum formulir</td></tr>
+          <tr><td class="p-3 font-bold">6 · Sorotan Event</td><td class="p-3 text-slate-300">Menonjolkan prestasi/ajang di luar kelas</td><td class="p-3 text-slate-400">Bergantung pada konfirmasi peran di event</td><td class="p-3 text-slate-300">event seperti ini rutin diikuti</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4 mt-6">
+      <div class="rounded-2xl border border-white/10 bg-[#1E293B]/50 p-5 text-sm">
+        <div class="font-bold mb-2"><i class="fa-solid fa-map-pin text-[#38BDF8] mr-1"></i> Saran penempatan</div>
+        <p class="text-slate-300">Setelah <b>Cara Belajar</b> (sebagai bukti nyata suasana kelas) atau tepat sebelum <b>Laporan Wali</b>. Opsi 2 juga bisa jadi pemisah tipis di antara dua section.</p>
+      </div>
+      <div class="rounded-2xl border border-[#F87171]/30 bg-[#F87171]/5 p-5 text-sm">
+        <div class="font-bold mb-2 text-[#F87171]"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Perlu dikonfirmasi</div>
+        <ul class="list-disc pl-5 text-slate-300 space-y-1">
+          <li>Izin orang tua untuk menampilkan wajah anak di website publik.</li>
+          <li>Nama event dan peran LesKoding di <i>National Junior Coding Championship</i> (tidak ada di KB).</li>
+          <li>Foto asli berukuran besar (folder 23 MB, sebagian 4032px). Halaman ini memakai thumbnail 600px di <code class="mono">assets/sessions/thumbs/</code> (±4 MB total), dan foto asli hanya dimuat di lightbox.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ LIGHTBOX ============================ -->
+<dialog id="lb" aria-label="Galeri foto">
+  <div class="w-full h-full flex flex-col text-white" id="lb-wrap">
+    <div class="flex items-center justify-between px-4 py-3">
+      <span class="mono text-xs text-slate-400" id="lb-count"></span>
+      <button id="lb-close" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="flex-1 min-h-0 flex items-center justify-center gap-2 px-2 sm:px-4">
+      <button id="lb-prev" class="hidden sm:flex w-12 h-12 shrink-0 rounded-full bg-white/10 hover:bg-white/20 items-center justify-center" aria-label="Sebelumnya"><i class="fa-solid fa-chevron-left"></i></button>
+      <img id="lb-img" alt="" class="max-h-full max-w-full object-contain rounded-lg select-none">
+      <button id="lb-next" class="hidden sm:flex w-12 h-12 shrink-0 rounded-full bg-white/10 hover:bg-white/20 items-center justify-center" aria-label="Berikutnya"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="px-4 py-4 text-center">
+      <span class="inline-block mono text-[10px] font-bold px-2 py-0.5 rounded-md mr-2" id="lb-tag"></span><span class="text-sm text-slate-200" id="lb-cap"></span>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+/* ===================== DATA ===================== */
+const KELAS = ["01M3H323B1QJV4PH2CCWGH9AQ2.jpeg", "01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg", "01M3RSJWMWDKRWTNA3D0HEP47C.jpg", "01M3RVHT4R9SQ961Z3GTWJD72Y.jpg", "WhatsApp Image 2026-02-22 at 20.04.35.jpeg", "WhatsApp Image 2026-02-22 at 20.04.36 (1).jpeg", "WhatsApp Image 2026-02-22 at 20.04.36.jpeg", "WhatsApp Image 2026-02-22 at 20.04.37 (1).jpeg", "WhatsApp Image 2026-02-22 at 20.04.37.jpeg", "WhatsApp Image 2026-02-22 at 20.04.38.jpeg", "WhatsApp Image 2026-02-22 at 20.04.41.jpeg", "WhatsApp Image 2026-02-22 at 20.04.44 (1).jpeg", "WhatsApp Image 2026-02-22 at 20.04.44.jpeg", "WhatsApp Image 2026-02-22 at 20.04.45 (1).jpeg", "WhatsApp Image 2026-02-22 at 20.04.45.jpeg", "WhatsApp Image 2026-02-22 at 20.04.46 (1).jpeg", "WhatsApp Image 2026-02-22 at 20.04.46.jpeg", "WhatsApp Image 2026-02-22 at 20.04.47 (1).jpeg", "WhatsApp Image 2026-02-22 at 20.04.47 (2).jpeg", "WhatsApp Image 2026-02-22 at 20.04.47.jpeg", "WhatsApp Image 2026-02-22 at 20.04.48.jpeg", "WhatsApp Image 2026-02-22 at 20.04.49.jpeg", "WhatsApp Image 2026-02-22 at 20.04.50 (1).jpeg", "WhatsApp Image 2026-02-22 at 20.04.50.jpeg", "WhatsApp Image 2026-02-22 at 20.04.51 (1).jpeg", "WhatsApp Image 2026-02-22 at 20.04.51 (2).jpeg", "WhatsApp Image 2026-02-22 at 20.04.51.jpeg", "WhatsApp Image 2026-02-22 at 20.04.52.jpeg", "WhatsApp Image 2026-02-22 at 20.04.53 (1).jpeg", "WhatsApp Image 2026-02-22 at 20.04.53 (2).jpeg", "WhatsApp Image 2026-02-22 at 20.04.53.jpeg", "WhatsApp Image 2026-02-22 at 20.04.54 (1).jpeg", "WhatsApp Image 2026-02-22 at 20.04.54.jpeg"];
+const EVENT = ["WhatsApp Image 2026-02-22 at 15.14.55.jpeg", "WhatsApp Image 2026-02-22 at 15.14.56.jpeg", "WhatsApp Image 2026-02-22 at 15.14.57.jpeg", "WhatsApp Image 2026-02-22 at 15.15.06.jpeg", "WhatsApp Image 2026-02-22 at 15.15.12.jpeg", "WhatsApp Image 2026-02-22 at 15.15.16.jpeg", "WhatsApp Image 2026-02-22 at 15.15.18.jpeg", "WhatsApp Image 2026-02-22 at 15.15.20.jpeg", "WhatsApp Image 2026-02-22 at 15.15.24.jpeg", "WhatsApp Image 2026-02-22 at 15.15.26.jpeg", "WhatsApp Image 2026-02-22 at 15.15.27.jpeg", "WhatsApp Image 2026-02-23 at 09.54.13.jpeg", "WhatsApp Image 2026-02-23 at 09.54.14.jpeg", "WhatsApp Image 2026-02-23 at 09.54.15 (1).jpeg", "WhatsApp Image 2026-02-23 at 09.54.15 (2).jpeg", "WhatsApp Image 2026-02-23 at 09.54.15.jpeg", "WhatsApp Image 2026-02-23 at 09.54.16.jpeg", "WhatsApp Image 2026-02-23 at 09.54.33.jpeg", "WhatsApp Image 2026-02-23 at 09.54.34 (1).jpeg", "WhatsApp Image 2026-02-23 at 09.54.34 (2).jpeg", "WhatsApp Image 2026-02-23 at 09.54.34 (3).jpeg", "WhatsApp Image 2026-02-23 at 09.54.34.jpeg", "WhatsApp Image 2026-02-23 at 09.54.35 (1).jpeg", "WhatsApp Image 2026-02-23 at 09.54.35 (2).jpeg", "WhatsApp Image 2026-02-23 at 09.54.35.jpeg", "WhatsApp Image 2026-02-23 at 09.54.36 (1).jpeg", "WhatsApp Image 2026-02-23 at 09.54.36 (2).jpeg", "WhatsApp Image 2026-02-23 at 09.54.36 (3).jpeg", "WhatsApp Image 2026-02-23 at 09.54.36 (4).jpeg", "WhatsApp Image 2026-02-23 at 09.54.36.jpeg", "WhatsApp Image 2026-02-23 at 09.54.52 (1).jpeg", "WhatsApp Image 2026-02-23 at 09.54.52.jpeg", "WhatsApp Image 2026-02-23 at 09.55.13.jpeg"];
+const src = f => 'assets/sessions/' + encodeURIComponent(f);
+const th = f => 'assets/sessions/thumbs/' + encodeURIComponent(f);
+const CAP = {
+  kelas: ['Fokus menyelesaikan project sendiri', 'Praktik langsung di laptop', 'Mencoba, gagal, lalu debug lagi', 'Programnya jalan! Saatnya pamer', 'Satu langkah algoritma demi satu', 'Serius tapi tetap seru', 'Belajar dengan ritme sendiri', 'Siap menjelaskan karyanya'],
+  event: ['Hari event: berani tampil', 'Foto bersama setelah acara', 'Bertemu teman sesama coder', 'Bangga dengan karyanya', 'Satu panggung, banyak cerita', 'Kenangan bersama keluarga'],
+};
+const MONO = { kelas: ['// fokus mode: ON', '// bug ditemukan ✓', '// run() → berhasil!', '// trial & error', '// level up', '// karya sendiri'], event: ['// hari besar', '// squad coding', '// berani tampil', '// say cheese!'] };
+const TAG = { kelas: ['Kelas & Praktik', 'bg-[#38BDF8]/20 text-[#38BDF8]'], event: ['Event', 'bg-[#34D399]/20 text-[#34D399]'] };
+const mk = c => (f, i) => ({ f, c, cap: CAP[c][i % CAP[c].length], mono: MONO[c][i % MONO[c].length] });
+const K = KELAS.map(mk('kelas')), E = EVENT.map(mk('event'));
+// interleave so "Semua" mixes both categories
+const ALL = []; for (let i = 0; i < Math.max(K.length, E.length); i++) { if (K[i]) ALL.push(K[i]); if (E[i]) ALL.push(E[i]); }
+const SET = { all: ALL, kelas: K, event: E };
+const by = f => ALL.find(p => p.f === f);
+document.querySelectorAll('[data-count]').forEach(el => el.textContent = SET[el.dataset.count].length);
+const imgTag = (p, cls = '', extra = '') => `<img src="${th(p.f)}" alt="${p.cap}" loading="lazy" decoding="async" class="${cls}" ${extra}>`;
+
+/* ===================== LIGHTBOX ===================== */
+const lb = document.getElementById('lb'), lbImg = document.getElementById('lb-img');
+let lbList = ALL, lbI = 0;
+const lbShow = () => {
+  const p = lbList[lbI];
+  lbImg.src = src(p.f); lbImg.alt = p.cap;
+  document.getElementById('lb-cap').textContent = p.cap;
+  const t = document.getElementById('lb-tag'); t.textContent = TAG[p.c][0]; t.className = 'inline-block mono text-[10px] font-bold px-2 py-0.5 rounded-md mr-2 ' + TAG[p.c][1];
+  document.getElementById('lb-count').textContent = `${lbI + 1} / ${lbList.length}`;
+};
+const openLB = (list, f) => { lbList = list; lbI = Math.max(0, list.findIndex(p => p.f === f)); lbShow(); lb.showModal(); };
+const step = d => { lbI = (lbI + d + lbList.length) % lbList.length; lbShow(); };
+document.getElementById('lb-prev').onclick = () => step(-1);
+document.getElementById('lb-next').onclick = () => step(1);
+document.getElementById('lb-close').onclick = () => lb.close();
+lb.addEventListener('click', e => { if (e.target.id === 'lb-wrap' || e.target.parentElement?.id === 'lb-wrap') lb.close(); });
+lb.addEventListener('keydown', e => { if (e.key === 'ArrowRight') step(1); if (e.key === 'ArrowLeft') step(-1); });
+let sx = null;
+lbImg.addEventListener('pointerdown', e => sx = e.clientX);
+lbImg.addEventListener('pointerup', e => { if (sx !== null && Math.abs(e.clientX - sx) > 40) step(e.clientX < sx ? 1 : -1); else if (sx !== null) step(1); sx = null; });
+lbImg.addEventListener('dragstart', e => e.preventDefault());
+document.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', () => openLB(SET[b.dataset.open], SET[b.dataset.open][0].f)));
+// any element with data-lb opens the lightbox in its list
+document.addEventListener('click', e => { const el = e.target.closest('[data-lb]'); if (el) openLB(SET[el.dataset.list || 'all'], el.dataset.lb); });
+
+/* ===================== 1 · GALERI ===================== */
+(() => {
+  const grid = document.getElementById('g1-grid'), more = document.getElementById('g1-more');
+  let f = 'all', n = 12;
+  const render = () => {
+    const list = SET[f];
+    grid.innerHTML = list.slice(0, n).map(p => `
+      <button class="g1-item ph relative block w-full rounded-xl overflow-hidden border border-white/10 text-left" data-lb="${p.f}" data-list="${f}">
+        ${imgTag(p, 'w-full h-auto block')}
+        <span class="g1-cap absolute inset-x-0 bottom-0 p-3 pt-8 bg-gradient-to-t from-black/80 to-transparent">
+          <span class="block mono text-[9px] font-bold uppercase tracking-wider ${p.c === 'event' ? 'text-[#34D399]' : 'text-[#38BDF8]'}">${TAG[p.c][0]}</span>
+          <span class="block text-xs font-semibold">${p.cap}</span>
+        </span>
+      </button>`).join('');
+    const left = list.length - n;
+    more.hidden = left <= 0;
+    document.getElementById('g1-left').textContent = `(+${left})`;
+  };
+  document.querySelectorAll('#g1-tabs [data-f]').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#g1-tabs [data-f]').forEach(x => x.setAttribute('aria-selected', x === b));
+    f = b.dataset.f; n = 12; render();
+  });
+  more.onclick = () => { n += 12; render(); };
+  render();
+})();
+
+/* ===================== 2 · ROLL FILM ===================== */
+(() => {
+  const frame = (p, i) => `<button class="frame" data-lb="${p.f}">${imgTag(p)}<span class="no">LK-${String(i + 1).padStart(3, '0')}</span></button>`;
+  const half = Math.ceil(ALL.length / 2);
+  const a = ALL.slice(0, half), b = ALL.slice(half);
+  document.getElementById('film-a').innerHTML = (a.map(frame).join('')).repeat(2);
+  document.getElementById('film-b').innerHTML = (b.map((p, i) => frame(p, i + half)).join('')).repeat(2);
+})();
+
+/* ===================== 3 · POLAROID ===================== */
+(() => {
+  const board = document.getElementById('pola-board');
+  // positions tuned for a 1160px wide board, 660px tall
+  // x = fraction of the free width, so the board never overflows
+  const SLOTS = [[0,'40px','-6deg'],[.25,'0px','4deg'],[.5,'60px','-3deg'],[.75,'10px','5deg'],[1,'50px','-4deg'],
+                 [.08,'340px','3deg'],[.36,'320px','-5deg'],[.64,'360px','2deg'],[.92,'330px','-2deg']];
+  const pick = () => { const pool = [...ALL]; const out = []; while (out.length < SLOTS.length) out.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]); return out; };
+  const render = () => {
+    board.innerHTML = pick().map((p, i) => `
+      <button class="pola pola-in relative text-left" style="--x:${SLOTS[i][0]};--y:${SLOTS[i][1]};--r:${SLOTS[i][2]};animation-delay:${i * 60}ms" data-lb="${p.f}">
+        <span class="tape"></span>
+        ${imgTag(p)}
+        <span class="block mono text-[11px] font-semibold text-[#475467] mt-2.5">${p.mono}</span>
+        <span class="block text-[13px] font-bold leading-snug">${p.cap}</span>
+      </button>`).join('');
+  };
+  document.getElementById('pola-shuffle').onclick = render;
+  render();
+})();
+
+/* ===================== 4 · STORY ===================== */
+(() => {
+  const S = [
+    { f: '01M3RSJWMWDKRWTNA3D0HEP47C.jpg', c: 'kelas', ch: 'Datang & siap', t: "menit 0'", title: 'Lab sudah siap.', text: 'Laptop menyala, project minggu lalu dibuka lagi.', col: '#38BDF8' },
+    { f: '01M3RVHT4R9SQ961Z3GTWJD72Y.jpg', c: 'kelas', ch: 'Konsep 15 menit', t: "menit 5'", title: 'Konsep baru, cara seru.', text: 'Tutor menjelaskan dengan analogi dan kuis singkat.', col: '#38BDF8' },
+    { f: 'WhatsApp Image 2026-02-22 at 20.04.41.jpeg', c: 'kelas', ch: 'Praktik 90 menit', t: "menit 30'", title: 'Saatnya membuat sendiri.', text: 'Anak langsung praktik dan menyusun project-nya.', col: '#FFC83D' },
+    { f: 'WhatsApp Image 2026-02-22 at 20.04.36 (1).jpeg', c: 'kelas', ch: 'Debug & coba lagi', t: "menit 70'", title: 'Ada bug? Cari sendiri dulu.', text: 'Trial & error yang sehat, tutor siap membantu.', col: '#FFC83D' },
+    { f: 'WhatsApp Image 2026-02-22 at 20.04.47.jpeg', c: 'kelas', ch: 'Review 15 menit', t: "menit 110'", title: 'Programnya jalan!', text: 'Karya dipresentasikan, tutor mencatat untuk laporan wali.', col: '#C084FC' },
+    { f: 'WhatsApp Image 2026-02-22 at 15.15.06.jpeg', c: 'event', ch: 'Hari event', t: 'event', title: 'Berani tampil.', text: 'Dari kelas ke panggung yang lebih besar.', col: '#34D399' },
+    { f: 'WhatsApp Image 2026-02-23 at 09.54.15 (1).jpeg', c: 'event', ch: 'Foto bersama', t: 'event', title: 'Satu komunitas.', text: 'Teman baru yang sama-sama suka coding.', col: '#34D399' },
+  ];
+  const DUR = 4500;
+  const img = document.getElementById('story-img'), bars = document.getElementById('story-bars'), chs = document.getElementById('story-ch');
+  bars.innerHTML = S.map(() => '<span class="story-bar"><i></i></span>').join('');
+  chs.innerHTML = S.map((s, i) => `<li><button class="ch w-full flex items-center gap-3 p-2.5 rounded-xl border border-white/10 text-left text-sm hover:bg-white/5 transition" data-i="${i}">
+      <span class="ch-no w-7 h-7 shrink-0 rounded-lg bg-white/10 grid place-items-center mono text-[11px] font-bold">${i + 1}</span>
+      <span class="font-semibold">${s.ch}</span><span class="ml-auto mono text-[10px]" style="color:${s.col}">${s.t}</span></button></li>`).join('');
+  S.forEach(s => { const im = new Image(); im.src = th(s.f); });
+  let i = 0, t0 = 0, elapsed = 0, paused = false, visible = false, hold = false;
+  const fills = [...bars.querySelectorAll('i')];
+  const show = n => {
+    i = (n + S.length) % S.length; elapsed = 0; t0 = performance.now();
+    const s = S[i];
+    img.style.opacity = 0;
+    setTimeout(() => { img.src = th(s.f); img.style.opacity = 1; }, 150);
+    const tag = document.getElementById('story-tag'); tag.textContent = s.ch.toUpperCase(); tag.style.background = s.col; tag.style.color = '#111827';
+    document.getElementById('story-title').textContent = s.title;
+    document.getElementById('story-text').textContent = s.text;
+    document.getElementById('story-time').textContent = s.t;
+    fills.forEach((f, k) => f.style.width = k < i ? '100%' : '0%');
+    chs.querySelectorAll('.ch').forEach((b, k) => b.setAttribute('aria-current', k === i));
+  };
+  const loop = now => {
+    if (!paused && visible && !hold) { elapsed += now - t0; if (elapsed >= DUR) { show(i + 1); } }
+    t0 = now;
+    fills[i].style.width = Math.min(100, elapsed / DUR * 100) + '%';
+    requestAnimationFrame(loop);
+  };
+  document.getElementById('story-next').onclick = () => show(i + 1);
+  document.getElementById('story-prev').onclick = () => show(i - 1);
+  chs.addEventListener('click', e => { const b = e.target.closest('.ch'); if (b) show(+b.dataset.i); });
+  const pb = document.getElementById('story-pause');
+  pb.onclick = () => { paused = !paused; pb.innerHTML = `<i class="fa-solid fa-${paused ? 'play' : 'pause'}"></i>`; pb.setAttribute('aria-label', paused ? 'Putar' : 'Jeda'); };
+  const story = document.getElementById('story');
+  story.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hold = true; });
+  story.addEventListener('pointerleave', () => hold = false);
+  new IntersectionObserver(([e]) => visible = e.isIntersecting, { threshold: .4 }).observe(story);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) paused = true;
+  show(0); requestAnimationFrame(loop);
+})();
+
+/* ===================== 5 · BENTO ===================== */
+(() => {
+  const P = f => by(f);
+  const photo = (p, span, pos = 'center') => `<button class="ph relative rounded-2xl overflow-hidden border border-white/10 ${span}" data-lb="${p.f}">
+      ${imgTag(p, 'absolute inset-0 w-full h-full object-cover', `style="object-position:${pos}"`)}
+      <span class="tile-cap absolute inset-x-0 bottom-0 p-3 pt-8 bg-gradient-to-t from-black/85 to-transparent text-left text-xs font-semibold">${p.cap}</span></button>`;
+  const fact = (big, small, icon, col, span = '') => `<div class="rounded-2xl p-4 md:p-5 flex flex-col justify-between border ${span}" style="background:color-mix(in srgb,${col} 10%,#0B0F19);border-color:color-mix(in srgb,${col} 35%,transparent)">
+      <i class="fa-solid ${icon}" style="color:${col}"></i>
+      <div><div class="font-display font-black text-3xl md:text-4xl leading-none" style="color:${col}">${big}</div><div class="text-xs text-slate-300 mt-1.5">${small}</div></div></div>`;
+  const stack = ALL.slice(10, 13);
+  document.getElementById('bento').innerHTML = [
+    photo(P('01M3RSJWMWDKRWTNA3D0HEP47C.jpg'), 'col-span-2 row-span-2'),
+    photo(P('WhatsApp Image 2026-02-22 at 20.04.41.jpeg'), 'row-span-2', 'center 30%'),
+    fact('1:5', '1 tutor mendampingi maks. 5 siswa', 'fa-user-group', '#FFC83D'),
+    fact("120'", 'maksimal per sesi: konsep, praktik, review', 'fa-clock', '#38BDF8'),
+    photo(P('WhatsApp Image 2026-02-23 at 09.54.15 (1).jpeg'), 'col-span-2'),
+    fact('<i class="fa-solid fa-file-lines text-3xl"></i>', 'laporan sesi untuk wali setelah kelas', 'fa-clipboard-check', '#C084FC'),
+    photo(P('WhatsApp Image 2026-02-22 at 20.04.47.jpeg'), '', 'center 30%'),
+    photo(P('WhatsApp Image 2026-02-22 at 15.15.06.jpeg'), '', 'center 30%'),
+    fact('<i class="fa-solid fa-award text-3xl"></i>', 'sertifikat kelulusan setelah course selesai', 'fa-certificate', '#34D399'),
+    `<button class="col-span-2 rounded-2xl border border-dashed border-white/20 hover:border-[#FFC83D] hover:bg-white/[.03] transition flex items-center justify-between gap-4 p-5 text-left group" data-open-all>
+      <div><div class="font-display text-xl md:text-2xl font-extrabold">Lihat semua foto</div><div class="text-xs text-slate-400 mt-1">${ALL.length} momen dari kelas &amp; event</div></div>
+      <div class="flex -space-x-4">${stack.map((p, k) => `<img src="${th(p.f)}" alt="" loading="lazy" class="w-14 h-14 md:w-16 md:h-16 rounded-xl object-cover border-2 border-[#0F172A]" style="transform:rotate(${(k - 1) * 6}deg)">`).join('')}</div>
+    </button>`,
+  ].join('');
+  document.querySelector('[data-open-all]').onclick = () => openLB(ALL, ALL[0].f);
+})();
+
+/* ===================== 6 · SPOTLIGHT ===================== */
+(() => {
+  const main = document.getElementById('sp-main'), thumbs = document.getElementById('sp-thumbs');
+  let cur = 0, timer;
+  const sel = n => {
+    cur = (n + E.length) % E.length; const p = E[cur];
+    main.src = th(p.f); main.alt = p.cap; main.classList.remove('xfade'); void main.offsetWidth; main.classList.add('xfade');
+    document.getElementById('sp-cap').textContent = p.cap;
+    document.getElementById('sp-no').textContent = `${String(cur + 1).padStart(2, '0')} / ${E.length}`;
+    thumbs.querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-pressed', k === cur));
+  };
+  thumbs.innerHTML = E.map((p, k) => `<button class="sp-thumb shrink-0 snap-start w-20 h-16 rounded-lg overflow-hidden border border-white/10" aria-pressed="false" aria-label="Foto event ${k + 1}">${imgTag(p, 'w-full h-full object-cover')}</button>`).join('');
+  thumbs.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel([...thumbs.children].indexOf(b)); clearInterval(timer); });
+  document.getElementById('sp-zoom').onclick = () => openLB(E, E[cur].f);
+  document.getElementById('sp-kelas').innerHTML = K.slice(0, 14).map(p => `<button class="ph shrink-0 snap-start w-40 md:w-48 aspect-[3/4] rounded-xl overflow-hidden border border-white/10 relative" data-lb="${p.f}" data-list="kelas">${imgTag(p, 'absolute inset-0 w-full h-full object-cover')}</button>`).join('');
+  sel(E.findIndex(p => p.f.includes('09.54.15 (1)')));
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) timer = setInterval(() => sel(cur + 1), 4000);
+})();
+})();
+</script>
+</body>
+</html>
