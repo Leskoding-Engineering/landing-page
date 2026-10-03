@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Hall of Fame</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Outfit:wght@200;300;500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  :root { --gold:#FFC83D; --gold-hi:#fde68a; --gold-lo:#a16207; --hair:rgba(255,200,61,.28); }
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .eyebrow { font-size:10px; letter-spacing:.32em; text-transform:uppercase; font-weight:600; }
+  .foil { background:linear-gradient(110deg,#a16207 0%,#fde68a 20%,#FFC83D 38%,#b45309 58%,#fef08a 78%,#ca8a04 100%); background-size:220% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:foil 7s linear infinite; }
+  @keyframes foil { to { background-position:220% center } }
+  .foil-bg { background:linear-gradient(110deg,#a16207,#fde68a 25%,#FFC83D 45%,#b45309 70%,#fde68a); }
+  .hairline { height:1px; background:linear-gradient(90deg,transparent,var(--hair),transparent); }
+  .grain { position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay; background-image:url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E'); }
+  .fade-swap { animation:fadeSwap .5s ease; }
+  @keyframes fadeSwap { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+  .btn-gold { background:#FFC83D; color:#111827; font-weight:800; letter-spacing:.12em; text-transform:uppercase; font-size:11px; border-radius:.75rem; padding:.9rem 1.6rem; display:inline-flex; align-items:center; gap:.6rem; transition:all .3s; box-shadow:0 4px 24px rgba(255,200,61,.25); }
+  .btn-gold:hover { background:#fed368; transform:translateY(-2px); box-shadow:0 8px 30px rgba(255,200,61,.4); }
+  .btn-ghost { border:1px solid var(--hair); color:#fde68a; font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:11px; border-radius:.75rem; padding:.9rem 1.6rem; display:inline-flex; align-items:center; gap:.6rem; transition:all .3s; }
+  .btn-ghost:hover { background:rgba(255,200,61,.08); }
+
+  /* 1 · Galeri Malam */
+  .wall { background:radial-gradient(ellipse at 50% 0%,#1a2234 0%,#0B0F19 60%); }
+  .spot { position:absolute; left:50%; top:4px; width:120%; height:85%; transform:translateX(-50%); pointer-events:none; z-index:3;
+          background:linear-gradient(to bottom,rgba(255,236,179,.32),rgba(255,236,179,.06) 55%,transparent 85%); clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);
+          mix-blend-mode:screen; filter:blur(10px); transition:opacity .5s; opacity:.7; }
+  .lamp { position:absolute; left:50%; top:-16px; transform:translateX(-50%); width:38%; height:12px; border-radius:999px; z-index:4;
+          background:linear-gradient(180deg,#fde68a,#b8860b 60%,#7c5a0a); box-shadow:0 6px 20px rgba(255,220,140,.45), inset 0 1px 0 rgba(255,255,255,.6); }
+  .lamp::before { content:''; position:absolute; left:50%; top:-14px; width:3px; height:14px; transform:translateX(-50%); background:#b8860b; }
+  .exhibit:hover .spot { opacity:1; }
+  .frame { padding:10px; background:linear-gradient(135deg,#7c5a0a,#fde68a 18%,#b8860b 40%,#fef3c7 55%,#a16207 75%,#fde68a); border-radius:6px; box-shadow:0 30px 60px -20px rgba(0,0,0,.9), inset 0 0 0 1px rgba(0,0,0,.3); transition:transform .5s, box-shadow .5s; }
+  .exhibit:hover .frame { transform:translateY(-6px); box-shadow:0 45px 80px -25px rgba(0,0,0,.95), 0 0 60px -10px rgba(255,200,61,.25); }
+  .matte { background:#0B0F19; padding:14px; box-shadow:inset 0 0 0 1px rgba(255,200,61,.25), inset 0 4px 14px rgba(0,0,0,.8); }
+  .placard { background:linear-gradient(160deg,#fde68a,#d4a017 45%,#a16207); color:#1c1404; box-shadow:0 6px 16px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.6); }
+
+  /* 2 · Gala Anugerah */
+  .env { perspective:1000px; }
+  .env-flap { transform-origin:top; transition:transform .7s cubic-bezier(.4,.1,.2,1); clip-path:polygon(0 0,100% 0,50% 100%); }
+  .env.open .env-flap { transform:rotateX(180deg); }
+  .env-body { transition:transform .7s .25s cubic-bezier(.4,.1,.2,1), opacity .5s .4s; }
+  .env.open .env-body { transform:translateY(105%); opacity:0; pointer-events:none; }
+  .env-winner { opacity:0; transform:translateY(20px) scale(.97); transition:all .6s .55s cubic-bezier(.2,.9,.3,1.1); }
+  .env.open .env-winner { opacity:1; transform:none; }
+  .seal { background:radial-gradient(circle at 35% 30%,#ff6b62,#F3261D 45%,#8b0f09); box-shadow:0 4px 10px rgba(0,0,0,.5), inset 0 -3px 6px rgba(0,0,0,.35); }
+  .sparkle { position:absolute; width:6px; height:6px; background:#fde68a; border-radius:50%; opacity:0; pointer-events:none; }
+  .env.open .sparkle { animation:spark 1.2s ease-out .6s forwards; }
+  @keyframes spark { 0%{opacity:1; transform:translate(0,0) scale(1)} 100%{opacity:0; transform:translate(var(--x),var(--y)) scale(.2)} }
+
+  /* 3 · Majalah */
+  .cover-img { transition:transform 8s ease; }
+  .cover:hover .cover-img { transform:scale(1.06); }
+  .toc-item[aria-pressed="true"] .toc-num { color:#FFC83D; }
+  .toc-item[aria-pressed="true"] { background:rgba(255,200,61,.06); }
+  .toc-item[aria-pressed="true"] .toc-bar { transform:scaleX(1); }
+  .toc-bar { transform:scaleX(0); transform-origin:left; transition:transform .4s; }
+
+  /* 4 · Kartu Hitam */
+  .bcard { aspect-ratio:1.586; border-radius:18px; position:relative; overflow:hidden; transition:transform .15s ease-out, box-shadow .3s; }
+  .bcard::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(115deg,rgba(255,255,255,.025) 0 2px,transparent 2px 5px); }
+  .bcard .sheen { position:absolute; inset:-50%; background:radial-gradient(circle at var(--mx,30%) var(--my,30%),rgba(255,255,255,.22),transparent 35%); pointer-events:none; transition:background .1s; }
+  .emboss { text-shadow:0 1px 0 rgba(255,255,255,.25), 0 -1px 0 rgba(0,0,0,.8); }
+  .mini[aria-pressed="true"] { outline:1px solid #FFC83D; outline-offset:4px; }
+
+  /* 5 · Piagam */
+  .cert { background-color:#0F172A; background-image:radial-gradient(circle at 50% 50%,rgba(255,200,61,.06),transparent 60%); transition:transform .7s cubic-bezier(.4,.1,.2,1), opacity .7s; }
+  .guilloche { position:absolute; inset:0; opacity:.13; pointer-events:none; }
+  .cert-border { position:absolute; inset:14px; border:1px solid rgba(255,200,61,.5); border-radius:6px; pointer-events:none; }
+  .cert-border::after { content:''; position:absolute; inset:6px; border:3px double rgba(255,200,61,.35); border-radius:3px; }
+
+  /* 6 · Premiere */
+  .kb { animation:kenburns 12s ease-out forwards; }
+  @keyframes kenburns { from{transform:scale(1.15) translate(2%,1%)} to{transform:scale(1) translate(0,0)} }
+  .prog > span { display:block; height:100%; width:0; background:#FFC83D; }
+  .prog.run > span { animation:prog var(--dur) linear forwards; }
+  .prog.done > span { width:100%; }
+  @keyframes prog { to { width:100% } }
+  .credit-in > * { opacity:0; animation:fadeSwap .8s ease forwards; }
+  .credit-in > *:nth-child(2){animation-delay:.15s} .credit-in > *:nth-child(3){animation-delay:.3s} .credit-in > *:nth-child(4){animation-delay:.45s} .credit-in > *:nth-child(5){animation-delay:.6s}
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI · Hall of Fame</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Galeri Malam</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Malam Anugerah</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Sampul Majalah</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Kartu Eksklusif</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Piagam Kehormatan</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Pemutaran Perdana</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-14 pb-6">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// section: #hall-of-fame · nuansa mewah &amp; bergengsi</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">6 konsep untuk <span class="foil">"Kisah Sukses dari Penjelajah Kami!"</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Kesan mewah dibangun tanpa keluar dari design system: latar gelap yang sama, emas <code class="mono text-slate-300">#FFC83D</code> diolah jadi efek foil dan hairline, font tetap Outfit + Plus Jakarta Sans (bobot tipis dan tracking lebar untuk label), dan ruang kosong yang lebih lega. Isi 4 karya diambil dari Knowledge Base §10.</p>
+</header>
+
+<!-- =========================== OPSI 1 · GALERI MALAM =========================== -->
+<section id="opsi-1" class="py-16 md:py-20 border-t border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span>
+      <h2 class="font-display text-2xl font-extrabold">Galeri Malam</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Suasana museum di malam pembukaan. Karya dipajang dalam bingkai emas di bawah lampu sorot, dengan plakat kuningan berisi judul, kreator, dan medium. Masterpiece mendapat dinding sendiri di tengah.</p>
+    </div>
+
+    <div class="wall relative rounded-[2rem] border border-white/10 overflow-hidden px-5 sm:px-10 pt-16 pb-14">
+      <div class="grain"></div>
+      <div class="text-center relative">
+        <div class="eyebrow text-[#fde68a]/80 mb-4">LesKoding · Hall of Fame</div>
+        <h3 class="font-display text-4xl md:text-6xl font-black tracking-tight leading-[1.05]" data-i18n="hof_title">Kisah Sukses dari<br><span class="foil">Penjelajah Kami!</span></h3>
+        <div class="hairline max-w-sm mx-auto my-6"></div>
+        <p class="text-slate-400 text-sm max-w-xl mx-auto">Setiap karya di ruangan ini lahir dari ide, kode, dan ketekunan anak-anak kami.</p>
+      </div>
+      <div id="g-main" class="mt-16"></div>
+      <div class="hairline my-14"></div>
+      <div id="g-row" class="grid md:grid-cols-3 gap-12 md:gap-8"></div>
+      <div class="text-center mt-16"><a href="#register" class="btn-gold"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== OPSI 2 · MALAM ANUGERAH =========================== -->
+<section id="opsi-2" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span>
+      <h2 class="font-display text-2xl font-extrabold">Malam Anugerah</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Format malam penghargaan. Setiap kategori adalah amplop bersegel lilin merah (warna brand <code class="mono">#F3261D</code>). Pengunjung membuka amplop sendiri untuk melihat pemenangnya, lengkap dengan laurel emas.</p>
+    </div>
+
+    <div class="relative rounded-[2rem] border border-[#FFC83D]/20 overflow-hidden px-5 sm:px-10 py-14" style="background:radial-gradient(ellipse at 50% -10%,rgba(255,200,61,.14),transparent 55%),#0B0F19">
+      <div class="grain"></div>
+      <div class="text-center relative mb-12">
+        <div id="aw-laurel" class="mx-auto w-40 mb-2"></div>
+        <h3 class="font-display text-3xl md:text-5xl font-black tracking-tight" data-i18n="hof_title">Kisah Sukses dari <span class="foil">Penjelajah Kami!</span></h3>
+        <p class="text-slate-400 text-sm mt-3">4 kategori penghargaan · klik amplop untuk membuka</p>
+        <button id="aw-all" class="btn-ghost mt-6"><i class="fa-solid fa-envelope-open-text"></i> Buka semua amplop</button>
+      </div>
+      <div id="aw-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 relative"></div>
+      <div class="text-center mt-12"><a href="#register" class="btn-gold"><i class="fa-solid fa-calendar-check"></i> Jadikan anak Anda nominasi berikutnya</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== OPSI 3 · SAMPUL MAJALAH =========================== -->
+<section id="opsi-3" class="py-16 md:py-20 border-t border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span>
+      <h2 class="font-display text-2xl font-extrabold">Sampul Majalah</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Layout editorial ala majalah premium. Sampul besar dengan masthead foil, daftar isi di samping, dan setiap entri daftar isi mengganti cerita sampul. Terasa eksklusif, seperti anak "masuk majalah".</p>
+    </div>
+
+    <div class="grid lg:grid-cols-[minmax(0,520px)_1fr] gap-10 lg:gap-14 items-stretch">
+      <div id="mg-cover" class="cover relative rounded-xl overflow-hidden aspect-[3/4] border border-white/10 shadow-[0_40px_80px_-30px_rgba(0,0,0,.9)]"></div>
+      <div class="flex flex-col">
+        <div class="eyebrow text-[#fde68a]/80">Edisi Khusus · Hall of Fame</div>
+        <h3 class="font-display text-4xl md:text-5xl font-black tracking-tight leading-[1.05] mt-3" data-i18n="hof_title">Kisah Sukses dari<br><span class="foil">Penjelajah Kami!</span></h3>
+        <div class="hairline my-7"></div>
+        <div class="eyebrow text-slate-500 mb-2">Daftar Isi</div>
+        <div id="mg-toc" class="divide-y divide-white/10 border-y border-white/10"></div>
+        <div id="mg-lede" class="mt-7"></div>
+        <div class="mt-auto pt-8 flex flex-wrap gap-3"><a href="#register" class="btn-ghost"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a><a href="#course" class="btn-ghost !border-white/10 !text-slate-300">Lihat Program</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== OPSI 4 · KARTU EKSKLUSIF =========================== -->
+<section id="opsi-4" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span>
+      <h2 class="font-display text-2xl font-extrabold">Kartu Eksklusif</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Setiap penjelajah berprestasi mendapat "black card" seperti kartu member premium: tekstur logam, chip, nama timbul, dan tier. Kartu bisa dimiringkan mengikuti kursor (efek 3D) dengan kilau yang ikut bergerak.</p>
+    </div>
+
+    <div class="relative rounded-[2rem] border border-white/10 overflow-hidden p-6 sm:p-10" style="background:radial-gradient(ellipse at 20% 0%,rgba(255,200,61,.08),transparent 50%),#0B0F19">
+      <div class="grain"></div>
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 relative">
+        <div>
+          <div class="eyebrow text-[#fde68a]/80 mb-3">Explorer Circle</div>
+          <h3 class="font-display text-3xl md:text-5xl font-black tracking-tight leading-[1.05]" data-i18n="hof_title">Kisah Sukses dari <span class="foil">Penjelajah Kami!</span></h3>
+        </div>
+        <p class="text-sm text-slate-400 max-w-sm md:text-right">Lingkaran eksklusif untuk karya terbaik. Gerakkan kursor di atas kartu.</p>
+      </div>
+      <div class="grid lg:grid-cols-[1.1fr_1fr] gap-10 items-center relative">
+        <div style="perspective:1200px"><div id="bc-main"></div></div>
+        <div id="bc-detail"></div>
+      </div>
+      <div class="hairline my-10"></div>
+      <div id="bc-minis" class="grid grid-cols-2 md:grid-cols-4 gap-4 relative"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== OPSI 5 · PIAGAM KEHORMATAN =========================== -->
+<section id="opsi-5" class="py-16 md:py-20 border-t border-white/10 overflow-x-clip">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span>
+      <h2 class="font-display text-2xl font-extrabold">Piagam Kehormatan</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Setiap karya ditampilkan sebagai piagam resmi: pola guilloche seperti uang kertas atau ijazah, bingkai emas ganda, dan segel lilin. Piagam tersusun bertumpuk dan bisa dibalik satu per satu. Selaras dengan sertifikat kelulusan LesKoding.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 items-center">
+      <div>
+        <div class="eyebrow text-[#fde68a]/80 mb-3">Piagam Kehormatan</div>
+        <h3 class="font-display text-3xl md:text-5xl font-black tracking-tight leading-[1.05]" data-i18n="hof_title">Kisah Sukses dari<br><span class="foil">Penjelajah Kami!</span></h3>
+        <p class="text-slate-400 text-sm mt-5 max-w-md leading-relaxed">Karya terbaik dari kelas kami, diakui dan diabadikan. Setiap siswa juga menerima sertifikat kelulusan setelah menyelesaikan course.</p>
+        <div class="flex items-center gap-3 mt-8">
+          <button id="ct-prev" class="w-12 h-12 rounded-full border border-[#FFC83D]/30 text-[#fde68a] hover:bg-[#FFC83D]/10 transition" aria-label="Piagam sebelumnya"><i class="fa-solid fa-arrow-left"></i></button>
+          <button id="ct-next" class="w-12 h-12 rounded-full bg-[#FFC83D] text-[#111827] hover:bg-[#fed368] transition" aria-label="Piagam berikutnya"><i class="fa-solid fa-arrow-right"></i></button>
+          <div id="ct-dots" class="flex gap-2 ml-3"></div>
+        </div>
+        <div class="flex flex-wrap gap-3 mt-8"><span id="ct-play"></span><a href="#register" class="btn-ghost"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a></div>
+      </div>
+      <div id="ct-stack" class="relative h-[540px] sm:h-[520px]"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== OPSI 6 · PEMUTARAN PERDANA =========================== -->
+<section id="opsi-6" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span>
+      <h2 class="font-display text-2xl font-extrabold">Pemutaran Perdana</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Nuansa premiere film. Foto layar lebar dengan letterbox dan efek Ken Burns, tipografi kredit film, serta laurel festival. Karya berganti otomatis dengan progress bar di bawahnya.</p>
+    </div>
+
+    <div class="text-center mb-8">
+      <div class="eyebrow text-[#fde68a]/80 mb-3">LesKoding Presents</div>
+      <h3 class="font-display text-3xl md:text-5xl font-black tracking-tight" data-i18n="hof_title">Kisah Sukses dari <span class="foil">Penjelajah Kami!</span></h3>
+    </div>
+    <div class="relative rounded-[1.5rem] overflow-hidden border border-white/10 bg-black">
+      <div class="h-6 sm:h-10 bg-black relative z-20"></div>
+      <div id="pm-stage" class="relative aspect-[4/5] sm:aspect-[21/10] overflow-hidden"></div>
+      <div class="h-6 sm:h-10 bg-black relative z-20"></div>
+    </div>
+    <div id="pm-thumbs" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5"></div>
+  </div>
+</section>
+
+<!-- =========================== PERBANDINGAN =========================== -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <h2 class="font-display text-2xl md:text-3xl font-extrabold mb-6">Perbandingan cepat</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[780px]">
+        <thead class="bg-[#1E293B] text-left text-xs uppercase tracking-wider text-slate-400">
+          <tr><th class="p-4">Opsi</th><th class="p-4">Rasa "mewah"-nya dari mana</th><th class="p-4">Interaksi</th><th class="p-4">Catatan</th><th class="p-4">Effort</th></tr>
+        </thead>
+        <tbody class="divide-y divide-white/5 text-slate-300">
+          <tr><td class="p-4 font-bold text-white">1 · Galeri Malam</td><td class="p-4">Bingkai emas, lampu sorot, plakat kuningan</td><td class="p-4">Hover saja, tenang</td><td class="p-4">Paling dekat dengan section sekarang ("museum exhibit")</td><td class="p-4">Rendah</td></tr>
+          <tr><td class="p-4 font-bold text-white">2 · Malam Anugerah</td><td class="p-4">Amplop bersegel, laurel, kategori penghargaan</td><td class="p-4">Buka amplop</td><td class="p-4">Paling "event"; perlu nama kategori resmi</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">3 · Sampul Majalah</td><td class="p-4">Tipografi editorial, masthead foil</td><td class="p-4">Daftar isi mengganti sampul</td><td class="p-4">Paling elegan; butuh foto tegak yang bagus</td><td class="p-4">Rendah–sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">4 · Kartu Eksklusif</td><td class="p-4">Kartu logam, chip, tekstur, tilt 3D</td><td class="p-4">Tilt + pilih kartu</td><td class="p-4">Nuansa "member eksklusif"</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">5 · Piagam Kehormatan</td><td class="p-4">Guilloche, segel lilin, bingkai ganda</td><td class="p-4">Balik tumpukan</td><td class="p-4">Nyambung dengan sertifikat kelulusan</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">6 · Pemutaran Perdana</td><td class="p-4">Sinematik, laurel festival, kredit film</td><td class="p-4">Auto-play + thumbnail</td><td class="p-4">Paling dramatis; foto harus resolusi tinggi</td><td class="p-4">Sedang</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-xs text-slate-500 mt-4"><i class="fa-solid fa-circle-info mr-1"></i>Foto yang dipakai adalah dokumentasi kelas dari <code class="mono">assets/sessions/</code>, bukan foto karya atau kreator yang disebut. Sebelum dipublikasikan, pastikan pasangan foto dan nama sudah benar dan ada izin orang tua.</p>
+  </div>
+</section>
+
+<script>
+/* ===================== DATA (Knowledge Base §10) ===================== */
+const img = f => 'assets/sessions/' + encodeURIComponent(f);
+const W = [
+  { id:'cyber', title:'Cyber City RP Game', t1:'Cyber City', t2:'RP Game', name:'Sarah', age:12, role:'Lead Roblox Creator', award:'Masterpiece Terbaik', category:'Pilihan Kurator', field:'Game Dev',
+    tools:['Roblox Studio','Lua','3D Modeling'], color:'#FFC83D', icon:'fa-crown', photo:img('01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg'),
+    desc:'Dunia roleplay 3D bernuansa kota cyberpunk, lengkap dengan sistem mata uang virtual, toko in-game, dan NPC interaktif.', stats:[['fa-heart','1,4k','votes'],['fa-eye','12k','penayangan']],
+    cta:{ label:'Mainkan di Roblox', icon:'fa-gamepad', link:'' } },
+  { id:'kasir', title:'Sistem AI Kasir Pintar', t1:'Sistem AI', t2:'Kasir Pintar', name:'Budi', age:14, role:'Web Developer', award:'Terfavorit', category:'Karya Terpopuler', field:'Web Dev',
+    tools:['JavaScript','HTML','CSS'], color:'#38BDF8', icon:'fa-fire', photo:img('WhatsApp Image 2026-02-22 at 20.04.37.jpeg'),
+    desc:'Aplikasi kasir berbasis web yang menghitung stok inventaris secara otomatis dan mencetak struk belanja real-time.',
+    cta:{ label:'Coba Aplikasinya', icon:'fa-cash-register', link:'' } },
+  { id:'robot', title:'Robot Pemilah Sampah', t1:'Robot', t2:'Pemilah Sampah', name:'Kevin', age:10, role:'Robotics Maker', award:'Future Tech', category:'Teknologi Masa Depan', field:'Robotika',
+    tools:['Arduino','Sensor Ultrasonik','Motor Servo'], color:'#F97316', icon:'fa-microchip', photo:img('01M3RVHT4R9SQ961Z3GTWJD72Y.jpg'),
+    desc:'Tempat sampah pintar berbasis Arduino: sensor ultrasonik mendeteksi objek dan motor servo membuka tutupnya tanpa disentuh.',
+    cta:{ label:'Tonton Demo', icon:'fa-circle-play', link:'' } },
+  { id:'porto', title:'Portofolio Animasi Web', t1:'Portofolio', t2:'Animasi Web', name:'Nadia', age:15, role:'Web Designer', award:'Desain Terbaik', category:'Estetika Visual', field:'Web Design',
+    tools:['HTML','CSS 3D','JavaScript'], color:'#C084FC', icon:'fa-gem', photo:img('01M3H323B1QJV4PH2CCWGH9AQ2.jpeg'),
+    desc:'Website portofolio responsif dengan animasi CSS 3D dan efek scroll mulus, dibangun murni tanpa framework.',
+    cta:{ label:'Kunjungi Website', icon:'fa-arrow-up-right-from-square', link:'' } },
+];
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const monogram = (w, size = 'w-10 h-10 text-sm') => `<span class="${size} rounded-full flex items-center justify-center font-display font-black text-[#111827] foil-bg shrink-0 shadow-[0_0_0_2px_#0B0F19,0_0_0_3px_rgba(255,200,61,.5)]">${w.name[0]}</span>`;
+/* CTA proyek: link kosong = placeholder (menampilkan toast) */
+const playBtn = (w, variant = 'gold', extra = '') => {
+  const cls = { gold:'btn-gold', ghost:'btn-ghost', chip:'inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.15em] text-[#fde68a] border border-[#FFC83D]/30 hover:bg-[#FFC83D]/10 rounded-full px-4 py-2 transition' }[variant];
+  const attrs = w.cta.link ? `href="${w.cta.link}" target="_blank" rel="noopener"` : `href="#" data-placeholder="${w.title}"`;
+  return `<a ${attrs} class="${cls} ${extra}" onclick="event.stopPropagation(); if (this.dataset.placeholder) { event.preventDefault(); showToast(this.dataset.placeholder); }"><i class="fa-solid ${w.cta.icon}"></i> ${w.cta.label}</a>`;
+};
+const trialBtn = (variant = 'ghost') => `<a href="#register" class="${variant === 'gold' ? 'btn-gold' : 'btn-ghost'}"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a>`;
+function showToast(title) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] px-5 py-3 rounded-xl bg-[#1E293B] border border-[#FFC83D]/40 text-sm shadow-2xl transition-opacity'; document.body.appendChild(t); }
+  t.innerHTML = `<i class="fa-solid fa-link text-[#FFC83D] mr-2"></i>Link proyek <b>${title}</b> belum diisi (field <code class="mono text-[#fde68a]">cta.link</code>)`;
+  t.style.opacity = 1; clearTimeout(t._h); t._h = setTimeout(() => t.style.opacity = 0, 2600);
+}
+const tagList = (w, cls = '') => w.tools.map(t => `<span class="text-[10px] mono px-2.5 py-1 rounded-md border border-[#FFC83D]/20 text-[#fde68a]/90 ${cls}">${t}</span>`).join('');
+
+/* Laurel wreath SVG */
+const laurel = (c = '#FFC83D') => {
+  let g = '';
+  for (let i = 0; i < 9; i++) {
+    const deg = 105 + i * 17, a = deg * Math.PI / 180;
+    const x = 60 + 44 * Math.cos(a), y = 62 + 44 * Math.sin(a), rot = deg + 60;
+    g += `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="9" ry="3.6" transform="rotate(${rot} ${x.toFixed(1)} ${y.toFixed(1)})"/>`;
+    g += `<ellipse cx="${(120 - x).toFixed(1)}" cy="${y.toFixed(1)}" rx="9" ry="3.6" transform="rotate(${180 - rot} ${(120 - x).toFixed(1)} ${y.toFixed(1)})"/>`;
+  }
+  return `<svg viewBox="0 0 120 120" class="w-full h-full" aria-hidden="true"><defs><linearGradient id="lg${c.slice(1)}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset=".5" stop-color="${c}"/><stop offset="1" stop-color="#a16207"/></linearGradient></defs><g fill="url(#lg${c.slice(1)})">${g}</g><path d="M38 104 Q60 114 82 104" stroke="url(#lg${c.slice(1)})" stroke-width="2" fill="none"/></svg>`;
+};
+const laurelBadge = (top, main, sub, c, sm = false) => `
+  <div class="relative aspect-square w-full">
+    <div class="absolute inset-0">${laurel(c)}</div>
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-[22%]">
+      <div class="${sm ? 'text-[6px]' : 'text-[7px] sm:text-[8px]'} tracking-[.25em] uppercase text-[#fde68a]/80 font-semibold">${top}</div>
+      <div class="font-display font-black ${sm ? 'text-[10px]' : 'text-[13px] sm:text-sm'} leading-tight foil my-0.5">${main}</div>
+      <div class="${sm ? 'text-[6px]' : 'text-[7px] sm:text-[8px]'} tracking-[.2em] uppercase text-slate-400">${sub}</div>
+    </div>
+  </div>`;
+
+/* ===================== OPSI 1 · GALERI MALAM ===================== */
+(() => {
+  const [m, ...rest] = W;
+  const placard = (w, big) => `
+    <div class="placard rounded-sm ${big ? 'px-6 py-4 max-w-md' : 'px-4 py-3 max-w-[260px]'} mx-auto text-center">
+      <div class="${big ? 'text-[9px]' : 'text-[8px]'} tracking-[.3em] uppercase font-bold opacity-70">${w.award}</div>
+      <div class="font-display font-black ${big ? 'text-xl' : 'text-base'} leading-tight mt-0.5">${w.title}</div>
+      <div class="${big ? 'text-xs' : 'text-[11px]'} font-semibold mt-1">${w.name}, ${w.age} tahun</div>
+      <div class="text-[10px] italic opacity-80">${w.tools.join(', ')}</div>
+    </div>`;
+  document.getElementById('g-main').innerHTML = `
+    <div class="exhibit relative grid lg:grid-cols-[1.25fr_1fr] gap-10 lg:gap-14 items-center">
+      <div class="relative">
+        <div class="relative"><div class="lamp"></div><div class="spot"></div>
+        <div class="frame relative"><div class="matte"><img src="${m.photo}" alt="${m.title}" class="w-full aspect-[4/3] object-cover"></div></div></div>
+        <div class="mt-6">${placard(m, true)}</div>
+      </div>
+      <div>
+        <div class="flex items-center gap-3 text-[#fde68a]"><span class="w-8 h-px bg-[#FFC83D]/60"></span><span class="eyebrow">Pilihan Kurator</span></div>
+        <h4 class="font-display text-4xl md:text-5xl font-black leading-[1.02] mt-4">${m.t1}<br><span class="foil">${m.t2}</span></h4>
+        <div class="flex items-center gap-3 mt-6">${monogram(m)}<div><div class="font-bold text-sm">${m.name} <span class="text-slate-400 font-normal">(${m.age} tahun)</span></div><div class="eyebrow !text-[9px] text-[#FFC83D]/80 !tracking-[.2em]">${m.role}</div></div></div>
+        <p class="text-slate-300 text-sm leading-relaxed mt-6">${m.desc}</p>
+        <div class="flex flex-wrap gap-2 mt-6">${tagList(m)}</div>
+        <div class="flex gap-8 mt-8">${m.stats.map(([ic, v, l]) => `<div><div class="font-display text-3xl font-light">${v}</div><div class="eyebrow !text-[9px] text-slate-500 mt-1"><i class="fa-solid ${ic} mr-1 text-[#FFC83D]/70"></i>${l}</div></div>`).join('')}</div>
+        <div class="flex flex-wrap gap-3 mt-8">${playBtn(m)}</div>
+      </div>
+    </div>`;
+  document.getElementById('g-row').innerHTML = rest.map(w => `
+    <div class="exhibit relative">
+      <div class="relative"><div class="lamp !h-2.5 !-top-3"></div><div class="spot !opacity-60"></div>
+      <div class="frame relative !p-[7px]"><div class="matte !p-2.5"><img src="${w.photo}" alt="${w.title}" class="w-full aspect-[4/3] object-cover"></div></div></div>
+      <div class="mt-5">${placard(w)}</div>
+      <p class="text-xs text-slate-400 text-center leading-relaxed mt-4 max-w-[280px] mx-auto">${w.desc}</p>
+      <div class="text-center mt-4">${playBtn(w, 'chip')}</div>
+    </div>`).join('');
+})();
+
+/* ===================== OPSI 2 · MALAM ANUGERAH ===================== */
+(() => {
+  document.getElementById('aw-laurel').innerHTML = laurelBadge('LesKoding', 'Explorer Awards', 'Hall of Fame', '#FFC83D');
+  const grid = document.getElementById('aw-grid');
+  const sparks = () => Array.from({ length: 10 }, (_, i) => { const a = i / 10 * Math.PI * 2; return `<span class="sparkle" style="left:50%; top:40%; --x:${Math.cos(a) * 110}px; --y:${Math.sin(a) * 110}px"></span>`; }).join('');
+  grid.innerHTML = W.map((w, i) => `
+    <div class="env relative h-[470px] rounded-2xl border border-[#FFC83D]/25 overflow-hidden bg-[#0F172A]" data-i="${i}">
+      <!-- Winner (under) -->
+      <div class="env-winner absolute inset-0 flex flex-col">
+        <div class="relative h-40 shrink-0 overflow-hidden"><img src="${w.photo}" alt="" class="w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] to-transparent"></div></div>
+        <div class="px-5 pb-5 -mt-10 relative flex-1 flex flex-col items-center text-center">
+          <div class="w-28">${laurelBadge('Pemenang', w.award, w.field, w.color, true)}</div>
+          <h4 class="font-display text-xl font-black leading-tight mt-1">${w.title}</h4>
+          <div class="text-sm text-[#fde68a] font-semibold mt-1">${w.name} · ${w.age} tahun</div>
+          <p class="text-xs text-slate-400 leading-relaxed mt-2 line-clamp-2">${w.desc}</p>
+          <div class="mt-auto pt-3">${playBtn(w, 'chip')}</div>
+        </div>
+      </div>
+      ${sparks()}
+      <!-- Envelope -->
+      <button class="env-body absolute inset-0 flex flex-col items-center justify-end pb-8 text-center" style="background:linear-gradient(170deg,#1E293B,#111827)" aria-label="Buka amplop ${w.category}">
+        <div class="absolute inset-3 border border-[#FFC83D]/25 rounded-xl pointer-events-none"></div>
+        <div class="eyebrow text-[#fde68a]/70 !text-[9px]">Kategori</div>
+        <div class="font-display text-2xl font-black foil mt-2 px-6 leading-tight">${w.award}</div>
+        <div class="text-[11px] text-slate-400 mt-1">${w.category}</div>
+        <div class="mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.2em] text-[#fde68a]"><i class="fa-solid fa-hand-pointer"></i> Buka amplop</div>
+      </button>
+      <div class="env-flap absolute inset-x-0 top-0 h-[58%] z-10 pointer-events-none" style="background:linear-gradient(180deg,#273449,#1a2436)">
+      </div>
+      <div class="env-flap absolute left-1/2 top-[52%] -translate-x-1/2 z-20 pointer-events-none" style="clip-path:none; transform-origin:center -130px">
+        <div class="seal w-14 h-14 rounded-full flex items-center justify-center font-display font-black text-white/90 text-sm -translate-y-1/2">LK</div>
+      </div>
+    </div>`).join('');
+  const open = el => el.classList.add('open');
+  grid.addEventListener('click', e => { const env = e.target.closest('.env'); if (env) open(env); });
+  document.getElementById('aw-all').onclick = () => grid.querySelectorAll('.env').forEach((el, i) => setTimeout(() => open(el), reduceMotion ? 0 : i * 250));
+})();
+
+/* ===================== OPSI 3 · SAMPUL MAJALAH ===================== */
+(() => {
+  const cover = document.getElementById('mg-cover'), toc = document.getElementById('mg-toc'), lede = document.getElementById('mg-lede');
+  const pages = ['04', '12', '18', '24'];
+  toc.innerHTML = W.map((w, i) => `
+    <button class="toc-item relative w-full text-left flex items-baseline gap-5 py-4 px-2 transition" data-i="${i}">
+      <span class="toc-bar absolute left-0 bottom-0 h-px w-full bg-[#FFC83D]"></span>
+      <span class="toc-num font-display text-2xl font-light text-slate-500 w-10 shrink-0 transition">${pages[i]}</span>
+      <span class="flex-1 min-w-0"><span class="block font-display text-lg font-bold leading-tight">${w.title}</span><span class="block text-xs text-slate-400 mt-0.5">${w.name}, ${w.age} · ${w.award}</span></span>
+      <i class="fa-solid fa-arrow-right text-xs text-slate-500"></i>
+    </button>`).join('');
+  const show = i => {
+    const w = W[i];
+    toc.querySelectorAll('.toc-item').forEach((b, j) => b.setAttribute('aria-pressed', i === j));
+    cover.innerHTML = `
+      <img src="${w.photo}" alt="${w.title}" class="cover-img absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-b from-[#0B0F19]/85 via-transparent to-[#0B0F19]/95"></div>
+      <div class="grain"></div>
+      <div class="absolute inset-x-0 top-0 p-6 fade-swap">
+        <div class="flex justify-between text-[9px] tracking-[.3em] uppercase text-white/70 font-semibold"><span>Edisi Hall of Fame</span><span>LesKoding · Bali</span></div>
+        <div class="font-display font-black text-[clamp(2.4rem,8.5vw,4.6rem)] leading-[.85] tracking-tight foil mt-2">EXPLORERS</div>
+        <div class="h-px bg-white/30 mt-2"></div>
+      </div>
+      <div class="absolute left-6 top-[40%] max-w-[45%] fade-swap">
+        <div class="text-[9px] tracking-[.3em] uppercase text-[#FFC83D] font-bold">${w.award}</div>
+        <div class="text-sm font-semibold text-white/90 mt-1 leading-snug">${w.tools.slice(0, 2).join(' & ')}</div>
+      </div>
+      <div class="absolute inset-x-0 bottom-0 p-6 fade-swap">
+        <div class="eyebrow text-[#fde68a] !tracking-[.3em]">Cerita Sampul</div>
+        <div class="font-display font-black text-3xl sm:text-4xl leading-[1] mt-2">${w.name}, ${w.age}</div>
+        <div class="text-white/85 text-sm sm:text-base mt-2 max-w-sm leading-snug">membangun <i>${w.title}</i> dari nol.</div>
+        <div class="mt-4">${playBtn(w, 'chip', '!bg-[#0B0F19]/60 backdrop-blur')}</div>
+        <div class="flex items-center justify-between mt-5 text-[9px] tracking-[.25em] uppercase text-white/50"><span>Hal. ${pages[i]}</span><span>${w.field}</span></div>
+      </div>`;
+    lede.innerHTML = `<div class="fade-swap">
+      <p class="text-slate-300 leading-relaxed"><span class="float-left font-display text-6xl font-black leading-[.8] mr-3 mt-1 foil">${w.desc[0]}</span>${w.desc.slice(1)}</p>
+      <div class="flex flex-wrap items-center gap-3 mt-5">${monogram(w, 'w-8 h-8 text-xs')}<span class="text-xs text-slate-400">${w.role}</span><span class="text-slate-600">·</span><div class="flex flex-wrap gap-1.5">${tagList(w)}</div></div>
+      <div class="mt-6">${playBtn(w)}</div></div>`;
+  };
+  toc.addEventListener('click', e => { const b = e.target.closest('.toc-item'); if (b) show(+b.dataset.i); });
+  show(0);
+})();
+
+/* ===================== OPSI 4 · KARTU EKSKLUSIF ===================== */
+(() => {
+  const main = document.getElementById('bc-main'), detail = document.getElementById('bc-detail'), minis = document.getElementById('bc-minis');
+  const chip = `<svg viewBox="0 0 48 36" class="w-11 h-8"><defs><linearGradient id="chipg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset=".5" stop-color="#ca8a04"/><stop offset="1" stop-color="#fef3c7"/></linearGradient></defs><rect x="1" y="1" width="46" height="34" rx="6" fill="url(#chipg)"/><path d="M1 12h14M1 24h14M33 12h14M33 24h14M15 1v34M33 1v34M15 18h18" stroke="#8a6508" stroke-width="1.2" fill="none" opacity=".7"/></svg>`;
+  const face = (w, small) => `
+    <div class="bcard ${small ? '' : 'shadow-[0_40px_80px_-30px_rgba(0,0,0,1)]'}" style="background:linear-gradient(135deg,#1f2937 0%,#0b0f19 45%,#111827 70%,#1f2937 100%); border:1px solid ${w.id === 'cyber' ? 'rgba(255,200,61,.5)' : 'rgba(255,255,255,.12)'}">
+      <div class="sheen"></div>
+      <div class="absolute -right-10 -top-10 w-48 h-48 rounded-full" style="background:radial-gradient(circle,${w.color}33,transparent 70%)"></div>
+      <div class="relative h-full flex flex-col justify-between ${small ? 'p-3' : 'p-6 sm:p-7'}">
+        <div class="flex justify-between items-start">
+          <div><div class="${small ? 'text-[6px]' : 'text-[9px]'} tracking-[.35em] uppercase text-white/50 font-semibold">LesKoding</div><div class="font-display font-black ${small ? 'text-[9px]' : 'text-sm'} tracking-[.25em] foil">EXPLORER</div></div>
+          <i class="fa-solid ${w.icon} ${small ? 'text-xs' : 'text-xl'}" style="color:${w.color}"></i>
+        </div>
+        ${small ? '' : `<div class="flex items-center gap-4">${chip}<i class="fa-solid fa-wifi rotate-90 text-white/40"></i></div>`}
+        <div>
+          <div class="font-display font-bold ${small ? 'text-[10px]' : 'text-xl sm:text-2xl'} emboss text-white/90 tracking-wide leading-tight">${w.title.toUpperCase()}</div>
+          <div class="flex justify-between items-end mt-1.5">
+            <div class="mono ${small ? 'text-[7px]' : 'text-xs'} text-white/60 tracking-[.2em]">${w.name.toUpperCase()} · ${w.age} THN</div>
+            <div class="${small ? 'text-[6px] px-1.5' : 'text-[9px] px-2.5'} py-0.5 rounded-full font-extrabold uppercase tracking-widest" style="background:${w.id === 'cyber' ? '#FFC83D' : w.color + '26'}; color:${w.id === 'cyber' ? '#111827' : w.color}">${w.award}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  minis.innerHTML = W.map((w, i) => `<button class="mini rounded-[18px] transition hover:-translate-y-1" data-i="${i}" aria-label="${w.title}">${face(w, true)}</button>`).join('');
+  const show = i => {
+    const w = W[i];
+    minis.querySelectorAll('.mini').forEach((b, j) => b.setAttribute('aria-pressed', i === j));
+    main.innerHTML = `<div class="fade-swap">${face(w)}</div>`;
+    const card = main.querySelector('.bcard');
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      card.style.transform = `rotateY(${(x - .5) * 18}deg) rotateX(${(.5 - y) * 14}deg)`;
+      card.style.setProperty('--mx', x * 100 / 2 + 25 + '%'); card.style.setProperty('--my', y * 100 / 2 + 25 + '%');
+    });
+    card.addEventListener('mouseleave', () => card.style.transform = '');
+    detail.innerHTML = `<div class="fade-swap">
+      <div class="eyebrow text-[#fde68a]/80">${w.category}</div>
+      <h4 class="font-display text-3xl md:text-4xl font-black leading-tight mt-3">${w.t1} <span class="foil">${w.t2}</span></h4>
+      <div class="flex items-center gap-3 mt-5">${monogram(w)}<div><div class="font-bold text-sm">${w.name} <span class="text-slate-400 font-normal">(${w.age} tahun)</span></div><div class="text-[10px] text-slate-400 uppercase tracking-[.2em]">${w.role}</div></div></div>
+      <p class="text-slate-300 text-sm leading-relaxed mt-5">${w.desc}</p>
+      <div class="flex flex-wrap gap-2 mt-5">${tagList(w)}</div>
+      <div class="flex flex-wrap gap-3 mt-8">${playBtn(w)}${trialBtn()}</div>
+    </div>`;
+  };
+  minis.addEventListener('click', e => { const b = e.target.closest('.mini'); if (b) show(+b.dataset.i); });
+  show(0);
+})();
+
+/* ===================== OPSI 5 · PIAGAM KEHORMATAN ===================== */
+(() => {
+  const stack = document.getElementById('ct-stack'), dots = document.getElementById('ct-dots');
+  // guilloche: overlapping rotated ellipses
+  const gu = (() => { let p = ''; for (let i = 0; i < 36; i++) p += `<ellipse cx="300" cy="200" rx="260" ry="90" transform="rotate(${i * 5} 300 200)"/>`; return `<svg class="guilloche" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#FFC83D" stroke-width=".6">${p}</g></svg>`; })();
+  stack.innerHTML = W.map((w, i) => `
+    <article class="cert absolute inset-x-0 top-0 h-[500px] sm:h-[480px] rounded-xl border border-[#FFC83D]/30 overflow-hidden shadow-[0_30px_60px_-20px_rgba(0,0,0,.9)]" data-i="${i}">
+      ${gu}<div class="cert-border"></div><div class="grain"></div>
+      <div class="relative h-full flex flex-col items-center text-center px-8 sm:px-14 pt-10 pb-9">
+        <div class="eyebrow text-[#fde68a]/80 !text-[9px]">LesKoding Academy Bali</div>
+        <div class="font-display text-2xl sm:text-3xl font-black tracking-[.15em] foil mt-2">PIAGAM KEHORMATAN</div>
+        <div class="text-[10px] uppercase tracking-[.3em] text-slate-400 mt-1">${w.award} · ${w.field}</div>
+        <div class="text-xs italic text-slate-400 mt-5">dengan bangga diberikan kepada</div>
+        <div class="font-display text-4xl sm:text-5xl font-light tracking-wide mt-1">${w.name}</div>
+        <div class="w-48 h-px bg-[#FFC83D]/50 mt-2"></div>
+        <div class="text-xs italic text-slate-400 mt-3">atas karya</div>
+        <div class="font-display text-xl font-bold text-[#fde68a] mt-0.5">"${w.title}"</div>
+        <p class="text-[11px] text-slate-400 mt-2 mb-4 max-w-sm leading-relaxed line-clamp-2">${w.desc}</p>
+        <div class="mt-auto w-full flex items-end justify-between">
+          <div class="text-left"><div class="w-28 h-px bg-white/30 mb-1"></div><div class="text-[9px] uppercase tracking-[.2em] text-slate-500">Tim Kurator</div></div>
+          <div class="seal w-16 h-16 rounded-full flex flex-col items-center justify-center -mb-1 ring-4 ring-[#F3261D]/20"><span class="font-display font-black text-white text-base leading-none">LK</span><span class="text-[6px] tracking-[.2em] text-white/80 mt-0.5">${w.age} THN</span></div>
+          <div class="text-right"><div class="w-28 h-px bg-white/30 mb-1 ml-auto"></div><div class="text-[9px] uppercase tracking-[.2em] text-slate-500">${w.tools[0]}</div></div>
+        </div>
+      </div>
+    </article>`).join('');
+  dots.innerHTML = W.map((_, i) => `<button class="h-1.5 rounded-full transition-all" data-i="${i}" aria-label="Piagam ${i + 1}"></button>`).join('');
+  let cur = 0;
+  const layout = () => {
+    stack.querySelectorAll('.cert').forEach(c => {
+      const d = (+c.dataset.i - cur + W.length) % W.length;
+      c.style.zIndex = 10 - d;
+      c.style.transform = `translate(${d * 14}px, ${d * 14}px) rotate(${d * 1.2}deg) scale(${1 - d * .03})`;
+      c.style.opacity = d > 2 ? 0 : 1 - d * .2;
+    });
+    document.getElementById('ct-play').innerHTML = playBtn(W[cur]);
+    dots.querySelectorAll('button').forEach((b, i) => { b.style.width = i === cur ? '28px' : '8px'; b.style.background = i === cur ? '#FFC83D' : 'rgba(255,255,255,.2)'; });
+  };
+  const go = dir => {
+    const top = stack.querySelector(`.cert[data-i="${cur}"]`);
+    if (dir > 0 && !reduceMotion) {
+      top.style.transform = 'translate(-60px,-30px) rotate(-8deg)'; top.style.opacity = 0;
+      setTimeout(() => { cur = (cur + 1) % W.length; layout(); }, 350);
+    } else { cur = (cur + dir + W.length) % W.length; layout(); }
+  };
+  document.getElementById('ct-next').onclick = () => go(1);
+  document.getElementById('ct-prev').onclick = () => go(-1);
+  dots.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { cur = +b.dataset.i; layout(); } });
+  stack.addEventListener('click', () => go(1));
+  layout();
+})();
+
+/* ===================== OPSI 6 · PEMUTARAN PERDANA ===================== */
+(() => {
+  const stage = document.getElementById('pm-stage'), thumbs = document.getElementById('pm-thumbs'), DUR = 7000;
+  thumbs.innerHTML = W.map((w, i) => `
+    <button class="group text-left" data-i="${i}">
+      <div class="prog h-[2px] bg-white/10 mb-3 overflow-hidden" style="--dur:${DUR}ms"><span></span></div>
+      <div class="flex gap-3 items-center">
+        <img src="${w.photo}" alt="" class="w-16 h-11 object-cover rounded-md opacity-50 group-hover:opacity-100 transition">
+        <div class="min-w-0"><div class="text-[9px] tracking-[.25em] uppercase text-slate-500">${w.award}</div><div class="text-sm font-bold truncate">${w.title}</div></div>
+      </div>
+    </button>`).join('');
+  let cur = 0, timer;
+  const show = i => {
+    cur = i; const w = W[i];
+    clearTimeout(timer);
+    thumbs.querySelectorAll('button').forEach((b, j) => {
+      const p = b.querySelector('.prog'); p.classList.remove('run', 'done'); void p.offsetWidth;
+      if (j < i) p.classList.add('done'); if (j === i) p.classList.add('run');
+      b.querySelector('img').style.opacity = j === i ? 1 : '';
+    });
+    stage.innerHTML = `
+      <img src="${w.photo}" alt="${w.title}" class="kb absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+      <div class="grain"></div>
+      <div class="absolute inset-0 flex items-end sm:items-center p-6 sm:p-12">
+        <div class="credit-in max-w-xl">
+          <div class="eyebrow text-[#fde68a]/80">LesKoding Presents</div>
+          <div class="text-sm sm:text-base font-light italic text-white/80 mt-4">sebuah karya dari <span class="not-italic font-semibold text-white tracking-[.2em] uppercase text-xs">${w.name} · ${w.age} tahun</span></div>
+          <h4 class="font-display text-4xl sm:text-6xl lg:text-7xl font-black leading-[.95] tracking-tight mt-3">${w.t1}<br><span class="foil">${w.t2}</span></h4>
+          <p class="text-white/70 text-sm leading-relaxed mt-5 max-w-md">${w.desc}</p>
+          <div class="flex flex-wrap items-center gap-3 mt-6">${playBtn(w)}${trialBtn()}<span class="w-full text-[10px] tracking-[.25em] uppercase text-white/50">${w.tools.join(' · ')}</span></div>
+        </div>
+      </div>
+      <div class="absolute right-5 top-5 sm:right-10 sm:top-8 w-24 sm:w-36 credit-in"><div>${laurelBadge('LesKoding', w.award, w.category, w.color)}</div></div>`;
+    if (!reduceMotion) timer = setTimeout(() => show((cur + 1) % W.length), DUR);
+  };
+  thumbs.addEventListener('click', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+  // start autoplay when visible
+  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { show(0); io.disconnect(); } }, { threshold:.3 }).observe(stage);
+  show(0); clearTimeout(timer);
+})();
+</script>
+</body>
+</html>

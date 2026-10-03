@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Laporan Wali</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], heading: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+  borderRadius: { input:'12px', card:'16px', hero:'24px' },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  /* sama seperti style.css index */
+  @keyframes spin-slow { from { transform:rotate(0deg) } to { transform:rotate(360deg) } }
+  .animate-spin-slow { animation:spin-slow 10s linear infinite; }
+  .fade-swap { animation:fadeSwap .45s ease; }
+  @keyframes fadeSwap { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+  .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .9rem; border-radius:999px; background:#1E293B; border:1px solid rgba(255,255,255,.1); }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#FFC83D; color:#111827; font-weight:800; padding:.85rem 1.6rem; min-height:48px; border-radius:.75rem; font-size:.875rem; transition:all .25s; box-shadow:0 6px 25px rgba(255,200,61,.25); }
+  .btn-primary:hover { background:#fed368; transform:translateY(-2px); }
+  .opsi-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem 1rem; margin-bottom:2rem; }
+
+  /* ---- Lapisan sorotan (tidak mengubah desain laporan) ---- */
+  .rpt-target { position:relative; transition:box-shadow .35s, outline-color .35s; outline:2px solid transparent; outline-offset:4px; border-radius:16px; }
+  .rpt-target.hl { z-index:5; outline-color:#FFC83D; box-shadow:0 0 0 9999px rgba(11,15,25,.62); }
+  .pin { position:absolute; top:-10px; right:-10px; z-index:6; width:24px; height:24px; border-radius:999px; background:#FFC83D; color:#111827; font:800 11px/24px 'Plus Jakarta Sans',sans-serif; text-align:center; box-shadow:0 0 0 3px #0F172A; cursor:pointer; transition:transform .2s; }
+  .pin:hover, .rpt-target.hl > .pin { transform:scale(1.2); }
+  .legend-item[aria-current="true"] { background:rgba(255,200,61,.08); border-color:rgba(255,200,61,.5); }
+  .legend-item[aria-current="true"] .num { background:#FFC83D; color:#111827; }
+
+  /* Opsi 2 · ponsel */
+  .notif { transition:transform .6s cubic-bezier(.2,.9,.3,1.1), opacity .5s; }
+  .phone.opened .lock { opacity:0; pointer-events:none; transform:translateY(-30px); }
+  .lock { transition:opacity .5s, transform .5s; }
+  .step2[aria-current="true"] .dot { background:#FFC83D; color:#111827; border-color:#FFC83D; }
+  .step2[aria-current="true"] .t { color:#fff; }
+  .phone-scroll::-webkit-scrollbar { width:0 }
+
+  /* Opsi 5 · scrollytelling */
+  .story-step { opacity:.35; transition:opacity .4s; }
+  .story-step.active { opacity:1; }
+  .pan { transition:transform .8s cubic-bezier(.4,.1,.2,1); }
+
+  /* Opsi 6 */
+  .tick span i { opacity:0; transition:opacity .2s; }
+  .tick input:checked + span { background:#10B981; border-color:#10B981; color:#0B0F19; }
+  .tick input:checked + span i { opacity:1; }
+  .tick input:focus-visible + span { outline:2px solid #38BDF8; outline-offset:2px; }
+  .tick input:checked ~ .lbl { text-decoration:line-through; color:#64748B; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- Kartu laporan: disalin persis dari index.html (#progress-wali). Jangan diubah. -->
+<template id="report-tpl">
+                    <div class="relative bg-slate-900/95 backdrop-blur-xl rounded-3xl border-2 border-b-[6px] border-cyan-500/30 border-b-cyan-500/50 p-5 sm:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white overflow-hidden">
+                        
+                        <!-- Top Header Row -->
+                        <div class="flex items-center justify-between pb-5 border-b-2 border-slate-800 gap-3">
+                            <div class="flex items-center gap-3.5">
+                                <!-- Iron Man / Tech Icon Box matching getSuperheroTheme -->
+                                <div class="w-13 h-13 sm:w-14 sm:h-14 bg-red-950 text-amber-400 border-2 border-b-[4px] border-red-500/50 rounded-2xl flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(239,68,68,0.25)]">
+                                    <i class="fa-solid fa-microchip text-xl sm:text-2xl"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <h3 data-i18n="report_course_title" class="font-extrabold text-white text-base sm:text-lg leading-tight mb-1 truncate drop-shadow-sm">
+                                        Game Programming (Roblox &amp; Lua)
+                                    </h3>
+                                    <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest flex-wrap">
+                                        <span data-i18n="report_session" class="text-cyan-400 border border-cyan-500/30 bg-cyan-500/10 px-2 py-0.5 rounded-lg text-[10px] sm:text-xs shadow-[0_0_5px_rgba(34,211,238,0.2)]">
+                                            Sesi #4
+                                        </span>
+                                        <span class="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-400">
+                                            <i class="fa-regular fa-calendar text-cyan-400"></i> 12 Sep 2026
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-400 bg-emerald-950/80 border border-emerald-500/40 px-2.5 py-1 rounded-xl">
+                                    <i class="fa-solid fa-check text-[10px]"></i> <span data-i18n="report_present">Hadir</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Tutor Row -->
+                        <div class="my-4 bg-slate-950/70 p-3.5 rounded-2xl border-2 border-slate-800 border-b-[4px] flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 bg-slate-900 border-2 border-fuchsia-500/50 rounded-xl flex items-center justify-center text-fuchsia-400 shrink-0">
+                                    <i class="fa-solid fa-award text-sm"></i>
+                                </div>
+                                <div>
+                                    <span data-i18n="report_tutor_role" class="text-[9px] font-extrabold text-slate-500 uppercase tracking-widest block">Tutor Utama</span>
+                                    <span data-i18n="report_tutor_name" class="text-xs sm:text-sm font-extrabold text-white">Danu (Fasilitator)</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-mono text-cyan-400 bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800">
+                                <span data-i18n="report_verified">Sesi Terverifikasi</span>
+                            </span>
+                        </div>
+
+                        <!-- Superhero Character Section (Iron Man theme like Student Space) -->
+                        <div class="mb-5">
+                            <span data-i18n="report_superhero_label" class="text-[10px] font-extrabold uppercase tracking-widest block mb-2 text-amber-400 drop-shadow-sm">
+                                Karakter Superhero
+                            </span>
+                            <div class="relative overflow-hidden p-4 rounded-2xl border-2 border-b-[4px] bg-gradient-to-r from-red-500/10 to-amber-500/10 border-red-500/30 border-b-amber-500/30">
+                                <i class="fa-solid fa-shield-halved absolute -right-4 -bottom-4 text-7xl text-amber-400/10 pointer-events-none -rotate-12"></i>
+                                <div class="relative z-10">
+                                    <div class="text-sm font-extrabold text-amber-400 mb-1 flex items-center gap-2">
+                                        <span data-i18n="report_superhero_name">Iron Man (Sang Inovator)</span>
+                                        <i class="fa-solid fa-bolt text-xs text-amber-400 animate-pulse"></i>
+                                    </div>
+                                    <p data-i18n="report_superhero_quote" class="text-xs font-medium text-slate-300 italic border-l-2 border-amber-500/50 pl-2 leading-relaxed">
+                                        "Tekun memecahkan masalah logika rintangan dan berani mencoba solusi teknologi baru secara mandiri."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skill Evaluation: Exact 3 Parameters requested by user -->
+                        <div class="mb-5">
+                            <span data-i18n="report_rubric_header" class="text-[10px] font-extrabold text-cyan-400 uppercase tracking-widest block mb-2.5 drop-shadow-[0_0_2px_rgba(34,211,238,0.5)]">
+                                Evaluasi Keterampilan (Rubrik Aktif)
+                            </span>
+                            <div class="grid gap-2.5">
+                                <!-- Parameter 1: Pemahaman Konsep & Problem Solving -->
+                                <div class="flex flex-col bg-slate-950/80 p-3.5 rounded-2xl border-2 border-slate-800 border-b-[4px]">
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <span data-i18n="report_r1_name" class="text-xs sm:text-sm font-bold text-slate-200 uppercase tracking-wider">
+                                            Pemahaman Konsep &amp; Problem Solving
+                                        </span>
+                                        <span class="text-xs font-extrabold text-cyan-400 bg-slate-900 border-2 border-cyan-500/30 px-2.5 py-0.5 rounded-xl font-mono">
+                                            8.5 / 10
+                                        </span>
+                                    </div>
+                                    <p data-i18n="report_r1_desc" class="text-[11px] text-slate-200 font-medium border-l-2 border-cyan-500/50 pl-2 leading-relaxed">
+                                        Mengukur tingkat pemahaman konsep siswa berdasarkan kemampuan menyelesaikan masalah dan tantangan arena secara terstruktur.
+                                    </p>
+                                </div>
+
+                                <!-- Parameter 2: Kreativitas & Inovasi -->
+                                <div class="flex flex-col bg-slate-950/80 p-3.5 rounded-2xl border-2 border-slate-800 border-b-[4px]">
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <span data-i18n="report_r2_name" class="text-xs sm:text-sm font-bold text-slate-200 uppercase tracking-wider">
+                                            Kreativitas &amp; Inovasi
+                                        </span>
+                                        <span class="text-xs font-extrabold text-amber-400 bg-slate-900 border-2 border-amber-500/30 px-2.5 py-0.5 rounded-xl font-mono">
+                                            9.0 / 10
+                                        </span>
+                                    </div>
+                                    <p data-i18n="report_r2_desc" class="text-[11px] text-slate-200 font-medium border-l-2 border-amber-500/50 pl-2 leading-relaxed">
+                                        Mengukur kemampuan siswa mengembangkan dan memodifikasi projek di luar contoh dasar yang diberikan dengan fitur unik.
+                                    </p>
+                                </div>
+
+                                <!-- Parameter 3: Keaktifan & Antusiasme -->
+                                <div class="flex flex-col bg-slate-950/80 p-3.5 rounded-2xl border-2 border-slate-800 border-b-[4px]">
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <span data-i18n="report_r3_name" class="text-xs sm:text-sm font-bold text-slate-200 uppercase tracking-wider">
+                                            Keaktifan &amp; Antusiasme
+                                        </span>
+                                        <span class="text-xs font-extrabold text-emerald-400 bg-slate-900 border-2 border-emerald-500/30 px-2.5 py-0.5 rounded-xl font-mono">
+                                            9.5 / 10
+                                        </span>
+                                    </div>
+                                    <p data-i18n="report_r3_desc" class="text-[11px] text-slate-200 font-medium border-l-2 border-emerald-500/50 pl-2 leading-relaxed">
+                                        Mengukur tingkat motivasi, rasa ingin tahu yang tinggi, dan keaktifan berdiskusi selama sesi belajar berlangsung.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tutor Evaluation (Feedback) -->
+                        <div>
+                            <span class="text-[10px] font-extrabold text-cyan-400 uppercase tracking-widest block mb-2.5 flex items-center gap-2 drop-shadow-[0_0_2px_rgba(34,211,238,0.5)]">
+                                <i class="fa-regular fa-comment-dots text-xs"></i> <span data-i18n="report_eval_header">Evaluasi Tutor</span>
+                            </span>
+                            <div class="bg-slate-950/90 p-4 sm:p-5 rounded-2xl border-2 border-slate-800 border-b-[4px] space-y-3.5 text-xs">
+                                <div>
+                                    <span data-i18n="report_strengths_label" class="text-[10px] font-extrabold text-emerald-400 uppercase tracking-widest block mb-1">
+                                        Kekuatan
+                                    </span>
+                                    <p data-i18n="report_strengths_desc" class="text-slate-300 font-medium leading-relaxed">
+                                        Mampu menjelaskan idenya dengan percaya diri dan mencoba menyelesaikan tantangan secara mandiri sebelum bertanya.
+                                    </p>
+                                </div>
+                                <div class="pt-3 border-t-2 border-slate-800">
+                                    <span data-i18n="report_improvements_label" class="text-[10px] font-extrabold text-fuchsia-400 uppercase tracking-widest block mb-1">
+                                        Sedang Dilatih
+                                    </span>
+                                    <p data-i18n="report_improvements_desc" class="text-slate-300 font-medium leading-relaxed">
+                                        Lebih teliti saat memeriksa baris kode yang menyebabkan error syntax pada script game.
+                                    </p>
+                                </div>
+                                <div class="pt-3 border-t-2 border-slate-800">
+                                    <span data-i18n="report_recommendation_label" class="text-[10px] font-extrabold text-amber-400 uppercase tracking-widest block mb-1">
+                                        Rekomendasi Tutor
+                                    </span>
+                                    <p data-i18n="report_recommendation_desc" class="text-cyan-400/90 font-mono italic leading-relaxed">
+                                        "Pada sesi berikutnya, coba uji solusi dengan beberapa contoh input berbeda untuk memastikan tidak ada celah error."
+                                    </p>
+                                </div>
+                                <div class="pt-3 border-t-2 border-slate-800">
+                                    <span data-i18n="report_parent_tips_label" class="text-[10px] font-extrabold text-blue-400 uppercase tracking-widest block mb-1">
+                                        Ide Latihan di Rumah
+                                    </span>
+                                    <p data-i18n="report_parent_tips_desc" class="text-slate-300 font-medium leading-relaxed">
+                                        Minta anak menceritakan langkah yang ia coba dan alasan mengapa memilih langkah tersebut untuk melatih computational thinking.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+</template>
+
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI · Laporan Wali</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Rapor Beranotasi</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Masuk ke Ponsel</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Rapor Biasa vs LesKoding</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Progres dari Waktu ke Waktu</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Tur Bergulir</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Dari Laporan ke Rumah</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-12 pb-10">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// section: #progress-wali</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">6 cara menyajikan <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">laporan yang benar-benar dipahami wali.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Kartu laporan Student Space di semua opsi <b class="text-white">identik</b> dengan yang ada di index.html (disalin persis, satu template untuk semua). Yang dieksplorasi hanya cara penyajian di sekitarnya: anotasi, konteks, perbandingan, dan interaksi. Sorotan kuning hanyalah lapisan sementara saat berinteraksi.</p>
+</header>
+
+<!-- ============================ OPSI 1 · RAPOR BERANOTASI ============================ -->
+<section id="opsi-1" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span><h2 class="font-display text-2xl font-extrabold">Rapor Beranotasi</h2><p class="text-sm text-slate-400 max-w-3xl">Seperti panduan membaca rapor. Titik bernomor menempel di laporan, legenda di samping menjelaskan artinya dalam bahasa orang tua. Hover atau klik salah satu, dan bagian laporannya tersorot.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      <div class="lg:col-span-5 lg:sticky lg:top-24">
+        <div class="badge mb-4"><i class="fa-solid fa-clipboard-check text-[#38BDF8] text-xs"></i><span class="text-xs font-bold tracking-wider uppercase" data-i18n="parent_badge">Laporan belajar yang bisa dipahami wali</span></div>
+        <h3 class="text-3xl sm:text-4xl font-bold leading-tight tracking-tight" data-i18n="parent_title">Tahu apa yang anak pelajari—dan langkah berikutnya.</h3>
+        <p class="text-slate-300 text-sm sm:text-base mt-4">Tidak perlu paham coding untuk membacanya. Ini panduan singkatnya:</p>
+        <ol class="mt-6 space-y-2" id="o1-legend"></ol>
+        <div class="mt-6 flex items-center gap-2 text-xs mono text-slate-400"><i class="fa-solid fa-sync text-cyan-400 animate-spin-slow"></i><span data-i18n="parent_sync">Sinkronisasi otomatis dengan aplikasi Student Space</span></div>
+      </div>
+      <div class="lg:col-span-7" data-report="o1"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 2 · MASUK KE PONSEL ============================ -->
+<section id="opsi-2" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19] overflow-hidden">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span><h2 class="font-display text-2xl font-extrabold">Masuk ke Ponsel Orang Tua</h2><p class="text-sm text-slate-400 max-w-3xl">Menunjukkan momen nyatanya: sesi selesai, notifikasi masuk, lalu laporan dibaca di ponsel. Kartu laporan tampil di dalam layar aplikasi dan bisa di-scroll seperti aslinya.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6">
+        <div class="badge mb-4"><i class="fa-solid fa-mobile-screen text-[#38BDF8] text-xs"></i><span class="text-xs font-bold tracking-wider uppercase">Langsung ke ponsel Anda</span></div>
+        <h3 class="text-3xl sm:text-4xl font-bold leading-tight tracking-tight">Kelas selesai. <span class="text-[#FFC83D]">Laporannya menyusul ke genggaman Anda.</span></h3>
+        <p class="text-slate-300 text-sm sm:text-base mt-4 max-w-lg">Tidak perlu menunggu akhir semester. Setiap sesi, tutor menuliskan apa yang dipelajari anak, dan Anda bisa membacanya di aplikasi Student Space.</p>
+        <ol class="mt-8 space-y-1" id="o2-steps"></ol>
+        <button id="o2-replay" class="mt-6 text-xs font-bold text-slate-400 hover:text-white"><i class="fa-solid fa-rotate-right mr-1"></i>Putar ulang</button>
+      </div>
+      <div class="lg:col-span-6 flex justify-center">
+        <div class="phone relative w-full max-w-[340px] h-[700px] rounded-[3rem] border-[10px] border-[#1E293B] bg-[#0B0F19] shadow-[0_40px_90px_-30px_rgba(0,0,0,.95)] overflow-hidden" id="o2-phone">
+          <div class="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full bg-black z-30"></div>
+          <!-- App -->
+          <div class="absolute inset-0 flex flex-col">
+            <div class="pt-10 pb-3 px-4 bg-[#0F172A] border-b border-white/10 flex items-center gap-3">
+              <i class="fa-solid fa-chevron-left text-slate-500 text-sm"></i>
+              <div class="flex-1"><div class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Student Space</div><div class="text-sm font-bold">Laporan Sesi</div></div>
+              <i class="fa-solid fa-share-nodes text-slate-500 text-sm"></i>
+            </div>
+            <div class="phone-scroll flex-1 overflow-y-auto p-3 bg-[#0B0F19]" id="o2-scroll"><div data-report="o2"></div></div>
+          </div>
+          <!-- Lock screen -->
+          <div class="lock absolute inset-0 z-20 flex flex-col items-center pt-20 px-4" style="background:radial-gradient(circle at 50% 30%,#1e3a8a,#0B0F19 70%)">
+            <div class="text-6xl font-display font-light tracking-tight">16:45</div>
+            <div class="text-xs text-slate-300 mt-1">Sabtu, 12 September</div>
+            <button id="o2-notif" class="notif w-full mt-10 text-left rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-3.5 opacity-0 -translate-y-6">
+              <div class="flex items-center gap-2 text-[10px] text-slate-300 uppercase tracking-wider font-bold"><span class="w-5 h-5 rounded-md bg-[#FFC83D] text-[#111827] flex items-center justify-center text-[9px]"><i class="fa-solid fa-graduation-cap"></i></span>Student Space<span class="ml-auto normal-case font-normal">baru saja</span></div>
+              <div class="text-sm font-bold mt-2">Laporan Sesi #4 sudah terbit 🎉</div>
+              <div class="text-xs text-slate-300 mt-0.5">Game Programming · Tutor Danu menambahkan evaluasi & tips latihan di rumah.</div>
+            </button>
+            <div class="mt-auto mb-8 text-[11px] text-slate-400" id="o2-hint">Ketuk notifikasi untuk membaca</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 3 · RAPOR BIASA VS LESKODING ============================ -->
+<section id="opsi-3" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span><h2 class="font-display text-2xl font-extrabold">Rapor Biasa vs Laporan LesKoding</h2><p class="text-sm text-slate-400 max-w-3xl">Kontras langsung. Di kiri, rapor generik yang menyisakan banyak pertanyaan. Di kanan, laporan LesKoding yang menjawabnya. Checklist di bawah rapor biasa merangkum perbedaannya.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h3 class="text-3xl sm:text-4xl font-bold leading-tight tracking-tight">Bukan sekadar nilai. <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">Penjelasan yang bisa ditindaklanjuti.</span></h3>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <div class="lg:col-span-5 lg:sticky lg:top-24">
+        <div class="text-[10px] mono font-bold uppercase tracking-widest text-slate-500 mb-3">Rapor pada umumnya</div>
+        <div class="relative rounded-2xl bg-[#F5F7FA] text-[#111827] p-6 shadow-xl rotate-[-1.5deg] opacity-90">
+          <div class="text-center border-b-2 border-[#E5E7EB] pb-3">
+            <div class="text-[10px] font-bold tracking-[.3em] text-[#475467]">LAPORAN HASIL BELAJAR</div>
+            <div class="font-bold mt-1">Kursus Komputer</div>
+          </div>
+          <table class="w-full text-sm mt-4">
+            <tr class="border-b border-[#E5E7EB]"><td class="py-2 text-[#475467]">Nama</td><td class="py-2 font-semibold text-right">—</td></tr>
+            <tr class="border-b border-[#E5E7EB]"><td class="py-2 text-[#475467]">Materi</td><td class="py-2 font-semibold text-right">Coding</td></tr>
+            <tr class="border-b border-[#E5E7EB]"><td class="py-2 text-[#475467]">Nilai</td><td class="py-2 text-right"><span class="font-black text-2xl">B+</span></td></tr>
+            <tr><td class="py-2 text-[#475467] align-top">Keterangan</td><td class="py-2 font-semibold text-right italic">"Baik, tingkatkan lagi."</td></tr>
+          </table>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-5">
+          <span class="-rotate-2 bg-[#F87171]/15 border border-[#F87171]/40 text-[#F87171] text-[11px] font-bold px-2.5 py-1 rounded-lg"><i class="fa-solid fa-question mr-1"></i>B+ untuk apa?</span>
+          <span class="rotate-1 bg-[#F87171]/15 border border-[#F87171]/40 text-[#F87171] text-[11px] font-bold px-2.5 py-1 rounded-lg"><i class="fa-solid fa-question mr-1"></i>Tingkatkan yang mana?</span>
+          <span class="-rotate-1 bg-[#F87171]/15 border border-[#F87171]/40 text-[#F87171] text-[11px] font-bold px-2.5 py-1 rounded-lg"><i class="fa-solid fa-question mr-1"></i>Saya bisa bantu apa?</span>
+        </div>
+        <div class="mt-8 rounded-2xl border border-white/10 overflow-hidden">
+          <div class="grid grid-cols-[1fr_70px_70px] text-[10px] mono font-bold uppercase tracking-wider text-slate-500 bg-[#1E293B] px-4 py-2.5"><span>Isi laporan</span><span class="text-center">Biasa</span><span class="text-center text-[#FFC83D]">LesKoding</span></div>
+          <div id="o3-rows" class="divide-y divide-white/5"></div>
+        </div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="text-[10px] mono font-bold uppercase tracking-widest text-[#FFC83D] mb-3">Laporan sesi LesKoding · Student Space</div>
+        <div data-report="o3"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 4 · PROGRES DARI WAKTU KE WAKTU ============================ -->
+<section id="opsi-4" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span><h2 class="font-display text-2xl font-extrabold">Progres dari Waktu ke Waktu</h2><p class="text-sm text-slate-400 max-w-3xl">Laporan satu sesi ditemani panel dashboard: grafik 3 rubrik dari sesi ke sesi, jejak kehadiran, dan fokus sesi berikutnya. Menegaskan bahwa progres "bisa dipantau dari waktu ke waktu".</p></div>
+    <div class="max-w-2xl mb-10">
+      <div class="badge mb-4"><i class="fa-solid fa-chart-line text-[#38BDF8] text-xs"></i><span class="text-xs font-bold tracking-wider uppercase">Satu sesi, satu langkah maju</span></div>
+      <h3 class="text-3xl sm:text-4xl font-bold leading-tight tracking-tight">Lihat perkembangannya, <span class="text-[#38BDF8]">bukan cuma hasil akhirnya.</span></h3>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="lg:col-span-7" data-report="o4"></div>
+      <div class="lg:col-span-5 space-y-5 lg:sticky lg:top-24">
+        <div class="rounded-3xl bg-[#1E293B] border border-white/10 p-5 sm:p-6">
+          <div class="flex items-center justify-between mb-4"><div class="text-sm font-bold">Rubrik dari sesi ke sesi</div><span class="text-[10px] mono text-slate-500">contoh data</span></div>
+          <div class="relative" id="o4-chart"></div>
+          <div class="flex flex-wrap gap-x-4 gap-y-1.5 mt-3 text-[11px]" id="o4-legend"></div>
+        </div>
+        <div class="rounded-3xl bg-[#1E293B] border border-white/10 p-5 sm:p-6">
+          <div class="text-sm font-bold mb-3">Jejak kehadiran</div>
+          <div class="flex gap-2" id="o4-att"></div>
+        </div>
+        <div class="rounded-3xl border border-[#FFC83D]/30 bg-[#FFC83D]/5 p-5 sm:p-6">
+          <div class="text-[10px] mono font-bold uppercase tracking-widest text-[#FFC83D] mb-2"><i class="fa-solid fa-flag-checkered mr-1"></i>Fokus sesi #5</div>
+          <p class="text-sm text-slate-200 leading-relaxed">Menguji solusi dengan beberapa input berbeda, sesuai rekomendasi tutor di laporan sesi #4.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 5 · TUR BERGULIR ============================ -->
+<section id="opsi-5" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span><h2 class="font-display text-2xl font-extrabold">Tur Bergulir</h2><p class="text-sm text-slate-400 max-w-3xl">Scrollytelling. Laporan diam di kanan seperti layar, dan saat pengunjung menggulir narasi di kiri, "kamera" bergeser ke bagian laporan yang sedang dibahas.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-5">
+        <div class="badge mb-4"><i class="fa-solid fa-clipboard-check text-[#38BDF8] text-xs"></i><span class="text-xs font-bold tracking-wider uppercase" data-i18n="parent_badge">Laporan belajar yang bisa dipahami wali</span></div>
+        <h3 class="text-3xl sm:text-4xl font-bold leading-tight tracking-tight" data-i18n="parent_title">Tahu apa yang anak pelajari—dan langkah berikutnya.</h3>
+        <div id="o5-steps" class="mt-6"></div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="lg:sticky lg:top-24">
+          <div id="o5-frame" class="relative lg:h-[calc(100vh-130px)] lg:overflow-hidden rounded-3xl">
+            <div class="pan" id="o5-pan"><div data-report="o5"></div></div>
+            <div class="hidden lg:block pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0F172A] to-transparent"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 6 · DARI LAPORAN KE RUMAH ============================ -->
+<section id="opsi-6" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span><h2 class="font-display text-2xl font-extrabold">Dari Laporan ke Rumah</h2><p class="text-sm text-slate-400 max-w-3xl">Fokus pada apa yang orang tua lakukan setelah membaca. Bagian "Ide Latihan di Rumah" diterjemahkan jadi pembuka obrolan dan checklist kecil, sehingga orang tua merasa jadi bagian dari proses belajar.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <div class="lg:col-span-7" data-report="o6"></div>
+      <div class="lg:col-span-5 lg:sticky lg:top-24">
+        <div class="badge mb-4"><i class="fa-solid fa-house-chimney text-[#38BDF8] text-xs"></i><span class="text-xs font-bold tracking-wider uppercase">Belajar berlanjut di rumah</span></div>
+        <h3 class="text-3xl sm:text-4xl font-bold leading-tight tracking-tight">Laporan yang bisa Anda <span class="text-[#FFC83D]">obrolkan</span> di meja makan.</h3>
+        <p class="text-slate-300 text-sm mt-4">Setiap laporan ditutup dengan ide latihan sederhana. Tanpa perlu paham coding, Anda bisa ikut menguatkan cara berpikir anak.</p>
+        <div class="mt-6 rounded-3xl bg-[#1E293B] border border-white/10 p-5 space-y-3" id="o6-chat"></div>
+        <div class="mt-5 rounded-3xl bg-[#1E293B] border border-white/10 p-5">
+          <div class="text-[10px] mono font-bold uppercase tracking-widest text-blue-400 mb-3">Coba minggu ini</div>
+          <div class="space-y-2.5" id="o6-ticks"></div>
+        </div>
+        <button id="o6-focus" class="mt-5 text-xs font-bold text-[#38BDF8] hover:text-white"><i class="fa-solid fa-arrow-left mr-1"></i>Lihat bagian "Ide Latihan di Rumah" di laporan</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PERBANDINGAN ============================ -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <h2 class="font-display text-2xl md:text-3xl font-extrabold mb-6">Perbandingan cepat</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[780px]">
+        <thead class="bg-[#1E293B] text-left text-xs uppercase tracking-wider text-slate-400">
+          <tr><th class="p-4">Opsi</th><th class="p-4">Pesan utama</th><th class="p-4">Interaksi</th><th class="p-4">Catatan</th><th class="p-4">Effort</th></tr>
+        </thead>
+        <tbody class="divide-y divide-white/5 text-slate-300">
+          <tr><td class="p-4 font-bold text-white">1 · Rapor Beranotasi</td><td class="p-4">"Tidak perlu paham coding untuk membacanya"</td><td class="p-4">Hover/klik legenda ↔ sorot bagian</td><td class="p-4">Paling langsung menjawab judul section</td><td class="p-4">Rendah</td></tr>
+          <tr><td class="p-4 font-bold text-white">2 · Masuk ke Ponsel</td><td class="p-4">"Laporan datang setiap sesi, ke ponsel Anda"</td><td class="p-4">Notifikasi → buka aplikasi</td><td class="p-4">Paling realistis; laporan tampil di layar sempit</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">3 · Rapor Biasa vs LesKoding</td><td class="p-4">"Bukan sekadar nilai"</td><td class="p-4">Pasif</td><td class="p-4">Persuasi kontras terkuat; rapor kiri generik</td><td class="p-4">Rendah</td></tr>
+          <tr><td class="p-4 font-bold text-white">4 · Progres dari Waktu ke Waktu</td><td class="p-4">"Perkembangan terlihat"</td><td class="p-4">Hover grafik</td><td class="p-4">Grafik memakai contoh data; perlu data asli/label jelas</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">5 · Tur Bergulir</td><td class="p-4">Penjelasan bertahap</td><td class="p-4">Scroll menggerakkan "kamera"</td><td class="p-4">Paling sinematik; di mobile jadi tumpukan biasa</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">6 · Dari Laporan ke Rumah</td><td class="p-4">"Orang tua ikut berperan"</td><td class="p-4">Checklist + tombol sorot</td><td class="p-4">Memperkuat rasa kemitraan</td><td class="p-4">Rendah</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ===================== TEMPLATE LAPORAN ===================== */
+const tpl = document.getElementById('report-tpl');
+// Bagian-bagian laporan yang bisa disorot (dipilih lewat atribut data-i18n yang sudah ada)
+const PARTS = {
+  header:     r => r.querySelector('[data-i18n="report_present"]').closest('.pb-5'),
+  tutor:      r => r.querySelector('[data-i18n="report_tutor_name"]').closest('.my-4'),
+  hero:       r => r.querySelector('[data-i18n="report_superhero_label"]').parentElement,
+  rubric:     r => r.querySelector('[data-i18n="report_rubric_header"]').parentElement,
+  strengths:  r => r.querySelector('[data-i18n="report_strengths_label"]').parentElement,
+  improve:    r => r.querySelector('[data-i18n="report_improvements_label"]').parentElement,
+  recommend:  r => r.querySelector('[data-i18n="report_recommendation_label"]').parentElement,
+  tips:       r => r.querySelector('[data-i18n="report_parent_tips_label"]').parentElement,
+};
+function mountReport(key) {
+  const host = document.querySelector(`[data-report="${key}"]`);
+  host.appendChild(tpl.content.cloneNode(true));
+  const root = host.firstElementChild;
+  const parts = {};
+  for (const [k, f] of Object.entries(PARTS)) { parts[k] = f(root); parts[k].classList.add('rpt-target'); }
+  // k boleh berisi beberapa bagian dipisah koma, mis. "strengths,improve"
+  const highlight = k => { const keys = (k || '').split(','); Object.entries(parts).forEach(([pk, el]) => el.classList.toggle('hl', keys.includes(pk))); };
+  return { root, parts, highlight };
+}
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ===================== OPSI 1 · BERANOTASI ===================== */
+(() => {
+  const r = mountReport('o1');
+  const L = [
+    ['header', 'Kehadiran & sesi ke berapa', 'Pastikan anak hadir dan tahu materi ini bagian dari sesi keberapa.'],
+    ['tutor', 'Siapa tutornya', 'Laporan ditulis dan diverifikasi oleh tutor yang mendampingi langsung.'],
+    ['hero', 'Karakter superhero anak', 'Gambaran gaya belajar anak di sesi ini, dibuat seru supaya anak bangga membacanya.'],
+    ['rubric', '3 keterampilan yang dinilai', 'Pemahaman, kreativitas, dan keaktifan, masing-masing dengan skor dan penjelasan singkat.'],
+    ['strengths,improve', 'Kekuatan & yang sedang dilatih', 'Apa yang sudah bagus, dan apa yang masih diasah. Bukan sekadar "baik".'],
+    ['recommend,tips', 'Langkah berikutnya & latihan di rumah', 'Rekomendasi untuk sesi berikutnya, plus ide latihan sederhana di rumah tanpa perlu paham coding.'],
+  ];
+  const legend = document.getElementById('o1-legend');
+  legend.innerHTML = L.map(([k, t, d], i) => `
+    <li><button class="legend-item w-full text-left flex gap-3.5 p-3 rounded-2xl border border-transparent hover:border-white/10 transition" data-k="${k}">
+      <span class="num w-7 h-7 rounded-full bg-white/10 text-white text-xs font-extrabold flex items-center justify-center shrink-0 transition">${i + 1}</span>
+      <span><span class="block text-sm font-bold">${t}</span><span class="block text-xs text-slate-400 mt-0.5 leading-relaxed">${d}</span></span>
+    </button></li>`).join('');
+  L.forEach(([k], i) => { const pin = document.createElement('button'); pin.className = 'pin'; pin.textContent = i + 1; pin.dataset.k = k; pin.setAttribute('aria-label', L[i][1]); r.parts[k.split(',')[0]].appendChild(pin); });
+  const set = k => { r.highlight(k); legend.querySelectorAll('.legend-item').forEach(b => b.setAttribute('aria-current', b.dataset.k === k)); };
+  const clear = () => { r.highlight(null); legend.querySelectorAll('.legend-item').forEach(b => b.removeAttribute('aria-current')); };
+  let locked = null;
+  legend.addEventListener('mouseover', e => { const b = e.target.closest('.legend-item'); if (b && !locked) set(b.dataset.k); });
+  legend.addEventListener('mouseleave', () => { if (!locked) clear(); });
+  const toggle = k => { locked = locked === k ? null : k; locked ? set(k) : clear(); };
+  legend.addEventListener('click', e => { const b = e.target.closest('.legend-item'); if (b) toggle(b.dataset.k); });
+  r.root.addEventListener('click', e => { const p = e.target.closest('.pin'); if (p) toggle(p.dataset.k); });
+})();
+
+/* ===================== OPSI 2 · PONSEL ===================== */
+(() => {
+  mountReport('o2');
+  const phone = document.getElementById('o2-phone'), notif = document.getElementById('o2-notif'), scroll = document.getElementById('o2-scroll'), stepsEl = document.getElementById('o2-steps');
+  const S = [
+    ['fa-chalkboard-user', 'Sesi selesai di lab', 'Anak menyelesaikan tantangan bersama tutor.'],
+    ['fa-pen-to-square', 'Tutor menulis evaluasi', 'Kehadiran, 3 rubrik, kekuatan, dan rekomendasi.'],
+    ['fa-bell', 'Notifikasi masuk', 'Laporan terbit di Student Space.'],
+    ['fa-book-open-reader', 'Anda membaca & berdiskusi', 'Lengkap dengan ide latihan di rumah.'],
+  ];
+  stepsEl.innerHTML = S.map(([ic, t, d], i) => `
+    <li class="step2 flex gap-4 items-start p-2" data-i="${i}">
+      <span class="dot w-9 h-9 rounded-xl border border-white/15 bg-white/5 text-slate-400 flex items-center justify-center text-sm shrink-0 transition"><i class="fa-solid ${ic}"></i></span>
+      <span><span class="t block text-sm font-bold text-slate-400 transition">${t}</span><span class="block text-xs text-slate-500">${d}</span></span>
+    </li>`).join('');
+  const mark = i => stepsEl.querySelectorAll('.step2').forEach((s, j) => s.setAttribute('aria-current', j <= i));
+  let timers = [];
+  const later = (fn, ms) => timers.push(setTimeout(fn, reduceMotion ? 0 : ms));
+  const open = () => { phone.classList.add('opened'); mark(3); scroll.scrollTop = 0; later(() => scroll.scrollTo({ top: 260, behavior: 'smooth' }), 1400); };
+  const play = () => {
+    timers.forEach(clearTimeout); timers = [];
+    phone.classList.remove('opened'); notif.style.opacity = 0; notif.style.transform = 'translateY(-24px)'; mark(-1);
+    later(() => mark(0), 200); later(() => mark(1), 1000);
+    later(() => { mark(2); notif.style.opacity = 1; notif.style.transform = 'none'; }, 1900);
+    later(open, 4200);
+  };
+  notif.onclick = () => { timers.forEach(clearTimeout); open(); };
+  document.getElementById('o2-replay').onclick = play;
+  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { play(); io.disconnect(); } }, { threshold:.4 }).observe(phone);
+})();
+
+/* ===================== OPSI 3 · BIASA VS LESKODING ===================== */
+(() => {
+  const r = mountReport('o3');
+  const ROWS = [
+    ['Kehadiran per sesi', false, 'header'], ['Nama tutor & verifikasi', false, 'tutor'], ['Nilai + penjelasan per keterampilan', false, 'rubric'],
+    ['Kekuatan anak', false, 'strengths'], ['Hal yang sedang dilatih', false, 'improve'], ['Rekomendasi sesi berikutnya', false, 'recommend'], ['Ide latihan di rumah', false, 'tips'],
+  ];
+  const rows = document.getElementById('o3-rows');
+  rows.innerHTML = ROWS.map(([t, a, k]) => `
+    <button class="w-full grid grid-cols-[1fr_70px_70px] items-center px-4 py-2.5 text-left text-sm hover:bg-white/[.03] transition" data-k="${k}">
+      <span class="text-slate-300">${t}</span>
+      <span class="text-center">${a ? '<i class="fa-solid fa-check text-emerald-400"></i>' : '<i class="fa-solid fa-xmark text-slate-600"></i>'}</span>
+      <span class="text-center"><i class="fa-solid fa-circle-check text-[#FFC83D]"></i></span>
+    </button>`).join('');
+  rows.addEventListener('mouseover', e => { const b = e.target.closest('[data-k]'); if (b) r.highlight(b.dataset.k); });
+  rows.addEventListener('mouseleave', () => r.highlight(null));
+})();
+
+/* ===================== OPSI 4 · PROGRES ===================== */
+(() => {
+  mountReport('o4');
+  // contoh data: sesi #4 sama dengan skor di laporan (8.5 / 9.0 / 9.5)
+  const SER = [
+    { n:'Pemahaman Konsep', c:'#22D3EE', v:[6.5, 7.0, 8.0, 8.5] },
+    { n:'Kreativitas', c:'#FFC83D', v:[7.0, 7.5, 8.5, 9.0] },
+    { n:'Keaktifan', c:'#34D399', v:[8.0, 8.5, 9.0, 9.5] },
+  ];
+  const W = 340, H = 190, P = { l:28, r:44, t:12, b:24 }, min = 5, max = 10;
+  const x = i => P.l + i * (W - P.l - P.r) / 3, y = v => P.t + (max - v) / (max - min) * (H - P.t - P.b);
+  let svg = `<svg viewBox="0 0 ${W} ${H}" class="w-full h-auto" role="img" aria-label="Grafik rubrik sesi 1 sampai 4">`;
+  [6, 8, 10].forEach(g => svg += `<line x1="${P.l}" x2="${W - P.r}" y1="${y(g)}" y2="${y(g)}" stroke="rgba(255,255,255,.07)"/><text x="${P.l - 8}" y="${y(g) + 3}" text-anchor="end" font-size="9" fill="#64748B">${g}</text>`);
+  [0, 1, 2, 3].forEach(i => svg += `<text x="${x(i)}" y="${H - 6}" text-anchor="middle" font-size="9" fill="#64748B">Sesi ${i + 1}</text>`);
+  SER.forEach(s => {
+    svg += `<polyline fill="none" stroke="${s.c}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="${s.v.map((v, i) => `${x(i)},${y(v)}`).join(' ')}"/>`;
+    s.v.forEach((v, i) => svg += `<circle cx="${x(i)}" cy="${y(v)}" r="${i === 3 ? 4 : 2.5}" fill="${i === 3 ? s.c : '#1E293B'}" stroke="${s.c}" stroke-width="1.5"><title>${s.n} · Sesi ${i + 1}: ${v.toFixed(1)}</title></circle>`);
+    svg += `<text x="${x(3) + 8}" y="${y(s.v[3]) + 3}" font-size="10" font-weight="700" fill="${s.c}">${s.v[3].toFixed(1)}</text>`;
+  });
+  document.getElementById('o4-chart').innerHTML = svg + '</svg>';
+  document.getElementById('o4-legend').innerHTML = SER.map(s => `<span class="inline-flex items-center gap-1.5 text-slate-300"><span class="w-3 h-[3px] rounded" style="background:${s.c}"></span>${s.n}</span>`).join('');
+  document.getElementById('o4-att').innerHTML = [1, 2, 3, 4].map(i => `<div class="flex-1 text-center"><div class="h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-check"></i></div><div class="text-[10px] text-slate-500 mt-1 mono">#${i}</div></div>`).join('') +
+    `<div class="flex-1 text-center"><div class="h-10 rounded-xl border border-dashed border-white/15 text-slate-500 flex items-center justify-center text-xs">#5</div><div class="text-[10px] text-slate-500 mt-1 mono">berikutnya</div></div>`;
+})();
+
+/* ===================== OPSI 5 · TUR BERGULIR ===================== */
+(() => {
+  const r = mountReport('o5');
+  const pan = document.getElementById('o5-pan'), frame = document.getElementById('o5-frame'), stepsEl = document.getElementById('o5-steps');
+  const S = [
+    ['header', '01', 'Hadir dan tercatat', 'Setiap laporan dimulai dari hal paling dasar: anak hadir di sesi ke berapa dan kapan.'],
+    ['hero', '02', 'Karakter yang membuat anak bangga', 'Gaya belajar anak di sesi ini digambarkan lewat karakter superhero. Anak senang membacanya, orang tua dapat gambaran sifatnya.'],
+    ['rubric', '03', 'Tiga keterampilan, bukan satu nilai', 'Pemahaman konsep, kreativitas, dan keaktifan dinilai terpisah, masing-masing dengan penjelasan singkat.'],
+    ['strengths,improve', '04', 'Kekuatan dan hal yang sedang dilatih', 'Tutor menulis apa yang sudah baik dan apa yang masih diasah, dalam bahasa yang mudah dipahami.'],
+    ['recommend,tips', '05', 'Langkah berikutnya, di kelas dan di rumah', 'Rekomendasi untuk sesi berikutnya plus ide latihan sederhana yang bisa dilakukan bersama di rumah.'],
+  ];
+  stepsEl.innerHTML = S.map(([k, n, t, d]) => `
+    <div class="story-step lg:min-h-[62vh] flex flex-col justify-center py-8" data-k="${k}">
+      <div class="font-display text-5xl font-black text-white/10">${n}</div>
+      <h4 class="text-xl sm:text-2xl font-bold mt-2">${t}</h4>
+      <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">${d}</p>
+    </div>`).join('') + `<div class="pt-4 pb-10"><a href="#register" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a></div>`;
+  const lg = matchMedia('(min-width:1024px)');
+  const go = k => {
+    stepsEl.querySelectorAll('.story-step').forEach(s => s.classList.toggle('active', s.dataset.k === k));
+    r.highlight(k);
+    if (!lg.matches) { pan.style.transform = ''; return; }
+    const el = r.parts[k.split(',')[0]], top = el.getBoundingClientRect().top - pan.getBoundingClientRect().top;
+    const maxShift = Math.max(0, pan.offsetHeight - frame.clientHeight);
+    pan.style.transform = `translateY(${-Math.min(maxShift, Math.max(0, top - 40))}px)`;
+  };
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) go(e.target.dataset.k); }), { rootMargin:'-45% 0px -45% 0px' });
+  stepsEl.querySelectorAll('.story-step').forEach(s => io.observe(s));
+  go('header');
+})();
+
+/* ===================== OPSI 6 · KE RUMAH ===================== */
+(() => {
+  const r = mountReport('o6');
+  const tip = r.root.querySelector('[data-i18n="report_parent_tips_desc"]').textContent.trim();
+  document.getElementById('o6-chat').innerHTML = `
+    <div class="text-[10px] mono font-bold uppercase tracking-widest text-blue-400">Dari laporan sesi #4</div>
+    <p class="text-sm text-slate-300 italic border-l-2 border-blue-400/50 pl-3">"${tip}"</p>
+    <div class="text-[10px] mono font-bold uppercase tracking-widest text-slate-500 pt-2">Pembuka obrolan</div>
+    <div class="flex justify-end"><div class="max-w-[85%] bg-[#0788F5] rounded-2xl rounded-br-sm px-3.5 py-2 text-sm">Tadi di kelas bikin apa? Ceritain dong 😊</div></div>
+    <div class="flex"><div class="max-w-[85%] bg-[#0B0F19] border border-white/10 rounded-2xl rounded-bl-sm px-3.5 py-2 text-sm">Bikin rintangan di game Roblox!</div></div>
+    <div class="flex justify-end"><div class="max-w-[85%] bg-[#0788F5] rounded-2xl rounded-br-sm px-3.5 py-2 text-sm">Langkah apa yang kamu coba dulu? Kenapa pilih itu?</div></div>
+    <div class="flex justify-end"><div class="max-w-[85%] bg-[#0788F5] rounded-2xl rounded-br-sm px-3.5 py-2 text-sm">Kalau ada error, gimana cara kamu cari salahnya?</div></div>
+    <p class="text-[10px] text-slate-500 pt-1">Ilustrasi percakapan.</p>`;
+  const T = ['Dengarkan anak menceritakan langkah yang ia coba', 'Tanyakan alasan di balik pilihannya', 'Minta ia menunjukkan game-nya ke keluarga'];
+  document.getElementById('o6-ticks').innerHTML = T.map((t, i) => `
+    <label class="tick flex items-center gap-3 cursor-pointer"><input type="checkbox" class="sr-only"><span class="w-6 h-6 rounded-md border-2 border-white/20 flex items-center justify-center text-[11px] shrink-0 transition"><i class="fa-solid fa-check"></i></span><span class="lbl text-sm text-slate-300 transition">${t}</span></label>`).join('');
+  let on = false;
+  document.getElementById('o6-focus').onclick = () => {
+    on = !on; r.highlight(on ? 'tips' : null);
+    if (on) r.parts.tips.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block:'center' });
+  };
+})();
+</script>
+</body>
+</html>

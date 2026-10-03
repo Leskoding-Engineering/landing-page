@@ -1,0 +1,25 @@
+# OS generated files
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Environment and IDE
+.claude/
+.idea/
+.vscode/
+
+# Temporary scratch scripts & dumps
+*.py
+*.txt
+old_*.html
+opsi*.html
+opsi*.js
+opsi*.txt
+extract_temp.html
+test.js
+run_test.js
+package.json
+package-lock.json

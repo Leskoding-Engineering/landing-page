@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi — Section Teknologi (Tech Flow)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .no-scrollbar::-webkit-scrollbar{display:none} .no-scrollbar{scrollbar-width:none}
+  .grain{background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:18px 18px}
+  .fade{animation:fade .45s cubic-bezier(.16,1,.3,1)}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .bob{animation:bob 2.4s ease-in-out infinite} .blink{animation:blink 1.2s steps(2) infinite}
+  .tool-chip img{filter:none}
+  .interest-btn[aria-selected="true"]{background:#1E293B;border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 12px 30px -12px var(--c)}
+  .interest-btn[aria-selected="true"] .dot{background:var(--c);color:#0B0F19}
+  .bento:hover .bento-art{transform:scale(1.04)}
+  .bento-art{transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  .story-before{filter:grayscale(1) brightness(.75)}
+  @media (prefers-reduced-motion: reduce){.bob,.blink,.fade{animation:none!important}}
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- Exploration switcher -->
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 font-mono">EKSPLORASI · Section Teknologi</div>
+    <div class="flex gap-1.5 text-xs font-bold">
+      <a href="#opsi-a" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">A · Pilih Minat</a>
+      <a href="#opsi-b" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">B · Bento Galeri</a>
+      <a href="#opsi-c" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">C · Sebelum → Sesudah</a>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================================== -->
+<!-- OPSI A — PILIH MINAT (interest-first, split layout)              -->
+<!-- =============================================================== -->
+<section id="opsi-a" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden">
+  <div class="absolute inset-0 grain opacity-60 pointer-events-none"></div>
+  <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI A — PILIH MINAT ANAK</div>
+
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+      <!-- Left: headline + interest list -->
+      <div class="lg:col-span-5">
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight">
+          Anak Anda suka apa?<br><span class="text-[#FFC83D]">Kami ubah jadi karya.</span>
+        </h2>
+        <p class="text-slate-300 mt-4 text-sm sm:text-base leading-relaxed max-w-md">Pilih yang paling menggambarkan anak Anda. Lihat software yang dipelajari dan karya yang dibawa pulang.</p>
+
+        <div class="flex gap-1.5 mt-7 mb-4 text-xs font-bold" id="a-age">
+          <button data-age="all" class="px-3.5 py-1.5 rounded-full bg-white text-[#0B0F19]">Semua usia</button>
+          <button data-age="kids" class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300">Anak 6–14</button>
+          <button data-age="teens" class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300">Remaja 11–17</button>
+        </div>
+
+        <div class="space-y-2" id="a-list" role="tablist"></div>
+      </div>
+
+      <!-- Right: creation stage -->
+      <div class="lg:col-span-7 lg:sticky lg:top-24" id="a-stage"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- OPSI B — BENTO GALERI (semua jalur terlihat sekaligus)           -->
+<!-- =============================================================== -->
+<section id="opsi-b" class="relative py-20 md:py-28 border-b border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI B — BENTO GALERI KARYA</div>
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div>
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight max-w-2xl">Dari rasa penasaran, jadi <span class="relative inline-block"><span class="relative z-10">karya nyata</span><span class="absolute left-0 right-0 bottom-1 h-3 bg-[#0788F5]/60 -z-0 rounded"></span></span>.</h2>
+        <p class="text-slate-300 mt-3 max-w-xl text-sm sm:text-base">7 jalur belajar, satu tujuan: anak pulang membawa karya yang bisa dimainkan, dipakai, dan dipamerkan.</p>
+      </div>
+      <div class="flex gap-1.5 text-xs font-bold" id="b-age">
+        <button data-age="all" class="px-3.5 py-1.5 rounded-full bg-white text-[#0B0F19]">Semua</button>
+        <button data-age="kids" class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300">Anak 6–14</button>
+        <button data-age="teens" class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300">Remaja 11–17</button>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[minmax(0,auto)] gap-4" id="b-grid"></div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- OPSI C — SEBELUM → SESUDAH (story carousel)                      -->
+<!-- =============================================================== -->
+<section id="opsi-c" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden">
+  <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI C — SEBELUM → SESUDAH</div>
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div>
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight max-w-2xl">Dari <span class="text-slate-500 line-through decoration-[#F3261D] decoration-4">penonton</span> jadi <span class="text-[#FFC83D]">pencipta</span>.</h2>
+        <p class="text-slate-300 mt-3 max-w-xl text-sm sm:text-base">Geser untuk melihat perubahan yang terjadi setelah anak belajar di LesKoding.</p>
+      </div>
+      <div class="flex gap-2">
+        <button id="c-prev" class="w-11 h-11 rounded-full border border-white/15 hover:bg-white/10" aria-label="Sebelumnya"><i class="fa-solid fa-arrow-left"></i></button>
+        <button id="c-next" class="w-11 h-11 rounded-full bg-[#FFC83D] text-[#0B0F19] hover:bg-[#fed368]" aria-label="Berikutnya"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+    <div id="c-track" class="flex gap-5 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-4 -mx-4 px-4"></div>
+    <div id="c-dots" class="flex justify-center gap-1.5 mt-6"></div>
+  </div>
+</section>
+
+<script>
+/* ------------------------------------------------------------------ DATA */
+const T = 'assets/tech/';
+const tracks = [
+  { id:'k1', group:'kids', age:'6–14', color:'#FFC83D', icon:'fa-gamepad', art:'game',
+    interest:'Suka main game', title:'Bikin Game & Animasi', tag:'Jalur populer anak',
+    before:'Main game buatan orang lain berjam-jam', after:'Bikin game & kartun dengan karakter dan cerita sendiri',
+    idea:'Anak suka main game? Yuk ajak buat game sendiri dengan karakter, labirin, dan jalan cerita buatan mereka.',
+    skill:'Logika & pemecahan masalah',
+    tools:[['Scratch','scratch.png'],['PictoBlox AI','pictoblox.png'],['CodeMonkey','codemonkey.png']],
+    outputs:[['Game 2D buatan sendiri','Dimainkan bersama teman & keluarga'],['Kartun dongeng interaktif','Dengan rekaman suara anak sendiri']],
+    course:'beginner' },
+  { id:'k2', group:'kids', age:'8–14', color:'#10B981', icon:'fa-desktop', art:'doc',
+    interest:'Sering mengerjakan tugas di laptop', title:'Pintar Komputer & Tugas Sekolah', tag:'Kebutuhan sekolah',
+    before:'Masih minta tolong orang tua untuk mengetik tugas', after:'Mengetik 10 jari, bikin makalah & slide presentasi sendiri',
+    idea:'Anak mandiri memakai komputer: mengetik tugas tanpa bantuan terus-menerus dan siap presentasi di kelas.',
+    skill:'Mengetik 10 jari & literasi digital',
+    tools:[['Word','ms_word.png'],['Excel','ms_excel.webp'],['PowerPoint','ms_powerpoint.webp']],
+    outputs:[['Makalah & laporan rapi','Margin, tabel, dan daftar isi otomatis'],['Slide presentasi keren','Percaya diri presentasi di kelas']],
+    course:'komputer-dasar' },
+  { id:'k3', group:'kids', age:'9–14', color:'#EC4899', icon:'fa-palette', art:'poster',
+    interest:'Suka menggambar & mewarnai', title:'Desain & Gambar Digital', tag:'Kreatif visual',
+    before:'Coretan gambar di buku tulis', after:'Poster & desain tampilan aplikasi yang siap dicetak',
+    idea:'Anak punya rasa seni? Salurkan ke media digital untuk membuat karya visual yang estetik dan membanggakan.',
+    skill:'Komposisi warna & tipografi',
+    tools:[['Canva','canva.png'],['Figma','figma.png']],
+    outputs:[['Poster edukasi','Siap dicetak dan dipajang di kamar'],['Desain tampilan aplikasi','Mockup layar buatan anak sendiri']],
+    course:'design-grafis' },
+  { id:'t1', group:'teens', age:'11–17', color:'#0788F5', icon:'fa-cube', art:'world',
+    interest:'Hobi main Roblox / game 3D', title:'Game Developer 3D', tag:'Spesialisasi game',
+    before:'Main Roblox setiap hari', after:'Menerbitkan game Roblox sendiri yang dimainkan teman online',
+    idea:'Dari sekadar bermain, remaja diarahkan merancang dunia 3D dan aturan permainannya sendiri.',
+    skill:'Logika game, world building & scripting Lua',
+    tools:[['Roblox Studio','roblox_studio.png'],['Construct 3','construct.svg'],['Unity','unity.svg']],
+    outputs:[['Game 3D siap main di Roblox','Link bisa dibagikan ke teman'],['Game HTML5 di browser','Dibuka di HP tanpa install']],
+    course:'advance-1' },
+  { id:'t2', group:'teens', age:'11–17', color:'#8B5CF6', icon:'fa-code', art:'web',
+    interest:'Ingin punya website sendiri', title:'Junior Web Developer', tag:'Spesialisasi web',
+    before:'Hanya scroll website orang lain', after:'Punya website portofolio pribadi yang live di internet',
+    idea:'Website profil pribadi untuk memamerkan hobi, sertifikat, dan karya buatan sendiri.',
+    skill:'HTML, CSS & JavaScript asli',
+    tools:[['HTML5','html.webp'],['CSS3','css.webp'],['JavaScript','js.svg']],
+    outputs:[['Website portofolio online','Live dan bisa dibuka di HP siapa saja'],['Tampilan responsif','Rapi di HP, tablet & laptop']],
+    course:'advance-2' },
+  { id:'t3', group:'teens', age:'11–17', color:'#14B8A6', icon:'fa-microchip', art:'circuit',
+    interest:'Suka membongkar alat elektronik', title:'Robotika & IoT', tag:'Spesialisasi robotik',
+    before:'Penasaran kenapa lampu bisa menyala sendiri', after:'Merakit alat otomatis dengan sensor yang terhubung ke HP',
+    idea:'Bagaimana lampu bisa menyala sendiri saat orang masuk kamar? Remaja merangkai alat otomatis dengan sensor nyata.',
+    skill:'Elektronika dasar & otomasi',
+    tools:[['Arduino','arduino.webp'],['PictoBlox IoT','pictoblox.png']],
+    outputs:[['Prototipe alat otomatis','Lampu sensor gerak atau alarm'],['Alat terkoneksi HP (IoT)','Pantau data sensor dari smartphone']],
+    course:'advance-3' },
+  { id:'t4', group:'teens', age:'11–17', color:'#F3261D', icon:'fa-mobile-screen', art:'phone',
+    interest:'Tidak pernah lepas dari HP', title:'Apps Developer', tag:'Spesialisasi aplikasi',
+    before:'Hanya memakai aplikasi buatan orang lain', after:'Aplikasi Android buatan sendiri terpasang di HP keluarga',
+    idea:'Punya ide aplikasi jadwal belajar, kalkulator uang saku, atau kuis seru? Remaja merancangnya jadi aplikasi ponsel.',
+    skill:'Desain UI & logika aplikasi mobile',
+    tools:[['App Inventor','mit_app_inventor.png'],['Flutter','flutter.webp']],
+    outputs:[['Aplikasi terpasang di HP','File .apk yang berjalan mulus'],['Karya siap pamer','Ditunjukkan ke keluarga & teman']],
+    course:'advance-4' },
+];
+
+/* --------------------------------------------- ARTIFACT MOCKS (pure CSS) */
+function art(type, c, size='md') {
+  const h = size === 'lg' ? 'h-64 sm:h-72' : size === 'sm' ? 'h-36' : 'h-44';
+  const wrap = (inner, bg='#0F172A') => `<div class="relative ${h} w-full rounded-2xl overflow-hidden border border-white/10" style="background:${bg}">${inner}</div>`;
+  switch (type) {
+    case 'game': return wrap(`
+      <div class="absolute inset-0" style="background:linear-gradient(#1e3a8a,#0F172A)"></div>
+      <div class="absolute top-3 left-3 font-mono text-[10px] text-white/80">SCORE 0420</div>
+      <div class="absolute top-3 right-3 flex gap-1">${'<i class="fa-solid fa-heart text-[10px] text-[#F3261D]"></i>'.repeat(3)}</div>
+      <div class="absolute bottom-0 left-0 right-0 h-6" style="background:repeating-linear-gradient(90deg,#16a34a 0 16px,#15803d 16px 32px)"></div>
+      <div class="absolute bottom-14 left-[22%] w-16 h-3 rounded bg-[#a16207]"></div>
+      <div class="absolute bottom-24 left-[52%] w-20 h-3 rounded bg-[#a16207]"></div>
+      <div class="absolute bottom-[7.5rem] left-[58%] w-3 h-3 rounded-full blink" style="background:${c}"></div>
+      <div class="absolute bottom-[4.5rem] left-[30%] w-3 h-3 rounded-full blink" style="background:${c}"></div>
+      <div class="absolute bottom-6 left-[12%] text-3xl bob">🐱</div>`);
+    case 'doc': return wrap(`
+      <div class="absolute left-[8%] top-5 w-[46%] h-[78%] bg-white rounded-lg shadow-xl p-3 rotate-[-4deg]">
+        <div class="h-2 w-2/3 rounded bg-slate-800 mb-2"></div>
+        ${'<div class="h-1.5 rounded bg-slate-300 mb-1.5"></div>'.repeat(5)}
+        <div class="h-1.5 w-1/2 rounded bg-slate-300"></div>
+      </div>
+      <div class="absolute right-[8%] top-8 w-[44%] h-[46%] rounded-lg shadow-xl p-2 rotate-[3deg] flex items-end gap-1.5" style="background:#ecfdf5">
+        ${[40,70,55,90,65].map(v=>`<div class="flex-1 rounded-t" style="height:${v}%;background:${c}"></div>`).join('')}
+      </div>
+      <div class="absolute right-[12%] bottom-4 w-[40%] h-[30%] rounded-lg shadow-xl rotate-[-2deg] p-2" style="background:#fb923c">
+        <div class="h-2 w-1/2 rounded bg-white/90 mb-1.5"></div><div class="h-1.5 w-3/4 rounded bg-white/60"></div>
+      </div>`, '#0b2a22');
+    case 'poster': return wrap(`
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[46%] h-[86%] rounded-lg shadow-2xl overflow-hidden rotate-[-3deg]" style="background:linear-gradient(160deg,${c},#8B5CF6)">
+        <div class="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-[#FFC83D]"></div>
+        <div class="absolute bottom-10 left-3 font-display font-black text-white text-xl leading-none">SAVE<br>OUR<br>OCEAN</div>
+        <div class="absolute bottom-3 left-3 h-1.5 w-1/2 rounded bg-white/70"></div>
+      </div>
+      <div class="absolute right-[8%] bottom-5 w-12 h-12 rounded-full border-4 border-white/20"></div>
+      <div class="absolute left-[9%] top-6 flex flex-col gap-1">${['#FFC83D',c,'#8B5CF6','#0788F5'].map(x=>`<span class="w-5 h-5 rounded-full border-2 border-white/30" style="background:${x}"></span>`).join('')}</div>`, '#2a0f1f');
+    case 'world': return wrap(`
+      <div class="absolute inset-0" style="background:linear-gradient(#38bdf8,#1e3a8a)"></div>
+      <div class="absolute inset-x-0 bottom-0 h-1/2" style="perspective:300px"><div class="absolute inset-0 origin-bottom" style="transform:rotateX(55deg);background:repeating-linear-gradient(90deg,rgba(255,255,255,.12) 0 1px,transparent 1px 28px),repeating-linear-gradient(0deg,rgba(255,255,255,.12) 0 1px,transparent 1px 28px),#166534"></div></div>
+      ${[[18,52,'#F3261D'],[38,42,'#FFC83D'],[58,34,'#8B5CF6'],[76,26,'#10B981']].map(([l,b,col])=>`<div class="absolute w-12 h-5 rounded-sm shadow-lg" style="left:${l}%;bottom:${b}%;background:${col};box-shadow:0 6px 0 rgba(0,0,0,.35)"></div>`).join('')}
+      <div class="absolute bottom-[50%] left-[20%] w-4 h-7 rounded-sm bg-[#FFC83D] bob border-2 border-black/30"></div>
+      <div class="absolute top-3 left-3 px-2 py-1 rounded bg-black/40 font-mono text-[10px]">🏁 OBBY · 12 players</div>`);
+    case 'web': return wrap(`
+      <div class="absolute inset-3 rounded-xl bg-white overflow-hidden shadow-2xl">
+        <div class="h-6 bg-slate-100 flex items-center gap-1 px-2"><span class="w-2 h-2 rounded-full bg-red-400"></span><span class="w-2 h-2 rounded-full bg-amber-400"></span><span class="w-2 h-2 rounded-full bg-green-400"></span><span class="ml-2 flex-1 h-3 rounded bg-white text-[8px] text-slate-400 font-mono px-1 leading-3">nadia.dev</span></div>
+        <div class="p-3 flex gap-3 items-center">
+          <div class="w-10 h-10 rounded-full shrink-0" style="background:${c}"></div>
+          <div class="flex-1"><div class="h-2.5 w-2/3 rounded bg-slate-800 mb-1.5"></div><div class="h-1.5 w-1/2 rounded bg-slate-300"></div></div>
+        </div>
+        <div class="px-3 grid grid-cols-3 gap-2">${[c,'#FFC83D','#0788F5'].map(x=>`<div class="h-14 rounded-lg" style="background:${x}22;border:1px solid ${x}55"></div>`).join('')}</div>
+      </div>`, '#1b1433');
+    case 'circuit': return wrap(`
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[62%] h-[62%] rounded-lg shadow-2xl" style="background:#0e7490;border:2px solid #155e75">
+        <div class="absolute top-2 left-2 right-2 flex gap-[3px]">${'<span class="flex-1 h-2 bg-black/60 rounded-[1px]"></span>'.repeat(12)}</div>
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-8 bg-black/80 rounded-sm font-mono text-[8px] text-white/70 flex items-center justify-center">ATmega</div>
+        <div class="absolute bottom-3 right-3 w-3 h-3 rounded-full bg-[#FFC83D] blink shadow-[0_0_12px_#FFC83D]"></div>
+        <div class="absolute bottom-3 left-3 w-3 h-3 rounded-full bg-[#F3261D] shadow-[0_0_10px_#F3261D]"></div>
+      </div>
+      <svg class="absolute inset-0 w-full h-full" viewBox="0 0 200 100" preserveAspectRatio="none"><path d="M0 20 H40 V40" stroke="${c}" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/><path d="M200 80 H160 V60" stroke="${c}" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/></svg>
+      <div class="absolute top-3 right-3 px-2 py-1 rounded bg-black/40 font-mono text-[10px]">📡 23.4°C · Wi-Fi</div>`, '#062a2a');
+    case 'phone': return wrap(`
+      <div class="absolute left-1/2 top-3 -translate-x-1/2 w-[34%] min-w-[110px] h-[120%] rounded-[1.4rem] bg-black p-1.5 shadow-2xl">
+        <div class="w-full h-full rounded-[1.1rem] bg-white overflow-hidden">
+          <div class="h-14 p-2.5" style="background:${c}"><div class="h-1.5 w-1/3 rounded bg-white/70 mb-1.5"></div><div class="h-2.5 w-2/3 rounded bg-white"></div></div>
+          <div class="p-2 space-y-1.5">${['Matematika','Bahasa','IPA'].map((s,i)=>`<div class="flex items-center gap-1.5 p-1.5 rounded-md bg-slate-100"><span class="w-3 h-3 rounded ${i===0?'':'border border-slate-300'}" style="${i===0?`background:${c}`:''}"></span><span class="text-[8px] text-slate-600 font-semibold">${s}</span></div>`).join('')}</div>
+        </div>
+      </div>`, '#2a0d0d');
+  }
+}
+
+const toolChip = ([n, img], dark=true) => `
+  <span class="tool-chip inline-flex items-center gap-2 pl-1 pr-2.5 py-1 rounded-full ${dark?'bg-white/5 border border-white/10':'bg-white text-slate-800'}">
+    <span class="w-6 h-6 rounded-full bg-white p-0.5 flex items-center justify-center"><img src="${T+img}" alt="${n}" class="w-full h-full object-contain"></span>
+    <span class="text-[11px] font-semibold">${n}</span>
+  </span>`;
+
+const filterBtns = (wrapId, onChange) => {
+  const wrap = document.getElementById(wrapId);
+  wrap.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    wrap.querySelectorAll('button').forEach(x => x.className = 'px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300');
+    b.className = 'px-3.5 py-1.5 rounded-full bg-white text-[#0B0F19]';
+    onChange(b.dataset.age);
+  }));
+};
+
+/* ------------------------------------------------------------- OPSI A */
+let aAge = 'all', aSel = 'k1';
+function renderA() {
+  const list = tracks.filter(t => aAge === 'all' || t.group === aAge);
+  if (!list.find(t => t.id === aSel)) aSel = list[0].id;
+  document.getElementById('a-list').innerHTML = list.map((t, i) => `
+    <button role="tab" aria-selected="${t.id===aSel}" data-id="${t.id}" style="--c:${t.color}"
+      class="interest-btn w-full text-left flex items-center gap-3.5 p-3.5 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/5 transition-all">
+      <span class="dot w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-sm transition-colors"><i class="fa-solid ${t.icon}"></i></span>
+      <span class="flex-1">
+        <span class="block font-bold text-sm sm:text-base">${t.interest}</span>
+        <span class="block text-[11px] text-slate-400">${t.group==='kids'?'Anak':'Remaja'} · ${t.age} thn</span>
+      </span>
+      <i class="fa-solid fa-arrow-right text-xs text-slate-500"></i>
+    </button>`).join('');
+  document.querySelectorAll('#a-list .interest-btn').forEach(b => b.onclick = () => { aSel = b.dataset.id; renderA(); });
+
+  const t = tracks.find(x => x.id === aSel);
+  document.getElementById('a-stage').innerHTML = `
+    <div class="fade rounded-[2rem] border border-white/10 bg-[#111827] p-5 sm:p-7 shadow-2xl relative overflow-hidden">
+      <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-[100px] opacity-30" style="background:${t.color}"></div>
+      <div class="relative">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md" style="color:${t.color};background:${t.color}1a;border:1px solid ${t.color}40">${t.tag}</span>
+          <span class="text-xs text-slate-400">Usia ${t.age} thn</span>
+        </div>
+        <h3 class="font-display text-2xl sm:text-3xl font-extrabold mb-5">${t.title}</h3>
+        ${art(t.art, t.color, 'lg')}
+
+        <!-- 3-step ribbon -->
+        <div class="grid sm:grid-cols-3 gap-3 mt-5">
+          <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
+            <div class="text-[10px] font-mono font-bold text-slate-400 mb-2">01 · RASA PENASARAN</div>
+            <p class="text-xs text-slate-300 leading-relaxed">${t.idea}</p>
+          </div>
+          <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
+            <div class="text-[10px] font-mono font-bold text-slate-400 mb-2">02 · BELAJAR PAKAI</div>
+            <div class="flex flex-wrap gap-1.5">${t.tools.map(x=>toolChip(x)).join('')}</div>
+            <p class="text-[11px] text-slate-400 mt-2.5"><i class="fa-solid fa-bolt mr-1" style="color:${t.color}"></i>${t.skill}</p>
+          </div>
+          <div class="rounded-2xl p-4 border" style="background:${t.color}12;border-color:${t.color}40">
+            <div class="text-[10px] font-mono font-bold mb-2" style="color:${t.color}">03 · DIBAWA PULANG</div>
+            <ul class="space-y-2">${t.outputs.map(([a,b])=>`<li><strong class="block text-xs">${a}</strong><span class="text-[11px] text-slate-400">${b}</span></li>`).join('')}</ul>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2.5 mt-5">
+          <a href="#" class="flex-1 text-center bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold py-3 rounded-xl text-xs uppercase tracking-wider">Lihat detail program →</a>
+          <a href="#" class="text-center px-5 py-3 rounded-xl border border-white/15 text-xs font-bold hover:bg-white/5"><i class="fa-solid fa-certificate text-[#FFC83D] mr-1"></i>Dapat sertifikat kelulusan</a>
+        </div>
+      </div>
+    </div>`;
+}
+filterBtns('a-age', v => { aAge = v; renderA(); });
+renderA();
+
+/* ------------------------------------------------------------- OPSI B */
+// Layout spans tuned for 7 tiles on a 4-col grid: 2+1+1 / 1+1+2 / 4 (consult CTA)
+const bSpan = { k1:'lg:col-span-2 lg:row-span-2', k2:'', k3:'', t1:'', t2:'', t3:'lg:col-span-2', t4:'lg:col-span-2' };
+function renderB(age='all') {
+  const list = tracks.filter(t => age === 'all' || t.group === age);
+  document.getElementById('b-grid').innerHTML = list.map(t => {
+    const big = age === 'all' && t.id === 'k1';
+    return `
+    <article class="bento fade group relative rounded-3xl border border-white/10 bg-[#111827] p-4 flex flex-col overflow-hidden hover:border-white/25 transition-colors ${age==='all'?bSpan[t.id]:''}">
+      <div class="bento-art">${art(t.art, t.color, big ? 'lg' : 'sm')}</div>
+      <div class="flex items-center gap-2 mt-4">
+        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="color:${t.color};background:${t.color}1a">${t.group==='kids'?'ANAK':'REMAJA'} · ${t.age}</span>
+      </div>
+      <h3 class="font-display font-extrabold ${big?'text-3xl':'text-lg'} mt-2 leading-tight">${t.title}</h3>
+      <p class="text-xs text-slate-400 mt-1 ${big?'':'line-clamp-2'}">${big ? t.idea : t.outputs.map(o=>o[0]).join(' · ')}</p>
+      ${big ? `<ul class="mt-4 grid sm:grid-cols-2 gap-2">${t.outputs.map(([a,b])=>`<li class="rounded-xl p-3 bg-white/[0.03] border border-white/10"><i class="fa-solid fa-trophy text-[#FFC83D] text-xs"></i><strong class="block text-xs mt-1">${a}</strong><span class="text-[11px] text-slate-400">${b}</span></li>`).join('')}</ul>` : ''}
+      <div class="mt-auto pt-4 flex items-center justify-between gap-2">
+        <div class="flex -space-x-2">${t.tools.map(([n,img])=>`<span title="${n}" class="w-8 h-8 rounded-full bg-white p-1 ring-2 ring-[#111827] flex items-center justify-center"><img src="${T+img}" alt="${n}" class="w-full h-full object-contain"></span>`).join('')}</div>
+        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-[#0B0F19] transition-transform group-hover:translate-x-0.5" style="background:${t.color}" aria-label="Lihat ${t.title}"><i class="fa-solid fa-arrow-right text-xs"></i></a>
+      </div>
+    </article>`;
+  }).join('') + `
+    <article class="fade rounded-3xl border border-dashed border-white/20 p-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:col-span-2 lg:col-span-4 bg-gradient-to-br from-[#0788F5]/15 to-[#5B0CB5]/15">
+      <i class="fa-solid fa-comments text-2xl text-[#FFC83D]"></i>
+      <div class="flex-1">
+        <h3 class="font-display font-extrabold text-xl">Belum yakin jalur mana?</h3>
+        <p class="text-xs text-slate-300 mt-1">Diskusikan minat dan usia anak bersama tim pengajar. Gratis.</p>
+      </div>
+      <a href="#" class="self-start sm:self-auto bg-[#FFC83D] text-[#111827] font-extrabold px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider">Konsultasi Gratis</a>
+    </article>`;
+}
+filterBtns('b-age', renderB);
+renderB();
+
+/* ------------------------------------------------------------- OPSI C */
+const cTrack = document.getElementById('c-track');
+cTrack.innerHTML = tracks.map((t, i) => `
+  <article class="snap-start shrink-0 w-[86%] sm:w-[420px] rounded-[2rem] border border-white/10 bg-[#111827] overflow-hidden flex flex-col">
+    <div class="p-5 pb-0 flex items-center justify-between">
+      <span class="font-mono text-[11px] text-slate-500">${String(i+1).padStart(2,'0')} / ${String(tracks.length).padStart(2,'0')}</span>
+      <span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="color:${t.color};background:${t.color}1a">${t.group==='kids'?'ANAK':'REMAJA'} · ${t.age} thn</span>
+    </div>
+    <!-- Before -->
+    <div class="px-5 pt-4">
+      <div class="text-[10px] font-mono font-bold text-slate-500 mb-1.5">SEBELUM</div>
+      <p class="text-slate-400 text-sm line-through decoration-white/20">${t.before}</p>
+    </div>
+    <!-- Bridge: tools -->
+    <div class="mx-5 my-4 rounded-2xl border border-white/10 bg-white/[0.03] p-3">
+      <div class="text-[10px] font-mono font-bold text-slate-400 mb-2 flex items-center gap-1.5"><i class="fa-solid fa-wand-magic-sparkles" style="color:${t.color}"></i> BELAJAR DI LESKODING PAKAI</div>
+      <div class="flex flex-wrap gap-1.5">${t.tools.map(x=>toolChip(x)).join('')}</div>
+    </div>
+    <!-- After -->
+    <div class="px-5">
+      <div class="text-[10px] font-mono font-bold mb-1.5" style="color:${t.color}">SESUDAH</div>
+      <p class="font-display font-extrabold text-xl leading-snug">${t.after}</p>
+    </div>
+    <div class="p-5 pt-4 mt-auto">
+      ${art(t.art, t.color, 'sm')}
+      <a href="#" class="mt-4 flex items-center justify-between text-xs font-bold px-4 py-3 rounded-xl border border-white/10 hover:bg-white/5">${t.title}<i class="fa-solid fa-arrow-right" style="color:${t.color}"></i></a>
+    </div>
+  </article>`).join('');
+const dots = document.getElementById('c-dots');
+dots.innerHTML = tracks.map((_, i) => `<span class="h-1.5 rounded-full transition-all ${i===0?'w-6 bg-[#FFC83D]':'w-1.5 bg-white/20'}"></span>`).join('');
+const cardW = () => cTrack.children[0].getBoundingClientRect().width + 20;
+document.getElementById('c-next').onclick = () => cTrack.scrollBy({ left: cardW(), behavior: 'smooth' });
+document.getElementById('c-prev').onclick = () => cTrack.scrollBy({ left: -cardW(), behavior: 'smooth' });
+cTrack.addEventListener('scroll', () => {
+  const idx = Math.round(cTrack.scrollLeft / cardW());
+  [...dots.children].forEach((d, i) => d.className = `h-1.5 rounded-full transition-all ${i===idx?'w-6 bg-[#FFC83D]':'w-1.5 bg-white/20'}`);
+});
+</script>
+</body>
+</html>

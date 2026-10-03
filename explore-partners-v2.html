@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Partners</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .opsi-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem 1rem; margin-bottom:2rem; }
+  .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .9rem; border-radius:999px; background:#1E293B; border:1px solid rgba(255,255,255,.1); font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+  .grad { background:linear-gradient(90deg,#FFC83D,#38BDF8,#C084FC); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .plate { background:#fff; display:flex; align-items:center; justify-content:center; }
+  .plate img { object-fit:contain; }
+  .fade-swap { animation:fadeSwap .45s ease; }
+  @keyframes fadeSwap { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+  .cta { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#FFC83D; color:#111827; font-weight:800; padding:.85rem 1.6rem; min-height:48px; border-radius:.75rem; font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; transition:all .25s; box-shadow:0 4px 20px rgba(255,200,61,.3); }
+  .cta:hover { background:#fed368; transform:translateY(-2px); }
+  .ghost { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border:1px solid rgba(255,255,255,.15); color:#fff; font-weight:700; padding:.85rem 1.4rem; min-height:48px; border-radius:.75rem; font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; transition:background .25s; }
+  .ghost:hover { background:rgba(255,255,255,.06); }
+
+  /* 2 · Peta */
+  .pin { position:absolute; transform:translate(-50%,-100%); cursor:pointer; }
+  .pin .dot { transition:transform .25s, box-shadow .25s; }
+  .pin:hover .dot, .pin[aria-pressed="true"] .dot { transform:scale(1.12); }
+  .pin[aria-pressed="true"] .dot { box-shadow:0 0 0 4px var(--c), 0 10px 30px -5px var(--c); }
+  .ping { position:absolute; left:50%; bottom:-6px; width:14px; height:14px; transform:translateX(-50%); border-radius:50%; background:var(--c); }
+  .ping::after { content:''; position:absolute; inset:0; border-radius:50%; background:var(--c); animation:ping 2s ease-out infinite; }
+  @keyframes ping { from{transform:scale(1); opacity:.7} to{transform:scale(3); opacity:0} }
+
+  /* 3 · Strip */
+  .strip-logo { filter:grayscale(1) contrast(.9); opacity:.75; transition:filter .3s, opacity .3s, transform .3s; }
+  .strip-logo:hover { filter:none; opacity:1; transform:translateY(-3px); }
+
+  /* 4 · Lockup */
+  .lk-tab[aria-selected="true"] { border-color:var(--c); background:color-mix(in srgb,var(--c) 10%,#0F172A); }
+
+  /* 5 · Orbit */
+  .orbit { position:relative; aspect-ratio:1; }
+  .ring { position:absolute; inset:0; border-radius:50%; border:1px dashed rgba(255,255,255,.12); }
+  .spin { position:absolute; inset:0; animation:spin 40s linear infinite; }
+  .spin:hover, .orbit:hover .spin { animation-play-state:paused; }
+  .counter { animation:spin 40s linear infinite reverse; }
+  .orbit:hover .counter { animation-play-state:paused; }
+  @keyframes spin { to { transform:rotate(360deg) } }
+  .sat { position:absolute; transform:translate(-50%,-50%); }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI · Partners (section baru)</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Mitra × Lab</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Peta Gianyar</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Strip Kepercayaan</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · LesKoding ×</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Orbit Ekosistem</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Ajak Sekolah Bermitra</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-12 pb-10">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// section baru: #partners</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">6 konsep untuk section <span class="grad">Partners.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Memakai 3 logo di <code class="mono text-slate-300">assets/partners/</code>. Karena logo-logonya berwarna dan sebagian berteks gelap, setiap logo ditaruh di <b class="text-white">plat putih</b> supaya tetap terbaca di latar gelap. Deskripsi peran mitra diambil dari KB §2.1. Tidak ada mitra atau klaim tambahan yang dikarang.</p>
+</header>
+
+<!-- ======================= OPSI 1 · MITRA × LAB ======================= -->
+<section id="opsi-1" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span><h2 class="font-display text-2xl font-extrabold">Mitra × Lab</h2><p class="text-sm text-slate-400 max-w-3xl">Setiap kartu menghubungkan mitra dengan Learning Center tempat kelas berlangsung: logo, peran mitra, chip lab, alamat, dan tombol rute. Informatif dan langsung berguna bagi orang tua yang memilih lokasi.</p></div>
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div>
+        <div class="badge mb-4"><i class="fa-solid fa-handshake text-[#38BDF8]"></i>Partner Kami</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Belajar di lingkungan <span class="grad">sekolah mitra.</span></h3>
+      </div>
+      <p class="text-slate-400 text-sm max-w-sm md:text-right">Learning Center LesKoding hadir lewat kolaborasi dengan sekolah di Gianyar dan Ubud.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6" id="o1"></div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 2 · PETA GIANYAR ======================= -->
+<section id="opsi-2" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span><h2 class="font-display text-2xl font-extrabold">Peta Gianyar</h2><p class="text-sm text-slate-400 max-w-3xl">Peta ilustratif Gianyar–Ubud dengan pin di setiap lab. Tiap pin menampilkan logo mitranya. Klik pin untuk melihat kartu mitra dan lab di samping peta. Menonjolkan kedekatan lokasi.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-7">
+        <div class="relative rounded-[2rem] border border-white/10 overflow-hidden aspect-[4/3]" id="o2-map" style="background:radial-gradient(ellipse at 40% 40%,#12304a,#0B0F19 70%)">
+          <svg viewBox="0 0 400 300" class="absolute inset-0 w-full h-full" aria-hidden="true">
+            <defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="rgba(255,255,255,.06)"/></pattern></defs>
+            <rect width="400" height="300" fill="url(#dots)"/>
+            <path d="M40 70 C90 40,170 35,230 50 S350 70,370 120 S360 220,300 250 S160 280,100 250 S20 160,40 70Z" fill="rgba(56,189,248,.06)" stroke="rgba(56,189,248,.35)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <path d="M120 20 C130 90,150 160,140 290" fill="none" stroke="rgba(56,189,248,.25)" stroke-width="2"/>
+            <path d="M250 15 C240 100,265 190,250 295" fill="none" stroke="rgba(56,189,248,.18)" stroke-width="2"/>
+            <path d="M135 140 C170 150,200 175,230 190 S300 160,310 150" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="3" stroke-linecap="round"/>
+            <text x="58" y="118" fill="rgba(255,255,255,.35)" font-size="11" font-family="Outfit" font-weight="700" letter-spacing="2">UBUD</text>
+            <text x="318" y="186" fill="rgba(255,255,255,.35)" font-size="11" font-family="Outfit" font-weight="700" letter-spacing="2">GIANYAR</text>
+            <text x="200" y="280" fill="rgba(255,255,255,.25)" font-size="9" font-family="Outfit" font-weight="600" letter-spacing="1.5">BLAHBATUH</text>
+            <g transform="translate(360,40)" fill="rgba(255,255,255,.4)" font-size="9" font-family="Outfit" font-weight="700"><circle r="13" fill="none" stroke="rgba(255,255,255,.25)"/><path d="M0 -10 L4 2 L0 0 L-4 2Z"/><text y="-16" text-anchor="middle">U</text></g>
+          </svg>
+          <div id="o2-pins"></div>
+          <div class="absolute bottom-3 left-4 text-[10px] text-slate-500"><i class="fa-solid fa-circle-info mr-1"></i>Ilustrasi, bukan skala</div>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="badge mb-4"><i class="fa-solid fa-map-location-dot text-[#38BDF8]"></i>Partner Kami</div>
+        <h3 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">Tiga lab, <span class="grad">satu jaringan mitra.</span></h3>
+        <div id="o2-card" class="mt-6"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 3 · STRIP KEPERCAYAAN ======================= -->
+<section id="opsi-3" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span><h2 class="font-display text-2xl font-extrabold">Strip Kepercayaan</h2><p class="text-sm text-slate-400 max-w-3xl">Versi ringkas yang tidak memakan banyak ruang. Cocok diletakkan tepat setelah hero atau sebelum formulir sebagai penguat kepercayaan. Logo tampil abu-abu dan berwarna saat di-hover. Di bawahnya ada dua varian tinggi berbeda.</p></div>
+
+    <div class="text-[10px] mono font-bold uppercase tracking-widest text-slate-500 mb-3">Varian A · strip satu baris</div>
+    <div class="rounded-3xl border border-white/10 bg-[#0B0F19] px-6 py-6 flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
+      <div class="shrink-0 text-center lg:text-left">
+        <div class="text-[10px] mono font-bold uppercase tracking-widest text-[#38BDF8]">Partner Kami</div>
+        <div class="font-display font-bold text-lg mt-1">Berkolaborasi dengan</div>
+      </div>
+      <div class="hidden lg:block w-px self-stretch bg-white/10"></div>
+      <div class="flex-1 grid grid-cols-3 gap-3 sm:gap-5 w-full" id="o3a"></div>
+    </div>
+
+    <div class="text-[10px] mono font-bold uppercase tracking-widest text-slate-500 mt-12 mb-3">Varian B · blok dengan angka fakta</div>
+    <div class="rounded-3xl border border-white/10 bg-[#0B0F19] p-6 sm:p-10">
+      <div class="text-center max-w-xl mx-auto">
+        <div class="badge mb-4"><i class="fa-solid fa-handshake text-[#38BDF8]"></i>Partner Kami</div>
+        <h3 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight">Dipercaya sekolah <span class="grad">di Gianyar &amp; Ubud.</span></h3>
+      </div>
+      <div class="grid grid-cols-3 gap-3 sm:gap-6 max-w-3xl mx-auto mt-10" id="o3b"></div>
+      <div class="flex flex-wrap justify-center gap-3 mt-10 text-xs">
+        <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10"><b class="text-[#FFC83D]">3</b> Learning Center</span>
+        <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10"><b class="text-[#38BDF8]">1:5</b> rasio tutor</span>
+        <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10"><b class="text-[#C084FC]">9</b> program, usia 6–17</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 4 · LESKODING × ======================= -->
+<section id="opsi-4" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span><h2 class="font-display text-2xl font-extrabold">LesKoding × Mitra</h2><p class="text-sm text-slate-400 max-w-3xl">Lockup co-branding besar: logo LesKoding × logo mitra, diganti lewat tab. Di bawahnya dijelaskan apa arti kolaborasi itu (siapa menyediakan apa) sehingga kemitraan terasa nyata, bukan sekadar logo.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="badge mb-4"><i class="fa-solid fa-handshake text-[#38BDF8]"></i>Partner Kami</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Kolaborasi untuk <span class="grad">generasi pencipta.</span></h3>
+    </div>
+    <div class="flex flex-wrap justify-center gap-2 mb-8" id="o4-tabs" role="tablist"></div>
+    <div class="rounded-[2rem] border border-white/10 bg-[#0F172A] overflow-hidden" id="o4-stage"></div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 5 · ORBIT EKOSISTEM ======================= -->
+<section id="opsi-5" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A] overflow-hidden">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span><h2 class="font-display text-2xl font-extrabold">Orbit Ekosistem</h2><p class="text-sm text-slate-400 max-w-3xl">LesKoding di pusat, para mitra mengorbit perlahan di sekelilingnya, dan lab-lab di orbit luar. Visual "ekosistem" yang hidup. Orbit berhenti saat di-hover, dan klik logo untuk detail.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-5 order-last lg:order-first">
+        <div class="badge mb-4"><i class="fa-solid fa-circle-nodes text-[#38BDF8]"></i>Partner Kami</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Satu ekosistem <span class="grad">belajar teknologi.</span></h3>
+        <p class="text-slate-300 mt-4 leading-relaxed">Kurikulum dan tutor dari LesKoding, ruang belajar dan komunitas dari sekolah mitra.</p>
+        <div id="o5-detail" class="mt-6"></div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="orbit max-w-[520px] mx-auto" id="o5-orbit">
+          <div class="ring" style="inset:6%"></div>
+          <div class="ring" style="inset:24%"></div>
+          <div class="absolute inset-[38%] rounded-full bg-[#0B0F19] border border-[#FFC83D]/40 shadow-[0_0_60px_rgba(255,200,61,.15)] flex items-center justify-center p-4">
+            <img src="assets/logo/leskoding_community.png" alt="LesKoding" class="w-full h-auto object-contain">
+          </div>
+          <div class="spin" id="o5-spin"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 6 · AJAK SEKOLAH BERMITRA ======================= -->
+<section id="opsi-6" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span><h2 class="font-display text-2xl font-extrabold">Ajak Sekolah Bermitra</h2><p class="text-sm text-slate-400 max-w-3xl">Section partner sekaligus pintu kerja sama: mitra yang ada menjadi bukti, lalu ada ajakan bagi sekolah lain untuk menghadirkan lab coding dan robotika. Menambah satu jalur pertumbuhan (B2B).</p></div>
+    <div class="rounded-[2rem] border border-white/10 overflow-hidden grid grid-cols-1 lg:grid-cols-2" style="background:linear-gradient(135deg,#0F172A,#0B0F19)">
+      <div class="p-8 sm:p-12">
+        <div class="badge mb-4"><i class="fa-solid fa-handshake text-[#38BDF8]"></i>Partner Kami</div>
+        <h3 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">Sekolah-sekolah yang sudah <span class="grad">berkolaborasi.</span></h3>
+        <div class="grid grid-cols-3 gap-3 mt-8" id="o6-logos"></div>
+        <ul class="mt-8 space-y-2.5 text-sm text-slate-300" id="o6-list"></ul>
+      </div>
+      <div class="p-8 sm:p-12 border-t lg:border-t-0 lg:border-l border-white/10 relative overflow-hidden">
+        <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-[#FFC83D]/10 blur-[90px]"></div>
+        <div class="relative">
+          <div class="text-[10px] mono font-bold uppercase tracking-widest text-[#FFC83D]">Untuk sekolah &amp; yayasan</div>
+          <h4 class="font-display text-3xl font-extrabold leading-tight mt-2">Hadirkan kelas coding &amp; robotika di sekolah Anda.</h4>
+          <div class="grid sm:grid-cols-2 gap-3 mt-6">
+            <div class="rounded-2xl bg-white/[.03] border border-white/10 p-4"><i class="fa-solid fa-book-open text-[#38BDF8]"></i><div class="font-bold text-sm mt-2">Kurikulum 9 program</div><div class="text-xs text-slate-400 mt-0.5">Usia 6–17, berbasis proyek nyata</div></div>
+            <div class="rounded-2xl bg-white/[.03] border border-white/10 p-4"><i class="fa-solid fa-chalkboard-user text-[#C084FC]"></i><div class="font-bold text-sm mt-2">Tutor pendamping</div><div class="text-xs text-slate-400 mt-0.5">Rasio kelas kecil 1:5</div></div>
+            <div class="rounded-2xl bg-white/[.03] border border-white/10 p-4"><i class="fa-solid fa-chart-line text-emerald-400"></i><div class="font-bold text-sm mt-2">Laporan tiap sesi</div><div class="text-xs text-slate-400 mt-0.5">Lewat Student Space</div></div>
+            <div class="rounded-2xl bg-white/[.03] border border-white/10 p-4"><i class="fa-solid fa-certificate text-[#FFC83D]"></i><div class="font-bold text-sm mt-2">Sertifikat kelulusan</div><div class="text-xs text-slate-400 mt-0.5">Di setiap course</div></div>
+          </div>
+          <div class="flex flex-wrap gap-3 mt-8">
+            <a href="mailto:halo@leskoding.id?subject=Kerja%20sama%20sekolah%20mitra" class="cta"><i class="fa-solid fa-envelope"></i>Ajukan Kerja Sama</a>
+            <a href="#location" class="ghost"><i class="fa-solid fa-map-location-dot text-[#38BDF8]"></i>Lihat Lab Kami</a>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-4"><i class="fa-solid fa-circle-info mr-1"></i>Program kemitraan sekolah belum tercantum di KB. Perlu konfirmasi tim sebelum dipublikasikan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PERBANDINGAN ======================= -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <h2 class="font-display text-2xl md:text-3xl font-extrabold mb-6">Perbandingan cepat</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[780px]">
+        <thead class="bg-[#1E293B] text-left text-xs uppercase tracking-wider text-slate-400">
+          <tr><th class="p-4">Opsi</th><th class="p-4">Kekuatan</th><th class="p-4">Ukuran section</th><th class="p-4">Posisi ideal di halaman</th><th class="p-4">Effort</th></tr>
+        </thead>
+        <tbody class="divide-y divide-white/5 text-slate-300">
+          <tr><td class="p-4 font-bold text-white">1 · Mitra × Lab</td><td class="p-4">Paling informatif, menghubungkan mitra ke lokasi</td><td class="p-4">Sedang</td><td class="p-4">Sebelum / digabung dengan section Lokasi</td><td class="p-4">Rendah</td></tr>
+          <tr><td class="p-4 font-bold text-white">2 · Peta Gianyar</td><td class="p-4">Visual kedekatan lokasi, interaktif</td><td class="p-4">Besar</td><td class="p-4">Menggantikan/mendampingi Lokasi</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">3 · Strip Kepercayaan</td><td class="p-4">Ringkas, social proof cepat</td><td class="p-4">Kecil</td><td class="p-4">Setelah hero atau sebelum formulir</td><td class="p-4">Rendah</td></tr>
+          <tr><td class="p-4 font-bold text-white">4 · LesKoding × Mitra</td><td class="p-4">Paling premium, menjelaskan arti kolaborasi</td><td class="p-4">Sedang–besar</td><td class="p-4">Setelah Hall of Fame</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">5 · Orbit Ekosistem</td><td class="p-4">Paling atraktif secara visual</td><td class="p-4">Sedang–besar</td><td class="p-4">Antara Laporan Wali dan Lokasi</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">6 · Ajak Sekolah Bermitra</td><td class="p-4">Membuka jalur kerja sama B2B</td><td class="p-4">Sedang</td><td class="p-4">Sebelum footer</td><td class="p-4">Rendah</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-6 rounded-2xl border border-[#FFC83D]/30 bg-[#FFC83D]/5 p-5 text-sm text-slate-300">
+      <div class="font-bold text-[#FFC83D] mb-2"><i class="fa-solid fa-circle-question mr-1.5"></i>Perlu dikonfirmasi sebelum implementasi</div>
+      <ul class="space-y-1 list-disc pl-5">
+        <li><b>PR Saraswati Gianyar</b> (<code class="mono">pr_genta.png</code>) tidak disebut di KB §2.1. Perannya di sini ditulis netral ("mitra di Gianyar"). Mohon konfirmasi peran dan lab yang terhubung.</li>
+        <li>Logo Bali Seeds bertuliskan <b>"Bali Seeds Primary School"</b>, sedangkan KB menyebut <b>"Bali Seed Foundation"</b>. Nama mana yang dipakai?</li>
+        <li>KB menyebut mitra Gianyar sebagai "Gents Robotic / Genta". Logonya bertuliskan <b>"Genta Saraswati Bilingual &amp; Montessori School"</b>.</li>
+        <li>Pastikan ada izin penggunaan logo dari tiap mitra.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ===================== DATA MITRA (KB §2.1 + aset logo) ===================== */
+const P = [
+  { id:'genta', short:'Genta Saraswati', full:'Genta Saraswati Bilingual & Montessori School', logo:'assets/partners/genta.png', c:'#38BDF8',
+    role:'Mitra strategis Learning Center Gianyar, dengan fokus kuat pada integrasi robotika dan mikrokontroler fisik.',
+    labs:[{ name:'Gents Robotic & Coding', area:'Gianyar', addr:'Jln. Ksatrian No. 8, Candi Baru, Gianyar', maps:'https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar' }] },
+  { id:'pr', short:'PR Saraswati Gianyar', full:'PR Saraswati Gianyar', logo:'assets/partners/pr_genta.png', c:'#FFC83D', unconfirmed:true,
+    role:'Mitra kolaborasi LesKoding di Gianyar.',
+    labs:[{ name:'Gents Robotic & Coding', area:'Gianyar', addr:'Jln. Ksatrian No. 8, Candi Baru, Gianyar', maps:'https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar' }] },
+  { id:'baliseeds', short:'Bali Seeds', full:'Bali Seeds Primary School', logo:'assets/partners/bali_seeds.jpg', c:'#34D399',
+    role:'Mitra pendidikan komunitas untuk Learning Center Ubud Peliatan dan Bedulu, mendukung literasi digital berkelanjutan.',
+    labs:[{ name:'Bali Seed Robotic & Coding Peliatan', area:'Ubud Peliatan', addr:'Jalan Peliatan No. 1, Ubud', maps:'https://maps.google.com/?q=Jalan+Peliatan+No+1+Ubud' },
+          { name:'Bali Seed Bedulu Robotics & Coding', area:'Bedulu', addr:'Jln. Raya Semebaung, Bedulu, Blahbatuh', maps:'https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu' }] },
+];
+const plate = (p, cls = 'h-24 rounded-2xl p-3', img = 'max-h-full') => `<div class="plate ${cls}"><img src="${p.logo}" alt="Logo ${p.full}" class="${img}"></div>`;
+const unconfirmedTag = p => p.unconfirmed ? '<span class="text-[9px] mono font-bold px-1.5 py-0.5 rounded bg-[#FFC83D]/15 text-[#FFC83D] border border-[#FFC83D]/30" title="Belum ada di KB">perlu konfirmasi</span>' : '';
+const labRow = l => `<div class="flex items-start justify-between gap-3 rounded-xl bg-white/[.03] border border-white/5 p-3">
+  <div class="min-w-0"><div class="text-sm font-bold">${l.area}</div><div class="text-[11px] text-slate-400 leading-snug mt-0.5">${l.addr}</div></div>
+  <a href="${l.maps}" target="_blank" rel="noopener" class="shrink-0 text-[11px] font-bold text-[#38BDF8] hover:text-white"><i class="fa-solid fa-route mr-1"></i>Rute</a></div>`;
+
+/* ===================== OPSI 1 ===================== */
+document.getElementById('o1').innerHTML = P.map(p => `
+  <article class="rounded-3xl border border-white/10 bg-[#0B0F19] overflow-hidden flex flex-col hover:-translate-y-1 transition-transform" style="box-shadow:inset 0 3px 0 ${p.c}">
+    <div class="p-6 pb-0">${plate(p, 'h-36 rounded-2xl p-4')}</div>
+    <div class="p-6 flex-1 flex flex-col">
+      <div class="flex flex-wrap items-center gap-2"><h4 class="font-display text-xl font-bold leading-tight">${p.short}</h4>${unconfirmedTag(p)}</div>
+      <div class="text-[11px] text-slate-500 mt-0.5">${p.full}</div>
+      <p class="text-sm text-slate-300 leading-relaxed mt-3">${p.role}</p>
+      <div class="text-[10px] mono font-bold uppercase tracking-widest mt-5 mb-2" style="color:${p.c}"><i class="fa-solid fa-location-dot mr-1"></i>Lab LesKoding</div>
+      <div class="space-y-2 mt-auto">${p.labs.map(labRow).join('')}</div>
+    </div>
+  </article>`).join('');
+
+/* ===================== OPSI 2 · PETA ===================== */
+(() => {
+  // posisi pin (% dari peta ilustratif)
+  const PINS = [
+    { area:'Ubud Peliatan', x:34, y:47, partners:['baliseeds'] },
+    { area:'Bedulu', x:52, y:66, partners:['baliseeds'] },
+    { area:'Gianyar', x:78, y:52, partners:['genta', 'pr'] },
+  ];
+  const pins = document.getElementById('o2-pins'), card = document.getElementById('o2-card');
+  pins.innerHTML = PINS.map((pin, i) => {
+    const ps = pin.partners.map(id => P.find(p => p.id === id)), c = ps[0].c;
+    return `<button class="pin" style="left:${pin.x}%; top:${pin.y}%; --c:${c}" data-i="${i}" aria-label="Lab ${pin.area}">
+      <span class="dot flex items-center gap-1 bg-white rounded-2xl p-1.5 shadow-xl">${ps.map(p => `<img src="${p.logo}" alt="" class="w-9 h-9 sm:w-11 sm:h-11 object-contain">`).join('')}</span>
+      <span class="block text-center text-[10px] sm:text-xs font-bold mt-1.5 text-white drop-shadow">${pin.area}</span>
+      <span class="ping"></span>
+    </button>`;
+  }).join('');
+  const show = i => {
+    const pin = PINS[i];
+    pins.querySelectorAll('.pin').forEach((b, j) => b.setAttribute('aria-pressed', i === j));
+    const ps = pin.partners.map(id => P.find(p => p.id === id));
+    const lab = ps[0].labs.find(l => l.area === pin.area);
+    card.innerHTML = `<div class="fade-swap rounded-3xl border bg-[#0F172A] p-5 sm:p-6" style="border-color:${ps[0].c}55">
+      <div class="text-[10px] mono font-bold uppercase tracking-widest" style="color:${ps[0].c}"><i class="fa-solid fa-location-dot mr-1"></i>Lab ${pin.area}</div>
+      <div class="font-bold mt-1">${lab.name}</div>
+      <div class="text-xs text-slate-400 mt-0.5">${lab.addr}</div>
+      <div class="mt-5 space-y-3">${ps.map(p => `<div class="flex gap-3 items-start">${plate(p, 'w-14 h-14 rounded-xl p-1.5 shrink-0')}<div><div class="flex flex-wrap items-center gap-2"><span class="text-sm font-bold">${p.short}</span>${unconfirmedTag(p)}</div><p class="text-xs text-slate-400 leading-relaxed mt-0.5">${p.role}</p></div></div>`).join('')}</div>
+      <a href="${lab.maps}" target="_blank" rel="noopener" class="ghost w-full mt-5"><i class="fa-solid fa-route text-[#38BDF8]"></i>Rute ke lab ini</a>
+    </div>`;
+  };
+  pins.addEventListener('click', e => { const b = e.target.closest('.pin'); if (b) show(+b.dataset.i); });
+  show(2);
+})();
+
+/* ===================== OPSI 3 · STRIP ===================== */
+document.getElementById('o3a').innerHTML = P.map(p => `<div class="strip-logo flex items-center gap-3 rounded-2xl bg-white/[.03] border border-white/10 p-2.5 sm:p-3" title="${p.full}">${plate(p, 'w-12 h-12 sm:w-14 sm:h-14 rounded-xl p-1 shrink-0')}<span class="hidden sm:block text-sm font-bold leading-tight">${p.short}</span></div>`).join('');
+document.getElementById('o3b').innerHTML = P.map(p => `<div class="strip-logo text-center" title="${p.full}">${plate(p, 'aspect-square rounded-3xl p-4 sm:p-6')}<div class="text-xs sm:text-sm font-bold mt-3">${p.short}</div></div>`).join('');
+
+/* ===================== OPSI 4 · LOCKUP ===================== */
+(() => {
+  const tabs = document.getElementById('o4-tabs'), stage = document.getElementById('o4-stage');
+  tabs.innerHTML = P.map((p, i) => `<button class="lk-tab inline-flex items-center gap-2 px-3 py-2 rounded-2xl border border-white/10 text-sm font-bold transition" role="tab" style="--c:${p.c}" data-i="${i}" aria-selected="${i === 0}">${plate(p, 'w-8 h-8 rounded-lg p-0.5')}${p.short}</button>`).join('');
+  const show = i => {
+    const p = P[i];
+    tabs.querySelectorAll('.lk-tab').forEach((b, j) => b.setAttribute('aria-selected', i === j));
+    stage.innerHTML = `<div class="fade-swap">
+      <div class="relative px-6 py-12 sm:py-16 flex items-center justify-center gap-6 sm:gap-12" style="background:radial-gradient(ellipse at center,${p.c}1f,transparent 65%)">
+        <div class="w-32 sm:w-56"><img src="assets/logo/leskoding_community.png" alt="LesKoding" class="w-full h-auto"></div>
+        <div class="font-display font-light text-5xl sm:text-7xl" style="color:${p.c}">×</div>
+        ${plate(p, 'w-32 h-32 sm:w-48 sm:h-48 rounded-[2rem] p-4 shadow-2xl')}
+      </div>
+      <div class="grid md:grid-cols-3 border-t border-white/10">
+        <div class="p-6 md:border-r border-white/10"><div class="text-[10px] mono font-bold uppercase tracking-widest" style="color:${p.c}">Mitra</div><div class="flex flex-wrap items-center gap-2 mt-1"><div class="font-bold">${p.full}</div>${unconfirmedTag(p)}</div><p class="text-sm text-slate-400 mt-2 leading-relaxed">${p.role}</p></div>
+        <div class="p-6 md:border-r border-white/10"><div class="text-[10px] mono font-bold uppercase tracking-widest text-[#FFC83D]">LesKoding menghadirkan</div>
+          <ul class="text-sm text-slate-300 mt-2 space-y-1.5"><li><i class="fa-solid fa-check text-emerald-400 mr-2"></i>Kurikulum 9 program</li><li><i class="fa-solid fa-check text-emerald-400 mr-2"></i>Tutor dengan rasio 1:5</li><li><i class="fa-solid fa-check text-emerald-400 mr-2"></i>Laporan sesi &amp; sertifikat</li></ul></div>
+        <div class="p-6"><div class="text-[10px] mono font-bold uppercase tracking-widest text-slate-400">Lab hasil kolaborasi</div><div class="space-y-2 mt-2">${p.labs.map(labRow).join('')}</div></div>
+      </div></div>`;
+  };
+  tabs.addEventListener('click', e => { const b = e.target.closest('.lk-tab'); if (b) show(+b.dataset.i); });
+  show(0);
+})();
+
+/* ===================== OPSI 5 · ORBIT ===================== */
+(() => {
+  const spin = document.getElementById('o5-spin'), detail = document.getElementById('o5-detail');
+  const LABS = ['Gianyar', 'Ubud Peliatan', 'Bedulu'];
+  // mitra di orbit dalam (radius 38%), lab di orbit luar (radius 44%)
+  const sat = (angle, r, html, extra = '') => { const a = angle * Math.PI / 180; return `<div class="sat ${extra}" style="left:${50 + r * Math.cos(a)}%; top:${50 + r * Math.sin(a)}%">${html}</div>`; };
+  spin.innerHTML = P.map((p, i) => sat(-90 + i * 120, 26, `<button class="counter block" data-i="${i}" aria-label="${p.full}">${plate(p, 'w-16 h-16 sm:w-24 sm:h-24 rounded-full p-2 sm:p-3 shadow-2xl border-4 hover:scale-110 transition-transform')}</button>`)).join('')
+    + LABS.map((l, i) => sat(-30 + i * 120, 44, `<span class="counter inline-flex items-center gap-1.5 whitespace-nowrap text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full bg-[#0B0F19] border border-white/15"><i class="fa-solid fa-location-dot text-[#38BDF8]"></i>${l}</span>`)).join('');
+  spin.querySelectorAll('.plate').forEach((el, i) => el.style.borderColor = P[i].c);
+  const show = i => {
+    const p = P[i];
+    detail.innerHTML = `<div class="fade-swap flex gap-4 items-start rounded-2xl border bg-[#0B0F19] p-4" style="border-color:${p.c}55">${plate(p, 'w-16 h-16 rounded-xl p-1.5 shrink-0')}
+      <div><div class="flex flex-wrap items-center gap-2"><span class="font-bold">${p.short}</span>${unconfirmedTag(p)}</div><p class="text-xs text-slate-400 mt-1 leading-relaxed">${p.role}</p>
+      <div class="flex flex-wrap gap-1.5 mt-2">${p.labs.map(l => `<span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="color:${p.c}; background:${p.c}1a">${l.area}</span>`).join('')}</div></div></div>`;
+  };
+  spin.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) show(+b.dataset.i); });
+  show(0);
+})();
+
+/* ===================== OPSI 6 ===================== */
+document.getElementById('o6-logos').innerHTML = P.map(p => `<div title="${p.full}">${plate(p, 'aspect-square rounded-2xl p-3')}<div class="text-[11px] font-bold text-center mt-2 leading-tight">${p.short}</div></div>`).join('');
+document.getElementById('o6-list').innerHTML = P.map(p => `<li class="flex gap-2.5"><i class="fa-solid fa-circle-check mt-0.5" style="color:${p.c}"></i><span><b class="text-white">${p.short}</b> · ${p.labs.map(l => l.area).join(' & ')}</span></li>`).join('');
+</script>
+</body>
+</html>

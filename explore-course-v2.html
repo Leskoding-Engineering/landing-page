@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Program v2</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .grid-bg { background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size:32px 32px; }
+  .fade-swap { animation:fadeSwap .35s ease; }
+  @keyframes fadeSwap { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none} }
+  .no-scrollbar::-webkit-scrollbar { display:none } .no-scrollbar { scrollbar-width:none }
+  .tab-btn[aria-pressed="true"] { background:#0788F5; border-color:#0788F5; color:#fff; box-shadow:0 0 20px rgba(7,136,245,.3); }
+
+  /* OPSI 1 · Metro */
+  .st { position:absolute; transform:translate(-50%,-50%); }
+  .st .dot { transition:transform .25s, box-shadow .25s; }
+  .st:hover .dot, .st[aria-pressed="true"] .dot { transform:scale(1.35); }
+  .st .lbl { position:absolute; white-space:nowrap; font-size:12px; font-weight:700; }
+  .st .lbl.b { top:calc(100% + 6px); left:50%; transform:translateX(-50%); text-align:center; }
+  .st .lbl.r { left:calc(100% + 10px); top:50%; transform:translateY(-50%); }
+  .st .lbl.t { bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); text-align:center; }
+  .metro-line { transition:opacity .3s, stroke-width .3s; }
+
+  /* OPSI 2 · Kaset */
+  .cart { transition:transform .35s cubic-bezier(.2,.9,.3,1.2), box-shadow .3s, opacity .3s; }
+  .cart:hover { transform:translateY(-6px); }
+  .cart[aria-pressed="true"] { transform:translateY(-12px) rotate(-2deg); }
+  .cart-ridge { background:repeating-linear-gradient(90deg,rgba(255,255,255,.08) 0 4px,transparent 4px 8px); }
+  .cart-pins { background:repeating-linear-gradient(90deg,#FFC83D 0 5px,transparent 5px 9px); opacity:.6; }
+  .crt { position:relative; }
+  .crt::after { content:''; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px); border-radius:inherit; }
+  .boot { animation:boot .45s ease; }
+  @keyframes boot { 0%{opacity:0; filter:brightness(3) blur(2px); transform:scaleY(.02)} 60%{opacity:1; transform:scaleY(1.02)} 100%{filter:none; transform:none} }
+  .blink { animation:blink 1s steps(1) infinite; } @keyframes blink { 50%{opacity:0} }
+
+  /* OPSI 3 · Kartu Koleksi */
+  .flip { perspective:1200px; }
+  .flip-inner { position:relative; width:100%; height:100%; transition:transform .7s cubic-bezier(.4,.2,.2,1); transform-style:preserve-3d; }
+  .flip.is-flipped .flip-inner { transform:rotateY(180deg); }
+  .face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:1.5rem; overflow:hidden; }
+  .face.back { transform:rotateY(180deg); }
+  .flip:hover .face.front { box-shadow:0 20px 50px -20px var(--c); }
+  .holo { background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.12) 45%,transparent 60%); background-size:250% 100%; animation:holo 4s linear infinite; }
+  @keyframes holo { from{background-position:150% 0} to{background-position:-100% 0} }
+
+  /* OPSI 7 · Peta + Kartu */
+  .flip.is-target { outline:2px solid var(--c); outline-offset:6px; border-radius:1.75rem; }
+  .flip.is-target .face.front { box-shadow:0 20px 50px -20px var(--c); }
+
+  /* OPSI 4 · Rentang Usia */
+  .gbar { transition:opacity .3s, filter .3s, transform .2s; }
+  .gbar:hover { transform:scaleY(1.08); }
+  .gbar.dim { opacity:.18; filter:grayscale(1); }
+  input[type=range].age { -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:999px; background:rgba(255,255,255,.1); outline:none; }
+  input[type=range].age::-webkit-slider-thumb { -webkit-appearance:none; width:24px; height:24px; border-radius:50%; background:#FFC83D; border:4px solid #0B0F19; box-shadow:0 0 0 2px #FFC83D; cursor:grab; }
+  input[type=range].age::-moz-range-thumb { width:18px; height:18px; border-radius:50%; background:#FFC83D; border:4px solid #0B0F19; cursor:grab; }
+  .age-cursor { transition:left .2s ease; }
+
+  /* OPSI 5 · Mau Bikin Apa */
+  .out-chip[aria-pressed="true"] { background:rgba(255,200,61,.12); border-color:#FFC83D; color:#fff; transform:translateY(-2px); }
+  .pix { image-rendering:pixelated; }
+  @keyframes jump { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-22px)} }
+  @keyframes spin { to{transform:rotate(360deg)} }
+  @keyframes ledBlink { 0%,49%{background:#F87171; box-shadow:0 0 12px #F87171} 50%,100%{background:#7f1d1d; box-shadow:none} }
+
+  /* OPSI 6 · Tabel Periodik */
+  .el { transition:transform .2s, box-shadow .2s, border-color .2s; }
+  .el:hover, .el[aria-pressed="true"] { transform:translateY(-4px) scale(1.03); z-index:2; }
+  .el[aria-pressed="true"] { box-shadow:0 0 0 2px var(--c), 0 12px 30px -10px var(--c); }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- NAV -->
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI v2 · Program Belajar</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Peta Jalur MRT</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Rak Kaset Game</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Kartu Koleksi</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Rentang Usia</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Mau Bikin Apa?</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Tabel Periodik</a>
+      <a href="#opsi-7" class="px-3 py-1.5 rounded-lg bg-[#0788F5]/15 border border-[#0788F5]/40 text-[#38BDF8] hover:bg-[#0788F5]/25">7 · Peta + List</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-14 pb-6">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// section: #course · 9 program · 3 pilar</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">7 konsep baru untuk <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">Program Belajar.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-2xl text-sm md:text-base">Data 9 program (usia, tools, karya, silabus) diambil dari Knowledge Base §6, dan warna per program sama dengan kartu di index.html. Setiap opsi punya tombol detail dan CTA <b class="text-[#FFC83D]">Coba Kelas Gratis</b>, jadi bisa menggantikan modal silabus yang sekarang.</p>
+</header>
+
+<!-- ============================ OPSI 1 · METRO ============================ -->
+<section id="opsi-1" class="py-16 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span>
+      <h2 class="font-display text-2xl font-extrabold">Peta Jalur MRT</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Kurikulum digambar seperti peta kereta. Jalur Fondasi berjenjang, jalur Skill Digital fleksibel, dan 4 cabang Teens bercabang dari stasiun "Asesmen Free Trial". Langsung terlihat bahwa remaja 11+ boleh masuk tanpa prasyarat.</p>
+    </div>
+
+    <div class="rounded-[2rem] bg-[#0F172A] border border-white/10 overflow-hidden">
+      <div class="p-6 sm:p-8 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10">
+        <div>
+          <h3 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight"><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]" data-i18n="course_title">Program Belajar.</span></h3>
+          <p class="text-sm text-slate-400 mt-2 max-w-md" data-i18n="course_desc">Dirancang bertahap untuk usia 6–17 tahun. Kurikulum berbasis proyek nyata dan pendampingan tutor berpengalaman.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 text-[11px] font-bold" id="m-legend"></div>
+      </div>
+      <div class="grid lg:grid-cols-[1fr_360px]">
+        <div class="overflow-x-auto no-scrollbar grid-bg">
+          <div class="relative min-w-[820px]" style="aspect-ratio:1000/440" id="m-map">
+            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1000 440" preserveAspectRatio="none" aria-hidden="true" id="m-svg"></svg>
+          </div>
+        </div>
+        <div id="m-detail" class="border-t lg:border-t-0 lg:border-l border-white/10 p-6 bg-[#0B0F19]/60"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 2 · KASET ============================ -->
+<section id="opsi-2" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span>
+      <h2 class="font-display text-2xl font-extrabold">Rak Kaset Game</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Setiap program jadi kaset game. Pilih kaset, layar "menyala", lalu silabus tampil sebagai <i>level</i>, karya sebagai <i>achievement</i>, dan tools sebagai <i>equipment</i>.</p>
+    </div>
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+      <h3 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight"><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">Pilih Kaset Belajarmu.</span></h3>
+      <div class="flex flex-wrap gap-2" id="k-tabs"></div>
+    </div>
+    <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-start">
+      <div class="grid grid-cols-3 gap-x-4 gap-y-7 pt-3" id="k-shelf"></div>
+      <div class="rounded-[2rem] bg-[#1E293B] border border-white/10 p-4 sm:p-5 shadow-2xl lg:sticky lg:top-24">
+        <div class="crt rounded-2xl bg-[#060912] border-4 border-[#0B0F19] min-h-[420px] overflow-hidden"><div id="k-screen" class="p-5 sm:p-6 mono"></div></div>
+        <div class="flex items-center justify-between mt-4 px-2">
+          <div class="flex gap-2"><span class="w-3 h-3 rounded-full bg-[#F87171]"></span><span class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34D399]"></span></div>
+          <span class="font-display font-black tracking-[0.3em] text-xs text-slate-500">LESKODING · LAB</span>
+          <div class="flex gap-1.5"><span class="w-6 h-2 rounded-full bg-white/10"></span><span class="w-6 h-2 rounded-full bg-white/10"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 3 · KARTU KOLEKSI ============================ -->
+<section id="opsi-3" class="py-16 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span>
+      <h2 class="font-display text-2xl font-extrabold">Kartu Koleksi</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Program tampil seperti trading card dengan efek holo. Sisi depan memuat karya yang dibuat, tools, dan posisi di jalur (jenjang / fleksibel / tanpa prasyarat). Klik kartu untuk membaliknya: sisi belakang berisi silabus dan "setelah ini lanjut ke mana".</p>
+    </div>
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div>
+        <h3 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight"><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">Program Belajar.</span></h3>
+        <p class="text-sm text-slate-400 mt-2"><i class="fa-solid fa-hand-pointer mr-1 text-[#38BDF8]"></i>Klik kartu untuk melihat silabus.</p>
+      </div>
+      <div class="flex flex-wrap gap-2" id="c-tabs"></div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="c-grid"></div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 4 · RENTANG USIA ============================ -->
+<section id="opsi-4" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span>
+      <h2 class="font-display text-2xl font-extrabold">Rentang Usia</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Semua program dipetakan di sumbu usia 6–17 seperti timeline. Geser penanda usia, program yang tidak cocok meredup. Ini menjawab pertanyaan orang tua nomor satu: "anak saya umur sekian, bisa ikut apa?"</p>
+    </div>
+
+    <div class="rounded-[2rem] bg-[#0B0F19] border border-white/10 p-6 sm:p-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+        <div>
+          <h3 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight"><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">Program Belajar.</span></h3>
+          <p class="text-sm text-slate-400 mt-2">Geser untuk melihat program sesuai usia anak.</p>
+        </div>
+        <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-3">
+          <div class="text-xs text-slate-400 leading-tight">Usia<br>anak</div>
+          <div class="font-display text-4xl font-black text-[#FFC83D] w-14 text-center" id="g-age-val">9</div>
+          <div class="text-xs text-slate-400 leading-tight"><span id="g-count" class="text-white font-bold text-base">0</span><br>program cocok</div>
+        </div>
+      </div>
+      <div class="overflow-x-auto no-scrollbar">
+        <div class="min-w-[720px]">
+          <div class="grid grid-cols-[170px_1fr] gap-4 items-center mb-2">
+            <div></div>
+            <div class="relative" style="padding:0 calc(100% / 24)">
+              <input id="g-age" type="range" min="6" max="17" value="9" class="age" aria-label="Usia anak">
+            </div>
+          </div>
+          <div class="grid grid-cols-[170px_1fr] gap-4">
+            <div></div>
+            <div class="grid grid-cols-12 text-[11px] mono text-slate-500 border-b border-white/10 pb-2" id="g-axis"></div>
+          </div>
+          <div class="relative" id="g-rows"></div>
+        </div>
+      </div>
+      <div id="g-detail" class="mt-6"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 5 · MAU BIKIN APA ============================ -->
+<section id="opsi-5" class="py-16 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span>
+      <h2 class="font-display text-2xl font-extrabold">Mau Bikin Apa?</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Dimulai dari hasil karya, bukan nama kelas. Anak (atau orang tua) memilih "mau bikin game / website / robot…", lalu muncul mockup karya itu dan program yang mengajarkannya.</p>
+    </div>
+
+    <div class="rounded-[2rem] bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#0B0F19] border border-white/10 p-6 sm:p-8 lg:p-10 relative overflow-hidden">
+      <div class="absolute -top-24 right-0 w-96 h-96 bg-[#0788F5]/10 rounded-full blur-[110px] pointer-events-none"></div>
+      <div class="relative">
+        <h3 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Si kecil mau bikin <span class="text-[#FFC83D]" id="o-word">game</span><span class="blink text-[#FFC83D]">_</span></h3>
+        <div class="flex gap-2 mt-6 overflow-x-auto no-scrollbar pb-2" id="o-chips"></div>
+        <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 mt-8 items-start">
+          <div id="o-preview" class="rounded-2xl border border-white/10 bg-[#0B0F19] min-h-[340px] p-4 sm:p-6 flex items-center justify-center"></div>
+          <div>
+            <div class="text-[11px] mono font-bold text-slate-400 mb-3" id="o-count"></div>
+            <div class="space-y-3" id="o-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 6 · TABEL PERIODIK ============================ -->
+<section id="opsi-6" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span>
+      <h2 class="font-display text-2xl font-extrabold">Tabel Periodik Program</h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Nuansa "lab sains" dari Playful Future Lab. Setiap program adalah elemen dengan simbol 2 huruf, nomor, dan rentang usia. Hover atau klik elemen untuk menampilkan detail besar di tengah tabel.</p>
+    </div>
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+      <h3 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight"><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">Program Belajar.</span></h3>
+      <p class="text-sm text-slate-400 max-w-sm border-l border-white/10 pl-6">9 "elemen" pembentuk inovator kecil. Kombinasikan sesuai minat dan usia.</p>
+    </div>
+    <div class="grid grid-cols-3 lg:grid-cols-8 lg:grid-rows-[repeat(3,minmax(150px,auto))] gap-3" id="p-table"></div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 7 · PETA + LIST KARTU ============================ -->
+<section id="opsi-7" class="py-16 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <div class="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span class="mono text-xs font-bold text-[#FFC83D]">OPSI 7</span>
+      <h2 class="font-display text-2xl font-extrabold">Peta + List Kartu <span class="text-sm font-sans font-semibold text-slate-400">(gabungan opsi 1 &amp; 3)</span></h2>
+      <p class="text-sm text-slate-400 max-w-3xl">Satu section, dua lapis. Peta jalur di atas memberi gambaran besar, list kartu di bawah dikelompokkan per jalur dengan warna yang sama. Keduanya saling terhubung: klik stasiun untuk lompat ke kartunya, hover kartu untuk menyalakan stasiunnya di peta, dan filter berlaku untuk peta dan list sekaligus.</p>
+    </div>
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+      <div>
+        <h3 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight"><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]" data-i18n="course_title">Program Belajar.</span></h3>
+        <p class="text-sm text-slate-400 mt-2 max-w-md" data-i18n="course_desc">Dirancang bertahap untuk usia 6–17 tahun. Kurikulum berbasis proyek nyata dan pendampingan tutor berpengalaman.</p>
+      </div>
+      <div class="flex flex-wrap gap-2" id="x-tabs"></div>
+    </div>
+
+    <!-- Map -->
+    <div class="rounded-[2rem] bg-[#0F172A] border border-white/10 overflow-hidden mb-12">
+      <div class="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-b border-white/10">
+        <div class="flex flex-wrap gap-2 text-[11px] font-bold" id="x-legend"></div>
+        <span class="text-[11px] text-slate-500"><i class="fa-solid fa-hand-pointer mr-1 text-[#38BDF8]"></i>Klik stasiun untuk lompat ke kartunya</span>
+      </div>
+      <div class="overflow-x-auto no-scrollbar grid-bg">
+        <div class="relative min-w-[820px] max-w-[1080px] mx-auto" style="aspect-ratio:1000/440" id="x-map">
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1000 440" preserveAspectRatio="none" aria-hidden="true" id="x-svg"></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- List -->
+    <div id="x-list" class="space-y-12"></div>
+  </div>
+</section>
+
+<!-- ============================ PERBANDINGAN ============================ -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <h2 class="font-display text-2xl md:text-3xl font-extrabold mb-6">Perbandingan cepat</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[780px]">
+        <thead class="bg-[#1E293B] text-left text-xs uppercase tracking-wider text-slate-400">
+          <tr><th class="p-4">Opsi</th><th class="p-4">Kekuatan utama</th><th class="p-4">Yang dikorbankan</th><th class="p-4">Mobile</th><th class="p-4">Effort</th></tr>
+        </thead>
+        <tbody class="divide-y divide-white/5 text-slate-300">
+          <tr><td class="p-4 font-bold text-white">1 · Peta Jalur MRT</td><td class="p-4">Struktur jenjang & cabang Teens paling jelas</td><td class="p-4">Peta lebih abstrak untuk orang tua awam</td><td class="p-4">Peta di-scroll horizontal</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">2 · Rak Kaset Game</td><td class="p-4">Paling playful, detail lengkap dalam 1 layar</td><td class="p-4">Gaya "game" kurang cocok untuk Komputer Dasar</td><td class="p-4">Layar di bawah rak</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">3 · Kartu Koleksi</td><td class="p-4">Grid familiar + kejutan flip, ringan</td><td class="p-4">Isi belakang kartu terbatas</td><td class="p-4">Sangat baik</td><td class="p-4">Rendah</td></tr>
+          <tr><td class="p-4 font-bold text-white">4 · Rentang Usia</td><td class="p-4">Paling informatif soal usia & irisan Kids/Teens</td><td class="p-4">Kurang "wah" secara visual</td><td class="p-4">Scroll horizontal</td><td class="p-4">Rendah–sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">5 · Mau Bikin Apa?</td><td class="p-4">Bicara bahasa anak: hasil karya</td><td class="p-4">Perlu mockup per kategori</td><td class="p-4">Baik</td><td class="p-4">Sedang–tinggi</td></tr>
+          <tr><td class="p-4 font-bold text-white">6 · Tabel Periodik</td><td class="p-4">Unik, rapi, memorable</td><td class="p-4">Metafora sains perlu dijelaskan</td><td class="p-4">Grid 3 kolom</td><td class="p-4">Rendah</td></tr>
+          <tr class="bg-[#0788F5]/5"><td class="p-4 font-bold text-white">7 · Peta + List</td><td class="p-4">Gambaran jalur + semua kartu terlihat, saling terhubung</td><td class="p-4">Section paling panjang</td><td class="p-4">Peta scroll horizontal, list 1 kolom</td><td class="p-4">Sedang</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ===================== DATA (Knowledge Base §6) ===================== */
+const PILLARS = {
+  foundation: { label:'Fondasi Coding', short:'Kids · Fondasi', color:'#FFC83D' },
+  skills: { label:'Skill Digital', short:'Kids · Skill', color:'#38BDF8' },
+  specialization: { label:'Spesialisasi Remaja', short:'Teens', color:'#C084FC' },
+};
+const P = [
+  { id:'innovator', n:'01', sym:'In', name:'Innovator', pillar:'foundation', min:6, max:8, color:'#FFC83D', icon:'fa-cubes', tagline:'Explore, Play & Think',
+    desc:'Mengenalkan logika dan cara berpikir programmer lewat permainan dan aktivitas visual.', tools:['Scratch Jr','CodeMonkey'],
+    outputs:['Animasi cerita interaktif','Dongeng digital bersuara','Mini-game arkade'], tags:['animasi','game'],
+    syllabus:['Urutan perintah logis','Pola & percabangan sederhana','Event & kendali karakter','Animasi sprite & kostum','Proyek akhir: buku cerita & mini game'] },
+  { id:'beginner', n:'02', sym:'Bg', name:'Beginner', pillar:'foundation', min:8, max:11, color:'#10B981', icon:'fa-gamepad', tagline:'Code & Create',
+    desc:'Belajar block coding membuat program yang bergerak, berbunyi, dan merespons pemain.', tools:['Scratch','PictoBlox'],
+    outputs:['Game labirin','Kuis pilihan ganda','Game tangkap objek'], tags:['game','animasi'],
+    syllabus:['Event, motion, looks & sound','Perulangan (loop)','Sensing keyboard & mouse','Variabel & skor','If-else & game over','Proyek akhir: labirin, kuis & catching game'] },
+  { id:'intermediate', n:'03', sym:'Im', name:'Intermediate', pillar:'foundation', min:10, max:14, color:'#A855F7', icon:'fa-rocket', tagline:'Build, Solve & Create',
+    desc:'Membuat project kompleks, game design, dan pengenalan AI dasar dengan block programming tingkat lanjut.', tools:['Scratch','PictoBlox AI'],
+    outputs:['Platformer multi-level','Proyek AI kamera','Aplikasi kuis canggih'], tags:['game','ai'],
+    syllabus:['Variabel lanjutan & game state','Operator & logika AND/OR/NOT','Nested loop','Custom block (fungsi)','Teknik debugging','AI & kamera via PictoBlox','Proyek akhir: game multi-stage + prototipe AI'] },
+  { id:'komputer', n:'04', sym:'Kd', name:'Komputer Dasar', pillar:'skills', min:8, max:14, color:'#3B82F6', icon:'fa-desktop', tagline:'Learn, Create & Be Productive',
+    desc:'Literasi digital: mengetik 10 jari, membuat dokumen, mengolah tabel data, dan presentasi interaktif.', tools:['MS Word','MS Excel','MS PowerPoint'],
+    outputs:['Makalah sekolah rapi','Tabel data + grafik','Slide presentasi animasi'], tags:['dokumen'],
+    syllabus:['Mengetik 10 jari','Manajemen file & etika internet','Word: layout & formatting','Makalah: daftar isi & penomoran','PowerPoint: desain slide','Excel: SUM, AVERAGE, COUNT…','Proyek akhir: bundel portofolio digital'] },
+  { id:'desain', n:'05', sym:'Dg', name:'Desain Grafis', pillar:'skills', min:9, max:14, color:'#EC4899', icon:'fa-pen-nib', tagline:'Imagine, Design & Create',
+    desc:'Eksplorasi layout, tipografi, dan UI/UX untuk membuat poster dan konten media sosial.', tools:['Canva','Figma'],
+    outputs:['Poster promosi','Konten media sosial','Mockup UI aplikasi'], tags:['desain'],
+    syllabus:['Teori warna & moodboard','Tipografi digital','Layout & grid','Poster & feed medsos di Canva','Desain presentasi portofolio','UI/UX dasar di Figma','Proyek akhir: brand kit + prototipe UI'] },
+  { id:'game', n:'06', sym:'Gd', name:'Game Developer', pillar:'specialization', min:11, max:17, color:'#EF4444', icon:'fa-cube', tagline:'Game Developer (2D & 3D)', code:'Advance 1',
+    desc:'Game logic, fisika 3D, dan scripting Lua untuk mempublikasikan game yang bisa dimainkan bersama teman.', tools:['Roblox Studio (Lua)','Construct 3','Unity'],
+    outputs:['Dunia game 3D di Roblox','Game web HTML5'], tags:['game'],
+    syllabus:['Mekanika & physics engine','Karakter, controller & SFX','Level design 3D di Roblox','Scripting objek & server-client','Construct 3 & ekspor HTML5','Pengenalan Unity','Proyek akhir: game siap publikasi'] },
+  { id:'web', n:'07', sym:'Wd', name:'Junior Web Developer', pillar:'specialization', min:11, max:17, color:'#14B8A6', icon:'fa-code', tagline:'Junior Web Developer', code:'Advance 2',
+    desc:'Merancang website responsif dan portofolio dengan kode asli: HTML, CSS, dan JavaScript.', tools:['HTML5','CSS3','JavaScript','VS Code'],
+    outputs:['Website portofolio live','Web app interaktif'], tags:['web'],
+    syllabus:['HTML5 semantik & SEO dasar','Styling CSS3','Flexbox, Grid & media query','Komponen UI web','Dasar JavaScript','Manipulasi DOM','Proyek akhir: portofolio live online'] },
+  { id:'robotik', n:'08', sym:'Ro', name:'Robotika & IoT', pillar:'specialization', min:11, max:17, color:'#F97316', icon:'fa-microchip', tagline:'Hardware + Software', code:'Advance 3',
+    desc:'Merakit perangkat fisik dengan mikrokontroler, sensor, dan aktuator yang terhubung ke internet.', tools:['Arduino','PictoBlox IoT','Sensor & Servo'],
+    outputs:['Prototipe smart home','Alarm pendeteksi gerak','Stasiun cuaca IoT'], tags:['robot'],
+    syllabus:['Arsitektur Arduino & sirkuit aman','Pin digital & analog','Sensor jarak, suhu, cahaya, gerak','Servo, relay & buzzer','Kirim data ke IoT cloud','Logika otomasi berbasis ambang','Proyek akhir: smart home WiFi / robot'] },
+  { id:'apps', n:'09', sym:'Ap', name:'Apps Developer', pillar:'specialization', min:11, max:17, color:'#6366F1', icon:'fa-mobile-screen', tagline:'Mobile Android', code:'Advance 4',
+    desc:'Merancang UX, data, dan logika aplikasi Android sampai menjadi file APK di HP sendiri.', tools:['MIT App Inventor','Flutter (dasar)'],
+    outputs:['Aplikasi Android (APK)'], tags:['app'],
+    syllabus:['Desain UI mobile','Navigasi multi-layar','Event-driven programming','Kamera, GPS, timer & notifikasi','Penyimpanan data lokal','Proyek akhir: APK terpasang di HP'] },
+];
+const byId = id => P.find(p => p.id === id);
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ageLabel = p => `${p.min}–${p.max} thn`;
+const trackLabel = p => p.pillar === 'specialization' ? `Teens · ${p.code}` : PILLARS[p.pillar].short;
+const hex = (c, a) => c + a; // c is #RRGGBB, a is 2-digit alpha
+
+const ctaRow = p => `
+  <div class="flex flex-wrap gap-2 mt-5">
+    <a href="#register" class="inline-flex items-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_20px_rgba(255,200,61,0.25)]"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a>
+    <button class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/15 font-bold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition" onclick="this.closest('[data-detail]').querySelector('.syl').classList.toggle('hidden')"><i class="fa-solid fa-list-ol"></i> Silabus</button>
+  </div>`;
+const detailHTML = (p, opts = {}) => `
+  <div data-detail class="fade-swap">
+    <div class="flex items-start gap-4">
+      <div class="w-14 h-14 shrink-0 rounded-2xl flex flex-col items-center justify-center font-display font-black text-xl border" style="background:${hex(p.color,'1f')}; border-color:${hex(p.color,'55')}; color:${p.color}">${p.sym}</div>
+      <div class="min-w-0">
+        <div class="flex flex-wrap gap-1.5 mb-1.5">
+          <span class="text-[10px] mono font-bold uppercase px-2 py-0.5 rounded-full border" style="color:${p.color}; border-color:${hex(p.color,'40')}; background:${hex(p.color,'14')}">${trackLabel(p)}</span>
+          <span class="text-[10px] mono font-bold px-2 py-0.5 rounded-full bg-white/5 text-slate-300">${ageLabel(p)}</span>
+        </div>
+        <h4 class="font-display text-2xl font-bold leading-tight">${p.name}</h4>
+        <p class="text-xs italic text-slate-400">"${p.tagline}"</p>
+      </div>
+    </div>
+    <p class="text-sm text-slate-300 leading-relaxed mt-4">${p.desc}</p>
+    <div class="grid ${opts.wide ? 'sm:grid-cols-2' : ''} gap-4 mt-4">
+      <div><div class="text-[10px] mono font-bold text-slate-500 mb-1.5">TOOLS</div><div class="flex flex-wrap gap-1.5">${p.tools.map(t => `<span class="text-[11px] mono px-2 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">${t}</span>`).join('')}</div></div>
+      <div><div class="text-[10px] mono font-bold text-slate-500 mb-1.5">KARYA YANG DIBUAT</div><ul class="space-y-1">${p.outputs.map(o => `<li class="text-xs text-slate-300 flex gap-2"><i class="fa-solid fa-check mt-0.5" style="color:${p.color}"></i>${o}</li>`).join('')}</ul></div>
+    </div>
+    <ol class="syl hidden mt-4 space-y-1 border-t border-white/10 pt-3">${p.syllabus.map((s, i) => `<li class="text-xs text-slate-300 flex gap-2"><span class="mono text-slate-500 w-5">${String(i + 1).padStart(2, '0')}</span>${s}</li>`).join('')}</ol>
+    ${ctaRow(p)}
+    <p class="text-[10px] text-slate-500 mt-3"><i class="fa-solid fa-certificate mr-1 text-[#FFC83D]"></i>Sertifikat kelulusan setelah course selesai · rasio 1:5</p>
+  </div>`;
+
+const tabs = (el, onChange, initial = 'all') => {
+  const opts = [['all','Semua Program'],['foundation','Fondasi Coding'],['skills','Skill Digital'],['specialization','Spesialisasi Remaja']];
+  el.innerHTML = opts.map(([v, l]) => `<button data-v="${v}" aria-pressed="${v === initial}" class="tab-btn px-4 py-2 rounded-full font-bold text-xs transition bg-transparent text-slate-400 border border-white/10 hover:border-white/30 hover:text-white">${l}</button>`).join('');
+  el.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
+    el.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); onChange(b.dataset.v); });
+};
+
+/* ===================== SHARED · METRO MAP (Opsi 1 & 7) ===================== */
+let gradSeq = 0;
+function buildMetro(map, svg, onSelect) {
+  const gid = 'skillGrad' + (++gradSeq);
+  const LINES = [
+    { d:'M90 110 H470 L570 210', c:'#FFC83D', w:9, pillar:'foundation' },
+    { d:'M90 360 H470', c:'#EC4899', w:9, pillar:'skills', grad:true },
+    { d:'M90 220 H570', c:'#94A3B8', w:3, dash:'6 8' },
+    { d:'M590 220 L680 70 H760', c:'#EF4444', w:7, pillar:'specialization' },
+    { d:'M590 220 L640 170 H760', c:'#14B8A6', w:7, pillar:'specialization' },
+    { d:'M590 220 L640 270 H760', c:'#F97316', w:7, pillar:'specialization' },
+    { d:'M590 220 L680 370 H760', c:'#6366F1', w:7, pillar:'specialization' },
+  ];
+  svg.innerHTML = `<defs><linearGradient id="${gid}" gradientUnits="userSpaceOnUse" x1="90" y1="0" x2="470" y2="0"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#EC4899"/></linearGradient></defs>` +
+    LINES.map(l => `<path class="metro-line" data-pillar="${l.pillar || ''}" d="${l.d}" fill="none" stroke="${l.grad ? `url(#${gid})` : l.c}" stroke-width="${l.w}" stroke-linecap="round" stroke-linejoin="round" ${l.dash ? `stroke-dasharray="${l.dash}"` : ''}/>`).join('');
+
+  const STATIONS = [
+    ['innovator',130,110,'b'],['beginner',290,110,'b'],['intermediate',450,110,'b'],
+    ['komputer',190,360,'t'],['desain',390,360,'t'],
+    ['game',760,70,'r'],['web',760,170,'r'],['robotik',760,270,'r'],['apps',760,370,'r'],
+  ];
+  const pos = (x, y) => `left:${x / 10}%; top:${y / 4.4}%`;
+  map.insertAdjacentHTML('beforeend', `
+    <div class="st" style="${pos(580,220)}"><div class="w-9 h-9 rotate-45 rounded-md bg-[#0B0F19] border-[3px] border-[#FFC83D] shadow-[0_0_24px_rgba(255,200,61,.5)]"></div>
+      <div class="lbl b !top-[calc(100%+12px)] !left-auto !right-[40%] !translate-x-0 text-right text-[#FFC83D]"><span class="text-[10px] mono block text-slate-400 font-semibold">STASIUN TRANSIT</span>Asesmen Free Trial</div></div>
+    <div class="st" style="${pos(70,110)}"><div class="w-4 h-4 rounded-full bg-[#FFC83D]"></div><div class="lbl t text-[10px] mono text-slate-400 !left-0 !translate-x-0 text-left">Mulai · usia 6</div></div>
+    <div class="st" style="${pos(70,220)}"><div class="w-4 h-4 rounded-full border-2 border-slate-400 bg-[#0B0F19]"></div><div class="lbl b text-[10px] mono text-slate-400 !left-0 !translate-x-0 text-left">Masuk langsung<br>usia 11+</div></div>
+    <div class="st" style="${pos(70,360)}"><div class="w-4 h-4 rounded-full bg-[#3B82F6]"></div><div class="lbl b text-[10px] mono text-slate-400 !left-0 !translate-x-0 text-left">Fleksibel<br>kapan saja</div></div>
+  `);
+  STATIONS.forEach(([id, x, y, side]) => {
+    const p = byId(id);
+    const b = document.createElement('button');
+    b.className = 'st group'; b.style.cssText = pos(x, y); b.dataset.id = id;
+    b.setAttribute('aria-label', `${p.name}, ${ageLabel(p)}`);
+    b.innerHTML = `<span class="dot block w-6 h-6 rounded-full bg-white border-[5px]" style="border-color:${p.color}"></span>
+      <span class="lbl ${side}"><span class="block group-hover:underline">${p.name}</span><span class="block text-[10px] mono font-semibold text-slate-400">${ageLabel(p)}${p.code ? ' · ' + p.code : ''}</span></span>`;
+    b.onclick = () => select(id);
+    map.appendChild(b);
+  });
+  function select(id) {
+    const p = byId(id);
+    map.querySelectorAll('button.st').forEach(b => b.setAttribute('aria-pressed', b.dataset.id === id));
+    svg.querySelectorAll('.metro-line').forEach(l => l.style.opacity = !l.dataset.pillar || l.dataset.pillar === p.pillar ? 1 : .25);
+    onSelect(p);
+  }
+  return select;
+}
+const metroLegend = () => [['#FFC83D','Jalur Fondasi · berjenjang'],['linear-gradient(90deg,#3B82F6,#EC4899)','Jalur Skill Digital'],['linear-gradient(90deg,#EF4444,#14B8A6,#F97316,#6366F1)','Cabang Teens · pilih minat']]
+  .map(([c, l]) => `<span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300"><span class="w-5 h-1.5 rounded-full" style="background:${c}"></span>${l}</span>`).join('');
+
+/* ===================== SHARED · KARTU (Opsi 3 & 7) ===================== */
+const NEXT = {
+  innovator: { ids:['beginner'], note:'Lanjut ke jenjang berikutnya' },
+  beginner: { ids:['intermediate'], note:'Lanjut ke jenjang berikutnya' },
+  intermediate: { ids:['game','web','robotik','apps'], note:'Lanjut ke spesialisasi Teens' },
+  komputer: { ids:['desain'], note:'Bisa diambil bersama jalur lain' },
+  desain: { ids:['komputer'], note:'Bisa diambil bersama jalur lain' },
+  game: { ids:['web','robotik','apps'], note:'Bisa lanjut cabang Teens lain' },
+  web: { ids:['game','robotik','apps'], note:'Bisa lanjut cabang Teens lain' },
+  robotik: { ids:['game','web','apps'], note:'Bisa lanjut cabang Teens lain' },
+  apps: { ids:['game','web','robotik'], note:'Bisa lanjut cabang Teens lain' },
+};
+const pathLabel = p => p.pillar === 'foundation' ? `Jenjang ${P.filter(x => x.pillar === 'foundation').indexOf(p) + 1} dari 3`
+  : p.pillar === 'skills' ? 'Fleksibel' : 'Tanpa prasyarat';
+const cardHTML = p => `
+  <div class="flip h-[460px] cursor-pointer" data-pillar="${p.pillar}" data-id="${p.id}" style="--c:${hex(p.color,'66')}" tabindex="0" role="button" aria-label="Balik kartu ${p.name}">
+    <div class="flip-inner">
+      <div class="face front bg-[#1E293B] border border-white/10 p-3 flex flex-col">
+        <div class="relative rounded-2xl h-36 shrink-0 overflow-hidden flex items-center justify-center" style="background:radial-gradient(circle at 30% 20%,${hex(p.color,'55')},transparent 60%),linear-gradient(160deg,${hex(p.color,'33')},#0B0F19)">
+          <div class="absolute inset-0 holo"></div>
+          <div class="absolute inset-0 grid-bg opacity-60"></div>
+          <i class="fa-solid ${p.icon} text-5xl relative" style="color:${p.color}; filter:drop-shadow(0 0 20px ${hex(p.color,'aa')})"></i>
+          <span class="absolute top-3 left-3 font-display font-black text-white/80 text-lg">${p.n}</span>
+          <span class="absolute top-3 right-3 text-[10px] mono font-bold px-2 py-0.5 rounded-full bg-[#0B0F19]/80" style="color:${p.color}">${ageLabel(p)}</span>
+        </div>
+        <div class="px-2 pt-4 flex-1 flex flex-col">
+          <div class="text-[10px] mono font-bold uppercase" style="color:${p.color}">${trackLabel(p)}</div>
+          <h4 class="font-display text-2xl font-bold leading-tight mt-0.5">${p.name}</h4>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">${p.desc}</p>
+          <div class="mt-auto pt-3">
+            <div class="text-[10px] mono font-bold text-slate-500 mb-1.5">KARYA YANG DIBUAT</div>
+            <ul class="space-y-1">${p.outputs.slice(0, 3).map(o => `<li class="text-[12px] text-slate-200 flex gap-2"><i class="fa-solid fa-check text-[10px] mt-1" style="color:${p.color}"></i>${o}</li>`).join('')}</ul>
+            <div class="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-white/5">
+              <div class="min-w-0"><div class="text-[9px] mono text-slate-500">TOOLS</div><div class="text-[11px] font-semibold truncate">${p.tools.slice(0, 2).join(' · ')}</div></div>
+              <div><div class="text-[9px] mono text-slate-500">JALUR</div><div class="text-[11px] font-semibold">${pathLabel(p)}</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="face back border p-6 flex flex-col" style="background:linear-gradient(170deg,${hex(p.color,'1f')},#0F172A 45%); border-color:${hex(p.color,'55')}">
+        <div class="flex items-center justify-between"><span class="font-display font-black text-3xl" style="color:${p.color}">${p.sym}</span><span class="text-[10px] mono text-slate-400"><i class="fa-solid fa-rotate mr-1"></i>balik</span></div>
+        <div class="font-bold mt-1">${p.name} <span class="text-xs italic font-normal text-slate-400">· "${p.tagline}"</span></div>
+        <div class="text-[10px] mono font-bold text-slate-500 mt-4 mb-1.5">SILABUS</div>
+        <ol class="space-y-1">${p.syllabus.map((s, i) => `<li class="text-[12px] text-slate-300 flex gap-2"><span class="mono text-slate-500">${i + 1}.</span>${s}</li>`).join('')}</ol>
+        <div class="text-[10px] mono font-bold text-slate-500 mt-4 mb-1">SETELAH INI</div>
+        <div class="text-[12px] text-slate-300">${NEXT[p.id].note}: <span class="text-white font-semibold">${NEXT[p.id].ids.map(id => byId(id).name).join(', ')}</span></div>
+        <div class="text-[11px] text-slate-400 mt-2"><i class="fa-solid fa-certificate text-[#FFC83D] mr-1"></i>Sertifikat kelulusan · rasio 1:5</div>
+        <a href="#register" onclick="event.stopPropagation()" class="mt-auto inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition">Coba Kelas Gratis <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>`;
+const bindFlip = el => {
+  el.addEventListener('click', e => { const c = e.target.closest('.flip'); if (c) c.classList.toggle('is-flipped'); });
+  el.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('flip')) { e.preventDefault(); e.target.classList.toggle('is-flipped'); } });
+};
+
+/* ===================== OPSI 1 · METRO ===================== */
+(() => {
+  const detail = document.getElementById('m-detail');
+  document.getElementById('m-legend').innerHTML = metroLegend();
+  buildMetro(document.getElementById('m-map'), document.getElementById('m-svg'), p => detail.innerHTML = detailHTML(p))('beginner');
+})();
+
+/* ===================== OPSI 2 · KASET ===================== */
+(() => {
+  const shelf = document.getElementById('k-shelf'), screen = document.getElementById('k-screen');
+  shelf.innerHTML = P.map(p => `
+    <button class="cart relative text-left" data-id="${p.id}" data-pillar="${p.pillar}" aria-pressed="false" aria-label="${p.name}">
+      <div class="rounded-t-xl rounded-b-md bg-[#1E293B] border border-white/10 overflow-hidden shadow-xl">
+        <div class="cart-ridge h-4 border-b border-white/5"></div>
+        <div class="m-2 rounded-md p-2.5 h-[104px] flex flex-col justify-between" style="background:linear-gradient(140deg,${p.color},${hex(p.color,'99')})">
+          <div class="flex justify-between items-start text-[#0B0F19]"><span class="font-display font-black text-2xl leading-none">${p.sym}</span><i class="fa-solid ${p.icon} text-sm opacity-70"></i></div>
+          <div class="text-[#0B0F19]"><div class="font-extrabold text-[12px] leading-tight">${p.name}</div><div class="text-[9px] mono font-bold opacity-70">${ageLabel(p)}</div></div>
+        </div>
+        <div class="flex justify-between px-2.5 pb-1.5 text-[8px] mono text-slate-500"><span>LK-${p.n}</span><span>${p.pillar === 'specialization' ? 'TEENS' : 'KIDS'}</span></div>
+      </div>
+      <div class="cart-pins h-1.5 mx-4"></div>
+    </button>`).join('');
+  shelf.addEventListener('click', e => { const b = e.target.closest('.cart'); if (b) select(b.dataset.id); });
+  tabs(document.getElementById('k-tabs'), v => shelf.querySelectorAll('.cart').forEach(c => { const on = v === 'all' || c.dataset.pillar === v; c.style.opacity = on ? 1 : .2; c.style.pointerEvents = on ? '' : 'none'; }));
+  function select(id) {
+    const p = byId(id);
+    shelf.querySelectorAll('.cart').forEach(c => { c.setAttribute('aria-pressed', c.dataset.id === id); c.style.filter = c.dataset.id === id ? `drop-shadow(0 10px 24px ${hex(p.color,'88')})` : ''; });
+    screen.innerHTML = `
+      <div class="boot">
+        <div class="flex items-center justify-between text-[11px] mb-4"><span style="color:${p.color}">► LK-${p.n} LOADED</span><span class="text-slate-500">${trackLabel(p).toUpperCase()}</span></div>
+        <div class="font-display font-black text-3xl sm:text-4xl tracking-tight leading-none" style="color:${p.color}; text-shadow:0 0 18px ${hex(p.color,'88')}">${p.name.toUpperCase()}</div>
+        <div class="text-[11px] text-slate-400 mt-1">PLAYER: usia ${ageLabel(p)} · "${p.tagline}"</div>
+        <div class="grid sm:grid-cols-2 gap-5 mt-5 text-[12px]">
+          <div><div class="text-slate-500 text-[10px] mb-1.5">── LEVELS ──</div>${p.syllabus.map((s, i) => `<div class="flex gap-2 py-0.5 ${i === p.syllabus.length - 1 ? 'text-[#FFC83D]' : 'text-slate-200'}"><span class="text-slate-500">${i === p.syllabus.length - 1 ? '★' : 'L' + (i + 1)}</span>${s}</div>`).join('')}</div>
+          <div class="space-y-4">
+            <div><div class="text-slate-500 text-[10px] mb-1.5">── ACHIEVEMENTS ──</div>${p.outputs.map(o => `<div class="py-0.5 text-slate-200">🏆 ${o}</div>`).join('')}<div class="py-0.5 text-[#FFC83D]">🏅 Sertifikat kelulusan</div></div>
+            <div><div class="text-slate-500 text-[10px] mb-1.5">── EQUIPMENT ──</div><div class="flex flex-wrap gap-1.5">${p.tools.map(t => `<span class="px-1.5 py-0.5 border border-white/15 text-[11px] text-slate-300">${t}</span>`).join('')}</div></div>
+          </div>
+        </div>
+        <a href="#register" class="mt-6 flex items-center justify-between gap-3 px-4 py-3 rounded-lg border-2 border-[#FFC83D] text-[#FFC83D] hover:bg-[#FFC83D] hover:text-[#111827] transition font-bold text-sm">
+          <span><span class="blink">▶</span> PRESS START · Coba Kelas Gratis</span><span class="text-[10px] opacity-70">1 SESI · Rp0</span></a>
+      </div>`;
+  }
+  select('intermediate');
+})();
+
+/* ===================== OPSI 3 · KARTU KOLEKSI ===================== */
+(() => {
+  const grid = document.getElementById('c-grid');
+  grid.innerHTML = P.map(cardHTML).join('');
+  bindFlip(grid);
+  tabs(document.getElementById('c-tabs'), v => grid.querySelectorAll('.flip').forEach(c => c.classList.toggle('hidden', v !== 'all' && c.dataset.pillar !== v)));
+})();
+
+/* ===================== OPSI 4 · RENTANG USIA ===================== */
+(() => {
+  const rows = document.getElementById('g-rows'), axis = document.getElementById('g-axis'), ageEl = document.getElementById('g-age'), detail = document.getElementById('g-detail');
+  axis.innerHTML = Array.from({ length: 12 }, (_, i) => `<span class="text-center">${i + 6}</span>`).join('');
+  let html = '', selected = 'beginner';
+  Object.entries(PILLARS).forEach(([k, pl]) => {
+    html += `<div class="grid grid-cols-[170px_1fr] gap-4 mt-5 mb-1"><div class="text-[10px] mono font-bold uppercase tracking-wider" style="color:${pl.color}">${pl.label}</div><div></div></div>`;
+    P.filter(p => p.pillar === k).forEach(p => {
+      const left = (p.min - 6) / 12 * 100, width = (p.max - p.min + 1) / 12 * 100;
+      html += `<div class="grid grid-cols-[170px_1fr] gap-4 items-center py-1">
+        <button class="g-name text-left text-sm font-bold text-slate-300 hover:text-white truncate" data-id="${p.id}">${p.name}</button>
+        <div class="relative h-9 rounded-lg bg-white/[.02]" style="background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px calc(100%/12))">
+          <button class="gbar absolute top-1 bottom-1 rounded-lg flex items-center gap-2 px-3 text-[11px] font-bold text-[#0B0F19] overflow-hidden" data-id="${p.id}" data-min="${p.min}" data-max="${p.max}"
+            style="left:${left}%; width:${width}%; background:linear-gradient(90deg,${p.color},${hex(p.color,'bb')})">
+            <i class="fa-solid ${p.icon}"></i><span class="truncate">${p.tools[0]}</span><span class="ml-auto mono opacity-70 whitespace-nowrap">${p.min}–${p.max}</span>
+          </button>
+        </div></div>`;
+    });
+  });
+  rows.innerHTML = html + `<div class="pointer-events-none absolute top-0 bottom-0 grid grid-cols-[170px_1fr] gap-4 inset-x-0"><div></div><div class="relative"><div id="g-cursor" class="age-cursor absolute top-0 bottom-0 w-[2px] bg-[#FFC83D] shadow-[0_0_12px_#FFC83D]"><span class="absolute -top-1 -translate-x-1/2 left-1/2 w-2.5 h-2.5 rounded-full bg-[#FFC83D]"></span></div></div></div>`;
+  const cursor = document.getElementById('g-cursor');
+  const update = () => {
+    const age = +ageEl.value;
+    document.getElementById('g-age-val').textContent = age;
+    cursor.style.left = `${(age - 6 + 0.5) / 12 * 100}%`;
+    let n = 0;
+    rows.querySelectorAll('.gbar').forEach(b => { const ok = age >= +b.dataset.min && age <= +b.dataset.max; b.classList.toggle('dim', !ok); n += ok; });
+    rows.querySelectorAll('.g-name').forEach(b => { const p = byId(b.dataset.id); b.style.opacity = age >= p.min && age <= p.max ? 1 : .35; });
+    document.getElementById('g-count').textContent = n;
+  };
+  const show = id => {
+    selected = id; const p = byId(id);
+    rows.querySelectorAll('.gbar').forEach(b => b.style.outline = b.dataset.id === id ? '2px solid #fff' : '');
+    detail.innerHTML = `<div class="rounded-2xl border p-5 sm:p-6" style="border-color:${hex(p.color,'40')}; background:${hex(p.color,'0a')}">${detailHTML(p, { wide:true })}</div>`;
+  };
+  rows.addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) show(b.dataset.id); });
+  ageEl.addEventListener('input', update);
+  update(); show(selected);
+})();
+
+/* ===================== OPSI 5 · MAU BIKIN APA ===================== */
+(() => {
+  const CATS = [
+    { k:'game', e:'🎮', l:'Game' }, { k:'animasi', e:'🎬', l:'Animasi & Cerita' }, { k:'ai', e:'🧠', l:'Proyek AI' }, { k:'web', e:'🌐', l:'Website' },
+    { k:'app', e:'📱', l:'Aplikasi HP' }, { k:'robot', e:'🤖', l:'Robot & Alat Pintar' }, { k:'desain', e:'🎨', l:'Desain & Poster' }, { k:'dokumen', e:'📊', l:'Dokumen & Presentasi' },
+  ];
+  const PREVIEW = {
+    game: `<div class="w-full max-w-md aspect-[4/3] rounded-xl overflow-hidden relative border-4 border-[#1E293B]" style="background:linear-gradient(#38BDF8,#a5f3fc)">
+        <div class="absolute top-3 left-3 mono text-[11px] font-bold text-[#0B0F19] bg-white/70 px-2 rounded">SKOR 120 · ❤️❤️❤️</div>
+        <div class="absolute text-3xl" style="left:14%; bottom:34%; animation:jump 1.2s ease-in-out infinite">🐱</div>
+        <div class="absolute text-xl" style="left:46%; bottom:56%">⭐</div><div class="absolute text-xl" style="left:76%; bottom:40%">⭐</div>
+        <div class="absolute h-4 rounded bg-[#10B981] border-b-4 border-[#065F46]" style="left:38%; width:24%; bottom:46%"></div>
+        <div class="absolute h-4 rounded bg-[#10B981] border-b-4 border-[#065F46]" style="left:68%; width:22%; bottom:30%"></div>
+        <div class="absolute bottom-0 inset-x-0 h-[28%] bg-[#A16207] border-t-8 border-[#16A34A]"></div></div>`,
+    animasi: `<div class="w-full max-w-md aspect-[4/3] rounded-xl overflow-hidden relative border-4 border-[#1E293B]" style="background:linear-gradient(#312E81,#7C3AED)">
+        <div class="absolute top-6 right-8 text-4xl">🌙</div><div class="absolute bottom-[22%] left-[8%] text-5xl">🌳</div><div class="absolute bottom-[22%] right-[16%] text-5xl">🦊</div>
+        <div class="absolute bottom-[50%] right-[22%] bg-white text-[#111827] text-xs font-bold px-3 py-2 rounded-xl rounded-br-none">Halo! Ayo ikut petualanganku!</div>
+        <div class="absolute bottom-0 inset-x-0 h-[22%] bg-[#14532D]"></div>
+        <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2 text-white/80 text-xs"><i class="fa-solid fa-backward-step"></i><i class="fa-solid fa-play"></i><i class="fa-solid fa-forward-step"></i></div></div>`,
+    ai: `<div class="w-full max-w-md aspect-[4/3] rounded-xl overflow-hidden relative border-4 border-[#1E293B] bg-[#111827] flex items-center justify-center">
+        <div class="text-8xl">🙋</div>
+        <div class="absolute border-2 border-[#A855F7] rounded-lg" style="left:33%; top:20%; width:34%; height:52%"><span class="absolute -top-6 left-0 text-[10px] mono bg-[#A855F7] text-white px-1.5 py-0.5 rounded">terdeteksi: tangan diangkat</span></div>
+        <div class="absolute top-3 left-3 flex items-center gap-1.5 text-[10px] mono text-[#F87171]"><span class="w-2 h-2 rounded-full bg-[#F87171]"></span>KAMERA</div>
+        <div class="absolute bottom-3 inset-x-3 text-[11px] mono text-slate-300 bg-black/50 rounded px-2 py-1">jika tangan diangkat → karakter melompat 🐱</div></div>`,
+    web: `<div class="w-full max-w-md rounded-xl overflow-hidden border border-white/15 bg-white">
+        <div class="flex items-center gap-2 px-3 py-2 bg-[#E2E8F0]"><span class="w-2.5 h-2.5 rounded-full bg-[#F87171]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#FFC83D]"></span><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span><span class="ml-2 flex-1 text-[10px] mono text-slate-500 bg-white rounded px-2 py-0.5">portofolio-saya.web.app</span></div>
+        <div class="p-5 text-[#111827]"><div class="flex justify-between items-center mb-5"><b class="font-display">Raka.dev</b><div class="flex gap-3 text-[10px] text-slate-500"><span>Karya</span><span>Tentang</span><span>Kontak</span></div></div>
+        <div class="font-display text-2xl font-black leading-tight">Hai, aku web<br>developer muda 👋</div><div class="h-2 w-2/3 bg-slate-200 rounded mt-3"></div>
+        <div class="grid grid-cols-3 gap-2 mt-5"><div class="h-14 rounded-lg bg-[#14B8A6]/30"></div><div class="h-14 rounded-lg bg-[#38BDF8]/30"></div><div class="h-14 rounded-lg bg-[#A855F7]/30"></div></div></div></div>`,
+    app: `<div class="w-48 rounded-[2rem] border-[6px] border-[#1E293B] bg-[#EEF2FF] overflow-hidden text-[#111827]">
+        <div class="bg-[#6366F1] text-white px-4 pt-5 pb-4"><div class="text-[10px] opacity-80">Soal 3/10</div><div class="font-bold text-sm mt-1">Planet terbesar di tata surya?</div></div>
+        <div class="p-3 space-y-2 text-xs font-semibold"><div class="bg-white rounded-lg px-3 py-2 border">Mars</div><div class="bg-emerald-100 rounded-lg px-3 py-2 border border-emerald-400">Jupiter ✓</div><div class="bg-white rounded-lg px-3 py-2 border">Venus</div></div>
+        <div class="px-3 pb-4"><div class="h-1.5 bg-slate-200 rounded"><div class="h-full w-1/3 bg-[#6366F1] rounded"></div></div></div></div>`,
+    robot: `<div class="w-full max-w-md aspect-[4/3] rounded-xl relative border-4 border-[#1E293B] bg-[#064E3B] p-5 grid-bg">
+        <div class="absolute left-6 top-6 w-32 h-20 rounded bg-[#0E7490] border-2 border-[#155E75] flex items-center justify-center mono text-[10px] text-white/80">ARDUINO UNO</div>
+        <div class="absolute right-8 top-8 flex gap-2"><span class="w-6 h-6 rounded-full border-2 border-slate-300 bg-slate-500"></span><span class="w-6 h-6 rounded-full border-2 border-slate-300 bg-slate-500"></span></div>
+        <div class="absolute right-8 top-[3.8rem] text-[9px] mono text-white/70">sensor jarak</div>
+        <div class="absolute left-10 bottom-10 w-5 h-5 rounded-full" style="animation:ledBlink 1s infinite"></div>
+        <div class="absolute left-[4.5rem] bottom-10 text-2xl" style="animation:spin 2s linear infinite">⚙️</div>
+        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M140 70 H300" stroke="#FFC83D" stroke-width="2" fill="none"/><path d="M70 110 V230" stroke="#F87171" stroke-width="2" fill="none"/><path d="M120 110 V230" stroke="#38BDF8" stroke-width="2" fill="none"/></svg>
+        <div class="absolute right-4 bottom-4 mono text-[11px] bg-black/60 text-emerald-300 rounded px-2 py-1">jarak: 12 cm → ALARM ON 🚨</div></div>`,
+    desain: `<div class="w-56 aspect-[3/4] rounded-lg overflow-hidden relative shadow-2xl" style="background:linear-gradient(160deg,#EC4899,#7C3AED)">
+        <div class="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-[#FFC83D]"></div><div class="absolute left-4 bottom-24 w-20 h-20 rounded-full border-8 border-white/30"></div>
+        <div class="absolute left-4 right-4 bottom-5"><div class="text-[10px] font-bold tracking-[0.3em] text-white/80">SABTU, 12 DES</div><div class="font-display font-black text-3xl leading-none text-white">FESTIVAL<br>SAINS<br>SEKOLAH</div></div></div>`,
+    dokumen: `<div class="w-full max-w-md rounded-xl overflow-hidden border border-white/15 bg-white text-[#111827]">
+        <div class="bg-[#16A34A] text-white text-[11px] font-bold px-3 py-1.5">Rekap_Tabungan_Kelas.xlsx</div>
+        <div class="text-[10px] mono px-3 py-1 border-b bg-slate-50">fx  =SUM(B2:B5)</div>
+        <div class="grid grid-cols-[1fr_1fr] text-[11px]">${[['Bulan','Tabungan'],['Jan','45.000'],['Feb','60.000'],['Mar','52.000'],['Apr','70.000'],['TOTAL','227.000']].map((r, i) => r.map(c => `<div class="px-3 py-1 border-b border-r ${i === 0 || i === 5 ? 'font-bold bg-slate-100' : ''}">${c}</div>`).join('')).join('')}</div>
+        <div class="flex items-end gap-3 h-20 px-5 py-3">${[45,60,52,70].map(v => `<div class="flex-1 rounded-t bg-[#3B82F6]" style="height:${v}%"></div>`).join('')}</div></div>`,
+  };
+  const chips = document.getElementById('o-chips');
+  chips.innerHTML = CATS.map((c, i) => `<button data-k="${c.k}" aria-pressed="${i === 0}" class="out-chip shrink-0 inline-flex items-center gap-2 px-4 py-3 rounded-2xl border border-white/10 bg-white/[.03] text-sm font-bold text-slate-300 hover:border-white/30 transition"><span class="text-xl">${c.e}</span>${c.l}</button>`).join('');
+  chips.addEventListener('click', e => { const b = e.target.closest('button'); if (b) select(b.dataset.k); });
+  function select(k) {
+    const c = CATS.find(x => x.k === k), list = P.filter(p => p.tags.includes(k));
+    chips.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.k === k));
+    document.getElementById('o-word').textContent = c.l.toLowerCase();
+    document.getElementById('o-preview').innerHTML = `<div class="fade-swap w-full flex flex-col items-center gap-3">${PREVIEW[k]}<span class="text-[10px] text-slate-500">Ilustrasi jenis karya, bukan karya siswa asli</span></div>`;
+    document.getElementById('o-count').textContent = `${list.length} PROGRAM MENGAJARKAN INI`;
+    document.getElementById('o-list').innerHTML = list.map(p => `
+      <div class="fade-swap group flex gap-4 p-4 rounded-2xl bg-[#0B0F19]/80 border border-white/10 hover:border-white/25 transition" style="border-left:4px solid ${p.color}">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style="background:${hex(p.color,'1f')}; color:${p.color}"><i class="fa-solid ${p.icon}"></i></div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2"><h4 class="font-bold">${p.name}</h4><span class="text-[10px] mono font-bold px-2 py-0.5 rounded-full bg-white/5 text-slate-300">${ageLabel(p)}</span></div>
+          <p class="text-xs text-slate-400 mt-1">${p.desc}</p>
+          <div class="text-[11px] mono text-slate-500 mt-2">${p.tools.join(' · ')}</div>
+        </div>
+        <a href="#register" class="self-center w-10 h-10 shrink-0 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#FFC83D] group-hover:text-[#111827] transition" aria-label="Coba ${p.name}"><i class="fa-solid fa-arrow-right -rotate-45 text-sm"></i></a>
+      </div>`).join('') + `<a href="#register" class="flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-5 py-3 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition mt-2"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis · tutor bantu pilih</a>`;
+  }
+  select('game');
+})();
+
+/* ===================== OPSI 6 · TABEL PERIODIK ===================== */
+(() => {
+  const t = document.getElementById('p-table');
+  // [id, col, row] for lg layout (8 cols x 3 rows)
+  const LAYOUT = { innovator:[1,1], beginner:[1,2], intermediate:[1,3], komputer:[2,3], desain:[3,3], game:[7,1], web:[8,1], robotik:[7,2], apps:[8,2] };
+  const tile = p => `
+    <button class="el relative text-left rounded-xl border p-3 flex flex-col min-h-[140px]" data-id="${p.id}" style="--c:${p.color}; background:linear-gradient(160deg,${hex(p.color,'26')},#0B0F19 70%); border-color:${hex(p.color,'40')}"
+      data-col="${LAYOUT[p.id][0]}" data-row="${LAYOUT[p.id][1]}">
+      <div class="flex justify-between text-[10px] mono"><span class="text-slate-300 font-bold">${parseInt(p.n)}</span><span class="text-slate-400">${p.min}–${p.max}</span></div>
+      <div class="font-display font-black text-4xl mt-auto leading-none" style="color:${p.color}">${p.sym}</div>
+      <div class="text-[12px] font-bold mt-1 leading-tight truncate">${p.name}</div>
+      <div class="text-[9px] mono text-slate-500 truncate">${p.tools[0]}</div>
+    </button>`;
+  t.innerHTML = P.map(tile).join('') + `
+    <div id="p-detail" class="col-span-3 lg:col-start-2 lg:col-end-7 lg:row-start-1 lg:row-end-3 order-first lg:order-none rounded-2xl border border-white/10 bg-[#0B0F19]/80 p-5 sm:p-6"></div>
+    <div class="col-span-3 lg:col-start-4 lg:col-end-9 lg:row-start-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] text-slate-400 px-2">
+      ${Object.values(PILLARS).map(pl => `<span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-sm" style="background:${pl.color}"></span>${pl.label}</span>`).join('')}
+      <span class="mono text-slate-500">nomor · simbol · nama · usia</span>
+    </div>`;
+  const applyGrid = () => {
+    const lg = matchMedia('(min-width:1024px)').matches;
+    t.querySelectorAll('.el').forEach(el => { el.style.gridColumn = lg ? el.dataset.col : ''; el.style.gridRow = lg ? el.dataset.row : ''; });
+  };
+  applyGrid(); addEventListener('resize', applyGrid);
+  const select = id => {
+    const p = byId(id);
+    t.querySelectorAll('.el').forEach(el => el.setAttribute('aria-pressed', el.dataset.id === id));
+    document.getElementById('p-detail').innerHTML = `<div class="grid sm:grid-cols-[150px_1fr] gap-6 items-start fade-swap">
+      <div class="rounded-2xl border-2 p-4 aspect-square flex flex-col" style="border-color:${p.color}; background:linear-gradient(160deg,${hex(p.color,'33')},#0B0F19)">
+        <div class="flex justify-between text-xs mono"><b>${parseInt(p.n)}</b><span class="text-slate-400">${ageLabel(p)}</span></div>
+        <div class="font-display font-black text-6xl mt-auto leading-none" style="color:${p.color}">${p.sym}</div>
+        <div class="text-xs font-bold mt-1">${p.name}</div></div>
+      <div>${detailHTML(p).replace(/<div class="flex items-start gap-4">[\s\S]*?<\/h4>[\s\S]*?<\/div>\s*<\/div>/, `<div><span class="text-[10px] mono font-bold uppercase" style="color:${p.color}">${trackLabel(p)}</span><h4 class="font-display text-2xl font-bold leading-tight">${p.name}</h4><p class="text-xs italic text-slate-400">"${p.tagline}"</p></div>`)}</div></div>`;
+  };
+  t.addEventListener('click', e => { const b = e.target.closest('.el'); if (b) select(b.dataset.id); });
+  t.addEventListener('mouseover', e => { const b = e.target.closest('.el'); if (b && b.getAttribute('aria-pressed') !== 'true') select(b.dataset.id); });
+  select('robotik');
+})();
+
+/* ===================== OPSI 7 · PETA + LIST KARTU ===================== */
+(() => {
+  const list = document.getElementById('x-list'), map = document.getElementById('x-map'), svg = document.getElementById('x-svg');
+  document.getElementById('x-legend').innerHTML = metroLegend();
+  const GROUPS = {
+    foundation: { line:'#FFC83D', title:'Jalur Fondasi', sub:'Berjenjang · Innovator → Beginner → Intermediate' },
+    skills: { line:'linear-gradient(90deg,#3B82F6,#EC4899)', title:'Jalur Skill Digital', sub:'Fleksibel · bisa diambil kapan saja, bersama jalur lain' },
+    specialization: { line:'linear-gradient(90deg,#EF4444,#14B8A6,#F97316,#6366F1)', title:'Cabang Teens', sub:'Tanpa prasyarat · dipilih setelah asesmen Free Trial' },
+  };
+  list.innerHTML = Object.entries(GROUPS).map(([k, g]) => `
+    <div class="x-group" data-pillar="${k}">
+      <div class="flex items-center gap-4 mb-5">
+        <span class="w-10 h-2 rounded-full shrink-0" style="background:${g.line}"></span>
+        <div><h4 class="font-display text-xl font-bold leading-tight">${g.title}</h4><p class="text-xs text-slate-400">${g.sub}</p></div>
+        <span class="flex-1 h-px bg-white/10"></span>
+        <span class="text-[11px] mono text-slate-500">${P.filter(p => p.pillar === k).length} program</span>
+      </div>
+      <div class="grid sm:grid-cols-2 ${{ foundation:'lg:grid-cols-3', skills:'lg:grid-cols-2', specialization:'lg:grid-cols-4' }[k]} gap-5">${P.filter(p => p.pillar === k).map(cardHTML).join('')}</div>
+    </div>`).join('');
+  bindFlip(list);
+
+  let scrollToCard = true;
+  const select = buildMetro(map, svg, p => {
+    list.querySelectorAll('.flip').forEach(c => c.classList.toggle('is-target', c.dataset.id === p.id));
+    if (scrollToCard) list.querySelector(`.flip[data-id="${p.id}"]`).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+  });
+  // hover kartu → nyalakan stasiun di peta (tanpa scroll)
+  list.addEventListener('mouseover', e => {
+    const c = e.target.closest('.flip'); if (!c || c.classList.contains('is-target')) return;
+    scrollToCard = false; select(c.dataset.id); scrollToCard = true;
+  });
+  // filter → list + peta
+  tabs(document.getElementById('x-tabs'), v => {
+    list.querySelectorAll('.x-group').forEach(g => g.classList.toggle('hidden', v !== 'all' && g.dataset.pillar !== v));
+    svg.querySelectorAll('.metro-line').forEach(l => l.style.opacity = v === 'all' || !l.dataset.pillar || l.dataset.pillar === v ? 1 : .15);
+    map.querySelectorAll('button.st').forEach(b => b.style.opacity = v === 'all' || byId(b.dataset.id).pillar === v ? 1 : .25);
+    list.querySelectorAll('.flip').forEach(c => c.classList.remove('is-target'));
+    map.querySelectorAll('button.st').forEach(b => b.setAttribute('aria-pressed', false));
+  });
+})();
+</script>
+</body>
+</html>

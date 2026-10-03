@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Hero</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .grad-text { background:linear-gradient(90deg,#FFC83D,#38BDF8,#C084FC); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .grid-bg { background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size:36px 36px; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#FFC83D; color:#111827; font-weight:800; padding:.9rem 1.8rem; min-height:48px; border-radius:.75rem; font-size:.875rem; transition:all .25s; box-shadow:0 6px 25px rgba(255,200,61,.3); }
+  .btn-primary:hover { background:#fed368; transform:translateY(-2px); box-shadow:0 10px 30px rgba(255,200,61,.45); }
+  .btn-secondary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#0788F5; color:#fff; font-weight:600; padding:.9rem 1.6rem; min-height:48px; border-radius:.75rem; font-size:.875rem; transition:all .25s; }
+  .btn-secondary:hover { background:#004E98; }
+  .btn-ghost { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border:1px solid rgba(255,255,255,.15); color:#fff; font-weight:600; padding:.9rem 1.6rem; min-height:48px; border-radius:.75rem; font-size:.875rem; transition:all .25s; }
+  .btn-ghost:hover { background:rgba(255,255,255,.06); }
+  .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .9rem; border-radius:999px; background:#1E293B; border:1px solid rgba(255,255,255,.1); font-size:.75rem; font-weight:700; }
+  .fade-swap { animation:fadeSwap .45s ease; }
+  @keyframes fadeSwap { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+  .opsi-tag { position:absolute; top:16px; left:16px; z-index:30; font-family:'Fira Code',monospace; font-size:11px; font-weight:700; padding:4px 10px; border-radius:8px; background:#FFC83D; color:#111827; }
+  .why { background:#0F172A; border-top:1px solid rgba(255,255,255,.08); border-bottom:1px solid rgba(255,255,255,.08); }
+  .chip-btn[aria-pressed="true"] { background:rgba(255,200,61,.12); border-color:#FFC83D; color:#fff; }
+
+  /* H1 · Saklar */
+  .switch { width:76px; height:40px; border-radius:999px; background:#334155; position:relative; transition:background .35s; flex-shrink:0; }
+  .switch::after { content:''; position:absolute; top:5px; left:5px; width:30px; height:30px; border-radius:50%; background:#fff; transition:transform .35s cubic-bezier(.4,.2,.2,1.3); box-shadow:0 2px 8px rgba(0,0,0,.4); }
+  .switch[aria-checked="true"] { background:#FFC83D; }
+  .switch[aria-checked="true"]::after { transform:translateX(36px); }
+  .mode-pane { transition:opacity .5s, transform .5s; }
+  .creator .mode-watch, .watcher .mode-make { opacity:0; transform:scale(.97); pointer-events:none; }
+  @keyframes walk { 0%,100%{left:12%} 50%{left:70%} }
+  @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+  /* H2 · Live build */
+  .caret::after { content:'▋'; color:#38BDF8; animation:blink 1s steps(1) infinite; margin-left:1px; }
+  @keyframes blink { 50%{opacity:0} }
+  .sprite { transition:left .6s cubic-bezier(.4,.2,.2,1), bottom .35s ease; }
+  .pop { animation:pop .5s cubic-bezier(.2,.9,.3,1.6); }
+  @keyframes pop { from{transform:scale(.4); opacity:0} to{transform:scale(1); opacity:1} }
+
+  /* H4 · Mosaik */
+  .marquee { display:flex; gap:2.5rem; width:max-content; animation:marquee 32s linear infinite; }
+  @keyframes marquee { to { transform:translateX(-50%) } }
+  .float-chip { animation:floaty 5s ease-in-out infinite; }
+
+  /* H5 · Tiket */
+  .ticket { --notch:#0B0F19; position:relative; border-radius:22px; }
+  .ticket .perf { position:relative; }
+  .ticket .perf::before, .ticket .perf::after { content:''; position:absolute; width:28px; height:28px; border-radius:50%; background:var(--notch); top:-14px; }
+  .ticket .perf::before { left:-14px; } .ticket .perf::after { right:-14px; }
+  .barcode { background:repeating-linear-gradient(90deg,#111827 0 2px,transparent 2px 4px,#111827 4px 5px,transparent 5px 8px,#111827 8px 11px,transparent 11px 13px); }
+  .shine { position:absolute; inset:0; background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%); background-size:250% 100%; animation:shine 4s ease-in-out infinite; pointer-events:none; border-radius:inherit; }
+  @keyframes shine { 0%{background-position:150% 0} 60%,100%{background-position:-60% 0} }
+
+  /* H6 · Masa depan */
+  input[type=range].age { -webkit-appearance:none; appearance:none; width:100%; height:8px; border-radius:999px; background:linear-gradient(90deg,#FFC83D,#10B981,#A855F7,#EF4444,#14B8A6,#F97316,#6366F1); outline:none; }
+  input[type=range].age::-webkit-slider-thumb { -webkit-appearance:none; width:30px; height:30px; border-radius:50%; background:#fff; border:5px solid #0B0F19; box-shadow:0 0 0 2px #fff, 0 6px 16px rgba(0,0,0,.5); cursor:grab; }
+  input[type=range].age::-moz-range-thumb { width:22px; height:22px; border-radius:50%; background:#fff; border:5px solid #0B0F19; cursor:grab; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI · Hero</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Penonton → Pencipta</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Lihat Karya Jadi</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Kuis Minat</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Lab Nyata</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Tiket Free Trial</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Bayangkan Masa Depannya</a>
+      <a href="#opsi-7" class="px-3 py-1.5 rounded-lg bg-[#0788F5]/15 border border-[#0788F5]/40 text-[#38BDF8] hover:bg-[#0788F5]/25">7 · Opsi 1 + Tools</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-12 pb-10">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// section: #home · hero</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">7 konsep hero yang <span class="grad-text">mengajak, bukan cuma menyapa.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Semua opsi memakai token yang sama dengan index.html: latar <code class="mono text-slate-300">#0B0F19</code>, CTA kuning <code class="mono text-slate-300">#FFC83D</code>, CTA sekunder biru <code class="mono text-slate-300">#0788F5</code>, dan gradient judul emas → biru → ungu. Setiap opsi memakai prinsip persuasi yang berbeda (dijelaskan di bawah tiap hero). Klaim hanya dari fakta di Knowledge Base: tanpa angka atau testimoni karangan.</p>
+</header>
+
+<!-- ================================================================
+     OPSI 1 · PENONTON → PENCIPTA
+================================================================= -->
+<section id="opsi-1" class="relative min-h-[88vh] flex items-center py-20 overflow-hidden border-t border-white/10 bg-[#0B0F19]">
+  <span class="opsi-tag">OPSI 1</span>
+  <div class="absolute inset-0 bg-gradient-to-b from-[#0B0F19]/60 via-[#0B0F19] to-[#0F172A]"></div>
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FFC83D]/10 rounded-full blur-[140px]"></div>
+  <div class="absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-[#0788F5]/15 rounded-full blur-[160px]"></div>
+  <div class="relative max-w-[1200px] mx-auto px-5 w-full grid lg:grid-cols-12 gap-12 items-center watcher" id="h1-root">
+    <div class="lg:col-span-6">
+      <div class="badge mb-6"><span class="w-2 h-2 rounded-full bg-[#FFC83D] animate-pulse"></span><span data-i18n="hero_badge">Playful Future Lab — Coding &amp; Robotic Bali</span></div>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-extrabold leading-[1.08] tracking-tight">
+        Hari ini dia <span class="text-slate-400">main</span> game.<br>
+        <span class="grad-text">Besok dia yang bikin.</span>
+      </h2>
+      <p class="text-base sm:text-lg text-slate-300 mt-6 max-w-xl leading-relaxed">Waktu layar yang sama, hasil yang berbeda. Di LesKoding, anak 6–17 tahun belajar mengubah game, animasi, dan aplikasi favoritnya menjadi <b class="text-white">karya buatan sendiri</b>, didampingi tutor setiap sesi.</p>
+      <div class="flex items-center gap-4 mt-8 p-4 rounded-2xl bg-[#1E293B]/70 border border-white/10 max-w-md">
+        <button class="switch" id="h1-switch" role="switch" aria-checked="false" aria-label="Ubah mode penonton menjadi pencipta"></button>
+        <div>
+          <div class="text-sm font-bold" id="h1-mode-title">Mode: Penonton</div>
+          <div class="text-xs text-slate-400" id="h1-mode-sub">Geser saklarnya, lihat bedanya →</div>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 mt-8">
+        <a href="#register" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a>
+        <a href="#course" class="btn-secondary"><i class="fa-solid fa-graduation-cap"></i> Lihat Kurikulum</a>
+      </div>
+      <p class="text-xs text-slate-500 mt-4"><i class="fa-solid fa-shield-heart text-emerald-400 mr-1"></i>1 sesi gratis · tanpa komitmen · bisa mulai dari nol</p>
+    </div>
+    <div class="lg:col-span-6">
+      <div class="relative mx-auto max-w-[520px]">
+        <div class="absolute -top-6 -right-6 w-36 h-36 border-2 border-[#FFC83D]/30 rounded-3xl -rotate-6"></div>
+        <div class="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-[#0788F5]/30 rounded-3xl rotate-12"></div>
+        <div class="relative rounded-[2rem] bg-[#1E293B] border border-white/10 p-3 shadow-2xl">
+          <div class="relative aspect-[4/3] rounded-[1.4rem] overflow-hidden bg-[#0B0F19]">
+            <!-- WATCH mode -->
+            <div class="mode-pane mode-watch absolute inset-0 flex flex-col">
+              <div class="flex-1 relative" style="background:linear-gradient(#38BDF8,#a5f3fc)">
+                <div class="absolute bottom-0 inset-x-0 h-1/4 bg-[#A16207] border-t-8 border-[#16A34A]"></div>
+                <div class="absolute text-4xl" style="bottom:25%; animation:walk 4s ease-in-out infinite">🏃</div>
+                <div class="absolute top-4 right-4 text-xs mono bg-black/50 px-2 py-1 rounded">LEVEL 99</div>
+                <div class="absolute inset-0 flex items-center justify-center"><div class="w-16 h-16 rounded-full bg-black/40 flex items-center justify-center text-2xl"><i class="fa-solid fa-play"></i></div></div>
+              </div>
+              <div class="bg-[#0B0F19] px-4 py-3 flex items-center justify-between text-xs">
+                <span class="text-slate-400"><i class="fa-solid fa-hourglass-half text-[#F87171] mr-1.5"></i>Waktu layar terus berjalan…</span>
+                <span class="mono text-[#F87171]">menonton</span>
+              </div>
+            </div>
+            <!-- MAKE mode -->
+            <div class="mode-pane mode-make absolute inset-0 grid grid-cols-[1.1fr_1fr]">
+              <div class="bg-[#0F172A] p-3 space-y-1.5 text-[11px] font-bold">
+                <div class="mono text-[9px] text-slate-500 mb-1">BLOK KODE</div>
+                <div class="rounded-md px-2.5 py-1.5 bg-[#E6A817] text-[#111827]">ketika 🏁 diklik</div>
+                <div class="rounded-md px-2.5 py-1.5 bg-[#7C3AED]">ulangi terus</div>
+                <div class="ml-3 rounded-md px-2.5 py-1.5 bg-[#0788F5]">jika tombol ➡ ditekan</div>
+                <div class="ml-6 rounded-md px-2.5 py-1.5 bg-[#0788F5]/80">gerak 10 langkah</div>
+                <div class="ml-3 rounded-md px-2.5 py-1.5 bg-[#10B981]">jika menyentuh ⭐</div>
+                <div class="ml-6 rounded-md px-2.5 py-1.5 bg-[#F97316]">ubah skor +1</div>
+              </div>
+              <div class="relative" style="background:linear-gradient(#38BDF8,#a5f3fc)">
+                <div class="absolute bottom-0 inset-x-0 h-1/4 bg-[#A16207] border-t-8 border-[#16A34A]"></div>
+                <div class="absolute text-3xl" style="bottom:25%; animation:walk 3s ease-in-out infinite">🐱</div>
+                <div class="absolute text-xl" style="right:18%; bottom:48%; animation:floaty 2s ease-in-out infinite">⭐</div>
+                <div class="absolute top-3 left-3 text-[10px] mono bg-white/80 text-[#111827] font-bold px-2 py-0.5 rounded">SKOR 3</div>
+              </div>
+              <div class="col-span-2 bg-[#0B0F19] px-4 py-3 flex items-center justify-between text-xs absolute bottom-0 inset-x-0">
+                <span class="text-slate-300"><i class="fa-solid fa-wand-magic-sparkles text-[#FFC83D] mr-1.5"></i>Game buatan sendiri, aturan sendiri</span>
+                <span class="mono text-emerald-400">mencipta</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="absolute -bottom-5 right-6 bg-[#0F172A] border border-white/10 rounded-xl px-4 py-2.5 shadow-xl flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#0788F5]/20 border border-[#0788F5]/40 flex items-center justify-center text-[#38BDF8] text-xs"><i class="fa-solid fa-user-check"></i></div>
+          <div class="text-left"><div class="text-xs font-bold">Feedback tutor setiap sesi</div><div class="text-[10px] text-slate-400">Catatan perkembangan untuk orang tua</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="why"><div class="max-w-[1200px] mx-auto px-5 py-5 grid md:grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
+  <div class="font-bold text-[#FFC83D] mono text-xs pt-0.5">PERSUASI</div>
+  <div class="text-slate-300"><b class="text-white">Reframing pain point.</b> Kekhawatiran nomor satu orang tua (screen time) diubah jadi peluang. Saklar membuat orang tua "mengalami" perubahannya sendiri. Headline kontras dua kalimat mudah diingat. Jaminan risiko ("tanpa komitmen") ditaruh tepat di bawah CTA.</div>
+</div></div>
+
+<!-- ================================================================
+     OPSI 2 · LIHAT KARYA JADI (LIVE BUILD)
+================================================================= -->
+<section id="opsi-2" class="relative min-h-[88vh] flex items-center py-20 overflow-hidden bg-[#0B0F19]">
+  <span class="opsi-tag">OPSI 2</span>
+  <div class="absolute inset-0 grid-bg opacity-60"></div>
+  <div class="absolute -top-20 right-0 w-[500px] h-[500px] bg-[#0788F5]/15 rounded-full blur-[160px]"></div>
+  <div class="relative max-w-[1200px] mx-auto px-5 w-full grid lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-5">
+      <div class="badge mb-6"><i class="fa-solid fa-code text-[#38BDF8]"></i> Akademi Koding &amp; Robotika Anak · Bali</div>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.1] tracking-tight"><span data-i18n="hero_title_1">Ubah rasa penasaran jadi</span> <span class="grad-text" data-i18n="hero_title_2">karya digital.</span></h2>
+      <p class="text-base sm:text-lg text-slate-300 mt-6 leading-relaxed">Lihat sendiri di sebelah: beberapa baris logika berubah jadi game yang bisa dimainkan. Begitulah anak belajar di kelas kami, <b class="text-white">langkah demi langkah</b>, dari nol.</p>
+      <div class="mt-7 space-y-3" id="h2-checks">
+        <div class="flex items-center gap-3 text-sm text-slate-300"><span class="w-6 h-6 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-[10px]"><i class="fa-solid fa-check"></i></span>Tidak perlu pengalaman coding sebelumnya</div>
+        <div class="flex items-center gap-3 text-sm text-slate-300"><span class="w-6 h-6 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-[10px]"><i class="fa-solid fa-check"></i></span>Maksimal 5 siswa per tutor, semua terbantu</div>
+        <div class="flex items-center gap-3 text-sm text-slate-300"><span class="w-6 h-6 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-[10px]"><i class="fa-solid fa-check"></i></span>Sertifikat kelulusan di setiap course</div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 mt-8">
+        <a href="#register" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a>
+        <a href="#hall-of-fame" class="btn-ghost"><i class="fa-solid fa-trophy text-[#FFC83D]"></i> Lihat Karya Siswa</a>
+      </div>
+    </div>
+    <div class="lg:col-span-7">
+      <div class="rounded-2xl border border-white/15 bg-[#0F172A] shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-4 py-2.5 bg-[#1E293B] border-b border-white/10">
+          <div class="flex gap-1.5"><span class="w-3 h-3 rounded-full bg-[#F87171]"></span><span class="w-3 h-3 rounded-full bg-[#FFC83D]"></span><span class="w-3 h-3 rounded-full bg-emerald-400"></span></div>
+          <span class="mono text-xs text-slate-400 flex-1">game-pertamaku.sb3</span>
+          <span id="h2-status" class="mono text-[10px] text-emerald-400"><i class="fa-solid fa-circle text-[6px] mr-1 animate-pulse"></i>membangun…</span>
+        </div>
+        <div class="grid sm:grid-cols-[1fr_1.1fr]">
+          <div id="h2-code" class="mono text-[12px] leading-7 p-4 min-h-[300px] border-b sm:border-b-0 sm:border-r border-white/10"></div>
+          <div class="relative min-h-[300px] overflow-hidden" style="background:linear-gradient(#1e3a8a,#38BDF8 70%)">
+            <div class="absolute top-3 left-3 mono text-[11px] font-bold bg-black/40 px-2 py-1 rounded">SKOR <span id="h2-score">0</span></div>
+            <div class="absolute bottom-0 inset-x-0 h-[22%] bg-[#A16207] border-t-[10px] border-[#16A34A]"></div>
+            <div id="h2-star1" class="absolute text-2xl opacity-0" style="left:45%; bottom:30%">⭐</div>
+            <div id="h2-star2" class="absolute text-2xl opacity-0" style="left:75%; bottom:30%">⭐</div>
+            <div id="h2-sprite" class="sprite absolute text-4xl opacity-0" style="left:10%; bottom:22%">🐱</div>
+            <div id="h2-win" class="absolute inset-0 hidden items-center justify-center bg-black/40"><div class="pop text-center"><div class="text-5xl">🎉</div><div class="font-display font-black text-2xl mt-2">Game pertamaku jadi!</div><div class="text-xs text-white/80 mt-1">dibuat, bukan sekadar dimainkan</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 mt-4 justify-center sm:justify-start text-[11px] mono text-slate-400">
+        <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Scratch</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Roblox Studio</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Arduino</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">App Inventor</span><span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">HTML/CSS/JS</span>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="why"><div class="max-w-[1200px] mx-auto px-5 py-5 grid md:grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
+  <div class="font-bold text-[#FFC83D] mono text-xs pt-0.5">PERSUASI</div>
+  <div class="text-slate-300"><b class="text-white">Show, don't tell.</b> Orang tua langsung melihat logika berubah jadi hasil nyata dalam beberapa detik, jadi "coding" tidak terasa abstrak atau menakutkan. Daftar centang di kiri menjawab tiga keberatan umum: anak belum bisa coding, takut tidak terbantu, dan apa buktinya.</div>
+</div></div>
+
+<!-- ================================================================
+     OPSI 3 · KUIS MINAT
+================================================================= -->
+<section id="opsi-3" class="relative min-h-[88vh] flex items-center py-20 overflow-hidden bg-[#0B0F19]">
+  <span class="opsi-tag">OPSI 3</span>
+  <div class="absolute inset-0 bg-gradient-to-b from-[#0F172A] to-[#0B0F19]"></div>
+  <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[#A855F7]/10 rounded-full blur-[150px]"></div>
+  <div class="relative max-w-[1100px] mx-auto px-5 w-full text-center">
+    <div class="badge mb-6"><span class="w-2 h-2 rounded-full bg-[#FFC83D] animate-pulse"></span>Rekomendasi kelas dalam 2 klik</div>
+    <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">Anak Anda suka apa?<br><span class="grad-text">Kami tunjukkan bisa jadi apa.</span></h2>
+    <p class="text-base sm:text-lg text-slate-300 mt-5 max-w-2xl mx-auto">Setiap minat bisa jadi pintu masuk ke dunia teknologi. Pilih yang paling cocok dengan si kecil.</p>
+    <div class="mt-9 flex flex-wrap justify-center gap-2.5" id="h3-interest"></div>
+    <div class="mt-4 flex flex-wrap justify-center items-center gap-2 text-sm" id="h3-age"><span class="text-slate-400 mr-1">Usianya:</span></div>
+    <div id="h3-result" class="mt-9 max-w-3xl mx-auto"></div>
+    <p class="text-[11px] text-slate-500 mt-4"><i class="fa-solid fa-circle-info mr-1"></i>Rekomendasi awal. Penempatan level final ditentukan tutor saat Free Trial Class.</p>
+  </div>
+</section>
+<div class="why"><div class="max-w-[1200px] mx-auto px-5 py-5 grid md:grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
+  <div class="font-bold text-[#FFC83D] mono text-xs pt-0.5">PERSUASI</div>
+  <div class="text-slate-300"><b class="text-white">Micro-commitment + personalisasi.</b> Dua klik kecil membuat orang tua mulai "terlibat". Hasilnya terasa dibuat khusus untuk anaknya, dan CTA ikut menyebut nama kelasnya ("Klaim Free Trial: Game Developer"), sehingga langkah berikutnya terasa wajar.</div>
+</div></div>
+
+<!-- ================================================================
+     OPSI 4 · LAB NYATA (MOSAIK FOTO)
+================================================================= -->
+<section id="opsi-4" class="relative min-h-[88vh] flex flex-col justify-center pt-20 pb-10 overflow-hidden bg-[#0B0F19]">
+  <span class="opsi-tag">OPSI 4</span>
+  <div class="absolute bottom-0 left-1/4 w-[500px] h-[400px] bg-[#FFC83D]/8 rounded-full blur-[160px]"></div>
+  <div class="relative max-w-[1200px] mx-auto px-5 w-full grid lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-5">
+      <div class="badge mb-6"><i class="fa-solid fa-location-dot text-[#C084FC]"></i> Gianyar · Ubud Peliatan · Bedulu</div>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.1] tracking-tight">Belajar coding di <span class="grad-text">lab sungguhan</span>, bukan sekadar nonton video.</h2>
+      <p class="text-base sm:text-lg text-slate-300 mt-6 leading-relaxed">Tatap muka di kelas kecil, komputer dan kit robotik sudah tersedia, dan tutor duduk di samping anak saat ia mencoba, salah, lalu berhasil.</p>
+      <div class="grid grid-cols-3 gap-3 mt-8">
+        <div class="rounded-xl bg-[#1E293B] border border-white/10 p-3"><div class="font-display text-2xl font-black text-[#FFC83D]">1:5</div><div class="text-[11px] text-slate-400 leading-tight mt-0.5">tutor : siswa per kelas</div></div>
+        <div class="rounded-xl bg-[#1E293B] border border-white/10 p-3"><div class="font-display text-2xl font-black text-[#38BDF8]">9</div><div class="text-[11px] text-slate-400 leading-tight mt-0.5">program, usia 6–17</div></div>
+        <div class="rounded-xl bg-[#1E293B] border border-white/10 p-3"><div class="font-display text-2xl font-black text-[#C084FC]">3</div><div class="text-[11px] text-slate-400 leading-tight mt-0.5">learning center di Bali</div></div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 mt-8">
+        <a href="#register" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a>
+        <a href="#location" class="btn-ghost"><i class="fa-solid fa-map-location-dot text-[#C084FC]"></i> Cari Lab Terdekat</a>
+      </div>
+    </div>
+    <div class="lg:col-span-7">
+      <div class="relative grid grid-cols-6 grid-rows-[repeat(6,52px)] sm:grid-rows-[repeat(6,64px)] gap-3">
+        <div class="col-span-4 row-span-4 rounded-2xl overflow-hidden border border-white/10 relative"><img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" class="w-full h-full object-cover" alt="Kelas LesKoding"><div class="absolute inset-0 bg-gradient-to-t from-[#0B0F19]/70 to-transparent"></div><span class="absolute bottom-3 left-3 text-[10px] font-bold bg-[#0B0F19]/85 border border-[#FFC83D]/40 text-[#FFC83D] px-3 py-1 rounded-full"><i class="fa-solid fa-camera mr-1"></i>Sesi nyata di lab</span></div>
+        <div class="col-span-2 row-span-3 rounded-2xl overflow-hidden border border-white/10"><img src="assets/sessions/WhatsApp%20Image%202026-02-22%20at%2020.04.47%20(2).jpeg" class="w-full h-full object-cover" alt="Siswa tersenyum"></div>
+        <div class="col-span-2 row-span-3 rounded-2xl overflow-hidden border border-white/10"><img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" class="w-full h-full object-cover" alt="Siswa membuat game"></div>
+        <div class="col-span-2 row-span-2 rounded-2xl overflow-hidden border border-white/10"><img src="assets/sessions/01M3RVHT4R9SQ961Z3GTWJD72Y.jpg" class="w-full h-full object-cover" alt="Siswa dengan tablet"></div>
+        <div class="col-span-2 row-span-2 rounded-2xl overflow-hidden border border-white/10"><img src="assets/sessions/WhatsApp%20Image%202026-02-22%20at%2020.04.53%20(1).jpeg" class="w-full h-full object-cover" alt="Siswa remaja di lab"></div>
+        <div class="float-chip absolute -left-3 sm:-left-6 top-[58%] bg-[#0F172A] border border-white/10 rounded-xl px-3.5 py-2.5 shadow-xl flex items-center gap-2.5 text-left"><i class="fa-solid fa-file-lines text-[#38BDF8]"></i><div><div class="text-xs font-bold">Laporan tiap sesi</div><div class="text-[10px] text-slate-400">langsung ke orang tua</div></div></div>
+        <div class="float-chip absolute -right-2 sm:-right-4 -top-4 bg-[#0F172A] border border-white/10 rounded-xl px-3.5 py-2.5 shadow-xl flex items-center gap-2.5 text-left" style="animation-delay:-2.5s"><i class="fa-solid fa-certificate text-[#FFC83D]"></i><div><div class="text-xs font-bold">Sertifikat kelulusan</div><div class="text-[10px] text-slate-400">di setiap course</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="relative mt-14 border-y border-white/10 bg-[#0F172A]/60 py-4 overflow-hidden">
+    <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0B0F19] to-transparent z-10"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0B0F19] to-transparent z-10"></div>
+    <div class="flex items-center gap-6">
+      <span class="shrink-0 pl-5 sm:pl-10 text-[10px] mono uppercase tracking-widest text-slate-500 relative z-20 bg-[#0F172A] pr-4">Tools standar industri</span>
+      <div class="overflow-hidden flex-1"><div class="marquee tools-marquee"></div></div>
+    </div>
+  </div>
+</section>
+<div class="why"><div class="max-w-[1200px] mx-auto px-5 py-5 grid md:grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
+  <div class="font-bold text-[#FFC83D] mono text-xs pt-0.5">PERSUASI</div>
+  <div class="text-slate-300"><b class="text-white">Social proof + authority.</b> Foto kelas asli membuktikan pembelajarannya nyata. Angka di sini semuanya fakta operasional (1:5, 9 program, 3 lab), bukan klaim. Logo tools industri memberi kesan serius dan relevan. Headline membedakan diri dari kursus online.</div>
+</div></div>
+
+<!-- ================================================================
+     OPSI 5 · TIKET FREE TRIAL
+================================================================= -->
+<section id="opsi-5" class="relative min-h-[88vh] flex items-center py-20 overflow-hidden bg-[#0B0F19]">
+  <span class="opsi-tag">OPSI 5</span>
+  <div class="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#FFC83D]/12 rounded-full blur-[160px]"></div>
+  <div class="relative max-w-[1200px] mx-auto px-5 w-full grid lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-6">
+      <div class="badge mb-6"><i class="fa-solid fa-ticket text-[#FFC83D]"></i> Free Trial Class · 1 sesi</div>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.1] tracking-tight">Tiket kelas pertama <span id="h5-name-h" class="grad-text">si kecil</span> sudah kami siapkan.</h2>
+      <p class="text-base sm:text-lg text-slate-300 mt-6 leading-relaxed max-w-xl">Datang ke lab, coba satu sesi penuh bersama tutor, dan lihat sendiri apakah ia menikmatinya. <b class="text-white">Gratis, tanpa komitmen.</b></p>
+      <div class="mt-8 space-y-4 max-w-md">
+        <label class="block">
+          <span class="text-xs font-bold text-slate-400">Nama panggilan anak</span>
+          <input id="h5-name" type="text" maxlength="14" placeholder="contoh: Raka" class="mt-1.5 w-full rounded-xl bg-[#1E293B] border border-white/10 focus:border-[#FFC83D] focus:outline-none px-4 py-3 text-sm placeholder:text-slate-500">
+        </label>
+        <div>
+          <span class="text-xs font-bold text-slate-400">Lab terdekat</span>
+          <div class="flex flex-wrap gap-2 mt-1.5" id="h5-loc"></div>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 mt-8">
+        <a href="#register" class="btn-primary"><i class="fa-solid fa-ticket"></i> Pakai Tiket Ini</a>
+        <a href="#faq" class="btn-ghost">Ada pertanyaan?</a>
+      </div>
+    </div>
+    <div class="lg:col-span-6">
+      <div class="ticket mx-auto max-w-[460px] rotate-[-3deg] hover:rotate-0 transition-transform duration-500 shadow-[0_40px_80px_-30px_rgba(0,0,0,.9)]" style="--notch:#0B0F19">
+        <div class="relative rounded-t-[22px] overflow-hidden p-6 sm:p-7" style="background:linear-gradient(135deg,#FFC83D,#fde68a 45%,#f59e0b)">
+          <div class="shine"></div>
+          <div class="flex items-start justify-between text-[#111827]">
+            <div><div class="text-[10px] font-extrabold tracking-[.3em]">LESKODING · BALI</div><div class="font-display font-black text-3xl sm:text-4xl leading-none mt-2">FREE TRIAL<br>PASS</div></div>
+            <div class="w-14 h-14 rounded-2xl bg-[#111827] text-[#FFC83D] flex items-center justify-center text-2xl"><i class="fa-solid fa-rocket"></i></div>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-3 mt-6 text-[#111827]">
+            <div><div class="text-[9px] font-extrabold tracking-[.25em] opacity-60">PESERTA</div><div class="font-extrabold text-lg truncate" id="h5-name-t">Si Kecil</div></div>
+            <div><div class="text-[9px] font-extrabold tracking-[.25em] opacity-60">TUJUAN</div><div class="font-extrabold text-lg truncate" id="h5-loc-t">Lab Gianyar</div></div>
+            <div><div class="text-[9px] font-extrabold tracking-[.25em] opacity-60">DURASI</div><div class="font-extrabold">1 sesi penuh</div></div>
+            <div><div class="text-[9px] font-extrabold tracking-[.25em] opacity-60">HARGA</div><div class="font-extrabold">Rp0 · gratis</div></div>
+          </div>
+        </div>
+        <div class="perf bg-[#1E293B] border-t-2 border-dashed border-[#0B0F19]/60 px-6 sm:px-7 py-5 rounded-b-[22px]">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <div class="text-[9px] font-bold tracking-[.25em] text-slate-400">KODE PROMO</div>
+              <div class="mono font-bold text-[#FFC83D] text-lg">PETUALANGAN2026</div>
+              <div class="text-[10px] text-slate-400">+ potongan biaya pendaftaran</div>
+            </div>
+            <button id="h5-copy" class="shrink-0 text-xs font-bold px-3 py-2 rounded-lg border border-[#FFC83D]/40 text-[#FFC83D] hover:bg-[#FFC83D]/10 transition"><i class="fa-regular fa-copy mr-1"></i>Salin</button>
+          </div>
+          <div class="barcode h-10 rounded mt-4 opacity-90" style="background-color:#fff"></div>
+          <div class="flex justify-between text-[9px] mono text-slate-500 mt-1.5"><span>TANPA KOMITMEN</span><span>DIDAMPINGI TUTOR</span><span>BISA DARI NOL</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="why"><div class="max-w-[1200px] mx-auto px-5 py-5 grid md:grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
+  <div class="font-bold text-[#FFC83D] mono text-xs pt-0.5">PERSUASI</div>
+  <div class="text-slate-300"><b class="text-white">Endowment effect + zero-price.</b> Begitu nama anak muncul di tiket, orang tua merasa tiket itu "sudah milik mereka", sehingga sayang kalau tidak dipakai. Harga Rp0, kode promo resmi, dan label "tanpa komitmen" menghapus risiko. Nama hanya dipakai di layar, tidak dikirim ke mana pun.</div>
+</div></div>
+
+<!-- ================================================================
+     OPSI 6 · BAYANGKAN MASA DEPANNYA
+================================================================= -->
+<section id="opsi-6" class="relative min-h-[88vh] flex items-center py-20 overflow-hidden bg-[#0B0F19]">
+  <span class="opsi-tag">OPSI 6</span>
+  <div id="h6-glow" class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-[170px] opacity-25 transition-colors duration-700" style="background:#10B981"></div>
+  <div class="relative max-w-[1100px] mx-auto px-5 w-full">
+    <div class="text-center">
+      <div class="badge mb-6"><span class="w-2 h-2 rounded-full bg-[#FFC83D] animate-pulse"></span><span data-i18n="hero_badge">Playful Future Lab — Coding &amp; Robotic Bali</span></div>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">Usianya <span id="h6-age-h" class="grad-text">9 tahun</span>.<br>Bayangkan apa yang bisa ia ciptakan.</h2>
+      <p class="text-base sm:text-lg text-slate-300 mt-5 max-w-2xl mx-auto">Geser usia anak dan lihat karya yang bisa ia buat di tiap tahap perjalanannya bersama LesKoding.</p>
+    </div>
+    <div class="mt-10 max-w-3xl mx-auto">
+      <input id="h6-age" type="range" min="6" max="17" value="9" class="age" aria-label="Usia anak">
+      <div class="flex justify-between text-[11px] mono text-slate-500 mt-2"><span>6 thn</span><span>Kids</span><span>Teens</span><span>17 thn</span></div>
+    </div>
+    <div id="h6-card" class="mt-10 max-w-4xl mx-auto"></div>
+    <div class="flex flex-col sm:flex-row gap-3 mt-10 justify-center">
+      <a href="#register" class="btn-primary" id="h6-cta"><i class="fa-solid fa-calendar-check"></i> Mulai Perjalanannya · Coba Gratis</a>
+      <a href="#course" class="btn-secondary"><i class="fa-solid fa-graduation-cap"></i> Lihat Kurikulum</a>
+    </div>
+  </div>
+</section>
+<div class="why"><div class="max-w-[1200px] mx-auto px-5 py-5 grid md:grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
+  <div class="font-bold text-[#FFC83D] mono text-xs pt-0.5">PERSUASI</div>
+  <div class="text-slate-300"><b class="text-white">Future pacing.</b> Orang tua diajak membayangkan versi masa depan anaknya secara konkret: bukan "belajar coding", tapi "membuat dunia game 3D" atau "aplikasi di HP-nya sendiri". Dimulai dari usia anak saat ini, jadi langsung terasa personal.</div>
+</div></div>
+
+<!-- ================================================================
+     OPSI 7 · PENONTON → PENCIPTA + TOOLS INDUSTRI (gabungan 1 & 4)
+================================================================= -->
+<section id="opsi-7" class="relative min-h-[88vh] flex flex-col justify-center pt-20 pb-10 overflow-hidden border-t border-white/10 bg-[#0B0F19]">
+  <span class="opsi-tag">OPSI 7</span>
+  <div class="absolute inset-0 bg-gradient-to-b from-[#0B0F19]/60 via-[#0B0F19] to-[#0F172A]"></div>
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FFC83D]/10 rounded-full blur-[140px]"></div>
+  <div class="absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-[#0788F5]/15 rounded-full blur-[160px]"></div>
+  <div class="relative max-w-[1200px] mx-auto px-5 w-full grid lg:grid-cols-12 gap-12 items-center watcher" id="h7-root">
+    <div class="lg:col-span-6">
+      <div class="badge mb-6"><span class="w-2 h-2 rounded-full bg-[#FFC83D] animate-pulse"></span><span data-i18n="hero_badge">Playful Future Lab — Coding &amp; Robotic Bali</span></div>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-extrabold leading-[1.08] tracking-tight">
+        Hari ini dia <span class="text-slate-400">main</span> game.<br>
+        <span class="grad-text">Besok dia yang bikin.</span>
+      </h2>
+      <p class="text-base sm:text-lg text-slate-300 mt-6 max-w-xl leading-relaxed">Waktu layar yang sama, hasil yang berbeda. Di LesKoding, anak 6–17 tahun belajar mengubah game, animasi, dan aplikasi favoritnya menjadi <b class="text-white">karya buatan sendiri</b>, didampingi tutor setiap sesi.</p>
+      <div class="flex items-center gap-4 mt-8 p-4 rounded-2xl bg-[#1E293B]/70 border border-white/10 max-w-md">
+        <button class="switch" id="h7-switch" role="switch" aria-checked="false" aria-label="Ubah mode penonton menjadi pencipta"></button>
+        <div>
+          <div class="text-sm font-bold" id="h7-mode-title">Mode: Penonton</div>
+          <div class="text-xs text-slate-400" id="h7-mode-sub">Geser saklarnya, lihat bedanya →</div>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 mt-8">
+        <a href="#register" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a>
+        <a href="#course" class="btn-secondary"><i class="fa-solid fa-graduation-cap"></i> Lihat Kurikulum</a>
+      </div>
+      <p class="text-xs text-slate-500 mt-4"><i class="fa-solid fa-shield-heart text-emerald-400 mr-1"></i>1 sesi gratis · tanpa komitmen · bisa mulai dari nol</p>
+    </div>
+    <div class="lg:col-span-6">
+      <div class="relative mx-auto max-w-[520px]">
+        <div class="absolute -top-6 -right-6 w-36 h-36 border-2 border-[#FFC83D]/30 rounded-3xl -rotate-6"></div>
+        <div class="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-[#0788F5]/30 rounded-3xl rotate-12"></div>
+        <div class="relative rounded-[2rem] bg-[#1E293B] border border-white/10 p-3 shadow-2xl">
+          <div class="relative aspect-[4/3] rounded-[1.4rem] overflow-hidden bg-[#0B0F19]">
+            <!-- WATCH mode -->
+            <div class="mode-pane mode-watch absolute inset-0 flex flex-col">
+              <div class="flex-1 relative" style="background:linear-gradient(#38BDF8,#a5f3fc)">
+                <div class="absolute bottom-0 inset-x-0 h-1/4 bg-[#A16207] border-t-8 border-[#16A34A]"></div>
+                <div class="absolute text-4xl" style="bottom:25%; animation:walk 4s ease-in-out infinite">🏃</div>
+                <div class="absolute top-4 right-4 text-xs mono bg-black/50 px-2 py-1 rounded">LEVEL 99</div>
+                <div class="absolute inset-0 flex items-center justify-center"><div class="w-16 h-16 rounded-full bg-black/40 flex items-center justify-center text-2xl"><i class="fa-solid fa-play"></i></div></div>
+              </div>
+              <div class="bg-[#0B0F19] px-4 py-3 flex items-center justify-between text-xs">
+                <span class="text-slate-400"><i class="fa-solid fa-hourglass-half text-[#F87171] mr-1.5"></i>Waktu layar terus berjalan…</span>
+                <span class="mono text-[#F87171]">menonton</span>
+              </div>
+            </div>
+            <!-- MAKE mode -->
+            <div class="mode-pane mode-make absolute inset-0 grid grid-cols-[1.1fr_1fr]">
+              <div class="bg-[#0F172A] p-3 space-y-1.5 text-[11px] font-bold">
+                <div class="mono text-[9px] text-slate-500 mb-1">BLOK KODE</div>
+                <div class="rounded-md px-2.5 py-1.5 bg-[#E6A817] text-[#111827]">ketika 🏁 diklik</div>
+                <div class="rounded-md px-2.5 py-1.5 bg-[#7C3AED]">ulangi terus</div>
+                <div class="ml-3 rounded-md px-2.5 py-1.5 bg-[#0788F5]">jika tombol ➡ ditekan</div>
+                <div class="ml-6 rounded-md px-2.5 py-1.5 bg-[#0788F5]/80">gerak 10 langkah</div>
+                <div class="ml-3 rounded-md px-2.5 py-1.5 bg-[#10B981]">jika menyentuh ⭐</div>
+                <div class="ml-6 rounded-md px-2.5 py-1.5 bg-[#F97316]">ubah skor +1</div>
+              </div>
+              <div class="relative" style="background:linear-gradient(#38BDF8,#a5f3fc)">
+                <div class="absolute bottom-0 inset-x-0 h-1/4 bg-[#A16207] border-t-8 border-[#16A34A]"></div>
+                <div class="absolute text-3xl" style="bottom:25%; animation:walk 3s ease-in-out infinite">🐱</div>
+                <div class="absolute text-xl" style="right:18%; bottom:48%; animation:floaty 2s ease-in-out infinite">⭐</div>
+                <div class="absolute top-3 left-3 text-[10px] mono bg-white/80 text-[#111827] font-bold px-2 py-0.5 rounded">SKOR 3</div>
+              </div>
+              <div class="col-span-2 bg-[#0B0F19] px-4 py-3 flex items-center justify-between text-xs absolute bottom-0 inset-x-0">
+                <span class="text-slate-300"><i class="fa-solid fa-wand-magic-sparkles text-[#FFC83D] mr-1.5"></i>Game buatan sendiri, aturan sendiri</span>
+                <span class="mono text-emerald-400">mencipta</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="absolute -bottom-5 right-6 bg-[#0F172A] border border-white/10 rounded-xl px-4 py-2.5 shadow-xl flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#0788F5]/20 border border-[#0788F5]/40 flex items-center justify-center text-[#38BDF8] text-xs"><i class="fa-solid fa-user-check"></i></div>
+          <div class="text-left"><div class="text-xs font-bold">Feedback tutor setiap sesi</div><div class="text-[10px] text-slate-400">Catatan perkembangan untuk orang tua</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tools standar industri -->
+  <div class="relative mt-16 border-y border-white/10 bg-[#0F172A]/60 py-4 overflow-hidden w-full">
+    <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0B0F19] to-transparent z-10"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0B0F19] to-transparent z-10"></div>
+    <div class="flex items-center gap-6">
+      <span class="shrink-0 pl-5 sm:pl-10 text-[10px] mono uppercase tracking-widest text-slate-500 relative z-20 bg-[#0F172A] pr-4">Tools standar industri</span>
+      <div class="overflow-hidden flex-1"><div class="marquee tools-marquee"></div></div>
+    </div>
+  </div>
+</section>
+<div class="why"><div class="max-w-[1200px] mx-auto px-5 py-5 grid md:grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
+  <div class="font-bold text-[#FFC83D] mono text-xs pt-0.5">PERSUASI</div>
+  <div class="text-slate-300"><b class="text-white">Reframing + authority.</b> Saklar opsi 1 menyentuh kekhawatiran screen time. Strip tools industri di bawahnya (Scratch, Roblox Studio, Arduino, Figma, Unity, dll.) menjawab pertanyaan berikutnya: "belajarnya pakai apa, relevan nggak?" Hasilnya hero yang emosional sekaligus kredibel.</div>
+</div></div>
+
+<!-- ================================================================ PERBANDINGAN -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <h2 class="font-display text-2xl md:text-3xl font-extrabold mb-6">Perbandingan cepat</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[820px]">
+        <thead class="bg-[#1E293B] text-left text-xs uppercase tracking-wider text-slate-400">
+          <tr><th class="p-4">Opsi</th><th class="p-4">Prinsip persuasi</th><th class="p-4">Paling cocok untuk</th><th class="p-4">Interaksi</th><th class="p-4">Effort</th></tr>
+        </thead>
+        <tbody class="divide-y divide-white/5 text-slate-300">
+          <tr><td class="p-4 font-bold text-white">1 · Penonton → Pencipta</td><td class="p-4">Reframing pain point (screen time)</td><td class="p-4">Orang tua yang khawatir anak kecanduan gadget</td><td class="p-4">Saklar (auto-demo)</td><td class="p-4">Rendah–sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">2 · Lihat Karya Jadi</td><td class="p-4">Demonstrasi, mengatasi keberatan</td><td class="p-4">Orang tua yang merasa coding itu abstrak</td><td class="p-4">Animasi otomatis</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">3 · Kuis Minat</td><td class="p-4">Micro-commitment, personalisasi</td><td class="p-4">Orang tua yang bingung pilih kelas</td><td class="p-4">2 klik → rekomendasi</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">4 · Lab Nyata</td><td class="p-4">Social proof, authority</td><td class="p-4">Orang tua yang ingin bukti & kepercayaan</td><td class="p-4">Pasif (marquee)</td><td class="p-4">Rendah</td></tr>
+          <tr><td class="p-4 font-bold text-white">5 · Tiket Free Trial</td><td class="p-4">Endowment, zero-price, risk reversal</td><td class="p-4">Mendorong konversi langsung ke trial</td><td class="p-4">Isi nama + pilih lab</td><td class="p-4">Rendah–sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">6 · Bayangkan Masa Depannya</td><td class="p-4">Future pacing, aspirasi</td><td class="p-4">Membangun "kenapa" sebelum "bagaimana"</td><td class="p-4">Slider usia</td><td class="p-4">Sedang</td></tr>
+          <tr class="bg-[#0788F5]/5"><td class="p-4 font-bold text-white">7 · Opsi 1 + Tools</td><td class="p-4">Reframing + authority</td><td class="p-4">Emosional sekaligus kredibel</td><td class="p-4">Saklar + marquee</td><td class="p-4">Rendah–sedang</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-xs text-slate-500 mt-4"><i class="fa-solid fa-circle-info mr-1"></i>Semua klaim berasal dari Knowledge Base (Free Trial 1 sesi gratis, rasio 1:5, 9 program, 3 lab, sertifikat, laporan sesi, kode PETUALANGAN2026). Mockup game/kode adalah ilustrasi. Foto dari <code class="mono">assets/sessions/</code>; pastikan izin publikasi foto anak.</p>
+  </div>
+</section>
+
+<script>
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const onVisible = (el, fn, threshold = .35) => new IntersectionObserver((es) => es.forEach(e => fn(e.isIntersecting)), { threshold }).observe(el);
+
+/* ===================== OPSI 1 & 7 · SAKLAR ===================== */
+function initSwitch(prefix) {
+  const root = document.getElementById(prefix + '-root'), sw = document.getElementById(prefix + '-switch');
+  const title = document.getElementById(prefix + '-mode-title'), sub = document.getElementById(prefix + '-mode-sub');
+  let on = false, auto = null, touched = false;
+  const set = v => {
+    on = v; sw.setAttribute('aria-checked', v);
+    root.classList.toggle('creator', v); root.classList.toggle('watcher', !v);
+    title.textContent = v ? 'Mode: Pencipta ✨' : 'Mode: Penonton';
+    sub.textContent = v ? 'Logika, kreativitas, dan karya sendiri' : 'Geser saklarnya, lihat bedanya →';
+  };
+  sw.onclick = () => { touched = true; clearInterval(auto); set(!on); };
+  onVisible(root, vis => { clearInterval(auto); if (vis && !touched && !reduceMotion) auto = setInterval(() => set(!on), 3500); });
+}
+initSwitch('h1');
+initSwitch('h7');
+
+/* ===================== OPSI 2 · LIVE BUILD ===================== */
+(() => {
+  const code = document.getElementById('h2-code'), sprite = document.getElementById('h2-sprite'), score = document.getElementById('h2-score');
+  const s1 = document.getElementById('h2-star1'), s2 = document.getElementById('h2-star2'), win = document.getElementById('h2-win'), status = document.getElementById('h2-status');
+  const kw = t => `<span class="text-[#C084FC]">${t}</span>`, fn = t => `<span class="text-[#38BDF8]">${t}</span>`, cm = t => `<span class="text-slate-500">${t}</span>`, nm = t => `<span class="text-[#FFC83D]">${t}</span>`;
+  const STEPS = [
+    { line:cm('// 1. munculkan karakter'), act:() => {} },
+    { line:`${fn('tampilkan')}(kucing)`, act:() => { sprite.style.opacity = 1; } },
+    { line:cm('// 2. taruh bintang'), act:() => {} },
+    { line:`${fn('taruh')}(bintang, ${nm(2)})`, act:() => { s1.style.opacity = 1; s2.style.opacity = 1; s1.classList.add('pop'); s2.classList.add('pop'); } },
+    { line:cm('// 3. gerak & lompat'), act:() => {} },
+    { line:`${kw('jika')} tekan(➡) ${fn('gerak')}(${nm(10)})`, act:() => { sprite.style.left = '42%'; } },
+    { line:`${kw('jika')} sentuh(bintang) skor += ${nm(1)}`, act:() => { s1.style.opacity = 0; score.textContent = 1; } },
+    { line:`${fn('lompat')}() ; ${fn('gerak')}(${nm(10)})`, act:() => { sprite.style.bottom = '40%'; setTimeout(() => sprite.style.bottom = '22%', 350); sprite.style.left = '72%'; } },
+    { line:`${kw('jika')} skor == ${nm(2)} → ${fn('menang')}()`, act:() => { s2.style.opacity = 0; score.textContent = 2; setTimeout(() => win.style.display = 'flex', 500); } },
+  ];
+  let running = false, visible = false;
+  const wait = ms => new Promise(r => setTimeout(r, reduceMotion ? 0 : ms));
+  async function run() {
+    if (running) return; running = true;
+    while (visible) {
+      code.innerHTML = ''; sprite.style.opacity = 0; sprite.style.left = '10%'; s1.style.opacity = s2.style.opacity = 0; score.textContent = 0; win.style.display = 'none';
+      status.innerHTML = '<i class="fa-solid fa-circle text-[6px] mr-1 animate-pulse"></i>membangun…'; status.className = 'mono text-[10px] text-emerald-400';
+      for (const [i, st] of STEPS.entries()) {
+        const d = document.createElement('div'); d.className = 'flex'; d.innerHTML = `<span class="w-6 text-slate-600 select-none">${i + 1}</span><span class="caret">${st.line}</span>`;
+        code.appendChild(d); await wait(650);
+        d.querySelector('.caret').classList.remove('caret'); st.act(); await wait(350);
+        if (!visible) break;
+      }
+      status.innerHTML = '<i class="fa-solid fa-check mr-1"></i>selesai'; status.className = 'mono text-[10px] text-[#FFC83D]';
+      await wait(3200);
+    }
+    running = false;
+  }
+  onVisible(code.closest('section'), v => { visible = v; if (v) run(); });
+})();
+
+/* ===================== OPSI 3 · KUIS MINAT ===================== */
+(() => {
+  const INTERESTS = [
+    { k:'game', e:'🎮', l:'Main game' }, { k:'gambar', e:'🎨', l:'Menggambar & mendesain' }, { k:'bongkar', e:'🔧', l:'Bongkar-pasang mainan' },
+    { k:'hp', e:'📱', l:'Utak-atik HP & aplikasi' }, { k:'sekolah', e:'📚', l:'Rajin tugas sekolah' },
+  ];
+  const AGES = [['6–8', 0], ['9–11', 1], ['12–14', 2], ['15–17', 3]];
+  // [nama kelas, peran, karya pertama, warna]
+  const P = {
+    innovator:['Innovator', 'Pencerita Digital', 'animasi cerita interaktif & mini-game', '#FFC83D'],
+    beginner:['Beginner', 'Pembuat Game Cilik', 'game labirin & kuis pintar', '#10B981'],
+    intermediate:['Intermediate', 'Perancang Game & AI', 'game multi-level & proyek AI kamera', '#A855F7'],
+    gamedev:['Game Developer', 'Game Developer', 'dunia game 3D di Roblox Studio', '#EF4444'],
+    desain:['Desain Grafis', 'Desainer Visual', 'poster, konten medsos & mockup aplikasi', '#EC4899'],
+    web:['Junior Web Developer', 'Web Developer', 'website portofolio yang live online', '#14B8A6'],
+    robot:['Robotika & IoT', 'Insinyur Robotik', 'alat pintar dengan sensor & Arduino', '#F97316'],
+    apps:['Apps Developer', 'Pembuat Aplikasi', 'aplikasi Android (APK) di HP sendiri', '#6366F1'],
+    komputer:['Komputer Dasar', 'Ahli Produktivitas', 'makalah, tabel Excel & presentasi keren', '#3B82F6'],
+  };
+  const MAP = {
+    game:['innovator', 'beginner', 'gamedev', 'gamedev'],
+    gambar:['innovator', 'desain', 'desain', 'web'],
+    bongkar:['innovator', 'beginner', 'robot', 'robot'],
+    hp:['innovator', 'beginner', 'apps', 'apps'],
+    sekolah:['innovator', 'komputer', 'komputer', 'web'],
+  };
+  const iEl = document.getElementById('h3-interest'), aEl = document.getElementById('h3-age'), res = document.getElementById('h3-result');
+  let interest = null, age = 1;
+  iEl.innerHTML = INTERESTS.map(i => `<button class="chip-btn inline-flex items-center gap-2 px-5 py-3 rounded-2xl border border-white/10 bg-white/[.03] text-sm font-bold text-slate-300 hover:border-white/30 transition" data-k="${i.k}" aria-pressed="false"><span class="text-xl">${i.e}</span>${i.l}</button>`).join('');
+  aEl.insertAdjacentHTML('beforeend', AGES.map(([l, v]) => `<button class="chip-btn px-4 py-2 rounded-full border border-white/10 text-xs font-bold text-slate-300 hover:border-white/30 transition" data-a="${v}" aria-pressed="${v === age}">${l} thn</button>`).join(''));
+  const render = () => {
+    if (!interest) {
+      res.innerHTML = `<div class="rounded-2xl border border-dashed border-white/15 p-8 text-slate-500 text-sm"><i class="fa-solid fa-hand-pointer mr-2 text-[#38BDF8]"></i>Pilih minat si kecil di atas untuk melihat rekomendasinya.</div>`;
+      return;
+    }
+    const [name, role, work, c] = P[MAP[interest][age]];
+    res.innerHTML = `
+      <div class="fade-swap rounded-3xl border p-6 sm:p-8 text-left grid sm:grid-cols-[auto_1fr] gap-6 items-center" style="border-color:${c}55; background:linear-gradient(135deg,${c}1f,#0F172A 60%)">
+        <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mx-auto sm:mx-0" style="background:${c}26; border:1px solid ${c}66">${INTERESTS.find(i => i.k === interest).e}</div>
+        <div>
+          <div class="text-[11px] mono font-bold uppercase tracking-wider" style="color:${c}">Si kecil berpotensi jadi</div>
+          <div class="font-display text-3xl sm:text-4xl font-black leading-tight mt-1">${role}</div>
+          <p class="text-slate-300 text-sm mt-2">Mulai dari kelas <b class="text-white">${name}</b>. Karya yang bisa ia buat: <b class="text-white">${work}</b>.</p>
+          <div class="flex flex-col sm:flex-row gap-3 mt-5">
+            <a href="#register" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Klaim Free Trial: ${name}</a>
+            <a href="#course" class="btn-ghost">Lihat silabusnya</a>
+          </div>
+        </div>
+      </div>`;
+  };
+  iEl.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; interest = b.dataset.k; iEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); render(); });
+  aEl.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; age = +b.dataset.a; aEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); render(); });
+  render();
+})();
+
+/* ===================== OPSI 4 & 7 · MARQUEE TOOLS ===================== */
+(() => {
+  const T = [['scratch.png','Scratch'],['roblox_studio.png','Roblox Studio'],['arduino.webp','Arduino'],['mit_app_inventor.png','App Inventor'],['figma.png','Figma'],['unity.svg','Unity'],['pictoblox.png','PictoBlox'],['js.svg','JavaScript'],['canva.png','Canva'],['flutter.webp','Flutter']];
+  const row = T.map(([f, n]) => `<span class="inline-flex items-center gap-2.5 shrink-0 opacity-70 hover:opacity-100 transition"><img src="assets/tech/${f}" alt="" class="w-7 h-7 object-contain rounded bg-white/90 p-0.5"><span class="text-sm font-semibold text-slate-300 whitespace-nowrap">${n}</span></span>`).join('');
+  document.querySelectorAll('.tools-marquee').forEach(el => el.innerHTML = row + row);
+})();
+
+/* ===================== OPSI 5 · TIKET ===================== */
+(() => {
+  const nameIn = document.getElementById('h5-name'), nameT = document.getElementById('h5-name-t'), nameH = document.getElementById('h5-name-h');
+  const locEl = document.getElementById('h5-loc'), locT = document.getElementById('h5-loc-t');
+  const LOCS = [['Gianyar', 'Lab Gianyar'], ['Ubud Peliatan', 'Lab Ubud'], ['Bedulu', 'Lab Bedulu']];
+  locEl.innerHTML = LOCS.map(([l, t], i) => `<button class="chip-btn px-4 py-2 rounded-full border border-white/10 text-xs font-bold text-slate-300 hover:border-white/30 transition" data-t="${t}" aria-pressed="${i === 0}"><i class="fa-solid fa-location-dot mr-1 text-[#C084FC]"></i>${l}</button>`).join('');
+  locEl.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; locEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); locT.textContent = b.dataset.t; });
+  nameIn.addEventListener('input', () => { const v = nameIn.value.trim(); nameT.textContent = v || 'Si Kecil'; nameH.textContent = v || 'si kecil'; });
+  const copy = document.getElementById('h5-copy');
+  copy.onclick = async () => {
+    try { await navigator.clipboard.writeText('PETUALANGAN2026'); } catch (e) {}
+    copy.innerHTML = '<i class="fa-solid fa-check mr-1"></i>Tersalin'; setTimeout(() => copy.innerHTML = '<i class="fa-regular fa-copy mr-1"></i>Salin', 1800);
+  };
+})();
+
+/* ===================== OPSI 6 · MASA DEPAN ===================== */
+(() => {
+  // usia → [program, karya, emoji, warna, tools]
+  const STAGES = [
+    { max:7, prog:'Innovator', work:'animasi cerita interaktif & dongeng digital bersuara', e:'📖', c:'#FFC83D', tools:'Scratch Jr · CodeMonkey' },
+    { max:9, prog:'Beginner', work:'game labirin, kuis pintar & game tangkap objek', e:'🕹️', c:'#10B981', tools:'Scratch · PictoBlox' },
+    { max:10, prog:'Intermediate', work:'game multi-level & proyek AI yang mengenali gerakan kamera', e:'🤖', c:'#A855F7', tools:'Scratch · PictoBlox AI' },
+    { max:12, prog:'Game Developer', work:'dunia game 3D di Roblox yang bisa dimainkan bersama teman', e:'🌐', c:'#EF4444', tools:'Roblox Studio · Lua' },
+    { max:14, prog:'Junior Web Developer', work:'website portofolio pribadi yang live di internet', e:'💻', c:'#14B8A6', tools:'HTML · CSS · JavaScript' },
+    { max:15, prog:'Robotika & IoT', work:'prototipe smart home & alarm sensor gerak', e:'🔌', c:'#F97316', tools:'Arduino · Sensor · Servo' },
+    { max:17, prog:'Apps Developer', work:'aplikasi Android (APK) yang terpasang di HP-nya sendiri', e:'📱', c:'#6366F1', tools:'MIT App Inventor · Flutter' },
+  ];
+  const ageEl = document.getElementById('h6-age'), card = document.getElementById('h6-card'), ageH = document.getElementById('h6-age-h'), glow = document.getElementById('h6-glow');
+  let last = null;
+  const render = () => {
+    const a = +ageEl.value, i = STAGES.findIndex(s => a <= s.max), s = STAGES[i];
+    ageH.textContent = `${a} tahun`;
+    glow.style.background = s.c;
+    if (last === i) return; last = i;
+    card.innerHTML = `
+      <div class="fade-swap grid md:grid-cols-[1fr_auto] gap-6 items-center rounded-3xl border p-6 sm:p-8 bg-[#0F172A]/80 backdrop-blur" style="border-color:${s.c}55">
+        <div class="flex gap-5 items-start">
+          <div class="w-20 h-20 shrink-0 rounded-2xl flex items-center justify-center text-4xl" style="background:${s.c}22; border:1px solid ${s.c}66">${s.e}</div>
+          <div>
+            <div class="text-[11px] mono font-bold uppercase tracking-wider" style="color:${s.c}">Di usia ini, ia bisa membuat</div>
+            <div class="font-display text-2xl sm:text-3xl font-black leading-tight mt-1">${s.work.charAt(0).toUpperCase() + s.work.slice(1)}</div>
+            <div class="text-sm text-slate-400 mt-2">Kelas <b class="text-white">${s.prog}</b> · <span class="mono text-xs">${s.tools}</span></div>
+          </div>
+        </div>
+        <div class="flex md:flex-col gap-2 justify-center">
+          ${STAGES.map((x, j) => `<span class="w-3 h-3 rounded-full transition" style="background:${j <= i ? x.c : 'rgba(255,255,255,.1)'}" title="${x.prog}"></span>`).join('')}
+        </div>
+      </div>`;
+  };
+  ageEl.addEventListener('input', render);
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi — Section Alur (Mulai dari Mana?)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  :root{ --bg:#0B0F19; }
+  body{background:var(--bg);color:#fff}
+  html{scroll-behavior:smooth}
+  
+  /* Shared utilities */
+  .card-lift{transition:transform .3s,box-shadow .3s}
+  .card-lift:hover{transform:translateY(-4px)}
+  
+  /* Opsi A: Vertical Timeline */
+  .timeline-line { position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.1); }
+  @media (min-width: 768px) {
+    .timeline-line { left: 50%; transform: translateX(-50%); }
+    .timeline-item:nth-child(even) .timeline-content { margin-left: 50%; padding-left: 3rem; text-align: left; }
+    .timeline-item:nth-child(even) .timeline-dot { left: 0; transform: translateX(-50%); }
+    .timeline-item:nth-child(odd) .timeline-content { margin-right: 50%; padding-right: 3rem; text-align: right; }
+    .timeline-item:nth-child(odd) .timeline-dot { right: 0; transform: translateX(50%); }
+  }
+
+  /* Opsi C: Accordion */
+  .acc-item[aria-expanded="true"] .acc-body { grid-template-rows: 1fr; }
+  .acc-item[aria-expanded="false"] .acc-body { grid-template-rows: 0fr; }
+  .acc-body { transition: grid-template-rows 0.3s ease; }
+  .acc-inner { overflow: hidden; }
+  
+  /* Opsi E: Scroll Snap */
+  .scroll-snap-x { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .snap-center { scroll-snap-align: center; }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- Nav -->
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 font-mono">EKSPLORASI · Section Alur</div>
+    <div class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-a" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">A · Peta Zig-zag</a>
+      <a href="#opsi-b" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">B · Progress Bar</a>
+      <a href="#opsi-c" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">C · Akordion</a>
+      <a href="#opsi-d" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">D · Bento Highlight</a>
+      <a href="#opsi-e" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">E · Kartu Geser</a>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!-- OPSI A: PETA ZIG-ZAG (Vertical Timeline)                   -->
+<!-- ========================================================= -->
+<section id="opsi-a" class="py-20 border-b border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1000px] mx-auto px-5 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-10 text-center">OPSI A — PETA ZIG-ZAG VERTICAL (GAMIFIKASI)</div>
+    
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/25 text-[#FFC83D] text-xs font-mono font-bold uppercase mb-3">
+        <i class="fa-solid fa-map-location-dot text-amber-400"></i> Panduan Keputusan
+      </div>
+      <h3 class="text-3xl md:text-4xl font-extrabold mb-3">Alur Mudah: Mulai dari Mana?</h3>
+      <p class="text-slate-400">5 tahapan santai mendampingi buah hati mulai belajar teknologi.</p>
+    </div>
+
+    <div class="relative">
+      <div class="timeline-line"></div>
+      
+      <!-- Step 1 -->
+      <div class="timeline-item relative mb-12 md:mb-24 flex items-center md:block">
+        <div class="timeline-dot absolute left-[24px] md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#0F172A] border-4 border-[#38BDF8] flex items-center justify-center text-[#38BDF8] text-sm z-10 shadow-[0_0_15px_rgba(56,189,248,0.4)]">1</div>
+        <div class="timeline-content ml-16 md:ml-0 md:w-1/2 w-full">
+          <div class="bg-[#1E293B] border border-white/10 p-5 rounded-2xl card-lift">
+            <h4 class="font-bold text-white mb-2 text-lg">Kenali Manfaat</h4>
+            <p class="text-sm text-slate-400 mb-3">Pahami nilai nyata coding untuk pola pikir anak.</p>
+            <a href="#" class="text-xs font-bold text-[#38BDF8] hover:underline">Pelajari Manfaat &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="timeline-item relative mb-12 md:mb-24 flex items-center md:block">
+        <div class="timeline-dot absolute left-[24px] md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#0F172A] border-4 border-[#38BDF8] flex items-center justify-center text-[#38BDF8] text-sm z-10">2</div>
+        <div class="timeline-content ml-16 md:ml-0 md:w-1/2 w-full">
+          <div class="bg-[#1E293B] border border-white/10 p-5 rounded-2xl card-lift">
+            <h4 class="font-bold text-white mb-2 text-lg">Pilih Level Anak</h4>
+            <p class="text-sm text-slate-400 mb-3">Sesuaikan dengan usia dan kesiapan belajar saat ini.</p>
+            <a href="#" class="text-xs font-bold text-[#38BDF8] hover:underline">Lihat 9 Kelas &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="timeline-item relative mb-12 md:mb-24 flex items-center md:block">
+        <div class="timeline-dot absolute left-[24px] md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#0F172A] border-4 border-[#C084FC] flex items-center justify-center text-[#C084FC] text-sm z-10">3</div>
+        <div class="timeline-content ml-16 md:ml-0 md:w-1/2 w-full">
+          <div class="bg-[#1E293B] border border-white/10 p-5 rounded-2xl card-lift">
+            <h4 class="font-bold text-white mb-2 text-lg">Lihat Karya Project</h4>
+            <p class="text-sm text-slate-400 mb-3">Ketahui tools industri dan karya yang akan dibuat.</p>
+            <a href="#" class="text-xs font-bold text-[#C084FC] hover:underline">Eksplorasi Tools &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="timeline-item relative mb-12 md:mb-24 flex items-center md:block">
+        <div class="timeline-dot absolute left-[24px] md:left-1/2 -translate-x-1/2 w-14 h-14 rounded-full bg-[#FFC83D] border-4 border-[#0F172A] flex items-center justify-center text-[#0F172A] text-xl z-10 shadow-[0_0_25px_rgba(255,200,61,0.6)]"><i class="fa-solid fa-star"></i></div>
+        <div class="timeline-content ml-16 md:ml-0 md:w-1/2 w-full">
+          <div class="bg-gradient-to-br from-amber-500/20 to-[#1E293B] border border-amber-400 p-6 rounded-2xl card-lift relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-[#FFC83D] text-[#0F172A] text-[10px] font-bold px-3 py-1 rounded-bl-lg">PILIHAN UTAMA</div>
+            <h4 class="font-extrabold text-[#FFC83D] mb-2 text-xl">Coba Kelas Gratis</h4>
+            <p class="text-sm text-slate-300 mb-4">1 sesi trial santai untuk ukur minat anak tanpa biaya.</p>
+            <a href="#" class="inline-block bg-[#FFC83D] text-[#0B0F19] px-5 py-2 rounded-lg text-sm font-bold shadow-lg hover:bg-amber-300 transition-colors">Daftar Trial Sekarang &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="timeline-item relative flex items-center md:block">
+        <div class="timeline-dot absolute left-[24px] md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#0F172A] border-4 border-[#34D399] flex items-center justify-center text-[#34D399] text-sm z-10">5</div>
+        <div class="timeline-content ml-16 md:ml-0 md:w-1/2 w-full">
+          <div class="bg-[#1E293B] border border-white/10 p-5 rounded-2xl card-lift">
+            <h4 class="font-bold text-white mb-2 text-lg">Mulai Berkarya</h4>
+            <p class="text-sm text-slate-400 mb-3">Jadwal disepakati bersama admin, lalu pantau laporan sesi.</p>
+            <a href="#" class="text-xs font-bold text-[#34D399] hover:underline">Amankan Jadwal &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- OPSI B: PROGRESS BAR MINIMALIS                             -->
+<!-- ========================================================= -->
+<section id="opsi-b" class="py-20 border-b border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1100px] mx-auto px-5 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-10 text-center">OPSI B — PROGRESS BAR (CLEAN / STEP-BY-STEP)</div>
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/25 text-[#FFC83D] text-xs font-mono font-bold uppercase mb-3">Panduan Keputusan</div>
+        <h3 class="text-3xl md:text-4xl font-extrabold">Saya Harus Mulai dari Mana?</h3>
+      </div>
+      <a href="#" class="inline-flex items-center justify-center gap-2 bg-[#FFC83D] text-[#0B0F19] px-6 py-3 rounded-xl font-bold text-sm shadow-[0_0_20px_rgba(255,200,61,0.3)]">
+        <i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis
+      </a>
+    </div>
+
+    <div class="bg-[#1E293B] border border-white/10 rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+      <!-- line -->
+      <div class="hidden md:block absolute top-20 left-16 right-16 h-1 bg-white/10 rounded-full"></div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 relative z-10">
+        <!-- 1 -->
+        <div class="text-center group relative flex md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
+          <div class="w-10 h-10 md:w-12 md:h-12 shrink-0 rounded-full bg-[#0F172A] border-4 border-[#38BDF8] flex items-center justify-center text-white font-bold md:mb-6 shadow-lg shadow-[#38BDF8]/20 z-10 group-hover:scale-110 transition-transform">1</div>
+          <div>
+            <h4 class="font-bold text-sm mb-2 group-hover:text-[#38BDF8] transition-colors">Kenali Manfaat</h4>
+            <p class="text-xs text-slate-400 mb-3 hidden md:block">Pahami nilai nyata coding.</p>
+            <a href="#" class="text-[10px] uppercase tracking-wider font-bold text-[#38BDF8] hover:underline">Pelajari</a>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="text-center group relative flex md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
+          <div class="w-10 h-10 md:w-12 md:h-12 shrink-0 rounded-full bg-[#0F172A] border-4 border-[#38BDF8] flex items-center justify-center text-white font-bold md:mb-6 shadow-lg shadow-[#38BDF8]/20 z-10 group-hover:scale-110 transition-transform">2</div>
+          <div>
+            <h4 class="font-bold text-sm mb-2 group-hover:text-[#38BDF8] transition-colors">Pilih Level</h4>
+            <p class="text-xs text-slate-400 mb-3 hidden md:block">Sesuaikan dengan usia anak.</p>
+            <a href="#" class="text-[10px] uppercase tracking-wider font-bold text-[#38BDF8] hover:underline">Lihat Kelas</a>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="text-center group relative flex md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
+          <div class="w-10 h-10 md:w-12 md:h-12 shrink-0 rounded-full bg-[#0F172A] border-4 border-[#C084FC] flex items-center justify-center text-white font-bold md:mb-6 shadow-lg shadow-[#C084FC]/20 z-10 group-hover:scale-110 transition-transform">3</div>
+          <div>
+            <h4 class="font-bold text-sm mb-2 group-hover:text-[#C084FC] transition-colors">Lihat Karya</h4>
+            <p class="text-xs text-slate-400 mb-3 hidden md:block">Ketahui tools industrinya.</p>
+            <a href="#" class="text-[10px] uppercase tracking-wider font-bold text-[#C084FC] hover:underline">Eksplorasi</a>
+          </div>
+        </div>
+        <!-- 4 -->
+        <div class="text-center group relative flex md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
+          <div class="w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-full bg-[#FFC83D] border-4 border-[#0F172A] flex items-center justify-center text-[#0B0F19] text-xl md:mb-4 shadow-[0_0_20px_rgba(255,200,61,0.5)] z-10 group-hover:scale-110 transition-transform"><i class="fa-solid fa-star"></i></div>
+          <div class="bg-amber-500/10 border border-amber-500/30 p-3 rounded-xl md:bg-transparent md:border-none md:p-0">
+            <div class="text-[10px] font-bold text-[#FFC83D] mb-1 md:hidden">PILIHAN UTAMA</div>
+            <h4 class="font-bold text-sm mb-2 text-[#FFC83D]">Coba Kelas Gratis</h4>
+            <p class="text-xs text-slate-300 mb-3 hidden md:block">1 sesi trial santai untuk ukur minat anak.</p>
+            <a href="#" class="text-[10px] uppercase tracking-wider font-bold text-[#FFC83D] hover:underline">Daftar Trial</a>
+          </div>
+        </div>
+        <!-- 5 -->
+        <div class="text-center group relative flex md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
+          <div class="w-10 h-10 md:w-12 md:h-12 shrink-0 rounded-full bg-[#0F172A] border-4 border-[#34D399] flex items-center justify-center text-white font-bold md:mb-6 shadow-lg shadow-[#34D399]/20 z-10 group-hover:scale-110 transition-transform">5</div>
+          <div>
+            <h4 class="font-bold text-sm mb-2 group-hover:text-[#34D399] transition-colors">Mulai Berkarya</h4>
+            <p class="text-xs text-slate-400 mb-3 hidden md:block">Amankan jadwal & belajar.</p>
+            <a href="#" class="text-[10px] uppercase tracking-wider font-bold text-[#34D399] hover:underline">Selesai</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- OPSI C: AKORDION (Interaktif Vertikal)                     -->
+<!-- ========================================================= -->
+<section id="opsi-c" class="py-20 border-b border-white/10 bg-[#0F172A]">
+  <div class="max-w-[900px] mx-auto px-5 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-10 text-center">OPSI C — AKORDION (HEMAT RUANG, FOKUS)</div>
+    
+    <div class="text-center mb-12">
+      <h3 class="text-3xl md:text-4xl font-extrabold mb-3">Mulai dari Mana?</h3>
+      <p class="text-slate-400">5 tahapan mudah mendampingi anak belajar coding.</p>
+    </div>
+
+    <div class="space-y-3 acc-container">
+      <!-- 1 -->
+      <div class="acc-item bg-[#1E293B] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-[#38BDF8]/50 transition-colors" aria-expanded="true">
+        <div class="p-5 flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <span class="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-[#38BDF8] font-bold font-mono">01</span>
+            <h4 class="font-bold text-lg">Kenali Manfaat</h4>
+          </div>
+          <i class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+        </div>
+        <div class="acc-body grid">
+          <div class="acc-inner">
+            <div class="px-5 pb-6 pt-2 pl-16 border-t border-white/5">
+              <p class="text-slate-300 text-sm mb-4">Pahami nilai nyata coding untuk pola pikir anak. Bukan sekadar main game, tapi belajar logika dan problem solving.</p>
+              <a href="#" class="inline-flex items-center gap-2 text-xs font-bold bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors">Pelajari Manfaat <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="acc-item bg-[#1E293B] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-[#38BDF8]/50 transition-colors" aria-expanded="false">
+        <div class="p-5 flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <span class="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-[#38BDF8] font-bold font-mono">02</span>
+            <h4 class="font-bold text-lg">Pilih Level Anak</h4>
+          </div>
+          <i class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+        </div>
+        <div class="acc-body grid">
+          <div class="acc-inner">
+            <div class="px-5 pb-6 pt-2 pl-16 border-t border-white/5">
+              <p class="text-slate-300 text-sm mb-4">Sesuaikan dengan usia dan kesiapan belajar saat ini. Mulai dari visual block programming hingga mengetik kode asli.</p>
+              <a href="#" class="inline-flex items-center gap-2 text-xs font-bold bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors">Lihat 9 Kelas <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="acc-item bg-[#1E293B] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-[#C084FC]/50 transition-colors" aria-expanded="false">
+        <div class="p-5 flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <span class="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-[#C084FC] font-bold font-mono">03</span>
+            <h4 class="font-bold text-lg">Lihat Karya Project</h4>
+          </div>
+          <i class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+        </div>
+        <div class="acc-body grid">
+          <div class="acc-inner">
+            <div class="px-5 pb-6 pt-2 pl-16 border-t border-white/5">
+              <p class="text-slate-300 text-sm mb-4">Ketahui tools industri dan ragam karya yang akan dibuat anak di kelas.</p>
+              <a href="#" class="inline-flex items-center gap-2 text-xs font-bold bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors">Eksplorasi Tools <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="acc-item bg-gradient-to-r from-amber-500/10 to-[#1E293B] border border-amber-400/50 rounded-2xl overflow-hidden cursor-pointer hover:border-amber-400 transition-colors shadow-[0_0_20px_rgba(255,200,61,0.1)]" aria-expanded="false">
+        <div class="p-5 flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <span class="w-8 h-8 rounded bg-[#FFC83D] flex items-center justify-center text-[#0B0F19] font-bold font-mono shadow-md">04</span>
+            <h4 class="font-bold text-lg text-[#FFC83D]">Coba Kelas Gratis <span class="ml-2 text-[10px] bg-amber-500/20 px-2 py-0.5 rounded text-amber-300 align-middle">REKOMENDASI</span></h4>
+          </div>
+          <i class="fa-solid fa-chevron-down text-[#FFC83D] transition-transform"></i>
+        </div>
+        <div class="acc-body grid">
+          <div class="acc-inner">
+            <div class="px-5 pb-6 pt-2 pl-16 border-t border-amber-400/20">
+              <p class="text-slate-300 text-sm mb-4">1 sesi trial santai untuk ukur minat anak tanpa biaya. Solusi terbaik jika masih ragu memilih.</p>
+              <a href="#" class="inline-flex items-center gap-2 text-sm font-bold bg-[#FFC83D] text-[#0B0F19] hover:bg-amber-300 px-5 py-2.5 rounded-lg transition-colors shadow-lg">Daftar Trial Sekarang <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="acc-item bg-[#1E293B] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-[#34D399]/50 transition-colors" aria-expanded="false">
+        <div class="p-5 flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <span class="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-[#34D399] font-bold font-mono">05</span>
+            <h4 class="font-bold text-lg">Mulai Berkarya</h4>
+          </div>
+          <i class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+        </div>
+        <div class="acc-body grid">
+          <div class="acc-inner">
+            <div class="px-5 pb-6 pt-2 pl-16 border-t border-white/5">
+              <p class="text-slate-300 text-sm mb-4">Jadwal disepakati bersama admin, lalu pantau laporan setiap sesi langsung dari smartphone Anda.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- OPSI D: BENTO HIGHLIGHT                                    -->
+<!-- ========================================================= -->
+<section id="opsi-d" class="py-20 border-b border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-10 text-center">OPSI D — BENTO HIGHLIGHT (FOKUS KE CTA)</div>
+    
+    <div class="text-center mb-12">
+      <h3 class="text-3xl md:text-4xl font-extrabold mb-3">Mulai dari Mana?</h3>
+      <p class="text-slate-400">Ikuti tahapan ini, atau langsung lompat ke langkah terpenting.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <!-- 1, 2, 3 Column -->
+      <div class="md:col-span-1 flex flex-col gap-4">
+        <a href="#" class="flex-1 bg-[#1E293B] border border-white/10 rounded-2xl p-5 hover:border-[#38BDF8]/50 card-lift group block">
+          <div class="text-[#38BDF8] font-mono font-bold text-xs mb-2">01</div>
+          <h4 class="font-bold mb-1">Kenali Manfaat</h4>
+          <p class="text-[11px] text-slate-400 group-hover:text-slate-300">Pahami nilai coding untuk anak.</p>
+        </a>
+        <a href="#" class="flex-1 bg-[#1E293B] border border-white/10 rounded-2xl p-5 hover:border-[#38BDF8]/50 card-lift group block">
+          <div class="text-[#38BDF8] font-mono font-bold text-xs mb-2">02</div>
+          <h4 class="font-bold mb-1">Pilih Level</h4>
+          <p class="text-[11px] text-slate-400 group-hover:text-slate-300">Sesuaikan dengan usia anak.</p>
+        </a>
+        <a href="#" class="flex-1 bg-[#1E293B] border border-white/10 rounded-2xl p-5 hover:border-[#C084FC]/50 card-lift group block">
+          <div class="text-[#C084FC] font-mono font-bold text-xs mb-2">03</div>
+          <h4 class="font-bold mb-1">Lihat Karya</h4>
+          <p class="text-[11px] text-slate-400 group-hover:text-slate-300">Eksplorasi hasil project.</p>
+        </a>
+      </div>
+      
+      <!-- 4 Highlight -->
+      <div class="md:col-span-2 bg-gradient-to-br from-[#FFC83D] via-amber-500 to-amber-600 rounded-3xl p-8 sm:p-10 flex flex-col justify-center text-[#0B0F19] relative overflow-hidden card-lift shadow-[0_15px_40px_rgba(255,200,61,0.2)]">
+        <div class="absolute right-0 bottom-0 text-[200px] leading-none opacity-20 -rotate-12 translate-x-8 translate-y-12 pointer-events-none"><i class="fa-solid fa-star"></i></div>
+        <div class="text-[#0B0F19] font-mono font-bold text-sm mb-4 border border-[#0B0F19]/20 self-start px-3 py-1 rounded-lg">04 — PALING DISARANKAN</div>
+        <h4 class="font-display text-4xl sm:text-5xl font-black mb-4">Coba Kelas Gratis</h4>
+        <p class="text-sm sm:text-base font-medium opacity-90 mb-8 max-w-sm">Bingung memilih? Ikuti 1 sesi trial santai untuk mengukur minat anak secara langsung tanpa biaya.</p>
+        <a href="#" class="inline-flex items-center justify-center gap-2 bg-[#0B0F19] text-[#FFC83D] hover:bg-[#1E293B] px-6 py-3.5 rounded-xl font-bold transition-colors self-start shadow-xl">
+          Daftar Trial Sekarang <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- 5 Column -->
+      <div class="md:col-span-1 flex flex-col gap-4">
+        <div class="flex-1 bg-[#1E293B] border border-white/10 rounded-2xl p-5 border-dashed flex items-center justify-center text-slate-500 text-xs text-center">
+          Ikuti trial terlebih dahulu sebelum mengamankan jadwal reguler.
+        </div>
+        <a href="#" class="h-[40%] bg-[#1E293B] border border-white/10 rounded-2xl p-5 hover:border-[#34D399]/50 card-lift group block flex flex-col justify-center">
+          <div class="text-[#34D399] font-mono font-bold text-xs mb-2">05</div>
+          <h4 class="font-bold mb-1">Mulai Berkarya</h4>
+          <p class="text-[11px] text-slate-400 group-hover:text-slate-300">Amankan jadwal reguler.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- OPSI E: KARTU GESER (Scroll Snap Horizontal)               -->
+<!-- ========================================================= -->
+<section id="opsi-e" class="py-20 border-b border-white/10 bg-[#0F172A] overflow-hidden">
+  <div class="max-w-[1200px] mx-auto px-5 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-10 text-center">OPSI E — SWIPEABLE CARDS (APP-LIKE FEEL)</div>
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+      <div>
+        <h3 class="text-3xl md:text-4xl font-extrabold mb-3">Mulai dari Mana?</h3>
+        <p class="text-slate-400">Geser untuk melihat 5 tahapan mendampingi anak.</p>
+      </div>
+      <div class="hidden md:flex gap-2">
+        <button id="btn-prev" class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"><i class="fa-solid fa-arrow-left"></i></button>
+        <button id="btn-next" class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="scroll-container" class="flex gap-4 overflow-x-auto scroll-snap-x hide-scrollbar px-5 md:px-[calc((100vw-1200px)/2+20px)] pb-10">
+    <!-- 1 -->
+    <a href="#" class="snap-center shrink-0 w-[280px] md:w-[320px] bg-[#1E293B] border border-white/10 hover:border-[#38BDF8]/50 rounded-3xl p-6 flex flex-col justify-between min-h-[320px] card-lift group">
+      <div>
+        <div class="w-14 h-14 rounded-2xl bg-[#0F172A] border border-white/5 flex items-center justify-center text-[#38BDF8] text-xl mb-6 shadow-inner"><i class="fa-solid fa-lightbulb"></i></div>
+        <div class="font-mono text-[#38BDF8] text-xs font-bold mb-2">LANGKAH 01</div>
+        <h4 class="text-xl font-bold mb-3">Kenali Manfaat</h4>
+        <p class="text-sm text-slate-400">Pahami nilai nyata coding untuk pola pikir anak.</p>
+      </div>
+      <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs font-bold text-slate-400 group-hover:text-[#38BDF8]">
+        Pelajari <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+      </div>
+    </a>
+    
+    <!-- 2 -->
+    <a href="#" class="snap-center shrink-0 w-[280px] md:w-[320px] bg-[#1E293B] border border-white/10 hover:border-[#38BDF8]/50 rounded-3xl p-6 flex flex-col justify-between min-h-[320px] card-lift group">
+      <div>
+        <div class="w-14 h-14 rounded-2xl bg-[#0F172A] border border-white/5 flex items-center justify-center text-[#38BDF8] text-xl mb-6 shadow-inner"><i class="fa-solid fa-compass"></i></div>
+        <div class="font-mono text-[#38BDF8] text-xs font-bold mb-2">LANGKAH 02</div>
+        <h4 class="text-xl font-bold mb-3">Pilih Level</h4>
+        <p class="text-sm text-slate-400">Sesuaikan dengan usia dan kesiapan belajar saat ini.</p>
+      </div>
+      <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs font-bold text-slate-400 group-hover:text-[#38BDF8]">
+        Lihat 9 Kelas <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+      </div>
+    </a>
+
+    <!-- 3 -->
+    <a href="#" class="snap-center shrink-0 w-[280px] md:w-[320px] bg-[#1E293B] border border-white/10 hover:border-[#C084FC]/50 rounded-3xl p-6 flex flex-col justify-between min-h-[320px] card-lift group">
+      <div>
+        <div class="w-14 h-14 rounded-2xl bg-[#0F172A] border border-white/5 flex items-center justify-center text-[#C084FC] text-xl mb-6 shadow-inner"><i class="fa-solid fa-shapes"></i></div>
+        <div class="font-mono text-[#C084FC] text-xs font-bold mb-2">LANGKAH 03</div>
+        <h4 class="text-xl font-bold mb-3">Lihat Karya Project</h4>
+        <p class="text-sm text-slate-400">Ketahui tools industri dan karya yang akan dibuat.</p>
+      </div>
+      <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs font-bold text-slate-400 group-hover:text-[#C084FC]">
+        Eksplorasi <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+      </div>
+    </a>
+
+    <!-- 4 (Highlight) -->
+    <a href="#" class="snap-center shrink-0 w-[280px] md:w-[320px] bg-gradient-to-br from-[#1E293B] to-[#0F172A] border-2 border-[#FFC83D] rounded-3xl p-6 flex flex-col justify-between min-h-[320px] card-lift group relative overflow-hidden shadow-[0_0_30px_rgba(255,200,61,0.15)]">
+      <div class="absolute top-0 right-0 w-20 h-20 bg-[#FFC83D]/10 rounded-bl-full"></div>
+      <div>
+        <div class="w-14 h-14 rounded-2xl bg-amber-500/20 border border-[#FFC83D]/50 flex items-center justify-center text-[#FFC83D] text-xl mb-6 shadow-inner"><i class="fa-solid fa-star"></i></div>
+        <div class="font-mono text-[#FFC83D] text-xs font-bold mb-2">LANGKAH 04 · REKOMENDASI</div>
+        <h4 class="text-xl font-bold mb-3 text-white">Coba Kelas Gratis</h4>
+        <p class="text-sm text-slate-300">1 sesi trial santai untuk ukur minat anak tanpa biaya.</p>
+      </div>
+      <div class="mt-6 pt-4 border-t border-[#FFC83D]/20 flex justify-between items-center text-xs font-bold text-[#FFC83D]">
+        Daftar Trial <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+      </div>
+    </a>
+
+    <!-- 5 -->
+    <a href="#" class="snap-center shrink-0 w-[280px] md:w-[320px] bg-[#1E293B] border border-white/10 hover:border-[#34D399]/50 rounded-3xl p-6 flex flex-col justify-between min-h-[320px] card-lift group">
+      <div>
+        <div class="w-14 h-14 rounded-2xl bg-[#0F172A] border border-white/5 flex items-center justify-center text-[#34D399] text-xl mb-6 shadow-inner"><i class="fa-solid fa-flag-checkered"></i></div>
+        <div class="font-mono text-[#34D399] text-xs font-bold mb-2">LANGKAH 05</div>
+        <h4 class="text-xl font-bold mb-3">Mulai Berkarya</h4>
+        <p class="text-sm text-slate-400">Jadwal disepakati bersama admin, pantau laporan sesi.</p>
+      </div>
+      <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs font-bold text-slate-400 group-hover:text-[#34D399]">
+        Amankan Jadwal <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+      </div>
+    </a>
+  </div>
+</section>
+
+<script>
+  // Script for Opsi C (Accordion)
+  document.querySelectorAll('.acc-item').forEach(item => {
+    item.querySelector('.p-5').addEventListener('click', () => {
+      const isExpanded = item.getAttribute('aria-expanded') === 'true';
+      // close all
+      document.querySelectorAll('.acc-item').forEach(i => {
+        i.setAttribute('aria-expanded', 'false');
+        i.querySelector('i').classList.remove('rotate-180');
+      });
+      // open clicked
+      if (!isExpanded) {
+        item.setAttribute('aria-expanded', 'true');
+        item.querySelector('i').classList.add('rotate-180');
+      }
+    });
+  });
+
+  // Script for Opsi E (Carousel buttons)
+  const sc = document.getElementById('scroll-container');
+  if (sc) {
+    document.getElementById('btn-prev')?.addEventListener('click', () => sc.scrollBy({left: -320, behavior: 'smooth'}));
+    document.getElementById('btn-next')?.addEventListener('click', () => sc.scrollBy({left: 320, behavior: 'smooth'}));
+  }
+</script>
+</body>
+</html>

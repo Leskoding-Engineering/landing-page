@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Cara Belajar</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .opsi-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem 1rem; margin-bottom:2rem; }
+  .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .9rem; border-radius:999px; background:#1E293B; border:1px solid rgba(255,255,255,.1); font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+  .grad { background:linear-gradient(90deg,#FFC83D,#38BDF8,#C084FC); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .fade-swap { animation:fadeSwap .4s ease; }
+  @keyframes fadeSwap { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none} }
+  .cta { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#FFC83D; color:#111827; font-weight:800; padding:.85rem 1.6rem; min-height:48px; border-radius:.75rem; font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; transition:all .25s; box-shadow:0 4px 20px rgba(255,200,61,.3); }
+  .cta:hover { background:#fed368; transform:translateY(-2px); }
+
+  /* 1 · Komik */
+  .panel { border:3px solid #E2E8F0; border-radius:14px; box-shadow:6px 6px 0 var(--c); background:#0F172A; overflow:hidden; position:relative; opacity:0; transform:translateY(16px) rotate(var(--r,0deg)); transition:opacity .6s, transform .6s cubic-bezier(.2,.9,.3,1.2); }
+  .panel.in { opacity:1; transform:rotate(var(--r,0deg)); }
+  .cap { position:absolute; top:10px; left:10px; z-index:3; background:#FFC83D; color:#111827; font:800 10px 'Fira Code',monospace; letter-spacing:.08em; padding:4px 8px; border:2px solid #111827; }
+  .bubble { position:absolute; z-index:3; background:#fff; color:#111827; font-weight:700; font-size:12px; line-height:1.35; padding:8px 11px; border-radius:16px; border:2px solid #111827; max-width:62%; }
+  .bubble::after { content:''; position:absolute; bottom:-10px; left:var(--tail,22px); border:8px solid transparent; border-top-color:#111827; }
+  .bubble::before { content:''; position:absolute; bottom:-6px; left:calc(var(--tail,22px) + 2px); border:6px solid transparent; border-top-color:#fff; z-index:1; }
+  .sfx { position:absolute; z-index:3; font:900 22px 'Outfit',sans-serif; color:#FFC83D; -webkit-text-stroke:1.5px #111827; transform:rotate(-8deg); letter-spacing:.02em; }
+  .halftone { background-image:radial-gradient(rgba(255,255,255,.07) 1.2px,transparent 1.2px); background-size:9px 9px; }
+
+  /* 2 · Quest */
+  .quest { transition:all .35s; }
+  .quest.done { border-color:rgba(16,185,129,.45); background:rgba(16,185,129,.06); }
+  .quest.done .qbox { background:#10B981; border-color:#10B981; color:#0B0F19; }
+  .quest.active { border-color:#FFC83D; box-shadow:0 0 0 1px #FFC83D, 0 0 24px rgba(255,200,61,.15); }
+  .xp-float { position:absolute; right:12px; top:-6px; font:800 13px 'Fira Code'; color:#FFC83D; animation:xpUp 1s ease forwards; pointer-events:none; }
+  @keyframes xpUp { from{opacity:1; transform:translateY(0)} to{opacity:0; transform:translateY(-26px)} }
+  .levelup { animation:levelup .7s cubic-bezier(.2,.9,.3,1.6); }
+  @keyframes levelup { from{transform:scale(.6); opacity:0} to{transform:scale(1); opacity:1} }
+
+  /* 3 · Scrubber */
+  input[type=range].scrub { -webkit-appearance:none; appearance:none; width:100%; height:44px; background:transparent; position:relative; z-index:2; cursor:pointer; }
+  input[type=range].scrub::-webkit-slider-runnable-track { height:44px; background:transparent; }
+  input[type=range].scrub::-webkit-slider-thumb { -webkit-appearance:none; width:4px; height:58px; margin-top:-7px; background:#fff; border-radius:4px; box-shadow:0 0 0 4px rgba(255,255,255,.15), 0 0 16px rgba(255,255,255,.4); }
+  input[type=range].scrub::-moz-range-thumb { width:4px; height:58px; background:#fff; border:none; border-radius:4px; }
+  .blk { border-radius:7px; padding:6px 10px; font-size:11px; font-weight:700; transition:all .35s; }
+  .bug { animation:bugPulse 1s infinite; }
+  @keyframes bugPulse { 50% { box-shadow:0 0 0 3px rgba(248,113,113,.6); } }
+  @keyframes run { 0%,100%{left:10%} 50%{left:68%} }
+
+  /* 4 · Swimlane */
+  .lane-col.dim { opacity:.35; }
+  .lane-col { transition:opacity .3s; }
+
+  /* 5 · Sepeda */
+  .bike { transition:left .15s linear; }
+  .bike-card { transition:border-color .3s, transform .3s; }
+  .bike-card.reached { border-color:var(--c); transform:translateY(-4px); }
+
+  /* 6 · Mitos */
+  .flip { perspective:1200px; }
+  .flip-in { position:relative; width:100%; height:100%; transition:transform .7s cubic-bezier(.4,.2,.2,1); transform-style:preserve-3d; }
+  .flip.on .flip-in { transform:rotateY(180deg); }
+  .face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:1.5rem; overflow:hidden; }
+  .face.back { transform:rotateY(180deg); }
+  .stamp { transform:rotate(-12deg); border:3px solid currentColor; border-radius:8px; padding:2px 10px; font:900 14px 'Outfit'; letter-spacing:.15em; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } .panel { opacity:1; transform:none; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI v2 · Cara Belajar</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Komik Satu Sesi</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Misi &amp; Level Up</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Geser Waktu Sesi</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Siapa Melakukan Apa</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Seperti Belajar Sepeda</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Mitos vs Cara Kami</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-12 pb-10">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// section: #cara-belajar · "How Students Learn at LesKoding"</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">6 konsep baru untuk <span class="grad">Cara Belajar di LesKoding.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Semua opsi memakai 4 tahap dengan <b class="text-white">maksimal 120 menit per sesi</b>: <b class="text-[#38BDF8]">Konsep (15 menit)</b>, <b class="text-[#FFC83D]">Praktik eksploratif (90 menit)</b>, <b class="text-[#C084FC]">Review &amp; feedback tutor (15 menit, rasio 1:5)</b>, dan <b class="text-[#F87171]">Capaian (XP, portofolio, laporan sesi, sertifikat kelulusan)</b>. Warnanya sama dengan section sekarang. Konsepnya sengaja berbeda dari eksplorasi sebelumnya (timeline, stepper, siklus, jalur foto, bento, terminal).</p>
+</header>
+
+<!-- ======================= OPSI 1 · KOMIK ======================= -->
+<section id="opsi-1" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span><h2 class="font-display text-2xl font-extrabold">Komik Satu Sesi</h2><p class="text-sm text-slate-400 max-w-3xl">Satu sesi diceritakan sebagai komik 4 panel, lengkap dengan balon kata dan efek suara. Di bawah tiap panel ada keterangan singkat untuk orang tua. Terasa hangat dan mudah dibayangkan.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <div class="badge mb-4"><span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>Metodologi Belajar</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Cara Belajar di LesKoding</h3>
+      <p class="text-slate-300 mt-4">Begini satu sesi berjalan, dari rasa penasaran sampai karya yang tersimpan.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-x-8 gap-y-12" id="comic"></div>
+    <p class="text-center text-[11px] text-slate-500 mt-10">Ilustrasi suasana kelas. Tokoh dan dialog bersifat contoh.</p>
+  </div>
+</section>
+
+<!-- ======================= OPSI 2 · MISI & LEVEL UP ======================= -->
+<section id="opsi-2" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span><h2 class="font-display text-2xl font-extrabold">Misi &amp; Level Up</h2><p class="text-sm text-slate-400 max-w-3xl">Satu sesi digambarkan sebagai level game: 4 misi dengan hadiah XP, sesuai sistem XP yang memang ada di Student Space. Tekan "Mainkan sesi", misi tercentang satu per satu, XP terisi, lalu LEVEL UP dengan karya masuk portofolio dan laporan terkirim ke orang tua.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <div class="lg:col-span-5">
+        <div class="badge mb-4"><i class="fa-solid fa-gamepad text-[#38BDF8]"></i>Metodologi Belajar</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">Setiap sesi adalah <span class="text-[#FFC83D]">satu level</span> yang diselesaikan.</h3>
+        <p class="text-slate-300 mt-4 leading-relaxed">Anak tidak duduk mendengarkan ceramah. Mereka menyelesaikan misi kecil, mendapat poin, dan melihat sendiri kemajuannya.</p>
+        <button id="q-play" class="cta mt-7"><i class="fa-solid fa-play"></i> Mainkan sesi</button>
+        <button id="q-reset" class="ml-3 text-xs font-bold text-slate-400 hover:text-white hidden"><i class="fa-solid fa-rotate-right mr-1"></i>Ulangi</button>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="rounded-3xl bg-[#0B0F19] border border-white/10 overflow-hidden shadow-2xl">
+          <div class="flex items-center gap-4 p-5 border-b border-white/10 bg-gradient-to-r from-[#0788F5]/15 to-transparent">
+            <div class="w-14 h-14 rounded-2xl bg-[#FFC83D] text-[#111827] flex items-center justify-center font-display font-black text-xl">R</div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between text-xs"><span class="font-bold">Raka · <span class="text-slate-400">Game Developer</span></span><span class="mono text-[#FFC83D]" id="q-level">LEVEL 4</span></div>
+              <div class="h-3 rounded-full bg-white/5 mt-2 overflow-hidden"><div id="q-bar" class="h-full rounded-full bg-gradient-to-r from-[#38BDF8] via-[#FFC83D] to-[#F87171] transition-all duration-700" style="width:20%"></div></div>
+              <div class="flex justify-between text-[10px] mono text-slate-500 mt-1"><span id="q-xp">60 / 200 XP</span><span>sesi #4</span></div>
+            </div>
+          </div>
+          <div class="p-5 space-y-3" id="q-list"></div>
+          <div id="q-result" class="hidden px-5 pb-5"></div>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-3">Nama, level, dan angka XP adalah contoh ilustrasi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 3 · GESER WAKTU SESI ======================= -->
+<section id="opsi-3" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span><h2 class="font-display text-2xl font-extrabold">Geser Waktu Sesi</h2><p class="text-sm text-slate-400 max-w-3xl">Seperti video yang bisa di-scrub. Geser penanda di garis waktu 0–120 menit, dan layar laptop anak berubah sesuai menitnya: kuis konsep, balok kode yang bertambah, bug yang diperbaiki, komentar tutor, lalu game jadi dan XP tercatat.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="badge mb-4"><i class="fa-solid fa-clock text-[#38BDF8]"></i>Metodologi Belajar</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Hingga 120 menit yang <span class="grad">penuh karya.</span></h3>
+      <p class="text-slate-300 mt-4">Geser waktunya dan lihat apa yang terjadi di layar anak.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-8">
+        <div class="rounded-2xl border border-white/15 bg-[#1E293B] p-2.5 shadow-2xl">
+          <div class="flex items-center gap-2 px-2 pb-2"><span class="w-2.5 h-2.5 rounded-full bg-[#F87171]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#FFC83D]"></span><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span><span class="mono text-[11px] text-slate-400 ml-2">laptop-raka · menit <b id="s-min" class="text-white">0</b></span></div>
+          <div class="relative rounded-xl overflow-hidden bg-[#0B0F19] aspect-[16/9]" id="s-screen"></div>
+        </div>
+      </div>
+      <div class="lg:col-span-4" id="s-caption"></div>
+    </div>
+    <div class="mt-8">
+      <div class="relative">
+        <div class="absolute inset-x-0 top-0 h-[44px] rounded-xl overflow-hidden flex">
+          <div class="h-full bg-[#38BDF8]/25 border-r-2 border-[#0B0F19] flex items-center px-2 sm:px-3 text-[11px] font-bold text-[#38BDF8] whitespace-nowrap overflow-hidden" style="width:12.5%">01 · 15'</div>
+          <div class="h-full bg-[#FFC83D]/20 border-r-2 border-[#0B0F19] flex items-center px-3 text-[11px] font-bold text-[#FFC83D] whitespace-nowrap overflow-hidden" style="width:75%">02 Praktik eksploratif · 90'</div>
+          <div class="h-full bg-[#C084FC]/25 flex items-center px-2 sm:px-3 text-[11px] font-bold text-[#C084FC] whitespace-nowrap overflow-hidden" style="width:12.5%">03 · 15'</div>
+        </div>
+        <div class="absolute top-[-14px] text-[10px] font-bold text-[#C084FC] -translate-x-1/2" style="left:33.33%"><i class="fa-solid fa-comment-dots"></i> Tutor</div>
+        <div class="absolute top-[-14px] text-[10px] font-bold text-[#C084FC] -translate-x-1/2" style="left:62.5%"><i class="fa-solid fa-comment-dots"></i> Tutor</div>
+        <div class="absolute top-[-14px] right-0 text-[10px] font-bold text-[#F87171]"><i class="fa-solid fa-trophy"></i> Capaian</div>
+        <input type="range" min="0" max="120" value="0" step="1" class="scrub" id="s-range" aria-label="Menit sesi">
+      </div>
+      <div class="relative h-4 mt-2 text-[11px] mono text-slate-500"><span class="absolute left-0">0'</span><span class="absolute -translate-x-1/2" style="left:12.50%">15'</span><span class="absolute -translate-x-1/2" style="left:50.00%">60'</span><span class="absolute -translate-x-1/2" style="left:87.50%">105'</span><span class="absolute right-0">120'</span></div>
+      <div class="flex justify-center mt-5"><button id="s-play" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-xs font-bold"><i class="fa-solid fa-play"></i> Putar otomatis</button></div>
+    </div>
+    <p class="text-center text-[11px] text-slate-500 mt-6">Maksimal 120 menit per sesi: 15' konsep · 90' praktik · 15' review. Tampilan layar adalah ilustrasi.</p>
+  </div>
+</section>
+
+<!-- ======================= OPSI 4 · SIAPA MELAKUKAN APA ======================= -->
+<section id="opsi-4" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span><h2 class="font-display text-2xl font-extrabold">Siapa Melakukan Apa</h2><p class="text-sm text-slate-400 max-w-3xl">Diagram swimlane: 4 tahap × 3 pihak (Anak, Tutor, Orang Tua). Orang tua langsung paham peran masing-masing, termasuk bahwa mereka cukup santai selama kelas lalu menerima laporan di akhir. Hover kolom untuk fokus ke satu tahap.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="badge mb-4"><i class="fa-solid fa-people-group text-[#38BDF8]"></i>Metodologi Belajar</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Satu sesi, <span class="grad">tiga peran.</span></h3>
+      <p class="text-slate-300 mt-4">Anak berkarya, tutor membimbing, dan Anda tahu hasilnya.</p>
+    </div>
+    <div id="lane" class="hidden md:grid grid-cols-[150px_repeat(4,1fr)] gap-3"></div>
+    <div id="lane-m" class="md:hidden space-y-4"></div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 5 · SEPERTI BELAJAR SEPEDA ======================= -->
+<section id="opsi-5" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span><h2 class="font-display text-2xl font-extrabold">Seperti Belajar Sepeda</h2><p class="text-sm text-slate-400 max-w-3xl">Metode dijelaskan lewat analogi yang dialami hampir semua orang tua: belajar naik sepeda. Saat di-scroll, sepeda melaju di jalan dan tiap kartu menyala ketika dilewati. Bagian atas kartu berisi analogi, bagian bawahnya cara yang sebenarnya di kelas.</p></div>
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <div class="badge mb-4"><i class="fa-solid fa-bicycle text-[#38BDF8]"></i>Metodologi Belajar</div>
+      <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Belajar coding itu <span class="grad">seperti belajar sepeda.</span></h3>
+      <p class="text-slate-300 mt-4">Tidak cukup dengan membaca buku. Harus dicoba, didampingi, sampai akhirnya bisa sendiri.</p>
+    </div>
+    <div class="relative hidden lg:block h-16 mb-6" id="bk-road">
+      <div class="absolute left-0 right-0 top-1/2 h-3 -translate-y-1/2 rounded-full bg-[#1E293B] border border-white/10"></div>
+      <div class="absolute left-4 right-4 top-1/2 -translate-y-1/2 border-t-2 border-dashed border-white/20"></div>
+      <div class="absolute left-0 top-1/2 h-3 -translate-y-1/2 rounded-full bg-gradient-to-r from-[#38BDF8] via-[#FFC83D] via-[#C084FC] to-[#F87171]" id="bk-fill" style="width:0"></div>
+      <div class="bike absolute -top-1 text-4xl -translate-x-1/2" id="bk-bike" style="left:0">🚲</div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" id="bk-cards"></div>
+    <div class="text-center mt-12"><a href="#register" class="cta"><i class="fa-solid fa-calendar-check"></i> Coba Kelas Gratis</a></div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 6 · MITOS VS CARA KAMI ======================= -->
+<section id="opsi-6" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span><h2 class="font-display text-2xl font-extrabold">Mitos vs Cara Kami</h2><p class="text-sm text-slate-400 max-w-3xl">Metode dijelaskan dengan membantah anggapan umum orang tua tentang les coding. Tiap kartu dibalik dari "Mitos" ke "Di LesKoding", dan masing-masing terhubung ke satu tahap. Langsung menjawab keberatan yang membuat orang tua ragu.</p></div>
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div>
+        <div class="badge mb-4"><i class="fa-solid fa-scale-balanced text-[#38BDF8]"></i>Metodologi Belajar</div>
+        <h3 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Les coding <span class="text-[#F87171] line-through decoration-4">membosankan?</span><br><span class="grad">Tidak di sini.</span></h3>
+      </div>
+      <button id="m-all" class="self-start md:self-auto inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-xs font-bold"><i class="fa-solid fa-rotate"></i> Balik semua kartu</button>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" id="m-grid"></div>
+  </div>
+</section>
+
+<!-- ======================= PERBANDINGAN ======================= -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <h2 class="font-display text-2xl md:text-3xl font-extrabold mb-6">Perbandingan cepat</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[780px]">
+        <thead class="bg-[#1E293B] text-left text-xs uppercase tracking-wider text-slate-400">
+          <tr><th class="p-4">Opsi</th><th class="p-4">Kekuatan</th><th class="p-4">Interaksi</th><th class="p-4">Catatan</th><th class="p-4">Effort</th></tr>
+        </thead>
+        <tbody class="divide-y divide-white/5 text-slate-300">
+          <tr><td class="p-4 font-bold text-white">1 · Komik Satu Sesi</td><td class="p-4">Paling hangat & mudah dibayangkan</td><td class="p-4">Panel muncul saat scroll</td><td class="p-4">Dialog perlu konsisten dengan tone brand</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">2 · Misi &amp; Level Up</td><td class="p-4">Selaras sistem XP; menarik bagi anak</td><td class="p-4">Tombol "Mainkan sesi"</td><td class="p-4">Angka XP harus ditandai contoh</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">3 · Geser Waktu Sesi</td><td class="p-4">Paling konkret: 15' + 90' + 15' terasa nyata</td><td class="p-4">Scrubber + putar otomatis</td><td class="p-4">Paling "wow", effort tertinggi</td><td class="p-4">Tinggi</td></tr>
+          <tr><td class="p-4 font-bold text-white">4 · Siapa Melakukan Apa</td><td class="p-4">Paling informatif soal peran tutor & ortu</td><td class="p-4">Hover kolom</td><td class="p-4">Menegaskan rasio 1:5 & laporan</td><td class="p-4">Rendah</td></tr>
+          <tr><td class="p-4 font-bold text-white">5 · Seperti Belajar Sepeda</td><td class="p-4">Analogi kuat untuk orang tua awam</td><td class="p-4">Sepeda melaju saat scroll</td><td class="p-4">Paling persuasif secara emosional</td><td class="p-4">Rendah–sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">6 · Mitos vs Cara Kami</td><td class="p-4">Menjawab keberatan secara langsung</td><td class="p-4">Flip card</td><td class="p-4">Bisa sekaligus mengurangi FAQ</td><td class="p-4">Rendah</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-6 rounded-2xl border border-[#F87171]/30 bg-[#F87171]/5 p-5 text-sm text-slate-300">
+      <div class="font-bold text-[#F87171] mb-2"><i class="fa-solid fa-triangle-exclamation mr-1.5"></i>Copy di section sekarang yang bertentangan dengan KB</div>
+      <ul class="space-y-1 list-disc pl-5">
+        <li>Step 3 menulis <b>"Rasio tutor 1:4 anak"</b>, padahal KB resmi menyebut <b>1:5</b> (1 tutor maks 5 siswa).</li>
+        <li>Deskripsi menyebut 4 tahapan <b>"yang terbukti efektif"</b>. KB §14.2 melarang klaim yang tidak bisa dibuktikan ("terbukti").</li>
+        <li>Step 4 menulis <b>"sertifikat level"</b>, sedangkan KB menyebut <b>sertifikat kelulusan setelah course selesai</b>.</li>
+        <li>Struktur sesi baru di file ini (<b>maks. 120 menit: 15' konsep · 90' praktik · 15' review</b>) belum diterapkan ke <b>KNOWLEDGE_BASE.md §8</b> dan section di <b>index.html</b>, yang masih menulis 15' + 50'. Perlu diselaraskan saat implementasi.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const STEPS = [
+  { n:'01', t:'Materi Konsep', dur:'15 Menit', c:'#38BDF8', ic:'fa-lightbulb' },
+  { n:'02', t:'Praktik Eksploratif', dur:'90 Menit', c:'#FFC83D', ic:'fa-laptop-code' },
+  { n:'03', t:'Review & Feedback', dur:'15 Menit', c:'#C084FC', ic:'fa-comments' },
+  { n:'04', t:'Pencapaian & Progres', dur:'Tercatat Nyata', c:'#F87171', ic:'fa-trophy' },
+];
+
+/* ===================== OPSI 1 · KOMIK ===================== */
+(() => {
+  const P = [
+    { r:'-1deg', cap:'MENIT 0–15 · KONSEP', scene:`
+        <div class="absolute inset-0 halftone"></div>
+        <div class="absolute left-[8%] bottom-[8%] text-6xl">🧑‍🏫</div>
+        <div class="absolute right-[7%] top-[38%] w-[46%] h-[44%] rounded-lg bg-white/95 border-2 border-[#111827] text-[#111827] p-3 text-[11px] font-bold leading-snug">
+          <div class="text-[9px] mono text-slate-500">PAPAN</div><div class="mt-1">LOOP = lagu yang diputar ulang 🔁</div><div class="mt-2 flex gap-1 text-lg">🎵🎵🎵</div></div>
+        <div class="absolute left-[30%] bottom-[10%] text-5xl">🧒</div>
+        <div class="bubble" style="left:20%; top:13%; --tail:18px">Ohh, jadi loop itu kayak muter lagu terus-terusan!</div>`,
+      note:'Konsep baru dijelaskan dengan analogi visual dan kuis singkat. Tidak ada ceramah panjang.' },
+    { r:'1deg', cap:'MENIT 15–105 · PRAKTIK', scene:`
+        <div class="absolute inset-0 halftone"></div>
+        <div class="absolute left-[6%] top-[22%] w-[56%] rounded-lg bg-[#1E293B] border-2 border-[#111827] p-2 space-y-1">
+          <div class="rounded px-2 py-1 text-[10px] font-bold bg-[#E6A817] text-[#111827]">ketika 🏁 diklik</div>
+          <div class="rounded px-2 py-1 text-[10px] font-bold bg-[#7C3AED] ml-2">ulangi 10 kali</div>
+          <div class="rounded px-2 py-1 text-[10px] font-bold bg-[#F87171] ml-4 ring-2 ring-[#F87171]/50">lompat ⚠️</div></div>
+        <div class="absolute right-[10%] bottom-[8%] text-6xl">👦</div>
+        <div class="sfx" style="left:12%; bottom:10%">ERROR?!</div>
+        <div class="bubble" style="right:6%; top:10%; --tail:60%">Hmm… kucingnya nggak mau lompat. Coba kucari salahnya!</div>`,
+      note:'90 menit anak menyusun proyeknya sendiri. Error bukan masalah, justru bahan belajar debugging.' },
+    { r:'-0.5deg', cap:'MENIT 105–120 · REVIEW', scene:`
+        <div class="absolute inset-0 halftone"></div>
+        <div class="absolute left-[10%] bottom-[8%] text-6xl">👩‍🏫</div>
+        <div class="absolute right-[12%] bottom-[8%] text-6xl">👦</div>
+        <div class="absolute right-[34%] bottom-[30%] text-3xl">💻</div>
+        <div class="bubble" style="left:6%; top:12%; --tail:30px">Idemu keren! Gimana kalau ditambah skor tiap dapat bintang?</div>
+        <div class="sfx" style="right:8%; top:14%; color:#C084FC">AHA!</div>`,
+      note:'15 menit terakhir: anak menunjukkan karyanya, tutor memberi feedback personal (maksimal 5 anak per tutor) dan tips.' },
+    { r:'1deg', cap:'MENIT 120 · CAPAIAN', scene:`
+        <div class="absolute inset-0 halftone"></div>
+        <div class="absolute left-[8%] bottom-[8%] text-6xl">🧒</div>
+        <div class="absolute left-[32%] top-[16%] rounded-xl bg-[#FFC83D] text-[#111827] border-2 border-[#111827] px-3 py-2 font-display font-black text-xl rotate-[-6deg]">+120 XP</div>
+        <div class="absolute right-[7%] top-[18%] w-[38%] rounded-2xl bg-[#1E293B] border-2 border-[#111827] p-2 text-[10px]">
+          <div class="text-slate-400 font-bold">📱 Student Space</div><div class="font-bold mt-1">Laporan sesi #4 terbit</div><div class="text-emerald-400 mt-0.5">✓ Hadir · 3 rubrik</div></div>
+        <div class="sfx" style="left:30%; bottom:12%; color:#34D399">LEVEL UP!</div>`,
+      note:'Karya tersimpan di portofolio, XP bertambah, dan laporan sesi terbit untuk orang tua.' },
+  ];
+  const el = document.getElementById('comic');
+  el.innerHTML = P.map((p, i) => `
+    <figure>
+      <div class="panel aspect-[4/3]" style="--c:${STEPS[i].c}; --r:${p.r}">
+        <span class="cap">${p.cap}</span>${p.scene}
+      </div>
+      <figcaption class="mt-4 flex gap-3">
+        <span class="font-display text-3xl font-black leading-none" style="color:${STEPS[i].c}55">${STEPS[i].n}</span>
+        <span><span class="block font-bold">${STEPS[i].t}</span><span class="block text-sm text-slate-400 leading-relaxed mt-0.5">${p.note}</span></span>
+      </figcaption>
+    </figure>`).join('');
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.15 });
+  el.querySelectorAll('.panel').forEach((p, i) => { p.style.transitionDelay = `${(i % 2) * .15}s`; io.observe(p); });
+})();
+
+/* ===================== OPSI 2 · MISI & LEVEL UP ===================== */
+(() => {
+  const Q = [
+    { t:'Tebak analogi "loop" di kuis pembuka', d:'Konsep · 15 menit', xp:20 },
+    { t:'Buat karakter bisa bergerak & melompat', d:'Praktik eksploratif · 90 menit', xp:50 },
+    { t:'Temukan & perbaiki 1 bug sendiri', d:'Praktik eksploratif · trial & error', xp:30 },
+    { t:'Presentasikan karya & terapkan saran tutor', d:'Review & feedback · 15 menit · rasio 1:5', xp:40 },
+  ];
+  const list = document.getElementById('q-list'), bar = document.getElementById('q-bar'), xpEl = document.getElementById('q-xp'), res = document.getElementById('q-result');
+  const START = 60, MAX = 200; // 60 + 140 XP dari 4 misi = level berikutnya
+  const render = () => list.innerHTML = Q.map((q, i) => `
+    <div class="quest relative flex items-center gap-4 p-4 rounded-2xl border border-white/10 bg-white/[.02]" data-i="${i}">
+      <span class="qbox w-7 h-7 rounded-lg border-2 border-white/20 flex items-center justify-center text-xs shrink-0 transition"><i class="fa-solid fa-check"></i></span>
+      <div class="flex-1 min-w-0"><div class="text-sm font-bold">${q.t}</div><div class="text-[11px] text-slate-400 mt-0.5">${q.d}</div></div>
+      <span class="mono text-xs font-bold text-[#FFC83D] shrink-0">+${q.xp} XP</span>
+    </div>`).join('');
+  const setXP = v => { bar.style.width = `${Math.min(100, v / MAX * 100)}%`; xpEl.textContent = `${v} / ${MAX} XP`; };
+  const wait = ms => new Promise(r => setTimeout(r, reduceMotion ? 0 : ms));
+  let running = false;
+  document.getElementById('q-play').onclick = async () => {
+    if (running) return; running = true;
+    render(); res.classList.add('hidden'); setXP(START); document.getElementById('q-level').textContent = 'LEVEL 4';
+    let xp = START;
+    for (const [i, q] of Q.entries()) {
+      const row = list.querySelector(`[data-i="${i}"]`);
+      row.classList.add('active'); await wait(800);
+      row.classList.remove('active'); row.classList.add('done');
+      row.insertAdjacentHTML('beforeend', `<span class="xp-float">+${q.xp}</span>`);
+      xp += q.xp; setXP(xp); await wait(500);
+    }
+    await wait(300);
+    document.getElementById('q-level').textContent = 'LEVEL 5 ↑';
+    res.classList.remove('hidden');
+    res.innerHTML = `<div class="levelup rounded-2xl border border-[#F87171]/40 bg-gradient-to-r from-[#F87171]/15 to-[#FFC83D]/10 p-5">
+      <div class="font-display font-black text-2xl text-[#FFC83D]">LEVEL UP! 🎉</div>
+      <div class="grid sm:grid-cols-3 gap-3 mt-3 text-xs">
+        <div class="rounded-xl bg-[#0B0F19]/70 p-3"><i class="fa-solid fa-floppy-disk text-[#38BDF8] mr-1.5"></i>Karya tersimpan di portofolio</div>
+        <div class="rounded-xl bg-[#0B0F19]/70 p-3"><i class="fa-solid fa-paper-plane text-emerald-400 mr-1.5"></i>Laporan sesi terkirim ke orang tua</div>
+        <div class="rounded-xl bg-[#0B0F19]/70 p-3"><i class="fa-solid fa-certificate text-[#FFC83D] mr-1.5"></i>Menuju sertifikat kelulusan</div>
+      </div></div>`;
+    document.getElementById('q-reset').classList.remove('hidden');
+    running = false;
+  };
+  document.getElementById('q-reset').onclick = () => { render(); res.classList.add('hidden'); setXP(START); document.getElementById('q-level').textContent = 'LEVEL 4'; };
+  render(); setXP(START);
+})();
+
+/* ===================== OPSI 3 · GESER WAKTU SESI ===================== */
+(() => {
+  const screen = document.getElementById('s-screen'), cap = document.getElementById('s-caption'), range = document.getElementById('s-range'), minEl = document.getElementById('s-min');
+  const BLOCKS = [['ketika 🏁 diklik', '#E6A817', '#111827'], ['ulangi terus', '#7C3AED'], ['jika tekan ➡ → gerak 10', '#0788F5'], ['jika tekan ⬆ → lompat', '#0788F5'], ['jika sentuh ⭐ → skor +1', '#10B981'], ['jika skor = 5 → menang 🎉', '#F97316']];
+  // Maksimal 120 menit: 0–15 konsep · 15–105 praktik · 105–120 review · 120 capaian
+  const state = m => {
+    if (m < 15) return { phase:0, title:'Kuis konsep', text:'Tutor membuka sesi dengan analogi visual dan kuis singkat tentang konsep hari ini.' };
+    if (m < 35) return { phase:1, blocks:2, title:'Mulai menyusun', text:'Anak membuka software dan mulai menyusun proyeknya sendiri.' };
+    if (m < 45) return { phase:1, blocks:3, tutor:'Bagus! Coba tambahkan cara karakternya melompat.', title:'Tutor berkeliling', text:'Selama praktik, tutor memberi petunjuk, bukan jawaban jadi.' };
+    if (m < 60) return { phase:1, blocks:4, bug:true, title:'Ketemu bug!', text:'Karakter tidak mau melompat. Anak diajak menelusuri sendiri penyebabnya.' };
+    if (m < 70) return { phase:1, blocks:4, title:'Bug diperbaiki', text:'Trial & error yang sehat melatih problem solving dan kegigihan.' };
+    if (m < 80) return { phase:1, blocks:5, tutor:'Idemu menambah bintang itu keren!', title:'Ide baru', text:'Tutor mengapresiasi ide orisinal anak saat praktik berlangsung.' };
+    if (m < 105) return { phase:1, blocks:6, run:true, title:'Game hampir jadi', text:'Anak menguji game buatannya dan merapikan detail terakhir.' };
+    if (m < 118) return { phase:2, blocks:6, run:true, tutor:'Coba ceritakan cara kerja game-mu ke teman-teman!', title:'Review & presentasi', text:'15 menit terakhir: anak mempresentasikan karyanya, tutor memberi feedback personal dan tips (maks. 5 anak per tutor).' };
+    return { phase:3, blocks:6, run:true, done:true, title:'Capaian tercatat', text:'XP bertambah, karya tersimpan di portofolio, dan laporan sesi terbit untuk orang tua.' };
+  };
+  let lastKey = '';
+  const render = () => {
+    const m = +range.value, s = state(m), st = STEPS[s.phase];
+    minEl.textContent = m;
+    const key = JSON.stringify(s);
+    if (key === lastKey) return; lastKey = key;
+    screen.innerHTML = s.phase === 0 && !s.blocks ? `
+      <div class="absolute inset-0 flex items-center justify-center p-6 fade-swap">
+        <div class="w-full max-w-md rounded-2xl bg-[#1E293B] border border-[#38BDF8]/40 p-5">
+          <div class="text-[10px] mono text-[#38BDF8] font-bold">KUIS · 1/3</div>
+          <div class="font-bold mt-1">Loop itu mirip apa?</div>
+          <div class="grid grid-cols-2 gap-2 mt-3 text-sm"><div class="rounded-lg bg-white/5 px-3 py-2">🚪 Pintu</div><div class="rounded-lg bg-[#38BDF8]/20 border border-[#38BDF8] px-3 py-2">🔁 Lagu diulang ✓</div><div class="rounded-lg bg-white/5 px-3 py-2">📦 Kotak</div><div class="rounded-lg bg-white/5 px-3 py-2">🌧️ Hujan</div></div>
+        </div>
+      </div>` : `
+      <div class="absolute inset-0 grid grid-cols-[1fr_1.1fr]">
+        <div class="bg-[#0F172A] p-3 space-y-1.5 overflow-hidden">
+          <div class="text-[9px] mono text-slate-500 mb-1">BLOK KODE</div>
+          ${BLOCKS.slice(0, s.blocks).map(([t, bg, fg], i) => `<div class="blk ${s.bug && i === 3 ? 'bug' : ''} ${i > 0 ? 'ml-' + Math.min(6, (i > 1 ? 4 : 2)) : ''}" style="background:${s.bug && i === 3 ? '#F87171' : bg}; color:${fg || '#fff'}">${t}${s.bug && i === 3 ? ' ⚠️' : ''}</div>`).join('')}
+        </div>
+        <div class="relative" style="background:linear-gradient(#1e3a8a,#38BDF8 70%)">
+          <div class="absolute bottom-0 inset-x-0 h-[22%] bg-[#A16207] border-t-[8px] border-[#16A34A]"></div>
+          <div class="absolute text-3xl" style="bottom:22%; left:12%; ${s.run ? 'animation:run 3s ease-in-out infinite' : ''}">🐱</div>
+          ${s.blocks >= 5 ? '<div class="absolute text-xl" style="right:20%; bottom:45%">⭐</div>' : ''}
+          ${s.blocks >= 5 ? `<div class="absolute top-2 left-2 mono text-[10px] font-bold bg-black/40 px-2 py-0.5 rounded">SKOR ${s.done ? 5 : 2}</div>` : ''}
+          ${s.done ? '<div class="absolute inset-0 flex items-center justify-center bg-black/40 fade-swap"><div class="text-center"><div class="font-display font-black text-3xl text-[#FFC83D]">+120 XP</div><div class="text-xs mt-1">💾 tersimpan ke portofolio</div></div></div>' : ''}
+        </div>
+      </div>
+      ${s.tutor ? `<div class="absolute left-3 bottom-3 max-w-[60%] flex items-end gap-2 fade-swap"><span class="w-9 h-9 rounded-full bg-[#C084FC] text-[#0B0F19] flex items-center justify-center text-sm shrink-0"><i class="fa-solid fa-chalkboard-user"></i></span><span class="bg-white text-[#111827] text-xs font-bold rounded-2xl rounded-bl-sm px-3 py-2">${s.tutor}</span></div>` : ''}`;
+    cap.innerHTML = `<div class="fade-swap">
+      <div class="inline-flex items-center gap-2 text-[11px] mono font-bold px-2.5 py-1 rounded-md" style="color:${st.c}; background:${st.c}1a; border:1px solid ${st.c}55"><i class="fa-solid ${st.ic}"></i>${st.n} · ${st.t}</div>
+      <h4 class="font-display text-3xl font-bold mt-3">${s.title}</h4>
+      <p class="text-slate-300 mt-2 leading-relaxed">${s.text}</p>
+      ${s.done ? '<div class="mt-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-3 text-xs text-emerald-300"><i class="fa-solid fa-paper-plane mr-1.5"></i>Laporan sesi terkirim ke orang tua</div>' : ''}
+    </div>`;
+  };
+  range.addEventListener('input', render);
+  let timer = null;
+  const btn = document.getElementById('s-play');
+  btn.onclick = () => {
+    if (timer) { clearInterval(timer); timer = null; btn.innerHTML = '<i class="fa-solid fa-play"></i> Putar otomatis'; return; }
+    if (+range.value >= 120) range.value = 0;
+    btn.innerHTML = '<i class="fa-solid fa-pause"></i> Jeda';
+    timer = setInterval(() => { range.value = +range.value + 1; render(); if (+range.value >= 120) { clearInterval(timer); timer = null; btn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Putar ulang'; } }, reduceMotion ? 10 : 110);
+  };
+  render();
+})();
+
+/* ===================== OPSI 4 · SWIMLANE ===================== */
+(() => {
+  const ROLES = [['Anak', 'fa-child', '#38BDF8'], ['Tutor', 'fa-chalkboard-user', '#C084FC'], ['Orang Tua', 'fa-house-user', '#34D399']];
+  const CELLS = [
+    ['Menjawab kuis & menebak analogi konsep baru', 'Menjelaskan konsep dengan analogi visual singkat', ['☕', 'Tidak perlu apa-apa, anak di lab']],
+    ['Menyusun proyek sendiri, mencoba & memperbaiki bug', 'Berkeliling memberi petunjuk, bukan jawaban jadi', ['☕', 'Santai, anak sedang berkarya']],
+    ['Mempresentasikan karya & menerapkan saran', 'Review personal 15 menit, maks. 5 anak per tutor', ['☕', 'Tetap santai']],
+    ['Mendapat XP, karya masuk portofolio', 'Mengisi rubrik & catatan sesi', ['📱', 'Menerima laporan sesi + ide latihan di rumah']],
+  ];
+  const lane = document.getElementById('lane');
+  let html = `<div></div>` + STEPS.map((s, j) => `<div class="lane-col rounded-2xl p-4 border" data-col="${j}" style="border-color:${s.c}55; background:${s.c}12">
+      <div class="flex items-center justify-between"><span class="font-display text-2xl font-black" style="color:${s.c}">${s.n}</span><span class="text-[10px] mono font-bold px-2 py-0.5 rounded-md" style="color:${s.c}; background:${s.c}1f">${s.dur}</span></div>
+      <div class="font-bold text-sm mt-1">${s.t}</div></div>`).join('');
+  ROLES.forEach(([r, ic, c], i) => {
+    html += `<div class="flex items-center gap-3 rounded-2xl bg-[#0B0F19] border border-white/10 px-4"><span class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:${c}22; color:${c}"><i class="fa-solid ${ic}"></i></span><span class="font-bold text-sm">${r}</span></div>`;
+    html += CELLS.map((cells, j) => {
+      const v = cells[i];
+      const muted = i === 2 && j < 3;
+      return `<div class="lane-col rounded-2xl border p-4 text-sm ${muted ? 'border-dashed border-white/10 text-slate-500' : 'border-white/10 bg-[#0B0F19] text-slate-200'} ${i === 2 && j === 3 ? '!border-emerald-500/40 !bg-emerald-500/10 !text-emerald-200' : ''}" data-col="${j}">${Array.isArray(v) ? `<span class="text-lg mr-1">${v[0]}</span>${v[1]}` : v}</div>`;
+    }).join('');
+  });
+  lane.innerHTML = html;
+  lane.addEventListener('mouseover', e => { const c = e.target.closest('[data-col]'); if (!c) return; lane.querySelectorAll('.lane-col').forEach(x => x.classList.toggle('dim', x.dataset.col !== c.dataset.col)); });
+  lane.addEventListener('mouseleave', () => lane.querySelectorAll('.lane-col').forEach(x => x.classList.remove('dim')));
+  document.getElementById('lane-m').innerHTML = STEPS.map((s, j) => `
+    <div class="rounded-2xl border p-4" style="border-color:${s.c}55; background:${s.c}0d">
+      <div class="flex items-center justify-between"><span class="font-bold"><span style="color:${s.c}">${s.n}</span> · ${s.t}</span><span class="text-[10px] mono" style="color:${s.c}">${s.dur}</span></div>
+      <div class="mt-3 space-y-2">${ROLES.map(([r, ic, c], i) => { const v = CELLS[j][i]; return `<div class="flex gap-3 text-sm"><i class="fa-solid ${ic} mt-1 w-4" style="color:${c}"></i><span class="text-slate-300"><b class="text-white">${r}:</b> ${Array.isArray(v) ? v[0] + ' ' + v[1] : v}</span></div>`; }).join('')}</div>
+    </div>`).join('');
+})();
+
+/* ===================== OPSI 5 · SEPEDA ===================== */
+(() => {
+  const C = [
+    ['👀', 'Lihat dulu caranya', 'Sebelum mengayuh, anak melihat cara menjaga keseimbangan.', 'Konsep baru dijelaskan dengan analogi visual & kuis singkat (15 menit).'],
+    ['🚲', 'Coba sendiri, pakai roda bantu', 'Jatuh sedikit itu biasa, justru di situ belajarnya.', 'Anak langsung praktik menyusun proyeknya, error jadi bahan belajar (90 menit).'],
+    ['🤝', 'Dipegangi sampai seimbang', 'Ada yang menemani di samping, siap menahan saat oleng.', 'Tutor mendampingi selama praktik, lalu 15 menit review personal (maks. 5 anak per tutor).'],
+    ['🏁', 'Lepas roda bantu', 'Bisa sendiri, siap menjelajah jalan berikutnya.', 'XP & portofolio tercatat, laporan untuk orang tua, sertifikat kelulusan di akhir course.'],
+  ];
+  const cards = document.getElementById('bk-cards');
+  cards.innerHTML = C.map(([e, t, a, real], i) => `
+    <div class="bike-card rounded-3xl border border-white/10 bg-[#1E293B] overflow-hidden" style="--c:${STEPS[i].c}">
+      <div class="p-6" style="background:linear-gradient(160deg,${STEPS[i].c}22,transparent 70%)">
+        <div class="flex items-center justify-between"><span class="text-5xl">${e}</span><span class="font-display text-3xl font-black" style="color:${STEPS[i].c}55">${STEPS[i].n}</span></div>
+        <div class="font-display text-xl font-bold mt-4 leading-tight">${t}</div>
+        <p class="text-sm text-slate-400 mt-1.5 italic">${a}</p>
+      </div>
+      <div class="p-6 pt-4 border-t border-white/10">
+        <div class="text-[10px] mono font-bold uppercase tracking-widest mb-1.5" style="color:${STEPS[i].c}"><i class="fa-solid ${STEPS[i].ic} mr-1"></i>Di kelas LesKoding · ${STEPS[i].t}</div>
+        <p class="text-sm text-slate-200 leading-relaxed">${real}</p>
+      </div>
+    </div>`).join('');
+  const sec = document.getElementById('opsi-5'), bike = document.getElementById('bk-bike'), fill = document.getElementById('bk-fill'), road = document.getElementById('bk-road');
+  const all = [...cards.children];
+  const onScroll = () => {
+    // Sepeda melaju saat jalan bergerak dari 85% ke 30% tinggi layar
+    const r = (road.offsetParent ? road : cards).getBoundingClientRect(), vh = innerHeight;
+    const p = Math.min(1, Math.max(0, (vh * .85 - r.top) / (vh * .55)));
+    bike.style.left = `${p * 100}%`; fill.style.width = `${p * 100}%`;
+    all.forEach((c, i) => c.classList.toggle('reached', p >= (i + .5) / 4 - .05));
+  };
+  addEventListener('scroll', onScroll, { passive:true }); onScroll();
+})();
+
+/* ===================== OPSI 6 · MITOS VS CARA KAMI ===================== */
+(() => {
+  const M = [
+    ['Les coding = duduk dengar ceramah berjam-jam.', 'Konsep cukup 15 menit dengan analogi & kuis, lalu 90 menit anak praktik langsung.', 0],
+    ['Anak harus jago matematika dulu.', 'Bisa mulai dari nol. Kurikulum dimulai dari blok visual, lalu naik bertahap.', 1],
+    ['Kalau ketemu error, anak pasti frustrasi.', 'Error jadi bahan belajar debugging, didampingi tutor dengan rasio 1:5.', 2],
+    ['Orang tua tidak tahu anaknya belajar apa.', 'Laporan sesi terbit setiap sesi: kehadiran, 3 rubrik, kekuatan, dan tips di rumah.', 3],
+  ];
+  const grid = document.getElementById('m-grid');
+  grid.innerHTML = M.map(([myth, fact, s]) => `
+    <div class="flip h-[300px] cursor-pointer" tabindex="0" role="button" aria-label="Balik kartu">
+      <div class="flip-in">
+        <div class="face bg-[#1E293B] border border-[#F87171]/30 p-6 flex flex-col">
+          <div class="flex items-center justify-between"><span class="stamp text-[#F87171]">MITOS</span><i class="fa-solid fa-circle-xmark text-[#F87171] text-2xl"></i></div>
+          <p class="font-display text-2xl font-bold leading-tight mt-auto">"${myth}"</p>
+          <div class="text-[11px] text-slate-500 mt-4"><i class="fa-solid fa-hand-pointer mr-1"></i>Klik untuk lihat faktanya</div>
+        </div>
+        <div class="face back border p-6 flex flex-col" style="background:linear-gradient(160deg,${STEPS[s].c}26,#0F172A 60%); border-color:${STEPS[s].c}66">
+          <div class="flex items-center justify-between"><span class="stamp text-emerald-400">DI LESKODING</span><i class="fa-solid fa-circle-check text-emerald-400 text-2xl"></i></div>
+          <p class="text-base text-slate-100 leading-relaxed mt-auto">${fact}</p>
+          <div class="mt-4 inline-flex self-start items-center gap-2 text-[11px] mono font-bold px-2.5 py-1 rounded-md" style="color:${STEPS[s].c}; background:${STEPS[s].c}1a"><i class="fa-solid ${STEPS[s].ic}"></i>${STEPS[s].n} · ${STEPS[s].t}</div>
+        </div>
+      </div>
+    </div>`).join('');
+  grid.addEventListener('click', e => { const f = e.target.closest('.flip'); if (f) f.classList.toggle('on'); });
+  grid.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('flip')) { e.preventDefault(); e.target.classList.toggle('on'); } });
+  document.getElementById('m-all').onclick = () => { const cards = [...grid.children], anyOff = cards.some(c => !c.classList.contains('on')); cards.forEach((c, i) => setTimeout(() => c.classList.toggle('on', anyOff), reduceMotion ? 0 : i * 120)); };
+})();
+</script>
+</body>
+</html>

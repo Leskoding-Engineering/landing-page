@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Layout — Program Belajar</title>
+<script src="https://cdn.tailwindcss.com">
+  // Opsi 4 Logic
+  const opsi4Btns = document.querySelectorAll('.opsi4-btn');
+  const opsi4Details = document.querySelectorAll('.opsi4-detail');
+  
+  opsi4Btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Reset all buttons
+      opsi4Btns.forEach(b => {
+        b.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-white/10 bg-dark-800 hover:bg-white/5';
+      });
+      
+      // Hide all details
+      opsi4Details.forEach(d => {
+        d.classList.remove('block');
+        d.classList.add('hidden');
+      });
+      
+      // Show target detail and style active button
+      const targetId = btn.getAttribute('data-target');
+      const targetElement = document.getElementById(targetId);
+      if(targetElement) {
+        targetElement.classList.remove('hidden');
+        targetElement.classList.add('block');
+        
+        if(targetId === 'opsi4-detail-1') {
+            btn.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-amber-500/50 bg-amber-500/10';
+        } else if(targetId === 'opsi4-detail-2') {
+            btn.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-blue-500/50 bg-blue-500/10';
+        } else {
+            btn.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-purple-500/50 bg-purple-500/10';
+        }
+      }
+    });
+  });
+
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- ========================================== -->
+<!-- OPSI 4: MASTER-DETAIL SPLIT VIEW -->
+<!-- ========================================== -->
+<section id="opsi-4" class="py-24 border-b border-white/10 bg-dark-900 relative">
+  <div class="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10">
+    <div class="text-[11px] font-mono text-emerald-400 mb-4 uppercase tracking-widest text-center md:text-left">Opsi 4 — Split View (Master-Detail)</div>
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div class="max-w-2xl">
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Eksplorasi Mendalam.</h2>
+        <p class="text-slate-300">Layout profesional bergaya dashboard. Pilih program di panel kiri untuk melihat silabus lengkap dan hasil karya di panel kanan tanpa perlu berpindah halaman.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8 items-start">
+      <!-- Left Panel: Course List -->
+      <div class="w-full lg:w-1/3 flex flex-col gap-3">
+        <!-- List Item 1 -->
+        <button class="opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-amber-500/50 bg-amber-500/10" data-target="opsi4-detail-1">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-lightbulb"></i></div>
+            <div>
+              <h3 class="font-bold text-white text-lg">Innovator</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Usia 6-8 Tahun • Level 1</p>
+            </div>
+          </div>
+        </button>
+        <!-- List Item 2 -->
+        <button class="opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-white/10 bg-dark-800 hover:bg-white/5" data-target="opsi4-detail-2">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-rocket"></i></div>
+            <div>
+              <h3 class="font-bold text-white text-lg">Creator</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Usia 9-11 Tahun • Level 2</p>
+            </div>
+          </div>
+        </button>
+        <!-- List Item 3 -->
+        <button class="opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-white/10 bg-dark-800 hover:bg-white/5" data-target="opsi4-detail-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-cube"></i></div>
+            <div>
+              <h3 class="font-bold text-white text-lg">Game Dev 3D</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Usia 11-17 Tahun • Remaja</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Right Panel: Course Details (Sticky) -->
+      <div class="w-full lg:w-2/3 lg:sticky lg:top-24">
+        <!-- Detail 1 -->
+        <div id="opsi4-detail-1" class="opsi4-detail bg-dark-800 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden block fade">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+          <div class="relative z-10">
+            <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold font-mono uppercase rounded-lg mb-4">Fondasi Logika</span>
+            <h3 class="font-display text-3xl sm:text-4xl font-extrabold mb-4">Kelas Innovator</h3>
+            <p class="text-slate-300 mb-8 leading-relaxed">Tahap paling awal untuk mengenalkan cara berpikir logis (computational thinking) pada anak usia dini melalui permainan visual dan puzzle animasi interaktif tanpa keharusan mengetik kode rumit.</p>
+            
+            <div class="grid sm:grid-cols-2 gap-6 mb-8">
+              <div>
+                <h4 class="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-3">Software yang Dikuasai</h4>
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-center gap-3 p-3 bg-dark-900 border border-white/5 rounded-xl">
+                    <div class="w-8 h-8 rounded bg-dark-800 p-1 flex items-center justify-center"><img src="assets/tech/scratch.png" class="w-full h-full object-contain"></div>
+                    <div>
+                      <strong class="text-sm block">Scratch Jr</strong>
+                      <span class="text-xs text-slate-400">Blok kode visual intuitif</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3 p-3 bg-dark-900 border border-white/5 rounded-xl">
+                    <div class="w-8 h-8 rounded bg-dark-800 p-1 flex items-center justify-center"><img src="assets/tech/codemonkey.png" class="w-full h-full object-contain"></div>
+                    <div>
+                      <strong class="text-sm block">CodeMonkey</strong>
+                      <span class="text-xs text-slate-400">Game puzzle algoritma</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-3">Fokus Keterampilan</h4>
+                <ul class="space-y-3 text-sm text-slate-300">
+                  <li class="flex items-start gap-2"><i class="fa-solid fa-check-circle text-amber-500 mt-0.5"></i> Pemahaman Sequence & Algoritma Dasar</li>
+                  <li class="flex items-start gap-2"><i class="fa-solid fa-check-circle text-amber-500 mt-0.5"></i> Koordinasi visual dan motorik halus</li>
+                  <li class="flex items-start gap-2"><i class="fa-solid fa-check-circle text-amber-500 mt-0.5"></i> Kemandirian memecahkan masalah</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-white/10">
+              <button class="px-6 py-3 bg-brand-yellow hover:bg-amber-400 text-dark-900 font-bold rounded-xl transition-colors text-sm text-center">Pilih Program Ini</button>
+              <button class="px-6 py-3 border border-white/20 hover:bg-white/10 text-white font-bold rounded-xl transition-colors text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-download"></i> Unduh Silabus</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail 2 -->
+        <div id="opsi4-detail-2" class="opsi4-detail bg-dark-800 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden hidden fade">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+          <div class="relative z-10">
+            <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-bold font-mono uppercase rounded-lg mb-4">Pemrograman 2D</span>
+            <h3 class="font-display text-3xl sm:text-4xl font-extrabold mb-4">Kelas Creator</h3>
+            <p class="text-slate-300 mb-8 leading-relaxed">Meningkatkan kemampuan nalar logika percabangan, fungsi, dan variabel. Siswa mulai mengintegrasikan kecerdasan buatan (AI) sederhana dan sensor wajah ke dalam karyanya.</p>
+            <div class="flex flex-col sm:flex-row gap-4 pt-6 mt-12 border-t border-white/10">
+              <button class="px-6 py-3 bg-brand-blue hover:bg-blue-400 text-white font-bold rounded-xl transition-colors text-sm text-center">Pilih Program Ini</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail 3 -->
+        <div id="opsi4-detail-3" class="opsi4-detail bg-dark-800 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden hidden fade">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+          <div class="relative z-10">
+            <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-bold font-mono uppercase rounded-lg mb-4">3D World Building</span>
+            <h3 class="font-display text-3xl sm:text-4xl font-extrabold mb-4">Game Dev 3D</h3>
+            <p class="text-slate-300 mb-8 leading-relaxed">Siswa mempelajari environment 3D, physics, dan teks scripting Lua yang sebenarnya. Mereka bisa mempublikasikan gamenya langsung ke platform Roblox untuk dimainkan seluruh dunia.</p>
+            <div class="flex flex-col sm:flex-row gap-4 pt-6 mt-12 border-t border-white/10">
+              <button class="px-6 py-3 bg-purple-500 hover:bg-purple-400 text-white font-bold rounded-xl transition-colors text-sm text-center">Pilih Program Ini</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========================================== -->
+<!-- OPSI 5: IMMERSIVE AWWWARDS STYLE -->
+<!-- ========================================== -->
+<section id="opsi-5" class="py-32 relative bg-[#050505] overflow-hidden border-b border-white/10">
+  <!-- Giant Background Typography -->
+  <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none opacity-[0.02] flex flex-col justify-center overflow-hidden">
+    <h1 class="text-[15vw] font-display font-black leading-none whitespace-nowrap">CURRICULUM</h1>
+  </div>
+  
+  <div class="max-w-[1400px] mx-auto px-6 sm:px-10 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-20">
+      <div>
+        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md mb-6">
+          <span class="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></span>
+          <span class="text-xs font-mono font-bold tracking-[0.2em] text-white/70 uppercase">Opsi 5 — Immersive Layout</span>
+        </div>
+        <h2 class="font-display text-5xl sm:text-7xl lg:text-[5.5rem] font-extrabold tracking-tighter mb-6 leading-[0.95]">
+          Ignite the<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 italic pr-4">Future.</span>
+        </h2>
+      </div>
+      <div class="max-w-xs text-sm text-slate-400 font-mono leading-relaxed pb-2">
+        A premium, high-impact aesthetic heavily inspired by top-tier Dribbble & Awwwards sites. Featuring massive typography, subtle glassmorphism, and bold structural grid.
+      </div>
+    </div>
+
+    <!-- The Grid (Awwwards style: unbalanced, dramatic) -->
+    <div class="grid lg:grid-cols-12 gap-6">
+      
+      <!-- Card 1 -->
+      <div class="lg:col-span-7 group relative rounded-[2.5rem] bg-[#0A0A0A] border border-white/10 overflow-hidden transition-all duration-500 hover:border-white/30 hover:shadow-[0_0_80px_-20px_rgba(236,72,153,0.3)] min-h-[480px] p-10 flex flex-col justify-between cursor-pointer">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-500/20 blur-[100px] rounded-full translate-x-1/3 -translate-y-1/3 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        
+        <div class="relative z-10 flex justify-between items-start">
+          <div class="text-[5rem] font-display font-black leading-none text-white/10 group-hover:text-white/20 transition-colors duration-500">01</div>
+          <div class="flex gap-2">
+            <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/60 backdrop-blur-md">AGE 6-8</span>
+            <span class="px-4 py-2 rounded-full bg-pink-500/20 border border-pink-500/30 text-xs font-mono text-pink-400 backdrop-blur-md">LEVEL 1</span>
+          </div>
+        </div>
+
+        <div class="relative z-10 w-full lg:w-2/3">
+          <h3 class="text-4xl sm:text-5xl font-display font-bold text-white mb-4 tracking-tight group-hover:tracking-normal transition-all duration-500">Innovator</h3>
+          <p class="text-slate-400 mb-8 leading-relaxed">Pengenalan komputasi visual melalui blok-blok warna dan permainan animasi logika. Sebuah pondasi sempurna untuk kreator cilik.</p>
+          
+          <div class="flex items-center gap-4">
+            <button class="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300"><i class="fa-solid fa-arrow-right -rotate-45"></i></button>
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-dark-900 border-2 border-[#0A0A0A] p-2 flex items-center justify-center z-20"><img src="assets/tech/scratch.png" class="w-full h-full object-contain"></div>
+              <div class="w-12 h-12 rounded-full bg-dark-900 border-2 border-[#0A0A0A] p-2 flex items-center justify-center z-10 -ml-4"><img src="assets/tech/codemonkey.png" class="w-full h-full object-contain"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="lg:col-span-5 group relative rounded-[2.5rem] bg-[#0A0A0A] border border-white/10 overflow-hidden transition-all duration-500 hover:border-white/30 hover:shadow-[0_0_80px_-20px_rgba(56,189,248,0.3)] min-h-[480px] p-10 flex flex-col justify-between cursor-pointer">
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-500/20 blur-[100px] rounded-full -translate-x-1/4 translate-y-1/4 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        
+        <div class="relative z-10 flex justify-between items-start">
+          <div class="text-[5rem] font-display font-black leading-none text-white/10 group-hover:text-white/20 transition-colors duration-500">02</div>
+          <span class="px-4 py-2 rounded-full bg-sky-500/20 border border-sky-500/30 text-xs font-mono text-sky-400 backdrop-blur-md">AGE 9-11</span>
+        </div>
+
+        <div class="relative z-10">
+          <h3 class="text-4xl sm:text-5xl font-display font-bold text-white mb-4 tracking-tight group-hover:tracking-normal transition-all duration-500">Creator</h3>
+          <p class="text-slate-400 mb-8 leading-relaxed">Merancang interaksi 2D dan AI dasar. Transformasi pemain menjadi pencipta sesungguhnya.</p>
+          
+          <button class="w-14 h-14 rounded-full border border-white/20 text-white flex items-center justify-center text-xl group-hover:bg-white group-hover:text-black transition-all duration-300"><i class="fa-solid fa-arrow-right -rotate-45"></i></button>
+        </div>
+      </div>
+
+      <!-- Card 3 (Full width cinematic) -->
+      <div class="lg:col-span-12 group relative rounded-[2.5rem] bg-[#0A0A0A] border border-white/10 overflow-hidden transition-all duration-500 hover:border-white/30 hover:shadow-[0_0_80px_-20px_rgba(168,85,247,0.3)] min-h-[380px] p-10 flex flex-col md:flex-row md:items-center justify-between gap-10 cursor-pointer">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-purple-500/20 blur-[120px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+        
+        <div class="relative z-10 flex-1">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="text-[3rem] font-display font-black leading-none text-white/20">03</div>
+            <span class="w-12 h-[1px] bg-white/20"></span>
+            <span class="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/30 text-xs font-mono text-purple-400 backdrop-blur-md">TEENS 11-17</span>
+          </div>
+          <h3 class="text-5xl sm:text-6xl font-display font-bold text-white mb-6 tracking-tight">Game Dev 3D</h3>
+          <p class="text-slate-400 text-lg max-w-xl leading-relaxed">Membangun semesta virtual multiplayer di ekosistem Roblox. Kuasai script Lua, physics, dan world building secara mendalam.</p>
+        </div>
+
+        <div class="relative z-10 shrink-0">
+          <button class="px-8 py-5 rounded-full bg-white text-black font-display font-bold text-lg group-hover:scale-105 transition-transform duration-300 flex items-center gap-3 shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+            Explore Mastery <i class="fa-solid fa-arrow-right -rotate-45"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+  colors: { dark: { 900: '#0B0F19', 800: '#111827', 700: '#1E293B' }, brand: { yellow: '#FFC83D', blue: '#0788F5' } }
+}}};
+
+  // Opsi 4 Logic
+  const opsi4Btns = document.querySelectorAll('.opsi4-btn');
+  const opsi4Details = document.querySelectorAll('.opsi4-detail');
+  
+  opsi4Btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Reset all buttons
+      opsi4Btns.forEach(b => {
+        b.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-white/10 bg-dark-800 hover:bg-white/5';
+      });
+      
+      // Hide all details
+      opsi4Details.forEach(d => {
+        d.classList.remove('block');
+        d.classList.add('hidden');
+      });
+      
+      // Show target detail and style active button
+      const targetId = btn.getAttribute('data-target');
+      const targetElement = document.getElementById(targetId);
+      if(targetElement) {
+        targetElement.classList.remove('hidden');
+        targetElement.classList.add('block');
+        
+        if(targetId === 'opsi4-detail-1') {
+            btn.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-amber-500/50 bg-amber-500/10';
+        } else if(targetId === 'opsi4-detail-2') {
+            btn.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-blue-500/50 bg-blue-500/10';
+        } else {
+            btn.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-purple-500/50 bg-purple-500/10';
+        }
+      }
+    });
+  });
+
+</script>
+<style>
+  body { background-color: #0B0F19; color: #fff; scroll-behavior: smooth; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+  
+  .fade { animation: fade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  /* Bento Hover FX */
+  .bento-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+  .bento-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5); }
+  
+  /* Accordion FX */
+  .accordion-content { transition: max-height 0.3s ease-out, opacity 0.3s ease-out; max-height: 0; opacity: 0; overflow: hidden; }
+  .accordion-item.active .accordion-content { max-height: 500px; opacity: 1; }
+  .accordion-item.active .fa-chevron-down { transform: rotate(180deg); }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- Sticky Nav -->
+<div class="sticky top-0 z-50 bg-dark-900/80 backdrop-blur-md border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-4 justify-between">
+    <div class="text-xs text-slate-400 font-mono"><i class="fa-solid fa-flask text-brand-yellow mr-2"></i>EKSPLORASI LAYOUT: PROGRAM BELAJAR</div>
+    <div class="flex gap-2 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">Opsi 1: Focus Cards</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">Opsi 2: Bento Grid</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">Opsi 3: List Expandable</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">Opsi 4: Split View</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-pink-500/10 border border-pink-500/30 text-pink-400 hover:bg-pink-500/20 transition-colors"><i class="fa-solid fa-fire mr-1"></i>Opsi 5: Awwwards Style</a>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- OPSI 1: FOCUS CARDS (Horizontal Scroll) -->
+<!-- ========================================== -->
+<section id="opsi-1" class="py-24 border-b border-white/10 relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-96 h-96 bg-brand-blue/10 blur-[120px] rounded-full pointer-events-none"></div>
+  <div class="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10">
+    <div class="text-[11px] font-mono text-brand-yellow mb-4 uppercase tracking-widest">Opsi 1 — Focus Cards</div>
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div class="max-w-2xl">
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Pilih Petualangan<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-amber-500">Koding Pertamamu.</span></h2>
+        <p class="text-slate-300">Geser untuk melihat detail setiap program. Desain ini memfokuskan perhatian user pada satu program di satu waktu dengan visual yang kaya.</p>
+      </div>
+      <div class="flex gap-2">
+        <button id="btn-prev-1" class="w-12 h-12 rounded-full border border-white/20 hover:bg-white/10 flex items-center justify-center transition-colors"><i class="fa-solid fa-arrow-left"></i></button>
+        <button id="btn-next-1" class="w-12 h-12 rounded-full bg-white text-dark-900 hover:bg-slate-200 flex items-center justify-center transition-colors"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pl-4 sm:pl-6 lg:pl-[calc((100vw-1240px)/2+1.5rem)]">
+    <div id="track-1" class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-10 pr-6">
+      
+      <!-- Card 1 -->
+      <article class="snap-start shrink-0 w-[85vw] max-w-[480px] bg-dark-800 border border-white/10 rounded-3xl overflow-hidden shadow-2xl relative group">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-amber-600"></div>
+        <div class="p-6 pb-0 border-b border-white/5 relative">
+          <!-- Background accent -->
+          <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 blur-[40px] rounded-full"></div>
+          
+          <div class="flex items-center justify-between mb-4 relative z-10">
+            <span class="px-3 py-1 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] font-bold font-mono uppercase rounded-lg">Level 1 • Pemula</span>
+            <span class="text-xs font-bold text-slate-400">Usia 6-8 Thn</span>
+          </div>
+          <div class="flex items-start gap-4 mb-6 relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/20 flex items-center justify-center text-amber-400 text-2xl shrink-0"><i class="fa-solid fa-lightbulb"></i></div>
+            <div>
+              <h3 class="text-2xl font-display font-extrabold mb-1">Innovator</h3>
+              <p class="text-sm text-slate-300 leading-relaxed line-clamp-2">Fondasi logika lewat game interaktif & animasi cerita tanpa mengetik kode rumit.</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 bg-dark-900/50">
+          <div class="mb-5">
+            <span class="text-[10px] uppercase font-bold text-slate-400 mb-2 block">Tools yang Dipakai:</span>
+            <div class="flex gap-2">
+              <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-dark-800 border border-white/10 text-xs font-semibold"><i class="fa-brands fa-linux text-amber-400"></i> Scratch Jr</span>
+              <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-dark-800 border border-white/10 text-xs font-semibold"><i class="fa-solid fa-gamepad text-green-400"></i> CodeMonkey</span>
+            </div>
+          </div>
+          <div class="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/10 mb-6">
+            <span class="text-[10px] uppercase font-bold text-amber-400 mb-1 block"><i class="fa-solid fa-trophy mr-1"></i> Output Karya</span>
+            <p class="text-sm font-semibold">Game Labirin Interaktif & Animasi Dongeng Anak</p>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 py-3 px-4 bg-brand-yellow hover:bg-amber-400 text-dark-900 font-bold text-sm rounded-xl transition-colors">Pilih Program</button>
+            <button class="w-12 h-12 flex items-center justify-center border border-white/20 hover:bg-white/10 rounded-xl transition-colors"><i class="fa-solid fa-download"></i></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="snap-start shrink-0 w-[85vw] max-w-[480px] bg-dark-800 border border-white/10 rounded-3xl overflow-hidden shadow-2xl relative group">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+        <div class="p-6 pb-0 border-b border-white/5 relative">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-[40px] rounded-full"></div>
+          
+          <div class="flex items-center justify-between mb-4 relative z-10">
+            <span class="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold font-mono uppercase rounded-lg">Level 2 • Menengah</span>
+            <span class="text-xs font-bold text-slate-400">Usia 9-11 Thn</span>
+          </div>
+          <div class="flex items-start gap-4 mb-6 relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-2xl shrink-0"><i class="fa-solid fa-rocket"></i></div>
+            <div>
+              <h3 class="text-2xl font-display font-extrabold mb-1">Creator</h3>
+              <p class="text-sm text-slate-300 leading-relaxed line-clamp-2">Membuat game 2D dengan logika percabangan, variabel, dan sensor AI kamera.</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 bg-dark-900/50">
+          <div class="mb-5">
+            <span class="text-[10px] uppercase font-bold text-slate-400 mb-2 block">Tools yang Dipakai:</span>
+            <div class="flex gap-2">
+              <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-dark-800 border border-white/10 text-xs font-semibold"><i class="fa-solid fa-cat text-orange-400"></i> Scratch</span>
+              <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-dark-800 border border-white/10 text-xs font-semibold"><i class="fa-solid fa-robot text-blue-400"></i> PictoBlox AI</span>
+            </div>
+          </div>
+          <div class="p-4 rounded-2xl bg-blue-500/5 border border-blue-500/10 mb-6">
+            <span class="text-[10px] uppercase font-bold text-blue-400 mb-1 block"><i class="fa-solid fa-trophy mr-1"></i> Output Karya</span>
+            <p class="text-sm font-semibold">Game 2D Platformer & Aplikasi Pengenal Wajah</p>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 py-3 px-4 bg-brand-yellow hover:bg-amber-400 text-dark-900 font-bold text-sm rounded-xl transition-colors">Pilih Program</button>
+            <button class="w-12 h-12 flex items-center justify-center border border-white/20 hover:bg-white/10 rounded-xl transition-colors"><i class="fa-solid fa-download"></i></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="snap-start shrink-0 w-[85vw] max-w-[480px] bg-dark-800 border border-white/10 rounded-3xl overflow-hidden shadow-2xl relative group">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-purple-600"></div>
+        <div class="p-6 pb-0 border-b border-white/5 relative">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-[40px] rounded-full"></div>
+          
+          <div class="flex items-center justify-between mb-4 relative z-10">
+            <span class="px-3 py-1 bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-bold font-mono uppercase rounded-lg">Spesialisasi Remaja</span>
+            <span class="text-xs font-bold text-slate-400">Usia 11-17 Thn</span>
+          </div>
+          <div class="flex items-start gap-4 mb-6 relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-400 text-2xl shrink-0"><i class="fa-solid fa-cube"></i></div>
+            <div>
+              <h3 class="text-2xl font-display font-extrabold mb-1">Game Dev 3D</h3>
+              <p class="text-sm text-slate-300 leading-relaxed line-clamp-2">Membangun dunia 3D interaktif dan multiplayer game menggunakan Roblox Studio (Lua).</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 bg-dark-900/50">
+          <div class="mb-5">
+            <span class="text-[10px] uppercase font-bold text-slate-400 mb-2 block">Tools yang Dipakai:</span>
+            <div class="flex gap-2">
+              <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-dark-800 border border-white/10 text-xs font-semibold"><i class="fa-solid fa-cubes text-slate-200"></i> Roblox Studio</span>
+              <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-dark-800 border border-white/10 text-xs font-semibold"><i class="fa-solid fa-code text-purple-400"></i> Lua Script</span>
+            </div>
+          </div>
+          <div class="p-4 rounded-2xl bg-purple-500/5 border border-purple-500/10 mb-6">
+            <span class="text-[10px] uppercase font-bold text-purple-400 mb-1 block"><i class="fa-solid fa-trophy mr-1"></i> Output Karya</span>
+            <p class="text-sm font-semibold">Game Roblox Multiplayer yang Siap Dimainkan Teman</p>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 py-3 px-4 bg-brand-yellow hover:bg-amber-400 text-dark-900 font-bold text-sm rounded-xl transition-colors">Pilih Program</button>
+            <button class="w-12 h-12 flex items-center justify-center border border-white/20 hover:bg-white/10 rounded-xl transition-colors"><i class="fa-solid fa-download"></i></button>
+          </div>
+        </div>
+      </article>
+      
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- OPSI 2: BENTO GRID (Highly Visual & Asymmetric) -->
+<!-- ========================================== -->
+<section id="opsi-2" class="py-24 border-b border-white/10 bg-dark-800/30">
+  <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
+    <div class="text-[11px] font-mono text-emerald-400 mb-4 uppercase tracking-widest">Opsi 2 — Bento Grid</div>
+    <div class="mb-12">
+      <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Program Unggulan.</h2>
+      <p class="text-slate-300 max-w-2xl">Layout bento bergaya modern yang asimetris. Menonjolkan hierarki visual, dengan program utama berukuran lebih besar dibanding program pendukung.</p>
+    </div>
+
+    <!-- Bento Grid Container -->
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[240px]">
+      
+      <!-- Big Bento (Span 2x2) -->
+      <div class="bento-card md:col-span-2 md:row-span-2 rounded-3xl bg-dark-800 border border-white/10 p-6 sm:p-8 flex flex-col relative overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#0788F5]/10 to-transparent"></div>
+        <div class="absolute top-8 right-8 w-40 h-40 bg-[#0788F5]/20 blur-[60px] rounded-full"></div>
+        
+        <div class="relative z-10 flex flex-wrap gap-2 mb-auto">
+          <span class="px-3 py-1 bg-white/10 text-white text-[10px] font-bold rounded-full backdrop-blur-md">Usia 9-11 Thn</span>
+          <span class="px-3 py-1 bg-[#0788F5]/20 text-[#38BDF8] border border-[#0788F5]/30 text-[10px] font-bold font-mono uppercase rounded-full">Fondasi Level 2</span>
+        </div>
+        
+        <div class="relative z-10 mt-12">
+          <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-[#0788F5] to-blue-700 flex items-center justify-center shadow-lg"><i class="fa-solid fa-rocket text-2xl text-white"></i></div>
+          <h3 class="font-display text-3xl sm:text-4xl font-extrabold mb-3">Creator Class</h3>
+          <p class="text-slate-300 max-w-md mb-8">Membuat game 2D kompleks dan mengenal kecerdasan buatan (AI) lewat block programming.</p>
+          <div class="flex items-center gap-4">
+            <button class="px-6 py-3 bg-white text-dark-900 font-bold rounded-xl hover:bg-slate-200 transition-colors">Daftar Sekarang</button>
+            <div class="flex -space-x-3">
+              <div class="w-10 h-10 rounded-full border-2 border-dark-800 bg-white flex items-center justify-center"><i class="fa-solid fa-cat text-orange-500"></i></div>
+              <div class="w-10 h-10 rounded-full border-2 border-dark-800 bg-white flex items-center justify-center"><i class="fa-solid fa-robot text-blue-500"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medium Bento (Span 2x1) -->
+      <div class="bento-card md:col-span-2 lg:col-span-2 rounded-3xl bg-dark-800 border border-white/10 p-6 flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent"></div>
+        <div class="flex justify-between items-start relative z-10">
+          <div>
+            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 border border-purple-500/30 text-[10px] font-bold font-mono uppercase rounded-full mb-3 inline-block">Spesialisasi</span>
+            <h3 class="font-display text-2xl font-extrabold">Game Dev 3D</h3>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center"><i class="fa-solid fa-cube text-purple-400 text-xl"></i></div>
+        </div>
+        <div class="relative z-10 flex justify-between items-end">
+          <p class="text-sm text-slate-300 max-w-[200px]">Ciptakan game Roblox multiplayer pertamamu.</p>
+          <button class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md transition-colors"><i class="fa-solid fa-arrow-right text-white"></i></button>
+        </div>
+      </div>
+      
+      <!-- Small Bento 1 -->
+      <div class="bento-card rounded-3xl bg-amber-500/10 border border-amber-500/20 p-6 flex flex-col justify-between relative overflow-hidden group/card">
+        <div class="relative z-10">
+          <span class="px-3 py-1 bg-amber-500/20 text-amber-400 text-[10px] font-bold font-mono uppercase rounded-full mb-3 inline-block">Level 1</span>
+          <h3 class="font-display text-xl font-extrabold text-amber-400">Innovator</h3>
+          <p class="text-xs text-slate-300 mt-2">Fondasi untuk usia 6-8 tahun.</p>
+        </div>
+        <div class="relative z-10 text-right">
+          <i class="fa-solid fa-lightbulb text-4xl text-amber-500/20 group-hover/card:scale-110 transition-transform origin-bottom-right"></i>
+        </div>
+      </div>
+      
+      <!-- Small Bento 2 -->
+      <div class="bento-card rounded-3xl bg-pink-500/10 border border-pink-500/20 p-6 flex flex-col justify-between relative overflow-hidden group/card">
+        <div class="relative z-10">
+          <span class="px-3 py-1 bg-pink-500/20 text-pink-400 text-[10px] font-bold font-mono uppercase rounded-full mb-3 inline-block">Desain</span>
+          <h3 class="font-display text-xl font-extrabold text-pink-400">Digital Art</h3>
+          <p class="text-xs text-slate-300 mt-2">Canva & Figma untuk anak.</p>
+        </div>
+        <div class="relative z-10 text-right">
+          <i class="fa-solid fa-palette text-4xl text-pink-500/20 group-hover/card:scale-110 transition-transform origin-bottom-right"></i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- OPSI 3: LIST EXPANDABLE (Clean & Professional) -->
+<!-- ========================================== -->
+<section id="opsi-3" class="py-24 border-b border-white/10 relative">
+  <div class="max-w-[900px] mx-auto px-4 sm:px-6 relative z-10">
+    <div class="text-[11px] font-mono text-purple-400 mb-4 uppercase tracking-widest text-center">Opsi 3 — Expandable List</div>
+    <div class="mb-12 text-center">
+      <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Katalog Kurikulum.</h2>
+      <p class="text-slate-300 max-w-2xl mx-auto">Layout berpusat pada teks yang bersih. Cocok untuk orang tua yang ingin membaca spesifikasi kurikulum secara rinci tanpa banyak gambar memecah fokus.</p>
+    </div>
+
+    <div class="space-y-4">
+      
+      <!-- Accordion Item 1 -->
+      <div class="accordion-item bg-dark-800 border border-white/10 rounded-2xl overflow-hidden active">
+        <!-- Header -->
+        <button class="w-full px-6 py-5 flex items-center justify-between bg-white/[0.02] hover:bg-white/5 transition-colors text-left" onclick="this.parentElement.classList.toggle('active')">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-lightbulb"></i></div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="text-lg font-bold">1. Innovator (Fondasi Level 1)</h3>
+                <span class="px-2 py-0.5 bg-white/10 text-[10px] font-bold rounded">Usia 6-8</span>
+              </div>
+              <p class="text-xs text-slate-400">Pengenalan algoritma dasar lewat game puzzle.</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+        </button>
+        <!-- Content -->
+        <div class="accordion-content border-t border-white/5">
+          <div class="p-6 bg-dark-900/30">
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-3">Target Pembelajaran</h4>
+                <ul class="space-y-2 text-sm text-slate-300">
+                  <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-500 mt-1"></i> Memahami konsep sekuensial (urutan)</li>
+                  <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-500 mt-1"></i> Logika perulangan (looping) sederhana</li>
+                  <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-500 mt-1"></i> Membuat animasi dari karakter gambar</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-3">Tools & Hasil</h4>
+                <div class="flex gap-2 mb-3">
+                  <span class="px-2.5 py-1 bg-dark-800 border border-white/10 text-xs rounded-md">Scratch Jr</span>
+                  <span class="px-2.5 py-1 bg-dark-800 border border-white/10 text-xs rounded-md">CodeMonkey</span>
+                </div>
+                <div class="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs text-amber-200">
+                  <strong>Output:</strong> Aplikasi game labirin anak & buku cerita interaktif digital.
+                </div>
+              </div>
+            </div>
+            <div class="mt-6 pt-5 border-t border-white/10 flex justify-end gap-3">
+              <button class="px-4 py-2 border border-white/20 hover:bg-white/10 rounded-lg text-sm font-bold transition-colors">Unduh Silabus</button>
+              <button class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-dark-900 rounded-lg text-sm font-bold transition-colors">Daftar Kelas Ini</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion Item 2 -->
+      <div class="accordion-item bg-dark-800 border border-white/10 rounded-2xl overflow-hidden">
+        <!-- Header -->
+        <button class="w-full px-6 py-5 flex items-center justify-between bg-white/[0.02] hover:bg-white/5 transition-colors text-left" onclick="this.parentElement.classList.toggle('active')">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-rocket"></i></div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="text-lg font-bold">2. Creator (Fondasi Level 2)</h3>
+                <span class="px-2 py-0.5 bg-white/10 text-[10px] font-bold rounded">Usia 9-11</span>
+              </div>
+              <p class="text-xs text-slate-400">Pembuatan game 2D & logika percabangan.</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+        </button>
+        <!-- Content -->
+        <div class="accordion-content border-t border-white/5">
+          <div class="p-6 bg-dark-900/30">
+            <p class="text-slate-300 text-sm mb-4">Konten detail untuk program Creator. (Format sama seperti di atas).</p>
+            <button class="px-4 py-2 bg-blue-500 hover:bg-blue-400 text-white rounded-lg text-sm font-bold transition-colors">Daftar Kelas Ini</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ========================================== -->
+<!-- OPSI 4: MASTER-DETAIL SPLIT VIEW -->
+<!-- ========================================== -->
+<section id="opsi-4" class="py-24 border-b border-white/10 bg-dark-900 relative">
+  <div class="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10">
+    <div class="text-[11px] font-mono text-emerald-400 mb-4 uppercase tracking-widest text-center md:text-left">Opsi 4 — Split View (Master-Detail)</div>
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div class="max-w-2xl">
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Eksplorasi Mendalam.</h2>
+        <p class="text-slate-300">Layout profesional bergaya dashboard. Pilih program di panel kiri untuk melihat silabus lengkap dan hasil karya di panel kanan tanpa perlu berpindah halaman.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8 items-start">
+      <!-- Left Panel: Course List -->
+      <div class="w-full lg:w-1/3 flex flex-col gap-3">
+        <!-- List Item 1 -->
+        <button class="opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-amber-500/50 bg-amber-500/10" data-target="opsi4-detail-1">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-lightbulb"></i></div>
+            <div>
+              <h3 class="font-bold text-white text-lg">Innovator</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Usia 6-8 Tahun • Level 1</p>
+            </div>
+          </div>
+        </button>
+        <!-- List Item 2 -->
+        <button class="opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-white/10 bg-dark-800 hover:bg-white/5" data-target="opsi4-detail-2">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-rocket"></i></div>
+            <div>
+              <h3 class="font-bold text-white text-lg">Creator</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Usia 9-11 Tahun • Level 2</p>
+            </div>
+          </div>
+        </button>
+        <!-- List Item 3 -->
+        <button class="opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-white/10 bg-dark-800 hover:bg-white/5" data-target="opsi4-detail-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-cube"></i></div>
+            <div>
+              <h3 class="font-bold text-white text-lg">Game Dev 3D</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Usia 11-17 Tahun • Remaja</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Right Panel: Course Details (Sticky) -->
+      <div class="w-full lg:w-2/3 lg:sticky lg:top-24">
+        <!-- Detail 1 -->
+        <div id="opsi4-detail-1" class="opsi4-detail bg-dark-800 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden block fade">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+          <div class="relative z-10">
+            <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold font-mono uppercase rounded-lg mb-4">Fondasi Logika</span>
+            <h3 class="font-display text-3xl sm:text-4xl font-extrabold mb-4">Kelas Innovator</h3>
+            <p class="text-slate-300 mb-8 leading-relaxed">Tahap paling awal untuk mengenalkan cara berpikir logis (computational thinking) pada anak usia dini melalui permainan visual dan puzzle animasi interaktif tanpa keharusan mengetik kode rumit.</p>
+            
+            <div class="grid sm:grid-cols-2 gap-6 mb-8">
+              <div>
+                <h4 class="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-3">Software yang Dikuasai</h4>
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-center gap-3 p-3 bg-dark-900 border border-white/5 rounded-xl">
+                    <div class="w-8 h-8 rounded bg-dark-800 p-1 flex items-center justify-center"><img src="assets/tech/scratch.png" class="w-full h-full object-contain"></div>
+                    <div>
+                      <strong class="text-sm block">Scratch Jr</strong>
+                      <span class="text-xs text-slate-400">Blok kode visual intuitif</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3 p-3 bg-dark-900 border border-white/5 rounded-xl">
+                    <div class="w-8 h-8 rounded bg-dark-800 p-1 flex items-center justify-center"><img src="assets/tech/codemonkey.png" class="w-full h-full object-contain"></div>
+                    <div>
+                      <strong class="text-sm block">CodeMonkey</strong>
+                      <span class="text-xs text-slate-400">Game puzzle algoritma</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-[10px] font-mono text-amber-400 uppercase tracking-widest mb-3">Fokus Keterampilan</h4>
+                <ul class="space-y-3 text-sm text-slate-300">
+                  <li class="flex items-start gap-2"><i class="fa-solid fa-check-circle text-amber-500 mt-0.5"></i> Pemahaman Sequence & Algoritma Dasar</li>
+                  <li class="flex items-start gap-2"><i class="fa-solid fa-check-circle text-amber-500 mt-0.5"></i> Koordinasi visual dan motorik halus</li>
+                  <li class="flex items-start gap-2"><i class="fa-solid fa-check-circle text-amber-500 mt-0.5"></i> Kemandirian memecahkan masalah</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-white/10">
+              <button class="px-6 py-3 bg-brand-yellow hover:bg-amber-400 text-dark-900 font-bold rounded-xl transition-colors text-sm text-center">Pilih Program Ini</button>
+              <button class="px-6 py-3 border border-white/20 hover:bg-white/10 text-white font-bold rounded-xl transition-colors text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-download"></i> Unduh Silabus</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail 2 -->
+        <div id="opsi4-detail-2" class="opsi4-detail bg-dark-800 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden hidden fade">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+          <div class="relative z-10">
+            <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-bold font-mono uppercase rounded-lg mb-4">Pemrograman 2D</span>
+            <h3 class="font-display text-3xl sm:text-4xl font-extrabold mb-4">Kelas Creator</h3>
+            <p class="text-slate-300 mb-8 leading-relaxed">Meningkatkan kemampuan nalar logika percabangan, fungsi, dan variabel. Siswa mulai mengintegrasikan kecerdasan buatan (AI) sederhana dan sensor wajah ke dalam karyanya.</p>
+            <div class="flex flex-col sm:flex-row gap-4 pt-6 mt-12 border-t border-white/10">
+              <button class="px-6 py-3 bg-brand-blue hover:bg-blue-400 text-white font-bold rounded-xl transition-colors text-sm text-center">Pilih Program Ini</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail 3 -->
+        <div id="opsi4-detail-3" class="opsi4-detail bg-dark-800 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden hidden fade">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+          <div class="relative z-10">
+            <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-bold font-mono uppercase rounded-lg mb-4">3D World Building</span>
+            <h3 class="font-display text-3xl sm:text-4xl font-extrabold mb-4">Game Dev 3D</h3>
+            <p class="text-slate-300 mb-8 leading-relaxed">Siswa mempelajari environment 3D, physics, dan teks scripting Lua yang sebenarnya. Mereka bisa mempublikasikan gamenya langsung ke platform Roblox untuk dimainkan seluruh dunia.</p>
+            <div class="flex flex-col sm:flex-row gap-4 pt-6 mt-12 border-t border-white/10">
+              <button class="px-6 py-3 bg-purple-500 hover:bg-purple-400 text-white font-bold rounded-xl transition-colors text-sm text-center">Pilih Program Ini</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========================================== -->
+<!-- OPSI 5: IMMERSIVE AWWWARDS STYLE -->
+<!-- ========================================== -->
+<section id="opsi-5" class="py-32 relative bg-[#050505] overflow-hidden border-b border-white/10">
+  <!-- Giant Background Typography -->
+  <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none opacity-[0.02] flex flex-col justify-center overflow-hidden">
+    <h1 class="text-[15vw] font-display font-black leading-none whitespace-nowrap">CURRICULUM</h1>
+  </div>
+  
+  <div class="max-w-[1400px] mx-auto px-6 sm:px-10 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-20">
+      <div>
+        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md mb-6">
+          <span class="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></span>
+          <span class="text-xs font-mono font-bold tracking-[0.2em] text-white/70 uppercase">Opsi 5 — Immersive Layout</span>
+        </div>
+        <h2 class="font-display text-5xl sm:text-7xl lg:text-[5.5rem] font-extrabold tracking-tighter mb-6 leading-[0.95]">
+          Ignite the<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 italic pr-4">Future.</span>
+        </h2>
+      </div>
+      <div class="max-w-xs text-sm text-slate-400 font-mono leading-relaxed pb-2">
+        A premium, high-impact aesthetic heavily inspired by top-tier Dribbble & Awwwards sites. Featuring massive typography, subtle glassmorphism, and bold structural grid.
+      </div>
+    </div>
+
+    <!-- The Grid (Awwwards style: unbalanced, dramatic) -->
+    <div class="grid lg:grid-cols-12 gap-6">
+      
+      <!-- Card 1 -->
+      <div class="lg:col-span-7 group relative rounded-[2.5rem] bg-[#0A0A0A] border border-white/10 overflow-hidden transition-all duration-500 hover:border-white/30 hover:shadow-[0_0_80px_-20px_rgba(236,72,153,0.3)] min-h-[480px] p-10 flex flex-col justify-between cursor-pointer">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-500/20 blur-[100px] rounded-full translate-x-1/3 -translate-y-1/3 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        
+        <div class="relative z-10 flex justify-between items-start">
+          <div class="text-[5rem] font-display font-black leading-none text-white/10 group-hover:text-white/20 transition-colors duration-500">01</div>
+          <div class="flex gap-2">
+            <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/60 backdrop-blur-md">AGE 6-8</span>
+            <span class="px-4 py-2 rounded-full bg-pink-500/20 border border-pink-500/30 text-xs font-mono text-pink-400 backdrop-blur-md">LEVEL 1</span>
+          </div>
+        </div>
+
+        <div class="relative z-10 w-full lg:w-2/3">
+          <h3 class="text-4xl sm:text-5xl font-display font-bold text-white mb-4 tracking-tight group-hover:tracking-normal transition-all duration-500">Innovator</h3>
+          <p class="text-slate-400 mb-8 leading-relaxed">Pengenalan komputasi visual melalui blok-blok warna dan permainan animasi logika. Sebuah pondasi sempurna untuk kreator cilik.</p>
+          
+          <div class="flex items-center gap-4">
+            <button class="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300"><i class="fa-solid fa-arrow-right -rotate-45"></i></button>
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-dark-900 border-2 border-[#0A0A0A] p-2 flex items-center justify-center z-20"><img src="assets/tech/scratch.png" class="w-full h-full object-contain"></div>
+              <div class="w-12 h-12 rounded-full bg-dark-900 border-2 border-[#0A0A0A] p-2 flex items-center justify-center z-10 -ml-4"><img src="assets/tech/codemonkey.png" class="w-full h-full object-contain"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="lg:col-span-5 group relative rounded-[2.5rem] bg-[#0A0A0A] border border-white/10 overflow-hidden transition-all duration-500 hover:border-white/30 hover:shadow-[0_0_80px_-20px_rgba(56,189,248,0.3)] min-h-[480px] p-10 flex flex-col justify-between cursor-pointer">
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-500/20 blur-[100px] rounded-full -translate-x-1/4 translate-y-1/4 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        
+        <div class="relative z-10 flex justify-between items-start">
+          <div class="text-[5rem] font-display font-black leading-none text-white/10 group-hover:text-white/20 transition-colors duration-500">02</div>
+          <span class="px-4 py-2 rounded-full bg-sky-500/20 border border-sky-500/30 text-xs font-mono text-sky-400 backdrop-blur-md">AGE 9-11</span>
+        </div>
+
+        <div class="relative z-10">
+          <h3 class="text-4xl sm:text-5xl font-display font-bold text-white mb-4 tracking-tight group-hover:tracking-normal transition-all duration-500">Creator</h3>
+          <p class="text-slate-400 mb-8 leading-relaxed">Merancang interaksi 2D dan AI dasar. Transformasi pemain menjadi pencipta sesungguhnya.</p>
+          
+          <button class="w-14 h-14 rounded-full border border-white/20 text-white flex items-center justify-center text-xl group-hover:bg-white group-hover:text-black transition-all duration-300"><i class="fa-solid fa-arrow-right -rotate-45"></i></button>
+        </div>
+      </div>
+
+      <!-- Card 3 (Full width cinematic) -->
+      <div class="lg:col-span-12 group relative rounded-[2.5rem] bg-[#0A0A0A] border border-white/10 overflow-hidden transition-all duration-500 hover:border-white/30 hover:shadow-[0_0_80px_-20px_rgba(168,85,247,0.3)] min-h-[380px] p-10 flex flex-col md:flex-row md:items-center justify-between gap-10 cursor-pointer">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-purple-500/20 blur-[120px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+        
+        <div class="relative z-10 flex-1">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="text-[3rem] font-display font-black leading-none text-white/20">03</div>
+            <span class="w-12 h-[1px] bg-white/20"></span>
+            <span class="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/30 text-xs font-mono text-purple-400 backdrop-blur-md">TEENS 11-17</span>
+          </div>
+          <h3 class="text-5xl sm:text-6xl font-display font-bold text-white mb-6 tracking-tight">Game Dev 3D</h3>
+          <p class="text-slate-400 text-lg max-w-xl leading-relaxed">Membangun semesta virtual multiplayer di ekosistem Roblox. Kuasai script Lua, physics, dan world building secara mendalam.</p>
+        </div>
+
+        <div class="relative z-10 shrink-0">
+          <button class="px-8 py-5 rounded-full bg-white text-black font-display font-bold text-lg group-hover:scale-105 transition-transform duration-300 flex items-center gap-3 shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+            Explore Mastery <i class="fa-solid fa-arrow-right -rotate-45"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  // Simple scroll for Opsi 1
+  const track = document.getElementById('track-1');
+  const cardW = 400; // approx
+  document.getElementById('btn-next-1').onclick = () => track.scrollBy({ left: cardW, behavior: 'smooth' });
+  document.getElementById('btn-prev-1').onclick = () => track.scrollBy({ left: -cardW, behavior: 'smooth' });
+
+  // Opsi 4 Logic
+  const opsi4Btns = document.querySelectorAll('.opsi4-btn');
+  const opsi4Details = document.querySelectorAll('.opsi4-detail');
+  
+  opsi4Btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Reset all buttons
+      opsi4Btns.forEach(b => {
+        b.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-white/10 bg-dark-800 hover:bg-white/5';
+      });
+      
+      // Hide all details
+      opsi4Details.forEach(d => {
+        d.classList.remove('block');
+        d.classList.add('hidden');
+      });
+      
+      // Show target detail and style active button
+      const targetId = btn.getAttribute('data-target');
+      const targetElement = document.getElementById(targetId);
+      if(targetElement) {
+        targetElement.classList.remove('hidden');
+        targetElement.classList.add('block');
+        
+        if(targetId === 'opsi4-detail-1') {
+            btn.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-amber-500/50 bg-amber-500/10';
+        } else if(targetId === 'opsi4-detail-2') {
+            btn.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-blue-500/50 bg-blue-500/10';
+        } else {
+            btn.className = 'opsi4-btn w-full text-left p-4 rounded-2xl border transition-all duration-200 border-purple-500/50 bg-purple-500/10';
+        }
+      }
+    });
+  });
+
+</script>
+</body>
+</html>

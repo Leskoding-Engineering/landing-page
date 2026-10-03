@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Pendaftaran</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .fade-swap { animation:fadeSwap .4s ease; }
+  @keyframes fadeSwap { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+  .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .9rem; border-radius:999px; background:#1E293B; border:1px solid rgba(255,255,255,.1); }
+  .btn-submit { display:inline-flex; align-items:center; justify-content:center; gap:.6rem; min-height:48px; background:#FFC83D; color:#111827; font-weight:800; padding:.85rem 2rem; border-radius:.75rem; text-transform:uppercase; letter-spacing:.06em; font-size:.75rem; transition:all .25s; box-shadow:0 4px 20px rgba(255,200,61,.3); }
+  .btn-submit:hover { background:#fed368; transform:translateY(-1px); }
+  .btn-sec { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:48px; border:1px solid rgba(255,255,255,.15); color:#fff; font-weight:700; padding:.85rem 1.5rem; border-radius:.75rem; font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; transition:all .25s; }
+  .btn-sec:hover { background:rgba(255,255,255,.06); }
+  .err { border-color:#F87171 !important; box-shadow:0 0 0 3px rgba(248,113,113,.2) !important; }
+  .shake { animation:shake .4s; } @keyframes shake { 20%,60%{transform:translateX(-6px)} 40%,80%{transform:translateX(6px)} }
+  .choice[aria-checked="true"] { border-color:var(--c); background:color-mix(in srgb,var(--c) 10%,#0F172A); box-shadow:0 0 0 1px var(--c); }
+  .choice[aria-checked="true"] .tick { opacity:1; transform:scale(1); }
+  .choice .tick { opacity:0; transform:scale(.5); transition:all .25s; }
+  .opsi-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem 1rem; margin-bottom:2rem; }
+
+  /* O1 wizard */
+  .wz-panel { display:none; } .wz-panel.active { display:block; animation:fadeSwap .4s ease; }
+  .wz-dot[data-state="done"] { background:#10B981; border-color:#10B981; color:#0B0F19; }
+  .wz-dot[data-state="now"] { background:#FFC83D; border-color:#FFC83D; color:#111827; }
+
+  /* O4 chat */
+  .msg { animation:msgIn .3s cubic-bezier(.2,.9,.3,1.2); }
+  @keyframes msgIn { from{opacity:0; transform:translateY(8px) scale(.97)} to{opacity:1; transform:none} }
+  .typing span { width:6px; height:6px; border-radius:50%; background:#94A3B8; display:inline-block; animation:typing 1s infinite; }
+  .typing span:nth-child(2){animation-delay:.15s} .typing span:nth-child(3){animation-delay:.3s}
+  @keyframes typing { 0%,60%,100%{transform:translateY(0); opacity:.5} 30%{transform:translateY(-4px); opacity:1} }
+
+  /* O5 kartu */
+  .idcard { background:linear-gradient(135deg,#0788F5 0%,#5B0CB5 55%,#0B0F19 100%); }
+  .idcard .val { transition:color .3s; }
+  .idcard .val.empty { color:rgba(255,255,255,.35); }
+  .holo { background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.18) 48%,transparent 60%); background-size:250% 100%; animation:holo 5s linear infinite; }
+  @keyframes holo { from{background-position:150% 0} to{background-position:-100% 0} }
+
+  /* O6 tabs */
+  .mode-tab[aria-selected="true"] { background:#0788F5; border-color:#0788F5; color:#fff; box-shadow:0 0 20px rgba(7,136,245,.3); }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI · Pendaftaran</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Wizard 3 Langkah</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Pratinjau WhatsApp</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Pilih Lab Dulu</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Ngobrol dengan Admin</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Kartu Penjelajah</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Cepat atau Lengkap</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-12 pb-10">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// section: #register · "Start Your Child's Tech Journey"</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">6 cara membuat formulir <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">terasa seperti awal petualangan.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Semua opsi memakai 12 data yang sama (KB §11.3), format pesan WhatsApp yang sama, dan routing admin yang sama (Ubud Peliatan → 0857-9273-6627, Gianyar &amp; Bedulu → 0851-8306-798). Di file eksplorasi ini, tombol kirim menampilkan <b class="text-white">pratinjau pesan dulu</b>, jadi tidak ada pesan uji coba yang terkirim ke admin.</p>
+</header>
+
+<!-- ============================ OPSI 1 · WIZARD ============================ -->
+<section id="opsi-1" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span><h2 class="font-display text-2xl font-extrabold">Wizard 3 Langkah</h2><p class="text-sm text-slate-400 max-w-3xl">12 kolom dipecah jadi 3 langkah pendek dengan progress bar. Ringkasan di samping terisi otomatis, sehingga orang tua tidak merasa sedang mengisi formulir panjang.</p></div>
+    <div class="text-center mb-10">
+      <div class="badge mb-3"><span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span><span class="text-xs font-bold tracking-wider uppercase" data-i18n="reg_badge">Formulir Pendaftaran</span></div>
+      <h3 class="text-3xl md:text-4xl font-bold tracking-tight" data-i18n="reg_title">Mulai Petualangan Belajar</h3>
+      <p class="text-slate-300 text-sm max-w-xl mx-auto mt-3">3 langkah singkat. Konfirmasi jadwal dikirim admin cabang lewat WhatsApp.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <form id="o1-form" class="lg:col-span-8 bg-[#1E293B] border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl" novalidate>
+        <div class="flex items-center gap-3 mb-2" id="o1-dots"></div>
+        <div class="h-1.5 rounded-full bg-white/5 overflow-hidden mb-8"><div id="o1-bar" class="h-full bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC] transition-all duration-500" style="width:33%"></div></div>
+        <div class="wz-panel active" data-step="0">
+          <h4 class="font-bold text-lg mb-1">Di mana dan belajar apa?</h4>
+          <p class="text-xs text-slate-400 mb-5">Pilih lab terdekat dan program yang diminati. Bingung? Pilih "Belum Yakin".</p>
+          <div class="grid sm:grid-cols-3 gap-3 mb-5" data-centers="o1" data-variant="compact"></div>
+          <div class="space-y-5" data-fields="o1:program,promo"></div>
+        </div>
+        <div class="wz-panel" data-step="1">
+          <h4 class="font-bold text-lg mb-1">Tentang si kecil</h4>
+          <p class="text-xs text-slate-400 mb-5">Membantu tutor menyiapkan kelas yang pas.</p>
+          <div class="grid sm:grid-cols-2 gap-5" data-fields="o1:nama,panggilan,usia,sekolah"></div>
+        </div>
+        <div class="wz-panel" data-step="2">
+          <h4 class="font-bold text-lg mb-1">Kontak orang tua / wali</h4>
+          <p class="text-xs text-slate-400 mb-5">Admin cabang akan menghubungi nomor ini untuk konfirmasi jadwal.</p>
+          <div class="grid sm:grid-cols-2 gap-5" data-fields="o1:ortu,email,waOrtu,waAnak,alamat"></div>
+        </div>
+        <div class="flex items-center justify-between gap-3 mt-8 pt-6 border-t border-white/10">
+          <button type="button" id="o1-back" class="btn-sec invisible"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
+          <button type="button" id="o1-next" class="btn-submit">Lanjut <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </form>
+      <aside class="lg:col-span-4 bg-[#0F172A] border border-white/10 rounded-2xl p-6 h-fit lg:sticky lg:top-24">
+        <div class="text-[10px] mono font-bold uppercase tracking-widest text-slate-500 mb-4">Ringkasan pendaftaran</div>
+        <div id="o1-summary" class="space-y-3 text-sm"></div>
+        <div class="mt-6 pt-5 border-t border-white/10 text-xs text-slate-400 flex gap-2"><i class="fa-solid fa-shield-halved text-emerald-400 mt-0.5"></i><span data-i18n="reg_security_note">Data Anda aman dan hanya digunakan untuk konfirmasi jadwal kelas oleh admin resmi LesKoding.</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 2 · PRATINJAU WHATSAPP ============================ -->
+<section id="opsi-2" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span><h2 class="font-display text-2xl font-extrabold">Pratinjau WhatsApp Langsung</h2><p class="text-sm text-slate-400 max-w-3xl">Formulir di kiri, dan di kanan ponsel menampilkan pesan WhatsApp yang sedang tersusun secara langsung, lengkap dengan admin tujuannya. Transparan: orang tua tahu persis apa yang terkirim dan ke siapa.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <form id="o2-form" class="lg:col-span-7 bg-[#1E293B] border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl" novalidate>
+        <div class="badge mb-3"><span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span><span class="text-xs font-bold tracking-wider uppercase">Formulir Pendaftaran</span></div>
+        <h3 class="text-2xl md:text-3xl font-bold tracking-tight">Mulai Petualangan Belajar</h3>
+        <p class="text-slate-400 text-sm mt-2 mb-7">Ketik di sini, lihat pesannya tersusun di sebelah →</p>
+        <label class="text-xs font-bold uppercase tracking-wider text-slate-200 block mb-2">Pilihan Learning Center <span class="text-[#F87171]">*</span></label>
+        <div class="flex flex-wrap gap-2 mb-6" data-centers="o2" data-variant="pill"></div>
+        <div class="grid sm:grid-cols-2 gap-5" data-fields="o2:program*,nama,panggilan,usia,sekolah,ortu,email,waOrtu,waAnak,alamat*,promo*"></div>
+      </form>
+      <div class="lg:col-span-5 lg:sticky lg:top-24 flex flex-col items-center">
+        <div class="w-full max-w-[360px] rounded-[2.5rem] border-[8px] border-[#1E293B] bg-[#0B141A] shadow-2xl overflow-hidden">
+          <div class="flex items-center gap-3 px-4 pt-8 pb-3 bg-[#1E293B]">
+            <div class="w-9 h-9 rounded-full bg-[#FFC83D] text-[#111827] flex items-center justify-center font-black text-xs">LK</div>
+            <div class="flex-1 min-w-0"><div class="text-sm font-bold truncate" id="o2-admin">Admin LesKoding</div><div class="text-[11px] text-slate-400 mono" id="o2-num">pilih lab dulu</div></div>
+            <i class="fa-brands fa-whatsapp text-emerald-400 text-xl"></i>
+          </div>
+          <div class="h-[440px] overflow-y-auto p-3 flex flex-col justify-end" style="background-color:#0B141A; background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px); background-size:14px 14px">
+            <div class="self-end max-w-[92%] bg-[#065F46] rounded-xl rounded-tr-sm px-3 py-2 text-[12px] leading-relaxed whitespace-pre-wrap" id="o2-bubble"></div>
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2.5 bg-[#1E293B]"><div class="flex-1 rounded-full bg-[#0B0F19] text-slate-500 text-xs px-4 py-2.5">Pesan siap dikirim</div><button type="button" id="o2-send" class="w-10 h-10 rounded-full bg-emerald-500 text-[#0B0F19] flex items-center justify-center" aria-label="Kirim"><i class="fa-solid fa-paper-plane text-sm"></i></button></div>
+        </div>
+        <button type="button" id="o2-submit" class="btn-submit mt-6 w-full max-w-[360px]"><i class="fa-brands fa-whatsapp text-base"></i> Kirim via WhatsApp</button>
+        <div class="text-xs text-slate-400 mt-3" id="o2-progress"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 3 · PILIH LAB DULU ============================ -->
+<section id="opsi-3" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span><h2 class="font-display text-2xl font-extrabold">Pilih Lab Dulu</h2><p class="text-sm text-slate-400 max-w-3xl">Keputusan terbesar orang tua (lokasi) dijadikan langkah pertama yang visual. Setelah lab dipilih, formulir terbuka di bawahnya dengan banner lab terpilih dan nomor admin yang akan menghubungi.</p></div>
+    <div class="text-center mb-10">
+      <div class="badge mb-3"><i class="fa-solid fa-map-location-dot text-[#38BDF8] text-xs"></i><span class="text-xs font-bold tracking-wider uppercase">3 Learning Center di Bali</span></div>
+      <h3 class="text-3xl md:text-4xl font-bold tracking-tight">Mulai dari lab terdekat dengan rumah Anda.</h3>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5" data-centers="o3" data-variant="big"></div>
+    <div id="o3-formwrap" class="hidden mt-8">
+      <form id="o3-form" class="bg-[#1E293B] border border-white/10 rounded-2xl overflow-hidden shadow-2xl" novalidate>
+        <div id="o3-banner" class="px-6 md:px-8 py-5 border-b border-white/10 flex flex-wrap items-center justify-between gap-3"></div>
+        <div class="p-6 md:p-8">
+          <div class="grid sm:grid-cols-2 gap-5" data-fields="o3:program*,nama,panggilan,usia,sekolah,ortu,email,waOrtu,waAnak,alamat*,promo*"></div>
+          <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-xs text-slate-400"><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i>Data hanya untuk konfirmasi jadwal oleh admin resmi LesKoding.</p>
+            <button type="submit" class="btn-submit w-full sm:w-auto"><i class="fa-brands fa-whatsapp text-base"></i> Kirim via WhatsApp</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 4 · NGOBROL DENGAN ADMIN ============================ -->
+<section id="opsi-4" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span><h2 class="font-display text-2xl font-extrabold">Ngobrol dengan Admin</h2><p class="text-sm text-slate-400 max-w-3xl">Formulir berbentuk percakapan. Satu pertanyaan muncul setiap kali, dan pilihan lab atau program tampil sebagai tombol. Terasa seperti chat, bukan mengisi formulir, dan cocok dengan saluran pendaftaran yang memang lewat WhatsApp.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <div class="lg:col-span-4">
+        <div class="badge mb-3"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span class="text-xs font-bold tracking-wider uppercase">Formulir Pendaftaran</span></div>
+        <h3 class="text-3xl md:text-4xl font-bold tracking-tight leading-tight">Mulai petualangan belajar, <span class="text-[#FFC83D]">semudah ngobrol.</span></h3>
+        <p class="text-slate-300 text-sm mt-4">Jawab beberapa pertanyaan singkat, lalu kami rangkum jadi pesan WhatsApp untuk admin cabang Anda.</p>
+        <div class="mt-6"><div class="flex justify-between text-xs text-slate-400 mb-1.5"><span>Progres</span><span id="o4-count">0/12</span></div><div class="h-1.5 rounded-full bg-white/5 overflow-hidden"><div id="o4-bar" class="h-full bg-emerald-400 transition-all duration-500" style="width:0"></div></div></div>
+        <button id="o4-restart" class="mt-5 text-xs font-bold text-slate-400 hover:text-white"><i class="fa-solid fa-rotate-right mr-1"></i>Ulangi dari awal</button>
+      </div>
+      <div class="lg:col-span-8 rounded-3xl bg-[#1E293B] border border-white/10 overflow-hidden shadow-2xl">
+        <div class="flex items-center gap-3 px-5 py-3.5 border-b border-white/10">
+          <div class="w-9 h-9 rounded-full bg-[#FFC83D] text-[#111827] flex items-center justify-center font-black text-xs">LK</div>
+          <div><div class="text-sm font-bold">Asisten Pendaftaran</div><div class="text-[11px] text-emerald-400" id="o4-status">online</div></div>
+        </div>
+        <div id="o4-body" class="h-[440px] overflow-y-auto p-4 space-y-3 bg-[#0B0F19]/60"></div>
+        <div id="o4-input" class="border-t border-white/10 p-3 bg-[#1E293B]"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 5 · KARTU PENJELAJAH ============================ -->
+<section id="opsi-5" class="py-16 md:py-24 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1200px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span><h2 class="font-display text-2xl font-extrabold">Kartu Penjelajah</h2><p class="text-sm text-slate-400 max-w-3xl">Saat data anak diisi, sebuah "Kartu Penjelajah LesKoding" terbentuk secara langsung: nama, usia, program, dan lab. Mengisi formulir terasa seperti membuat kartu anggota untuk si kecil.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <div class="lg:col-span-5 lg:sticky lg:top-24 order-first lg:order-last">
+        <div class="badge mb-3"><span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span><span class="text-xs font-bold tracking-wider uppercase">Formulir Pendaftaran</span></div>
+        <h3 class="text-3xl md:text-4xl font-bold tracking-tight leading-tight">Buat kartu penjelajah <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">pertamanya.</span></h3>
+        <div id="o5-card" class="mt-7"></div>
+        <div class="mt-5 flex items-center gap-3"><div class="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden"><div id="o5-bar" class="h-full bg-[#FFC83D] transition-all duration-500" style="width:0"></div></div><span class="text-xs text-slate-400 mono" id="o5-count">0/10 wajib</span></div>
+      </div>
+      <form id="o5-form" class="lg:col-span-7 bg-[#1E293B] border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl" novalidate>
+        <label class="text-xs font-bold uppercase tracking-wider text-slate-200 block mb-2">Pilihan Learning Center <span class="text-[#F87171]">*</span></label>
+        <div class="grid sm:grid-cols-3 gap-3 mb-6" data-centers="o5" data-variant="compact"></div>
+        <div class="grid sm:grid-cols-2 gap-5" data-fields="o5:program*,nama,panggilan,usia,sekolah,ortu,email,waOrtu,waAnak,alamat*,promo*"></div>
+        <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-xs text-slate-400"><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i>Kartu ini pratinjau; data dikirim ke admin lewat WhatsApp.</p>
+          <button type="submit" class="btn-submit w-full sm:w-auto"><i class="fa-brands fa-whatsapp text-base"></i> Kirim via WhatsApp</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 6 · CEPAT ATAU LENGKAP ============================ -->
+<section id="opsi-6" class="py-16 md:py-24 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[900px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span><h2 class="font-display text-2xl font-extrabold">Cepat atau Lengkap</h2><p class="text-sm text-slate-400 max-w-3xl">Dua jalur. <b class="text-white">Cepat</b> cukup 5 data inti, dan sisanya dilengkapi bersama admin di WhatsApp. <b class="text-white">Lengkap</b> berisi 12 data seperti sekarang. Mengurangi orang tua yang batal karena formulirnya terlihat panjang.</p></div>
+    <div class="text-center mb-8">
+      <div class="badge mb-3"><span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span><span class="text-xs font-bold tracking-wider uppercase" data-i18n="reg_badge">Formulir Pendaftaran</span></div>
+      <h3 class="text-3xl md:text-4xl font-bold tracking-tight" data-i18n="reg_title">Mulai Petualangan Belajar</h3>
+    </div>
+    <div class="grid grid-cols-2 gap-3 max-w-lg mx-auto mb-8" role="tablist">
+      <button class="mode-tab rounded-2xl border border-white/10 px-4 py-3 text-left transition" role="tab" data-mode="quick" aria-selected="true">
+        <div class="text-sm font-bold"><i class="fa-solid fa-bolt text-[#FFC83D] mr-1.5"></i>Cepat</div><div class="text-[11px] text-slate-300 mt-0.5">5 data · sisanya via WA</div>
+      </button>
+      <button class="mode-tab rounded-2xl border border-white/10 px-4 py-3 text-left transition" role="tab" data-mode="full" aria-selected="false">
+        <div class="text-sm font-bold"><i class="fa-solid fa-list-check text-[#38BDF8] mr-1.5"></i>Lengkap</div><div class="text-[11px] text-slate-300 mt-0.5">12 data · langsung tuntas</div>
+      </button>
+    </div>
+    <form id="o6-form" class="bg-[#1E293B] border border-white/10 rounded-2xl p-6 md:p-10 shadow-2xl" novalidate>
+      <label class="text-xs font-bold uppercase tracking-wider text-slate-200 block mb-2">Pilihan Learning Center <span class="text-[#F87171]">*</span></label>
+      <div class="flex flex-wrap gap-2 mb-6" data-centers="o6" data-variant="pill"></div>
+      <div class="grid sm:grid-cols-2 gap-5" data-fields="o6:program*,panggilan,usia,waOrtu,nama,sekolah,ortu,email,waAnak,alamat*,promo*"></div>
+      <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-slate-400" id="o6-note"></p>
+        <button type="submit" class="btn-submit w-full sm:w-auto"><i class="fa-brands fa-whatsapp text-base"></i> Kirim via WhatsApp</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ============================ PERBANDINGAN ============================ -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <h2 class="font-display text-2xl md:text-3xl font-extrabold mb-6">Perbandingan cepat</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[780px]">
+        <thead class="bg-[#1E293B] text-left text-xs uppercase tracking-wider text-slate-400">
+          <tr><th class="p-4">Opsi</th><th class="p-4">Mengurangi friksi dengan</th><th class="p-4">Kelebihan</th><th class="p-4">Catatan</th><th class="p-4">Effort</th></tr>
+        </thead>
+        <tbody class="divide-y divide-white/5 text-slate-300">
+          <tr><td class="p-4 font-bold text-white">1 · Wizard 3 Langkah</td><td class="p-4">Memecah formulir</td><td class="p-4">Terasa pendek, ada ringkasan</td><td class="p-4">Pola paling aman & familiar</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">2 · Pratinjau WhatsApp</td><td class="p-4">Transparansi</td><td class="p-4">Orang tua tahu persis apa yang dikirim & ke siapa</td><td class="p-4">Paling jujur & menenangkan</td><td class="p-4">Rendah–sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">3 · Pilih Lab Dulu</td><td class="p-4">Keputusan besar di depan</td><td class="p-4">Langsung terhubung ke cabang</td><td class="p-4">Cocok jika lokasi faktor utama</td><td class="p-4">Rendah</td></tr>
+          <tr><td class="p-4 font-bold text-white">4 · Ngobrol dengan Admin</td><td class="p-4">Satu pertanyaan per waktu</td><td class="p-4">Paling ramah & personal</td><td class="p-4">Lebih lambat untuk pengguna yang ingin cepat</td><td class="p-4">Sedang–tinggi</td></tr>
+          <tr><td class="p-4 font-bold text-white">5 · Kartu Penjelajah</td><td class="p-4">Hadiah visual saat mengisi</td><td class="p-4">Paling menyenangkan & berkesan</td><td class="p-4">Kartu hanya pratinjau</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">6 · Cepat atau Lengkap</td><td class="p-4">Memangkas jumlah kolom</td><td class="p-4">Konversi terbaik untuk yang ragu</td><td class="p-4">Perlu persetujuan tim (admin melengkapi data via WA)</td><td class="p-4">Rendah</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-xs text-slate-500 mt-4"><i class="fa-solid fa-bug mr-1 text-[#F87171]"></i>Catatan untuk index.html: handler submit di <code class="mono">app.js</code> saat ini tidak memasukkan "Program yang Dipilih" ke pesan WhatsApp, padahal ada di formulir dan template KB. Semua opsi di sini sudah menyertakannya.</p>
+  </div>
+</section>
+
+<!-- Modal pratinjau kirim -->
+<div id="preview" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#0B0F19]/85 backdrop-blur-md">
+  <div class="w-full max-w-md bg-[#1E293B] border border-white/10 rounded-3xl overflow-hidden shadow-2xl fade-swap">
+    <div class="px-6 py-4 border-b border-white/10 flex items-center gap-3">
+      <i class="fa-brands fa-whatsapp text-emerald-400 text-2xl"></i>
+      <div class="flex-1"><div class="text-sm font-bold">Siap dikirim ke <span id="pv-admin"></span></div><div class="text-xs text-slate-400 mono" id="pv-num"></div></div>
+      <button id="pv-close" class="w-8 h-8 rounded-full hover:bg-white/10" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <pre id="pv-msg" class="px-6 py-4 text-[12px] leading-relaxed whitespace-pre-wrap text-slate-200 max-h-[50vh] overflow-y-auto font-sans"></pre>
+    <div class="px-6 py-4 border-t border-white/10 flex flex-col sm:flex-row gap-3">
+      <button id="pv-edit" class="btn-sec flex-1">Ubah data</button>
+      <a id="pv-wa" target="_blank" rel="noopener" class="btn-submit flex-1"><i class="fa-brands fa-whatsapp text-base"></i> Buka WhatsApp</a>
+    </div>
+    <p class="px-6 pb-4 text-[10px] text-slate-500">Mode eksplorasi: pesan baru terkirim jika Anda menekan "Buka WhatsApp" lalu kirim di aplikasi.</p>
+  </div>
+</div>
+
+<script>
+/* ===================== DATA & LOGIKA BERSAMA (sesuai app.js + KB §11) ===================== */
+const CENTERS = [
+  { id:'gianyar', value:'Gents Robotic & Coding (Gianyar)', short:'Gianyar', addr:'Jln Ksatrian No 8, Lingkungan Candi Baru, Gianyar', icon:'fa-microchip', c:'#38BDF8', maps:'https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar' },
+  { id:'ubud', value:'Bali Seed Robotic & Coding Peliatan (Ubud)', short:'Ubud Peliatan', addr:'Jalan Peliatan No. 1, Ubud', icon:'fa-laptop-code', c:'#C084FC', maps:'https://maps.google.com/?q=Jalan+Peliatan+No+1+Ubud' },
+  { id:'bedulu', value:'Bali Seed Bedulu Robotics & Coding', short:'Bedulu', addr:'Jln Raya Semebaung, Bedulu, Blahbatuh', icon:'fa-robot', c:'#FFC83D', maps:'https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu' },
+];
+const adminFor = center => center.includes('Peliatan')
+  ? { wa:'6285792736627', label:'Admin Ubud Peliatan', pretty:'0857-9273-6627' }
+  : { wa:'628518306798', label:'Admin Gianyar & Bedulu', pretty:'0851-8306-798' };
+const PROGRAM_GROUPS = [
+  ['Program Anak (Fondasi Coding & Kreativitas)', [['Innovator (6-8 Tahun)', 'Innovator (6–8 Thn) — Coding Visual & Logika Awal'], ['Beginner (8-11 Tahun)', 'Beginner (8–11 Thn) — Scratch & Game Kreatif'], ['Intermediate (10-14 Tahun)', 'Intermediate (10–14 Thn) — Logika Lanjut & AI Dasar']]],
+  ['Skill Digital Praktis', [['Komputer Dasar (8-14 Tahun)', 'Komputer Dasar (8–14 Thn) — Word, Excel, PPT & Ketik'], ['Desain Grafis (9-14 Tahun)', 'Desain Grafis (9–14 Thn) — Canva, Figma & UI Kreator']]],
+  ['Program Remaja (Spesialisasi Coding & Teknologi)', [['Advance 1: Game Dev (11-17 Tahun)', 'Game Developer (11–17 Thn) — Roblox, Construct & Game Lab'], ['Advance 2: Web Dev (11-17 Tahun)', 'Junior Web Dev (11–17 Thn) — HTML, CSS, JavaScript'], ['Advance 3: Robotika & IoT (11-17 Tahun)', 'Robotika & IoT (11–17 Thn) — Arduino & Sensor Pintar'], ['Advance 4: Apps Dev (11-17 Tahun)', 'Apps Developer (11–17 Thn) — App Inventor & Flutter Mobile']]],
+  ['Layanan Konsultasi', [['Belum Yakin (Konsultasi Minat & Bakat)', 'Belum Yakin — Ingin Konsultasi / Tes Minat Terlebih Dahulu']]],
+];
+const FIELDS = {
+  program:  { l:'Program Belajar yang Dipilih', t:'program', r:true, icon:'fa-graduation-cap' },
+  promo:    { l:'Kode / Nama Promo (Opsional)', ph:'contoh: PETUALANGAN2026', icon:'fa-ticket' },
+  nama:     { l:'Nama Lengkap Siswa', r:true, ph:'Nama lengkap anak' },
+  panggilan:{ l:'Nama Panggilan', r:true, ph:'Nama panggilan' },
+  usia:     { l:'Usia Anak', r:true, ph:'contoh: 9 tahun' },
+  sekolah:  { l:'Asal Sekolah', r:true, ph:'Nama sekolah' },
+  ortu:     { l:'Nama Orang Tua / Wali', r:true, ph:'Nama orang tua / wali' },
+  email:    { l:'Email Orang Tua', t:'email', r:true, ph:'nama@email.com' },
+  alamat:   { l:'Alamat Domisili', t:'textarea', r:true, ph:'Alamat lengkap' },
+  waOrtu:   { l:'WhatsApp Orang Tua', t:'tel', r:true, ph:'08xx xxxx xxxx' },
+  waAnak:   { l:'WhatsApp Anak (Opsional)', t:'tel', ph:'08xx xxxx xxxx' },
+};
+const REQUIRED = ['center', 'program', 'nama', 'panggilan', 'usia', 'sekolah', 'ortu', 'email', 'alamat', 'waOrtu'];
+const INPUT = 'w-full bg-[#0F172A] border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0788F5]/20 focus:border-[#0788F5] transition-all placeholder-slate-500';
+const LABEL = 'text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2';
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esc = s => String(s ?? '').replace(/[&<>"]/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[ch]));
+
+const programOptions = () => `<option value="" disabled selected>-- Pilih Program Belajar --</option>` +
+  PROGRAM_GROUPS.map(([g, opts]) => `<optgroup label="${g}">${opts.map(([v, l]) => `<option value="${v}">${l}</option>`).join('')}</optgroup>`).join('');
+function fieldHTML(p, k, full) {
+  const f = FIELDS[k], id = `${p}-${k}`, req = f.r ? ' <span class="text-[#F87171]">*</span>' : '';
+  const ctrl = f.t === 'program'
+    ? `<div class="relative"><select id="${id}" data-k="${k}" class="${INPUT} appearance-none pr-10">${programOptions()}</select><i class="fa-solid fa-chevron-down text-xs text-slate-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"></i></div>`
+    : f.t === 'textarea' ? `<textarea id="${id}" data-k="${k}" rows="2" class="${INPUT}" placeholder="${f.ph}"></textarea>`
+    : `<input id="${id}" data-k="${k}" type="${f.t || 'text'}" class="${INPUT}" placeholder="${f.ph}">`;
+  return `<div class="space-y-1.5 ${full ? 'sm:col-span-2' : ''}" data-wrap="${k}"><label for="${id}" class="${LABEL}">${f.icon ? `<i class="fa-solid ${f.icon} text-[#38BDF8]"></i>` : ''}${f.l}${req}</label>${ctrl}</div>`;
+}
+// Render semua [data-fields="prefix:a,b*,c"] (* = lebar penuh)
+document.querySelectorAll('[data-fields]').forEach(el => {
+  const [p, list] = el.dataset.fields.split(':');
+  el.innerHTML = list.split(',').map(x => fieldHTML(p, x.replace('*', ''), x.endsWith('*'))).join('');
+});
+// Render pilihan lab
+function renderCenters(el) {
+  const p = el.dataset.centers, v = el.dataset.variant;
+  el.innerHTML = `<input type="hidden" id="${p}-center" data-k="center">` + CENTERS.map(c => {
+    const common = `type="button" role="radio" aria-checked="false" data-center="${c.id}" style="--c:${c.c}"`;
+    if (v === 'pill') return `<button ${common} class="choice inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-700 bg-[#0F172A] text-sm font-bold transition"><i class="fa-solid ${c.icon}" style="color:${c.c}"></i>${c.short}<i class="tick fa-solid fa-circle-check text-xs" style="color:${c.c}"></i></button>`;
+    if (v === 'big') {
+      const a = adminFor(c.value);
+      return `<button ${common} class="choice relative text-left rounded-3xl border border-white/10 bg-[#1E293B] p-6 transition hover:-translate-y-1 group">
+        <i class="tick fa-solid fa-circle-check absolute top-5 right-5 text-xl" style="color:${c.c}"></i>
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5" style="background:${c.c}22; border:1px solid ${c.c}55; color:${c.c}"><i class="fa-solid ${c.icon}"></i></div>
+        <div class="text-[10px] mono font-bold uppercase tracking-widest" style="color:${c.c}">${c.short}</div>
+        <div class="font-bold text-lg leading-tight mt-1">${c.value}</div>
+        <div class="text-xs text-slate-400 mt-2 flex gap-1.5"><i class="fa-solid fa-location-dot mt-0.5"></i>${c.addr}</div>
+        <div class="text-xs text-slate-400 mt-1 flex gap-1.5"><i class="fa-brands fa-whatsapp mt-0.5 text-emerald-400"></i>${a.pretty}</div>
+        <div class="flex items-center justify-between mt-5 pt-4 border-t border-white/10">
+          <a href="${c.maps}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="text-xs font-bold text-slate-300 hover:text-white"><i class="fa-solid fa-route mr-1"></i>Rute</a>
+          <span class="text-xs font-extrabold uppercase tracking-wider" style="color:${c.c}">Pilih lab ini →</span>
+        </div>
+      </button>`;
+    }
+    return `<button ${common} class="choice relative text-left rounded-xl border border-slate-700 bg-[#0F172A] p-3.5 transition">
+      <i class="tick fa-solid fa-circle-check absolute top-3 right-3 text-sm" style="color:${c.c}"></i>
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center mb-2.5" style="background:${c.c}22; color:${c.c}"><i class="fa-solid ${c.icon}"></i></div>
+      <div class="text-sm font-bold">${c.short}</div><div class="text-[11px] text-slate-400 leading-snug mt-0.5">${c.addr}</div>
+    </button>`;
+  }).join('');
+  el.addEventListener('click', e => {
+    const b = e.target.closest('[data-center]'); if (!b) return;
+    el.querySelectorAll('[data-center]').forEach(x => x.setAttribute('aria-checked', x === b));
+    const c = CENTERS.find(x => x.id === b.dataset.center);
+    const hidden = document.getElementById(`${p}-center`); hidden.value = c.value;
+    el.classList.remove('err');
+    hidden.dispatchEvent(new Event('input', { bubbles:true }));
+  });
+}
+document.querySelectorAll('[data-centers]').forEach(renderCenters);
+
+function collect(p) {
+  const d = {};
+  ['center', ...Object.keys(FIELDS)].forEach(k => { const el = document.getElementById(`${p}-${k}`); d[k] = el ? el.value.trim() : ''; });
+  return d;
+}
+function validate(d, keys = REQUIRED) {
+  for (const k of keys) if (!d[k]) return { k, msg: k === 'center' ? 'Mohon pilih Learning Center terdekat terlebih dahulu.' : `Mohon isi "${FIELDS[k].l}".` };
+  if (keys.includes('email') && d.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) return { k:'email', msg:'Format email belum benar.' };
+  if (keys.includes('waOrtu') && d.waOrtu) {
+    if (!/^[0-9\+\-\s]+$/.test(d.waOrtu)) return { k:'waOrtu', msg:'Mohon masukkan format Nomor WA Orang Tua yang valid (angka).' };
+    if (d.waOrtu.replace(/\D/g, '').length < 9) return { k:'waOrtu', msg:'Nomor WA terlalu pendek.' };
+  }
+  return null;
+}
+function showError(p, err) {
+  const el = err.k === 'center' ? document.querySelector(`[data-centers="${p}"]`) : document.getElementById(`${p}-${err.k}`);
+  if (el) { el.classList.add('err', 'shake'); setTimeout(() => el.classList.remove('shake'), 400); el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block:'center' }); if (el.focus && err.k !== 'center') el.focus({ preventScroll:true }); }
+  toast(err.msg);
+}
+document.addEventListener('input', e => { if (e.target.classList.contains('err')) e.target.classList.remove('err'); });
+function buildMessage(d, note) {
+  const dash = v => v || (note ? '(dilengkapi via WhatsApp)' : '-');
+  return `*Form Pendaftaran Siswa Baru Akademi LesKoding*
+
+Pilihan Learning Center: ${d.center || '-'}
+Program yang Dipilih: ${d.program || '-'}
+Kode / Nama Promo: ${d.promo || '-'}
+
+Nama Lengkap: ${dash(d.nama)}
+Panggilan: ${d.panggilan || '-'}
+Usia: ${d.usia || '-'}
+Asal sekolah: ${dash(d.sekolah)}
+Nama orang tua: ${dash(d.ortu)}
+Email: ${dash(d.email)}
+Alamat lengkap: ${dash(d.alamat)}
+WA Ortu: ${d.waOrtu || '-'}
+WA Anak (opsional): ${d.waAnak || '-'}`;
+}
+function openPreview(d, note) {
+  const a = adminFor(d.center), msg = buildMessage(d, note);
+  document.getElementById('pv-admin').textContent = a.label;
+  document.getElementById('pv-num').textContent = '+' + a.wa;
+  document.getElementById('pv-msg').textContent = msg;
+  document.getElementById('pv-wa').href = `https://wa.me/${a.wa}?text=${encodeURIComponent(msg)}`;
+  const m = document.getElementById('preview'); m.classList.remove('hidden'); m.classList.add('flex');
+}
+const closePreview = () => { const m = document.getElementById('preview'); m.classList.add('hidden'); m.classList.remove('flex'); };
+document.getElementById('pv-close').onclick = closePreview;
+document.getElementById('pv-edit').onclick = closePreview;
+document.getElementById('preview').addEventListener('click', e => { if (e.target.id === 'preview') closePreview(); });
+function toast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-[110] px-5 py-3 rounded-xl bg-[#1E293B] border border-[#F87171]/50 text-sm shadow-2xl transition-opacity max-w-[90vw]'; document.body.appendChild(t); }
+  t.innerHTML = `<i class="fa-solid fa-circle-exclamation text-[#F87171] mr-2"></i>${msg}`; t.style.opacity = 1; clearTimeout(t._h); t._h = setTimeout(() => t.style.opacity = 0, 2800);
+}
+const submitFlow = (p, keys, note) => { const d = collect(p), err = validate(d, keys); err ? showError(p, err) : openPreview(d, note); };
+
+/* ===================== OPSI 1 · WIZARD ===================== */
+(() => {
+  const form = document.getElementById('o1-form'), panels = [...form.querySelectorAll('.wz-panel')];
+  const STEPS = [['Lokasi & Program', ['center', 'program']], ['Data Anak', ['nama', 'panggilan', 'usia', 'sekolah']], ['Kontak Orang Tua', ['ortu', 'email', 'waOrtu', 'alamat']]];
+  const dots = document.getElementById('o1-dots'), next = document.getElementById('o1-next'), back = document.getElementById('o1-back');
+  let cur = 0;
+  const render = () => {
+    dots.innerHTML = STEPS.map(([t], i) => `<div class="flex items-center gap-2 ${i < 2 ? 'flex-1' : ''}"><span class="wz-dot w-7 h-7 rounded-full border border-white/20 text-xs font-extrabold flex items-center justify-center shrink-0 transition" data-state="${i < cur ? 'done' : i === cur ? 'now' : ''}">${i < cur ? '<i class="fa-solid fa-check"></i>' : i + 1}</span><span class="text-xs font-bold ${i === cur ? 'text-white' : 'text-slate-500'} hidden sm:inline">${t}</span></div>`).join('');
+    panels.forEach((p, i) => p.classList.toggle('active', i === cur));
+    document.getElementById('o1-bar').style.width = `${(cur + 1) / 3 * 100}%`;
+    back.classList.toggle('invisible', cur === 0);
+    next.innerHTML = cur === 2 ? '<i class="fa-brands fa-whatsapp text-base"></i> Kirim via WhatsApp' : 'Lanjut <i class="fa-solid fa-arrow-right"></i>';
+  };
+  const summary = () => {
+    const d = collect('o1'), row = (ic, l, v) => `<div class="flex gap-3"><i class="fa-solid ${ic} text-slate-500 w-4 mt-0.5"></i><div class="min-w-0"><div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">${l}</div><div class="truncate ${v ? 'text-white font-semibold' : 'text-slate-600'}">${v ? esc(v) : 'belum diisi'}</div></div></div>`;
+    document.getElementById('o1-summary').innerHTML = row('fa-school', 'Lab', d.center) + row('fa-graduation-cap', 'Program', d.program) + row('fa-child', 'Anak', d.panggilan && `${d.panggilan}${d.usia ? ' · ' + d.usia : ''}`) + row('fa-user', 'Orang tua', d.ortu) + row('fa-brands fa-whatsapp', 'WhatsApp', d.waOrtu) + (d.promo ? row('fa-ticket', 'Promo', d.promo) : '');
+  };
+  next.onclick = () => {
+    const err = validate(collect('o1'), STEPS[cur][1]);
+    if (err) return showError('o1', err);
+    if (cur < 2) { cur++; render(); } else openPreview(collect('o1'));
+  };
+  back.onclick = () => { cur--; render(); };
+  form.addEventListener('input', summary); form.addEventListener('change', summary);
+  render(); summary();
+})();
+
+/* ===================== OPSI 2 · PRATINJAU WA ===================== */
+(() => {
+  const form = document.getElementById('o2-form');
+  const update = () => {
+    const d = collect('o2');
+    document.getElementById('o2-bubble').textContent = buildMessage(d);
+    if (d.center) { const a = adminFor(d.center); document.getElementById('o2-admin').textContent = a.label; document.getElementById('o2-num').textContent = '+' + a.wa; }
+    const done = REQUIRED.filter(k => d[k]).length;
+    document.getElementById('o2-progress').innerHTML = done === REQUIRED.length ? '<i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i>Semua data wajib lengkap' : `${done}/${REQUIRED.length} data wajib terisi`;
+  };
+  form.addEventListener('input', update); form.addEventListener('change', update);
+  const go = () => submitFlow('o2');
+  document.getElementById('o2-submit').onclick = go; document.getElementById('o2-send').onclick = go;
+  update();
+})();
+
+/* ===================== OPSI 3 · PILIH LAB DULU ===================== */
+(() => {
+  const wrap = document.getElementById('o3-formwrap'), banner = document.getElementById('o3-banner');
+  document.getElementById('o3-center').addEventListener('input', e => {
+    const c = CENTERS.find(x => x.value === e.target.value), a = adminFor(c.value);
+    banner.style.background = `linear-gradient(90deg,${c.c}1f,transparent)`;
+    banner.innerHTML = `<div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:${c.c}22; color:${c.c}"><i class="fa-solid ${c.icon}"></i></div><div><div class="text-[10px] uppercase tracking-widest font-bold" style="color:${c.c}">Lab terpilih</div><div class="font-bold">${c.value}</div></div></div>
+      <div class="text-xs text-slate-300"><i class="fa-brands fa-whatsapp text-emerald-400 mr-1"></i>Dikonfirmasi oleh <b>${a.label}</b> (${a.pretty})</div>`;
+    const first = wrap.classList.contains('hidden');
+    wrap.classList.remove('hidden'); wrap.classList.add('fade-swap');
+    if (first) setTimeout(() => wrap.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block:'start' }), 150);
+  });
+  document.getElementById('o3-form').addEventListener('submit', e => { e.preventDefault(); submitFlow('o3'); });
+})();
+
+/* ===================== OPSI 4 · CHAT ===================== */
+(() => {
+  const body = document.getElementById('o4-body'), input = document.getElementById('o4-input'), status = document.getElementById('o4-status');
+  const Q = [
+    { k:'center', q:'Halo! 👋 Senang Anda mampir. Pertama, lab mana yang paling dekat dengan rumah?', type:'center' },
+    { k:'program', q:'Program apa yang ingin dicoba si kecil? Kalau belum yakin, pilih "Belum Yakin" saja.', type:'program' },
+    { k:'panggilan', q:'Siapa nama panggilan si kecil?' },
+    { k:'nama', q: d => `Nama yang bagus! Nama lengkap ${esc(d.panggilan)} siapa?` },
+    { k:'usia', q: d => `Berapa usia ${esc(d.panggilan)} sekarang?`, ph:'contoh: 9 tahun' },
+    { k:'sekolah', q: d => `${esc(d.panggilan)} sekolah di mana?` },
+    { k:'ortu', q:'Terima kasih! Sekarang data orang tua/wali. Boleh tahu nama Anda?' },
+    { k:'waOrtu', q:'Nomor WhatsApp Anda? Admin akan menghubungi lewat nomor ini.', t:'tel' },
+    { k:'email', q:'Alamat email Anda?', t:'email' },
+    { k:'alamat', q:'Alamat domisili?' },
+    { k:'waAnak', q: d => `Apakah ${esc(d.panggilan)} punya nomor WhatsApp sendiri? (opsional)`, t:'tel', skip:'Tidak ada' },
+    { k:'promo', q:'Terakhir, punya kode promo? (opsional)', skip:'Tidak punya', chip:'PETUALANGAN2026' },
+  ];
+  let d = {}, i = 0;
+  const wait = ms => new Promise(r => setTimeout(r, reduceMotion ? 0 : ms));
+  const scroll = () => body.scrollTop = body.scrollHeight;
+  const bot = async html => {
+    status.textContent = 'mengetik…';
+    const t = document.createElement('div'); t.className = 'msg flex'; t.innerHTML = '<div class="typing bg-[#1E293B] rounded-2xl rounded-tl-sm px-4 py-3 flex gap-1"><span></span><span></span><span></span></div>';
+    body.appendChild(t); scroll(); await wait(650); t.remove(); status.textContent = 'online';
+    const m = document.createElement('div'); m.className = 'msg flex'; m.innerHTML = `<div class="max-w-[85%] bg-[#1E293B] border border-white/5 rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-slate-200">${html}</div>`;
+    body.appendChild(m); scroll();
+  };
+  const me = txt => { const m = document.createElement('div'); m.className = 'msg flex justify-end'; m.innerHTML = `<div class="max-w-[85%] bg-[#0788F5] rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm"></div>`; m.firstChild.textContent = txt; body.appendChild(m); scroll(); };
+  // hitung pertanyaan yang sudah dijawab (termasuk yang dilewati)
+  const progress = () => { document.getElementById('o4-count').textContent = `${i}/${Q.length}`; document.getElementById('o4-bar').style.width = `${i / Q.length * 100}%`; };
+  const answer = async (val, shown) => {
+    const q = Q[i];
+    if (q.k === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return toast('Format email belum benar.');
+    if (q.k === 'waOrtu' && (!/^[0-9\+\-\s]+$/.test(val) || val.replace(/\D/g, '').length < 9)) return toast('Mohon masukkan nomor WA yang valid (minimal 9 angka).');
+    input.innerHTML = ''; me(shown ?? (val || '—')); d[q.k] = val; i++; progress(); ask();
+  };
+  const ask = async () => {
+    if (i >= Q.length) {
+      await bot(`Siap, ${esc(d.panggilan)}! 🎉 Ini ringkasannya. Tekan tombol di bawah untuk mengirim ke <b>${adminFor(d.center).label}</b>.`);
+      input.innerHTML = `<button class="btn-submit w-full"><i class="fa-brands fa-whatsapp text-base"></i> Kirim via WhatsApp</button>`;
+      input.querySelector('button').onclick = () => openPreview(d);
+      return;
+    }
+    const q = Q[i]; await bot(typeof q.q === 'function' ? q.q(d) : q.q);
+    if (q.type === 'center') {
+      input.innerHTML = `<div class="flex flex-wrap gap-2">${CENTERS.map(c => `<button class="px-4 py-2.5 rounded-xl border border-slate-700 bg-[#0F172A] hover:border-[${c.c}] text-sm font-bold" data-v="${c.value}" data-s="${c.short}"><i class="fa-solid ${c.icon} mr-1.5" style="color:${c.c}"></i>${c.short}</button>`).join('')}</div>`;
+      input.querySelectorAll('button').forEach(b => b.onclick = () => answer(b.dataset.v, b.dataset.s));
+    } else if (q.type === 'program') {
+      input.innerHTML = `<div class="flex flex-wrap gap-2 max-h-40 overflow-y-auto">${PROGRAM_GROUPS.flatMap(g => g[1]).map(([v, l]) => `<button class="px-3 py-2 rounded-xl border border-slate-700 bg-[#0F172A] hover:border-[#38BDF8] text-xs font-bold text-left" data-v="${v}">${l.split(' — ')[0]}</button>`).join('')}</div>`;
+      input.querySelectorAll('button').forEach(b => b.onclick = () => answer(b.dataset.v));
+    } else {
+      input.innerHTML = `<form class="flex gap-2">${q.chip ? `<button type="button" class="chip shrink-0 px-3 rounded-xl border border-[#FFC83D]/40 text-[#FFC83D] text-xs font-bold mono">${q.chip}</button>` : ''}<input type="${q.t || 'text'}" class="${INPUT}" placeholder="${q.ph || 'Ketik jawaban…'}" aria-label="Jawaban">${q.skip ? `<button type="button" class="skip shrink-0 px-3 rounded-xl border border-white/10 text-xs text-slate-300">${q.skip}</button>` : ''}<button class="shrink-0 w-12 rounded-xl bg-[#FFC83D] text-[#111827]" aria-label="Kirim jawaban"><i class="fa-solid fa-paper-plane"></i></button></form>`;
+      const f = input.querySelector('form'), inp = f.querySelector('input');
+      if (!reduceMotion) inp.focus({ preventScroll:true });
+      f.onsubmit = e => { e.preventDefault(); const v = inp.value.trim(); if (!v) return q.skip ? answer('', q.skip) : toast('Mohon isi jawabannya dulu.'); answer(v); };
+      f.querySelector('.skip')?.addEventListener('click', () => answer('', q.skip));
+      f.querySelector('.chip')?.addEventListener('click', () => answer(q.chip));
+    }
+  };
+  const start = () => { body.innerHTML = ''; input.innerHTML = ''; d = {}; i = 0; progress(); ask(); };
+  document.getElementById('o4-restart').onclick = start;
+  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { start(); io.disconnect(); } }, { threshold:.3 }).observe(body);
+})();
+
+/* ===================== OPSI 5 · KARTU PENJELAJAH ===================== */
+(() => {
+  const form = document.getElementById('o5-form'), card = document.getElementById('o5-card');
+  const progName = v => (PROGRAM_GROUPS.flatMap(g => g[1]).find(([x]) => x === v) || [, ''])[1].split(' — ')[0];
+  const render = () => {
+    const d = collect('o5'), c = CENTERS.find(x => x.value === d.center);
+    const v = (x, ph) => `<span class="val ${x ? '' : 'empty'}">${x || ph}</span>`;
+    const nick = esc(d.panggilan), name = esc(d.nama), school = esc(d.sekolah), age = esc(d.usia);
+    card.innerHTML = `
+      <div class="idcard relative rounded-3xl p-6 aspect-[1.586] overflow-hidden shadow-[0_30px_60px_-20px_rgba(7,136,245,.5)] border border-white/15">
+        <div class="absolute inset-0 holo pointer-events-none"></div>
+        <div class="absolute -right-10 -bottom-12 w-52 h-52 rounded-full border-[22px] border-white/5"></div>
+        <div class="relative h-full flex flex-col">
+          <div class="flex items-start justify-between">
+            <div><div class="text-[9px] tracking-[.3em] font-bold text-white/60">LESKODING · BALI</div><div class="font-display font-black text-lg tracking-wide">KARTU PENJELAJAH</div></div>
+            <div class="text-[10px] font-bold px-2.5 py-1 rounded-full ${c ? '' : 'opacity-40'}" style="background:${c ? c.c : '#fff'}; color:#111827">${c ? c.short : 'LAB?'}</div>
+          </div>
+          <div class="flex items-center gap-4 mt-auto">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center font-display font-black text-3xl shrink-0">${nick ? nick[0].toUpperCase() : '<i class="fa-solid fa-user-astronaut text-2xl text-white/50"></i>'}</div>
+            <div class="min-w-0">
+              <div class="font-display font-black text-2xl sm:text-3xl leading-none truncate">${v(nick, 'Nama Panggilan')}</div>
+              <div class="text-xs text-white/80 truncate mt-1">${v(name, 'Nama lengkap')}</div>
+              <div class="text-[11px] text-white/70 truncate mt-0.5">${v(age, 'Usia')} · ${v(school, 'Sekolah')}</div>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/15 flex items-center justify-between gap-3">
+            <div class="min-w-0"><div class="text-[9px] tracking-[.25em] text-white/50 font-bold">PROGRAM</div><div class="text-sm font-bold truncate">${v(progName(d.program), 'Pilih program')}</div></div>
+            <i class="fa-solid fa-rocket text-[#FFC83D] text-xl"></i>
+          </div>
+        </div>
+      </div>`;
+    const done = REQUIRED.filter(k => d[k]).length;
+    document.getElementById('o5-bar').style.width = `${done / REQUIRED.length * 100}%`;
+    document.getElementById('o5-count').textContent = `${done}/${REQUIRED.length} wajib`;
+  };
+  form.addEventListener('input', render); form.addEventListener('change', render);
+  form.addEventListener('submit', e => { e.preventDefault(); submitFlow('o5'); });
+  render();
+})();
+
+/* ===================== OPSI 6 · CEPAT ATAU LENGKAP ===================== */
+(() => {
+  const QUICK = ['center', 'program', 'panggilan', 'usia', 'waOrtu'], form = document.getElementById('o6-form');
+  let mode = 'quick';
+  const apply = () => {
+    document.querySelectorAll('.mode-tab').forEach(t => t.setAttribute('aria-selected', t.dataset.mode === mode));
+    form.querySelectorAll('[data-wrap]').forEach(w => w.classList.toggle('hidden', mode === 'quick' && !QUICK.includes(w.dataset.wrap)));
+    document.getElementById('o6-note').innerHTML = mode === 'quick'
+      ? '<i class="fa-solid fa-bolt text-[#FFC83D] mr-1"></i>Data lainnya akan ditanyakan admin di WhatsApp.'
+      : '<i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i>Data hanya untuk konfirmasi jadwal oleh admin resmi LesKoding.';
+  };
+  document.querySelectorAll('.mode-tab').forEach(t => t.onclick = () => { mode = t.dataset.mode; apply(); });
+  form.addEventListener('submit', e => { e.preventDefault(); mode === 'quick' ? submitFlow('o6', QUICK, true) : submitFlow('o6'); });
+  apply();
+})();
+</script>
+</body>
+</html>

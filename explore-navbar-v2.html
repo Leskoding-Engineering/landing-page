@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Navbar</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .opsi-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem 1rem; margin-bottom:1.5rem; }
+  .frame { scrollbar-width:thin; scrollbar-color:#334155 transparent; }
+  .frame::-webkit-scrollbar { width:6px } .frame::-webkit-scrollbar-thumb { background:#334155; border-radius:9px }
+  .cta { display:inline-flex; align-items:center; gap:.5rem; background:#FFC83D; color:#111827; font-weight:800; border-radius:.75rem; font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; transition:all .25s; box-shadow:0 4px 18px rgba(255,200,61,.25); white-space:nowrap; }
+  .cta:hover { background:#fed368; }
+  .lang { display:inline-flex; align-items:center; gap:.4rem; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:.75rem; font:700 11px 'Fira Code',monospace; transition:background .2s; }
+  .lang:hover { background:rgba(255,255,255,.14); }
+  .nl { position:relative; display:inline-flex; align-items:center; gap:.4rem; padding:.5rem .8rem; border-radius:.75rem; font-size:13px; font-weight:600; color:#CBD5E1; transition:color .2s, background .2s; white-space:nowrap; }
+  .nl:hover { color:#fff; background:rgba(255,255,255,.05); }
+  .nl.active { color:#fff; }
+  .phone { width:340px; height:640px; border-radius:2.6rem; border:9px solid #1E293B; background:#0B0F19; position:relative; overflow:hidden; box-shadow:0 30px 70px -30px rgba(0,0,0,.9); flex-shrink:0; }
+  .phone .notch { position:absolute; top:6px; left:50%; transform:translateX(-50%); width:90px; height:22px; border-radius:999px; background:#000; z-index:60; }
+  .fade-swap { animation:fadeSwap .35s ease; }
+  @keyframes fadeSwap { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none} }
+
+  /* O1 pill */
+  .pill { transition:padding .4s, gap .4s, box-shadow .4s; }
+  .pill-links { display:flex; align-items:center; gap:.15rem; max-width:720px; overflow:hidden; transition:max-width .5s cubic-bezier(.4,.1,.2,1), opacity .3s; position:relative; }
+  .pill-current { max-width:0; opacity:0; overflow:hidden; white-space:nowrap; transition:max-width .5s cubic-bezier(.4,.1,.2,1), opacity .3s; }
+  .pill.compact .pill-links { max-width:0; opacity:0; }
+  .pill.compact .pill-current { max-width:220px; opacity:1; }
+  .pill.compact:hover .pill-links { max-width:720px; opacity:1; }
+  .pill.compact:hover .pill-current { max-width:0; opacity:0; }
+  .pill-ind { position:absolute; top:0; bottom:0; border-radius:999px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.1); transition:left .35s cubic-bezier(.4,.1,.2,1), width .35s cubic-bezier(.4,.1,.2,1); z-index:0; }
+  .pill-links .nl { z-index:1; border-radius:999px; }
+  .tabbar a.active { color:#FFC83D; }
+
+  /* O2 mega */
+  .mega { opacity:0; visibility:hidden; transform:translateY(-6px); transition:all .25s; }
+  .mega.open { opacity:1; visibility:visible; transform:none; }
+  .trig[aria-expanded="true"] { color:#fff; background:rgba(255,255,255,.06); }
+  .trig[aria-expanded="true"] .chev { transform:rotate(180deg); }
+  .acc-body { display:grid; grid-template-rows:0fr; transition:grid-template-rows .3s; }
+  .acc.open .acc-body { grid-template-rows:1fr; }
+  .acc.open .chev { transform:rotate(180deg); }
+  .sheet { transform:translateY(100%); transition:transform .45s cubic-bezier(.2,.9,.3,1); }
+  .sheet.open { transform:none; }
+
+  /* O3 journey */
+  .station { position:absolute; top:50%; width:9px; height:9px; border-radius:50%; background:#334155; border:2px solid #0B0F19; transform:translate(-50%,-50%); transition:all .3s; cursor:pointer; }
+  .station.passed { background:#38BDF8; }
+  .station.now { width:13px; height:13px; background:#FFC83D; box-shadow:0 0 0 4px rgba(255,200,61,.25); }
+  .station .tip { position:absolute; top:14px; left:50%; transform:translateX(-50%); white-space:nowrap; font:600 10px 'Plus Jakarta Sans'; color:#CBD5E1; background:#1E293B; border:1px solid rgba(255,255,255,.1); padding:2px 6px; border-radius:6px; opacity:0; pointer-events:none; transition:opacity .2s; }
+  .station:hover .tip, .station.now .tip { opacity:1; }
+
+  /* O4 strip */
+  .strip { overflow:hidden; transition:max-height .4s, opacity .3s; max-height:44px; }
+  .strip.collapsed { max-height:0; opacity:0; }
+  .dd { opacity:0; visibility:hidden; transform:translateY(-6px); transition:all .2s; }
+  .dd.open { opacity:1; visibility:visible; transform:none; }
+
+  /* O5 persona */
+  .seg button[aria-selected="true"] { background:#0788F5; color:#fff; box-shadow:0 0 18px rgba(7,136,245,.35); }
+
+  /* O6 palette */
+  .pal-item[aria-selected="true"] { background:rgba(7,136,245,.15); border-color:rgba(7,136,245,.4); }
+  kbd { font:600 10px 'Fira Code',monospace; padding:2px 6px; border-radius:6px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); color:#CBD5E1; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="sticky top-0 z-[80] bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1400px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI · Navbar / Topbar</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Pil Melayang</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Mega Menu</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Jalur Perjalanan</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Strip Promo + WA</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Orang Tua / Siswa</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Cari Cepat ⌘K</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1400px] mx-auto px-4 pt-12 pb-8">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// header#main-header</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">6 konsep navbar yang <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">menuntun, bukan cuma menautkan.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Setiap opsi ditampilkan di dalam <b class="text-white">halaman mini yang bisa di-scroll</b> (desktop) dan <b class="text-white">mockup HP</b> (mobile), supaya perilaku sticky, sorotan bagian aktif, dan menu mobile bisa dicoba langsung. Token tetap sama: logo LesKoding, latar <code class="mono text-slate-300">#0B0F19</code>, CTA kuning "Coba Kelas Gratis", dan tombol bahasa.</p>
+</header>
+
+<!-- ======================= OPSI 1 ======================= -->
+<section id="opsi-1" class="py-12 border-t border-white/10">
+  <div class="max-w-[1400px] mx-auto px-4">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span><h2 class="font-display text-2xl font-extrabold">Pil Melayang (Dynamic Island)</h2><p class="text-sm text-slate-400 max-w-3xl">Navbar terlepas dari tepi, berbentuk kapsul kaca di tengah. Indikator aktif bergeser mengikuti bagian yang dibaca. Saat di-scroll, kapsul menyusut jadi "pulau" kecil berisi nama bagian dan CTA, lalu melebar lagi saat di-hover. Di mobile, navigasi pindah ke tab bar bawah yang mudah dijangkau jempol.</p></div>
+    <div class="flex flex-col xl:flex-row gap-8 items-start">
+      <div class="frame relative flex-1 w-full h-[600px] overflow-y-auto rounded-3xl border border-white/10" id="o1-frame">
+        <div class="sticky top-0 z-40 h-0">
+          <div class="flex justify-center pt-4 px-4">
+            <div class="pill flex items-center gap-2 rounded-full bg-[#0F172A]/80 backdrop-blur-xl border border-white/10 pl-3 pr-1.5 py-1.5 shadow-[0_10px_40px_-10px_rgba(0,0,0,.8)]" id="o1-pill">
+              <a href="#" data-go="home" class="shrink-0"><img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-7 w-auto"></a>
+              <div class="pill-current text-xs font-bold text-white flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#FFC83D]"></span><span id="o1-cur">Beranda</span></div>
+              <div class="pill-links" id="o1-links"><span class="pill-ind" id="o1-ind"></span></div>
+              <button class="lang px-2.5 py-1.5 rounded-full" data-lang><i class="fa-solid fa-globe text-[#FFC83D]"></i><span>ID</span></button>
+              <a href="#" data-go="register" class="cta px-4 py-2 !rounded-full"><i class="fa-solid fa-calendar-check"></i>Coba Gratis</a>
+            </div>
+          </div>
+        </div>
+        <div data-page="o1"></div>
+      </div>
+      <div class="phone mx-auto" id="o1m-phone"><div class="notch"></div>
+        <div class="frame absolute inset-0 overflow-y-auto" id="o1m-frame">
+          <div class="sticky top-0 z-40 flex items-center justify-between px-4 pt-9 pb-3 bg-gradient-to-b from-[#0B0F19] to-transparent">
+            <img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-7 w-auto">
+            <button class="lang px-2.5 py-1.5" data-lang><i class="fa-solid fa-globe text-[#FFC83D]"></i><span>ID</span></button>
+          </div>
+          <div data-page="o1m" data-compact></div>
+          <div class="h-24"></div>
+        </div>
+        <nav class="tabbar absolute bottom-3 left-3 right-3 z-50 flex items-end justify-between rounded-2xl bg-[#0F172A]/90 backdrop-blur-xl border border-white/10 px-2 pt-2 pb-1.5" id="o1m-tabs"></nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 2 ======================= -->
+<section id="opsi-2" class="py-12 border-t border-white/10 bg-[#0F172A]/40">
+  <div class="max-w-[1400px] mx-auto px-4">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span><h2 class="font-display text-2xl font-extrabold">Mega Menu dengan Pratinjau</h2><p class="text-sm text-slate-400 max-w-3xl">Pengelompokan seperti sekarang, tapi dropdown-nya jadi panel lebar: 9 program per pilar lengkap dengan usia, plus kartu sorotan berfoto dan kode promo. Orang tua bisa langsung lompat ke program yang tepat dari navbar. Di mobile, menu jadi bottom sheet dengan akordion.</p></div>
+    <div class="flex flex-col xl:flex-row gap-8 items-start">
+      <div class="frame relative flex-1 w-full h-[600px] overflow-y-auto rounded-3xl border border-white/10" id="o2-frame">
+        <div class="sticky top-0 z-40" id="o2-nav">
+          <div class="flex items-center justify-between h-[68px] px-6 bg-[#0B0F19]/90 backdrop-blur-xl border-b border-white/10">
+            <a href="#" data-go="home"><img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-9 w-auto"></a>
+            <nav class="flex items-center gap-1">
+              <button class="trig nl" data-mega="program" aria-expanded="false"><i class="fa-solid fa-graduation-cap text-[#0788F5] text-xs"></i>Program &amp; Teknologi<i class="chev fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform"></i></button>
+              <button class="trig nl" data-mega="metode" aria-expanded="false"><i class="fa-solid fa-route text-emerald-400 text-xs"></i>Metode &amp; Progres<i class="chev fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform"></i></button>
+              <a href="#" data-go="location" class="nl"><i class="fa-solid fa-map-location-dot text-[#0788F5] text-xs"></i>Lokasi</a>
+              <a href="#" data-go="faq" class="nl"><i class="fa-solid fa-circle-question text-[#F3261D] text-xs"></i>FAQ</a>
+            </nav>
+            <div class="flex items-center gap-2.5">
+              <button class="lang px-3 py-2" data-lang><i class="fa-solid fa-globe text-[#FFC83D]"></i><span>ID</span></button>
+              <a href="#" data-go="register" class="cta px-4 py-2.5"><i class="fa-solid fa-calendar-check"></i>Coba Kelas Gratis</a>
+            </div>
+          </div>
+          <div class="mega absolute left-4 right-4 top-[76px] rounded-3xl bg-[#0F172A]/95 backdrop-blur-xl border border-white/15 shadow-2xl p-6" data-panel="program"></div>
+          <div class="mega absolute left-4 right-4 top-[76px] rounded-3xl bg-[#0F172A]/95 backdrop-blur-xl border border-white/15 shadow-2xl p-6" data-panel="metode"></div>
+        </div>
+        <div data-page="o2"></div>
+      </div>
+      <div class="phone mx-auto" id="o2m-phone"><div class="notch"></div>
+        <div class="frame absolute inset-0 overflow-y-auto" id="o2m-frame">
+          <div class="sticky top-0 z-40 flex items-center justify-between px-4 pt-9 pb-3 bg-[#0B0F19]/90 backdrop-blur border-b border-white/10">
+            <img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-7 w-auto">
+            <div class="flex items-center gap-2">
+              <a href="#" data-go="register" class="cta px-3 py-2">Daftar</a>
+              <button class="w-10 h-10 rounded-xl border border-white/15 bg-white/5" id="o2m-open" aria-label="Buka menu"><i class="fa-solid fa-bars-staggered"></i></button>
+            </div>
+          </div>
+          <div data-page="o2m" data-compact></div>
+        </div>
+        <div class="absolute inset-0 z-50 bg-black/50 opacity-0 pointer-events-none transition-opacity" id="o2m-dim"></div>
+        <div class="sheet absolute inset-x-0 bottom-0 z-50 max-h-[82%] overflow-y-auto rounded-t-3xl bg-[#0F172A] border-t border-white/15 p-4" id="o2m-sheet"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 3 ======================= -->
+<section id="opsi-3" class="py-12 border-t border-white/10">
+  <div class="max-w-[1400px] mx-auto px-4">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span><h2 class="font-display text-2xl font-extrabold">Jalur Perjalanan</h2><p class="text-sm text-slate-400 max-w-3xl">Di bawah navbar ada garis progres bergradien (emas → biru → ungu) dengan "stasiun" untuk tiap bagian halaman, selaras dengan tema petualangan dan peta jalur. Pengunjung tahu sudah sejauh mana, melihat nama stasiun aktif di garis, dan bisa melompat ke stasiun mana pun (di layar lebar juga muncul label "Kamu di …" di samping logo).</p></div>
+    <div class="flex flex-col xl:flex-row gap-8 items-start">
+      <div class="frame relative flex-1 w-full h-[600px] overflow-y-auto rounded-3xl border border-white/10" id="o3-frame">
+        <div class="sticky top-0 z-40 bg-[#0B0F19]/90 backdrop-blur-xl">
+          <div class="flex items-center justify-between h-[64px] px-6">
+            <div class="flex items-center gap-4">
+              <a href="#" data-go="home"><img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-9 w-auto"></a>
+              <div class="hidden 2xl:flex items-center gap-2 pl-4 border-l border-white/10 text-xs"><span class="text-slate-500">Kamu di</span><span class="font-bold text-white" id="o3-cur">Beranda</span></div>
+            </div>
+            <nav class="flex items-center gap-0.5" id="o3-links"></nav>
+            <div class="flex items-center gap-2.5">
+              <button class="lang px-3 py-2" data-lang><i class="fa-solid fa-globe text-[#FFC83D]"></i><span>ID</span></button>
+              <a href="#" data-go="register" class="cta px-4 py-2.5"><i class="fa-solid fa-calendar-check"></i>Coba Kelas Gratis</a>
+            </div>
+          </div>
+          <div class="relative h-[14px] mx-6">
+            <div class="absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 bg-white/10 rounded"></div>
+            <div class="absolute left-0 top-1/2 h-[2px] -translate-y-1/2 rounded bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]" id="o3-fill" style="width:0"></div>
+            <div id="o3-stations"></div>
+          </div>
+        </div>
+        <div data-page="o3"></div>
+      </div>
+      <div class="phone mx-auto"><div class="notch"></div>
+        <div class="frame absolute inset-0 overflow-y-auto" id="o3m-frame">
+          <div class="sticky top-0 z-40 bg-[#0B0F19]/90 backdrop-blur border-b border-white/10">
+            <div class="flex items-center justify-between px-4 pt-9 pb-3">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-7 w-auto shrink-0">
+                <span class="text-[11px] text-slate-400 truncate">· <b class="text-white" id="o3m-cur">Beranda</b></span>
+              </div>
+              <button class="relative w-11 h-11 shrink-0" aria-label="Menu">
+                <svg viewBox="0 0 44 44" class="absolute inset-0 -rotate-90"><circle cx="22" cy="22" r="19" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="3"/><circle id="o3m-ring" cx="22" cy="22" r="19" fill="none" stroke="#FFC83D" stroke-width="3" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4"/></svg>
+                <i class="fa-solid fa-bars-staggered relative"></i>
+              </button>
+            </div>
+          </div>
+          <div data-page="o3m" data-compact></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 4 ======================= -->
+<section id="opsi-4" class="py-12 border-t border-white/10 bg-[#0F172A]/40">
+  <div class="max-w-[1400px] mx-auto px-4">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span><h2 class="font-display text-2xl font-extrabold">Strip Promo + WhatsApp Cepat</h2><p class="text-sm text-slate-400 max-w-3xl">Strip tipis di atas navbar menyampaikan penawaran resmi (Free Trial + kode PETUALANGAN2026) dengan tombol salin, dan bisa ditutup. Navbar menambahkan dropdown WhatsApp ke 2 admin cabang, karena di situlah pendaftaran terjadi. Di mobile ada action bar menempel di bawah: WhatsApp + Coba Gratis.</p></div>
+    <div class="flex flex-col xl:flex-row gap-8 items-start">
+      <div class="frame relative flex-1 w-full h-[600px] overflow-y-auto rounded-3xl border border-white/10" id="o4-frame">
+        <div class="sticky top-0 z-40">
+          <div class="strip bg-gradient-to-r from-[#FFC83D]/20 via-[#FFC83D]/10 to-[#0788F5]/15 border-b border-[#FFC83D]/20" id="o4-strip">
+            <div class="h-[40px] flex items-center justify-center gap-3 text-xs px-10 relative">
+              <span>🎁</span><span class="text-slate-200"><b class="text-white">Free Trial 1 sesi gratis</b> + potongan biaya pendaftaran di semua lab</span>
+              <button class="mono font-bold text-[#FFC83D] border border-[#FFC83D]/40 rounded-md px-2 py-0.5 hover:bg-[#FFC83D]/10" data-copy>PETUALANGAN2026 <i class="fa-regular fa-copy ml-1"></i></button>
+              <button class="absolute right-4 text-slate-400 hover:text-white" id="o4-close" aria-label="Tutup promo"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+          </div>
+          <div class="flex items-center justify-between h-[68px] px-6 bg-[#0B0F19]/90 backdrop-blur-xl border-b border-white/10">
+            <a href="#" data-go="home"><img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-9 w-auto"></a>
+            <nav class="flex items-center gap-1">
+              <a href="#" data-go="course" class="nl"><i class="fa-solid fa-graduation-cap text-[#0788F5] text-xs"></i>Program</a>
+              <a href="#" data-go="hof" class="nl"><i class="fa-solid fa-trophy text-amber-400 text-xs"></i>Karya Siswa</a>
+              <a href="#" data-go="progress" class="nl"><i class="fa-solid fa-chart-line text-emerald-400 text-xs"></i>Laporan Wali</a>
+              <a href="#" data-go="location" class="nl"><i class="fa-solid fa-map-location-dot text-[#0788F5] text-xs"></i>Lokasi</a>
+              <a href="#" data-go="faq" class="nl"><i class="fa-solid fa-circle-question text-[#F3261D] text-xs"></i>FAQ</a>
+            </nav>
+            <div class="flex items-center gap-2.5">
+              <div class="relative">
+                <button class="nl border border-emerald-500/30 bg-emerald-500/10 !text-emerald-300" id="o4-wa" aria-expanded="false"><i class="fa-brands fa-whatsapp text-sm"></i>Chat Admin<i class="fa-solid fa-chevron-down text-[10px]"></i></button>
+                <div class="dd absolute right-0 top-full mt-2 w-72 rounded-2xl bg-[#0F172A]/95 backdrop-blur-xl border border-white/15 shadow-2xl p-2" id="o4-dd">
+                  <a href="https://wa.me/628518306798" target="_blank" rel="noopener" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5"><span class="w-9 h-9 rounded-lg bg-[#0788F5]/15 text-[#38BDF8] flex items-center justify-center"><i class="fa-solid fa-microchip"></i></span><span><span class="block text-sm font-bold">Gianyar &amp; Bedulu</span><span class="block text-[11px] text-slate-400 mono">0851-8306-798</span></span></a>
+                  <a href="https://wa.me/6285792736627" target="_blank" rel="noopener" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5"><span class="w-9 h-9 rounded-lg bg-purple-500/15 text-purple-300 flex items-center justify-center"><i class="fa-solid fa-laptop-code"></i></span><span><span class="block text-sm font-bold">Ubud Peliatan</span><span class="block text-[11px] text-slate-400 mono">0857-9273-6627</span></span></a>
+                </div>
+              </div>
+              <button class="lang px-3 py-2" data-lang><i class="fa-solid fa-globe text-[#FFC83D]"></i><span>ID</span></button>
+              <a href="#" data-go="register" class="cta px-4 py-2.5"><i class="fa-solid fa-calendar-check"></i>Coba Gratis</a>
+            </div>
+          </div>
+        </div>
+        <div data-page="o4"></div>
+      </div>
+      <div class="phone mx-auto"><div class="notch"></div>
+        <div class="frame absolute inset-0 overflow-y-auto" id="o4m-frame">
+          <div class="sticky top-0 z-40">
+            <div class="pt-8 bg-[#FFC83D]/15 border-b border-[#FFC83D]/20 text-[11px] text-center px-3 pb-2">🎁 Free Trial gratis · <b class="mono text-[#FFC83D]">PETUALANGAN2026</b></div>
+            <div class="flex items-center justify-between px-4 py-3 bg-[#0B0F19]/90 backdrop-blur border-b border-white/10">
+              <img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-7 w-auto">
+              <div class="flex items-center gap-2"><button class="lang px-2.5 py-1.5" data-lang><i class="fa-solid fa-globe text-[#FFC83D]"></i><span>ID</span></button><button class="w-10 h-10 rounded-xl border border-white/15 bg-white/5" aria-label="Menu"><i class="fa-solid fa-bars-staggered"></i></button></div>
+            </div>
+          </div>
+          <div data-page="o4m" data-compact></div>
+          <div class="h-20"></div>
+        </div>
+        <div class="absolute bottom-0 inset-x-0 z-50 grid grid-cols-[auto_1fr] gap-2 p-3 bg-[#0B0F19]/95 backdrop-blur border-t border-white/10">
+          <a href="https://wa.me/628518306798" target="_blank" rel="noopener" class="w-12 h-12 rounded-xl bg-emerald-500 text-[#0B0F19] flex items-center justify-center text-xl" aria-label="WhatsApp admin"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" data-go="register" data-frame="o4m-frame" class="cta justify-center py-3"><i class="fa-solid fa-calendar-check"></i>Coba Kelas Gratis</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 5 ======================= -->
+<section id="opsi-5" class="py-12 border-t border-white/10">
+  <div class="max-w-[1400px] mx-auto px-4">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span><h2 class="font-display text-2xl font-extrabold">Orang Tua / Calon Siswa</h2><p class="text-sm text-slate-400 max-w-3xl">Saklar persona di tengah navbar. <b class="text-white">Orang Tua</b> melihat Manfaat, Laporan Wali, Lokasi, dan FAQ. <b class="text-white">Calon Siswa</b> melihat Program, Tools, Karya Siswa, dan Cara Belajar. Satu situs, dua jalur baca, sehingga tiap pengunjung langsung menemukan yang relevan.</p></div>
+    <div class="flex flex-col xl:flex-row gap-8 items-start">
+      <div class="frame relative flex-1 w-full h-[600px] overflow-y-auto rounded-3xl border border-white/10" id="o5-frame">
+        <div class="sticky top-0 z-40 bg-[#0B0F19]/90 backdrop-blur-xl border-b border-white/10">
+          <div class="flex items-center justify-between h-[72px] px-6 gap-4">
+            <a href="#" data-go="home" class="shrink-0"><img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-9 w-auto"></a>
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="seg flex p-1 rounded-xl bg-white/5 border border-white/10 text-xs font-bold shrink-0" role="tablist" data-seg="o5">
+                <button class="px-3 py-1.5 rounded-lg transition text-slate-300" data-persona="ortu" aria-selected="true"><i class="fa-solid fa-user-group mr-1"></i>Orang Tua</button>
+                <button class="px-3 py-1.5 rounded-lg transition text-slate-300" data-persona="siswa" aria-selected="false"><i class="fa-solid fa-rocket mr-1"></i>Calon Siswa</button>
+              </div>
+              <nav class="flex items-center gap-0.5 fade-swap" id="o5-links"></nav>
+            </div>
+            <div class="flex items-center gap-2.5 shrink-0">
+              <button class="lang px-3 py-2" data-lang><i class="fa-solid fa-globe text-[#FFC83D]"></i><span>ID</span></button>
+              <a href="#" data-go="register" class="cta px-4 py-2.5" id="o5-cta"><i class="fa-solid fa-calendar-check"></i>Coba Kelas Gratis</a>
+            </div>
+          </div>
+        </div>
+        <div data-page="o5"></div>
+      </div>
+      <div class="phone mx-auto" id="o5m-phone"><div class="notch"></div>
+        <div class="frame absolute inset-0 overflow-y-auto" id="o5m-frame">
+          <div class="sticky top-0 z-40 flex items-center justify-between px-4 pt-9 pb-3 bg-[#0B0F19]/90 backdrop-blur border-b border-white/10">
+            <img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-7 w-auto">
+            <button class="w-10 h-10 rounded-xl border border-white/15 bg-white/5" id="o5m-open" aria-label="Buka menu"><i class="fa-solid fa-bars-staggered"></i></button>
+          </div>
+          <div data-page="o5m" data-compact></div>
+        </div>
+        <div class="absolute inset-0 z-50 bg-[#0B0F19] backdrop-blur-xl flex flex-col p-5 pt-12 opacity-0 pointer-events-none transition-opacity duration-300" id="o5m-menu">
+          <div class="flex items-center justify-between mb-6"><img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-7 w-auto"><button id="o5m-close" class="w-10 h-10 rounded-xl border border-white/15" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button></div>
+          <div class="text-[10px] mono font-bold uppercase tracking-widest text-slate-500 mb-2">Saya adalah…</div>
+          <div class="seg grid grid-cols-2 p-1 rounded-xl bg-white/5 border border-white/10 text-xs font-bold mb-5" data-seg="o5m">
+            <button class="py-2.5 rounded-lg transition text-slate-300" data-persona="ortu" aria-selected="true">Orang Tua</button>
+            <button class="py-2.5 rounded-lg transition text-slate-300" data-persona="siswa" aria-selected="false">Calon Siswa</button>
+          </div>
+          <div class="space-y-1.5 flex-1" id="o5m-links"></div>
+          <a href="#" data-go="register" data-frame="o5m-frame" class="cta justify-center py-3.5 mt-4"><i class="fa-solid fa-calendar-check"></i>Coba Kelas Gratis</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OPSI 6 ======================= -->
+<section id="opsi-6" class="py-12 border-t border-white/10 bg-[#0F172A]/40">
+  <div class="max-w-[1400px] mx-auto px-4">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span><h2 class="font-display text-2xl font-extrabold">Cari Cepat (Command Palette)</h2><p class="text-sm text-slate-400 max-w-3xl">Navbar minimalis dengan kolom pencarian sebagai pusatnya. Klik atau tekan <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>K</kbd>, lalu ketik "robot", "ubud", "biaya", atau "9 tahun" untuk langsung melompat ke program, lokasi, atau jawaban FAQ yang tepat. Navigasinya terasa seperti produk teknologi, sesuai identitas akademi coding.</p></div>
+    <div class="flex flex-col xl:flex-row gap-8 items-start">
+      <div class="frame relative flex-1 w-full h-[600px] overflow-y-auto rounded-3xl border border-white/10" id="o6-frame">
+        <div class="sticky top-0 z-40 bg-[#0B0F19]/90 backdrop-blur-xl border-b border-white/10">
+          <div class="flex items-center justify-between h-[68px] px-6 gap-6">
+            <a href="#" data-go="home" class="shrink-0"><img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-9 w-auto"></a>
+            <button class="flex-1 max-w-md flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#0788F5]/60 text-sm text-slate-400 transition" data-palette>
+              <i class="fa-solid fa-magnifying-glass text-[#38BDF8]"></i><span class="flex-1 text-left">Cari program, lokasi, atau pertanyaan…</span><kbd>Ctrl K</kbd>
+            </button>
+            <div class="flex items-center gap-1 shrink-0">
+              <a href="#" data-go="course" class="nl">Program</a>
+              <a href="#" data-go="location" class="nl">Lokasi</a>
+              <button class="lang px-3 py-2 ml-1.5" data-lang><i class="fa-solid fa-globe text-[#FFC83D]"></i><span>ID</span></button>
+              <a href="#" data-go="register" class="cta px-4 py-2.5 ml-1.5"><i class="fa-solid fa-calendar-check"></i>Coba Kelas Gratis</a>
+            </div>
+          </div>
+        </div>
+        <div data-page="o6"></div>
+      </div>
+      <div class="phone mx-auto"><div class="notch"></div>
+        <div class="frame absolute inset-0 overflow-y-auto" id="o6m-frame">
+          <div class="sticky top-0 z-40 px-4 pt-9 pb-3 bg-[#0B0F19]/90 backdrop-blur border-b border-white/10">
+            <div class="flex items-center justify-between mb-3">
+              <img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-7 w-auto">
+              <a href="#" data-go="register" class="cta px-3 py-2">Coba Gratis</a>
+            </div>
+            <button class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-400" data-palette="o6m-frame"><i class="fa-solid fa-magnifying-glass text-[#38BDF8]"></i>Cari program, lokasi, FAQ…</button>
+          </div>
+          <div data-page="o6m" data-compact></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PERBANDINGAN ======================= -->
+<section id="banding" class="py-16 border-t border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4">
+    <h2 class="font-display text-2xl md:text-3xl font-extrabold mb-6">Perbandingan cepat</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[820px]">
+        <thead class="bg-[#1E293B] text-left text-xs uppercase tracking-wider text-slate-400">
+          <tr><th class="p-4">Opsi</th><th class="p-4">Kekuatan</th><th class="p-4">Mobile</th><th class="p-4">Catatan</th><th class="p-4">Effort</th></tr>
+        </thead>
+        <tbody class="divide-y divide-white/5 text-slate-300">
+          <tr><td class="p-4 font-bold text-white">1 · Pil Melayang</td><td class="p-4">Paling modern & ringan, tidak menutupi konten</td><td class="p-4">Tab bar bawah (ramah jempol)</td><td class="p-4">Link dibatasi ±6 item</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">2 · Mega Menu</td><td class="p-4">Navigasi terkaya; langsung ke 9 program</td><td class="p-4">Bottom sheet + akordion</td><td class="p-4">Evolusi paling dekat dari navbar sekarang</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">3 · Jalur Perjalanan</td><td class="p-4">Orientasi: tahu posisi & sisa halaman</td><td class="p-4">Ring progres di tombol menu</td><td class="p-4">Selaras tema petualangan</td><td class="p-4">Rendah–sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">4 · Strip Promo + WA</td><td class="p-4">Paling konversi: promo & WA selalu terlihat</td><td class="p-4">Action bar bawah</td><td class="p-4">Bisa menggantikan popup promo</td><td class="p-4">Rendah</td></tr>
+          <tr><td class="p-4 font-bold text-white">5 · Orang Tua / Siswa</td><td class="p-4">Personal, relevan per audiens</td><td class="p-4">Saklar di menu layar penuh</td><td class="p-4">Perlu kurasi link per persona</td><td class="p-4">Sedang</td></tr>
+          <tr><td class="p-4 font-bold text-white">6 · Cari Cepat</td><td class="p-4">Paling cepat untuk pengunjung bertujuan</td><td class="p-4">Kolom cari di header</td><td class="p-4">Identitas "tech", butuh indeks konten</td><td class="p-4">Sedang–tinggi</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-xs text-slate-500 mt-4"><i class="fa-solid fa-bug mr-1 text-[#F87171]"></i>Catatan index.html: efek navbar saat scroll di <code class="mono">app.js</code> (bagian "DYNAMIC NAVBAR SCROLL EFFECT") mencari <code class="mono">#navbar</code>, <code class="mono">#nav-container</code>, dan <code class="mono">#nav-logo</code>, padahal header memakai <code class="mono">#main-header</code>, jadi efek itu tidak pernah berjalan.</p>
+  </div>
+</section>
+
+<!-- Command palette (global) -->
+<div id="palette" class="fixed inset-0 z-[120] hidden items-start justify-center p-4 pt-[12vh] bg-[#0B0F19]/80 backdrop-blur-md">
+  <div class="w-full max-w-xl rounded-2xl bg-[#0F172A] border border-white/15 shadow-2xl overflow-hidden fade-swap" role="dialog" aria-label="Cari">
+    <div class="flex items-center gap-3 px-4 border-b border-white/10">
+      <i class="fa-solid fa-magnifying-glass text-[#38BDF8]"></i>
+      <input id="pal-input" class="flex-1 bg-transparent py-4 text-sm outline-none placeholder:text-slate-500" placeholder="Ketik: robot, ubud, biaya, 9 tahun…" autocomplete="off">
+      <kbd>Esc</kbd>
+    </div>
+    <div id="pal-list" class="max-h-[50vh] overflow-y-auto p-2"></div>
+    <div class="px-4 py-2.5 border-t border-white/10 text-[11px] text-slate-500 flex gap-4"><span><kbd>↑</kbd> <kbd>↓</kbd> pilih</span><span><kbd>Enter</kbd> buka</span></div>
+  </div>
+</div>
+
+<script>
+/* ===================== DATA & UTIL BERSAMA ===================== */
+const SECTIONS = [
+  ['home', 'Beranda', 'fa-house', '#FFC83D'], ['manfaat', 'Manfaat', 'fa-wand-magic-sparkles', '#FFC83D'], ['course', 'Program', 'fa-graduation-cap', '#0788F5'],
+  ['tech', 'Tools', 'fa-shapes', '#22D3EE'], ['hof', 'Karya Siswa', 'fa-trophy', '#FBBF24'], ['cara', 'Cara Belajar', 'fa-cubes-stacked', '#34D399'],
+  ['progress', 'Laporan Wali', 'fa-chart-line', '#60A5FA'], ['location', 'Lokasi', 'fa-map-location-dot', '#C084FC'], ['faq', 'FAQ', 'fa-circle-question', '#F87171'], ['register', 'Daftar', 'fa-calendar-check', '#FFC83D'],
+];
+const label = id => SECTIONS.find(s => s[0] === id)[1];
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Halaman tiruan supaya perilaku scroll navbar terasa
+function fakePage(compact) {
+  return SECTIONS.map(([id, l, ic, c], i) => {
+    if (id === 'home') return `
+      <section data-sec="home" class="relative ${compact ? 'min-h-[440px] px-5 pt-28 pb-10' : 'min-h-[560px] px-12 pt-32 pb-16'} overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-[#FFC83D]/10 rounded-full blur-[110px]"></div>
+        <div class="absolute bottom-10 right-1/4 w-80 h-80 bg-[#0788F5]/15 rounded-full blur-[120px]"></div>
+        <div class="relative max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1E293B] border border-white/10 text-[11px] font-bold mb-5"><span class="w-1.5 h-1.5 rounded-full bg-[#FFC83D]"></span>Playful Future Lab — Coding &amp; Robotic Bali</div>
+          <div class="font-display font-extrabold ${compact ? 'text-3xl' : 'text-5xl'} leading-[1.08] tracking-tight">Hari ini dia main game.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]">Besok dia yang bikin.</span></div>
+          <p class="text-slate-400 ${compact ? 'text-xs' : 'text-sm'} mt-4 max-w-md">Scroll di dalam bingkai ini untuk melihat perilaku navbar.</p>
+          <div class="flex gap-2 mt-6"><span class="cta px-4 py-2.5">Coba Kelas Gratis</span><span class="px-4 py-2.5 rounded-xl bg-[#0788F5] text-xs font-bold">Lihat Kurikulum</span></div>
+        </div>
+      </section>`;
+    return `
+      <section data-sec="${id}" class="${compact ? 'min-h-[340px] px-5 py-10' : 'min-h-[420px] px-12 py-14'} border-t border-white/5 ${i % 2 ? 'bg-[#0F172A]' : 'bg-[#0B0F19]'}">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1E293B] border border-white/10 text-[11px] font-bold mb-3"><i class="fa-solid ${ic}" style="color:${c}"></i>${l}</div>
+        <div class="font-display font-bold ${compact ? 'text-xl' : 'text-3xl'} tracking-tight">Section ${l}</div>
+        <div class="grid ${compact ? 'grid-cols-2' : 'grid-cols-3'} gap-3 mt-6">${Array.from({ length: compact ? 4 : 6 }, () => `<div class="h-24 rounded-2xl bg-white/[.03] border border-white/5"></div>`).join('')}</div>
+      </section>`;
+  }).join('');
+}
+document.querySelectorAll('[data-page]').forEach(el => el.innerHTML = fakePage(el.hasAttribute('data-compact')));
+
+// Scrollspy per bingkai
+function spy(frame, cb) {
+  const secs = [...frame.querySelectorAll('[data-sec]')];
+  const run = () => {
+    const y = frame.scrollTop + frame.clientHeight * .35; let cur = secs[0];
+    secs.forEach(s => { if (s.offsetTop <= y) cur = s; });
+    const max = frame.scrollHeight - frame.clientHeight;
+    cb(cur.dataset.sec, max > 0 ? frame.scrollTop / max : 0, frame.scrollTop);
+  };
+  frame.addEventListener('scroll', run, { passive:true }); run();
+  return run;
+}
+function goTo(frame, id, offset = 76) {
+  const s = frame.querySelector(`[data-sec="${id}"]`); if (!s) return;
+  frame.scrollTo({ top: Math.max(0, s.offsetTop - offset), behavior: reduceMotion ? 'auto' : 'smooth' });
+}
+// Klik [data-go] → scroll bingkai terdekat (atau bingkai yang disebut data-frame)
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-go]'); if (!a) return;
+  e.preventDefault();
+  const frame = a.dataset.frame ? document.getElementById(a.dataset.frame) : a.closest('.frame') || a.closest('.phone')?.querySelector('.frame');
+  if (frame) goTo(frame, a.dataset.go, frame.closest('.phone') ? 90 : 84);
+});
+// Tombol bahasa (demo)
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-lang]'); if (!b) return;
+  document.querySelectorAll('[data-lang] span').forEach(s => s.textContent = s.textContent === 'ID' ? 'EN' : 'ID');
+});
+const navLink = (id, extra = '', icon = true) => { const s = SECTIONS.find(x => x[0] === id); return `<a href="#" data-go="${id}" data-link="${id}" class="nl ${extra}">${icon ? `<i class="fa-solid ${s[2]} text-xs" style="color:${s[3]}"></i>` : ''}${s[1]}</a>`; };
+const markActive = (root, id) => root.querySelectorAll('[data-link]').forEach(a => a.classList.toggle('active', a.dataset.link === id));
+
+/* ===================== OPSI 1 · PIL MELAYANG ===================== */
+(() => {
+  const frame = document.getElementById('o1-frame'), pill = document.getElementById('o1-pill'), links = document.getElementById('o1-links'), ind = document.getElementById('o1-ind');
+  const LINKS = ['course', 'hof', 'cara', 'progress', 'location', 'faq'];
+  links.insertAdjacentHTML('beforeend', LINKS.map(id => navLink(id)).join(''));
+  const moveInd = id => {
+    const a = links.querySelector(`[data-link="${id}"]`);
+    if (!a) { ind.style.width = '0'; return; }
+    ind.style.left = a.offsetLeft + 'px'; ind.style.width = a.offsetWidth + 'px';
+  };
+  spy(frame, (id, p, top) => {
+    markActive(links, id); moveInd(id);
+    document.getElementById('o1-cur').textContent = label(id);
+    pill.classList.toggle('compact', top > 140);
+  });
+  pill.addEventListener('mouseenter', () => setTimeout(() => moveInd([...links.querySelectorAll('.active')][0]?.dataset.link), 520));
+  // mobile tab bar
+  const mframe = document.getElementById('o1m-frame'), tabs = document.getElementById('o1m-tabs');
+  const T = [['course', 'Program'], ['hof', 'Karya'], null, ['location', 'Lokasi'], ['faq', 'FAQ']];
+  tabs.innerHTML = T.map(t => t
+    ? `<a href="#" data-go="${t[0]}" data-frame="o1m-frame" data-link="${t[0]}" class="flex-1 flex flex-col items-center gap-1 text-[10px] font-bold text-slate-400 py-1 transition"><i class="fa-solid ${SECTIONS.find(s => s[0] === t[0])[2]} text-base"></i>${t[1]}</a>`
+    : `<a href="#" data-go="register" data-frame="o1m-frame" class="flex-1 flex flex-col items-center -mt-6"><span class="w-14 h-14 rounded-2xl bg-[#FFC83D] text-[#111827] flex items-center justify-center text-lg shadow-[0_8px_24px_rgba(255,200,61,.45)] border-4 border-[#0B0F19]"><i class="fa-solid fa-calendar-check"></i></span><span class="text-[10px] font-extrabold text-[#FFC83D] mt-1 whitespace-nowrap">Coba Gratis</span></a>`).join('');
+  spy(mframe, id => markActive(tabs, id));
+})();
+
+/* ===================== OPSI 2 · MEGA MENU ===================== */
+(() => {
+  const frame = document.getElementById('o2-frame'), nav = document.getElementById('o2-nav');
+  const PILLARS = [
+    ['Fondasi Coding', '#FFC83D', [['Innovator', '6–8'], ['Beginner', '8–11'], ['Intermediate', '10–14']]],
+    ['Skill Digital', '#38BDF8', [['Komputer Dasar', '8–14'], ['Desain Grafis', '9–14']]],
+    ['Spesialisasi Remaja', '#C084FC', [['Game Developer', '11–17'], ['Junior Web Developer', '11–17'], ['Robotika & IoT', '11–17'], ['Apps Developer', '11–17']]],
+  ];
+  nav.querySelector('[data-panel="program"]').innerHTML = `
+    <div class="grid grid-cols-[1fr_1fr_1fr_1.1fr] gap-6">
+      ${PILLARS.map(([t, c, ps]) => `<div><div class="flex items-center gap-2 text-[10px] mono font-bold uppercase tracking-widest mb-3" style="color:${c}"><span class="w-4 h-1 rounded" style="background:${c}"></span>${t}</div>
+        <div class="space-y-1">${ps.map(([n, a]) => `<a href="#" data-go="course" class="flex items-center justify-between gap-2 px-3 py-2 rounded-xl hover:bg-white/5 group"><span class="text-sm font-semibold text-slate-200 group-hover:text-white">${n}</span><span class="text-[10px] mono text-slate-500">${a} thn</span></a>`).join('')}</div></div>`).join('')}
+      <div class="rounded-2xl overflow-hidden border border-white/10 relative">
+        <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/70 to-transparent"></div>
+        <div class="relative p-4 h-full flex flex-col justify-end min-h-[190px]">
+          <div class="text-[10px] mono font-bold uppercase tracking-widest text-[#FFC83D]">Bingung pilih?</div>
+          <div class="font-bold leading-tight mt-1">Coba 1 sesi gratis, tutor bantu tentukan level.</div>
+          <a href="#" data-go="register" class="cta px-3 py-2 mt-3 self-start">Coba Gratis <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center justify-between mt-5 pt-4 border-t border-white/10 text-xs">
+      <a href="#" data-go="tech" class="text-slate-300 hover:text-white"><i class="fa-solid fa-shapes text-cyan-400 mr-1.5"></i>Alur Tools &amp; Teknologi</a>
+      <a href="#" data-go="hof" class="text-slate-300 hover:text-white"><i class="fa-solid fa-trophy text-amber-400 mr-1.5"></i>Galeri Karya Siswa</a>
+      <a href="#" data-go="course" class="font-bold text-[#38BDF8]">Lihat semua program →</a>
+    </div>`;
+  const M = [['manfaat', 'Manfaat Belajar', 'Logika, kreativitas & problem solving', 'fa-wand-magic-sparkles', '#FFC83D'], ['cara', 'Cara Belajar', '4 fase interaktif yang menyenangkan', 'fa-cubes-stacked', '#34D399'], ['progress', 'Laporan Progres Wali', 'Evaluasi transparan setiap sesi', 'fa-chart-line', '#60A5FA']];
+  nav.querySelector('[data-panel="metode"]').innerHTML = `
+    <div class="grid grid-cols-[1fr_1fr_1fr_1.1fr] gap-4">
+      ${M.map(([id, t, d, ic, c]) => `<a href="#" data-go="${id}" class="rounded-2xl p-4 border border-white/5 hover:border-white/15 hover:bg-white/[.03] transition"><span class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:${c}22; color:${c}"><i class="fa-solid ${ic}"></i></span><span class="block text-sm font-bold">${t}</span><span class="block text-xs text-slate-400 mt-1">${d}</span></a>`).join('')}
+      <div class="rounded-2xl p-4 border border-[#60A5FA]/30 bg-[#60A5FA]/5">
+        <div class="text-[10px] mono font-bold uppercase tracking-widest text-[#60A5FA] mb-2">Contoh laporan sesi</div>
+        <div class="space-y-1.5 text-[11px]">${[['Pemahaman Konsep', '8.5', '#22D3EE'], ['Kreativitas', '9.0', '#FFC83D'], ['Keaktifan', '9.5', '#34D399']].map(([n, v, c]) => `<div class="flex items-center justify-between bg-[#0B0F19] rounded-lg px-2.5 py-1.5"><span class="text-slate-300">${n}</span><span class="mono font-bold" style="color:${c}">${v}</span></div>`).join('')}</div>
+        <a href="#" data-go="progress" class="block text-xs font-bold text-[#60A5FA] mt-3">Lihat laporan lengkap →</a>
+      </div>
+    </div>`;
+  let timer;
+  const open = key => { clearTimeout(timer); nav.querySelectorAll('[data-panel]').forEach(p => p.classList.toggle('open', p.dataset.panel === key)); nav.querySelectorAll('[data-mega]').forEach(b => b.setAttribute('aria-expanded', b.dataset.mega === key)); };
+  const closeSoon = () => { timer = setTimeout(() => open(null), 180); };
+  nav.querySelectorAll('[data-mega]').forEach(b => { b.addEventListener('mouseenter', () => open(b.dataset.mega)); b.addEventListener('click', () => open(b.getAttribute('aria-expanded') === 'true' ? null : b.dataset.mega)); b.addEventListener('mouseleave', closeSoon); });
+  nav.querySelectorAll('[data-panel]').forEach(p => { p.addEventListener('mouseenter', () => clearTimeout(timer)); p.addEventListener('mouseleave', closeSoon); p.addEventListener('click', e => { if (e.target.closest('[data-go]')) open(null); }); });
+  spy(frame, id => nav.querySelectorAll('[data-go].nl').forEach(a => a.classList.toggle('active', a.dataset.go === id)));
+  // mobile sheet
+  const sheet = document.getElementById('o2m-sheet'), dim = document.getElementById('o2m-dim');
+  const GROUPS = [['Program & Karya', [['course', 'Program Belajar'], ['tech', 'Alur Tools & Teknologi'], ['hof', 'Galeri Karya Siswa']]], ['Metode & Progres', [['manfaat', 'Manfaat Belajar'], ['cara', 'Cara Belajar'], ['progress', 'Laporan Progres Wali']]], ['Informasi Kampus', [['location', 'Lokasi Belajar'], ['faq', 'FAQ']]]];
+  sheet.innerHTML = `<div class="w-10 h-1.5 rounded-full bg-white/20 mx-auto mb-4"></div>` + GROUPS.map(([g, ls], i) => `
+    <div class="acc ${i === 0 ? 'open' : ''} border-b border-white/5">
+      <button class="w-full flex items-center justify-between py-3 text-sm font-bold" data-acc>${g}<i class="chev fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i></button>
+      <div class="acc-body"><div class="overflow-hidden"><div class="pb-3 space-y-1">${ls.map(([id, l]) => { const s = SECTIONS.find(x => x[0] === id); return `<a href="#" data-go="${id}" data-frame="o2m-frame" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/[.03] text-sm"><i class="fa-solid ${s[2]} w-4" style="color:${s[3]}"></i>${l}</a>`; }).join('')}</div></div></div>
+    </div>`).join('') + `<a href="#" data-go="register" data-frame="o2m-frame" class="cta justify-center w-full py-3.5 mt-4"><i class="fa-solid fa-calendar-check"></i>Coba Kelas Gratis</a>
+    <div class="flex items-center justify-between mt-3 text-xs text-slate-400"><span>Bahasa</span><button class="lang px-3 py-1.5" data-lang><i class="fa-solid fa-globe text-[#FFC83D]"></i><span>ID</span></button></div>`;
+  const setSheet = v => { sheet.classList.toggle('open', v); dim.style.opacity = v ? 1 : 0; dim.style.pointerEvents = v ? 'auto' : 'none'; };
+  document.getElementById('o2m-open').onclick = () => setSheet(true);
+  dim.onclick = () => setSheet(false);
+  sheet.addEventListener('click', e => { const a = e.target.closest('[data-acc]'); if (a) a.parentElement.classList.toggle('open'); if (e.target.closest('[data-go]')) setSheet(false); });
+})();
+
+/* ===================== OPSI 3 · JALUR PERJALANAN ===================== */
+(() => {
+  const frame = document.getElementById('o3-frame'), links = document.getElementById('o3-links'), st = document.getElementById('o3-stations');
+  links.innerHTML = ['course', 'hof', 'cara', 'progress', 'location', 'faq'].map(id => navLink(id)).join('');
+  const secs = [...frame.querySelectorAll('[data-sec]')];
+  const place = () => {
+    const max = frame.scrollHeight - frame.clientHeight;
+    st.innerHTML = secs.map(s => { const p = Math.min(1, Math.max(0, (s.offsetTop - 80) / max)); return `<span class="station" data-go="${s.dataset.sec}" style="left:${p * 100}%"><span class="tip">${label(s.dataset.sec)}</span></span>`; }).join('');
+  };
+  place(); addEventListener('resize', place);
+  spy(frame, (id, p) => {
+    document.getElementById('o3-fill').style.width = `${p * 100}%`;
+    document.getElementById('o3-cur').textContent = label(id);
+    markActive(links, id);
+    const idx = secs.findIndex(s => s.dataset.sec === id);
+    st.querySelectorAll('.station').forEach((s, i) => { s.classList.toggle('passed', i < idx); s.classList.toggle('now', i === idx); });
+  });
+  const mf = document.getElementById('o3m-frame');
+  spy(mf, (id, p) => { document.getElementById('o3m-cur').textContent = label(id); document.getElementById('o3m-ring').style.strokeDashoffset = 119.4 * (1 - p); });
+})();
+
+/* ===================== OPSI 4 · STRIP PROMO + WA ===================== */
+(() => {
+  const frame = document.getElementById('o4-frame'), strip = document.getElementById('o4-strip');
+  let closed = false;
+  document.getElementById('o4-close').onclick = () => { closed = true; strip.classList.add('collapsed'); };
+  spy(frame, (id, p, top) => { if (!closed) strip.classList.toggle('collapsed', top > 160); frame.querySelectorAll('[data-go].nl').forEach(a => a.classList.toggle('active', a.dataset.go === id)); });
+  const wa = document.getElementById('o4-wa'), dd = document.getElementById('o4-dd');
+  wa.onclick = e => { e.stopPropagation(); const v = !dd.classList.contains('open'); dd.classList.toggle('open', v); wa.setAttribute('aria-expanded', v); };
+  document.addEventListener('click', e => { if (!e.target.closest('#o4-dd')) { dd.classList.remove('open'); wa.setAttribute('aria-expanded', false); } });
+  document.querySelectorAll('[data-copy]').forEach(b => b.onclick = async () => {
+    try { await navigator.clipboard.writeText('PETUALANGAN2026'); } catch (e) {}
+    const h = b.innerHTML; b.innerHTML = 'Tersalin <i class="fa-solid fa-check ml-1"></i>'; setTimeout(() => b.innerHTML = h, 1600);
+  });
+})();
+
+/* ===================== OPSI 5 · PERSONA ===================== */
+(() => {
+  const P = {
+    ortu:  { links:['manfaat', 'progress', 'location', 'faq'], cta:'Coba Kelas Gratis', desc:{ manfaat:'Apa yang anak dapatkan', progress:'Laporan tiap sesi', location:'3 lab di Gianyar & Ubud', faq:'Biaya, jadwal & lainnya' } },
+    siswa: { links:['course', 'tech', 'hof', 'cara'], cta:'Ajak Ortu Daftar', desc:{ course:'9 kelas seru, usia 6–17', tech:'Scratch, Roblox, Arduino…', hof:'Game & web buatan teman', cara:'Belajar sambil berkarya' } },
+  };
+  const frame = document.getElementById('o5-frame'), links = document.getElementById('o5-links'), mlinks = document.getElementById('o5m-links');
+  let persona = 'ortu';
+  const render = () => {
+    const p = P[persona];
+    links.classList.remove('fade-swap'); void links.offsetWidth; links.classList.add('fade-swap');
+    links.innerHTML = p.links.map(id => navLink(id, '!px-2.5', false)).join('');
+    document.getElementById('o5-cta').innerHTML = `<i class="fa-solid ${persona === 'ortu' ? 'fa-calendar-check' : 'fa-rocket'}"></i>${p.cta}`;
+    mlinks.innerHTML = p.links.map(id => { const s = SECTIONS.find(x => x[0] === id); return `<a href="#" data-go="${id}" data-frame="o5m-frame" class="fade-swap flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/[.03] border border-white/5"><span class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:${s[3]}22; color:${s[3]}"><i class="fa-solid ${s[2]}"></i></span><span><span class="block text-sm font-bold">${s[1]}</span><span class="block text-[11px] text-slate-400">${p.desc[id]}</span></span></a>`; }).join('');
+    document.querySelectorAll('[data-seg] [data-persona]').forEach(b => b.setAttribute('aria-selected', b.dataset.persona === persona));
+  };
+  document.querySelectorAll('[data-seg]').forEach(seg => seg.addEventListener('click', e => { const b = e.target.closest('[data-persona]'); if (b) { persona = b.dataset.persona; render(); } }));
+  spy(frame, id => markActive(links, id));
+  const menu = document.getElementById('o5m-menu');
+  const setMenu = v => { menu.style.opacity = v ? 1 : 0; menu.style.pointerEvents = v ? 'auto' : 'none'; };
+  document.getElementById('o5m-open').onclick = () => setMenu(true);
+  document.getElementById('o5m-close').onclick = () => setMenu(false);
+  menu.addEventListener('click', e => { if (e.target.closest('[data-go]')) setMenu(false); });
+  render();
+})();
+
+/* ===================== OPSI 6 · COMMAND PALETTE ===================== */
+(() => {
+  const ITEMS = [
+    ...SECTIONS.map(([id, l, ic, c]) => ({ g:'Bagian halaman', t:l, ic, c, go:id, k:l })),
+    ...[['Innovator', '6–8 thn', 6, 8], ['Beginner', '8–11 thn', 8, 11], ['Intermediate', '10–14 thn', 10, 14], ['Komputer Dasar', '8–14 thn', 8, 14], ['Desain Grafis', '9–14 thn', 9, 14], ['Game Developer', '11–17 thn · Roblox', 11, 17], ['Junior Web Developer', '11–17 thn · HTML/CSS/JS', 11, 17], ['Robotika & IoT', '11–17 thn · Arduino, robot, sensor', 11, 17], ['Apps Developer', '11–17 thn · aplikasi Android', 11, 17]]
+      .map(([t, s, a, b]) => ({ g:'Program', t, s, ic:'fa-graduation-cap', c:'#0788F5', go:'course', k:`${t} ${s} game coding`, age:[a, b] })),
+    ...[['Gianyar', 'Jln Ksatrian No 8'], ['Ubud Peliatan', 'Jalan Peliatan No. 1'], ['Bedulu', 'Jln Raya Semebaung']].map(([t, s]) => ({ g:'Lokasi', t:`Lab ${t}`, s, ic:'fa-location-dot', c:'#C084FC', go:'location', k:`${t} lokasi alamat lab` })),
+    ...[['Berapa biayanya?', 'Diinformasikan admin setelah mendaftar', 'faq', 'biaya harga mahal bayar'], ['Apakah ada kelas gratis?', 'Ya, 1 sesi Free Trial tanpa komitmen', 'register', 'gratis trial coba promo'], ['Anak saya belum pernah coding', 'Bisa mulai dari nol', 'faq', 'pemula nol belum bisa'], ['Bagaimana saya memantau progres?', 'Laporan tiap sesi di Student Space', 'progress', 'laporan rapor progres pantau'], ['Jadwal kelasnya kapan?', 'Disepakati bersama admin', 'faq', 'jadwal jam hari waktu']]
+      .map(([t, s, go, k]) => ({ g:'Pertanyaan populer', t, s, ic:'fa-circle-question', c:'#F87171', go, k:`${t} ${k}` })),
+  ];
+  const pal = document.getElementById('palette'), input = document.getElementById('pal-input'), list = document.getElementById('pal-list');
+  let results = [], sel = 0, targetFrame = 'o6-frame';
+  const esc = s => s.replace(/[&<>"]/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[ch]));
+  const search = q => {
+    q = q.trim().toLowerCase();
+    if (!q) return ITEMS.filter(i => i.g !== 'Bagian halaman' || ['course', 'location', 'faq', 'register'].includes(i.go)).slice(0, 12);
+    const age = parseInt(q.match(/\d+/)?.[0]);
+    return ITEMS.filter(i => (age && i.age) ? age >= i.age[0] && age <= i.age[1] : i.k.toLowerCase().includes(q) || q.split(/\s+/).every(w => i.k.toLowerCase().includes(w)));
+  };
+  const render = () => {
+    results = search(input.value); sel = Math.min(sel, Math.max(0, results.length - 1));
+    if (!results.length) { list.innerHTML = `<div class="p-6 text-center text-sm text-slate-500">Tidak ada hasil. <a href="#" data-pal-go="faq" class="text-[#38BDF8] font-bold">Lihat FAQ</a></div>`; return; }
+    let g = '';
+    list.innerHTML = results.map((r, i) => `${r.g !== g ? `<div class="px-3 pt-3 pb-1 text-[10px] mono font-bold uppercase tracking-widest text-slate-500">${g = r.g}</div>` : ''}
+      <button class="pal-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl border border-transparent text-left" data-i="${i}" aria-selected="${i === sel}">
+        <span class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style="background:${r.c}1f; color:${r.c}"><i class="fa-solid ${r.ic} text-sm"></i></span>
+        <span class="flex-1 min-w-0"><span class="block text-sm font-semibold truncate">${esc(r.t)}</span>${r.s ? `<span class="block text-[11px] text-slate-400 truncate">${esc(r.s)}</span>` : ''}</span>
+        <i class="fa-solid fa-arrow-turn-down rotate-90 text-[10px] text-slate-500"></i>
+      </button>`).join('');
+    list.querySelector('[aria-selected="true"]')?.scrollIntoView({ block:'nearest' });
+  };
+  const open = frameId => { targetFrame = frameId || 'o6-frame'; pal.classList.remove('hidden'); pal.classList.add('flex'); input.value = ''; sel = 0; render(); setTimeout(() => input.focus(), 30); };
+  const close = () => { pal.classList.add('hidden'); pal.classList.remove('flex'); };
+  const choose = r => { close(); goTo(document.getElementById(targetFrame), r.go, targetFrame.startsWith('o6m') ? 120 : 84); };
+  document.addEventListener('click', e => { const b = e.target.closest('[data-palette]'); if (b) open(b.dataset.palette || 'o6-frame'); });
+  pal.addEventListener('click', e => {
+    if (e.target === pal) return close();
+    const it = e.target.closest('.pal-item'); if (it) choose(results[+it.dataset.i]);
+    const g = e.target.closest('[data-pal-go]'); if (g) { e.preventDefault(); choose({ go:g.dataset.palGo }); }
+  });
+  input.addEventListener('input', () => { sel = 0; render(); });
+  input.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); sel = Math.min(results.length - 1, sel + 1); render(); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); sel = Math.max(0, sel - 1); render(); }
+    if (e.key === 'Enter' && results[sel]) choose(results[sel]);
+  });
+  document.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); pal.classList.contains('hidden') ? open() : close(); }
+    if (e.key === 'Escape' && !pal.classList.contains('hidden')) close();
+  });
+  spy(document.getElementById('o6-frame'), id => document.querySelectorAll('#o6-frame [data-go].nl').forEach(a => a.classList.toggle('active', a.dataset.go === id)));
+})();
+</script>
+</body>
+</html>

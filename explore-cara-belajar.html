@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi — Section Cara Belajar (How Students Learn)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  /* Tokens mirrored from style.css */
+  :root{
+    --yellow:#FFC83D; --blue:#0788F5; --sky:#38BDF8; --purple:#C084FC; --red:#F87171;
+    --surface:#1E293B; --surface-soft:#0F172A; --bg:#0B0F19;
+  }
+  body{background:var(--bg);color:#fff}
+  html{scroll-behavior:smooth}
+  .grain{background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:18px 18px}
+  .bg-grid-pattern{background-image:linear-gradient(to right,rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.035) 1px,transparent 1px);background-size:40px 40px}
+  .fade{animation:fade .45s cubic-bezier(.16,1,.3,1)}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  @keyframes dash{from{stroke-dashoffset:32}to{stroke-dashoffset:0}}
+  @keyframes spin-slow{to{transform:rotate(360deg)}}
+  @keyframes fill{from{width:0}to{width:100%}}
+  .bob{animation:bob 2.4s ease-in-out infinite}
+  .blink{animation:blink 1.2s steps(2) infinite}
+  .dash{stroke-dasharray:8 8;animation:dash 2.4s linear infinite}
+  .spin-slow{animation:spin-slow 40s linear infinite}
+  .card-lift{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .35s}
+  .card-lift:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.4)}
+
+  /* Option B */
+  .step-tab[aria-selected="true"]{background:var(--surface);border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 12px 30px -14px var(--c)}
+  .step-tab[aria-selected="true"] .num{background:var(--c);color:#0B0F19;border-color:var(--c)}
+  .step-tab .bar{width:0}
+  .step-tab[aria-selected="true"] .bar{animation:fill 6s linear forwards}
+  .paused .step-tab[aria-selected="true"] .bar{animation-play-state:paused}
+
+  /* Option C */
+  .cyc-node{transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,border-color .3s}
+  .cyc-node[data-active="true"]{transform:scale(1.06);border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 0 40px -8px var(--c)}
+
+  /* Option F */
+  .term-line{opacity:0;transform:translateY(4px);transition:opacity .35s,transform .35s}
+  .term-line.on{opacity:1;transform:none}
+
+  @media (prefers-reduced-motion: reduce){
+    .bob,.blink,.fade,.dash,.spin-slow{animation:none!important}
+    .step-tab .bar{animation:none!important}
+    .term-line{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- Exploration switcher -->
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 font-mono">EKSPLORASI · Section Cara Belajar</div>
+    <div class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-a" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">A · Timeline Sesi</a>
+      <a href="#opsi-b" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">B · Stepper Interaktif</a>
+      <a href="#opsi-c" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">C · Siklus Belajar</a>
+      <a href="#opsi-d" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">D · Jalur Foto</a>
+      <a href="#opsi-e" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">E · Bento</a>
+      <a href="#opsi-f" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">F · Terminal</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- =============================================================== -->
+<!-- OPSI A — TIMELINE SESI (proportional session bar)               -->
+<!-- =============================================================== -->
+<section id="opsi-a" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden">
+  <div class="absolute inset-0 grain opacity-60 pointer-events-none"></div>
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI A — TIMELINE SATU SESI</div>
+
+    <div class="grid lg:grid-cols-12 gap-8 items-end mb-12">
+      <div class="lg:col-span-7">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-4">
+          <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
+          <span class="text-xs font-bold tracking-wider uppercase">Metodologi Belajar</span>
+        </div>
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight">
+          Satu sesi di LesKoding,<br><span class="text-[#FFC83D]">lebih banyak praktiknya.</span>
+        </h2>
+      </div>
+      <p class="lg:col-span-5 text-slate-300 text-sm sm:text-base leading-relaxed">
+        Penjelasan cuma 15 menit, setelah itu anak langsung praktik. Tutor mendampingi sepanjang sesi, dan semua hasilnya tercatat untuk orang tua.
+      </p>
+    </div>
+
+    <!-- Proportional bar -->
+    <div class="rounded-2xl bg-[#0F172A] border border-white/10 p-5 sm:p-7">
+      <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-3">
+        <span>00:00 · MULAI</span>
+        <span class="hidden sm:inline">↓ Tutor mendampingi sepanjang sesi</span>
+        <span>SELESAI</span>
+      </div>
+
+      <!-- tutor layer -->
+      <div class="h-2 rounded-full bg-[#C084FC]/25 mb-2 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[repeating-linear-gradient(90deg,#C084FC_0_10px,transparent_10px_20px)] opacity-70"></div>
+      </div>
+
+      <div class="flex h-16 sm:h-20 rounded-xl overflow-hidden text-[#0B0F19] font-bold">
+        <div class="bg-[#38BDF8] flex items-center gap-2 px-3 sm:px-4" style="flex:15">
+          <i class="fa-solid fa-book-open-reader"></i><span class="hidden md:inline text-sm">Konsep · 15'</span>
+        </div>
+        <div class="bg-[#FFC83D] flex items-center gap-2 px-4 relative" style="flex:50">
+          <i class="fa-solid fa-laptop-code"></i><span class="text-sm">Praktik Eksploratif · 50 menit</span>
+          <span class="ml-auto hidden sm:inline-flex text-[11px] font-mono bg-[#0B0F19]/15 px-2 py-0.5 rounded">porsi terbesar sesi</span>
+        </div>
+        <div class="bg-[#F87171] flex items-center justify-center px-3 w-14 sm:w-20 shrink-0" title="Tercatat">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+      </div>
+      <div class="flex justify-between text-[11px] font-mono text-slate-500 mt-2">
+        <span>15'</span><span class="text-[#C084FC]">feedback personal · rasio 1:5</span><span>+ rapor</span>
+      </div>
+    </div>
+
+    <!-- Step details -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+      <div class="card-lift rounded-2xl bg-[#1E293B] border border-white/10 p-6 hover:border-[#38BDF8]/60">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-[11px] font-bold tracking-widest text-[#38BDF8]">01 · KONSEP</span>
+          <span class="text-xs font-bold bg-[#0F172A] px-2 py-0.5 rounded-md border border-white/10 text-slate-300">15 Menit</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Materi Konsep</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Konsep baru dijelaskan lewat analogi visual dan kuis singkat, tanpa ceramah panjang.</p>
+      </div>
+      <div class="card-lift rounded-2xl bg-[#1E293B] border border-[#FFC83D]/30 p-6 hover:border-[#FFC83D]/70">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-[11px] font-bold tracking-widest text-[#FFC83D]">02 · PRAKTIK</span>
+          <span class="text-xs font-bold bg-[#FFC83D] text-[#0B0F19] px-2 py-0.5 rounded-md">50 Menit</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Praktik Eksploratif</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Anak membuat game, menulis logika, atau merangkai sensor robot. Bug dicari sendiri dulu sebelum dibantu.</p>
+      </div>
+      <div class="card-lift rounded-2xl bg-[#1E293B] border border-white/10 p-6 hover:border-[#C084FC]/60">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-[11px] font-bold tracking-widest text-[#C084FC]">03 · FEEDBACK</span>
+          <span class="text-xs font-bold bg-[#0F172A] px-2 py-0.5 rounded-md border border-white/10 text-slate-300">Setiap Sesi</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Feedback Tutor</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Satu tutor untuk maksimal 5 siswa. Kode diulas, ide orisinal diapresiasi.</p>
+      </div>
+      <div class="card-lift rounded-2xl bg-[#1E293B] border border-white/10 p-6 hover:border-[#F87171]/60">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-[11px] font-bold tracking-widest text-[#F87171]">04 · PROGRES</span>
+          <span class="text-xs font-bold bg-[#0F172A] px-2 py-0.5 rounded-md border border-white/10 text-slate-300">Tercatat</span>
+        </div>
+        <h3 class="font-bold text-lg mb-2">Pencapaian &amp; Progres</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">XP bertambah, karya masuk portofolio, dan rapor sesi terkirim ke orang tua.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================================== -->
+<!-- OPSI B — STEPPER INTERAKTIF + MOCK LAYAR                         -->
+<!-- =============================================================== -->
+<section id="opsi-b" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI B — STEPPER INTERAKTIF (AUTO-PLAY)</div>
+
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-4">
+        <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
+        <span class="text-xs font-bold tracking-wider uppercase">Metodologi Belajar</span>
+      </div>
+      <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Cara Belajar di LesKoding</h2>
+      <p class="text-slate-300 mt-4 max-w-2xl mx-auto">Klik setiap tahap untuk melihat apa yang dialami anak di kelas.</p>
+    </div>
+
+    <div id="stepper" class="grid lg:grid-cols-12 gap-8 items-stretch">
+      <!-- Tabs -->
+      <div class="lg:col-span-5 flex flex-col gap-3" role="tablist">
+        <button class="step-tab text-left rounded-2xl border border-white/10 bg-white/[.02] p-5 transition-all relative overflow-hidden" style="--c:#38BDF8" role="tab" aria-selected="true" data-step="0">
+          <div class="flex items-start gap-4">
+            <span class="num w-10 h-10 shrink-0 rounded-xl border border-white/15 flex items-center justify-center font-mono font-bold text-sm">01</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between"><h3 class="font-bold">Materi Konsep</h3><span class="text-[11px] font-mono text-slate-400">15'</span></div>
+              <p class="text-sm text-slate-400 mt-1">Analogi visual &amp; kuis interaktif.</p>
+            </div>
+          </div>
+          <span class="bar absolute left-0 bottom-0 h-[3px]" style="background:var(--c)"></span>
+        </button>
+        <button class="step-tab text-left rounded-2xl border border-white/10 bg-white/[.02] p-5 transition-all relative overflow-hidden" style="--c:#FFC83D" role="tab" aria-selected="false" data-step="1">
+          <div class="flex items-start gap-4">
+            <span class="num w-10 h-10 shrink-0 rounded-xl border border-white/15 flex items-center justify-center font-mono font-bold text-sm">02</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between"><h3 class="font-bold">Praktik Eksploratif</h3><span class="text-[11px] font-mono text-slate-400">50'</span></div>
+              <p class="text-sm text-slate-400 mt-1">Bikin game, kode &amp; robot sendiri.</p>
+            </div>
+          </div>
+          <span class="bar absolute left-0 bottom-0 h-[3px]" style="background:var(--c)"></span>
+        </button>
+        <button class="step-tab text-left rounded-2xl border border-white/10 bg-white/[.02] p-5 transition-all relative overflow-hidden" style="--c:#C084FC" role="tab" aria-selected="false" data-step="2">
+          <div class="flex items-start gap-4">
+            <span class="num w-10 h-10 shrink-0 rounded-xl border border-white/15 flex items-center justify-center font-mono font-bold text-sm">03</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between"><h3 class="font-bold">Feedback Tutor</h3><span class="text-[11px] font-mono text-slate-400">tiap sesi</span></div>
+              <p class="text-sm text-slate-400 mt-1">Bimbingan personal, rasio 1:5.</p>
+            </div>
+          </div>
+          <span class="bar absolute left-0 bottom-0 h-[3px]" style="background:var(--c)"></span>
+        </button>
+        <button class="step-tab text-left rounded-2xl border border-white/10 bg-white/[.02] p-5 transition-all relative overflow-hidden" style="--c:#F87171" role="tab" aria-selected="false" data-step="3">
+          <div class="flex items-start gap-4">
+            <span class="num w-10 h-10 shrink-0 rounded-xl border border-white/15 flex items-center justify-center font-mono font-bold text-sm">04</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between"><h3 class="font-bold">Pencapaian &amp; Progres</h3><span class="text-[11px] font-mono text-slate-400">tercatat</span></div>
+              <p class="text-sm text-slate-400 mt-1">XP, portofolio &amp; rapor orang tua.</p>
+            </div>
+          </div>
+          <span class="bar absolute left-0 bottom-0 h-[3px]" style="background:var(--c)"></span>
+        </button>
+      </div>
+
+      <!-- Mock window -->
+      <div class="lg:col-span-7">
+        <div class="h-full min-h-[420px] rounded-3xl bg-[#0B0F19] border border-white/10 overflow-hidden shadow-2xl shadow-black/50 flex flex-col">
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-[#1E293B]/60">
+            <span class="w-3 h-3 rounded-full bg-[#F87171]"></span><span class="w-3 h-3 rounded-full bg-[#FFC83D]"></span><span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+            <span id="mock-title" class="ml-3 text-xs font-mono text-slate-400">kelas/konsep.lesson</span>
+          </div>
+          <div class="flex-1 p-6 sm:p-8 relative grain">
+
+            <!-- Panel 0: concept quiz -->
+            <div class="mock-panel fade" data-panel="0">
+              <div class="text-[11px] font-mono text-[#38BDF8] mb-3">KUIS ANALOGI · 2/4</div>
+              <h4 class="font-display text-2xl font-bold mb-5">Kalau robot harus belok saat ketemu tembok, kita pakai…</h4>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <div class="rounded-xl border border-white/10 bg-white/[.03] p-4 text-sm">🔁 Perulangan (loop)</div>
+                <div class="rounded-xl border-2 border-[#38BDF8] bg-[#38BDF8]/10 p-4 text-sm font-bold flex items-center justify-between">🔀 Percabangan (if) <i class="fa-solid fa-circle-check text-[#38BDF8]"></i></div>
+                <div class="rounded-xl border border-white/10 bg-white/[.03] p-4 text-sm">📦 Variabel</div>
+                <div class="rounded-xl border border-white/10 bg-white/[.03] p-4 text-sm">🎵 Event suara</div>
+              </div>
+              <div class="mt-6 flex items-center gap-3 text-sm text-slate-300"><span class="bob text-2xl">💡</span> Seperti lampu lalu lintas: <b class="text-white">jika</b> merah, <b class="text-white">maka</b> berhenti.</div>
+            </div>
+
+            <!-- Panel 1: practice blocks -->
+            <div class="mock-panel hidden" data-panel="1">
+              <div class="text-[11px] font-mono text-[#FFC83D] mb-3">PROYEK · Game Tangkap Bintang</div>
+              <div class="grid sm:grid-cols-5 gap-5">
+                <div class="sm:col-span-3 space-y-2 font-mono text-[13px]">
+                  <div class="rounded-lg bg-[#FFC83D] text-[#0B0F19] px-3 py-2 font-bold w-fit">ketika ▶ diklik</div>
+                  <div class="rounded-lg bg-[#0788F5] px-3 py-2 ml-4 w-fit">ulangi selamanya</div>
+                  <div class="rounded-lg bg-[#5B0CB5] px-3 py-2 ml-8 w-fit">jika <span class="bg-white/20 px-1.5 rounded">menyentuh bintang?</span></div>
+                  <div class="rounded-lg bg-emerald-500 text-[#0B0F19] px-3 py-2 ml-12 w-fit font-bold">skor + 1</div>
+                  <div class="rounded-lg border border-dashed border-white/30 px-3 py-2 ml-12 w-fit text-slate-400">+ tambah blok… <span class="blink">▍</span></div>
+                </div>
+                <div class="sm:col-span-2 rounded-xl bg-[#1E293B] border border-white/10 aspect-square relative overflow-hidden">
+                  <div class="absolute top-3 left-3 text-xs font-mono bg-black/40 px-2 py-1 rounded">SKOR: 7</div>
+                  <div class="absolute top-[30%] left-[60%] text-2xl bob">⭐</div>
+                  <div class="absolute top-[55%] left-[20%] text-xl bob" style="animation-delay:.6s">⭐</div>
+                  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-3xl">🚀</div>
+                </div>
+              </div>
+              <div class="mt-5 text-sm text-slate-300"><i class="fa-solid fa-bug text-[#FFC83D] mr-2"></i>Trial &amp; error: anak menelusuri bug sendiri dulu.</div>
+            </div>
+
+            <!-- Panel 2: tutor feedback -->
+            <div class="mock-panel hidden" data-panel="2">
+              <div class="text-[11px] font-mono text-[#C084FC] mb-4">REVIEW TUTOR · rasio 1:5</div>
+              <div class="space-y-4 max-w-lg">
+                <div class="flex gap-3">
+                  <div class="w-9 h-9 rounded-full bg-[#C084FC]/20 border border-[#C084FC]/40 flex items-center justify-center text-[#C084FC] shrink-0"><i class="fa-solid fa-user-tie text-sm"></i></div>
+                  <div class="rounded-2xl rounded-tl-sm bg-[#1E293B] border border-white/10 p-4 text-sm">Ide bintang yang makin cepat itu keren! 🌟 Coba simpan kecepatannya di <code class="text-[#C084FC]">variabel</code>, supaya gampang diubah.</div>
+                </div>
+                <div class="flex gap-3 justify-end">
+                  <div class="rounded-2xl rounded-tr-sm bg-[#C084FC]/15 border border-[#C084FC]/30 p-4 text-sm">Oh iya! Jadi kalau level naik, tinggal tambah angkanya ya kak?</div>
+                  <div class="w-9 h-9 rounded-full bg-[#FFC83D]/20 border border-[#FFC83D]/40 flex items-center justify-center shrink-0">🧒</div>
+                </div>
+                <div class="flex gap-3">
+                  <div class="w-9 h-9 rounded-full bg-[#C084FC]/20 border border-[#C084FC]/40 flex items-center justify-center text-[#C084FC] shrink-0"><i class="fa-solid fa-user-tie text-sm"></i></div>
+                  <div class="rounded-2xl rounded-tl-sm bg-[#1E293B] border border-white/10 p-4 text-sm">Tepat sekali. Itu namanya berpikir seperti programmer 👏</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel 3: progress report -->
+            <div class="mock-panel hidden" data-panel="3">
+              <div class="text-[11px] font-mono text-[#F87171] mb-4">RAPOR SESI · Student Space</div>
+              <div class="grid sm:grid-cols-3 gap-3 mb-5">
+                <div class="rounded-xl bg-[#1E293B] border border-white/10 p-4"><div class="text-[11px] text-slate-400">XP Sesi Ini</div><div class="font-display text-3xl font-extrabold text-[#FFC83D]">+120</div></div>
+                <div class="rounded-xl bg-[#1E293B] border border-white/10 p-4"><div class="text-[11px] text-slate-400">Karya Baru</div><div class="font-display text-3xl font-extrabold">1</div></div>
+                <div class="rounded-xl bg-[#1E293B] border border-white/10 p-4"><div class="text-[11px] text-slate-400">Karakter</div><div class="font-bold mt-1">🦾 Sang Inovator</div></div>
+              </div>
+              <div class="space-y-3 text-sm">
+                <div><div class="flex justify-between mb-1"><span class="text-slate-300">Pemahaman Konsep &amp; Problem Solving</span><span class="font-mono text-xs">Sangat Baik</span></div><div class="h-2 rounded-full bg-white/10"><div class="h-full rounded-full bg-[#38BDF8]" style="width:90%"></div></div></div>
+                <div><div class="flex justify-between mb-1"><span class="text-slate-300">Kreativitas &amp; Inovasi</span><span class="font-mono text-xs">Aktif</span></div><div class="h-2 rounded-full bg-white/10"><div class="h-full rounded-full bg-[#FFC83D]" style="width:80%"></div></div></div>
+                <div><div class="flex justify-between mb-1"><span class="text-slate-300">Keaktifan &amp; Antusiasme</span><span class="font-mono text-xs">Tinggi</span></div><div class="h-2 rounded-full bg-white/10"><div class="h-full rounded-full bg-[#C084FC]" style="width:85%"></div></div></div>
+              </div>
+              <div class="mt-5 inline-flex items-center gap-2 text-xs font-bold bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 px-3 py-1.5 rounded-full"><i class="fa-solid fa-paper-plane"></i> Terkirim ke orang tua</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================================== -->
+<!-- OPSI C — SIKLUS BELAJAR (loop diagram)                           -->
+<!-- =============================================================== -->
+<section id="opsi-c" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden">
+  <div class="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none"></div>
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI C — SIKLUS YANG BERULANG TIAP SESI</div>
+
+    <div class="grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-5">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-4">
+          <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
+          <span class="text-xs font-bold tracking-wider uppercase">Metodologi Belajar</span>
+        </div>
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight mb-5">
+          Bukan sekali jalan.<br><span class="text-[#38BDF8]">Siklus yang terus naik level.</span>
+        </h2>
+        <p class="text-slate-300 leading-relaxed mb-8">Empat tahap ini diulang di setiap sesi. Tiap putaran, anak membawa pulang satu kemampuan baru dan satu karya.</p>
+
+        <div id="cyc-detail" class="rounded-2xl bg-[#1E293B] border border-white/10 p-6 min-h-[170px]" style="--c:#38BDF8">
+          <div class="flex items-center justify-between mb-2">
+            <span id="cyc-step" class="font-mono text-[11px] font-bold tracking-widest" style="color:var(--c)">LANGKAH 01 · 15 MENIT</span>
+            <i id="cyc-icon" class="fa-solid fa-book-open-reader" style="color:var(--c)"></i>
+          </div>
+          <h3 id="cyc-title" class="font-bold text-xl mb-2">Materi Konsep</h3>
+          <p id="cyc-desc" class="text-sm text-slate-300 leading-relaxed">Konsep koding dan robotika dijelaskan lewat analogi visual sederhana dan kuis interaktif, tanpa ceramah panjang.</p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7">
+        <div class="relative mx-auto w-full max-w-[520px] aspect-square">
+          <!-- ring -->
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400" fill="none">
+            <circle cx="200" cy="200" r="140" stroke="rgba(255,255,255,.08)" stroke-width="2"/>
+            <circle class="dash" cx="200" cy="200" r="140" stroke="url(#cg)" stroke-width="3" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="cg" x1="0" y1="0" x2="400" y2="400" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38BDF8"/><stop offset=".35" stop-color="#FFC83D"/><stop offset=".65" stop-color="#C084FC"/><stop offset="1" stop-color="#F87171"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="absolute inset-[14%] rounded-full border border-dashed border-white/10 spin-slow"></div>
+
+          <!-- center -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+              <img src="assets/logo/leskoding_community.png" alt="LesKoding" class="h-12 mx-auto mb-3 opacity-90">
+              <div class="font-display text-2xl font-extrabold">1 Sesi</div>
+              <div class="text-xs font-mono text-slate-400">= 1 putaran · 1 karya</div>
+            </div>
+          </div>
+
+          <!-- nodes -->
+          <button class="cyc-node absolute top-0 left-1/2 -translate-x-1/2 w-32 rounded-2xl bg-[#0F172A] border border-white/10 p-3 text-center" style="--c:#38BDF8" data-i="0" data-active="true">
+            <div class="w-10 h-10 mx-auto rounded-xl bg-[#38BDF8]/15 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] mb-1.5"><i class="fa-solid fa-book-open-reader"></i></div>
+            <div class="text-xs font-bold">Konsep</div><div class="text-[10px] font-mono text-slate-400">15'</div>
+          </button>
+          <button class="cyc-node absolute right-0 top-1/2 -translate-y-1/2 w-32 rounded-2xl bg-[#0F172A] border border-white/10 p-3 text-center" style="--c:#FFC83D" data-i="1">
+            <div class="w-10 h-10 mx-auto rounded-xl bg-[#FFC83D]/15 border border-[#FFC83D]/30 flex items-center justify-center text-[#FFC83D] mb-1.5"><i class="fa-solid fa-laptop-code"></i></div>
+            <div class="text-xs font-bold">Praktik</div><div class="text-[10px] font-mono text-slate-400">50'</div>
+          </button>
+          <button class="cyc-node absolute bottom-0 left-1/2 -translate-x-1/2 w-32 rounded-2xl bg-[#0F172A] border border-white/10 p-3 text-center" style="--c:#C084FC" data-i="2">
+            <div class="w-10 h-10 mx-auto rounded-xl bg-[#C084FC]/15 border border-[#C084FC]/30 flex items-center justify-center text-[#C084FC] mb-1.5"><i class="fa-solid fa-comments"></i></div>
+            <div class="text-xs font-bold">Feedback</div><div class="text-[10px] font-mono text-slate-400">tiap sesi</div>
+          </button>
+          <button class="cyc-node absolute left-0 top-1/2 -translate-y-1/2 w-32 rounded-2xl bg-[#0F172A] border border-white/10 p-3 text-center" style="--c:#F87171" data-i="3">
+            <div class="w-10 h-10 mx-auto rounded-xl bg-[#F87171]/15 border border-[#F87171]/30 flex items-center justify-center text-[#F87171] mb-1.5"><i class="fa-solid fa-trophy"></i></div>
+            <div class="text-xs font-bold">Progres</div><div class="text-[10px] font-mono text-slate-400">tercatat</div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================================== -->
+<!-- OPSI D — JALUR FOTO (zig-zag with real class photos)             -->
+<!-- =============================================================== -->
+<section id="opsi-d" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI D — JALUR ZIG-ZAG DENGAN FOTO KELAS ASLI</div>
+
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-4">
+        <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
+        <span class="text-xs font-bold tracking-wider uppercase">Metodologi Belajar</span>
+      </div>
+      <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Begini suasana belajarnya</h2>
+      <p class="text-slate-300 mt-4 max-w-2xl mx-auto">4 tahap yang dijalani anak di setiap sesi, langsung dari kelas LesKoding.</p>
+    </div>
+
+    <div class="relative">
+      <!-- spine -->
+      <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-gradient-to-b from-[#38BDF8] via-[#FFC83D] via-60% to-[#F87171] opacity-40"></div>
+
+      <!-- Step 1 -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 relative">
+        <div class="relative rounded-3xl overflow-hidden border border-white/10 aspect-[4/3] group">
+          <img src="assets/sessions/01M3RSJWMWDKRWTNA3D0HEP47C.jpg" alt="Kelas LesKoding" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0B0F19]/80 to-transparent"></div>
+          <span class="absolute bottom-4 left-4 text-xs font-bold bg-[#38BDF8] text-[#0B0F19] px-2.5 py-1 rounded-md">15 Menit</span>
+        </div>
+        <div>
+          <div class="font-display text-7xl font-black text-[#38BDF8]/20 leading-none mb-2">01</div>
+          <h3 class="text-2xl font-bold mb-3">Materi Konsep</h3>
+          <p class="text-slate-300 leading-relaxed mb-4">Konsep baru dijelaskan lewat analogi visual sederhana dan kuis interaktif, singkat dan tidak membosankan.</p>
+          <div class="flex items-center gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-emerald-400"></i>Visual block &amp; kuis seru</div>
+        </div>
+        <span class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#38BDF8] ring-8 ring-[#0F172A]"></span>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 relative">
+        <div class="md:order-2 relative rounded-3xl overflow-hidden border border-white/10 aspect-[4/3] group">
+          <img src="assets/sessions/01M3RVHT4R9SQ961Z3GTWJD72Y.jpg" alt="Anak praktik" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0B0F19]/80 to-transparent"></div>
+          <span class="absolute bottom-4 left-4 text-xs font-bold bg-[#FFC83D] text-[#0B0F19] px-2.5 py-1 rounded-md">50 Menit</span>
+        </div>
+        <div class="md:order-1 md:text-right">
+          <div class="font-display text-7xl font-black text-[#FFC83D]/20 leading-none mb-2">02</div>
+          <h3 class="text-2xl font-bold mb-3">Praktik Eksploratif</h3>
+          <p class="text-slate-300 leading-relaxed mb-4">Bagian terpanjang sesi. Anak merakit game, menyusun logika kode, atau merangkai sensor robot sendiri.</p>
+          <div class="flex items-center gap-2 text-sm text-slate-300 md:justify-end"><i class="fa-solid fa-circle-check text-emerald-400"></i>Hands-on langsung di kelas</div>
+        </div>
+        <span class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#FFC83D] ring-8 ring-[#0F172A]"></span>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 relative">
+        <div class="relative rounded-3xl overflow-hidden border border-white/10 aspect-[4/3] group">
+          <img src="assets/sessions/01M3H323B1QJV4PH2CCWGH9AQ2.jpeg" alt="Tutor LesKoding" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0B0F19]/80 to-transparent"></div>
+          <span class="absolute bottom-4 left-4 text-xs font-bold bg-[#C084FC] text-[#0B0F19] px-2.5 py-1 rounded-md">Rasio 1:5</span>
+        </div>
+        <div>
+          <div class="font-display text-7xl font-black text-[#C084FC]/20 leading-none mb-2">03</div>
+          <h3 class="text-2xl font-bold mb-3">Feedback Tutor</h3>
+          <p class="text-slate-300 leading-relaxed mb-4">Tutor mengulas logika kode, memberi tips penyempurnaan, dan mengapresiasi ide orisinal setiap anak.</p>
+          <div class="flex items-center gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-emerald-400"></i>1 tutor : maks. 5 siswa</div>
+        </div>
+        <span class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#C084FC] ring-8 ring-[#0F172A]"></span>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center relative">
+        <div class="md:order-2 relative rounded-3xl overflow-hidden border border-white/10 aspect-[4/3] group">
+          <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" alt="Karya siswa" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0B0F19]/80 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 flex items-center gap-2">
+            <span class="text-xs font-bold bg-[#F87171] text-[#0B0F19] px-2.5 py-1 rounded-md">Tercatat</span>
+            <span class="text-xs font-mono bg-black/50 backdrop-blur px-2.5 py-1 rounded-md">+120 XP</span>
+          </div>
+        </div>
+        <div class="md:order-1 md:text-right">
+          <div class="font-display text-7xl font-black text-[#F87171]/20 leading-none mb-2">04</div>
+          <h3 class="text-2xl font-bold mb-3">Pencapaian &amp; Progres</h3>
+          <p class="text-slate-300 leading-relaxed mb-4">XP bertambah, karya masuk portofolio, dan rapor sesi terkirim ke orang tua.</p>
+          <div class="flex items-center gap-2 text-sm text-slate-300 md:justify-end"><i class="fa-solid fa-circle-check text-emerald-400"></i>Portofolio &amp; sertifikat kelulusan</div>
+        </div>
+        <span class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#F87171] ring-8 ring-[#0F172A]"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================================== -->
+<!-- OPSI E — BENTO (asymmetric, practice as hero)                    -->
+<!-- =============================================================== -->
+<section id="opsi-e" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden">
+  <div class="absolute inset-0 grain opacity-60 pointer-events-none"></div>
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI E — BENTO GRID (PRAKTIK SEBAGAI HERO)</div>
+
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-4">
+          <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
+          <span class="text-xs font-bold tracking-wider uppercase">Metodologi Belajar</span>
+        </div>
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">Cara Belajar di LesKoding</h2>
+      </div>
+      <p class="text-slate-300 max-w-md">Anak tidak belajar dengan menghafal. Mereka belajar sambil membuat sesuatu.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-6 md:grid-rows-[auto_auto] gap-4">
+      <!-- Hero: Praktik -->
+      <div class="md:col-span-4 md:row-span-2 relative rounded-3xl overflow-hidden border border-[#FFC83D]/30 min-h-[420px] group card-lift">
+        <img src="assets/sessions/01M3RVHT4R9SQ961Z3GTWJD72Y.jpg" alt="Praktik" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/60 to-transparent"></div>
+        <div class="absolute top-5 left-5 flex gap-2">
+          <span class="text-[11px] font-mono font-bold bg-[#FFC83D] text-[#0B0F19] px-2.5 py-1 rounded-md">LANGKAH 02</span>
+          <span class="text-[11px] font-mono font-bold bg-black/50 backdrop-blur px-2.5 py-1 rounded-md">INTI SESI</span>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+          <div class="flex items-end gap-4 mb-3">
+            <span class="font-display text-7xl sm:text-8xl font-black text-[#FFC83D] leading-none">50'</span>
+            <span class="text-sm text-slate-300 pb-2">praktik langsung<br>setiap pertemuan</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-2">Praktik Eksploratif</h3>
+          <p class="text-slate-300 max-w-lg">Merakit game, menulis logika kode, merangkai sensor robot. Bug dicari sendiri dulu, karena dari situ kemampuan problem solving tumbuh.</p>
+        </div>
+      </div>
+
+      <!-- Konsep -->
+      <div class="md:col-span-2 rounded-3xl bg-[#1E293B] border border-white/10 p-6 card-lift hover:border-[#38BDF8]/60">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-[#38BDF8]/15 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8]"><i class="fa-solid fa-book-open-reader"></i></div>
+          <span class="font-display text-3xl font-black text-[#38BDF8]">15'</span>
+        </div>
+        <div class="font-mono text-[11px] font-bold tracking-widest text-[#38BDF8] mb-1">LANGKAH 01</div>
+        <h3 class="font-bold text-lg mb-1">Materi Konsep</h3>
+        <p class="text-sm text-slate-300">Analogi visual &amp; kuis singkat yang bikin konsep langsung nyantol.</p>
+      </div>
+
+      <!-- Feedback -->
+      <div class="md:col-span-2 rounded-3xl bg-[#1E293B] border border-white/10 p-6 card-lift hover:border-[#C084FC]/60">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-[#C084FC]/15 border border-[#C084FC]/30 flex items-center justify-center text-[#C084FC]"><i class="fa-solid fa-comments"></i></div>
+          <span class="font-display text-3xl font-black text-[#C084FC]">1:5</span>
+        </div>
+        <div class="font-mono text-[11px] font-bold tracking-widest text-[#C084FC] mb-1">LANGKAH 03</div>
+        <h3 class="font-bold text-lg mb-1">Feedback Tutor</h3>
+        <p class="text-sm text-slate-300">Satu tutor untuk maksimal 5 siswa, jadi setiap anak dibimbing personal.</p>
+      </div>
+
+      <!-- Progress (wide) -->
+      <div class="md:col-span-6 rounded-3xl bg-[#1E293B] border border-white/10 p-6 sm:p-7 card-lift hover:border-[#F87171]/60 grid md:grid-cols-12 gap-6 items-center">
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-11 h-11 rounded-xl bg-[#F87171]/15 border border-[#F87171]/30 flex items-center justify-center text-[#F87171]"><i class="fa-solid fa-trophy"></i></div>
+            <div>
+              <div class="font-mono text-[11px] font-bold tracking-widest text-[#F87171]">LANGKAH 04</div>
+              <h3 class="font-bold text-lg">Pencapaian &amp; Progres</h3>
+            </div>
+          </div>
+          <p class="text-sm text-slate-300">Semua yang dikerjakan anak tercatat. Orang tua bisa melihat perkembangannya kapan saja.</p>
+        </div>
+        <div class="md:col-span-7 grid grid-cols-3 gap-3">
+          <div class="rounded-2xl bg-[#0F172A] border border-white/10 p-4 text-center">
+            <i class="fa-solid fa-bolt text-[#FFC83D] mb-2"></i><div class="font-bold text-sm">Poin XP</div><div class="text-[11px] text-slate-400">bertambah tiap sesi</div>
+          </div>
+          <div class="rounded-2xl bg-[#0F172A] border border-white/10 p-4 text-center">
+            <i class="fa-solid fa-folder-open text-[#38BDF8] mb-2"></i><div class="font-bold text-sm">Portofolio</div><div class="text-[11px] text-slate-400">karya tersimpan</div>
+          </div>
+          <div class="rounded-2xl bg-[#0F172A] border border-white/10 p-4 text-center">
+            <i class="fa-solid fa-file-lines text-[#C084FC] mb-2"></i><div class="font-bold text-sm">Rapor Sesi</div><div class="text-[11px] text-slate-400">untuk orang tua</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================================== -->
+<!-- OPSI F — TERMINAL "sesi.run()" (playful dev aesthetic)           -->
+<!-- =============================================================== -->
+<section id="opsi-f" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden bg-[#0F172A]">
+  <div class="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none"></div>
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI F — TERMINAL / KODE (TEMA PROGRAMMER)</div>
+
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-5">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-white/10 mb-4">
+          <span class="w-2 h-2 rounded-full bg-[#FFC83D]"></span>
+          <span class="text-xs font-bold tracking-wider uppercase">Metodologi Belajar</span>
+        </div>
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight mb-5">
+          Algoritma belajar<br>kami, <span class="font-mono text-[#38BDF8] text-3xl sm:text-4xl">dalam kode.</span>
+        </h2>
+        <p class="text-slate-300 leading-relaxed mb-6">Setiap sesi berjalan seperti program yang rapi: urut, terukur, dan selalu menghasilkan output nyata.</p>
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-center gap-3"><span class="w-6 h-6 rounded-md bg-[#38BDF8]/15 text-[#38BDF8] flex items-center justify-center font-mono text-[11px] font-bold">01</span>Konsep · 15 menit</li>
+          <li class="flex items-center gap-3"><span class="w-6 h-6 rounded-md bg-[#FFC83D]/15 text-[#FFC83D] flex items-center justify-center font-mono text-[11px] font-bold">02</span>Praktik · 50 menit</li>
+          <li class="flex items-center gap-3"><span class="w-6 h-6 rounded-md bg-[#C084FC]/15 text-[#C084FC] flex items-center justify-center font-mono text-[11px] font-bold">03</span>Feedback tutor · rasio 1:5</li>
+          <li class="flex items-center gap-3"><span class="w-6 h-6 rounded-md bg-[#F87171]/15 text-[#F87171] flex items-center justify-center font-mono text-[11px] font-bold">04</span>Progres tercatat · rapor orang tua</li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-7">
+        <div id="terminal" class="rounded-2xl bg-[#0B0F19] border border-white/10 shadow-2xl shadow-black/60 overflow-hidden font-mono text-[13px] leading-relaxed">
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-[#1E293B]/60">
+            <span class="w-3 h-3 rounded-full bg-[#F87171]"></span><span class="w-3 h-3 rounded-full bg-[#FFC83D]"></span><span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+            <span class="ml-3 text-xs text-slate-400">leskoding/sesi.js</span>
+          </div>
+          <div class="p-5 sm:p-6 overflow-x-auto">
+            <div class="term-line"><span class="text-slate-500">// setiap pertemuan di LesKoding</span></div>
+            <div class="term-line"><span class="text-[#C084FC]">async function</span> <span class="text-[#FFC83D]">sesi</span>(siswa) {</div>
+            <div class="term-line pl-5"><span class="text-[#C084FC]">await</span> <span class="text-[#38BDF8]">konsep</span>({ durasi: <span class="text-emerald-300">"15 menit"</span>, cara: <span class="text-emerald-300">"analogi + kuis"</span> });</div>
+            <div class="term-line pl-5"><span class="text-[#C084FC]">await</span> <span class="text-[#FFC83D]">praktik</span>({ durasi: <span class="text-emerald-300">"50 menit"</span>, proyek: siswa.minat });</div>
+            <div class="term-line pl-5"><span class="text-[#C084FC]">await</span> <span class="text-[#C084FC]">feedback</span>({ tutor: <span class="text-orange-300">1</span>, maksSiswa: <span class="text-orange-300">5</span> });</div>
+            <div class="term-line pl-5"><span class="text-[#C084FC]">return</span> <span class="text-[#F87171]">catatProgres</span>(siswa); <span class="text-slate-500">// XP, portofolio, rapor</span></div>
+            <div class="term-line">}</div>
+            <div class="term-line mt-4 text-slate-400">$ node sesi.js --siswa="Komang, 9 th"</div>
+            <div class="term-line"><span class="text-[#38BDF8]">✔ konsep</span>    <span class="text-slate-400">paham percabangan if/else</span></div>
+            <div class="term-line"><span class="text-[#FFC83D]">✔ praktik</span>   <span class="text-slate-400">game "Tangkap Bintang" jalan 🚀</span></div>
+            <div class="term-line"><span class="text-[#C084FC]">✔ feedback</span>  <span class="text-slate-400">"ide level makin cepat, keren!"</span></div>
+            <div class="term-line"><span class="text-[#F87171]">✔ progres</span>   <span class="text-slate-400">+120 XP · 1 karya · rapor terkirim ke orang tua</span></div>
+            <div class="term-line mt-2 text-emerald-400">Sesi selesai. Sampai minggu depan! <span class="blink">▍</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-10 text-center text-xs text-slate-500 font-mono">Eksplorasi · pilih salah satu opsi untuk dipasang di index.html</footer>
+
+<script>
+/* ---------- Opsi B: stepper ---------- */
+(() => {
+  const root = document.getElementById('stepper');
+  const tabs = [...root.querySelectorAll('.step-tab')];
+  const panels = [...root.querySelectorAll('.mock-panel')];
+  const titles = ['kelas/konsep.lesson','kelas/proyek.sb3','kelas/review.chat','student-space/rapor'];
+  let cur = 0, timer;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(i){
+    cur = i;
+    tabs.forEach((t,j)=>t.setAttribute('aria-selected', j===i));
+    panels.forEach((p,j)=>{ p.classList.toggle('hidden', j!==i); if(j===i){p.classList.remove('fade');void p.offsetWidth;p.classList.add('fade');} });
+    document.getElementById('mock-title').textContent = titles[i];
+    // restart bar animation
+    tabs.forEach(t=>{const b=t.querySelector('.bar'); b.style.animation='none'; void b.offsetWidth; b.style.animation='';});
+    restart();
+  }
+  function restart(){ clearTimeout(timer); if(!reduce) timer = setTimeout(()=>show((cur+1)%tabs.length), 6000); }
+  tabs.forEach((t,i)=>t.addEventListener('click',()=>show(i)));
+  root.addEventListener('mouseenter',()=>{clearTimeout(timer);root.classList.add('paused')});
+  root.addEventListener('mouseleave',()=>{root.classList.remove('paused');restart()});
+  restart();
+})();
+
+/* ---------- Opsi C: cycle ---------- */
+(() => {
+  const data = [
+    {c:'#38BDF8',s:'LANGKAH 01 · 15 MENIT',i:'fa-book-open-reader',t:'Materi Konsep',d:'Konsep koding dan robotika dijelaskan lewat analogi visual sederhana dan kuis interaktif, tanpa ceramah panjang.'},
+    {c:'#FFC83D',s:'LANGKAH 02 · 50 MENIT',i:'fa-laptop-code',t:'Praktik Eksploratif',d:'Anak langsung merakit game, menyusun logika kode, atau merangkai sensor robot. Trial & error melatih problem solving.'},
+    {c:'#C084FC',s:'LANGKAH 03 · SETIAP SESI',i:'fa-comments',t:'Feedback Tutor',d:'Satu tutor untuk maksimal 5 siswa. Kode diulas, tips penyempurnaan diberikan, dan ide orisinal diapresiasi.'},
+    {c:'#F87171',s:'LANGKAH 04 · TERCATAT',i:'fa-trophy',t:'Pencapaian & Progres',d:'XP bertambah, karya masuk portofolio, dan rapor sesi terkirim ke orang tua. Lalu siklus berulang di sesi berikutnya.'},
+  ];
+  const nodes = [...document.querySelectorAll('.cyc-node')];
+  const box = document.getElementById('cyc-detail');
+  let cur = 0, timer;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(i){
+    cur = i; const x = data[i];
+    nodes.forEach((n,j)=>n.dataset.active = j===i);
+    box.style.setProperty('--c', x.c);
+    document.getElementById('cyc-step').textContent = x.s;
+    document.getElementById('cyc-icon').className = 'fa-solid ' + x.i;
+    document.getElementById('cyc-title').textContent = x.t;
+    document.getElementById('cyc-desc').textContent = x.d;
+    box.classList.remove('fade'); void box.offsetWidth; box.classList.add('fade');
+    clearTimeout(timer); if(!reduce) timer = setTimeout(()=>show((cur+1)%4), 4000);
+  }
+  nodes.forEach((n,i)=>{ n.addEventListener('click',()=>show(i)); n.addEventListener('mouseenter',()=>show(i)); });
+  show(0);
+})();
+
+/* ---------- Opsi F: terminal reveal on scroll ---------- */
+(() => {
+  const term = document.getElementById('terminal');
+  const lines = [...term.querySelectorAll('.term-line')];
+  const io = new IntersectionObserver(es => {
+    if (!es[0].isIntersecting) return;
+    lines.forEach((l,i)=>setTimeout(()=>l.classList.add('on'), i*220));
+    io.disconnect();
+  }, {threshold:.35});
+  io.observe(term);
+})();
+</script>
+</body>
+</html>

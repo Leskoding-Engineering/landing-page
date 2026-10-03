@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi — Section Manfaat (Bukan hanya belajar coding)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  /* Tokens mirrored from style.css / #manfaat */
+  :root{ --yellow:#FFC83D; --sky:#38BDF8; --emerald:#34D399; --purple:#C084FC; --pink:#F472B6; --bg:#0B0F19; }
+  body{background:var(--bg);color:#fff}
+  html{scroll-behavior:smooth}
+  .grain{background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:18px 18px}
+  .bg-grid-pattern{background-image:linear-gradient(to right,rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.035) 1px,transparent 1px);background-size:40px 40px}
+  .grad-text{background:linear-gradient(90deg,#FFC83D,#38BDF8,#10B981);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .fade{animation:fade .45s cubic-bezier(.16,1,.3,1)}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+  .bob{animation:bob 2.4s ease-in-out infinite}
+  .blink{animation:blink 1.2s steps(2) infinite}
+  .card-lift{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .35s}
+  .card-lift:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.4)}
+
+  /* A: before/after toggle */
+  #ba[data-mode="before"] .after-only{display:none}
+  #ba[data-mode="after"] .before-only{display:none}
+  #ba[data-mode="before"] .ba-row{filter:grayscale(1);opacity:.75}
+  .ba-knob{transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  #ba[data-mode="after"] .ba-knob{transform:translateX(100%)}
+
+  /* B: tabs */
+  .ben-tab[aria-selected="true"]{background:#1E293B;border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 12px 30px -14px var(--c)}
+  .ben-tab[aria-selected="true"] .ico{background:var(--c);color:#0B0F19}
+
+  /* E: stat bars */
+  .stat-fill{width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1)}
+  .stats-on .stat-fill{width:var(--w)}
+  .stat-row[data-active="true"]{background:rgba(255,255,255,.04);border-color:var(--c)}
+
+  /* F: editorial rows */
+  .ed-row .ed-body{grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1)}
+  .ed-row:hover .ed-body,.ed-row:focus-within .ed-body,.ed-row[data-open="true"] .ed-body{grid-template-rows:1fr}
+  .ed-row .ed-num{transition:color .3s,-webkit-text-stroke .3s}
+  .ed-row:hover .ed-num,.ed-row[data-open="true"] .ed-num{color:var(--c);-webkit-text-stroke:0}
+  .text-outline{color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.2)}
+
+  @media (prefers-reduced-motion: reduce){
+    .bob,.blink,.fade{animation:none!important}
+    .stat-fill,.ba-knob,.ed-row .ed-body{transition:none!important}
+  }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- Exploration switcher -->
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 font-mono">EKSPLORASI · Section Manfaat</div>
+    <div class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-a" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">A · Penonton → Kreator</a>
+      <a href="#opsi-b" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">B · Demo Interaktif</a>
+      <a href="#opsi-c" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">C · 3 Kata Kerja</a>
+      <a href="#opsi-d" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">D · Bento Foto</a>
+      <a href="#opsi-e" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">E · Kartu Skill</a>
+      <a href="#opsi-f" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">F · Editorial</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- =============================================================== -->
+<!-- OPSI A — PENONTON → KREATOR (before/after toggle)                -->
+<!-- =============================================================== -->
+<section id="opsi-a" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden">
+  <div class="absolute top-1/3 -left-32 w-96 h-96 bg-amber-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+  <div class="absolute bottom-10 -right-32 w-96 h-96 bg-[#0788F5]/10 rounded-full blur-[140px] pointer-events-none"></div>
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI A — PENONTON GADGET → KREATOR DIGITAL (TOGGLE)</div>
+
+    <div id="ba" data-mode="after">
+      <div class="grid lg:grid-cols-12 gap-8 items-end mb-10">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-amber-400/30 mb-4">
+            <span class="w-2 h-2 rounded-full bg-[#FFC83D] animate-pulse"></span>
+            <span class="text-xs font-bold tracking-wider uppercase text-amber-400">Investasi Masa Depan Anak</span>
+          </div>
+          <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight">
+            Bukan hanya belajar coding.<br><span class="grad-text">Anak belajar berpikir, mencoba, &amp; berkarya.</span>
+          </h2>
+        </div>
+        <div class="lg:col-span-5">
+          <p class="text-slate-300 leading-relaxed mb-5">Waktu layar yang sama, hasil yang berbeda. Geser untuk melihat perubahannya.</p>
+          <!-- toggle -->
+          <button id="ba-toggle" class="relative grid grid-cols-2 w-full max-w-sm rounded-2xl bg-[#0F172A] border border-white/10 p-1 text-sm font-bold" aria-label="Ubah tampilan sebelum/sesudah">
+            <span class="ba-knob absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-xl bg-[#FFC83D]"></span>
+            <span class="relative z-10 py-2.5 flex items-center justify-center gap-2 ba-lbl-before"><i class="fa-solid fa-tv"></i> Penonton</span>
+            <span class="relative z-10 py-2.5 flex items-center justify-center gap-2 ba-lbl-after"><i class="fa-solid fa-wand-magic-sparkles"></i> Kreator</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="rounded-3xl border border-white/10 bg-[#0F172A]/70 divide-y divide-white/10 overflow-hidden">
+        <!-- row -->
+        <div class="ba-row grid md:grid-cols-12 gap-4 p-5 sm:p-6 items-center transition-all">
+          <div class="md:col-span-4 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-[#38BDF8]/15 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] text-xl shrink-0"><i class="fa-solid fa-brain"></i></div>
+            <div><div class="font-mono text-[11px] text-[#38BDF8] font-bold">01 · LOGIKA</div><h3 class="font-bold">Berpikir Logis &amp; Terstruktur</h3></div>
+          </div>
+          <p class="md:col-span-8 text-sm text-slate-300 before-only"><i class="fa-solid fa-xmark text-slate-500 mr-2"></i>Menunggu jawaban instan dari video atau game.</p>
+          <p class="md:col-span-8 text-sm text-slate-200 after-only fade"><i class="fa-solid fa-check text-emerald-400 mr-2"></i>Memecah masalah besar jadi langkah kecil yang teratur (<i>computational thinking</i>). Kemampuan ini juga terpakai di matematika &amp; sains.</p>
+        </div>
+        <div class="ba-row grid md:grid-cols-12 gap-4 p-5 sm:p-6 items-center transition-all">
+          <div class="md:col-span-4 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-[#FFC83D]/15 border border-[#FFC83D]/30 flex items-center justify-center text-[#FFC83D] text-xl shrink-0"><i class="fa-solid fa-lightbulb"></i></div>
+            <div><div class="font-mono text-[11px] text-[#FFC83D] font-bold">02 · KREATIF</div><h3 class="font-bold">Kreatif Membuat Project</h3></div>
+          </div>
+          <p class="md:col-span-8 text-sm text-slate-300 before-only"><i class="fa-solid fa-xmark text-slate-500 mr-2"></i>Memainkan game buatan orang lain.</p>
+          <p class="md:col-span-8 text-sm text-slate-200 after-only fade"><i class="fa-solid fa-check text-emerald-400 mr-2"></i>Mendesain karakter, jalan cerita, dan aturan permainannya sendiri dari imajinasi.</p>
+        </div>
+        <div class="ba-row grid md:grid-cols-12 gap-4 p-5 sm:p-6 items-center transition-all">
+          <div class="md:col-span-4 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl shrink-0"><i class="fa-solid fa-puzzle-piece"></i></div>
+            <div><div class="font-mono text-[11px] text-emerald-400 font-bold">03 · TANGGUH</div><h3 class="font-bold">Problem Solving &amp; Tangguh</h3></div>
+          </div>
+          <p class="md:col-span-8 text-sm text-slate-300 before-only"><i class="fa-solid fa-xmark text-slate-500 mr-2"></i>Mudah menyerah atau marah saat sesuatu tidak berjalan.</p>
+          <p class="md:col-span-8 text-sm text-slate-200 after-only fade"><i class="fa-solid fa-check text-emerald-400 mr-2"></i>Tidak takut error. Menganalisis penyebab, mencoba solusi lain dengan tenang, dan tidak mudah menyerah.</p>
+        </div>
+        <div class="ba-row grid md:grid-cols-12 gap-4 p-5 sm:p-6 items-center transition-all">
+          <div class="md:col-span-4 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl shrink-0"><i class="fa-solid fa-microphone-lines"></i></div>
+            <div><div class="font-mono text-[11px] text-purple-400 font-bold">04 · SHOW &amp; TELL</div><h3 class="font-bold">Percaya Diri Presentasi</h3></div>
+          </div>
+          <p class="md:col-span-8 text-sm text-slate-300 before-only"><i class="fa-solid fa-xmark text-slate-500 mr-2"></i>Diam dan ragu saat diminta menjelaskan idenya.</p>
+          <p class="md:col-span-8 text-sm text-slate-200 after-only fade"><i class="fa-solid fa-check text-emerald-400 mr-2"></i>Mempresentasikan karya di depan tutor &amp; teman di akhir setiap proyek. Berani bicara sejak dini.</p>
+        </div>
+        <div class="ba-row grid md:grid-cols-12 gap-4 p-5 sm:p-6 items-center transition-all">
+          <div class="md:col-span-4 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-pink-500/15 border border-pink-500/30 flex items-center justify-center text-pink-400 text-xl shrink-0"><i class="fa-solid fa-award"></i></div>
+            <div><div class="font-mono text-[11px] text-pink-400 font-bold">05 · PORTOFOLIO</div><h3 class="font-bold">Portofolio Digital &amp; Sertifikat</h3></div>
+          </div>
+          <p class="md:col-span-8 text-sm text-slate-300 before-only"><i class="fa-solid fa-xmark text-slate-500 mr-2"></i>Berjam-jam di depan layar, tidak ada yang bisa ditunjukkan.</p>
+          <p class="md:col-span-8 text-sm text-slate-200 after-only fade"><i class="fa-solid fa-check text-emerald-400 mr-2"></i>Game, website, dan aplikasi tersimpan rapi sebagai portofolio, plus sertifikat setelah menyelesaikan course.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================================== -->
+<!-- OPSI B — DEMO INTERAKTIF PER MANFAAT                             -->
+<!-- =============================================================== -->
+<section id="opsi-b" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI B — PILIH MANFAAT, LIHAT CONTOHNYA</div>
+
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-amber-400/30 mb-4">
+        <span class="w-2 h-2 rounded-full bg-[#FFC83D] animate-pulse"></span>
+        <span class="text-xs font-bold tracking-wider uppercase text-amber-400">Investasi Masa Depan Anak</span>
+      </div>
+      <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.08]">Bukan hanya belajar coding.<br><span class="grad-text">Anak belajar berpikir, mencoba, &amp; berkarya.</span></h2>
+    </div>
+
+    <div id="ben-tabs" class="flex flex-wrap justify-center gap-2 mb-8" role="tablist">
+      <button class="ben-tab flex items-center gap-2.5 rounded-2xl border border-white/10 bg-white/[.02] pl-1.5 pr-4 py-1.5 text-sm font-bold transition-all" style="--c:#38BDF8" aria-selected="true" data-i="0"><span class="ico w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-[#38BDF8]"><i class="fa-solid fa-brain"></i></span>Berpikir Logis</button>
+      <button class="ben-tab flex items-center gap-2.5 rounded-2xl border border-white/10 bg-white/[.02] pl-1.5 pr-4 py-1.5 text-sm font-bold transition-all" style="--c:#FFC83D" aria-selected="false" data-i="1"><span class="ico w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-[#FFC83D]"><i class="fa-solid fa-lightbulb"></i></span>Kreatif</button>
+      <button class="ben-tab flex items-center gap-2.5 rounded-2xl border border-white/10 bg-white/[.02] pl-1.5 pr-4 py-1.5 text-sm font-bold transition-all" style="--c:#34D399" aria-selected="false" data-i="2"><span class="ico w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-emerald-400"><i class="fa-solid fa-puzzle-piece"></i></span>Problem Solving</button>
+      <button class="ben-tab flex items-center gap-2.5 rounded-2xl border border-white/10 bg-white/[.02] pl-1.5 pr-4 py-1.5 text-sm font-bold transition-all" style="--c:#C084FC" aria-selected="false" data-i="3"><span class="ico w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-purple-400"><i class="fa-solid fa-microphone-lines"></i></span>Presentasi</button>
+      <button class="ben-tab flex items-center gap-2.5 rounded-2xl border border-white/10 bg-white/[.02] pl-1.5 pr-4 py-1.5 text-sm font-bold transition-all" style="--c:#F472B6" aria-selected="false" data-i="4"><span class="ico w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-pink-400"><i class="fa-solid fa-award"></i></span>Portofolio</button>
+    </div>
+
+    <div class="rounded-3xl bg-[#0B0F19] border border-white/10 overflow-hidden grid lg:grid-cols-2 min-h-[380px]">
+      <!-- text side -->
+      <div class="p-7 sm:p-10 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/10">
+        <div id="ben-text" class="fade"></div>
+      </div>
+      <!-- demo side -->
+      <div class="p-7 sm:p-10 grain flex items-center justify-center relative">
+        <!-- 0 logic -->
+        <div class="ben-demo w-full max-w-sm" data-d="0">
+          <div class="text-[11px] font-mono text-[#38BDF8] mb-3">MASALAH: "Buat robot pulang ke rumah"</div>
+          <div class="space-y-2 font-mono text-[13px]">
+            <div class="rounded-lg bg-[#38BDF8]/15 border border-[#38BDF8]/40 px-3 py-2">1. maju 3 langkah</div>
+            <div class="rounded-lg bg-[#38BDF8]/15 border border-[#38BDF8]/40 px-3 py-2 ml-4">2. jika ada tembok → belok kanan</div>
+            <div class="rounded-lg bg-[#38BDF8]/15 border border-[#38BDF8]/40 px-3 py-2 ml-4">3. ulangi sampai ketemu 🏠</div>
+          </div>
+          <div class="mt-4 text-xs text-slate-400"><i class="fa-solid fa-diagram-project text-[#38BDF8] mr-1.5"></i>Masalah besar → langkah kecil yang urut</div>
+        </div>
+        <!-- 1 creative -->
+        <div class="ben-demo w-full max-w-sm hidden" data-d="1">
+          <div class="text-[11px] font-mono text-[#FFC83D] mb-3">DESAIN GAME · ide Komang</div>
+          <div class="grid grid-cols-3 gap-2 mb-3">
+            <div class="aspect-square rounded-xl bg-[#1E293B] border-2 border-[#FFC83D] flex items-center justify-center text-3xl bob">🐉</div>
+            <div class="aspect-square rounded-xl bg-[#1E293B] border border-white/10 flex items-center justify-center text-3xl">🏝️</div>
+            <div class="aspect-square rounded-xl bg-[#1E293B] border border-white/10 flex items-center justify-center text-3xl">💎</div>
+          </div>
+          <div class="rounded-xl bg-[#1E293B] border border-white/10 p-3 text-xs space-y-1">
+            <div><span class="text-[#FFC83D] font-bold">Karakter:</span> naga kecil penjaga pulau</div>
+            <div><span class="text-[#FFC83D] font-bold">Misi:</span> kumpulkan 10 permata</div>
+            <div><span class="text-[#FFC83D] font-bold">Aturan:</span> kena ombak = mulai lagi</div>
+          </div>
+        </div>
+        <!-- 2 debug -->
+        <div class="ben-demo w-full max-w-sm hidden" data-d="2">
+          <div class="rounded-xl bg-[#1E293B] border border-[#F87171]/50 p-3 font-mono text-[12px] mb-3" style="animation:shake .4s 2">
+            <div class="text-[#F87171]"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Error: karakter jatuh menembus lantai</div>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="flex items-center gap-2 text-slate-300"><span class="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-[10px]">1</span>Cek: apakah lantai punya collider?</div>
+            <div class="flex items-center gap-2 text-slate-300"><span class="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-[10px]">2</span>Coba: aktifkan "Anchored"</div>
+            <div class="flex items-center gap-2 text-emerald-300 font-bold"><span class="w-5 h-5 rounded-full bg-emerald-500 text-[#0B0F19] flex items-center justify-center text-[10px]"><i class="fa-solid fa-check"></i></span>Berhasil! Dicari sendiri 💪</div>
+          </div>
+        </div>
+        <!-- 3 present -->
+        <div class="ben-demo w-full max-w-sm hidden text-center" data-d="3">
+          <div class="relative rounded-2xl bg-gradient-to-b from-[#C084FC]/20 to-transparent border border-[#C084FC]/30 p-6">
+            <div class="text-[11px] font-mono text-[#C084FC] mb-4">SHOWCASE · akhir proyek</div>
+            <div class="text-5xl mb-3 bob">🧒🎤</div>
+            <div class="font-bold mb-1">"Ini game buatanku!"</div>
+            <div class="text-xs text-slate-400 mb-4">Menjelaskan ide, cara main &amp; tantangan yang dihadapi</div>
+            <div class="flex justify-center gap-1 text-xl">👏👏👏</div>
+          </div>
+        </div>
+        <!-- 4 portfolio -->
+        <div class="ben-demo w-full max-w-sm hidden" data-d="4">
+          <div class="text-[11px] font-mono text-pink-400 mb-3">PORTOFOLIO SISWA</div>
+          <div class="grid grid-cols-2 gap-2 mb-3">
+            <div class="rounded-xl bg-[#1E293B] border border-white/10 p-3"><div class="text-2xl mb-1">🎮</div><div class="text-xs font-bold">Game Tangkap Bintang</div><div class="text-[10px] text-slate-400">Scratch</div></div>
+            <div class="rounded-xl bg-[#1E293B] border border-white/10 p-3"><div class="text-2xl mb-1">🌐</div><div class="text-xs font-bold">Website Profil</div><div class="text-[10px] text-slate-400">HTML &amp; CSS</div></div>
+            <div class="rounded-xl bg-[#1E293B] border border-white/10 p-3"><div class="text-2xl mb-1">📱</div><div class="text-xs font-bold">Aplikasi Kuis</div><div class="text-[10px] text-slate-400">App Inventor</div></div>
+            <div class="rounded-xl bg-pink-500/15 border border-pink-500/40 p-3"><div class="text-2xl mb-1">🏅</div><div class="text-xs font-bold">Sertifikat</div><div class="text-[10px] text-pink-300">course selesai</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================================== -->
+<!-- OPSI C — 3 KATA KERJA: BERPIKIR · MENCOBA · BERKARYA             -->
+<!-- =============================================================== -->
+<section id="opsi-c" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden">
+  <div class="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none"></div>
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI C — 5 MANFAAT DIKELOMPOKKAN KE 3 KATA KERJA JUDUL</div>
+
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-amber-400/30 mb-4">
+        <span class="w-2 h-2 rounded-full bg-[#FFC83D] animate-pulse"></span>
+        <span class="text-xs font-bold tracking-wider uppercase text-amber-400">Investasi Masa Depan Anak</span>
+      </div>
+      <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Bukan hanya belajar coding.</h2>
+      <p class="text-slate-300 max-w-2xl mx-auto">Coding hanyalah alatnya. Yang sebenarnya dilatih adalah tiga kebiasaan ini:</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 relative">
+      <!-- connector arrows -->
+      <div class="hidden md:flex absolute top-[46px] left-[33.33%] -translate-x-1/2 z-10 w-9 h-9 rounded-full bg-[#0B0F19] border border-white/15 items-center justify-center text-slate-400 text-xs"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="hidden md:flex absolute top-[46px] left-[66.66%] -translate-x-1/2 z-10 w-9 h-9 rounded-full bg-[#0B0F19] border border-white/15 items-center justify-center text-slate-400 text-xs"><i class="fa-solid fa-arrow-right"></i></div>
+
+      <!-- Berpikir -->
+      <div class="rounded-3xl bg-[#1E293B]/70 border border-white/10 overflow-hidden card-lift hover:border-[#38BDF8]/60">
+        <div class="p-6 pb-5 bg-gradient-to-br from-[#38BDF8]/20 to-transparent">
+          <div class="font-display text-5xl font-black text-[#FFC83D]">Berpikir.</div>
+          <div class="text-xs font-mono text-slate-400 mt-1">pola pikir yang terstruktur</div>
+        </div>
+        <div class="p-6 pt-4 space-y-5">
+          <div class="flex gap-4">
+            <div class="w-11 h-11 rounded-xl bg-[#38BDF8]/15 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] shrink-0"><i class="fa-solid fa-brain"></i></div>
+            <div><h3 class="font-bold mb-1">Berpikir Logis &amp; Terstruktur</h3><p class="text-sm text-slate-300 leading-relaxed">Memecah masalah besar jadi langkah teratur. Terbawa ke pelajaran matematika &amp; sains.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mencoba -->
+      <div class="rounded-3xl bg-[#1E293B]/70 border border-white/10 overflow-hidden card-lift hover:border-[#38BDF8]/60">
+        <div class="p-6 pb-5 bg-gradient-to-br from-[#38BDF8]/20 to-transparent">
+          <div class="font-display text-5xl font-black text-[#38BDF8]">Mencoba.</div>
+          <div class="text-xs font-mono text-slate-400 mt-1">berani salah, berani ulang</div>
+        </div>
+        <div class="p-6 pt-4 space-y-5">
+          <div class="flex gap-4">
+            <div class="w-11 h-11 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0"><i class="fa-solid fa-puzzle-piece"></i></div>
+            <div><h3 class="font-bold mb-1">Problem Solving &amp; Tangguh</h3><p class="text-sm text-slate-300 leading-relaxed">Error bukan akhir. Anak menganalisis, mencoba solusi lain, dan tidak mudah menyerah.</p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-11 h-11 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0"><i class="fa-solid fa-microphone-lines"></i></div>
+            <div><h3 class="font-bold mb-1">Percaya Diri Presentasi</h3><p class="text-sm text-slate-300 leading-relaxed">Berani tampil menjelaskan karyanya di depan tutor &amp; teman di akhir proyek.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Berkarya -->
+      <div class="rounded-3xl bg-[#1E293B]/70 border border-white/10 overflow-hidden card-lift hover:border-emerald-400/60">
+        <div class="p-6 pb-5 bg-gradient-to-br from-emerald-500/20 to-transparent">
+          <div class="font-display text-5xl font-black text-emerald-400">Berkarya.</div>
+          <div class="text-xs font-mono text-slate-400 mt-1">dari penonton jadi kreator</div>
+        </div>
+        <div class="p-6 pt-4 space-y-5">
+          <div class="flex gap-4">
+            <div class="w-11 h-11 rounded-xl bg-[#FFC83D]/15 border border-[#FFC83D]/30 flex items-center justify-center text-[#FFC83D] shrink-0"><i class="fa-solid fa-lightbulb"></i></div>
+            <div><h3 class="font-bold mb-1">Kreatif Membuat Project</h3><p class="text-sm text-slate-300 leading-relaxed">Screen-time pasif jadi waktu berkarya: karakter, cerita, dan aturan game sendiri.</p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-11 h-11 rounded-xl bg-pink-500/15 border border-pink-500/30 flex items-center justify-center text-pink-400 shrink-0"><i class="fa-solid fa-award"></i></div>
+            <div><h3 class="font-bold mb-1">Portofolio &amp; Sertifikat</h3><p class="text-sm text-slate-300 leading-relaxed">Karya tersimpan rapi sebagai bukti kompetensi, plus sertifikat setelah course selesai.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================================== -->
+<!-- OPSI D — BENTO DENGAN FOTO                                       -->
+<!-- =============================================================== -->
+<section id="opsi-d" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI D — BENTO GRID DENGAN FOTO KELAS</div>
+
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-amber-400/30 mb-4">
+          <span class="w-2 h-2 rounded-full bg-[#FFC83D] animate-pulse"></span>
+          <span class="text-xs font-bold tracking-wider uppercase text-amber-400">Investasi Masa Depan Anak</span>
+        </div>
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.08]">Bukan hanya belajar coding.<br><span class="grad-text">Anak belajar berpikir, mencoba, &amp; berkarya.</span></h2>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+      <!-- Hero: Kreatif (photo) -->
+      <div class="md:col-span-4 md:row-span-2 relative rounded-3xl overflow-hidden border border-[#FFC83D]/30 min-h-[400px] group card-lift">
+        <img src="assets/sessions/01M3JK7K4AA96G0Q8T29G6E4MZ.jpeg" alt="Siswa membuat game" class="absolute inset-0 w-full h-full object-cover object-[center_60%] group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/55 to-transparent"></div>
+        <span class="absolute top-5 left-5 text-[10px] font-mono font-bold uppercase tracking-wider text-[#0B0F19] bg-[#FFC83D] px-2.5 py-1 rounded-md">Kreator Aktif</span>
+        <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+          <div class="w-12 h-12 rounded-xl bg-[#FFC83D]/20 border border-[#FFC83D]/40 flex items-center justify-center text-[#FFC83D] text-xl mb-4"><i class="fa-solid fa-lightbulb"></i></div>
+          <h3 class="text-2xl sm:text-3xl font-bold mb-2">Kreatif Membuat Project</h3>
+          <p class="text-slate-300 max-w-lg">Screen-time pasif berubah jadi waktu berkarya. Anak mendesain karakter, jalan cerita, dan aturan permainannya sendiri.</p>
+        </div>
+      </div>
+
+      <!-- Logika -->
+      <div class="md:col-span-2 rounded-3xl bg-[#1E293B]/70 border border-white/10 p-6 card-lift hover:border-[#38BDF8]/60 flex flex-col">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-[#38BDF8]/15 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8]"><i class="fa-solid fa-brain"></i></div>
+          <span class="text-[10px] font-mono font-bold uppercase text-[#38BDF8] bg-blue-500/10 border border-blue-500/30 px-2 py-1 rounded-md">Logika</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1">Berpikir Logis</h3>
+        <p class="text-sm text-slate-300 mb-4">Masalah besar dipecah jadi langkah teratur.</p>
+        <div class="mt-auto flex items-center gap-1.5 font-mono text-[10px]">
+          <span class="px-2 py-1 rounded bg-[#38BDF8]/15 text-[#38BDF8]">masalah</span><i class="fa-solid fa-arrow-right text-slate-500"></i>
+          <span class="px-2 py-1 rounded bg-[#38BDF8]/15 text-[#38BDF8]">langkah</span><i class="fa-solid fa-arrow-right text-slate-500"></i>
+          <span class="px-2 py-1 rounded bg-emerald-500/15 text-emerald-300">solusi</span>
+        </div>
+      </div>
+
+      <!-- Tangguh -->
+      <div class="md:col-span-2 rounded-3xl bg-[#1E293B]/70 border border-white/10 p-6 card-lift hover:border-emerald-500/60 flex flex-col">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400"><i class="fa-solid fa-puzzle-piece"></i></div>
+          <span class="text-[10px] font-mono font-bold uppercase text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded-md">Growth Mindset</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1">Problem Solving &amp; Tangguh</h3>
+        <p class="text-sm text-slate-300 mb-4">Tidak takut error, tidak mudah menyerah.</p>
+        <div class="mt-auto font-mono text-[11px] rounded-lg bg-[#0B0F19] border border-white/10 px-3 py-2"><span class="text-[#F87171] line-through">✗ error</span> <span class="text-slate-500">→</span> <span class="text-emerald-300">✓ fixed</span></div>
+      </div>
+
+      <!-- Presentasi (photo) -->
+      <div class="md:col-span-3 relative rounded-3xl overflow-hidden border border-white/10 min-h-[240px] group card-lift">
+        <img src="assets/sessions/01M3RVHT4R9SQ961Z3GTWJD72Y.jpg" alt="Siswa di kelas" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0B0F19] via-[#0B0F19]/70 to-transparent"></div>
+        <div class="relative p-6 max-w-[70%]">
+          <div class="w-11 h-11 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300 mb-4"><i class="fa-solid fa-microphone-lines"></i></div>
+          <span class="text-[10px] font-mono font-bold uppercase text-purple-300">Show &amp; Tell</span>
+          <h3 class="font-bold text-lg mb-1">Percaya Diri Presentasi</h3>
+          <p class="text-sm text-slate-300">Setiap akhir proyek, anak mempresentasikan karyanya di depan tutor &amp; teman.</p>
+        </div>
+      </div>
+
+      <!-- Portofolio -->
+      <div class="md:col-span-3 rounded-3xl bg-gradient-to-br from-pink-500/15 via-[#1E293B]/70 to-[#1E293B]/70 border border-white/10 p-6 card-lift hover:border-pink-500/60">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-pink-500/15 border border-pink-500/30 flex items-center justify-center text-pink-400"><i class="fa-solid fa-award"></i></div>
+          <span class="text-[10px] font-mono font-bold uppercase text-pink-400 bg-pink-500/10 border border-pink-500/30 px-2 py-1 rounded-md">Portofolio Nyata</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1">Portofolio Digital &amp; Sertifikat</h3>
+        <p class="text-sm text-slate-300 mb-4">Bukti nyata kompetensi anak untuk sekolah &amp; jenjang berikutnya.</p>
+        <div class="flex gap-2">
+          <span class="text-xs bg-[#0B0F19] border border-white/10 rounded-lg px-2.5 py-1.5">🎮 Game</span>
+          <span class="text-xs bg-[#0B0F19] border border-white/10 rounded-lg px-2.5 py-1.5">🌐 Website</span>
+          <span class="text-xs bg-[#0B0F19] border border-white/10 rounded-lg px-2.5 py-1.5">📱 Aplikasi</span>
+          <span class="text-xs bg-pink-500/15 border border-pink-500/30 text-pink-200 rounded-lg px-2.5 py-1.5">🏅 Sertifikat</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================================== -->
+<!-- OPSI E — KARTU SKILL (RPG character stats)                       -->
+<!-- =============================================================== -->
+<section id="opsi-e" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden">
+  <div class="absolute inset-0 grain opacity-60 pointer-events-none"></div>
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI E — KARTU KARAKTER / SKILL TREE (GAMIFIKASI)</div>
+
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-5">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-amber-400/30 mb-4">
+          <span class="w-2 h-2 rounded-full bg-[#FFC83D] animate-pulse"></span>
+          <span class="text-xs font-bold tracking-wider uppercase text-amber-400">Investasi Masa Depan Anak</span>
+        </div>
+        <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight mb-5">
+          Bukan hanya belajar coding.<br><span class="grad-text">Anak belajar berpikir, mencoba, &amp; berkarya.</span>
+        </h2>
+        <p class="text-slate-300 leading-relaxed mb-6">Setiap sesi, lima skill ini ikut naik level. Arahkan kursor ke tiap skill untuk melihat penjelasannya.</p>
+        <div id="skill-desc" class="rounded-2xl bg-[#1E293B] border border-white/10 p-5 min-h-[120px]" style="--c:#38BDF8">
+          <div id="skill-desc-title" class="font-bold mb-1" style="color:var(--c)">Berpikir Logis &amp; Terstruktur</div>
+          <p id="skill-desc-text" class="text-sm text-slate-300 leading-relaxed">Memecah masalah besar menjadi langkah-langkah teratur dan sistematis (computational thinking). Membantu di pelajaran matematika &amp; sains.</p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7">
+        <div id="skill-card" class="relative rounded-3xl p-[1.5px] bg-gradient-to-br from-[#FFC83D] via-[#38BDF8] to-[#10B981] shadow-2xl shadow-black/60">
+          <div class="rounded-[22px] bg-[#0F172A] p-6 sm:p-8">
+            <div class="flex items-center gap-4 mb-6 pb-6 border-b border-white/10">
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FFC83D] to-amber-600 flex items-center justify-center text-3xl shadow-lg shadow-amber-500/20">🧒</div>
+              <div class="flex-1">
+                <div class="text-[11px] font-mono text-slate-400">PROFIL KREATOR</div>
+                <div class="font-display text-2xl font-extrabold">Kreator Muda</div>
+                <div class="text-xs text-[#FFC83D] font-bold">Level naik setiap sesi</div>
+              </div>
+              <div class="text-right">
+                <div class="text-[11px] font-mono text-slate-400">XP</div>
+                <div class="font-display text-2xl font-extrabold text-[#FFC83D]">↑</div>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <div class="stat-row rounded-xl border border-transparent p-3 cursor-default transition-colors" style="--c:#38BDF8" data-t="Berpikir Logis &amp; Terstruktur" data-d="Memecah masalah besar menjadi langkah-langkah teratur dan sistematis (computational thinking). Membantu di pelajaran matematika &amp; sains." data-active="true">
+                <div class="flex items-center justify-between text-sm mb-1.5"><span class="flex items-center gap-2 font-bold"><i class="fa-solid fa-brain text-[#38BDF8] w-4"></i>Logika</span><span class="font-mono text-[11px] text-slate-400">LOGIKA TERSTRUKTUR</span></div>
+                <div class="h-2.5 rounded-full bg-white/10 overflow-hidden"><div class="stat-fill h-full rounded-full bg-[#38BDF8]" style="--w:88%"></div></div>
+              </div>
+              <div class="stat-row rounded-xl border border-transparent p-3 cursor-default transition-colors" style="--c:#FFC83D" data-t="Kreatif Membuat Project" data-d="Mengubah screen-time pasif menjadi waktu berkarya. Anak mendesain karakter, jalan cerita, dan aturan permainannya sendiri.">
+                <div class="flex items-center justify-between text-sm mb-1.5"><span class="flex items-center gap-2 font-bold"><i class="fa-solid fa-lightbulb text-[#FFC83D] w-4"></i>Kreativitas</span><span class="font-mono text-[11px] text-slate-400">KREATOR AKTIF</span></div>
+                <div class="h-2.5 rounded-full bg-white/10 overflow-hidden"><div class="stat-fill h-full rounded-full bg-[#FFC83D]" style="--w:94%"></div></div>
+              </div>
+              <div class="stat-row rounded-xl border border-transparent p-3 cursor-default transition-colors" style="--c:#34D399" data-t="Problem Solving &amp; Tangguh" data-d="Tidak takut salah saat menghadapi error. Anak menganalisis penyebab, mencoba solusi alternatif dengan tenang, dan tidak mudah menyerah.">
+                <div class="flex items-center justify-between text-sm mb-1.5"><span class="flex items-center gap-2 font-bold"><i class="fa-solid fa-puzzle-piece text-emerald-400 w-4"></i>Ketangguhan</span><span class="font-mono text-[11px] text-slate-400">GROWTH MINDSET</span></div>
+                <div class="h-2.5 rounded-full bg-white/10 overflow-hidden"><div class="stat-fill h-full rounded-full bg-emerald-400" style="--w:80%"></div></div>
+              </div>
+              <div class="stat-row rounded-xl border border-transparent p-3 cursor-default transition-colors" style="--c:#C084FC" data-t="Percaya Diri Presentasi" data-d="Di akhir setiap proyek, anak mempresentasikan karyanya di depan tutor dan teman sekelas. Membangun keberanian public speaking sejak dini.">
+                <div class="flex items-center justify-between text-sm mb-1.5"><span class="flex items-center gap-2 font-bold"><i class="fa-solid fa-microphone-lines text-purple-400 w-4"></i>Percaya Diri</span><span class="font-mono text-[11px] text-slate-400">SHOW &amp; TELL</span></div>
+                <div class="h-2.5 rounded-full bg-white/10 overflow-hidden"><div class="stat-fill h-full rounded-full bg-purple-400" style="--w:76%"></div></div>
+              </div>
+              <div class="stat-row rounded-xl border border-transparent p-3 cursor-default transition-colors" style="--c:#F472B6" data-t="Portofolio Digital &amp; Sertifikat" data-d="Game, website, dan aplikasi tersimpan rapi sebagai portofolio. Sertifikat diberikan setelah menyelesaikan course.">
+                <div class="flex items-center justify-between text-sm mb-1.5"><span class="flex items-center gap-2 font-bold"><i class="fa-solid fa-award text-pink-400 w-4"></i>Portofolio</span><span class="font-mono text-[11px] text-slate-400">PORTOFOLIO NYATA</span></div>
+                <div class="h-2.5 rounded-full bg-white/10 overflow-hidden"><div class="stat-fill h-full rounded-full bg-pink-400" style="--w:85%"></div></div>
+              </div>
+            </div>
+            <div class="mt-5 text-[11px] text-slate-500 font-mono">* Ilustrasi. Perkembangan nyata anak dilaporkan tutor di rapor sesi.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================================== -->
+<!-- OPSI F — EDITORIAL (big type rows, expand on hover)              -->
+<!-- =============================================================== -->
+<section id="opsi-f" class="relative py-20 md:py-28 border-b border-white/10 overflow-hidden bg-[#0F172A]">
+  <div class="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 relative">
+    <div class="text-[11px] font-mono text-[#FFC83D] mb-6">OPSI F — EDITORIAL / TIPOGRAFI BESAR</div>
+
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-5 lg:sticky lg:top-24 self-start">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E293B] border border-amber-400/30 mb-4">
+          <span class="w-2 h-2 rounded-full bg-[#FFC83D] animate-pulse"></span>
+          <span class="text-xs font-bold tracking-wider uppercase text-amber-400">Investasi Masa Depan Anak</span>
+        </div>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.02] tracking-tight mb-6">
+          Bukan hanya<br>belajar coding.
+        </h2>
+        <div class="font-display text-2xl sm:text-3xl font-bold leading-snug mb-6">
+          Anak belajar <span class="text-[#FFC83D]">berpikir</span>,<br><span class="text-[#38BDF8]">mencoba</span>, &amp; <span class="text-emerald-400">berkarya</span>.
+        </div>
+        <p class="text-slate-300 leading-relaxed max-w-md">Coding adalah sarana melatih logika, kemandirian problem solving, dan mengubah anak dari penonton gadget menjadi kreator digital yang percaya diri.</p>
+      </div>
+
+      <div class="lg:col-span-7 border-t border-white/10">
+        <div class="ed-row group border-b border-white/10 py-6 cursor-default" style="--c:#38BDF8" tabindex="0" data-open="true">
+          <div class="flex items-baseline gap-5">
+            <span class="ed-num font-display text-5xl sm:text-6xl font-black text-outline leading-none w-20 shrink-0">01</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-4"><h3 class="text-xl sm:text-2xl font-bold">Berpikir Logis &amp; Terstruktur</h3><i class="fa-solid fa-brain text-[#38BDF8] text-xl"></i></div>
+              <div class="ed-body grid"><div class="overflow-hidden"><p class="text-slate-300 leading-relaxed pt-3">Memecah masalah besar menjadi langkah-langkah teratur (<i>computational thinking</i>). Kemampuan ini membantu di pelajaran matematika dan sains.</p></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ed-row group border-b border-white/10 py-6 cursor-default" style="--c:#FFC83D" tabindex="0">
+          <div class="flex items-baseline gap-5">
+            <span class="ed-num font-display text-5xl sm:text-6xl font-black text-outline leading-none w-20 shrink-0">02</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-4"><h3 class="text-xl sm:text-2xl font-bold">Kreatif Membuat Project</h3><i class="fa-solid fa-lightbulb text-[#FFC83D] text-xl"></i></div>
+              <div class="ed-body grid"><div class="overflow-hidden"><p class="text-slate-300 leading-relaxed pt-3">Screen-time pasif berubah jadi waktu berkarya. Anak mendesain karakter, jalan cerita, dan aturan permainannya sendiri.</p></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ed-row group border-b border-white/10 py-6 cursor-default" style="--c:#34D399" tabindex="0">
+          <div class="flex items-baseline gap-5">
+            <span class="ed-num font-display text-5xl sm:text-6xl font-black text-outline leading-none w-20 shrink-0">03</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-4"><h3 class="text-xl sm:text-2xl font-bold">Problem Solving &amp; Tangguh</h3><i class="fa-solid fa-puzzle-piece text-emerald-400 text-xl"></i></div>
+              <div class="ed-body grid"><div class="overflow-hidden"><p class="text-slate-300 leading-relaxed pt-3">Tidak takut error. Anak belajar menganalisis penyebab masalah, mencoba solusi lain dengan tenang, dan tidak mudah menyerah.</p></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ed-row group border-b border-white/10 py-6 cursor-default" style="--c:#C084FC" tabindex="0">
+          <div class="flex items-baseline gap-5">
+            <span class="ed-num font-display text-5xl sm:text-6xl font-black text-outline leading-none w-20 shrink-0">04</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-4"><h3 class="text-xl sm:text-2xl font-bold">Percaya Diri Presentasi</h3><i class="fa-solid fa-microphone-lines text-purple-400 text-xl"></i></div>
+              <div class="ed-body grid"><div class="overflow-hidden"><p class="text-slate-300 leading-relaxed pt-3">Di akhir setiap proyek, anak mempresentasikan karyanya di depan tutor dan teman sekelas. Keberanian bicara terbangun sejak dini.</p></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ed-row group border-b border-white/10 py-6 cursor-default" style="--c:#F472B6" tabindex="0">
+          <div class="flex items-baseline gap-5">
+            <span class="ed-num font-display text-5xl sm:text-6xl font-black text-outline leading-none w-20 shrink-0">05</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-4"><h3 class="text-xl sm:text-2xl font-bold">Portofolio Digital &amp; Sertifikat</h3><i class="fa-solid fa-award text-pink-400 text-xl"></i></div>
+              <div class="ed-body grid"><div class="overflow-hidden"><p class="text-slate-300 leading-relaxed pt-3">Game, website, dan aplikasi tersimpan rapi sebagai bukti kompetensi. Sertifikat diberikan setelah menyelesaikan course.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-10 text-center text-xs text-slate-500 font-mono">Eksplorasi · bagian "Alur Mudah: Saya Harus Mulai dari Mana?" tidak diubah di sini</footer>
+
+<script>
+/* ---------- A: before/after ---------- */
+(() => {
+  const root = document.getElementById('ba');
+  document.getElementById('ba-toggle').addEventListener('click', () => {
+    root.dataset.mode = root.dataset.mode === 'after' ? 'before' : 'after';
+    syncLabels();
+  });
+  function syncLabels(){
+    const after = root.dataset.mode === 'after';
+    root.querySelector('.ba-lbl-after').style.color = after ? '#0B0F19' : '';
+    root.querySelector('.ba-lbl-before').style.color = after ? '' : '#0B0F19';
+  }
+  syncLabels();
+})();
+
+/* ---------- B: tabs ---------- */
+(() => {
+  const data = [
+    {c:'#38BDF8',tag:'LOGIKA TERSTRUKTUR',t:'Berpikir Logis & Terstruktur',d:'Anak dilatih memecah masalah besar menjadi langkah-langkah kecil yang teratur dan sistematis (computational thinking). Kemampuan ini dapat membantu di pelajaran matematika dan sains di sekolah.'},
+    {c:'#FFC83D',tag:'KREATOR AKTIF',t:'Kreatif Membuat Project',d:'Kebiasaan screen-time pasif berubah menjadi waktu berkarya. Anak mendesain karakter, jalan cerita, dan aturan permainannya sendiri dari imajinasi mereka.'},
+    {c:'#34D399',tag:'GROWTH MINDSET',t:'Problem Solving & Tangguh',d:'Anak tidak takut salah saat menghadapi error (debugging). Mereka belajar menganalisis penyebab masalah, mencoba solusi lain dengan tenang, dan tidak mudah menyerah.'},
+    {c:'#C084FC',tag:'SHOW & TELL',t:'Percaya Diri Presentasi',d:'Di akhir setiap proyek, siswa mempresentasikan karyanya di depan tutor dan teman sekelas. Ini membangun keberanian public speaking dan kemampuan menyampaikan ide sejak dini.'},
+    {c:'#F472B6',tag:'PORTOFOLIO NYATA',t:'Portofolio Digital & Sertifikat',d:'Setiap karya (game, website, aplikasi) tersimpan rapi, dan anak mendapat sertifikat setelah menyelesaikan course. Bukti nyata kompetensi untuk sekolah maupun jenjang berikutnya.'},
+  ];
+  const tabs = [...document.querySelectorAll('.ben-tab')];
+  const demos = [...document.querySelectorAll('.ben-demo')];
+  const box = document.getElementById('ben-text');
+  function show(i){
+    const x = data[i];
+    tabs.forEach((t,j)=>t.setAttribute('aria-selected', j===i));
+    demos.forEach((d,j)=>{d.classList.toggle('hidden', j!==i); if(j===i){d.classList.remove('fade');void d.offsetWidth;d.classList.add('fade');}});
+    box.innerHTML = `<span class="inline-block text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md mb-4" style="color:${x.c};background:${x.c}1a;border:1px solid ${x.c}4d">${x.tag}</span>
+      <div class="font-display text-6xl font-black leading-none mb-3" style="color:${x.c}33">0${i+1}</div>
+      <h3 class="text-2xl sm:text-3xl font-bold mb-3">${x.t}</h3>
+      <p class="text-slate-300 leading-relaxed">${x.d}</p>`;
+    box.classList.remove('fade'); void box.offsetWidth; box.classList.add('fade');
+  }
+  tabs.forEach((t,i)=>t.addEventListener('click',()=>show(i)));
+  show(0);
+})();
+
+/* ---------- E: skill card ---------- */
+(() => {
+  const card = document.getElementById('skill-card');
+  const rows = [...card.querySelectorAll('.stat-row')];
+  const box = document.getElementById('skill-desc');
+  const io = new IntersectionObserver(es => { if (es[0].isIntersecting){ card.classList.add('stats-on'); io.disconnect(); } }, {threshold:.3});
+  io.observe(card);
+  rows.forEach(r => r.addEventListener('mouseenter', () => {
+    rows.forEach(x => x.dataset.active = x === r);
+    box.style.setProperty('--c', getComputedStyle(r).getPropertyValue('--c'));
+    document.getElementById('skill-desc-title').innerHTML = r.dataset.t;
+    document.getElementById('skill-desc-text').innerHTML = r.dataset.d;
+  }));
+})();
+
+/* ---------- F: keep one row open (touch devices) ---------- */
+(() => {
+  const rows = [...document.querySelectorAll('.ed-row')];
+  rows.forEach(r => {
+    const open = () => rows.forEach(x => x.dataset.open = x === r);
+    r.addEventListener('mouseenter', open);
+    r.addEventListener('click', open);
+    r.addEventListener('focus', open);
+  });
+})();
+</script>
+</body>
+</html>
