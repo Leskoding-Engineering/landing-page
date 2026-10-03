@@ -1,8 +1,8 @@
 # KNOWLEDGE BASE: LESKODING ACADEMY BALI
 > **Dokumen Single Source of Truth (SSOT)**  
 > **Kategori:** Edukasi Teknologi, Coding, Robotika, dan Kreativitas Digital Anak & Remaja  
-> **Wilayah Operasional:** Bali (Gianyar, Ubud Peliatan, Bedulu)  
-> **Versi Basis Pengetahuan:** 1.1 (Rasio tutor 1:5, sertifikat kelulusan, biaya & jadwal, penghapusan klaim tanpa bukti)  
+> **Wilayah Operasional:** Bali (Gianyar, Bedulu, serta Layanan Private Home Visit Gianyar & Ubud)  
+> **Versi Basis Pengetahuan:** 1.2 (Pembaruan: Ubud dialihkan ke Kelas Private Home Visit)  
 > **Tanggal Pembaruan:** 3 Oktober 2026  
 > **Dokumentasi Teknis Landing Page:** lihat [`README.md`](README.md)  
 
@@ -64,24 +64,26 @@
 ### 1.5 Saluran Kontak & Komunikasi Resmi
 - **Email Resmi:** `halo@leskoding.id`
 - **WhatsApp Admin (Gianyar & Bedulu):** `0851-8306-798` (Internasional: `+628518306798`)
-- **WhatsApp Admin (Ubud Peliatan):** `0857-9273-6627` (Internasional: `+6285792736627`)
+- **WhatsApp Admin (Layanan Private / Home Visit):** `0857-9273-6627` (Internasional: `+6285792736627`)
 - **Hak Cipta:** © 2026 LesKoding Bali. All rights reserved.
 
 ---
 
 ## 2. JARINGAN KAMPUS & LOKASI BELAJAR DI BALI
 
-LesKoding menyelenggarakan pembelajaran tatap muka (*offline/in-person classes*) di tiga Learning Center strategis di Kabupaten Gianyar & Ubud:
+LesKoding menyelenggarakan pembelajaran tatap muka (*offline/in-person classes*) di Learning Center fisik serta program kelas private di rumah sendiri:
 
-| Cabang / Kampus | Nama Resmi Laboratorium | Alamat Lengkap | Nomor WhatsApp | Akses Google Maps / Rute |
+| Cabang / Layanan | Nama Resmi / Deskripsi | Lokasi & Jangkauan | Nomor WhatsApp | Akses / Keterangan |
 |---|---|---|---|---|
 | **Gianyar (Pusat)** | Gents Robotic & Coding (Gianyar) | Jln. Ksatrian, No. 8, Lingkungan Candi Baru, Gianyar, Bali | `0851-8306-798` | [Rute Google Maps](https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar) |
-| **Ubud (Peliatan)** | Bali Seed Robotic & Coding Peliatan (Ubud) | Jalan Peliatan, No. 1, Ubud, Gianyar, Bali | `0857-9273-6627` | [Rute Google Maps](https://maps.google.com/?q=Jalan+Peliatan+No+1+Ubud) |
 | **Bedulu** | Bali Seed Bedulu Robotics & Coding | Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar, Bali | `0851-8306-798` | [Rute Google Maps](https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu) |
+| **Private (Home Visit)** | Kelas Belajar di Rumah Sendiri | Area Gianyar, Ubud, Denpasar & sekitarnya | `0857-9273-6627` | Tutor berkunjung langsung ke rumah, 1-on-1 atau kelompok privat |
+
+> **Catatan Operasional:** Learning Center fisik di Ubud (Peliatan) sudah tidak beroperasi dan seluruh kebutuhan kelas di area Ubud dan sekitarnya dilayani secara personal melalui program **Kelas Private (Home Visit)** di mana tutor LesKoding datang langsung ke rumah siswa.
 
 ### 2.1 Mitra Strategis & Kolaborator
 - **Gents Robotic / Genta:** Mitra strategis penyelenggaraan cabang Gianyar dengan fokus kuat pada integrasi robotika dan mikrokontroler fisik.
-- **Bali Seeds (Bali Seed Foundation):** Mitra pendidikan komunitas untuk cabang Ubud Peliatan dan Bedulu, mendukung literasi digital berkelanjutan.
+- **Bali Seeds (Bali Seed Foundation):** Mitra pendidikan komunitas untuk cabang Bedulu, mendukung literasi digital berkelanjutan.
 
 ### 2.2 Fasilitas Ruang Belajar (Laboratorium Komputer & Robotika)
 - Ruang kelas berpendingin udara (Full AC) dirancang bersih, aman, dan ramah anak (*child-friendly*).
@@ -506,7 +508,7 @@ Karya-karya terbaik siswa diabadikan dalam ruang pameran (*Hall of Fame*) sebaga
 
 ### 11.3 Formulir Pendaftaran & Data Calon Siswa
 Formulir pendaftaran digital mengumpulkan data terstruktur:
-1. Pilihan Learning Center (Gianyar / Ubud Peliatan / Bedulu)
+1. Pilihan Lokasi / Metode Belajar (Gianyar / Bedulu / Kelas Private Home Visit)
 2. Pilihan Program Belajar (9 Opsi Program atau Konsultasi Gratis)
 3. Kode / Nama Promo (Opsional, cth: `PETUALANGAN2026`)
 4. Nama Lengkap Siswa
@@ -520,11 +522,11 @@ Formulir pendaftaran digital mengumpulkan data terstruktur:
 12. Nomor WhatsApp Anak (Opsional)
 
 ### 11.4 Logika Routing WhatsApp Otomatis
-Sistem pendaftaran pada landing page secara cerdas mengarahkan pesan pendaftaran ke admin cabang terkait berdasarkan Learning Center yang dipilih pengguna:
+Sistem pendaftaran pada landing page secara cerdas mengarahkan pesan pendaftaran ke admin terkait berdasarkan pilihan metode belajar:
 
-- **Jika memilih cabang yang mengandung kata "Peliatan" (Ubud):**  
-  ➔ Diarahkan ke admin Bali Seed Peliatan: **`6285792736627`**
-- **Jika memilih cabang Gianyar atau Bedulu:**  
+- **Jika memilih opsi Kelas Private (Home Visit / Di Rumah):**  
+  ➔ Diarahkan ke admin Layanan Private: **`6285792736627`**
+- **Jika memilih kampus Gianyar atau Bedulu:**  
   ➔ Diarahkan ke admin Gianyar / Bedulu: **`628518306798`**
 
 #### Template Pesan WhatsApp Otomatis (Bahasa Indonesia):
@@ -595,7 +597,7 @@ Berikut adalah ringkasan pertanyaan yang paling sering diajukan orang tua besert
 > **Jawaban Resmi:** Tentu sangat bisa! Banyak siswa LesKoding memulai dari nol (*scratch*). Pembelajaran dirancang ramah anak melalui visual blok interaktif dan analogi dunia nyata terlebih dahulu sebelum perlahan dikenalkan pada logika kode teks.
 
 ### Q2: Apakah tersedia kelas percobaan (trial class) dan berapa biayanya?
-> **Jawaban Resmi:** Ya, kami menyediakan 1 sesi **Free Trial Class (100% Gratis)** di ketiga Learning Center kami (Gianyar, Ubud Peliatan, dan Bedulu). Orang tua cukup mengisi formulir atau menghubungi admin via WhatsApp untuk memilih slot jadwal uji coba tanpa ikatan komitmen finansial.
+> **Jawaban Resmi:** Ya, kami menyediakan 1 sesi **Free Trial Class (100% Gratis)** di Learning Center kami (Gianyar dan Bedulu), serta opsi konsultasi/trial untuk program Kelas Private di rumah sendiri. Orang tua cukup mengisi formulir atau menghubungi admin via WhatsApp untuk memilih slot jadwal uji coba tanpa ikatan komitmen finansial.
 
 ### Q3: Apakah siswa harus membawa laptop sendiri dari rumah?
 > **Jawaban Resmi:** Tidak wajib. Seluruh laboratorium LesKoding telah dilengkapi dengan unit komputer/laptop performa tinggi serta kit robotika lengkap siap pakai. Namun, bagi siswa yang ingin membawa laptop pribadi agar proyek tersimpan langsung di perangkatnya, kami sangat menyambut baik.

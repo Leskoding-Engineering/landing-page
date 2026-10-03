@@ -629,8 +629,8 @@ WA Anak (opsional): ${waAnak}`;
             
             // Route to appropriate branch admin WhatsApp
             let adminWA = "628518306798"; // default Gianyar / Bedulu
-            if (center.includes("Peliatan")) {
-                adminWA = "6285792736627"; // Bali Seed Peliatan Ubud
+            if (center.includes("Private") || center.includes("Peliatan") || center.includes("Rumah")) {
+                adminWA = "6285792736627"; // Private / Home Visit admin
             }
             const whatsappUrl = `https://wa.me/${adminWA}?text=${encodedMessage}`;
             
@@ -2390,7 +2390,7 @@ function calculateDistance() {
         // Randomize mock distance for gamification effect
         const randomMins = Math.floor(Math.random() * 20) + 10; // 10-30 mins
         const randomKm = Math.floor(Math.random() * 15) + 3; // 3-18 km
-        const campuses = ['Gents Robotic Gianyar', 'Bali Seed Peliatan', 'Bali Seed Bedulu'];
+        const campuses = ['Gents Robotic Gianyar', 'Bali Seed Bedulu', 'Layanan Private (Home Visit)'];
         const randomCampus = campuses[Math.floor(Math.random() * campuses.length)];
         
         if (lang === 'en') {
@@ -2701,6 +2701,8 @@ const i18nDictionary = {
         "hero7_make_status": "Their own game, their own rules",
         "hero7_make_tag": "creating",
         "hero7_tools": "Industry-standard tools",
+        "partners_tag": "Our Partners",
+        "partners_title": "In collaboration with",
         "rpt3_title_1": "More than a grade.",
         "rpt3_title_2": "Explanations you can act on.",
         "rpt3_generic_label": "A typical report card",
@@ -2824,8 +2826,8 @@ const i18nDictionary = {
         "hero_trust_1_sub": "Beginner to Advanced",
         "hero_trust_2_title": "Parent Progress Reports",
         "hero_trust_2_sub": "Track Learning Milestones",
-        "hero_trust_3_title": "3 Learning Centers",
-        "hero_trust_3_sub": "Gianyar, Ubud &amp; Bedulu",
+        "hero_trust_3_title": "2 Centers + Private",
+        "hero_trust_3_sub": "Gianyar, Bedulu &amp; Home Visit",
         "hero_vis_badge": "Real Student Session",
         "hero_vis_tag": "Project Showcase",
         "hero_vis_title": "Robotics &amp; Interactive Mini Games",
@@ -3038,7 +3040,13 @@ const i18nDictionary = {
         "report_parent_tips_desc": "Ask your child to share the steps they attempted and their reasoning behind them to foster computational thinking.",
         "loc_badge": "Campuses &amp; Laboratories",
         "loc_title": "Learning Centers in Bali",
-        "loc_desc": "Choose the nearest learning center from your home for interactive in-person classes. Each campus is equipped with air-conditioned labs, robotics hardware, and friendly mentors.",
+        "loc_desc": "Choose the nearest learning center for interactive in-person classes, or choose our Private Home Visit option where our tutors come directly to your home.",
+        "loc_c2_name": "Private Classes (Home Visit)",
+        "loc_c2_tag": "Tutor Visits Home",
+        "loc_c2_box_title": "Learn from the Comfort of Home",
+        "loc_c2_box_sub": "1-on-1 or small group. Personalized curriculum & flexible schedule tailored to your family.",
+        "loc_c2_addr": "Coverage Area: Gianyar, Ubud, Denpasar & surrounding areas",
+        "loc_c2_cta": "Book Private Class",
         "loc_directions": "Directions",
         "loc_calc_title": "Find Nearest Campus",
         "loc_calc_desc": "Enter your neighborhood or district to discover which campus is closest to your home.",
@@ -3051,7 +3059,7 @@ const i18nDictionary = {
         "faq_q1": "Can a child with zero prior coding experience join?",
         "faq_a1": "Absolutely! Over 80% of our new students start from scratch. We introduce structured computational thinking through intuitive visual blocks before advancing to real typed syntax.",
         "faq_q2": "Is a free trial class available?",
-        "faq_a2": "Yes, we offer complimentary Free Trial sessions across Gianyar, Ubud Peliatan, and Bedulu centers. Book a slot using the form below or chat directly with our campus admin.",
+        "faq_a2": "Yes, we offer complimentary Free Trial sessions at our Gianyar and Bedulu centers, as well as consultation/trial options for Private Home Visit classes. Book a slot using the form below or chat directly with our team.",
         "faq_q3": "Does my child need to bring their own laptop?",
         "faq_a3": "Our labs are fully equipped with dedicated PCs and robotic hardware ready for each student. However, students who prefer to bring their own laptop so projects stay on their machine are welcome.",
         "faq_q4": "What is the tutor-to-student ratio per class?",
@@ -3061,11 +3069,13 @@ const i18nDictionary = {
         "reg_desc": "Fill in the brief form below to schedule a class consultation or book a free trial. Confirmation will be sent directly via WhatsApp.",
         "reg_form_header": "Student &amp; Parent Registration Details",
         "reg_required_notice": "Required",
-        "reg_lbl_center": "Learning Center Choice",
-        "reg_campus_count": "3 Campuses Available in Bali",
-        "reg_choose_center": "Choose Nearest Learning Center",
-        "reg_choose_center_sub": "Click to select your child's study center",
-        "reg_select_default": "-- Choose Nearest Learning Center --",
+        "reg_lbl_center": "Choose Campus or Learning Mode",
+        "reg_campus_count": "2 Campuses + Private Home Visit",
+        "reg_choice_private_title": "Private / Home Visit",
+        "reg_choice_private_desc": "Learn at your own home (Gianyar &amp; Ubud)",
+        "reg_choose_center": "Choose Campus or Learning Mode",
+        "reg_choose_center_sub": "Click to select your child's learning center or private option",
+        "reg_select_default": "-- Choose Campus or Learning Mode --",
         "reg_lbl_promo": "Promo Code / Voucher (Optional)",
         "reg_promo_sub": "Auto-filled when claiming promo voucher",
         "reg_promo_applied": "Promo Applied",
@@ -3228,6 +3238,8 @@ const i18nDictionary = {
         "hero7_make_status": "Game buatan sendiri, aturan sendiri",
         "hero7_make_tag": "mencipta",
         "hero7_tools": "Tools standar industri",
+        "partners_tag": "Partner Kami",
+        "partners_title": "Berkolaborasi dengan",
         "rpt3_title_1": "Bukan sekadar nilai.",
         "rpt3_title_2": "Penjelasan yang bisa ditindaklanjuti.",
         "rpt3_generic_label": "Rapor pada umumnya",
@@ -3351,8 +3363,8 @@ const i18nDictionary = {
         "hero_trust_1_sub": "Pemula hingga Mahir",
         "hero_trust_2_title": "Laporan Wali Murid",
         "hero_trust_2_sub": "Pantau Progres Belajar",
-        "hero_trust_3_title": "3 Learning Center",
-        "hero_trust_3_sub": "Gianyar, Ubud &amp; Bedulu",
+        "hero_trust_3_title": "2 Kampus + Private",
+        "hero_trust_3_sub": "Gianyar, Bedulu &amp; Home Visit",
         "hero_vis_badge": "Sesi Nyata Siswa",
         "hero_vis_tag": "Pameran Proyek",
         "hero_vis_title": "Robotika &amp; Mini Game Interaktif",
@@ -3565,7 +3577,13 @@ const i18nDictionary = {
         "report_parent_tips_desc": "Minta anak menceritakan langkah yang ia coba dan alasan mengapa memilih langkah tersebut untuk melatih computational thinking.",
         "loc_badge": "Kampus &amp; Laboratorium",
         "loc_title": "Lokasi Belajar di Bali",
-        "loc_desc": "Pilih Learning Center terdekat dari rumah Anda untuk kelas tatap muka interaktif. Setiap cabang dilengkapi dengan lab komputer ber-AC, perangkat robotika, dan tutor ramah.",
+        "loc_desc": "Pilih Learning Center terdekat untuk kelas tatap muka interaktif, atau pilih layanan Private di mana tutor kami datang langsung mendampingi anak belajar di rumah sendiri.",
+        "loc_c2_name": "Kelas Private (Home Visit)",
+        "loc_c2_tag": "Tutor ke Rumah",
+        "loc_c2_box_title": "Belajar di Rumah Sendiri",
+        "loc_c2_box_sub": "1-on-1 atau grup kecil. Tutor membawa kurikulum &amp; pendampingan langsung ke rumah Anda.",
+        "loc_c2_addr": "Jangkauan Area: Gianyar, Ubud, Denpasar &amp; sekitarnya",
+        "loc_c2_cta": "Daftar Private",
         "loc_directions": "Rute",
         "loc_calc_title": "Cek Kampus Terdekat",
         "loc_calc_desc": "Masukkan area atau kecamatan Anda untuk melihat cabang mana yang paling mudah diakses.",
@@ -3578,7 +3596,7 @@ const i18nDictionary = {
         "faq_q1": "Apakah anak yang belum pernah memegang coding bisa ikut?",
         "faq_a1": "Tentu bisa! 80% siswa baru kami memulai dari nol. Kami mengajarkan logika berpikir terstruktur (computational thinking) melalui blok visual interaktif terlebih dahulu sebelum beralih ke sintaks kode teks asli.",
         "faq_q2": "Apakah tersedia kelas percobaan (trial class)?",
-        "faq_a2": "Ya, kami menyediakan sesi Free Trial di Learning Center Gianyar, Ubud Peliatan, dan Bedulu. Anda dapat mendaftarkan jadwal percobaan melalui form di bawah atau via WhatsApp admin kami.",
+        "faq_a2": "Ya, kami menyediakan sesi Free Trial di Learning Center Gianyar dan Bedulu, serta opsi kelas Private di rumah sendiri (Home Visit). Anda dapat mendaftarkan jadwal percobaan melalui form di bawah atau via WhatsApp admin kami.",
         "faq_q3": "Apakah siswa harus membawa laptop sendiri?",
         "faq_a3": "Setiap lab Learning Center kami sudah dilengkapi dengan PC/Laptop dan perangkat robotik siap pakai. Namun, siswa yang ingin membawa laptop pribadi agar proyek tersimpan langsung di perangkatnya sangat dipersilakan.",
         "faq_q4": "Berapa rasio tutor per siswa di setiap kelas?",
@@ -3588,11 +3606,13 @@ const i18nDictionary = {
         "reg_desc": "Isi data singkat berikut untuk konsultasi jadwal kelas reguler atau klaim kelas percobaan gratis (trial). Konfirmasi akan otomatis diteruskan ke WhatsApp admin cabang.",
         "reg_form_header": "Data Calon Siswa &amp; Wali Murid",
         "reg_required_notice": "Wajib diisi",
-        "reg_lbl_center": "Pilihan Learning Center",
-        "reg_campus_count": "3 Kampus Tersedia di Bali",
-        "reg_choose_center": "Pilih Learning Center Terdekat",
-        "reg_choose_center_sub": "Klik untuk memilih cabang belajar anak Anda",
-        "reg_select_default": "-- Pilih Learning Center Terdekat --",
+        "reg_lbl_center": "Pilihan Lokasi / Metode Belajar",
+        "reg_campus_count": "2 Kampus + Layanan Private",
+        "reg_choice_private_title": "Private / Home Visit",
+        "reg_choice_private_desc": "Belajar di rumah sendiri (Gianyar &amp; Ubud)",
+        "reg_choose_center": "Pilih Lokasi / Metode Belajar",
+        "reg_choose_center_sub": "Klik untuk memilih cabang belajar atau opsi private",
+        "reg_select_default": "-- Pilih Lokasi / Metode Belajar --",
         "reg_lbl_promo": "Kode / Nama Promo (Opsional)",
         "reg_promo_sub": "Otomatis terisi jika klaim voucher promo",
         "reg_promo_applied": "Promo Terpasang",

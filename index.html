@@ -388,6 +388,42 @@
         </div>
     </section>
 
+    <!-- ========================================== -->
+    <!-- PARTNERS SECTION (explore-partners-v2.html Opsi 3 Varian A) -->
+    <!-- ========================================== -->
+    <section id="partners" class="py-8 md:py-12 relative z-10 bg-[#0B0F19] border-b border-white/10 text-white">
+        <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-3xl border border-white/10 bg-[#0F172A]/80 px-6 py-6 flex flex-col lg:flex-row items-center gap-6 lg:gap-10 shadow-lg">
+                <div class="shrink-0 text-center lg:text-left">
+                    <div class="text-[10px] font-mono font-bold uppercase tracking-widest text-[#38BDF8]" data-i18n="partners_tag">Partner Kami</div>
+                    <div class="font-display font-bold text-lg mt-1 text-white" data-i18n="partners_title">Berkolaborasi dengan</div>
+                </div>
+                <div class="hidden lg:block w-px self-stretch bg-white/10"></div>
+                <div class="flex-1 grid grid-cols-3 gap-3 sm:gap-5 w-full" id="partners-strip">
+                    <div class="strip-logo flex items-center justify-center sm:justify-start gap-3 rounded-2xl bg-white/[.03] border border-white/10 p-2.5 sm:p-3 hover:bg-white/[.06] transition-all cursor-default" title="Genta Saraswati Bilingual & Montessori School">
+                        <div class="plate w-12 h-12 sm:w-14 sm:h-14 rounded-xl p-1 shrink-0 bg-white flex items-center justify-center shadow-md">
+                            <img src="assets/partners/genta.png" alt="Logo Genta Saraswati Bilingual & Montessori School" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <span class="hidden sm:block text-xs md:text-sm font-bold leading-tight text-white">Genta Saraswati</span>
+                    </div>
+                    <div class="strip-logo flex items-center justify-center sm:justify-start gap-3 rounded-2xl bg-white/[.03] border border-white/10 p-2.5 sm:p-3 hover:bg-white/[.06] transition-all cursor-default" title="PR Saraswati Gianyar">
+                        <div class="plate w-12 h-12 sm:w-14 sm:h-14 rounded-xl p-1 shrink-0 bg-white flex items-center justify-center shadow-md">
+                            <img src="assets/partners/pr_genta.png" alt="Logo PR Saraswati Gianyar" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <span class="hidden sm:block text-xs md:text-sm font-bold leading-tight text-white">PR Saraswati Gianyar</span>
+                    </div>
+                    <div class="strip-logo flex items-center justify-center sm:justify-start gap-3 rounded-2xl bg-white/[.03] border border-white/10 p-2.5 sm:p-3 hover:bg-white/[.06] transition-all cursor-default" title="Bali Seeds Primary School">
+                        <div class="plate w-12 h-12 sm:w-14 sm:h-14 rounded-xl p-1 shrink-0 bg-white flex items-center justify-center shadow-md">
+                            <img src="assets/partners/bali_seeds.jpg" alt="Logo Bali Seeds Primary School" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <span class="hidden sm:block text-xs md:text-sm font-bold leading-tight text-white">Bali Seeds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
     <!-- ========================================== -->
     <!-- MANFAAT SECTION (Apa yang Anak Dapatkan?) -->
@@ -928,7 +964,7 @@
                     <span data-i18n="loc_badge" class="text-xs font-bold tracking-wider uppercase text-white">Kampus &amp; Laboratorium</span>
                 </div>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4"><span data-i18n="loc_title">Lokasi Belajar di Bali</span></h2>
-                <p data-i18n="loc_desc" class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Pilih Learning Center terdekat dari rumah Anda untuk kelas tatap muka interaktif. Setiap cabang dilengkapi dengan lab komputer ber-AC, perangkat robotika, dan tutor ramah.</p>
+                <p data-i18n="loc_desc" class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Pilih Learning Center terdekat untuk kelas tatap muka interaktif, atau pilih layanan Private di mana tutor kami datang langsung mendampingi anak belajar di rumah sendiri.</p>
             </div>
 
             <!-- Locations Grid (3 Columns) -->
@@ -962,23 +998,31 @@
                     </div>
                 </div>
 
-                <!-- Cabang 2: Peliatan -->
+                <!-- Opsi 2: Kelas Private / Home Visit -->
                 <div class="bg-[#1E293B] rounded-2xl p-5 border border-white/10 hover:border-purple-500/60 hover:shadow-2xl transition-all group flex flex-col h-full" style="transition-delay: 100ms;">
-                    <h3 class="text-lg font-bold text-white mb-3 group-hover:text-purple-400 transition-colors flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center text-sm">
-                            <i class="fa-solid fa-laptop-code"></i>
-                        </div>
-                        Bali Seed Peliatan Ubud
-                    </h3>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-house-laptop"></i>
+                            </div>
+                            <span data-i18n="loc_c2_name">Kelas Private (Home Visit)</span>
+                        </h3>
+                        <span class="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40" data-i18n="loc_c2_tag">Tutor ke Rumah</span>
+                    </div>
                     
-                    <div class="w-full h-[180px] rounded-xl overflow-hidden mb-4 border border-white/10">
-                        <iframe src="https://maps.google.com/maps?q=Jalan%20Peliatan%20No%201%20Ubud&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="w-full h-[180px] rounded-xl overflow-hidden mb-4 border border-white/10 bg-gradient-to-br from-purple-950/60 via-[#0F172A] to-[#0B0F19] p-4 flex flex-col justify-center items-center text-center relative group-hover:border-purple-500/40 transition-colors">
+                        <div class="absolute -top-10 -right-10 w-28 h-28 bg-purple-500/10 rounded-full blur-xl pointer-events-none"></div>
+                        <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/40 text-purple-300 flex items-center justify-center text-xl mb-2.5 shadow-lg shadow-purple-500/10">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                        </div>
+                        <div class="font-bold text-white text-sm" data-i18n="loc_c2_box_title">Belajar di Rumah Sendiri</div>
+                        <p class="text-[11px] text-slate-300 mt-1 max-w-[240px]" data-i18n="loc_c2_box_sub">1-on-1 atau grup kecil. Tutor membawa kurikulum &amp; pendampingan langsung ke rumah Anda.</p>
                     </div>
 
                     <div class="flex-grow">
                         <p class="text-xs text-slate-300 mb-2 flex items-start gap-2">
-                            <i class="fa-solid fa-location-dot mt-0.5 text-slate-400"></i>
-                            <span>Jalan Peliatan, No. 1, Ubud</span>
+                            <i class="fa-solid fa-map-pin mt-0.5 text-purple-400"></i>
+                            <span data-i18n="loc_c2_addr">Jangkauan Area: Gianyar, Ubud, Denpasar &amp; sekitarnya</span>
                         </p>
                     </div>
                     <div class="mt-2 pt-4 border-t border-white/10 flex items-center justify-between">
@@ -986,7 +1030,7 @@
                             <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i>
                             <span class="text-xs font-bold text-emerald-300">0857-9273-6627</span>
                         </div>
-                        <a href="https://maps.google.com/?q=Jalan+Peliatan+No+1+Ubud" target="_blank" class="text-xs font-bold uppercase tracking-wider text-[#38BDF8] underline hover:text-white flex items-center gap-1"><span data-i18n="loc_directions">Rute</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                        <a href="#register" class="text-xs font-bold uppercase tracking-wider text-purple-400 hover:text-white flex items-center gap-1 transition-colors"><span data-i18n="loc_c2_cta">Daftar Private</span> <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
                     </div>
                 </div>
 
@@ -1062,7 +1106,7 @@
                         </span>
                     </summary>
                     <p class="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed pt-3 border-t border-white/10" data-i18n="faq_a2">
-                        Ya, kami menyediakan sesi Free Trial di Learning Center Gianyar, Ubud Peliatan, dan Bedulu. Anda dapat mendaftarkan jadwal percobaan melalui form di bawah atau via WhatsApp admin kami.
+                        Ya, kami menyediakan sesi Free Trial di Learning Center Gianyar dan Bedulu, serta opsi kelas Private di rumah sendiri (Home Visit). Anda dapat mendaftarkan jadwal percobaan melalui form di bawah atau via WhatsApp admin kami.
                     </p>
                 </details>
 
@@ -1181,8 +1225,8 @@
 
                     <!-- Learning center -->
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2" id="reg-center-label"><i class="fa-solid fa-school text-[#38BDF8]"></i> <span data-i18n="reg_lbl_center">Pilihan Learning Center</span> <span class="text-[#F87171]">*</span></span>
-                        <span data-i18n="reg_campus_count" class="text-xs text-slate-400 hidden sm:inline">3 Kampus Tersedia di Bali</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2" id="reg-center-label"><i class="fa-solid fa-school text-[#38BDF8]"></i> <span data-i18n="reg_lbl_center">Pilihan Lokasi / Metode Belajar</span> <span class="text-[#F87171]">*</span></span>
+                        <span data-i18n="reg_campus_count" class="text-xs text-slate-400 hidden sm:inline">2 Kampus + Layanan Private</span>
                     </div>
                     <div id="reg-center-cards" class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 rounded-2xl transition-shadow" role="radiogroup" aria-labelledby="reg-center-label">
                         <button type="button" role="radio" aria-checked="false" class="reg-choice relative text-left rounded-xl border border-slate-700 bg-[#0F172A] p-3.5 transition" style="--c:#38BDF8" data-center="Gents Robotic & Coding (Gianyar)" data-short="Gianyar">
@@ -1191,11 +1235,11 @@
                             <div class="text-sm font-bold text-white">Gianyar</div>
                             <div class="text-[11px] text-slate-400 leading-snug mt-0.5">Jln Ksatrian No 8, Candi Baru, Gianyar</div>
                         </button>
-                        <button type="button" role="radio" aria-checked="false" class="reg-choice relative text-left rounded-xl border border-slate-700 bg-[#0F172A] p-3.5 transition" style="--c:#C084FC" data-center="Bali Seed Robotic & Coding Peliatan (Ubud)" data-short="Ubud">
+                        <button type="button" role="radio" aria-checked="false" class="reg-choice relative text-left rounded-xl border border-slate-700 bg-[#0F172A] p-3.5 transition" style="--c:#C084FC" data-center="Kelas Private (Home Visit / Di Rumah)" data-short="Private">
                             <i class="reg-tick fa-solid fa-circle-check absolute top-3 right-3 text-sm text-[#C084FC]"></i>
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center mb-2.5 bg-[#C084FC]/15 text-[#C084FC]"><i class="fa-solid fa-laptop-code"></i></div>
-                            <div class="text-sm font-bold text-white">Ubud Peliatan</div>
-                            <div class="text-[11px] text-slate-400 leading-snug mt-0.5">Jalan Peliatan No. 1, Ubud</div>
+                            <div class="w-9 h-9 rounded-lg flex items-center justify-center mb-2.5 bg-[#C084FC]/15 text-[#C084FC]"><i class="fa-solid fa-house-laptop"></i></div>
+                            <div class="text-sm font-bold text-white" data-i18n="reg_choice_private_title">Private / Home Visit</div>
+                            <div class="text-[11px] text-slate-400 leading-snug mt-0.5" data-i18n="reg_choice_private_desc">Belajar di rumah sendiri (Gianyar &amp; Ubud)</div>
                         </button>
                         <button type="button" role="radio" aria-checked="false" class="reg-choice relative text-left rounded-xl border border-slate-700 bg-[#0F172A] p-3.5 transition" style="--c:#FFC83D" data-center="Bali Seed Bedulu Robotics & Coding" data-short="Bedulu">
                             <i class="reg-tick fa-solid fa-circle-check absolute top-3 right-3 text-sm text-[#FFC83D]"></i>
@@ -1205,9 +1249,9 @@
                         </button>
                     </div>
                     <select id="reg-center" class="sr-only" tabindex="-1" aria-hidden="true">
-                        <option value="" selected data-i18n="reg_select_default">-- Pilih Learning Center Terdekat --</option>
+                        <option value="" selected data-i18n="reg_select_default">-- Pilih Lokasi / Metode Belajar --</option>
                         <option value="Gents Robotic & Coding (Gianyar)">Gents Robotic &amp; Coding (Gianyar)</option>
-                        <option value="Bali Seed Robotic & Coding Peliatan (Ubud)">Bali Seed Robotic &amp; Coding Peliatan (Ubud)</option>
+                        <option value="Kelas Private (Home Visit / Di Rumah)">Kelas Private (Home Visit / Di Rumah)</option>
                         <option value="Bali Seed Bedulu Robotics & Coding">Bali Seed Bedulu Robotics &amp; Coding</option>
                     </select>
 
@@ -1403,14 +1447,14 @@
                     </ul>
                 </div>
 
-                <!-- Col 3: Learning Center di Bali -->
+                <!-- Col 3: Lokasi & Metode Belajar di Bali -->
                 <div>
-                    <h5 data-i18n="footer_col_center" class="text-white text-xs font-bold uppercase tracking-wider mb-4">Learning Center</h5>
+                    <h5 data-i18n="footer_col_center" class="text-white text-xs font-bold uppercase tracking-wider mb-4">Lokasi &amp; Metode</h5>
                     <ul class="space-y-2 text-xs">
                         <li><strong class="text-white">Gianyar:</strong> Jln Ksatrian No. 8, Candi Baru</li>
-                        <li><strong class="text-white">Ubud Peliatan:</strong> Jalan Peliatan No. 1</li>
                         <li><strong class="text-white">Bedulu:</strong> Jln Raya Semebaung Bedulu</li>
-                        <li class="pt-1"><a href="#location" class="text-[#38BDF8] underline font-semibold flex items-center gap-1 hover:text-white"><span data-i18n="footer_c_check">Cek Peta &amp; Rute Terdekat &rarr;</span></a></li>
+                        <li><strong class="text-white">Private:</strong> Belajar di rumah sendiri (Gianyar &amp; Ubud)</li>
+                        <li class="pt-1"><a href="#location" class="text-[#38BDF8] underline font-semibold flex items-center gap-1 hover:text-white"><span data-i18n="footer_c_check">Cek Lokasi &amp; Info Private &rarr;</span></a></li>
                     </ul>
                 </div>
 
@@ -1424,7 +1468,7 @@
                         </li>
                         <li class="flex items-center gap-2">
                             <i class="fa-brands fa-whatsapp text-emerald-400"></i>
-                            <span>0857-9273-6627 (Ubud Peliatan)</span>
+                            <span>0857-9273-6627 (Private / Home Visit)</span>
                         </li>
                         <li class="flex items-center gap-2">
                             <i class="fa-solid fa-envelope text-slate-400"></i>
@@ -1874,7 +1918,7 @@ const STEPS = [
   { n:'01', key:'step1', title:'Kenali Manfaat', desc:'Pahami nilai nyata coding untuk pola pikir anak.', long:'Coding melatih logika terstruktur, mengubah screen-time pasif jadi waktu berkarya, dan membuat anak tidak takut salah saat debugging.', icon:'fa-lightbulb', color:'#38BDF8', href:'#manfaat', cta:'Pelajari Manfaat', reward:'Logika terstruktur', emoji:'💡' },
   { n:'02', key:'step2', title:'Pilih Level Anak', desc:'Sesuaikan dengan usia dan kesiapan belajar saat ini.', long:'Kids (6–14 thn) mulai dari blok visual, Teens (11–17 thn) masuk ke kode teks, robotika, atau aplikasi. Ada 9 kelas untuk dipilih.', icon:'fa-compass', color:'#38BDF8', href:'#course', cta:'Lihat 9 Kelas', reward:'Kelas yang pas', emoji:'🧭' },
   { n:'03', key:'step3', title:'Lihat Karya Project', desc:'Ketahui tools industri dan karya yang akan dibuat.', long:'Scratch, Roblox Studio, App Inventor, Arduino, hingga HTML/CSS. Hasilnya game, website, aplikasi APK, dan alat IoT.', icon:'fa-shapes', color:'#C084FC', href:'#tech-flow', cta:'Eksplorasi Tools', reward:'Gambaran karya', emoji:'🎮' },
-  { n:'04', key:'step4', title:'Coba Kelas Gratis', desc:'1 sesi trial santai untuk ukur minat anak tanpa biaya.', long:'Datang ke lab Gianyar, Ubud Peliatan, atau Bedulu. Tutor mengamati minat dan kesiapan anak, tanpa biaya dan tanpa komitmen.', icon:'fa-star', color:'#FFC83D', href:'#register', cta:'Daftar Trial Sekarang', reward:'Rp0 · tanpa komitmen', emoji:'⭐', featured:true },
+  { n:'04', key:'step4', title:'Coba Kelas Gratis', desc:'1 sesi trial santai untuk ukur minat anak tanpa biaya.', long:'Datang ke lab Gianyar, Bedulu, atau pilih kelas Private di rumah. Tutor mengamati minat dan kesiapan anak, tanpa biaya dan tanpa komitmen.', icon:'fa-star', color:'#FFC83D', href:'#register', cta:'Daftar Trial Sekarang', reward:'Rp0 · tanpa komitmen', emoji:'⭐', featured:true },
   { n:'05', key:'step5', title:'Mulai Berkarya', desc:'Jadwal disepakati bersama admin, lalu pantau laporan setiap sesi.', long:'Jadwal dan biaya dibahas bersama admin. Anak belajar dengan rasio 1:5, orang tua menerima laporan sesi, dan sertifikat diberikan setelah course selesai.', icon:'fa-flag-checkered', color:'#34D399', href:'#register', cta:'Amankan Jadwal', reward:'Sertifikat kelulusan', emoji:'🏅' },
 ];
 

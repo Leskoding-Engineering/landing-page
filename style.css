@@ -591,3 +591,10 @@ h1, h2, h3, h4, h5, h6 {
 .cb-fade { animation:cb-fade .4s ease; }
 @keyframes cb-fade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
 @media (prefers-reduced-motion: reduce) { .cb-bug, .cb-run, .cb-fade { animation:none; } }
+
+/* ---- Partners: Strip Kepercayaan (opsi 3 varian a) ---- */
+.plate { background:#fff; display:flex; align-items:center; justify-content:center; }
+.plate img { object-fit:contain; }
+.strip-logo { filter:grayscale(1) contrast(.9); opacity:.75; transition:filter .3s, opacity .3s, transform .3s; }
+.strip-logo:hover { filter:none; opacity:1; transform:translateY(-3px); }
+

@@ -41,7 +41,7 @@ Dokumentasi teknis landing page LesKoding Academy Bali. Informasi bisnis (progra
 6. **Modal detail silabus:** tombol "Lihat Detail Kurikulum" di setiap kartu program membuka modal berisi tools, deskripsi, kompetensi, topik silabus, dan catatan sertifikat kelulusan.
 7. **Dropdown Learning Center kustom:** kartu cabang yang ramah sentuhan.
 8. **Form pendaftaran → WhatsApp:** pesan dikirim ke admin sesuai cabang:
-   - Cabang mengandung "Peliatan" → `6285792736627`
+   - Pilihan Private / Home Visit → `6285792736627`
    - Gianyar / Bedulu → `628518306798`
 
 ## Aturan Konten (wajib konsisten dengan KB)
