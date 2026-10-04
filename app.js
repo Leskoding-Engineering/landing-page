@@ -628,7 +628,7 @@ WA Anak (opsional): ${waAnak}`;
             const encodedMessage = encodeURIComponent(message);
             
             // Semua lokasi & metode belajar dilayani satu nomor admin
-            const adminWA = "6285117535970";
+            const adminWA = "6285183046798";
             const whatsappUrl = `https://wa.me/${adminWA}?text=${encodedMessage}`;
             
             window.open(whatsappUrl, '_blank');
@@ -2631,8 +2631,8 @@ const i18nDictionary = {
         "faq5_cat_fee": "Fees &amp; Schedule",
         "faq5_still_t": "Still have questions?",
         "faq5_still_d": "Our admin is happy to help on WhatsApp.",
-        "faq5_chat": "Chat Mr. Irvan",
-        "footer_wa_name": "Mr. Irvan",
+        "faq5_chat": "Chat LesKoding Official",
+        "footer_wa_name": "LesKoding Official",
         "faq5_q1": "Can a child with no coding or computer experience join?",
         "faq5_tl1": "Yes!",
         "faq5_sub1": "starting from zero",
@@ -3309,8 +3309,8 @@ const i18nDictionary = {
         "faq5_cat_fee": "Biaya &amp; Jadwal",
         "faq5_still_t": "Masih ada pertanyaan?",
         "faq5_still_d": "Admin kami siap membantu lewat WhatsApp.",
-        "faq5_chat": "Chat Mr. Irvan",
-        "footer_wa_name": "a.n. Mr. Irvan",
+        "faq5_chat": "Chat LesKoding Official",
+        "footer_wa_name": "a.n. LesKoding Official",
         "faq5_q1": "Apakah anak yang belum pernah belajar coding atau komputer bisa ikut?",
         "faq5_tl1": "Bisa!",
         "faq5_sub1": "mulai dari nol",

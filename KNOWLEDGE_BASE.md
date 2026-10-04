@@ -63,7 +63,7 @@
 
 ### 1.5 Saluran Kontak & Komunikasi Resmi
 - **Email Resmi:** `halo@leskoding.id`
-- **WhatsApp Admin (semua lokasi & metode belajar):** `+62 851-1753-5970` a.n. **Mr. Irvan** (format wa.me: `6285117535970`)
+- **WhatsApp Admin (semua lokasi & metode belajar):** `+62 851-8304-6798` a.n. **LesKoding Official** (format wa.me: `6285183046798`)
 - **Hak Cipta:** © 2026 LesKoding Bali. All rights reserved.
 
 ---
@@ -74,9 +74,9 @@ LesKoding menyelenggarakan pembelajaran tatap muka (*offline/in-person classes*)
 
 | Cabang / Layanan | Nama Resmi / Deskripsi | Lokasi & Jangkauan | Nomor WhatsApp | Akses / Keterangan |
 |---|---|---|---|---|
-| **Gianyar (Pusat)** | Gents Robotic & Coding (Gianyar) | Jln. Ksatrian, No. 8, Lingkungan Candi Baru, Gianyar, Bali | `+62 851-1753-5970` | [Rute Google Maps](https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar) |
-| **Bedulu** | Bali Seed Bedulu Robotics & Coding | Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar, Bali | `+62 851-1753-5970` | [Rute Google Maps](https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu) |
-| **Private (Home Visit)** | Kelas Belajar di Rumah Sendiri | Area Gianyar, Ubud, Denpasar & sekitarnya | `+62 851-1753-5970` | Tutor berkunjung langsung ke rumah, 1-on-1 atau kelompok privat |
+| **Gianyar (Pusat)** | Gents Robotic & Coding (Gianyar) | Jln. Ksatrian, No. 8, Lingkungan Candi Baru, Gianyar, Bali | `+62 851-8304-6798` | [Rute Google Maps](https://maps.google.com/?q=Jln+Ksatrian+No+8+Lingkungan+Candi+Baru+Gianyar) |
+| **Bedulu** | Bali Seed Bedulu Robotics & Coding | Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar, Bali | `+62 851-8304-6798` | [Rute Google Maps](https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu) |
+| **Private (Home Visit)** | Kelas Belajar di Rumah Sendiri | Area Gianyar, Ubud, Denpasar & sekitarnya | `+62 851-8304-6798` | Tutor berkunjung langsung ke rumah, 1-on-1 atau kelompok privat |
 
 > **Catatan Operasional:** Learning Center fisik di Ubud (Peliatan) sudah tidak beroperasi dan seluruh kebutuhan kelas di area Ubud dan sekitarnya dilayani secara personal melalui program **Kelas Private (Home Visit)** di mana tutor LesKoding datang langsung ke rumah siswa.
 
@@ -521,7 +521,7 @@ Formulir pendaftaran digital mengumpulkan data terstruktur:
 12. Nomor WhatsApp Anak (Opsional)
 
 ### 11.4 Logika Routing WhatsApp Otomatis
-Semua pilihan lokasi / metode belajar (Gianyar, Bedulu, Kelas Private Home Visit, dan Kelas Online) diarahkan ke satu admin: **`6285117535970`**.
+Semua pilihan lokasi / metode belajar (Gianyar, Bedulu, Kelas Private Home Visit, dan Kelas Online) diarahkan ke satu admin: **`6285183046798`**.
 
 #### Template Pesan WhatsApp Otomatis (Bahasa Indonesia):
 ```text
