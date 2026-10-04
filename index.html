@@ -67,7 +67,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css?v=20261004_v2">
+    <link rel="stylesheet" href="style.css?v=20261004_v3">
     <script>
         // Konten dari admin panel (landing-content.json): fetch dimulai sedini mungkin dan
         // section yang diatur admin disembunyikan sampai datanya siap, supaya konten statis
@@ -100,7 +100,20 @@
             <button type="button" id="promo-bar-close" class="w-9 h-9 text-[#111827] hover:bg-black/10 rounded-md" aria-label="Tutup promo"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
-    <a href="#promo" id="promo-pill" class="fixed right-5 bottom-5 z-40 items-center gap-2 rounded-full bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] pl-2 pr-4 py-2 text-xs font-extrabold shadow-[0_10px_30px_-5px_rgba(255,200,61,.5)] transition hidden"><span class="w-7 h-7 rounded-full bg-[#111827] text-[#FFC83D] grid place-items-center"><i class="fa-solid fa-gift"></i></span><span data-i18n="promo_trigger">Promo 2026</span></a>
+    <!-- Pojok kanan bawah: pil promo (setelah top bar ditutup) + tombol hubungi admin kontekstual (opsi 4) -->
+    <div id="float-dock" class="fixed right-4 sm:right-5 bottom-4 sm:bottom-5 z-40 flex flex-col items-end gap-2.5 pointer-events-none">
+        <a href="#promo" id="promo-pill" class="pointer-events-auto items-center gap-2 rounded-full bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] pl-2 pr-4 py-2 text-xs font-extrabold shadow-[0_10px_30px_-5px_rgba(255,200,61,.5)] transition hidden"><span class="w-7 h-7 rounded-full bg-[#111827] text-[#FFC83D] grid place-items-center"><i class="fa-solid fa-gift"></i></span><span data-i18n="promo_trigger">Promo 2026</span></a>
+        <div class="flex items-center gap-3">
+            <div id="ctx-tip" class="ctx-tip pointer-events-auto relative hidden sm:block max-w-[250px] rounded-2xl rounded-br-sm bg-white text-[#111827] shadow-xl">
+                <a href="https://wa.me/6285183046798" target="_blank" rel="noopener" id="ctx-tip-link" class="block pl-4 pr-8 py-2.5">
+                    <span class="block text-[13px] font-extrabold leading-snug" id="ctx-t">Ada pertanyaan? 👋</span>
+                    <span class="block text-[11px] text-[#475467] mt-0.5" id="ctx-d">Admin kami siap membantu via WhatsApp</span>
+                </a>
+                <button type="button" id="ctx-tip-close" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full text-[#98A2B3] hover:text-[#111827] hover:bg-black/5 text-[11px]" aria-label="Sembunyikan pesan"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <a href="https://wa.me/6285183046798" target="_blank" rel="noopener" id="ctx-fab" class="pointer-events-auto w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#2EE07A] text-[#052e16] grid place-items-center text-2xl shrink-0 shadow-[0_12px_30px_-6px_rgba(37,211,102,.6)] transition hover:scale-105" aria-label="Chat admin Leskoding via WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
 
     <!-- Global Animated Background -->
     <div class="global-bg-wrapper overflow-hidden">
@@ -1655,7 +1668,7 @@
     </div>
 
     <!-- Script -->
-    <script src="app.js?v=20261004_v3"></script>
+    <script src="app.js?v=20261004_v4"></script>
 <script>
 
 /* ---------- B: tabs ---------- */

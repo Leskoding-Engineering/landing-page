@@ -672,3 +672,10 @@ body { padding-top:var(--promo-bar-h, 0px); }
     #faq5-list, #faq5-panels, #reg-center-cards { transition:none; }
 }
 
+
+/* ---- Hubungi admin (opsi 4): tombol WhatsApp kontekstual ---- */
+.ctx-tip { transition:opacity .3s, transform .3s; }
+.ctx-tip.swap { opacity:0; transform:translateX(8px); }
+#promo-pill.flex { display:flex; }
+body:has(#mobile-menu.open) #float-dock { display:none; }
+@media (prefers-reduced-motion: reduce) { .ctx-tip { transition:none; } }

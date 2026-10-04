@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Hubungi Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['"Fira Code"', 'monospace'] },
+}}};
+</script>
+<style>
+  body { background:#0B0F19; color:#fff; }
+  .mono { font-family:'Fira Code',monospace; }
+  .opsi-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem 1rem; margin-bottom:1.5rem; }
+  .grad { background:linear-gradient(90deg,#FFC83D,#38BDF8,#C084FC); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .ghost { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border:1px solid rgba(255,255,255,.15); color:#fff; font-weight:700; padding:.6rem 1rem; min-height:40px; border-radius:.75rem; font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; transition:background .25s; }
+  .ghost:hover { background:rgba(255,255,255,.06); }
+  .grid-bg { background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:32px 32px; }
+
+  /* Mock browser: widget menempel di pojok kanan bawah bingkai, halaman di dalamnya bisa di-scroll */
+  .stage { position:relative; height:560px; border-radius:1.5rem; border:1px solid rgba(255,255,255,.12); background:#0B0F19; overflow:hidden; }
+  .stage-bar { position:relative; z-index:5; height:38px; display:flex; align-items:center; gap:6px; padding:0 14px; background:#1E293B; border-bottom:1px solid rgba(255,255,255,.08); }
+  .stage-bar i.d { width:9px; height:9px; border-radius:50%; display:inline-block; }
+  .scroller { position:absolute; inset:38px 0 0 0; overflow-y:auto; }
+  .faux-sec { min-height:300px; padding:28px; border-bottom:1px solid rgba(255,255,255,.06); }
+  .sk { background:rgba(255,255,255,.06); border-radius:10px; }
+  .dock-area { position:absolute; right:16px; bottom:16px; z-index:10; display:flex; flex-direction:column; align-items:flex-end; gap:10px; }
+  .wa-green { background:#25D366; color:#052e16; }
+  .promo-pill { display:flex; align-items:center; gap:.5rem; border-radius:999px; background:#FFC83D; color:#111827; padding:.4rem 1rem .4rem .4rem; font-size:.72rem; font-weight:800; box-shadow:0 10px 30px -5px rgba(255,200,61,.5); }
+  .promo-pill span.i { width:26px; height:26px; border-radius:999px; background:#111827; color:#FFC83D; display:grid; place-items:center; }
+
+  /* 1 · Speed dial */
+  .sd-item { opacity:0; transform:translateY(12px) scale(.9); transition:all .3s cubic-bezier(.2,.9,.2,1.2); pointer-events:none; }
+  .sd.open .sd-item { opacity:1; transform:none; pointer-events:auto; }
+  .sd.open .sd-item:nth-last-child(2) { transition-delay:.03s; } .sd.open .sd-item:nth-last-child(3) { transition-delay:.06s; } .sd.open .sd-item:nth-last-child(4) { transition-delay:.09s; } .sd.open .sd-item:nth-last-child(5) { transition-delay:.12s; }
+  .sd-main i { transition:transform .3s; }
+  .sd.open .sd-main .ic-open { transform:rotate(90deg) scale(0); position:absolute; }
+  .sd:not(.open) .sd-main .ic-close { transform:rotate(-90deg) scale(0); position:absolute; }
+
+  /* 2 · Chat bubble */
+  .cb-card { transform-origin:bottom right; transform:scale(.6) translateY(20px); opacity:0; transition:all .35s cubic-bezier(.2,.9,.2,1.2); pointer-events:none; }
+  .cb-card.show { transform:none; opacity:1; pointer-events:auto; }
+  .typing span { width:6px; height:6px; border-radius:50%; background:#94A3B8; display:inline-block; animation:typing 1s infinite; }
+  .typing span:nth-child(2) { animation-delay:.15s; } .typing span:nth-child(3) { animation-delay:.3s; }
+  @keyframes typing { 0%,60%,100% { transform:translateY(0); opacity:.5; } 30% { transform:translateY(-4px); opacity:1; } }
+
+  /* 3 · Morph pill */
+  .mp { width:168px; height:52px; border-radius:26px; transition:width .45s cubic-bezier(.2,.9,.2,1), height .45s cubic-bezier(.2,.9,.2,1), border-radius .45s; overflow:hidden; }
+  .mp.open { width:320px; height:286px; border-radius:22px; }
+  .mp .mp-closed, .mp .mp-open { transition:opacity .25s; }
+  .mp.open .mp-closed { opacity:0; pointer-events:none; }
+  .mp:not(.open) .mp-open { opacity:0; pointer-events:none; }
+  .mp.open .mp-open { transition-delay:.2s; }
+
+  /* 4 · Kontekstual */
+  .ctx-tip { transition:opacity .3s, transform .3s; }
+  .ctx-tip.swap { opacity:0; transform:translateX(8px); }
+
+  /* 5 · Robot */
+  .bot { transition:transform .4s cubic-bezier(.3,1.6,.5,1); transform:translateY(38px); }
+  .bot-wrap:hover .bot, .bot-wrap.awake .bot { transform:translateY(0); }
+  .bot-eye { animation:blink 4s infinite; transform-origin:center; transform-box:fill-box; }
+  @keyframes blink { 0%,92%,100% { transform:scaleY(1); } 95% { transform:scaleY(.1); } }
+  .bot-arm { transform-origin:10% 90%; transform-box:fill-box; }
+  .bot-wrap:hover .bot-arm, .bot-wrap.awake .bot-arm { animation:wave .8s ease-in-out 2; }
+  @keyframes wave { 50% { transform:rotate(-35deg); } }
+  .bot-bubble { opacity:0; transform:translateY(8px) scale(.95); transition:all .3s .15s; pointer-events:none; }
+  .bot-wrap:hover .bot-bubble, .bot-wrap.awake .bot-bubble { opacity:1; transform:none; pointer-events:auto; }
+
+  /* 6 · Dock */
+  .ring { transform:rotate(-90deg); }
+  .dock-btn { position:relative; }
+  .dock-btn .tip { position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%) translateY(4px); white-space:nowrap; opacity:0; transition:all .2s; pointer-events:none; }
+  .dock-btn:hover .tip, .dock-btn:focus-visible .tip { opacity:1; transform:translateX(-50%); }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; } }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="sticky top-0 z-50 bg-[#0B0F19]/85 backdrop-blur border-b border-white/10">
+  <div class="max-w-[1240px] mx-auto px-4 py-3 flex flex-wrap items-center gap-2 justify-between">
+    <div class="text-xs text-slate-400 mono">EKSPLORASI · Hubungi Admin (pojok kanan bawah)</div>
+    <nav class="flex flex-wrap gap-1.5 text-xs font-bold">
+      <a href="#opsi-1" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">1 · Speed Dial</a>
+      <a href="#opsi-2" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">2 · Gelembung Chat</a>
+      <a href="#opsi-3" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">3 · Pil → Form</a>
+      <a href="#opsi-4" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">4 · Kontekstual</a>
+      <a href="#opsi-5" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">5 · Robo Helper</a>
+      <a href="#opsi-6" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">6 · Dock</a>
+      <a href="#banding" class="px-3 py-1.5 rounded-lg bg-[#FFC83D] text-[#111827] hover:bg-[#fed368]">Perbandingan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="max-w-[1240px] mx-auto px-4 pt-12 pb-10">
+  <p class="mono text-xs text-[#38BDF8] mb-2">// widget menempel (sticky) di pojok kanan bawah · semua ke WhatsApp LesKoding Official</p>
+  <h1 class="font-display text-3xl md:text-5xl font-black tracking-tight">6 konsep tombol <span class="grad">Hubungi Admin.</span></h1>
+  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base">Setiap opsi ditampilkan di <b class="text-white">bingkai browser tiruan yang bisa di-scroll</b>, dengan widget menempel di pojok kanan bawah bingkai. Semua tombol membuka WhatsApp <span class="mono text-emerald-400">+62 851-8304-6798</span> dengan pesan awal yang sudah terisi sesuai topik. Tidak ada klaim "online" atau "dibalas dalam X menit" karena belum ada di KB. Pil <b class="text-[#FFC83D]">Promo 2026</b> (yang muncul setelah top bar ditutup) ikut ditampilkan agar terlihat cara keduanya berbagi pojok.</p>
+</header>
+
+<!-- template halaman tiruan -->
+<template id="faux-page">
+  <div class="faux-sec grid-bg" data-ctx="hero"><div class="mono text-[10px] text-slate-500 mb-3">HERO</div><div class="sk h-9 w-2/3 mb-3"></div><div class="sk h-4 w-1/2 mb-6"></div><div class="flex gap-3"><div class="sk h-10 w-32"></div><div class="sk h-10 w-32"></div></div></div>
+  <div class="faux-sec" data-ctx="program"><div class="mono text-[10px] text-[#38BDF8] mb-3">PROGRAM BELAJAR</div><div class="grid grid-cols-3 gap-3"><div class="sk h-40"></div><div class="sk h-40"></div><div class="sk h-40"></div></div></div>
+  <div class="faux-sec" data-ctx="lokasi"><div class="mono text-[10px] text-[#FFC83D] mb-3">LEARNING CENTERS</div><div class="grid grid-cols-4 gap-3 mb-3"><div class="sk h-16"></div><div class="sk h-16"></div><div class="sk h-16"></div><div class="sk h-16"></div></div><div class="sk h-40"></div></div>
+  <div class="faux-sec" data-ctx="faq"><div class="mono text-[10px] text-[#C084FC] mb-3">FAQ</div><div class="space-y-2"><div class="sk h-12"></div><div class="sk h-12"></div><div class="sk h-12"></div><div class="sk h-12"></div></div></div>
+  <div class="faux-sec" data-ctx="daftar"><div class="mono text-[10px] text-[#34D399] mb-3">FORMULIR PENDAFTARAN</div><div class="grid grid-cols-2 gap-3"><div class="sk h-11"></div><div class="sk h-11"></div><div class="sk h-11"></div><div class="sk h-11"></div></div><div class="sk h-12 w-40 mt-4"></div></div>
+</template>
+
+<!-- ============================ OPSI 1 ============================ -->
+<section id="opsi-1" class="py-14 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 1</span><h2 class="font-display text-2xl font-extrabold">Speed Dial</h2><p class="text-sm text-slate-400 max-w-3xl">Satu tombol WhatsApp bulat. Saat diklik, terbuka 4 jalan pintas berlabel: Tanya admin, Cek promo, Lihat FAQ, Daftar trial. Pil promo <b>dilebur ke dalam menu</b>, jadi pojok kanan bawah hanya berisi satu tombol.</p></div>
+    <div class="stage" data-stage>
+      <div class="stage-bar"><i class="d bg-[#F87171]"></i><i class="d bg-[#FFC83D]"></i><i class="d bg-emerald-400"></i><span class="mono text-[11px] text-slate-500 ml-3">leskoding.id · scroll di dalam bingkai</span></div>
+      <div class="scroller" data-faux></div>
+      <div class="dock-area">
+        <div class="sd flex flex-col items-end gap-2.5" id="sd">
+          <a href="#" data-wa="umum" class="sd-item flex items-center gap-3"><span class="rounded-lg bg-[#1E293B] border border-white/10 px-3 py-1.5 text-xs font-bold shadow-lg">Tanya admin via WhatsApp</span><span class="w-11 h-11 rounded-full wa-green grid place-items-center text-lg shadow-lg"><i class="fa-brands fa-whatsapp"></i></span></a>
+          <a href="#" class="sd-item flex items-center gap-3" data-demo="promo"><span class="rounded-lg bg-[#1E293B] border border-white/10 px-3 py-1.5 text-xs font-bold shadow-lg">Promo 2026</span><span class="w-11 h-11 rounded-full bg-[#FFC83D] text-[#111827] grid place-items-center shadow-lg"><i class="fa-solid fa-gift"></i></span></a>
+          <a href="#" class="sd-item flex items-center gap-3" data-demo="faq"><span class="rounded-lg bg-[#1E293B] border border-white/10 px-3 py-1.5 text-xs font-bold shadow-lg">Lihat FAQ</span><span class="w-11 h-11 rounded-full bg-[#C084FC] text-[#0B0F19] grid place-items-center shadow-lg"><i class="fa-solid fa-circle-question"></i></span></a>
+          <a href="#" class="sd-item flex items-center gap-3" data-demo="daftar"><span class="rounded-lg bg-[#1E293B] border border-white/10 px-3 py-1.5 text-xs font-bold shadow-lg">Daftar Free Trial</span><span class="w-11 h-11 rounded-full bg-[#38BDF8] text-[#0B0F19] grid place-items-center shadow-lg"><i class="fa-solid fa-rocket"></i></span></a>
+          <button class="sd-main relative w-14 h-14 rounded-full wa-green grid place-items-center text-2xl shadow-[0_12px_30px_-6px_rgba(37,211,102,.6)]" aria-expanded="false" aria-label="Buka menu bantuan" id="sd-btn">
+            <i class="fa-brands fa-whatsapp ic-open"></i><i class="fa-solid fa-xmark ic-close"></i>
+            <span class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#FFC83D] border-2 border-[#0B0F19]" title="ada promo"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 2 ============================ -->
+<section id="opsi-2" class="py-14 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 2</span><h2 class="font-display text-2xl font-extrabold">Gelembung Chat</h2><p class="text-sm text-slate-400 max-w-3xl">Setelah pengunjung scroll sedikit, muncul gelembung sapaan dari admin dengan animasi mengetik, plus 3 pilihan topik (Free Trial, Biaya &amp; Jadwal, Lokasi). Setiap topik membuka WhatsApp dengan pesan yang sesuai. Setelah ditutup, tersisa tombol avatar.</p></div>
+    <div class="flex justify-end mb-3"><button class="ghost" id="cb-replay"><i class="fa-solid fa-rotate-left"></i> Putar ulang</button></div>
+    <div class="stage" data-stage>
+      <div class="stage-bar"><i class="d bg-[#F87171]"></i><i class="d bg-[#FFC83D]"></i><i class="d bg-emerald-400"></i><span class="mono text-[11px] text-slate-500 ml-3">leskoding.id · muncul setelah scroll</span></div>
+      <div class="scroller" data-faux id="cb-scroller"></div>
+      <div class="dock-area">
+        <div class="promo-pill"><span class="i"><i class="fa-solid fa-gift"></i></span>Promo 2026</div>
+        <div class="cb-card w-[300px] rounded-2xl bg-[#1E293B] border border-white/10 shadow-2xl overflow-hidden" id="cb-card">
+          <div class="flex items-center gap-3 px-4 py-3 bg-[#0F172A] border-b border-white/10">
+            <img src="assets/logo/leskoding_community_sm.png" alt="" class="w-9 h-9 rounded-full bg-white p-1 object-contain">
+            <div class="leading-tight flex-1"><div class="text-sm font-bold">LesKoding Official</div><div class="text-[11px] text-slate-400">Admin · via WhatsApp</div></div>
+            <button class="w-8 h-8 text-slate-400 hover:text-white" aria-label="Tutup" id="cb-close"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="p-4 space-y-2" id="cb-body"></div>
+          <div class="px-4 pb-4 grid gap-2" id="cb-topics">
+            <a href="#" data-wa="trial" class="rounded-xl border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 px-3 py-2 text-xs font-bold flex items-center gap-2 transition"><i class="fa-solid fa-gift"></i> Tanya Free Trial <i class="fa-solid fa-arrow-right ml-auto text-[10px]"></i></a>
+            <a href="#" data-wa="biaya" class="rounded-xl border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 px-3 py-2 text-xs font-bold flex items-center gap-2 transition"><i class="fa-solid fa-calendar-check"></i> Tanya biaya &amp; jadwal <i class="fa-solid fa-arrow-right ml-auto text-[10px]"></i></a>
+            <a href="#" data-wa="lokasi" class="rounded-xl border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 px-3 py-2 text-xs font-bold flex items-center gap-2 transition"><i class="fa-solid fa-location-dot"></i> Tanya lokasi &amp; kelas <i class="fa-solid fa-arrow-right ml-auto text-[10px]"></i></a>
+          </div>
+        </div>
+        <button class="relative w-14 h-14 rounded-full bg-white grid place-items-center shadow-[0_12px_30px_-6px_rgba(37,211,102,.6)] ring-4 ring-[#25D366]" aria-label="Buka chat admin" id="cb-fab">
+          <img src="assets/logo/leskoding_community_sm.png" alt="" class="w-9 h-9 object-contain">
+          <span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full wa-green grid place-items-center text-xs border-2 border-[#0B0F19]"><i class="fa-brands fa-whatsapp"></i></span>
+          <span class="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 rounded-full bg-[#F87171] text-[10px] font-bold grid place-items-center border-2 border-[#0B0F19] hidden" id="cb-badge">1</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 3 ============================ -->
+<section id="opsi-3" class="py-14 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 3</span><h2 class="font-display text-2xl font-extrabold">Pil → Form Singkat</h2><p class="text-sm text-slate-400 max-w-3xl">Pil "Tanya Admin" yang <b>berubah bentuk</b> (morph) menjadi kartu kecil berisi kotak pertanyaan. Orang tua mengetik pertanyaan dan nama anak (opsional), lalu "Kirim via WhatsApp" membuka chat dengan pesan yang sudah tersusun. Pertanyaan tidak perlu diketik ulang di WhatsApp.</p></div>
+    <div class="stage" data-stage>
+      <div class="stage-bar"><i class="d bg-[#F87171]"></i><i class="d bg-[#FFC83D]"></i><i class="d bg-emerald-400"></i><span class="mono text-[11px] text-slate-500 ml-3">leskoding.id</span></div>
+      <div class="scroller" data-faux></div>
+      <div class="dock-area">
+        <div class="promo-pill"><span class="i"><i class="fa-solid fa-gift"></i></span>Promo 2026</div>
+        <div class="mp relative bg-[#1E293B] border border-emerald-500/40 shadow-[0_16px_40px_-12px_rgba(37,211,102,.45)]" id="mp">
+          <button class="mp-closed absolute inset-0 flex items-center gap-2.5 pl-1.5 pr-4 text-left" id="mp-open" aria-expanded="false">
+            <span class="w-10 h-10 rounded-full wa-green grid place-items-center text-lg shrink-0"><i class="fa-brands fa-whatsapp"></i></span>
+            <span class="leading-tight"><span class="block text-[13px] font-extrabold">Tanya Admin</span><span class="block text-[10px] text-slate-400">ada pertanyaan?</span></span>
+          </button>
+          <form class="mp-open absolute inset-0 p-4 flex flex-col" id="mp-form">
+            <div class="flex items-center justify-between"><div class="font-display font-extrabold">Masih ada pertanyaan?</div><button type="button" class="w-8 h-8 text-slate-400 hover:text-white -mr-2" id="mp-close" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button></div>
+            <p class="text-[11px] text-slate-400 mb-3">Tulis di sini, lanjutkan di WhatsApp.</p>
+            <textarea id="mp-q" rows="3" class="w-full bg-[#0B0F19] border border-white/10 focus:border-emerald-400 focus:outline-none rounded-xl px-3 py-2 text-[13px] resize-none placeholder:text-slate-500" placeholder="Contoh: Anak saya 8 tahun, program apa yang cocok?"></textarea>
+            <input id="mp-name" class="mt-2 w-full bg-[#0B0F19] border border-white/10 focus:border-emerald-400 focus:outline-none rounded-xl px-3 py-2 text-[13px] placeholder:text-slate-500" placeholder="Nama anak (opsional)">
+            <button class="mt-auto w-full inline-flex items-center justify-center gap-2 wa-green font-extrabold rounded-xl py-2.5 text-xs uppercase tracking-wider"><i class="fa-brands fa-whatsapp"></i> Kirim via WhatsApp</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 4 ============================ -->
+<section id="opsi-4" class="py-14 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 4</span><h2 class="font-display text-2xl font-extrabold">Kontekstual</h2><p class="text-sm text-slate-400 max-w-3xl">Tooltip di samping tombol WhatsApp <b>berganti sesuai section yang sedang dibaca</b>: di Program "Bingung pilih program?", di Lokasi "Mau tahu lokasi terdekat?", di FAQ "Pertanyaanmu belum ada?", dan seterusnya. Pesan WhatsApp-nya juga ikut menyesuaikan. <b>Scroll di dalam bingkai</b> untuk melihatnya.</p></div>
+    <div class="stage" data-stage>
+      <div class="stage-bar"><i class="d bg-[#F87171]"></i><i class="d bg-[#FFC83D]"></i><i class="d bg-emerald-400"></i><span class="mono text-[11px] text-slate-500 ml-3">leskoding.id · scroll ↓</span></div>
+      <div class="scroller" data-faux id="ctx-scroller"></div>
+      <div class="dock-area">
+        <div class="promo-pill"><span class="i"><i class="fa-solid fa-gift"></i></span>Promo 2026</div>
+        <div class="flex items-center gap-3">
+          <a href="#" class="ctx-tip max-w-[230px] rounded-2xl rounded-br-sm bg-white text-[#111827] px-4 py-2.5 shadow-xl" id="ctx-tip" data-wa="umum">
+            <span class="block text-[13px] font-extrabold leading-snug" id="ctx-t"></span>
+            <span class="block text-[11px] text-[#475467] mt-0.5" id="ctx-d"></span>
+          </a>
+          <a href="#" class="w-14 h-14 rounded-full wa-green grid place-items-center text-2xl shrink-0 shadow-[0_12px_30px_-6px_rgba(37,211,102,.6)]" id="ctx-fab" data-wa="umum" aria-label="Chat admin via WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 5 ============================ -->
+<section id="opsi-5" class="py-14 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 5</span><h2 class="font-display text-2xl font-extrabold">Robo Helper</h2><p class="text-sm text-slate-400 max-w-3xl">Maskot robot kecil (sesuai tema coding &amp; robotika) yang mengintip dari pojok layar. Saat di-hover atau diketuk, robot naik, melambai, dan menawarkan bantuan. Paling berkarakter dan disukai anak, tanpa mengurangi kejelasan bagi orang tua.</p></div>
+    <div class="flex justify-end mb-3"><button class="ghost" id="bot-wake"><i class="fa-solid fa-hand"></i> Bangunkan robot</button></div>
+    <div class="stage" data-stage>
+      <div class="stage-bar"><i class="d bg-[#F87171]"></i><i class="d bg-[#FFC83D]"></i><i class="d bg-emerald-400"></i><span class="mono text-[11px] text-slate-500 ml-3">leskoding.id · hover robotnya</span></div>
+      <div class="scroller" data-faux></div>
+      <div class="absolute right-4 bottom-4 z-10 flex flex-col items-end gap-2.5">
+        <div class="promo-pill"><span class="i"><i class="fa-solid fa-gift"></i></span>Promo 2026</div>
+      </div>
+      <div class="bot-wrap absolute right-[150px] bottom-0 z-10" id="bot-wrap">
+        <div class="bot-bubble absolute bottom-[118px] right-0 w-[230px] rounded-2xl rounded-br-sm bg-white text-[#111827] p-3.5 shadow-xl">
+          <div class="text-[13px] font-extrabold">Halo! 👋 Ada yang bisa dibantu?</div>
+          <div class="text-[11px] text-[#475467] mt-0.5">Tanya admin LesKoding lewat WhatsApp.</div>
+          <a href="#" data-wa="umum" class="mt-2.5 w-full inline-flex items-center justify-center gap-2 wa-green font-extrabold rounded-lg py-2 text-[11px] uppercase tracking-wider"><i class="fa-brands fa-whatsapp"></i> Chat admin</a>
+        </div>
+        <button class="bot block" aria-label="Robo helper: hubungi admin" id="bot">
+          <svg width="96" height="110" viewBox="0 0 96 110" aria-hidden="true">
+            <line x1="48" y1="6" x2="48" y2="20" stroke="#94A3B8" stroke-width="3"/><circle cx="48" cy="6" r="5" fill="#FFC83D"/>
+            <rect x="14" y="20" width="68" height="50" rx="16" fill="#38BDF8"/>
+            <rect x="22" y="30" width="52" height="30" rx="10" fill="#0B0F19"/>
+            <ellipse class="bot-eye" cx="38" cy="45" rx="5" ry="6" fill="#34D399"/><ellipse class="bot-eye" cx="58" cy="45" rx="5" ry="6" fill="#34D399"/>
+            <path d="M40 54 Q48 59 56 54" stroke="#34D399" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <rect x="22" y="74" width="52" height="40" rx="12" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
+            <circle cx="48" cy="90" r="7" fill="#25D366"/><path d="M45 90 l2 2 4-4" stroke="#052e16" stroke-width="2" fill="none"/>
+            <rect class="bot-arm" x="74" y="66" width="10" height="26" rx="5" fill="#38BDF8" transform="rotate(-150 79 79)"/>
+            <rect x="12" y="78" width="10" height="24" rx="5" fill="#38BDF8"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPSI 6 ============================ -->
+<section id="opsi-6" class="py-14 md:py-20 border-t border-white/10 bg-[#0B0F19]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <div class="opsi-head"><span class="mono text-xs font-bold text-[#FFC83D]">OPSI 6</span><h2 class="font-display text-2xl font-extrabold">Dock</h2><p class="text-sm text-slate-400 max-w-3xl">Dock kecil seperti macOS yang menyatukan 3 aksi: <b>WhatsApp admin</b>, <b>Promo</b>, dan <b>Kembali ke atas</b> (dengan cincin progres scroll). Pojok tetap rapi meskipun ada beberapa aksi. Tombol WhatsApp paling besar sebagai aksi utama.</p></div>
+    <div class="stage" data-stage>
+      <div class="stage-bar"><i class="d bg-[#F87171]"></i><i class="d bg-[#FFC83D]"></i><i class="d bg-emerald-400"></i><span class="mono text-[11px] text-slate-500 ml-3">leskoding.id · scroll ↓</span></div>
+      <div class="scroller" data-faux id="dock-scroller"></div>
+      <div class="dock-area">
+        <div class="flex items-end gap-2 rounded-2xl bg-[#1E293B]/90 backdrop-blur border border-white/10 p-2 shadow-2xl">
+          <button class="dock-btn w-11 h-11 rounded-xl bg-[#FFC83D] text-[#111827] grid place-items-center" data-demo="promo" aria-label="Promo 2026"><i class="fa-solid fa-gift"></i><span class="tip rounded-md bg-black/90 text-white text-[11px] font-bold px-2 py-1">Promo 2026</span></button>
+          <a href="#" data-wa="umum" class="dock-btn h-12 rounded-xl wa-green flex items-center gap-2 px-3.5 font-extrabold text-[13px]" aria-label="Chat admin via WhatsApp"><i class="fa-brands fa-whatsapp text-xl"></i>Chat admin<span class="tip rounded-md bg-black/90 text-white text-[11px] font-bold px-2 py-1">+62 851-8304-6798</span></a>
+          <button class="dock-btn relative w-11 h-11 rounded-xl bg-white/5 text-white grid place-items-center" id="dock-top" aria-label="Kembali ke atas">
+            <svg class="ring absolute inset-0 w-11 h-11" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="3"/><circle id="dock-ring" cx="22" cy="22" r="18" fill="none" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" stroke-dasharray="113.1" stroke-dashoffset="113.1"/></svg>
+            <i class="fa-solid fa-arrow-up relative"></i><span class="tip rounded-md bg-black/90 text-white text-[11px] font-bold px-2 py-1">Kembali ke atas</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PERBANDINGAN ============================ -->
+<section id="banding" class="py-16 md:py-20 border-t border-white/10 bg-[#0F172A]">
+  <div class="max-w-[1100px] mx-auto px-5">
+    <h2 class="font-display text-3xl font-extrabold mb-6">Perbandingan</h2>
+    <div class="overflow-x-auto rounded-2xl border border-white/10">
+      <table class="w-full text-sm min-w-[760px]">
+        <thead class="bg-[#1E293B] text-[11px] mono uppercase tracking-wider text-slate-400"><tr><th class="text-left p-3">Opsi</th><th class="text-left p-3">Kekuatan</th><th class="text-left p-3">Dengan pil promo</th><th class="text-left p-3">Catatan</th></tr></thead>
+        <tbody class="divide-y divide-white/5">
+          <tr><td class="p-3 font-bold">1 · Speed Dial</td><td class="p-3 text-slate-300">Satu tombol, banyak jalan pintas</td><td class="p-3 text-emerald-400">Dilebur ke menu</td><td class="p-3 text-slate-400">Butuh 1 klik tambahan untuk WhatsApp</td></tr>
+          <tr><td class="p-3 font-bold">2 · Gelembung Chat</td><td class="p-3 text-slate-300">Terasa personal, topik mengarahkan pesan</td><td class="p-3 text-slate-300">Ditumpuk di atas</td><td class="p-3 text-slate-400">Gelembung otomatis bisa terasa mengganggu jika terlalu cepat</td></tr>
+          <tr><td class="p-3 font-bold">3 · Pil → Form</td><td class="p-3 text-slate-300">Pertanyaan diketik di situs, terkirim lengkap</td><td class="p-3 text-slate-300">Ditumpuk di atas</td><td class="p-3 text-slate-400">Kartu cukup lebar di HP (perlu versi layar penuh)</td></tr>
+          <tr><td class="p-3 font-bold">4 · Kontekstual</td><td class="p-3 text-slate-300">Ajakan relevan dengan yang sedang dibaca</td><td class="p-3 text-slate-300">Ditumpuk di atas</td><td class="p-3 text-slate-400">Tooltip disembunyikan di HP, cukup tombol</td></tr>
+          <tr><td class="p-3 font-bold">5 · Robo Helper</td><td class="p-3 text-slate-300">Paling berkarakter, memorable</td><td class="p-3 text-slate-300">Berdampingan</td><td class="p-3 text-slate-400">Butuh ilustrasi maskot final (sekarang SVG sederhana)</td></tr>
+          <tr><td class="p-3 font-bold">6 · Dock</td><td class="p-3 text-slate-300">Rapi untuk banyak aksi + kembali ke atas</td><td class="p-3 text-emerald-400">Menjadi tombol di dock</td><td class="p-3 text-slate-400">Pil promo lama diganti tombol dock</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rounded-2xl border border-white/10 bg-[#1E293B]/50 p-5 text-sm mt-6">
+      <div class="font-bold mb-2"><i class="fa-solid fa-lightbulb text-[#FFC83D] mr-1"></i> Catatan implementasi</div>
+      <ul class="list-disc pl-5 text-slate-300 space-y-1">
+        <li>Kartu "Masih ada pertanyaan?" di section FAQ bisa tetap ada (inline), dan widget pojok menjadi versi yang selalu tersedia.</li>
+        <li>Di HP, widget disembunyikan saat menu bawah (bottom sheet) terbuka, dan tidak boleh menutupi tombol kirim formulir.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[60] max-w-[90vw] rounded-xl bg-[#1E293B] border border-white/15 px-4 py-2.5 text-sm font-semibold shadow-2xl transition-all opacity-0 translate-y-4 pointer-events-none" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+const WA = '6285183046798';
+const MSG = {
+  umum: 'Halo LesKoding Official, saya ingin bertanya.',
+  trial: 'Halo LesKoding Official, saya ingin bertanya tentang Free Trial.',
+  biaya: 'Halo LesKoding Official, saya ingin bertanya tentang biaya dan jadwal kelas.',
+  lokasi: 'Halo LesKoding Official, saya ingin bertanya tentang lokasi dan pilihan kelas.',
+  program: 'Halo LesKoding Official, saya ingin konsultasi program yang cocok untuk anak saya.',
+  daftar: 'Halo LesKoding Official, saya butuh bantuan mengisi formulir pendaftaran.',
+  faq: 'Halo LesKoding Official, saya punya pertanyaan yang belum ada di FAQ.',
+};
+const waUrl = text => `https://wa.me/${WA}?text=${encodeURIComponent(text)}`;
+const toastEl = document.getElementById('toast'); let tT;
+const toast = m => { toastEl.textContent = m; toastEl.classList.remove('opacity-0', 'translate-y-4'); clearTimeout(tT); tT = setTimeout(() => toastEl.classList.add('opacity-0', 'translate-y-4'), 2600); };
+
+// isi halaman tiruan di semua bingkai
+const tpl = document.getElementById('faux-page');
+document.querySelectorAll('[data-faux]').forEach(s => s.appendChild(tpl.content.cloneNode(true)));
+
+// semua [data-wa] → link WhatsApp (dibuka di tab baru, plus pesan demo)
+const setWa = (el, key) => { el.dataset.wa = key; el.href = waUrl(MSG[key] || MSG.umum); el.target = '_blank'; el.rel = 'noopener'; };
+document.querySelectorAll('a[data-wa]').forEach(a => setWa(a, a.dataset.wa));
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[data-wa]');
+  if (a) toast('WhatsApp: "' + decodeURIComponent(a.href.split('text=')[1]) + '"');
+  const d = e.target.closest('[data-demo]');
+  if (d) { e.preventDefault(); toast({ promo: 'Di index: menggulir ke section Promo 2026', faq: 'Di index: menggulir ke FAQ', daftar: 'Di index: menggulir ke formulir' }[d.dataset.demo]); }
+});
+
+/* 1 · Speed dial */
+const sd = document.getElementById('sd'), sdBtn = document.getElementById('sd-btn');
+sdBtn.onclick = () => { const o = !sd.classList.contains('open'); sd.classList.toggle('open', o); sdBtn.setAttribute('aria-expanded', o); sdBtn.setAttribute('aria-label', o ? 'Tutup menu bantuan' : 'Buka menu bantuan'); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { sd.classList.remove('open'); sdBtn.setAttribute('aria-expanded', false); } });
+
+/* 2 · Chat bubble */
+const cbCard = document.getElementById('cb-card'), cbBody = document.getElementById('cb-body'), cbTopics = document.getElementById('cb-topics'), cbBadge = document.getElementById('cb-badge'), cbScroller = document.getElementById('cb-scroller');
+let cbShown = false;
+const cbPlay = () => {
+  cbShown = true; cbCard.classList.add('show'); cbBadge.classList.add('hidden'); cbTopics.classList.add('hidden');
+  cbBody.innerHTML = '<div class="typing inline-flex gap-1 rounded-2xl rounded-tl-sm bg-[#0F172A] px-4 py-3"><span></span><span></span><span></span></div>';
+  setTimeout(() => {
+    cbBody.innerHTML = '<div class="rounded-2xl rounded-tl-sm bg-[#0F172A] px-3.5 py-2.5 text-[13px] leading-relaxed">Halo, Bapak/Ibu! 👋 Ada yang ingin ditanyakan tentang kelas coding &amp; robotika? Pilih topik di bawah, kami lanjutkan di WhatsApp.</div>';
+    cbTopics.classList.remove('hidden');
+  }, 1100);
+};
+const cbHide = () => { cbCard.classList.remove('show'); };
+document.getElementById('cb-close').onclick = () => { cbHide(); cbBadge.classList.remove('hidden'); };
+document.getElementById('cb-fab').onclick = () => cbCard.classList.contains('show') ? cbHide() : cbPlay();
+document.getElementById('cb-replay').onclick = () => { cbHide(); cbShown = false; cbScroller.scrollTop = 0; cbBadge.classList.add('hidden'); toast('Scroll di dalam bingkai untuk memunculkan sapaan'); };
+cbScroller.addEventListener('scroll', () => { if (!cbShown && cbScroller.scrollTop > 180) cbPlay(); }, { passive: true });
+
+/* 3 · Morph pill */
+const mp = document.getElementById('mp'), mpOpen = document.getElementById('mp-open');
+mpOpen.onclick = () => { mp.classList.add('open'); mpOpen.setAttribute('aria-expanded', true); setTimeout(() => document.getElementById('mp-q').focus(), 350); };
+document.getElementById('mp-close').onclick = () => { mp.classList.remove('open'); mpOpen.setAttribute('aria-expanded', false); };
+document.getElementById('mp-form').onsubmit = e => {
+  e.preventDefault();
+  const q = document.getElementById('mp-q').value.trim(), n = document.getElementById('mp-name').value.trim();
+  if (!q) { document.getElementById('mp-q').focus(); toast('Tulis pertanyaannya dulu, ya'); return; }
+  const text = `Halo LesKoding Official, saya ingin bertanya:\n${q}${n ? `\n\nNama anak: ${n}` : ''}`;
+  window.open(waUrl(text), '_blank', 'noopener');
+  toast('WhatsApp dibuka dengan pertanyaan Anda');
+};
+
+/* 4 · Kontekstual */
+const CTX = {
+  hero: ['Ada pertanyaan? 👋', 'Admin kami siap membantu via WhatsApp', 'umum'],
+  program: ['Bingung pilih program?', 'Ceritakan minat anak, kami bantu pilihkan', 'program'],
+  lokasi: ['Mau tahu kelas terdekat?', 'Lab, Private, atau Online. Tanya admin', 'lokasi'],
+  faq: ['Pertanyaanmu belum ada?', 'Tanyakan langsung ke admin', 'faq'],
+  daftar: ['Butuh bantuan isi formulir?', 'Kami bantu lewat WhatsApp', 'daftar'],
+};
+const ctxScroller = document.getElementById('ctx-scroller'), tip = document.getElementById('ctx-tip'), fab = document.getElementById('ctx-fab');
+let ctxCur = '';
+const ctxSet = k => {
+  if (k === ctxCur) return; ctxCur = k;
+  tip.classList.add('swap');
+  setTimeout(() => { const [t, d, m] = CTX[k]; document.getElementById('ctx-t').textContent = t; document.getElementById('ctx-d').textContent = d; setWa(tip, m); setWa(fab, m); tip.classList.remove('swap'); }, 200);
+};
+const ctxIO = new IntersectionObserver(es => {
+  const vis = es.filter(e => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+  if (vis) ctxSet(vis.target.dataset.ctx);
+}, { root: ctxScroller, threshold: [.4, .6, .8] });
+ctxScroller.querySelectorAll('[data-ctx]').forEach(s => ctxIO.observe(s));
+ctxSet('hero');
+
+/* 5 · Robot */
+const botWrap = document.getElementById('bot-wrap');
+document.getElementById('bot').onclick = () => botWrap.classList.toggle('awake');
+document.getElementById('bot-wake').onclick = () => { botWrap.classList.remove('awake'); void botWrap.offsetWidth; botWrap.classList.add('awake'); };
+
+/* 6 · Dock */
+const dScroller = document.getElementById('dock-scroller'), ring = document.getElementById('dock-ring');
+const C = 113.1;
+dScroller.addEventListener('scroll', () => { const p = dScroller.scrollTop / (dScroller.scrollHeight - dScroller.clientHeight || 1); ring.style.strokeDashoffset = C * (1 - p); }, { passive: true });
+document.getElementById('dock-top').onclick = () => dScroller.scrollTo({ top: 0, behavior: 'smooth' });
+})();
+</script>
+</body>
+</html>

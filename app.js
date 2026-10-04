@@ -2607,6 +2607,26 @@ const i18nDictionary = {
         "cb3_replay": "Replay",
         "cb3_range_label": "Session minute",
         "cb3_note": "Up to 120 minutes per session. Screen shown is an illustration.",
+        "ctx_umum_t": "Have a question? 👋",
+        "ctx_umum_d": "Our admin is happy to help on WhatsApp",
+        "ctx_program_t": "Not sure which program?",
+        "ctx_program_d": "Tell us what your child loves, we'll help you choose",
+        "ctx_kelas_t": "Want to see a class in person?",
+        "ctx_kelas_d": "Ask our admin about Free Trial slots",
+        "ctx_lokasi_t": "Looking for the nearest class?",
+        "ctx_lokasi_d": "Lab, Private, or Online. Ask our admin",
+        "ctx_faq_t": "Question not listed?",
+        "ctx_faq_d": "Ask our admin directly",
+        "ctx_daftar_t": "Need help with the form?",
+        "ctx_daftar_d": "We can help you on WhatsApp",
+        "ctx_hide": "Hide message",
+        "ctx_fab": "Chat with Leskoding admin on WhatsApp",
+        "ctx_msg_umum": "Hi Leskoding Official, I have a question.",
+        "ctx_msg_program": "Hi Leskoding Official, I'd like advice on the right program for my child.",
+        "ctx_msg_kelas": "Hi Leskoding Official, I'd like to ask about Free Trial schedules.",
+        "ctx_msg_lokasi": "Hi Leskoding Official, I'd like to ask about locations and class options.",
+        "ctx_msg_faq": "Hi Leskoding Official, I have a question that isn't in the FAQ.",
+        "ctx_msg_daftar": "Hi Leskoding Official, I need help filling in the registration form.",
         "promo2_bar_1": "PROMO 2026: 1 Free Trial session + registration fee discount",
         "promo2_bar_2": "Use code",
         "promo2_bar_cta": "Claim",
@@ -3297,6 +3317,26 @@ const i18nDictionary = {
         "cb3_replay": "Putar ulang",
         "cb3_range_label": "Menit sesi",
         "cb3_note": "Maksimal 120 menit per sesi. Tampilan layar adalah ilustrasi.",
+        "ctx_umum_t": "Ada pertanyaan? 👋",
+        "ctx_umum_d": "Admin kami siap membantu via WhatsApp",
+        "ctx_program_t": "Bingung pilih program?",
+        "ctx_program_d": "Ceritakan minat anak, kami bantu pilihkan",
+        "ctx_kelas_t": "Ingin lihat kelasnya langsung?",
+        "ctx_kelas_d": "Tanya jadwal Free Trial ke admin",
+        "ctx_lokasi_t": "Mau tahu kelas terdekat?",
+        "ctx_lokasi_d": "Lab, Private, atau Online. Tanya admin",
+        "ctx_faq_t": "Pertanyaanmu belum ada?",
+        "ctx_faq_d": "Tanyakan langsung ke admin",
+        "ctx_daftar_t": "Butuh bantuan isi formulir?",
+        "ctx_daftar_d": "Kami bantu lewat WhatsApp",
+        "ctx_hide": "Sembunyikan pesan",
+        "ctx_fab": "Chat admin Leskoding via WhatsApp",
+        "ctx_msg_umum": "Halo Leskoding Official, saya ingin bertanya.",
+        "ctx_msg_program": "Halo Leskoding Official, saya ingin konsultasi program yang cocok untuk anak saya.",
+        "ctx_msg_kelas": "Halo Leskoding Official, saya ingin bertanya tentang jadwal Free Trial.",
+        "ctx_msg_lokasi": "Halo Leskoding Official, saya ingin bertanya tentang lokasi dan pilihan kelas.",
+        "ctx_msg_faq": "Halo Leskoding Official, saya punya pertanyaan yang belum ada di FAQ.",
+        "ctx_msg_daftar": "Halo Leskoding Official, saya butuh bantuan mengisi formulir pendaftaran.",
         "promo2_bar_1": "PROMO 2026: 1 sesi Free Trial gratis + potongan biaya pendaftaran",
         "promo2_bar_2": "Gunakan kode",
         "promo2_bar_cta": "Klaim",
@@ -4957,4 +4997,66 @@ document.addEventListener('leskoding:lang', () => renderA());
     document.addEventListener('leskoding:lang', relabel);
     relabel();
     render();
+})();
+
+/* ========================================================
+   21. HUBUNGI ADMIN (opsi 4): TOMBOL WHATSAPP KONTEKSTUAL
+   Pesan di samping tombol & isi chat WhatsApp mengikuti section yang sedang
+   dibaca. Pesan bisa disembunyikan (diingat per sesi); tombol tetap ada.
+   ======================================================== */
+(() => {
+    const tip = document.getElementById('ctx-tip');
+    const tipLink = document.getElementById('ctx-tip-link');
+    const fab = document.getElementById('ctx-fab');
+    if (!tip || !tipLink || !fab) return;
+    const WA = '6285183046798';
+    const KEY = 'leskoding_ctx_tip_hidden';
+    // section → konteks
+    const MAP = {
+        home: 'umum', partners: 'umum', alur: 'umum', manfaat: 'umum',
+        'tech-flow': 'program', course: 'program', 'hall-of-fame': 'program',
+        'cara-belajar': 'kelas', dokumentasi: 'kelas', 'progress-wali': 'kelas',
+        location: 'lokasi', faq: 'faq', promo: 'daftar', register: 'daftar',
+    };
+    let lang = localStorage.getItem('leskoding_lang') || 'en';
+    const t = key => (i18nDictionary[lang] || i18nDictionary.en)[key] || i18nDictionary.id[key] || key;
+    let ctx = 'umum';
+    let hidden = false;
+    try { hidden = sessionStorage.getItem(KEY) === '1'; } catch (e) { /* storage diblokir */ }
+
+    const apply = (animate) => {
+        // nomor bisa diganti dari admin panel (landing-data.js → window.LESKODING.whatsapp)
+        const number = (window.LESKODING && window.LESKODING.whatsapp) || WA;
+        const href = `https://wa.me/${number}?text=${encodeURIComponent(t('ctx_msg_' + ctx))}`;
+        fab.href = href;
+        tipLink.href = href;
+        fab.setAttribute('aria-label', t('ctx_fab'));
+        document.getElementById('ctx-tip-close').setAttribute('aria-label', t('ctx_hide'));
+        const write = () => {
+            document.getElementById('ctx-t').textContent = t(`ctx_${ctx}_t`);
+            document.getElementById('ctx-d').textContent = t(`ctx_${ctx}_d`);
+            tip.classList.remove('swap');
+        };
+        if (animate) { tip.classList.add('swap'); setTimeout(write, 200); } else write();
+    };
+    const setHidden = () => { tip.classList.toggle('sm:block', !hidden); };
+
+    // section yang melewati garis tengah layar dianggap sedang dibaca
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+            if (!en.isIntersecting) return;
+            const next = MAP[en.target.id];
+            if (next && next !== ctx) { ctx = next; apply(true); }
+        });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    Object.keys(MAP).forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
+
+    document.getElementById('ctx-tip-close').addEventListener('click', () => {
+        hidden = true;
+        try { sessionStorage.setItem(KEY, '1'); } catch (e) { /* abaikan */ }
+        setHidden();
+    });
+    document.addEventListener('leskoding:lang', e => { if (e.detail) lang = e.detail; apply(false); });
+    setHidden();
+    apply(false);
 })();
