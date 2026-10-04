@@ -1,5 +1,5 @@
 {
-    "published_at": "2026-10-04T10:18:06+08:00",
+    "published_at": "2026-10-04T10:19:35+08:00",
     "data": {
         "settings": {
             "whatsapp": {
@@ -133,8 +133,8 @@
                 "icon": "fa-building-flag",
                 "color": "#38BDF8",
                 "logo": "http://localhost:8000/storage/landing/locations/genta.png",
-                "address": "Jln. Ksatrian No. 8, Lingkungan Candi Baru, Gianyar",
-                "maps_query": "Jln Ksatrian No 8 Lingkungan Candi Baru Gianyar",
+                "address": "Jalan Kesatrian No, 28 Gianyar, Bali",
+                "maps_query": "Jalan Kesatrian No, 28 Gianyar, Bali",
                 "features": [
                     "Kit robotik lengkap · laptop pribadi disarankan",
                     "Ruang ber-AC, bersih & ramah anak",
