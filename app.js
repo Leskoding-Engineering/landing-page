@@ -596,7 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const promo = promoInput ? promoInput.value.trim() : '';
 
             const message = currentLang === 'en' ?
-`*New Student Registration Form — LesKoding Academy*
+`*New Student Registration Form — Leskoding Academy*
 
 Learning Center: ${center}
 Selected Program: ${program || '-'}
@@ -612,7 +612,7 @@ Home Address: ${alamat}
 Parent WhatsApp: ${waOrtu}
 Child WhatsApp (optional): ${waAnak}`
 :
-`*Form Pendaftaran Siswa Baru Akademi LesKoding*
+`*Form Pendaftaran Siswa Baru Akademi Leskoding*
 
 Pilihan Learning Center: ${center}
 Program yang Dipilih: ${program || '-'}
@@ -2591,7 +2591,7 @@ const i18nDictionary = {
         "cb3_tutor_badge": "Mentor",
 
         "faq_q5": "Do students receive an official certificate?",
-        "faq_a5": "Yes. Every student who completes their course receives an official graduation certificate from LesKoding, complementing their live portfolio of projects.",
+        "faq_a5": "Yes. Every student who completes their course receives an official graduation certificate from Leskoding, complementing their live portfolio of projects.",
         "faq_q6": "What are the course fees and class schedules?",
         "faq_a6": "Tuition details are shared by our team during the free consultation after you register. Class schedules are fully flexible and arranged directly with parents.",
 
@@ -2634,12 +2634,12 @@ const i18nDictionary = {
         "faq5_cat_fee": "Fees &amp; Schedule",
         "faq5_still_t": "Still have questions?",
         "faq5_still_d": "Our admin is happy to help on WhatsApp.",
-        "faq5_chat": "Chat LesKoding Official",
-        "footer_wa_name": "LesKoding Official",
+        "faq5_chat": "Chat Leskoding Official",
+        "footer_wa_name": "Leskoding Official",
         "faq5_q1": "Can a child with no coding or computer experience join?",
         "faq5_tl1": "Yes!",
         "faq5_sub1": "starting from zero",
-        "faq5_a1": "Absolutely! Many LesKoding students start from zero. Lessons are child-friendly, using interactive visual blocks and real-world analogies first, before gradually introducing text-based code.",
+        "faq5_a1": "Absolutely! Many Leskoding students start from zero. Lessons are child-friendly, using interactive visual blocks and real-world analogies first, before gradually introducing text-based code.",
         "faq5_cta1": "See beginner programs",
         "faq5_q2": "Is there a trial class, and how much does it cost?",
         "faq5_tl2": "Free",
@@ -2649,17 +2649,17 @@ const i18nDictionary = {
         "faq5_q3": "Does my child need to bring their own laptop?",
         "faq5_tl3": "Recommended",
         "faq5_sub3": "bring a personal laptop",
-        "faq5_a3": "We recommend that students bring their own laptop so their projects are saved and learning is more effective. If a student cannot bring one, LesKoding will try to provide a device when available.",
+        "faq5_a3": "We recommend that students bring their own laptop so their projects are saved and learning is more effective. If a student cannot bring one, Leskoding will try to provide a device when available.",
         "faq5_cta3": "See Learning Centers",
         "faq5_q4": "What is the tutor-to-student ratio in each class?",
         "faq5_tl4": "1 : 5",
         "faq5_sub4": "tutor : students",
-        "faq5_a4": "LesKoding keeps classes small with a 1:5 ratio: 1 tutor teaches a maximum of 5 students. Every student gets close guidance and no child is left behind during hands-on practice.",
+        "faq5_a4": "Leskoding keeps classes small with a 1:5 ratio: 1 tutor teaches a maximum of 5 students. Every student gets close guidance and no child is left behind during hands-on practice.",
         "faq5_cta4": "See how we teach",
         "faq5_q5": "Do students receive a certificate?",
         "faq5_tl5": "Yes",
         "faq5_sub5": "after completing a course",
-        "faq5_a5": "Yes. Every student who completes a course receives a graduation certificate from LesKoding as proof of their achievement, alongside the portfolio of projects they have built.",
+        "faq5_a5": "Yes. Every student who completes a course receives a graduation certificate from Leskoding as proof of their achievement, alongside the portfolio of projects they have built.",
         "faq5_cta5": "See student work",
         "faq5_q6": "What are the course fees and class schedules?",
         "faq5_tl6": "Flexible",
@@ -2714,7 +2714,7 @@ const i18nDictionary = {
         "doc_badge": "Class Gallery",
         "doc_title_1": "Every session,",
         "doc_title_2": "one frame of the story.",
-        "doc_desc": "Focused at the laptop, cheering when the program runs, group photos on event day. This is everyday life for LesKoding students.",
+        "doc_desc": "Focused at the laptop, cheering when the program runs, group photos on event day. This is everyday life for Leskoding students.",
         "doc_open_all": "View all photos",
         "doc_hint": "Hover to pause the reel, click a photo to enlarge",
         "doc_open_photo": "Enlarge photo",
@@ -2819,7 +2819,7 @@ const i18nDictionary = {
         "nav2_g3": "Campus Info",
         "hero7_title_1": "Yesterday they <span class=\"text-slate-400\">play</span> game,",
         "hero7_title_2": "today they build them.",
-        "hero7_desc": "Same screen time, different outcome. At LesKoding, kids aged 6–17 learn to turn their favorite games, animations, and apps into <b class=\"text-white\">their own creations</b>, guided by a tutor every session.",
+        "hero7_desc": "Same screen time, different outcome. At Leskoding, kids aged 6–17 learn to turn their favorite games, animations, and apps into <b class=\"text-white\">their own creations</b>, guided by a tutor every session.",
         "hero7_mode_watch": "Mode: Viewer",
         "hero7_mode_make": "Mode: Creator ✨",
         "hero7_sub_watch": "Flip the switch, see the difference →",
@@ -2866,7 +2866,7 @@ const i18nDictionary = {
         "rpt3_row6": "Next-session recommendation",
         "rpt3_row7": "Home practice ideas",
         "rpt3_hint": "Hover (or tap) a row to see where it appears in the report.",
-        "rpt3_ours_label": "LesKoding session report · Student Space",
+        "rpt3_ours_label": "Leskoding session report · Student Space",
         "reg5_card_heading": "Create their very first <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]\">explorer card.</span>",
         "reg5_card_title": "EXPLORER CARD",
         "reg5_ph_nick": "Nickname",
@@ -3092,7 +3092,7 @@ const i18nDictionary = {
         "c10_b4": "Project: Interactive utility app tested on real smartphones",
         "c10_dur": "8–10 Weeks",
         "method_badge": "Learning Methodology",
-        "method_title": "How Students Learn at LesKoding",
+        "method_title": "How Students Learn at Leskoding",
         "method_desc": "We guide young minds through 4 proven stages: not just rote memorization, but creating real digital projects and experiencing true mastery.",
         "method_s1_step": "Step 01",
         "method_s1_dur": "15 Mins",
@@ -3201,7 +3201,7 @@ const i18nDictionary = {
         "faq_q2": "Is a free trial class available?",
         "faq_a2": "Yes, we offer complimentary Free Trial sessions at our Gianyar and Bedulu centers, as well as consultation/trial options for Private Home Visit classes. Book a slot using the form below or chat directly with our team.",
         "faq_q3": "Does my child need to bring their own laptop?",
-        "faq_a3": "We recommend that students bring their own laptop so their projects are saved and learning is more effective. If a student cannot bring one, LesKoding will try to provide a device when available.",
+        "faq_a3": "We recommend that students bring their own laptop so their projects are saved and learning is more effective. If a student cannot bring one, Leskoding will try to provide a device when available.",
         "faq_q4": "What is the tutor-to-student ratio per class?",
         "faq_a4": "We maintain small interactive classes of 4 to 6 students per tutor, ensuring personalized guidance and immediate support during hands-on projects.",
         "reg_badge": "Registration Form",
@@ -3228,12 +3228,12 @@ const i18nDictionary = {
         "reg_lbl_address": "Home Address",
         "reg_lbl_wa_parent": "Parent's WhatsApp",
         "reg_lbl_wa_child": "Child's WhatsApp (Optional)",
-        "reg_security_note": "Your information is secure and exclusively used for class scheduling confirmation by official LesKoding mentors.",
+        "reg_security_note": "Your information is secure and exclusively used for class scheduling confirmation by official Leskoding mentors.",
         "reg_btn_submit": "Send via WhatsApp",
         "promo_badge": "Limited 2026 Promo",
         "promo_sub": "Free Trial + Registration Discount",
         "promo_title": "Launch Your Digital<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-yellow-500\">Creator Journey!</span>",
-        "promo_body": "Claim a complimentary trial session and registration discount across all LesKoding Learning Centers now:",
+        "promo_body": "Claim a complimentary trial session and registration discount across all Leskoding Learning Centers now:",
         "promo_cta": "Enroll Now &amp; Claim Promo",
         "promo_trigger": "2026 Promo",
         "modal_xp_label": "XP Achievement",
@@ -3253,7 +3253,7 @@ const i18nDictionary = {
         "footer_c_check": "Check Map &amp; Nearest Route &rarr;",
         "footer_col_contact": "Contact &amp; Inquiries",
         "footer_form_btn": "Online Registration Form",
-        "footer_rights": "&copy; 2026 LesKoding Bali. All rights reserved. Education Technology &amp; Community.",
+        "footer_rights": "&copy; 2026 Leskoding Bali. All rights reserved. Education Technology &amp; Community.",
         "footer_back_top": "Back to Top",
         "footer_nav_method": "How We Teach",
         "footer_nav_privacy": "Privacy Policy",
@@ -3281,7 +3281,7 @@ const i18nDictionary = {
         "course_click_station": "Klik stasiun untuk lompat ke kartunya",
         "cb3_tutor_badge": "Tutor",
         "faq_q5": "Apakah siswa mendapatkan sertifikat?",
-        "faq_a5": "Ya. Setiap siswa yang menyelesaikan course akan mendapatkan sertifikat kelulusan dari LesKoding sebagai bukti capaian belajarnya, melengkapi portofolio karya yang sudah dibuat.",
+        "faq_a5": "Ya. Setiap siswa yang menyelesaikan course akan mendapatkan sertifikat kelulusan dari Leskoding sebagai bukti capaian belajarnya, melengkapi portofolio karya yang sudah dibuat.",
         "faq_q6": "Berapa biaya kursus dan bagaimana jadwal kelasnya?",
         "faq_a6": "Informasi biaya akan disampaikan oleh admin saat konsultasi setelah Anda mendaftar. Jadwal kelas bersifat fleksibel dan ditentukan bersama sesuai kesepakatan dengan orang tua.",
 
@@ -3324,12 +3324,12 @@ const i18nDictionary = {
         "faq5_cat_fee": "Biaya &amp; Jadwal",
         "faq5_still_t": "Masih ada pertanyaan?",
         "faq5_still_d": "Admin kami siap membantu lewat WhatsApp.",
-        "faq5_chat": "Chat LesKoding Official",
-        "footer_wa_name": "a.n. LesKoding Official",
+        "faq5_chat": "Chat Leskoding Official",
+        "footer_wa_name": "a.n. Leskoding Official",
         "faq5_q1": "Apakah anak yang belum pernah belajar coding atau komputer bisa ikut?",
         "faq5_tl1": "Bisa!",
         "faq5_sub1": "mulai dari nol",
-        "faq5_a1": "Tentu bisa! Banyak siswa LesKoding memulai dari nol. Pembelajaran dirancang ramah anak melalui visual blok interaktif dan analogi dunia nyata terlebih dahulu, sebelum perlahan dikenalkan pada logika kode teks.",
+        "faq5_a1": "Tentu bisa! Banyak siswa Leskoding memulai dari nol. Pembelajaran dirancang ramah anak melalui visual blok interaktif dan analogi dunia nyata terlebih dahulu, sebelum perlahan dikenalkan pada logika kode teks.",
         "faq5_cta1": "Lihat program pemula",
         "faq5_q2": "Apakah tersedia kelas percobaan (trial class) dan berapa biayanya?",
         "faq5_tl2": "Gratis",
@@ -3339,17 +3339,17 @@ const i18nDictionary = {
         "faq5_q3": "Apakah siswa harus membawa laptop sendiri?",
         "faq5_tl3": "Disarankan",
         "faq5_sub3": "bawa laptop pribadi",
-        "faq5_a3": "Kami menyarankan siswa membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, LesKoding akan mengusahakan menyediakan perangkat apabila tersedia.",
+        "faq5_a3": "Kami menyarankan siswa membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, Leskoding akan mengusahakan menyediakan perangkat apabila tersedia.",
         "faq5_cta3": "Lihat Learning Center",
         "faq5_q4": "Berapa rasio tutor per siswa di setiap kelas?",
         "faq5_tl4": "1 : 5",
         "faq5_sub4": "tutor : siswa",
-        "faq5_a4": "LesKoding menerapkan kelas kecil dengan rasio 1:5, yaitu 1 tutor mengajar maksimal 5 siswa. Setiap siswa mendapat bimbingan intensif dan tidak ada anak yang tertinggal saat praktik langsung.",
+        "faq5_a4": "Leskoding menerapkan kelas kecil dengan rasio 1:5, yaitu 1 tutor mengajar maksimal 5 siswa. Setiap siswa mendapat bimbingan intensif dan tidak ada anak yang tertinggal saat praktik langsung.",
         "faq5_cta4": "Lihat cara belajar",
         "faq5_q5": "Apakah siswa mendapatkan sertifikat?",
         "faq5_tl5": "Ya",
         "faq5_sub5": "setelah lulus course",
-        "faq5_a5": "Ya. Setiap siswa yang menyelesaikan course mendapatkan sertifikat kelulusan dari LesKoding sebagai bukti capaian belajar, melengkapi portofolio karya yang sudah dibuat.",
+        "faq5_a5": "Ya. Setiap siswa yang menyelesaikan course mendapatkan sertifikat kelulusan dari Leskoding sebagai bukti capaian belajar, melengkapi portofolio karya yang sudah dibuat.",
         "faq5_cta5": "Lihat karya siswa",
         "faq5_q6": "Berapa biaya kursus dan bagaimana jadwal kelasnya?",
         "faq5_tl6": "Fleksibel",
@@ -3404,7 +3404,7 @@ const i18nDictionary = {
         "doc_badge": "Dokumentasi Kelas",
         "doc_title_1": "Setiap sesi,",
         "doc_title_2": "satu frame cerita.",
-        "doc_desc": "Fokus di depan laptop, tepuk tangan setelah program berjalan, foto bersama di hari event. Inilah keseharian siswa LesKoding.",
+        "doc_desc": "Fokus di depan laptop, tepuk tangan setelah program berjalan, foto bersama di hari event. Inilah keseharian siswa Leskoding.",
         "doc_open_all": "Buka semua foto",
         "doc_hint": "Arahkan kursor untuk menghentikan gulungan, klik foto untuk memperbesar",
         "doc_open_photo": "Perbesar foto",
@@ -3509,7 +3509,7 @@ const i18nDictionary = {
         "nav2_g3": "Informasi Kampus",
         "hero7_title_1": "Kemarin mereka <span class=\"text-slate-400\">main</span> game,",
         "hero7_title_2": "hari ini mereka yang bikin.",
-        "hero7_desc": "Waktu layar yang sama, hasil yang berbeda. Di LesKoding, anak 6–17 tahun belajar mengubah game, animasi, dan aplikasi favoritnya menjadi <b class=\"text-white\">karya buatan sendiri</b>, didampingi tutor setiap sesi.",
+        "hero7_desc": "Waktu layar yang sama, hasil yang berbeda. Di Leskoding, anak 6–17 tahun belajar mengubah game, animasi, dan aplikasi favoritnya menjadi <b class=\"text-white\">karya buatan sendiri</b>, didampingi tutor setiap sesi.",
         "hero7_mode_watch": "Mode: Penonton",
         "hero7_mode_make": "Mode: Pencipta ✨",
         "hero7_sub_watch": "Geser saklarnya, lihat bedanya →",
@@ -3556,7 +3556,7 @@ const i18nDictionary = {
         "rpt3_row6": "Rekomendasi sesi berikutnya",
         "rpt3_row7": "Ide latihan di rumah",
         "rpt3_hint": "Arahkan kursor (atau ketuk) baris tabel untuk melihat bagiannya di laporan.",
-        "rpt3_ours_label": "Laporan sesi LesKoding · Student Space",
+        "rpt3_ours_label": "Laporan sesi Leskoding · Student Space",
         "reg5_card_heading": "Buat kartu penjelajah <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-[#FFC83D] via-[#38BDF8] to-[#C084FC]\">pertamanya.</span>",
         "reg5_card_title": "KARTU PENJELAJAH",
         "reg5_ph_nick": "Nama Panggilan",
@@ -3782,7 +3782,7 @@ const i18nDictionary = {
         "c10_b4": "Proyek: Aplikasi utilitas diuji langsung di ponsel",
         "c10_dur": "8–10 Minggu",
         "method_badge": "Metodologi Belajar",
-        "method_title": "Cara Belajar di LesKoding",
+        "method_title": "Cara Belajar di Leskoding",
         "method_desc": "Kami memandu anak melalui 4 tahapan belajar yang terbukti efektif: bukan sekadar teori hafalan, melainkan proses langsung berkreasi dan melihat hasil nyata.",
         "method_s1_step": "Langkah 01",
         "method_s1_dur": "15 Menit",
@@ -3891,7 +3891,7 @@ const i18nDictionary = {
         "faq_q2": "Apakah tersedia kelas percobaan (trial class)?",
         "faq_a2": "Ya, kami menyediakan sesi Free Trial di Learning Center Gianyar dan Bedulu, serta opsi kelas Private di rumah sendiri (Home Visit). Anda dapat mendaftarkan jadwal percobaan melalui form di bawah atau via WhatsApp admin kami.",
         "faq_q3": "Apakah siswa harus membawa laptop sendiri?",
-        "faq_a3": "Kami menyarankan siswa membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, LesKoding akan mengusahakan menyediakan perangkat apabila tersedia.",
+        "faq_a3": "Kami menyarankan siswa membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, Leskoding akan mengusahakan menyediakan perangkat apabila tersedia.",
         "faq_q4": "Berapa rasio tutor per siswa di setiap kelas?",
         "faq_a4": "Kami menjaga kualitas pembelajaran dengan kelas kecil: maksimal 4–6 anak per tutor agar setiap anak mendapat pendampingan intensif dan tidak ada yang tertinggal dalam proses praktek.",
         "reg_badge": "Formulir Pendaftaran",
@@ -3918,12 +3918,12 @@ const i18nDictionary = {
         "reg_lbl_address": "Alamat Domisili",
         "reg_lbl_wa_parent": "WhatsApp Orang Tua",
         "reg_lbl_wa_child": "WhatsApp Anak (Opsional)",
-        "reg_security_note": "Data Anda aman dan hanya digunakan untuk konfirmasi jadwal kelas oleh admin resmi LesKoding.",
+        "reg_security_note": "Data Anda aman dan hanya digunakan untuk konfirmasi jadwal kelas oleh admin resmi Leskoding.",
         "reg_btn_submit": "Kirim via WhatsApp",
         "promo_badge": "Promo Terbatas 2026",
         "promo_sub": "Free Trial + Diskon Pendaftaran",
         "promo_title": "Mulai Petualangan<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-yellow-500\">Kreator Digital!</span>",
-        "promo_body": "Klaim sesi uji coba gratis dan potongan biaya pendaftaran di seluruh Learning Center LesKoding sekarang:",
+        "promo_body": "Klaim sesi uji coba gratis dan potongan biaya pendaftaran di seluruh Learning Center Leskoding sekarang:",
         "promo_cta": "Daftar Sekarang &amp; Klaim Promo",
         "promo_trigger": "Promo 2026",
         "modal_xp_label": "Pencapaian XP",
@@ -3943,7 +3943,7 @@ const i18nDictionary = {
         "footer_c_check": "Cek Peta &amp; Rute Terdekat &rarr;",
         "footer_col_contact": "Kontak &amp; Konsultasi",
         "footer_form_btn": "Formulir Pendaftaran Online",
-        "footer_rights": "&copy; 2026 LesKoding Bali. Hak cipta dilindungi. Education Technology &amp; Community.",
+        "footer_rights": "&copy; 2026 Leskoding Bali. Hak cipta dilindungi. Education Technology &amp; Community.",
         "footer_back_top": "Kembali ke Atas",
         "footer_nav_method": "Cara Belajar",
         "footer_nav_privacy": "Kebijakan &amp; Privasi",
@@ -4016,8 +4016,8 @@ window.applyLanguage = function(lang) {
     // Update document title and html lang attribute
     document.documentElement.lang = lang;
     document.title = lang === 'en' 
-        ? "LesKoding Bali — Future Tech Academy | Coding & Robotics for Kids"
-        : "LesKoding Bali — Akademi Koding & Robotika Anak Modern di Bali";
+        ? "Leskoding Bali — Future Tech Academy | Coding & Robotics for Kids"
+        : "Leskoding Bali — Akademi Koding & Robotika Anak Modern di Bali";
 };
 
 // Initialize Language on Page Load (DEFAULT: 'en')

@@ -1,6 +1,6 @@
-# LesKoding Bali — Landing Page
+# Leskoding Bali — Landing Page
 
-Dokumentasi teknis landing page LesKoding Academy Bali. Informasi bisnis (program, kurikulum, kebijakan, FAQ) ada di [`KNOWLEDGE_BASE.md`](KNOWLEDGE_BASE.md).
+Dokumentasi teknis landing page Leskoding Academy Bali. Informasi bisnis (program, kurikulum, kebijakan, FAQ) ada di [`KNOWLEDGE_BASE.md`](KNOWLEDGE_BASE.md).
 
 ## Struktur File
 
@@ -41,7 +41,7 @@ Dokumentasi teknis landing page LesKoding Academy Bali. Informasi bisnis (progra
 5. **Distance Checker:** **simulasi/mock** (`calculateDistance` di `app.js`), bukan perhitungan jarak sungguhan.
 6. **Modal detail silabus:** tombol "Lihat Detail Kurikulum" di setiap kartu program membuka modal berisi tools, deskripsi, kompetensi, topik silabus, dan catatan sertifikat kelulusan.
 7. **Dropdown Learning Center kustom:** kartu cabang yang ramah sentuhan.
-8. **Form pendaftaran → WhatsApp:** semua pilihan lokasi dikirim ke satu nomor admin (default `6285183046798`, LesKoding Official; bisa diubah di admin panel → Landing Page → Contact & Social).
+8. **Form pendaftaran → WhatsApp:** semua pilihan lokasi dikirim ke satu nomor admin (default `6285183046798`, Leskoding Official; bisa diubah di admin panel → Landing Page → Contact & Social).
 
 ## Konten dari Admin Panel
 

@@ -18,7 +18,7 @@
 
     const STATIC_WA = '6285183046798';
     const STATIC_WA_DISPLAY = '+62 851-8304-6798';
-    const STATIC_WA_LABEL = 'LesKoding Official';
+    const STATIC_WA_LABEL = 'Leskoding Official';
 
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     // hanya izinkan http(s), anchor (#...) dan path relatif
@@ -48,7 +48,7 @@
     const EMPTY = {
         partners: { icon: 'fa-handshake', color: '#38BDF8', compact: true },
         stories: { icon: 'fa-envelope', color: '#FFC83D' },
-        locations: { icon: 'fa-map-location-dot', color: '#34D399', bare: true, cta: () => ({ href: waLink('Halo LesKoding, saya ingin bertanya tentang lokasi belajar terdekat.'), icon: 'fa-whatsapp', brand: true, ext: true }) },
+        locations: { icon: 'fa-map-location-dot', color: '#34D399', bare: true, cta: () => ({ href: waLink('Halo Leskoding, saya ingin bertanya tentang lokasi belajar terdekat.'), icon: 'fa-whatsapp', brand: true, ext: true }) },
         faqs: { icon: 'fa-comments', color: '#C084FC' },
     };
     const badge = c => `<span class="relative inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest" style="color:${c};background:${c}14;border:1px solid ${c}40"><span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:${c}"></span><span data-i18n="empty_badge">${esc(t('empty_badge'))}</span></span>`;
@@ -79,9 +79,9 @@
         </div>`;
     };
 
-    let wa = { number: STATIC_WA, display: STATIC_WA_DISPLAY, label: STATIC_WA_LABEL, message: 'Halo LesKoding, saya ingin bertanya.' };
+    let wa = { number: STATIC_WA, display: STATIC_WA_DISPLAY, label: STATIC_WA_LABEL, message: 'Halo Leskoding, saya ingin bertanya.' };
     const waLink = text => `https://wa.me/${wa.number}${text ? '?text=' + encodeURIComponent(text) : ''}`;
-    const waBadge = topic => `<a href="${esc(waLink(`Halo LesKoding, saya ingin bertanya tentang ${topic}.`))}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>${esc(wa.display)}${wa.label ? ' · ' + esc(wa.label) : ''}</a>`;
+    const waBadge = topic => `<a href="${esc(waLink(`Halo Leskoding, saya ingin bertanya tentang ${topic}.`))}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900/80 px-2.5 py-1.5 rounded-md border border-emerald-500/40 text-xs font-bold text-emerald-300 transition"><i class="fa-brands fa-whatsapp text-emerald-400"></i>${esc(wa.display)}${wa.label ? ' · ' + esc(wa.label) : ''}</a>`;
 
     /* ---------- 6. WhatsApp ---------- */
     function applyWhatsApp(settings) {

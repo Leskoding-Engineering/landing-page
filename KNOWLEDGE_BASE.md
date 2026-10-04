@@ -34,11 +34,11 @@
 ## 1. RINGKASAN EKSEKUTIF & IDENTITAS BRAND
 
 ### 1.1 Profil Lembaga
-**LesKoding** (dikenal juga sebagai *LesKoding Bali* atau *LesKoding Academy*) adalah akademi teknologi, pemrograman (*coding*), dan robotika modern untuk anak-anak dan remaja usia 6 hingga 17 tahun di Bali. Lembaga ini memposisikan diri sebagai wadah inovasi interaktif (*Playful Future Lab*) yang mengubah rasa penasaran anak terhadap gawai/gadget menjadi karya digital nyata.
+**Leskoding** (dikenal juga sebagai *Leskoding Bali* atau *Leskoding Academy*) adalah akademi teknologi, pemrograman (*coding*), dan robotika modern untuk anak-anak dan remaja usia 6 hingga 17 tahun di Bali. Lembaga ini memposisikan diri sebagai wadah inovasi interaktif (*Playful Future Lab*) yang mengubah rasa penasaran anak terhadap gawai/gadget menjadi karya digital nyata.
 
 ### 1.2 Identitas Nama & Badan
-- **Nama Komersial:** LesKoding / LesKoding Academy Bali
-- **Sub-Brand / Komunitas:** LesKoding Community
+- **Nama Komersial:** Leskoding / Leskoding Academy Bali
+- **Sub-Brand / Komunitas:** Leskoding Community
 - **Badan / Kemitraan:** Beroperasi melalui kolaborasi Learning Center bersama Genta (Gents Robotic) dan Bali Seeds.
 
 ### 1.3 Tagline & Slogan Resmi
@@ -63,14 +63,14 @@
 
 ### 1.5 Saluran Kontak & Komunikasi Resmi
 - **Email Resmi:** `halo@leskoding.id`
-- **WhatsApp Admin (semua lokasi & metode belajar):** `+62 851-8304-6798` a.n. **LesKoding Official** (format wa.me: `6285183046798`)
-- **Hak Cipta:** © 2026 LesKoding Bali. All rights reserved.
+- **WhatsApp Admin (semua lokasi & metode belajar):** `+62 851-8304-6798` a.n. **Leskoding Official** (format wa.me: `6285183046798`)
+- **Hak Cipta:** © 2026 Leskoding Bali. All rights reserved.
 
 ---
 
 ## 2. JARINGAN KAMPUS & LOKASI BELAJAR DI BALI
 
-LesKoding menyelenggarakan pembelajaran tatap muka (*offline/in-person classes*) di Learning Center fisik serta program kelas private di rumah sendiri:
+Leskoding menyelenggarakan pembelajaran tatap muka (*offline/in-person classes*) di Learning Center fisik serta program kelas private di rumah sendiri:
 
 | Cabang / Layanan | Nama Resmi / Deskripsi | Lokasi & Jangkauan | Nomor WhatsApp | Akses / Keterangan |
 |---|---|---|---|---|
@@ -78,7 +78,7 @@ LesKoding menyelenggarakan pembelajaran tatap muka (*offline/in-person classes*)
 | **Bedulu** | Bali Seed Bedulu Robotics & Coding | Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar, Bali | `+62 851-8304-6798` | [Rute Google Maps](https://maps.google.com/?q=Jln+Raya+Semebaung+Bedulu) |
 | **Private (Home Visit)** | Kelas Belajar di Rumah Sendiri | Area Gianyar, Ubud, Denpasar & sekitarnya | `+62 851-8304-6798` | Tutor berkunjung langsung ke rumah, 1-on-1 atau kelompok privat |
 
-> **Catatan Operasional:** Learning Center fisik di Ubud (Peliatan) sudah tidak beroperasi dan seluruh kebutuhan kelas di area Ubud dan sekitarnya dilayani secara personal melalui program **Kelas Private (Home Visit)** di mana tutor LesKoding datang langsung ke rumah siswa.
+> **Catatan Operasional:** Learning Center fisik di Ubud (Peliatan) sudah tidak beroperasi dan seluruh kebutuhan kelas di area Ubud dan sekitarnya dilayani secara personal melalui program **Kelas Private (Home Visit)** di mana tutor Leskoding datang langsung ke rumah siswa.
 
 ### 2.1 Mitra Strategis & Kolaborator
 - **Gents Robotic / Genta:** Mitra strategis penyelenggaraan cabang Gianyar dengan fokus kuat pada integrasi robotika dan mikrokontroler fisik.
@@ -86,7 +86,7 @@ LesKoding menyelenggarakan pembelajaran tatap muka (*offline/in-person classes*)
 
 ### 2.2 Fasilitas Ruang Belajar (Ruang Kelas & Laboratorium Robotika)
 - Ruang kelas berpendingin udara (Full AC) dirancang bersih, aman, dan ramah anak (*child-friendly*).
-- **Perangkat belajar:** siswa disarankan membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, LesKoding akan mengusahakan menyediakan perangkat apabila tersedia (lihat FAQ Q3).
+- **Perangkat belajar:** siswa disarankan membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, Leskoding akan mengusahakan menyediakan perangkat apabila tersedia (lihat FAQ Q3).
 - Perangkat keras robotik lengkap: board Arduino, aneka sensor (ultrasonik, suhu, PIR, LDR), motor servo, breadboard, kabel jumper, modul IoT.
 - Rasio kelas kecil **1:5**: 1 tutor mendampingi maksimal 5 siswa untuk menjamin perhatian personal dan bantuan langsung saat *hands-on*.
 
@@ -117,7 +117,7 @@ LesKoding menyelenggarakan pembelajaran tatap muka (*offline/in-person classes*)
 
 ## 4. NILAI TAMBAH & 5 MANFAAT KONKRET PEMBELAJARAN
 
-LesKoding tidak hanya mengajarkan sintaksis pemrograman, melainkan membentuk pola pikir (*growth mindset*) dan kebiasaan berkarya. Terdapat 5 manfaat nyata:
+Leskoding tidak hanya mengajarkan sintaksis pemrograman, melainkan membentuk pola pikir (*growth mindset*) dan kebiasaan berkarya. Terdapat 5 manfaat nyata:
 
 ```
                   ┌──────────────────────────────────────────────┐
@@ -155,13 +155,13 @@ Dalam coding, kesalahan (*error/bug*) adalah hal biasa. Siswa dilatih tidak taku
 Setiap akhir babak proyek atau modul, siswa memamerkan karyanya di depan teman sekelas dan tutor. Ini mengasah keterampilan komunikasi lisan, artikulasi ide, dan rasa bangga atas karyanya sendiri.
 
 ### 5. Portofolio Digital Nyata & Sertifikat Kelulusan
-Setiap siswa mengoleksi rekam jejak digital berupa link game yang dapat dimainkan di web/Roblox, aplikasi Android mandiri (APK), halaman web portofolio, serta **sertifikat kelulusan dari LesKoding setelah menyelesaikan setiap course**.
+Setiap siswa mengoleksi rekam jejak digital berupa link game yang dapat dimainkan di web/Roblox, aplikasi Android mandiri (APK), halaman web portofolio, serta **sertifikat kelulusan dari Leskoding setelah menyelesaikan setiap course**.
 
 ---
 
 ## 5. ALUR PANDUAN KEPUTUSAN ORANG TUA (5-STEP ROADMAP)
 
-Bagi orang tua yang baru pertama kali ingin mengenalkan anak pada dunia teknologi, LesKoding menyediakan alur 5 tahapan yang terarah:
+Bagi orang tua yang baru pertama kali ingin mengenalkan anak pada dunia teknologi, Leskoding menyediakan alur 5 tahapan yang terarah:
 
 ```
 [01. Kenali Manfaat] ──▶ [02. Pilih Level] ──▶ [03. Lihat Karya] ──▶ [04. Coba Gratis] ──▶ [05. Mulai Belajar]
@@ -179,7 +179,7 @@ Bagi orang tua yang baru pertama kali ingin mengenalkan anak pada dunia teknolog
 
 ## 6. ARSITEKTUR KURIKULUM & SILABUS LENGKAP (9 PROGRAM BELAJAR)
 
-Kurikulum LesKoding terbagi menjadi 3 Pilar Utama yang mencakup 9 program terstruktur. **Setiap siswa yang menyelesaikan salah satu program/course akan mendapatkan sertifikat kelulusan dari LesKoding.**
+Kurikulum Leskoding terbagi menjadi 3 Pilar Utama yang mencakup 9 program terstruktur. **Setiap siswa yang menyelesaikan salah satu program/course akan mendapatkan sertifikat kelulusan dari Leskoding.**
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
@@ -355,7 +355,7 @@ Kurikulum LesKoding terbagi menjadi 3 Pilar Utama yang mencakup 9 program terstr
 
 ## 7. ALUR TOOLS & EKOSISTEM TEKNOLOGI (TECHNOLOGY FLOW)
 
-LesKoding menerapkan alur pembelajaran berorientasi hasil karya (*Project-Based Learning Pipeline*) yang terbagi dalam 3 tahapan jelas:
+Leskoding menerapkan alur pembelajaran berorientasi hasil karya (*Project-Based Learning Pipeline*) yang terbagi dalam 3 tahapan jelas:
 
 ```
 ┌─────────────────────────┐      ┌─────────────────────────┐      ┌─────────────────────────┐
@@ -386,7 +386,7 @@ LesKoding menerapkan alur pembelajaran berorientasi hasil karya (*Project-Based 
 
 ## 8. METODOLOGI PEMBELAJARAN 4 TAHAP (4-STEP LEARNING METHOD)
 
-LesKoding menerapkan alur pedagogi interaktif dalam setiap sesi pertemuan tatap muka:
+Leskoding menerapkan alur pedagogi interaktif dalam setiap sesi pertemuan tatap muka:
 
 ```
 [Tahap 1: Konsep] ──▶ [Tahap 2: Praktik] ──▶ [Tahap 3: Feedback] ──▶ [Tahap 4: Capaian]
@@ -407,13 +407,13 @@ LesKoding menerapkan alur pedagogi interaktif dalam setiap sesi pertemuan tatap 
 4. **Langkah 04: Pencapaian & Progres Nyata (Tercatat Digital):**
    - Setiap hasil karya disimpan ke dalam cloud portofolio siswa.
    - Poin pengalaman (XP) siswa terakumulasi, modul terselesaikan, dan laporan sesi terbit otomatis untuk orang tua.
-   - Setelah menyelesaikan seluruh course, siswa mendapatkan **sertifikat kelulusan** dari LesKoding.
+   - Setelah menyelesaikan seluruh course, siswa mendapatkan **sertifikat kelulusan** dari Leskoding.
 
 ---
 
 ## 9. SISTEM LAPORAN PROGRES WALI & STUDENT SPACE
 
-Salah satu keunggulan terbesar LesKoding adalah **transparansi perkembangan belajar** yang dapat dipantau oleh orang tua melalui aplikasi atau dashboard **Student Space**.
+Salah satu keunggulan terbesar Leskoding adalah **transparansi perkembangan belajar** yang dapat dipantau oleh orang tua melalui aplikasi atau dashboard **Student Space**.
 
 ### 9.1 Parameter Rubrik Evaluasi Keterampilan (Active Rubrics)
 Tutor mengevaluasi siswa pada setiap sesi menggunakan 3 parameter terstandar:
@@ -431,7 +431,7 @@ Untuk memotivasi anak, sistem laporan menghubungkan performa belajar dengan kepr
 - Karakter lain yang mencerminkan profil ketelitian, imajinasi kreatif, atau kepemimpinan tim.
 
 ### 9.3 Anatomi Contoh Rapor Sesi (Sample Session Report)
-Berikut adalah format nyata dokumen laporan perkembangan sesi LesKoding:
+Berikut adalah format nyata dokumen laporan perkembangan sesi Leskoding:
 
 ```markdown
 ========================================================================
@@ -525,7 +525,7 @@ Semua pilihan lokasi / metode belajar (Gianyar, Bedulu, Kelas Private Home Visit
 
 #### Template Pesan WhatsApp Otomatis (Bahasa Indonesia):
 ```text
-*Form Pendaftaran Siswa Baru Akademi LesKoding*
+*Form Pendaftaran Siswa Baru Akademi Leskoding*
 
 Pilihan Learning Center: [Nama Cabang]
 Program yang Dipilih: [Nama Program]
@@ -544,7 +544,7 @@ WA Anak (opsional): [Nomor WA Anak]
 
 #### Template Pesan WhatsApp Otomatis (English Version):
 ```text
-*New Student Registration Form — LesKoding Academy*
+*New Student Registration Form — Leskoding Academy*
 
 Learning Center: [Center Name]
 Selected Program: [Program Name]
@@ -575,7 +575,7 @@ Child WhatsApp (optional): [Child Phone]
 - Diskusi jadwal dilakukan **setelah pendaftaran**, menyesuaikan ketersediaan anak, tutor, dan kapasitas kelas (maks. 5 siswa per tutor).
 
 ### 12.3 Sertifikat Kelulusan
-- Setiap siswa yang **menyelesaikan course** akan mendapatkan **sertifikat kelulusan dari LesKoding**.
+- Setiap siswa yang **menyelesaikan course** akan mendapatkan **sertifikat kelulusan dari Leskoding**.
 - Sertifikat melengkapi portofolio karya digital siswa sebagai bukti capaian belajar.
 
 ### 12.4 Rasio Tutor
@@ -588,19 +588,19 @@ Child WhatsApp (optional): [Child Phone]
 Berikut adalah ringkasan pertanyaan yang paling sering diajukan orang tua beserta jawaban resmi akademi:
 
 ### Q1: Apakah anak yang belum pernah memegang coding atau komputer sama sekali bisa ikut?
-> **Jawaban Resmi:** Tentu sangat bisa! Banyak siswa LesKoding memulai dari nol (*scratch*). Pembelajaran dirancang ramah anak melalui visual blok interaktif dan analogi dunia nyata terlebih dahulu sebelum perlahan dikenalkan pada logika kode teks.
+> **Jawaban Resmi:** Tentu sangat bisa! Banyak siswa Leskoding memulai dari nol (*scratch*). Pembelajaran dirancang ramah anak melalui visual blok interaktif dan analogi dunia nyata terlebih dahulu sebelum perlahan dikenalkan pada logika kode teks.
 
 ### Q2: Apakah tersedia kelas percobaan (trial class) dan berapa biayanya?
 > **Jawaban Resmi:** Ya, kami menyediakan 1 sesi **Free Trial Class (100% Gratis)** di Learning Center kami (Gianyar dan Bedulu), serta opsi konsultasi/trial untuk program Kelas Private di rumah sendiri. Orang tua cukup mengisi formulir atau menghubungi admin via WhatsApp untuk memilih slot jadwal uji coba tanpa ikatan komitmen finansial.
 
 ### Q3: Apakah siswa harus membawa laptop sendiri dari rumah?
-> **Jawaban Resmi:** Kami menyarankan siswa membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, LesKoding akan mengusahakan menyediakan perangkat apabila tersedia.
+> **Jawaban Resmi:** Kami menyarankan siswa membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, Leskoding akan mengusahakan menyediakan perangkat apabila tersedia.
 
 ### Q4: Berapa rasio jumlah tutor per siswa di setiap kelas?
-> **Jawaban Resmi:** LesKoding menerapkan kebijakan kelas kecil (*small interactive class*) dengan rasio **1:5**, yaitu **1 tutor mengajar maksimal 5 siswa**. Hal ini memastikan setiap siswa mendapatkan bimbingan intensif dan tidak ada anak yang tertinggal dalam sesi praktik langsung.
+> **Jawaban Resmi:** Leskoding menerapkan kebijakan kelas kecil (*small interactive class*) dengan rasio **1:5**, yaitu **1 tutor mengajar maksimal 5 siswa**. Hal ini memastikan setiap siswa mendapatkan bimbingan intensif dan tidak ada anak yang tertinggal dalam sesi praktik langsung.
 
 ### Q5: Apakah siswa mendapatkan sertifikat?
-> **Jawaban Resmi:** Ya. Setiap siswa yang menyelesaikan course akan mendapatkan sertifikat kelulusan dari LesKoding sebagai bukti capaian belajarnya, melengkapi portofolio karya yang sudah dibuat.
+> **Jawaban Resmi:** Ya. Setiap siswa yang menyelesaikan course akan mendapatkan sertifikat kelulusan dari Leskoding sebagai bukti capaian belajarnya, melengkapi portofolio karya yang sudah dibuat.
 
 ### Q6: Berapa biaya kursus dan bagaimana jadwal kelasnya?
 > **Jawaban Resmi:** Informasi biaya akan disampaikan oleh admin saat konsultasi setelah Anda mendaftar. Jadwal kelas bersifat fleksibel dan ditentukan bersama sesuai kesepakatan dengan orang tua.
@@ -609,14 +609,14 @@ Berikut adalah ringkasan pertanyaan yang paling sering diajukan orang tua besert
 
 ## 14. GLOSARIUM ISTILAH & PANDUAN KOMUNIKASI (COPYWRITING GUIDELINES)
 
-Bagi tim konten, pemasaran, atau pengembang yang berinteraksi dengan orang tua calon murid, berikut adalah panduan istilah baku dan gaya bahasa resmi LesKoding:
+Bagi tim konten, pemasaran, atau pengembang yang berinteraksi dengan orang tua calon murid, berikut adalah panduan istilah baku dan gaya bahasa resmi Leskoding:
 
 ### 14.1 Kamus Istilah Baku
 - **Computational Thinking:** Berpikir logis terstruktur memecahkan persoalan selangkah demi selangkah.
 - **Block Coding:** Pemrograman visual dengan menyusun balok logika (seperti puzzle) tanpa perlu mengetik teks perintah manual.
 - **Text-Based Coding:** Pemrograman kode teks asli (seperti JavaScript, Lua, HTML/CSS).
 - **Free Trial Class:** Kelas percobaan gratis 1 sesi tatap muka di lab.
-- **Sertifikat Kelulusan:** Sertifikat dari LesKoding yang diberikan kepada siswa setelah menyelesaikan sebuah course.
+- **Sertifikat Kelulusan:** Sertifikat dari Leskoding yang diberikan kepada siswa setelah menyelesaikan sebuah course.
 - **Rasio 1:5:** Kebijakan kelas kecil, 1 tutor mengajar maksimal 5 siswa.
 - **Student Space:** Aplikasi/portal pemantauan laporan perkembangan siswa oleh wali murid.
 - **Hardware Interfacing:** Menghubungkan logika software dengan rangkaian elektronika fisik (sensor/motor).
@@ -630,4 +630,4 @@ Bagi tim konten, pemasaran, atau pengembang yang berinteraksi dengan orang tua c
 - **Bebas Intimidasi Teknis:** Menggunakan istilah yang mudah dicerna oleh orang tua non-teknis tanpa menghilangkan kredibilitas profesional.
 
 ---
-*Dokumen ini merupakan intisari resmi sistem pengetahuan LesKoding Academy Bali. Untuk revisi atau penambahan materi program, silakan merujuk pada standar arsitektur kurikulum di atas.*
+*Dokumen ini merupakan intisari resmi sistem pengetahuan Leskoding Academy Bali. Untuk revisi atau penambahan materi program, silakan merujuk pada standar arsitektur kurikulum di atas.*
