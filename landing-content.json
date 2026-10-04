@@ -1,5 +1,5 @@
 {
-    "published_at": "2026-10-04T09:30:32+08:00",
+    "published_at": "2026-10-04T09:48:10+08:00",
     "data": {
         "settings": {
             "whatsapp": {
@@ -15,7 +15,14 @@
                 "facebook": null
             }
         },
-        "partners": [],
+        "partners": [
+            {
+                "name": "Genta Saraswati",
+                "short_name": "Genta",
+                "logo": "http://localhost:8000/storage/landing/partners/01M429HJ673BY0ZQFQZEN7Q05W.png",
+                "url": null
+            }
+        ],
         "programs": [
             {
                 "id": "scratch",
