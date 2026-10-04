@@ -1,5 +1,5 @@
 {
-    "published_at": "2026-10-04T10:15:28+08:00",
+    "published_at": "2026-10-04T10:18:06+08:00",
     "data": {
         "settings": {
             "whatsapp": {
@@ -273,16 +273,6 @@
                 "cta_url": "whatsapp"
             }
         ],
-        "promotion": {
-            "name": "Promo 2026",
-            "headline": "Mulai petualangan,",
-            "headline_accent": "coba dulu gratis.",
-            "description": "Pakai kode promo saat mendaftar: anak mendapat 1 sesi Free Trial, dan Anda mendapat potongan biaya pendaftaran.",
-            "bar_text": "PROMO 2026: 1 sesi Free Trial gratis + potongan biaya pendaftaran",
-            "code": "PETUALANGAN2026",
-            "cta_label": "Pakai & Daftar Sekarang",
-            "note": "Kode terisi otomatis di formulir. Besaran potongan diinformasikan admin saat konsultasi.",
-            "ends_at": null
-        }
+        "promotion": null
     }
 }
