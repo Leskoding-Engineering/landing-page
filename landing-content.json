@@ -1,5 +1,5 @@
 {
-    "published_at": "2026-10-04T09:53:43+08:00",
+    "published_at": "2026-10-04T10:15:28+08:00",
     "data": {
         "settings": {
             "whatsapp": {
@@ -15,11 +15,274 @@
                 "facebook": null
             }
         },
-        "partners": [],
+        "partners": [
+            {
+                "name": "Genta Saraswati Bilingual & Montessori School",
+                "logo": "http://localhost:8000/storage/landing/partners/genta.png",
+                "url": null
+            },
+            {
+                "name": "PR Saraswati Gianyar",
+                "logo": "http://localhost:8000/storage/landing/partners/pr-genta.png",
+                "url": null
+            },
+            {
+                "name": "Bali Seeds Primary School",
+                "logo": "http://localhost:8000/storage/landing/partners/bali-seeds.jpg",
+                "url": null
+            }
+        ],
         "programs": [],
-        "stories": [],
-        "locations": [],
-        "faqs": [],
-        "promotion": null
+        "stories": [
+            {
+                "id": "story-1",
+                "title": "Cyber City RP Game",
+                "name": "Sarah",
+                "age": 12,
+                "award": "Masterpiece Terbaik",
+                "category": "Pilihan Kurator",
+                "field": "Game Dev",
+                "tools": [
+                    "Roblox Studio",
+                    "Lua",
+                    "3D Modeling"
+                ],
+                "color": "#FFC83D",
+                "photo": "http://localhost:8000/storage/landing/stories/01m3jk7k4aa96g0q8t29g6e4mz.jpeg",
+                "desc": "Dunia roleplay 3D bernuansa kota cyberpunk, lengkap dengan sistem mata uang virtual, toko in-game, dan NPC interaktif.",
+                "cta": {
+                    "label": "Mainkan di Roblox",
+                    "icon": "fa-gamepad",
+                    "link": null
+                }
+            },
+            {
+                "id": "story-2",
+                "title": "Sistem AI Kasir Pintar",
+                "name": "Budi",
+                "age": 14,
+                "award": "Terfavorit",
+                "category": "Karya Terpopuler",
+                "field": "Web Dev",
+                "tools": [
+                    "JavaScript",
+                    "HTML",
+                    "CSS"
+                ],
+                "color": "#38BDF8",
+                "photo": "http://localhost:8000/storage/landing/stories/whatsapp-image-2026-02-22-at-200437.jpeg",
+                "desc": "Aplikasi kasir berbasis web yang menghitung stok inventaris secara otomatis dan mencetak struk belanja real-time.",
+                "cta": {
+                    "label": "Coba Aplikasinya",
+                    "icon": "fa-cash-register",
+                    "link": null
+                }
+            },
+            {
+                "id": "story-3",
+                "title": "Robot Pemilah Sampah",
+                "name": "Kevin",
+                "age": 10,
+                "award": "Future Tech",
+                "category": "Teknologi Masa Depan",
+                "field": "Robotika",
+                "tools": [
+                    "Arduino",
+                    "Sensor Ultrasonik",
+                    "Motor Servo"
+                ],
+                "color": "#F97316",
+                "photo": "http://localhost:8000/storage/landing/stories/01m3rvht4r9sq961z3gtwjd72y.jpg",
+                "desc": "Tempat sampah pintar berbasis Arduino: sensor ultrasonik mendeteksi objek dan motor servo membuka tutupnya tanpa disentuh.",
+                "cta": {
+                    "label": "Tonton Demo",
+                    "icon": "fa-circle-play",
+                    "link": null
+                }
+            },
+            {
+                "id": "story-4",
+                "title": "Portofolio Animasi Web",
+                "name": "Nadia",
+                "age": 15,
+                "award": "Desain Terbaik",
+                "category": "Estetika Visual",
+                "field": "Web Design",
+                "tools": [
+                    "HTML",
+                    "CSS 3D",
+                    "JavaScript"
+                ],
+                "color": "#C084FC",
+                "photo": "http://localhost:8000/storage/landing/stories/01m3h323b1qjv4ph2ccwgh9aq2.jpeg",
+                "desc": "Website portofolio responsif dengan animasi CSS 3D dan efek scroll mulus, dibangun murni tanpa framework.",
+                "cta": {
+                    "label": "Kunjungi Website",
+                    "icon": "fa-arrow-up-right-from-square",
+                    "link": null
+                }
+            }
+        ],
+        "locations": [
+            {
+                "id": "lab-gianyar-1",
+                "type": "learning_center",
+                "name": "Lab Gianyar",
+                "title": "Gents Robotic Gianyar",
+                "subtitle": "Learning Center",
+                "icon": "fa-building-flag",
+                "color": "#38BDF8",
+                "logo": "http://localhost:8000/storage/landing/locations/genta.png",
+                "address": "Jln. Ksatrian No. 8, Lingkungan Candi Baru, Gianyar",
+                "maps_query": "Jln Ksatrian No 8 Lingkungan Candi Baru Gianyar",
+                "features": [
+                    "Kit robotik lengkap · laptop pribadi disarankan",
+                    "Ruang ber-AC, bersih & ramah anak",
+                    "Rasio 1 tutor : maks. 5 siswa"
+                ],
+                "register_value": "Gents Robotic & Coding (Gianyar)",
+                "cta_label": "Coba Gratis",
+                "is_new": false
+            },
+            {
+                "id": "lab-bedulu-2",
+                "type": "learning_center",
+                "name": "Lab Bedulu",
+                "title": "Bali Seed Bedulu",
+                "subtitle": "Learning Center",
+                "icon": "fa-robot",
+                "color": "#FFC83D",
+                "logo": "http://localhost:8000/storage/landing/locations/bali-seeds.jpg",
+                "address": "Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar",
+                "maps_query": "Jln Raya Semebaung Bedulu",
+                "features": [
+                    "Kit robotik lengkap · laptop pribadi disarankan",
+                    "Ruang ber-AC, bersih & ramah anak",
+                    "Rasio 1 tutor : maks. 5 siswa"
+                ],
+                "register_value": "Bali Seed Bedulu Robotics & Coding",
+                "cta_label": "Coba Gratis",
+                "is_new": false
+            },
+            {
+                "id": "private-3",
+                "type": "private",
+                "name": "Private",
+                "title": "Kelas Private (Home Visit)",
+                "subtitle": "Tutor ke rumah",
+                "icon": "fa-house-laptop",
+                "color": "#C084FC",
+                "logo": null,
+                "address": "Jangkauan Area: Gianyar, Ubud, Denpasar & sekitarnya",
+                "maps_query": null,
+                "features": [
+                    "Tutor datang langsung ke rumah",
+                    "1-on-1 atau grup kecil privat",
+                    "Jadwal disepakati bersama admin"
+                ],
+                "register_value": "Kelas Private (Home Visit / Di Rumah)",
+                "cta_label": "Daftar Private",
+                "is_new": false
+            },
+            {
+                "id": "online-4",
+                "type": "online",
+                "name": "Online",
+                "title": "Kelas Online",
+                "subtitle": "Belajar jarak jauh",
+                "icon": "fa-video",
+                "color": "#34D399",
+                "logo": null,
+                "address": "Dari mana saja, cukup laptop & internet",
+                "maps_query": null,
+                "features": [
+                    "Sesi live bersama tutor via video call",
+                    "Tanpa perjalanan, dari rumah sendiri",
+                    "Paling cocok untuk program berbasis software"
+                ],
+                "register_value": "Kelas Online",
+                "cta_label": "Daftar Online",
+                "is_new": true
+            }
+        ],
+        "faqs": [
+            {
+                "question": "Apakah anak yang belum pernah belajar coding atau komputer bisa ikut?",
+                "category": "Memulai",
+                "highlight": "Bisa!",
+                "highlight_note": "mulai dari nol",
+                "answer": "Tentu bisa! Banyak siswa LesKoding memulai dari nol. Pembelajaran dirancang ramah anak melalui visual blok interaktif dan analogi dunia nyata terlebih dahulu, sebelum perlahan dikenalkan pada logika kode teks.",
+                "icon": "fa-seedling",
+                "color": "#34D399",
+                "cta_label": "Lihat program pemula",
+                "cta_url": "#course"
+            },
+            {
+                "question": "Apakah tersedia kelas percobaan (trial class) dan berapa biayanya?",
+                "category": "Memulai",
+                "highlight": "Gratis",
+                "highlight_note": "1 sesi Free Trial",
+                "answer": "Ya, kami menyediakan 1 sesi Free Trial Class (100% gratis) di Learning Center Gianyar dan Bedulu, serta opsi konsultasi/trial untuk Kelas Private di rumah. Cukup isi formulir atau hubungi admin via WhatsApp untuk memilih jadwal, tanpa ikatan.",
+                "icon": "fa-gift",
+                "color": "#FFC83D",
+                "cta_label": "Daftar Free Trial",
+                "cta_url": "#register"
+            },
+            {
+                "question": "Apakah siswa harus membawa laptop sendiri?",
+                "category": "Di Kelas",
+                "highlight": "Disarankan",
+                "highlight_note": "bawa laptop pribadi",
+                "answer": "Kami menyarankan siswa membawa laptop pribadi agar project dapat tersimpan dan pembelajaran lebih optimal. Jika siswa tidak dapat membawa laptop, LesKoding akan mengusahakan menyediakan perangkat apabila tersedia.",
+                "icon": "fa-laptop",
+                "color": "#38BDF8",
+                "cta_label": "Lihat Learning Center",
+                "cta_url": "#location"
+            },
+            {
+                "question": "Berapa rasio tutor per siswa di setiap kelas?",
+                "category": "Di Kelas",
+                "highlight": "1 : 5",
+                "highlight_note": "tutor : siswa",
+                "answer": "LesKoding menerapkan kelas kecil dengan rasio 1:5, yaitu 1 tutor mengajar maksimal 5 siswa. Setiap siswa mendapat bimbingan intensif dan tidak ada anak yang tertinggal saat praktik langsung.",
+                "icon": "fa-user-group",
+                "color": "#C084FC",
+                "cta_label": "Lihat cara belajar",
+                "cta_url": "#cara-belajar"
+            },
+            {
+                "question": "Apakah siswa mendapatkan sertifikat?",
+                "category": "Hasil Belajar",
+                "highlight": "Ya",
+                "highlight_note": "setelah lulus course",
+                "answer": "Ya. Setiap siswa yang menyelesaikan course mendapatkan sertifikat kelulusan dari LesKoding sebagai bukti capaian belajar, melengkapi portofolio karya yang sudah dibuat.",
+                "icon": "fa-award",
+                "color": "#F97316",
+                "cta_label": "Lihat karya siswa",
+                "cta_url": "#hall-of-fame"
+            },
+            {
+                "question": "Berapa biaya kursus dan bagaimana jadwal kelasnya?",
+                "category": "Biaya & Jadwal",
+                "highlight": "Fleksibel",
+                "highlight_note": "biaya via admin",
+                "answer": "Informasi biaya disampaikan oleh admin saat konsultasi setelah Anda mendaftar. Jadwal kelas bersifat fleksibel dan ditentukan bersama sesuai kesepakatan dengan orang tua.",
+                "icon": "fa-calendar-check",
+                "color": "#F87171",
+                "cta_label": "Konsultasi via WhatsApp",
+                "cta_url": "whatsapp"
+            }
+        ],
+        "promotion": {
+            "name": "Promo 2026",
+            "headline": "Mulai petualangan,",
+            "headline_accent": "coba dulu gratis.",
+            "description": "Pakai kode promo saat mendaftar: anak mendapat 1 sesi Free Trial, dan Anda mendapat potongan biaya pendaftaran.",
+            "bar_text": "PROMO 2026: 1 sesi Free Trial gratis + potongan biaya pendaftaran",
+            "code": "PETUALANGAN2026",
+            "cta_label": "Pakai & Daftar Sekarang",
+            "note": "Kode terisi otomatis di formulir. Besaran potongan diinformasikan admin saat konsultasi.",
+            "ends_at": null
+        }
     }
 }
