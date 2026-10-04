@@ -1,0 +1,51 @@
+{
+    "published_at": "2026-10-04T09:30:32+08:00",
+    "data": {
+        "settings": {
+            "whatsapp": {
+                "number": "6285183046798",
+                "display": "+62 851-8304-6798",
+                "label": "LesKoding Official",
+                "message": "Halo LesKoding, saya ingin bertanya."
+            },
+            "social": {
+                "instagram": null,
+                "youtube": null,
+                "tiktok": null,
+                "facebook": null
+            }
+        },
+        "partners": [],
+        "programs": [
+            {
+                "id": "scratch",
+                "n": "01",
+                "sym": "Sc",
+                "name": "Scratch",
+                "pillar": "foundation",
+                "code": "Scratch",
+                "min": 8,
+                "max": 14,
+                "color": "#F59E0B",
+                "icon": "fa-gamepad",
+                "tagline": "Bikin game & animasi pertamamu",
+                "desc": "Belajar dasar pemrograman dengan Scratch. Cocok untuk pemula yang ingin membuat game, animasi, dan cerita interaktif.",
+                "tools": [
+                    "Scratch"
+                ],
+                "outputs": [
+                    "Game labirin mencari koin"
+                ],
+                "syllabus": [
+                    "Gerakan & Animasi",
+                    "Suara & Musik",
+                    "Perulangan & Logika"
+                ]
+            }
+        ],
+        "stories": [],
+        "locations": [],
+        "faqs": [],
+        "promotion": null
+    }
+}
