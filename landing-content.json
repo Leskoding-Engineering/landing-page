@@ -1,5 +1,5 @@
 {
-    "published_at": "2026-10-04T10:20:23+08:00",
+    "published_at": "2026-10-04T10:47:30+08:00",
     "data": {
         "settings": {
             "whatsapp": {
@@ -18,22 +18,44 @@
         "partners": [
             {
                 "name": "Genta Saraswati Bilingual & Montessori School",
-                "logo": "http://localhost:8000/storage/landing/partners/genta.png",
+                "logo": "https://schoola.pro/storage/landing/partners/01M42CS7E18D6C0G7KENG05V3B.png",
                 "url": null
             },
             {
                 "name": "PR Saraswati Gianyar",
-                "logo": "http://localhost:8000/storage/landing/partners/pr-genta.png",
+                "logo": "https://schoola.pro/storage/landing/partners/01M42CSK09AEJRHCWWMS8Z0EC5.png",
                 "url": null
             },
             {
                 "name": "Bali Seeds Primary School",
-                "logo": "http://localhost:8000/storage/landing/partners/bali-seeds.jpg",
+                "logo": "https://schoola.pro/storage/landing/partners/01M42CT0P279CRAHSWN41NQKX5.jpg",
                 "url": null
             }
         ],
         "programs": [],
         "stories": [
+            {
+                "id": "story-1",
+                "title": "Cyber City RP Game",
+                "name": "Sarah",
+                "age": 12,
+                "award": "Masterpiece Terbaik",
+                "category": "Pilihan Kurator",
+                "field": "Game Dev",
+                "tools": [
+                    "Roblox Studio",
+                    "Lua",
+                    "3D Modeling"
+                ],
+                "color": "#FFC83D",
+                "photo": "https://schoola.pro/storage/landing/stories/01M42CTZZHTCTNYA94A3R10WEG.jpeg",
+                "desc": "Dunia roleplay 3D bernuansa kota cyberpunk, lengkap dengan sistem mata uang virtual, toko in-game, dan NPC interaktif.",
+                "cta": {
+                    "label": "Mainkan di Roblox",
+                    "icon": "fa-gamepad",
+                    "link": null
+                }
+            },
             {
                 "id": "story-2",
                 "title": "Sistem AI Kasir Pintar",
@@ -48,7 +70,7 @@
                     "CSS"
                 ],
                 "color": "#38BDF8",
-                "photo": "http://localhost:8000/storage/landing/stories/whatsapp-image-2026-02-22-at-200437.jpeg",
+                "photo": "https://schoola.pro/storage/landing/stories/01M42CVHH22BTZQJG360AT6KD0.jpg",
                 "desc": "Aplikasi kasir berbasis web yang menghitung stok inventaris secara otomatis dan mencetak struk belanja real-time.",
                 "cta": {
                     "label": "Coba Aplikasinya",
@@ -70,7 +92,7 @@
                     "Motor Servo"
                 ],
                 "color": "#F97316",
-                "photo": "http://localhost:8000/storage/landing/stories/01m3rvht4r9sq961z3gtwjd72y.jpg",
+                "photo": "https://schoola.pro/storage/landing/stories/01M42CW5412BANNT1NCJSQT7WS.jpeg",
                 "desc": "Tempat sampah pintar berbasis Arduino: sensor ultrasonik mendeteksi objek dan motor servo membuka tutupnya tanpa disentuh.",
                 "cta": {
                     "label": "Tonton Demo",
@@ -92,7 +114,7 @@
                     "JavaScript"
                 ],
                 "color": "#C084FC",
-                "photo": "http://localhost:8000/storage/landing/stories/01m3h323b1qjv4ph2ccwgh9aq2.jpeg",
+                "photo": "https://schoola.pro/storage/landing/stories/01M42CWNXPWW916FV965M9VHRK.jpeg",
                 "desc": "Website portofolio responsif dengan animasi CSS 3D dan efek scroll mulus, dibangun murni tanpa framework.",
                 "cta": {
                     "label": "Kunjungi Website",
@@ -110,9 +132,9 @@
                 "subtitle": "Learning Center",
                 "icon": "fa-building-flag",
                 "color": "#38BDF8",
-                "logo": "http://localhost:8000/storage/landing/locations/genta.png",
-                "address": "Jalan Kesatrian No, 28 Gianyar, Bali",
-                "maps_query": "Jalan Kesatrian No, 28 Gianyar, Bali",
+                "logo": "https://schoola.pro/storage/landing/locations/01M42CXCZVX1E560459Z7MX0A7.png",
+                "address": "Jln. Ksatrian No. 8, Lingkungan Candi Baru, Gianyar",
+                "maps_query": "Jln Ksatrian No 8 Lingkungan Candi Baru Gianyar",
                 "features": [
                     "Kit robotik lengkap · laptop pribadi disarankan",
                     "Ruang ber-AC, bersih & ramah anak",
@@ -130,7 +152,7 @@
                 "subtitle": "Learning Center",
                 "icon": "fa-robot",
                 "color": "#FFC83D",
-                "logo": "http://localhost:8000/storage/landing/locations/bali-seeds.jpg",
+                "logo": "https://schoola.pro/storage/landing/locations/01M42CXV32S8PV1BHCNT5TT3NV.jpg",
                 "address": "Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar",
                 "maps_query": "Jln Raya Semebaung Bedulu",
                 "features": [
