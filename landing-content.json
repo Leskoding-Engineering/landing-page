@@ -1,5 +1,5 @@
 {
-    "published_at": "2026-10-04T10:47:30+08:00",
+    "published_at": "2026-10-04T10:57:51+08:00",
     "data": {
         "settings": {
             "whatsapp": {
@@ -33,96 +33,7 @@
             }
         ],
         "programs": [],
-        "stories": [
-            {
-                "id": "story-1",
-                "title": "Cyber City RP Game",
-                "name": "Sarah",
-                "age": 12,
-                "award": "Masterpiece Terbaik",
-                "category": "Pilihan Kurator",
-                "field": "Game Dev",
-                "tools": [
-                    "Roblox Studio",
-                    "Lua",
-                    "3D Modeling"
-                ],
-                "color": "#FFC83D",
-                "photo": "https://schoola.pro/storage/landing/stories/01M42CTZZHTCTNYA94A3R10WEG.jpeg",
-                "desc": "Dunia roleplay 3D bernuansa kota cyberpunk, lengkap dengan sistem mata uang virtual, toko in-game, dan NPC interaktif.",
-                "cta": {
-                    "label": "Mainkan di Roblox",
-                    "icon": "fa-gamepad",
-                    "link": null
-                }
-            },
-            {
-                "id": "story-2",
-                "title": "Sistem AI Kasir Pintar",
-                "name": "Budi",
-                "age": 14,
-                "award": "Terfavorit",
-                "category": "Karya Terpopuler",
-                "field": "Web Dev",
-                "tools": [
-                    "JavaScript",
-                    "HTML",
-                    "CSS"
-                ],
-                "color": "#38BDF8",
-                "photo": "https://schoola.pro/storage/landing/stories/01M42CVHH22BTZQJG360AT6KD0.jpg",
-                "desc": "Aplikasi kasir berbasis web yang menghitung stok inventaris secara otomatis dan mencetak struk belanja real-time.",
-                "cta": {
-                    "label": "Coba Aplikasinya",
-                    "icon": "fa-cash-register",
-                    "link": null
-                }
-            },
-            {
-                "id": "story-3",
-                "title": "Robot Pemilah Sampah",
-                "name": "Kevin",
-                "age": 10,
-                "award": "Future Tech",
-                "category": "Teknologi Masa Depan",
-                "field": "Robotika",
-                "tools": [
-                    "Arduino",
-                    "Sensor Ultrasonik",
-                    "Motor Servo"
-                ],
-                "color": "#F97316",
-                "photo": "https://schoola.pro/storage/landing/stories/01M42CW5412BANNT1NCJSQT7WS.jpeg",
-                "desc": "Tempat sampah pintar berbasis Arduino: sensor ultrasonik mendeteksi objek dan motor servo membuka tutupnya tanpa disentuh.",
-                "cta": {
-                    "label": "Tonton Demo",
-                    "icon": "fa-circle-play",
-                    "link": null
-                }
-            },
-            {
-                "id": "story-4",
-                "title": "Portofolio Animasi Web",
-                "name": "Nadia",
-                "age": 15,
-                "award": "Desain Terbaik",
-                "category": "Estetika Visual",
-                "field": "Web Design",
-                "tools": [
-                    "HTML",
-                    "CSS 3D",
-                    "JavaScript"
-                ],
-                "color": "#C084FC",
-                "photo": "https://schoola.pro/storage/landing/stories/01M42CWNXPWW916FV965M9VHRK.jpeg",
-                "desc": "Website portofolio responsif dengan animasi CSS 3D dan efek scroll mulus, dibangun murni tanpa framework.",
-                "cta": {
-                    "label": "Kunjungi Website",
-                    "icon": "fa-arrow-up-right-from-square",
-                    "link": null
-                }
-            }
-        ],
+        "stories": [],
         "locations": [
             {
                 "id": "lab-gianyar-1",
