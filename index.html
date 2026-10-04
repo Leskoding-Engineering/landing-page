@@ -65,7 +65,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css?v=20261003_v3">
+    <link rel="stylesheet" href="style.css?v=20261004_v1">
+    <script>
+        // Konten dari admin panel (landing-content.json): fetch dimulai sedini mungkin dan
+        // section yang diatur admin disembunyikan sampai datanya siap, supaya konten statis
+        // tidak sempat berkedip. Batas 4 detik: setelah itu konten statis ditampilkan.
+        if (location.protocol !== 'file:') {
+            document.documentElement.classList.add('lk-loading');
+            window.__lkContent = fetch('landing-content.json', { cache: 'no-cache', headers: { Accept: 'application/json' } })
+                .then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)));
+            setTimeout(() => document.documentElement.classList.remove('lk-loading'), 4000);
+        }
+    </script>
 
     <style>
         /* Smooth View Transitions */
@@ -646,7 +657,7 @@
     </div>
 
     <!-- Map -->
-    <div class="rounded-[2rem] bg-[#0F172A] border border-white/10 overflow-hidden mb-12">
+    <div class="rounded-[2rem] bg-[#0F172A] border border-white/10 overflow-hidden mb-12" id="x-map-box">
       <div class="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-b border-white/10">
         <div class="flex flex-wrap gap-2 text-[11px] font-bold" id="x-legend"></div>
         <span class="text-[11px] text-slate-500"><i class="fa-solid fa-hand-pointer mr-1 text-[#38BDF8]"></i><span data-i18n="course_click_station">Klik stasiun untuk lompat ke kartunya</span></span>
@@ -1050,7 +1061,7 @@
                     <span class="block text-[11px] text-slate-400 mt-0.5" data-i18n="loc5_kind_online">Belajar jarak jauh</span>
                 </button>
             </div>
-            <div class="rounded-[1.75rem] border border-white/10 bg-[#0F172A] overflow-hidden">
+            <div class="rounded-[1.75rem] border border-white/10 bg-[#0F172A] overflow-hidden" id="loc-panels">
             <div id="loc-panel-gianyar" role="tabpanel" aria-labelledby="loc-tab-gianyar" class="loc-panel grid grid-cols-1 lg:grid-cols-2">
                     <div class="p-6 sm:p-8 flex flex-col">
                         <div class="flex items-center gap-3">
@@ -1329,7 +1340,7 @@
                                 <div class="flex-1 text-center rounded-xl border-2 border-dashed border-[#FFC83D]/50 text-[#FFC83D] py-3 text-base sm:text-lg font-mono font-semibold tracking-[.14em]">PETUALANGAN2026</div>
                                 <button type="button" id="promo-copy" class="rounded-xl bg-white/10 hover:bg-white/15 px-4 text-xs font-bold transition"><i class="fa-regular fa-copy mr-1"></i><span data-i18n="promo2_copy">Salin</span></button>
                             </div>
-                            <button type="button" onclick="claimPromoAndRegister('PETUALANGAN2026')" class="w-full mt-4 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-5 py-3.5 min-h-[48px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_20px_rgba(255,200,61,0.3)]"><i class="fa-solid fa-rocket"></i> <span data-i18n="promo2_cta">Pakai &amp; Daftar Sekarang</span></button>
+                            <button type="button" onclick="claimPromoAndRegister()" class="w-full mt-4 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-5 py-3.5 min-h-[48px] rounded-xl text-xs uppercase tracking-wider transition shadow-[0_4px_20px_rgba(255,200,61,0.3)]"><i class="fa-solid fa-rocket"></i> <span data-i18n="promo2_cta">Pakai &amp; Daftar Sekarang</span></button>
                             <p class="text-[11px] text-slate-500 mt-4 leading-relaxed" data-i18n="promo2_note">Kode terisi otomatis di formulir. Besaran potongan diinformasikan admin saat konsultasi.</p>
                         </div>
                     </div>
@@ -1549,7 +1560,7 @@
                     <p data-i18n="footer_tagline" class="text-xs text-slate-400 leading-relaxed mb-4">
                         Akademi Pemrograman &amp; Robotika Masa Depan di Bali. Membimbing anak mengubah rasa penasaran menjadi karya teknologi nyata.
                     </p>
-                    <div class="flex items-center gap-3 text-slate-400">
+                    <div class="flex items-center gap-3 text-slate-400" id="footer-social">
                         <a href="https://instagram.com" target="_blank" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 shadow-sm flex items-center justify-center text-slate-300 hover:text-white hover:border-white/30 transition-colors"><i class="fa-brands fa-instagram text-xs"></i></a>
                         <a href="https://wa.me/6285183046798" target="_blank" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 hover:text-emerald-300 hover:border-emerald-400 transition-colors"><i class="fa-brands fa-whatsapp text-xs"></i></a>
                         <a href="https://youtube.com" target="_blank" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-red-400 hover:text-red-300 hover:border-red-400 transition-colors"><i class="fa-brands fa-youtube text-xs"></i></a>
@@ -1642,7 +1653,7 @@
     </div>
 
     <!-- Script -->
-    <script src="app.js"></script>
+    <script src="app.js?v=20261004_v1"></script>
 <script>
 
 /* ---------- B: tabs ---------- */
@@ -1833,23 +1844,29 @@ let gradSeq = 0;
 function buildMetro(map, svg, onSelect) {
   const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
   const gid = 'skillGrad' + (++gradSeq);
+  // posisi stasiun dihitung dari daftar program (bisa berubah dari admin panel)
+  const spread = (n, from, to) => Array.from({ length: n }, (_, i) => n === 1 ? (from + to) / 2 : from + (to - from) * i / (n - 1));
+  const ofPillar = k => P.filter(p => p.pillar === k);
+  const specs = ofPillar('specialization');
+  const specY = spread(specs.length, specs.length > 1 ? 70 : 220, 370);
   const LINES = [
     { d:'M90 110 H470 L570 210', c:'#FFC83D', w:9, pillar:'foundation' },
     { d:'M90 360 H470', c:'#EC4899', w:9, pillar:'skills', grad:true },
     { d:'M90 220 H570', c:'#94A3B8', w:3, dash:'6 8' },
-    { d:'M590 220 L680 70 H760', c:'#EF4444', w:7, pillar:'specialization' },
-    { d:'M590 220 L640 170 H760', c:'#14B8A6', w:7, pillar:'specialization' },
-    { d:'M590 220 L640 270 H760', c:'#F97316', w:7, pillar:'specialization' },
-    { d:'M590 220 L680 370 H760', c:'#6366F1', w:7, pillar:'specialization' },
+    ...specs.map((p, i) => {
+      const dy = Math.abs(specY[i] - 220);
+      const dx = dy === 0 ? 0 : Math.min(90, 50 + (dy - 50) * .4);
+      return { d:`M590 220 L${590 + dx} ${specY[i]} H760`, c:p.color, w:7, pillar:'specialization' };
+    }),
   ];
   svg.innerHTML = `<defs><linearGradient id="${gid}" gradientUnits="userSpaceOnUse" x1="90" y1="0" x2="470" y2="0"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#EC4899"/></linearGradient></defs>` +
     LINES.map(l => `<path class="metro-line" data-pillar="${l.pillar || ''}" d="${l.d}" fill="none" stroke="${l.grad ? `url(#${gid})` : l.c}" stroke-width="${l.w}" stroke-linecap="round" stroke-linejoin="round" ${l.dash ? `stroke-dasharray="${l.dash}"` : ''}/>`).join('');
 
   map.querySelectorAll('.st').forEach(el => el.remove());
   const STATIONS = [
-    ['innovator',130,110,'b'],['beginner',290,110,'b'],['intermediate',450,110,'b'],
-    ['komputer',190,360,'t'],['desain',390,360,'t'],
-    ['game',760,70,'r'],['web',760,170,'r'],['robotik',760,270,'r'],['apps',760,370,'r'],
+    ...ofPillar('foundation').map((p, i, a) => [p.id, spread(a.length, 130, 450)[i], 110, 'b']),
+    ...ofPillar('skills').map((p, i, a) => [p.id, spread(a.length, 190, 390)[i], 360, 't']),
+    ...specs.map((p, i) => [p.id, 760, specY[i], 'r']),
   ];
   const pos = (x, y) => `left:${x / 10}%; top:${y / 4.4}%`;
   map.insertAdjacentHTML('beforeend', `
@@ -1871,6 +1888,7 @@ function buildMetro(map, svg, onSelect) {
   });
   function select(id) {
     const p = byId(id);
+    if (!p) return;
     map.querySelectorAll('button.st').forEach(b => b.setAttribute('aria-pressed', b.dataset.id === id));
     svg.querySelectorAll('.metro-line').forEach(l => l.style.opacity = !l.dataset.pillar || l.dataset.pillar === p.pillar ? 1 : .25);
     onSelect(p);
@@ -1892,23 +1910,25 @@ const metroLegend = () => {
 };
 
 /* ===================== SHARED · KARTU (Opsi 3 & 7) ===================== */
-const NEXT = {
-  innovator: { ids:['beginner'], note:'Lanjut ke jenjang berikutnya', note_en:'Advance to next level' },
-  beginner: { ids:['intermediate'], note:'Lanjut ke jenjang berikutnya', note_en:'Advance to next level' },
-  intermediate: { ids:['game','web','robotik','apps'], note:'Lanjut ke spesialisasi Teens', note_en:'Advance to Teens Specialization' },
-  komputer: { ids:['desain'], note:'Bisa diambil bersama jalur lain', note_en:'Can be taken alongside other tracks' },
-  desain: { ids:['komputer'], note:'Bisa diambil bersama jalur lain', note_en:'Can be taken alongside other tracks' },
-  game: { ids:['web','robotik','apps'], note:'Bisa lanjut cabang Teens lain', note_en:'Can explore other Teens tracks' },
-  web: { ids:['game','robotik','apps'], note:'Bisa lanjut cabang Teens lain', note_en:'Can explore other Teens tracks' },
-  robotik: { ids:['game','web','apps'], note:'Bisa lanjut cabang Teens lain', note_en:'Can explore other Teens tracks' },
-  apps: { ids:['game','web','robotik'], note:'Bisa lanjut cabang Teens lain', note_en:'Can explore other Teens tracks' },
+// Langkah berikutnya diturunkan dari jalur & urutan program
+const nextOf = p => {
+  const same = P.filter(x => x.pillar === p.pillar);
+  const others = same.filter(x => x !== p);
+  if (p.pillar === 'foundation') {
+    const after = same[same.indexOf(p) + 1];
+    if (after) return { ids:[after.id], note:'Lanjut ke jenjang berikutnya', note_en:'Advance to next level' };
+    return { ids:P.filter(x => x.pillar === 'specialization').map(x => x.id), note:'Lanjut ke spesialisasi Teens', note_en:'Advance to Teens Specialization' };
+  }
+  if (p.pillar === 'skills') return { ids:others.map(x => x.id), note:'Bisa diambil bersama jalur lain', note_en:'Can be taken alongside other tracks' };
+  return { ids:others.map(x => x.id), note:'Bisa lanjut cabang Teens lain', note_en:'Can explore other Teens tracks' };
 };
 
 const pathLabel = p => {
   const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
   if (p.pillar === 'foundation') {
     const idx = P.filter(x => x.pillar === 'foundation').indexOf(p) + 1;
-    return isEn ? `Level ${idx} of 3` : `Jenjang ${idx} dari 3`;
+    const total = P.filter(x => x.pillar === 'foundation').length;
+    return isEn ? `Level ${idx} of ${total}` : `Jenjang ${idx} dari ${total}`;
   }
   if (p.pillar === 'skills') return isEn ? 'Flexible' : 'Fleksibel';
   return isEn ? 'No prerequisites' : 'Tanpa prasyarat';
@@ -1919,7 +1939,8 @@ const cardHTML = p => {
   const desc = isEn && p.desc_en ? p.desc_en : p.desc;
   const outputs = isEn && p.outputs_en ? p.outputs_en : p.outputs;
   const syllabus = isEn && p.syllabus_en ? p.syllabus_en : p.syllabus;
-  const nextNote = isEn ? (NEXT[p.id].note_en || NEXT[p.id].note) : NEXT[p.id].note;
+  const next = nextOf(p);
+  const nextNote = isEn ? (next.note_en || next.note) : next.note;
 
   return `
   <div class="flip h-[460px] cursor-pointer" data-pillar="${p.pillar}" data-id="${p.id}" style="--c:${hex(p.color,'66')}" tabindex="0" role="button" aria-label="${isEn ? 'Flip card' : 'Balik kartu'} ${p.name}">
@@ -1938,9 +1959,9 @@ const cardHTML = p => {
           <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">${desc}</p>
           <div class="mt-auto pt-3">
             <div class="text-[10px] mono font-bold text-slate-500 mb-1.5">${isEn ? 'PROJECTS CREATED' : 'KARYA YANG DIBUAT'}</div>
-            <ul class="space-y-1">${outputs.slice(0, 3).map(o => `<li class="text-[12px] text-slate-200 flex gap-2"><i class="fa-solid fa-check text-[10px] mt-1" style="color:${p.color}"></i>${o}</li>`).join('')}</ul>
+            <ul class="space-y-1">${(outputs || []).slice(0, 3).map(o => `<li class="text-[12px] text-slate-200 flex gap-2"><i class="fa-solid fa-check text-[10px] mt-1" style="color:${p.color}"></i>${o}</li>`).join('')}</ul>
             <div class="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-white/5">
-              <div class="min-w-0"><div class="text-[9px] mono text-slate-500">TOOLS</div><div class="text-[11px] font-semibold truncate">${p.tools.slice(0, 2).join(' · ')}</div></div>
+              <div class="min-w-0"><div class="text-[9px] mono text-slate-500">TOOLS</div><div class="text-[11px] font-semibold truncate">${(p.tools || []).slice(0, 2).join(' · ') || '-'}</div></div>
               <div><div class="text-[9px] mono text-slate-500">${isEn ? 'TRACK' : 'JALUR'}</div><div class="text-[11px] font-semibold">${pathLabel(p)}</div></div>
             </div>
           </div>
@@ -1948,12 +1969,12 @@ const cardHTML = p => {
       </div>
       <div class="face back border p-6 flex flex-col" style="background:linear-gradient(170deg,${hex(p.color,'1f')},#0F172A 45%); border-color:${hex(p.color,'55')}">
         <div class="flex items-center justify-between"><span class="font-display font-black text-3xl" style="color:${p.color}">${p.sym}</span><span class="text-[10px] mono text-slate-400"><i class="fa-solid fa-rotate mr-1"></i>${isEn ? 'flip' : 'balik'}</span></div>
-        <div class="font-bold mt-1">${p.name} <span class="text-xs italic font-normal text-slate-400">· "${p.tagline}"</span></div>
+        <div class="font-bold mt-1">${p.name}${p.tagline ? ` <span class="text-xs italic font-normal text-slate-400">· "${p.tagline}"</span>` : ''}</div>
         <div class="flex-1 overflow-y-auto min-h-0 py-2 mt-2 -mx-2 px-2 no-scrollbar">
           <div class="text-[10px] mono font-bold text-slate-500 mb-1.5">${isEn ? 'SYLLABUS' : 'SILABUS'}</div>
-          <ol class="space-y-1">${syllabus.map((s, i) => `<li class="text-[12px] text-slate-300 flex gap-2"><span class="mono text-slate-500">${i + 1}.</span>${s}</li>`).join('')}</ol>
-          <div class="text-[10px] mono font-bold text-slate-500 mt-4 mb-1">${isEn ? 'NEXT STEP' : 'SETELAH INI'}</div>
-          <div class="text-[12px] text-slate-300">${nextNote}: <span class="text-white font-semibold">${NEXT[p.id].ids.map(id => byId(id).name).join(', ')}</span></div>
+          <ol class="space-y-1">${(syllabus || []).map((s, i) => `<li class="text-[12px] text-slate-300 flex gap-2"><span class="mono text-slate-500">${i + 1}.</span>${s}</li>`).join('')}</ol>
+          ${next.ids.length ? `<div class="text-[10px] mono font-bold text-slate-500 mt-4 mb-1">${isEn ? 'NEXT STEP' : 'SETELAH INI'}</div>
+          <div class="text-[12px] text-slate-300">${nextNote}: <span class="text-white font-semibold">${next.ids.map(id => byId(id).name).join(', ')}</span></div>` : ''}
           <div class="text-[11px] text-slate-400 mt-2"><i class="fa-solid fa-certificate text-[#FFC83D] mr-1"></i>${isEn ? 'Graduation certificate · 1:5 ratio' : 'Sertifikat kelulusan · rasio 1:5'}</div>
         </div>
         <a href="#register" onclick="event.stopPropagation()" class="mt-4 shrink-0 inline-flex items-center justify-center gap-2 bg-[#FFC83D] hover:bg-[#fed368] text-[#111827] font-extrabold px-4 py-2.5 min-h-[44px] rounded-xl text-xs uppercase tracking-wider transition">${isEn ? 'Try a Free Class' : 'Coba Kelas Gratis'} <i class="fa-solid fa-arrow-right"></i></a>
@@ -1979,19 +2000,29 @@ const bindFlip = el => {
 
   function renderCourses() {
     const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
+    // admin belum mempublish program: tampilkan empty state (lihat landing-data.js)
+    const empty = !P.length;
+    document.getElementById('x-map-box').style.display = empty ? 'none' : '';
+    const tabsBox = document.getElementById('x-tabs');
+    if (tabsBox) tabsBox.style.display = empty ? 'none' : '';
+    if (empty) {
+      list.innerHTML = window.leskodingEmptyState ? window.leskodingEmptyState('programs') : '';
+      return;
+    }
     document.getElementById('x-legend').innerHTML = metroLegend();
+    const foundationPath = P.filter(p => p.pillar === 'foundation').map(p => p.name).join(' → ');
     
     const GROUPS = isEn ? {
-      foundation: { line:'#FFC83D', title:'Foundation Track', sub:'Progressive · Innovator → Beginner → Intermediate' },
+      foundation: { line:'#FFC83D', title:'Foundation Track', sub:'Progressive · ' + foundationPath },
       skills: { line:'linear-gradient(90deg,#3B82F6,#EC4899)', title:'Digital Skills Track', sub:'Flexible · take anytime alongside other tracks' },
       specialization: { line:'linear-gradient(90deg,#EF4444,#14B8A6,#F97316,#6366F1)', title:'Teens Specialization', sub:'No prerequisites · selected after Free Trial Assessment' },
     } : {
-      foundation: { line:'#FFC83D', title:'Jalur Fondasi', sub:'Berjenjang · Innovator → Beginner → Intermediate' },
+      foundation: { line:'#FFC83D', title:'Jalur Fondasi', sub:'Berjenjang · ' + foundationPath },
       skills: { line:'linear-gradient(90deg,#3B82F6,#EC4899)', title:'Jalur Skill Digital', sub:'Fleksibel · bisa diambil kapan saja, bersama jalur lain' },
       specialization: { line:'linear-gradient(90deg,#EF4444,#14B8A6,#F97316,#6366F1)', title:'Cabang Teens', sub:'Tanpa prasyarat · dipilih setelah asesmen Free Trial' },
     };
 
-    list.innerHTML = Object.entries(GROUPS).map(([k, g]) => `
+    list.innerHTML = Object.entries(GROUPS).filter(([k]) => P.some(p => p.pillar === k)).map(([k, g]) => `
       <div class="x-group ${currentFilter !== 'all' && currentFilter !== k ? 'hidden' : ''}" data-pillar="${k}">
         <div class="flex items-center gap-4 mb-5">
           <span class="w-10 h-2 rounded-full shrink-0" style="background:${g.line}"></span>
@@ -2017,7 +2048,7 @@ const bindFlip = el => {
         currentFilter = v;
         list.querySelectorAll('.x-group').forEach(g => g.classList.toggle('hidden', v !== 'all' && g.dataset.pillar !== v));
         svg.querySelectorAll('.metro-line').forEach(l => l.style.opacity = v === 'all' || !l.dataset.pillar || l.dataset.pillar === v ? 1 : .15);
-        map.querySelectorAll('button.st').forEach(b => b.style.opacity = v === 'all' || byId(b.dataset.id).pillar === v ? 1 : .25);
+        map.querySelectorAll('button.st').forEach(b => b.style.opacity = v === 'all' || byId(b.dataset.id)?.pillar === v ? 1 : .25);
         list.querySelectorAll('.flip').forEach(c => c.classList.remove('is-target'));
         map.querySelectorAll('button.st').forEach(b => b.setAttribute('aria-pressed', false));
       }, currentFilter);
@@ -2042,6 +2073,7 @@ const bindFlip = el => {
 
   renderCourses();
   document.addEventListener('leskoding:lang', renderCourses);
+  document.addEventListener('leskoding:data', e => { if (e.detail === 'programs') renderCourses(); });
 })();
 </script>
 
@@ -2097,6 +2129,7 @@ const W = [
 
 const playBtn = (w, isEn) => {
   const cta = isEn ? w.cta_en : w.cta_id;
+  if (!cta || !cta.label) return '';
   const cls = 'inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.15em] text-[#fde68a] border border-[#FFC83D]/30 hover:bg-[#FFC83D]/10 rounded-full px-4 py-2 transition';
   const attrs = cta.link ? `href="${cta.link}" target="_blank" rel="noopener"` : `href="#" data-placeholder="${w.title}"`;
   return `<a ${attrs} class="${cls}" onclick="event.stopPropagation(); if (this.dataset.placeholder) { event.preventDefault(); showToast(this.dataset.placeholder); }"><i class="fa-solid ${cta.icon}"></i> ${cta.label}</a>`;
@@ -2154,6 +2187,17 @@ const laurelBadge = (top, main, sub, c, sm = false) => `
       return `<span class="sparkle" style="left:50%; top:40%; --x:${Math.cos(a) * 110}px; --y:${Math.sin(a) * 110}px"></span>`;
     }).join('');
 
+    // admin belum mempublish kisah sukses: tampilkan empty state (lihat landing-data.js)
+    const empty = !W.length;
+    const openAll = document.getElementById('aw-all');
+    const descEl = document.querySelector('[data-i18n="hof_desc2"]');
+    if (openAll) openAll.style.display = empty ? 'none' : '';
+    if (descEl) descEl.style.display = empty ? 'none' : '';
+    if (empty) {
+      grid.innerHTML = `<div class="col-span-full">${window.leskodingEmptyState ? window.leskodingEmptyState('stories') : ''}</div>`;
+      return;
+    }
+
     grid.innerHTML = W.map((w, i) => {
       const award = isEn ? w.award_en : w.award_id;
       const category = isEn ? w.category_en : w.category_id;
@@ -2168,11 +2212,11 @@ const laurelBadge = (top, main, sub, c, sm = false) => `
       <div class="env relative h-[470px] rounded-2xl border border-[#FFC83D]/25 overflow-hidden bg-[#0F172A]" data-i="${i}">
         <!-- Winner (under) -->
         <div class="env-winner absolute inset-0 flex flex-col">
-          <div class="relative h-40 shrink-0 overflow-hidden"><img src="${w.photo}" alt="" class="w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] to-transparent"></div></div>
+          <div class="relative h-40 shrink-0 overflow-hidden">${w.photo ? `<img src="${w.photo}" alt="" class="w-full h-full object-cover" loading="lazy">` : `<div class="w-full h-full grid place-items-center text-5xl" style="background:linear-gradient(160deg,${w.color}55,#0B0F19);color:${w.color}"><i class="fa-solid fa-trophy"></i></div>`}<div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] to-transparent"></div></div>
           <div class="px-5 pb-5 -mt-10 relative flex-1 flex flex-col items-center text-center">
             <div class="w-28">${laurelBadge(winnerLabel, award, field, w.color, true)}</div>
             <h4 class="font-display text-xl font-black leading-tight mt-1">${w.title}</h4>
-            <div class="text-sm text-[#fde68a] font-semibold mt-1">${w.name} · ${ageLabelText}</div>
+            <div class="text-sm text-[#fde68a] font-semibold mt-1">${w.name}${w.age ? ' · ' + ageLabelText : ''}</div>
             <p class="text-xs text-slate-400 leading-relaxed mt-2 line-clamp-2">${desc}</p>
             <div class="mt-auto pt-3">${playBtn(w, isEn)}</div>
           </div>
@@ -2208,6 +2252,7 @@ const laurelBadge = (top, main, sub, c, sm = false) => `
 
   renderHof();
   document.addEventListener('leskoding:lang', renderHof);
+  document.addEventListener('leskoding:data', e => { if (e.detail === 'stories') renderHof(); });
 })();
 </script>
 <!-- OPSI 1 PETA PETUALANGAN SCRIPTS -->
@@ -2353,5 +2398,7 @@ const STEPS_DATA = {
 })();
 </script>
 
+<!-- Konten dari admin panel via landing-content.json (fallback: konten statis di atas) -->
+<script src="landing-data.js?v=20261004_v1"></script>
 </body>
 </html>

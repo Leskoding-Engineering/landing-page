@@ -9,6 +9,7 @@ Dokumentasi teknis landing page LesKoding Academy Bali. Informasi bisnis (progra
 | `index.html` | Markup seluruh halaman (teks default Bahasa Indonesia) + konfigurasi Tailwind |
 | `app.js` | Interaksi, data kurikulum (modal silabus), mini-game, kuis, form WhatsApp, kamus i18n (EN & ID) |
 | `style.css` | Style kustom di luar Tailwind |
+| `landing-data.js` | Mengambil konten dari admin panel (`GET /api/landing`) lalu menimpa section terkait |
 | `assets/` | Logo, logo mitra, foto sesi, ikon tools |
 
 ## Tech Stack
@@ -40,7 +41,21 @@ Dokumentasi teknis landing page LesKoding Academy Bali. Informasi bisnis (progra
 5. **Distance Checker:** **simulasi/mock** (`calculateDistance` di `app.js`), bukan perhitungan jarak sungguhan.
 6. **Modal detail silabus:** tombol "Lihat Detail Kurikulum" di setiap kartu program membuka modal berisi tools, deskripsi, kompetensi, topik silabus, dan catatan sertifikat kelulusan.
 7. **Dropdown Learning Center kustom:** kartu cabang yang ramah sentuhan.
-8. **Form pendaftaran → WhatsApp:** semua pilihan (Gianyar, Bedulu, Private / Home Visit, Kelas Online) dikirim ke satu admin `6285183046798` (LesKoding Official).
+8. **Form pendaftaran → WhatsApp:** semua pilihan lokasi dikirim ke satu nomor admin (default `6285183046798`, LesKoding Official; bisa diubah di admin panel → Landing Page → Contact & Social).
+
+## Konten dari Admin Panel
+
+Partner, Program Belajar, Kisah Sukses, Lokasi, FAQ, nomor WhatsApp, Promo, dan link sosial media diatur di admin panel (menu **Landing Page**).
+
+Alur: admin mengedit konten → klik **Publish** → admin panel meng-commit `landing-content.json` ke repo ini lewat GitHub API → GitHub Pages deploy ulang (±1–2 menit) → `landing-data.js` membaca `landing-content.json` saat halaman dimuat.
+
+- **Jangan edit `landing-content.json` manual**; isinya akan ditimpa pada publish berikutnya.
+- Konten statis di `index.html` / `app.js` hanya menjadi **fallback** bila `landing-content.json` belum ada atau gagal dimuat (termasuk saat `index.html` dibuka via `file://` — jalankan server lokal).
+- Bila file termuat tetapi daftar sebuah section kosong (partner, program, kisah sukses, lokasi, FAQ), section itu menampilkan **empty state "Segera Hadir"**. Copy-nya ada di kamus i18n (`empty_*`). Saat lokasi kosong, formulir pendaftaran menampilkan satu pilihan "Diskusikan dengan admin".
+- Promo: bila tidak ada promo aktif saat publish, bar promo, pil, dan section `#promo` disembunyikan.
+- Gambar (logo partner, foto karya) tetap di-host admin panel (`/storage/landing/...`).
+- Konten dari admin hanya berbahasa Indonesia; label/judul statis tetap mengikuti toggle EN/ID.
+- Program Belajar diambil dari Curriculum Course (Lesson Plan) yang **Published** dan punya **Track**; peta jalur & "langkah berikutnya" dihitung otomatis dari jalur dan urutan program.
 
 ## Aturan Konten (wajib konsisten dengan KB)
 

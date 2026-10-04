@@ -1,3 +1,6 @@
+/* Nilai yang bisa diubah dari admin panel (lihat landing-data.js) */
+window.LESKODING = window.LESKODING || { whatsapp: '6285183046798', promoCode: 'PETUALANGAN2026' };
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ========================================================
@@ -628,7 +631,7 @@ WA Anak (opsional): ${waAnak}`;
             const encodedMessage = encodeURIComponent(message);
             
             // Semua lokasi & metode belajar dilayani satu nomor admin
-            const adminWA = "6285183046798";
+            const adminWA = window.LESKODING.whatsapp;
             const whatsappUrl = `https://wa.me/${adminWA}?text=${encodedMessage}`;
             
             window.open(whatsappUrl, '_blank');
@@ -2499,7 +2502,7 @@ window.upvoteProject = function(btn) {
 window.openPromoModal = function () { document.getElementById('promo')?.scrollIntoView({ behavior: 'smooth' }); };
 window.closePromoModal = function () {};
 
-window.claimPromoAndRegister = function(promoCode = 'PETUALANGAN2026') {
+window.claimPromoAndRegister = function(promoCode = window.LESKODING.promoCode) {
     // 1. Close modal
     window.closePromoModal();
 
@@ -2663,6 +2666,21 @@ const i18nDictionary = {
         "faq5_sub6": "fees shared by admin",
         "faq5_a6": "Fee details are shared by our admin during a consultation after you register. Class schedules are flexible and arranged together with parents.",
         "faq5_cta6": "Ask via WhatsApp",
+        "empty_badge": "Coming Soon",
+        "empty_partners_t": "New collaborations are on the way",
+        "empty_partners_d": "Stay tuned for the schools and communities joining our adventure soon.",
+        "empty_programs_t": "The next learning adventure is being crafted",
+        "empty_programs_d": "Our curriculum team is putting the finishing touches on fresh, hands-on programs. Book a Free Trial now and be the first to try them!",
+        "empty_programs_cta": "Book a Free Trial",
+        "empty_stories_t": "The next award envelopes are being sealed",
+        "empty_stories_d": "Our young explorers' best creations will be revealed soon. Who knows, your child could be the next name inside!",
+        "empty_locations_t": "A learning spot near you is coming soon",
+        "empty_locations_d": "We're preparing new places to learn, closer to home. Message our admin for the latest schedule and locations.",
+        "empty_locations_cta": "Ask about locations",
+        "empty_faqs_t": "We're polishing the best answers for you",
+        "empty_faqs_d": "Parents' most popular questions are coming soon. Can't wait? Our admin is happy to answer you directly on WhatsApp.",
+        "reg_center_tbd_t": "Discuss with admin",
+        "reg_center_tbd_d": "We'll help you pick the best location or learning method",
         "loc5_title_1": "Learn wherever",
         "loc5_title_2": "works best for you.",
         "loc5_desc": "Come to a Learning Center, have a tutor visit your home, or join an online class. Same curriculum.",
@@ -3341,6 +3359,21 @@ const i18nDictionary = {
         "faq5_sub6": "biaya via admin",
         "faq5_a6": "Informasi biaya disampaikan oleh admin saat konsultasi setelah Anda mendaftar. Jadwal kelas bersifat fleksibel dan ditentukan bersama sesuai kesepakatan dengan orang tua.",
         "faq5_cta6": "Konsultasi via WhatsApp",
+        "empty_badge": "Segera Hadir",
+        "empty_partners_t": "Kolaborasi baru sedang disiapkan",
+        "empty_partners_d": "Nantikan sekolah dan komunitas yang akan segera bergabung dalam petualangan kami.",
+        "empty_programs_t": "Petualangan belajar berikutnya sedang diracik",
+        "empty_programs_d": "Tim kurikulum kami sedang menyempurnakan program-program baru yang seru dan penuh praktik. Daftar Free Trial sekarang dan jadilah yang pertama mencobanya!",
+        "empty_programs_cta": "Daftar Free Trial",
+        "empty_stories_t": "Amplop penghargaan berikutnya sedang disegel",
+        "empty_stories_d": "Karya-karya terbaik para penjelajah cilik kami akan segera diumumkan. Siapa tahu, nama anak Anda yang ada di dalamnya!",
+        "empty_locations_t": "Tempat belajar di dekat Anda segera hadir",
+        "empty_locations_d": "Kami sedang menyiapkan lokasi belajar baru yang lebih dekat dengan rumah. Tanyakan jadwal dan lokasi terbaru ke admin kami.",
+        "empty_locations_cta": "Tanya lokasi",
+        "empty_faqs_t": "Jawaban terbaik sedang kami siapkan",
+        "empty_faqs_d": "Pertanyaan yang paling sering ditanyakan orang tua akan segera hadir. Tidak sabar? Admin kami siap menjawab langsung lewat WhatsApp.",
+        "reg_center_tbd_t": "Diskusikan dengan admin",
+        "reg_center_tbd_d": "Kami bantu pilihkan lokasi atau metode belajar terbaik",
         "loc5_title_1": "Belajar di mana pun",
         "loc5_title_2": "yang paling pas.",
         "loc5_desc": "Datang ke Learning Center, tutor yang datang ke rumah, atau ikut kelas online. Kurikulumnya sama.",
@@ -3983,7 +4016,7 @@ window.applyLanguage = function(lang) {
     if (regAddress) regAddress.placeholder = lang === 'en' ? 'e.g. Br Katiklantang Singakerta Ubud' : 'Cth: Br Katiklantang Singakerta Ubud';
 
     const regPromo = document.getElementById('reg-promo');
-    if (regPromo) regPromo.placeholder = lang === 'en' ? 'e.g. PETUALANGAN2026' : 'Cth: PETUALANGAN2026';
+    if (regPromo) regPromo.placeholder = window.LESKODING.promoCode ? (lang === 'en' ? 'e.g. ' : 'Cth: ') + window.LESKODING.promoCode : '';
 
 
     // Update document title and html lang attribute
@@ -4428,7 +4461,12 @@ document.addEventListener('leskoding:lang', () => renderA());
     const centerCards = document.getElementById('reg-center-cards');
     const centerSelect = document.getElementById('reg-center');
     if (form && centerCards && centerSelect) {
-        const choices = [...centerCards.querySelectorAll('.reg-choice')];
+        let choices = [...centerCards.querySelectorAll('.reg-choice')];
+        document.addEventListener('leskoding:data', e => {
+            if (e.detail !== 'locations') return;
+            choices = [...centerCards.querySelectorAll('.reg-choice')];
+            choices.forEach((c, i) => c.tabIndex = i === 0 ? 0 : -1);
+        });
         const choose = btn => {
             choices.forEach(c => {
                 const on = c === btn;
@@ -4779,7 +4817,11 @@ document.addEventListener('leskoding:lang', () => renderA());
 (() => {
     const tabs = document.getElementById('loc-tabs');
     if (!tabs) return;
-    const all = [...tabs.querySelectorAll('.loc-tab')];
+    // dibaca ulang tiap kali: tab bisa dirender ulang dari admin panel
+    let all = [...tabs.querySelectorAll('.loc-tab')];
+    document.addEventListener('leskoding:data', e => {
+        if (e.detail === 'locations') all = [...tabs.querySelectorAll('.loc-tab')];
+    });
     const show = (btn, focus) => {
         all.forEach(b => {
             const on = b === btn;
@@ -4830,8 +4872,8 @@ document.addEventListener('leskoding:lang', () => renderA());
     const list = document.getElementById('faq5-list');
     const col = document.getElementById('faq5-panels');
     if (!list || !col) return;
-    const tabs = [...list.querySelectorAll('.faq5-q')];
-    const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+    let tabs = [...list.querySelectorAll('.faq5-q')];
+    let panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
     const desktop = window.matchMedia('(min-width: 1024px)');
     let active = 0;          // desktop: selalu ada satu yang aktif
     let open = -1;           // HP: boleh semua tertutup
@@ -4871,6 +4913,15 @@ document.addEventListener('leskoding:lang', () => renderA());
         tabs[active].focus();
     });
     desktop.addEventListener('change', place);
+    // FAQ dirender ulang dari admin panel
+    document.addEventListener('leskoding:data', e => {
+        if (e.detail !== 'faqs') return;
+        tabs = [...list.querySelectorAll('.faq5-q')];
+        panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+        active = 0;
+        open = -1;
+        place();
+    });
     place();
 })();
 
@@ -4904,7 +4955,7 @@ document.addEventListener('leskoding:lang', () => renderA());
         render();
     });
     if (copyBtn) copyBtn.addEventListener('click', async () => {
-        try { await navigator.clipboard.writeText('PETUALANGAN2026'); } catch (e) { /* clipboard tidak tersedia */ }
+        try { await navigator.clipboard.writeText(window.LESKODING.promoCode || ''); } catch (e) { /* clipboard tidak tersedia */ }
         const label = copyBtn.querySelector('span');
         if (label) { label.textContent = t('promo2_copied'); setTimeout(() => { label.textContent = t('promo2_copy'); }, 1800); }
     });

@@ -652,3 +652,23 @@ body { padding-top:var(--promo-bar-h, 0px); }
 .promo-bar:hover .promo-bar-track, .promo-bar:focus-within .promo-bar-track { animation-play-state:paused; }
 @keyframes promo-roll { to { transform:translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .promo-bar-track { animation:none; } }
+
+/* ---- Konten dari admin panel: sembunyikan section CMS sampai landing-content.json siap ----
+   Kelas .lk-loading dipasang di <head> dan dilepas oleh landing-data.js (maks. 4 detik).
+   Ruang promo bar tetap dipesan agar tidak ada lompatan layout saat promo tampil. */
+.lk-loading #promo-bar,
+.lk-loading #promo,
+.lk-loading #partners-strip,
+.lk-loading #x-tabs, .lk-loading #x-map-box, .lk-loading #x-list,
+.lk-loading #aw-grid, .lk-loading #aw-all, .lk-loading [data-i18n="hof_desc2"],
+.lk-loading #loc-tabs, .lk-loading #loc-panels,
+.lk-loading #faq5-list, .lk-loading #faq5-panels,
+.lk-loading #reg-center-cards, .lk-loading #footer-social { visibility:hidden; opacity:0; }
+.lk-loading #promo-pill { display:none !important; }
+#promo-bar, #promo, #partners-strip, #x-tabs, #x-map-box, #x-list, #aw-grid, #loc-tabs, #loc-panels,
+#faq5-list, #faq5-panels, #reg-center-cards { transition:opacity .35s ease; }
+@media (prefers-reduced-motion: reduce) {
+    #promo-bar, #promo, #partners-strip, #x-tabs, #x-map-box, #x-list, #aw-grid, #loc-tabs, #loc-panels,
+    #faq5-list, #faq5-panels, #reg-center-cards { transition:none; }
+}
+
