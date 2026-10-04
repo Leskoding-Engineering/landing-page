@@ -1,5 +1,5 @@
 {
-    "published_at": "2026-10-04T09:48:10+08:00",
+    "published_at": "2026-10-04T09:53:43+08:00",
     "data": {
         "settings": {
             "whatsapp": {
@@ -15,41 +15,8 @@
                 "facebook": null
             }
         },
-        "partners": [
-            {
-                "name": "Genta Saraswati",
-                "short_name": "Genta",
-                "logo": "http://localhost:8000/storage/landing/partners/01M429HJ673BY0ZQFQZEN7Q05W.png",
-                "url": null
-            }
-        ],
-        "programs": [
-            {
-                "id": "scratch",
-                "n": "01",
-                "sym": "Sc",
-                "name": "Scratch",
-                "pillar": "foundation",
-                "code": "Scratch",
-                "min": 8,
-                "max": 14,
-                "color": "#F59E0B",
-                "icon": "fa-gamepad",
-                "tagline": "Bikin game & animasi pertamamu",
-                "desc": "Belajar dasar pemrograman dengan Scratch. Cocok untuk pemula yang ingin membuat game, animasi, dan cerita interaktif.",
-                "tools": [
-                    "Scratch"
-                ],
-                "outputs": [
-                    "Game labirin mencari koin"
-                ],
-                "syllabus": [
-                    "Gerakan & Animasi",
-                    "Suara & Musik",
-                    "Perulangan & Logika"
-                ]
-            }
-        ],
+        "partners": [],
+        "programs": [],
         "stories": [],
         "locations": [],
         "faqs": [],
