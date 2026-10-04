@@ -65,7 +65,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css?v=20261004_v1">
+    <link rel="stylesheet" href="style.css?v=20261004_v2">
     <script>
         // Konten dari admin panel (landing-content.json): fetch dimulai sedini mungkin dan
         // section yang diatur admin disembunyikan sampai datanya siap, supaya konten statis
@@ -1653,7 +1653,7 @@
     </div>
 
     <!-- Script -->
-    <script src="app.js?v=20261004_v1"></script>
+    <script src="app.js?v=20261004_v2"></script>
 <script>
 
 /* ---------- B: tabs ---------- */
@@ -2000,15 +2000,6 @@ const bindFlip = el => {
 
   function renderCourses() {
     const isEn = (localStorage.getItem('leskoding_lang') || 'en') === 'en';
-    // admin belum mempublish program: tampilkan empty state (lihat landing-data.js)
-    const empty = !P.length;
-    document.getElementById('x-map-box').style.display = empty ? 'none' : '';
-    const tabsBox = document.getElementById('x-tabs');
-    if (tabsBox) tabsBox.style.display = empty ? 'none' : '';
-    if (empty) {
-      list.innerHTML = window.leskodingEmptyState ? window.leskodingEmptyState('programs') : '';
-      return;
-    }
     document.getElementById('x-legend').innerHTML = metroLegend();
     const foundationPath = P.filter(p => p.pillar === 'foundation').map(p => p.name).join(' → ');
     
@@ -2399,6 +2390,6 @@ const STEPS_DATA = {
 </script>
 
 <!-- Konten dari admin panel via landing-content.json (fallback: konten statis di atas) -->
-<script src="landing-data.js?v=20261004_v1"></script>
+<script src="landing-data.js?v=20261004_v2"></script>
 </body>
 </html>

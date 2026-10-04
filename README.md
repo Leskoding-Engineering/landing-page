@@ -51,11 +51,11 @@ Alur: admin mengedit konten → klik **Publish** → admin panel meng-commit `la
 
 - **Jangan edit `landing-content.json` manual**; isinya akan ditimpa pada publish berikutnya.
 - Konten statis di `index.html` / `app.js` hanya menjadi **fallback** bila `landing-content.json` belum ada atau gagal dimuat (termasuk saat `index.html` dibuka via `file://` — jalankan server lokal).
-- Bila file termuat tetapi daftar sebuah section kosong (partner, program, kisah sukses, lokasi, FAQ), section itu menampilkan **empty state "Segera Hadir"**. Copy-nya ada di kamus i18n (`empty_*`). Saat lokasi kosong, formulir pendaftaran menampilkan satu pilihan "Diskusikan dengan admin".
+- Bila file termuat tetapi daftar sebuah section kosong (partner, kisah sukses, lokasi, FAQ), section itu menampilkan **empty state "Segera Hadir"**. Copy-nya ada di kamus i18n (`empty_*`). Saat lokasi kosong, formulir pendaftaran menampilkan satu pilihan "Diskusikan dengan admin".
 - Promo: bila tidak ada promo aktif saat publish, bar promo, pil, dan section `#promo` disembunyikan.
 - Gambar (logo partner, foto karya) tetap di-host admin panel (`/storage/landing/...`).
 - Konten dari admin hanya berbahasa Indonesia; label/judul statis tetap mengikuti toggle EN/ID.
-- Program Belajar diambil dari Curriculum Course (Lesson Plan) yang **Published** dan punya **Track**; peta jalur & "langkah berikutnya" dihitung otomatis dari jalur dan urutan program.
+- Program Belajar diambil dari Curriculum Course (Lesson Plan) yang **Published** dan punya **Track**; peta jalur & "langkah berikutnya" dihitung otomatis dari jalur dan urutan program. Bila `programs` di JSON kosong, section ini memakai program statis (data `P` di `index.html`), bukan empty state.
 
 ## Aturan Konten (wajib konsisten dengan KB)
 

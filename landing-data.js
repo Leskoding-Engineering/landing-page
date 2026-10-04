@@ -8,6 +8,7 @@
    - Jika file belum ada / gagal dimuat, konten statis di index.html tetap tampil.
    - Jika file termuat tapi daftar sebuah section kosong, section itu menampilkan
      empty state "segera hadir" (copy ada di kamus i18n, key empty_*).
+     Pengecualian: Program Belajar kosong → tetap konten statis di index.html.
    - Promo: jika admin tidak punya promo aktif, bar & section promo disembunyikan.
    - Konten admin hanya berbahasa Indonesia, jadi elemen yang diisi dari API
      dilepas dari kamus i18n (data-i18n dihapus).
@@ -46,7 +47,6 @@
     /* ---------- Empty state "segera hadir" ---------- */
     const EMPTY = {
         partners: { icon: 'fa-handshake', color: '#38BDF8', compact: true },
-        programs: { icon: 'fa-wand-magic-sparkles', color: '#FFC83D', cta: () => ({ href: '#register', icon: 'fa-rocket' }) },
         stories: { icon: 'fa-envelope', color: '#FFC83D' },
         locations: { icon: 'fa-map-location-dot', color: '#34D399', bare: true, cta: () => ({ href: waLink('Halo LesKoding, saya ingin bertanya tentang lokasi belajar terdekat.'), icon: 'fa-whatsapp', brand: true, ext: true }) },
         faqs: { icon: 'fa-comments', color: '#C084FC' },
@@ -169,7 +169,8 @@
             outputs: (p.outputs || []).map(esc),
             syllabus: (p.syllabus || []).map(esc),
         }));
-        P.splice(0, P.length, ...programs); // kosong → renderCourses menampilkan empty state
+        if (!programs.length) return; // kosong → tetap pakai program statis di index.html
+        P.splice(0, P.length, ...programs);
         emit('programs');
         applyProgramOptions(programs);
     }
