@@ -1,5 +1,5 @@
 {
-    "published_at": "2026-10-04T10:19:35+08:00",
+    "published_at": "2026-10-04T10:20:23+08:00",
     "data": {
         "settings": {
             "whatsapp": {
@@ -34,28 +34,6 @@
         ],
         "programs": [],
         "stories": [
-            {
-                "id": "story-1",
-                "title": "Cyber City RP Game",
-                "name": "Sarah",
-                "age": 12,
-                "award": "Masterpiece Terbaik",
-                "category": "Pilihan Kurator",
-                "field": "Game Dev",
-                "tools": [
-                    "Roblox Studio",
-                    "Lua",
-                    "3D Modeling"
-                ],
-                "color": "#FFC83D",
-                "photo": "http://localhost:8000/storage/landing/stories/01m3jk7k4aa96g0q8t29g6e4mz.jpeg",
-                "desc": "Dunia roleplay 3D bernuansa kota cyberpunk, lengkap dengan sistem mata uang virtual, toko in-game, dan NPC interaktif.",
-                "cta": {
-                    "label": "Mainkan di Roblox",
-                    "icon": "fa-gamepad",
-                    "link": null
-                }
-            },
             {
                 "id": "story-2",
                 "title": "Sistem AI Kasir Pintar",
