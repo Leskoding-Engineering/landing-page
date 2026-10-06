@@ -1,5 +1,5 @@
 {
-    "published_at": "2026-10-06T09:46:02+08:00",
+    "published_at": "2026-10-06T09:51:53+08:00",
     "data": {
         "settings": {
             "whatsapp": {
@@ -39,6 +39,11 @@
             {
                 "name": "SMP Genta Saraswati",
                 "logo": "https://schoola.pro/storage/landing/partners/01M47E73ZWQBKPFM30JGV9V5X1.webp",
+                "url": null
+            },
+            {
+                "name": "Tirta Alam Bali School",
+                "logo": "https://schoola.pro/storage/landing/partners/01M47EHV3ZZM696TKXXED2J2BQ.png",
                 "url": null
             }
         ],
