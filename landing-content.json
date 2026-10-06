@@ -1,5 +1,5 @@
 {
-    "published_at": "2026-10-05T23:10:29+08:00",
+    "published_at": "2026-10-06T09:46:02+08:00",
     "data": {
         "settings": {
             "whatsapp": {
@@ -29,6 +29,16 @@
             {
                 "name": "Bali Seeds Primary School",
                 "logo": "https://schoola.pro/storage/landing/partners/01M42CT0P279CRAHSWN41NQKX5.jpg",
+                "url": null
+            },
+            {
+                "name": "Genta Coding Club",
+                "logo": "https://schoola.pro/storage/landing/partners/01M47E4PAFPTXP4CY587F414Y2.png",
+                "url": null
+            },
+            {
+                "name": "SMP Genta Saraswati",
+                "logo": "https://schoola.pro/storage/landing/partners/01M47E73ZWQBKPFM30JGV9V5X1.webp",
                 "url": null
             }
         ],
