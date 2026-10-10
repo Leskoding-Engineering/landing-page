@@ -1,5 +1,5 @@
 {
-    "published_at": "2026-10-07T20:51:15+08:00",
+    "published_at": "2026-10-11T02:23:09+08:00",
     "data": {
         "settings": {
             "whatsapp": {
@@ -18,32 +18,32 @@
         "partners": [
             {
                 "name": "SD Genta Saraswati",
-                "logo": "https://schoola.pro/storage/landing/partners/01M42CS7E18D6C0G7KENG05V3B.png",
+                "logo": "https://cdn.schoola.pro/landing/partners/01M42CS7E18D6C0G7KENG05V3B.png",
                 "url": null
             },
             {
                 "name": "PR Saraswati Gianyar",
-                "logo": "https://schoola.pro/storage/landing/partners/01M42CSK09AEJRHCWWMS8Z0EC5.png",
+                "logo": "https://cdn.schoola.pro/landing/partners/01M42CSK09AEJRHCWWMS8Z0EC5.png",
                 "url": null
             },
             {
                 "name": "Bali Seeds Primary School",
-                "logo": "https://schoola.pro/storage/landing/partners/01M42CT0P279CRAHSWN41NQKX5.jpg",
+                "logo": "https://cdn.schoola.pro/landing/partners/01M42CT0P279CRAHSWN41NQKX5.jpg",
                 "url": null
             },
             {
                 "name": "Genta Coding Club",
-                "logo": "https://schoola.pro/storage/landing/partners/01M47E4PAFPTXP4CY587F414Y2.png",
+                "logo": "https://cdn.schoola.pro/landing/partners/01M47E4PAFPTXP4CY587F414Y2.png",
                 "url": null
             },
             {
                 "name": "SMP Genta Saraswati",
-                "logo": "https://schoola.pro/storage/landing/partners/01M47E73ZWQBKPFM30JGV9V5X1.webp",
+                "logo": "https://cdn.schoola.pro/landing/partners/01M47E73ZWQBKPFM30JGV9V5X1.webp",
                 "url": null
             },
             {
                 "name": "Tirta Alam Bali School",
-                "logo": "https://schoola.pro/storage/landing/partners/01M47EHV3ZZM696TKXXED2J2BQ.png",
+                "logo": "https://cdn.schoola.pro/landing/partners/01M47EHV3ZZM696TKXXED2J2BQ.png",
                 "url": null
             }
         ],
@@ -58,7 +58,7 @@
                 "subtitle": "Learning Center",
                 "icon": "fa-building-flag",
                 "color": "#38BDF8",
-                "logo": "https://schoola.pro/storage/landing/locations/01M42CXCZVX1E560459Z7MX0A7.png",
+                "logo": "https://cdn.schoola.pro/landing/locations/01M42CXCZVX1E560459Z7MX0A7.png",
                 "address": "Jalan Kesatrian No. 28 Gianyar, Bali",
                 "maps_query": "Jalan Kesatrian No. 28 Gianyar, Bali",
                 "features": [
@@ -78,7 +78,7 @@
                 "subtitle": "Learning Center",
                 "icon": "fa-robot",
                 "color": "#FFC83D",
-                "logo": "https://schoola.pro/storage/landing/locations/01M42CXV32S8PV1BHCNT5TT3NV.jpg",
+                "logo": "https://cdn.schoola.pro/landing/locations/01M42CXV32S8PV1BHCNT5TT3NV.jpg",
                 "address": "Jln. Raya Semebaung, Bedulu, Blahbatuh, Gianyar",
                 "maps_query": "Jln Raya Semebaung Bedulu",
                 "features": [
